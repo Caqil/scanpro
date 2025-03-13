@@ -37,17 +37,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { FileIcon, Cross2Icon, CheckCircledIcon, CrossCircledIcon, UploadIcon } from "@radix-ui/react-icons";
 
 const SUPPORTED_FORMATS = [
-  { value: "docx", label: "Word Document (.docx)" },
-  { value: "doc", label: "Word Document - Legacy (.doc)" },
-  { value: "xlsx", label: "Excel Spreadsheet (.xlsx)" },
   { value: "pptx", label: "PowerPoint Presentation (.pptx)" },
   { value: "txt", label: "Text File (.txt)" },
   { value: "html", label: "HTML Document (.html)" },
   { value: "jpg", label: "JPEG Image (.jpg)" },
   { value: "png", label: "PNG Image (.png)" },
-  { value: "csv", label: "CSV File (.csv)" },
-  { value: "rtf", label: "Rich Text Format (.rtf)" },
-  { value: "odt", label: "OpenDocument Text (.odt)" },
 ];
 
 // Form schema

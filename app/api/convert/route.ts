@@ -16,7 +16,37 @@ const libreConvert = promisify(libre.convert);
 
 const UPLOAD_DIR = join(process.cwd(), 'uploads');
 const CONVERSION_DIR = join(process.cwd(), 'public', 'conversions');
+const FORMAT_FILTERS: Record<string, string> = {
+    // Text Documents
+    'doc': 'doc:MS Word 97',
+    'docx': 'docx:Office Open XML Text',
+    'docm': 'docm:MS Word 2007-2013 XML (macro enabled)',
+    'dotx': 'dotx:Office Open XML Text Template',
+    'dotm': 'dotm:Office Open XML Text Template (macro enabled)',
+    'rtf': 'rtf:Rich Text Format',
+    'txt': 'txt:Text',
+    'odt': 'odt:writer8',
+    'html': 'html:HTML (StarWriter)',
 
+    // Spreadsheets
+    'xls': 'xls:MS Excel 97',
+    'xlsx': 'xlsx:Office Open XML Spreadsheet',
+    'xlsm': 'xlsm:MS Excel 2007-2013 XML (macro enabled)',
+    'xltx': 'xltx:Office Open XML Spreadsheet Template',
+    'xltm': 'xltm:Office Open XML Spreadsheet Template (macro enabled)',
+    'csv': 'csv:Text - txt - csv (StarCalc)',
+
+    // Presentations
+    'ppt': 'ppt:MS PowerPoint 97',
+    'pptx': 'pptx:Office Open XML Presentation',
+    'pptm': 'pptm:MS PowerPoint 2007-2013 XML (macro enabled)',
+    'potx': 'potx:Office Open XML Presentation Template',
+    'potm': 'potm:Office Open XML Presentation Template (macro enabled)',
+
+    // Other formats
+    'xml': 'xml:DocBook File',
+    'pdf': 'pdf:writer_pdf_Export'
+};
 // Ensure directories exist
 async function ensureDirectories() {
     if (!existsSync(UPLOAD_DIR)) {
@@ -123,7 +153,6 @@ async function extractTextWithOCR(inputPath: string, outputPath: string) {
         throw new Error('Failed to extract text with OCR: ' + (error as Error).message);
     }
 }
-
 async function convertWithLibreOffice(inputPath: string, outputPath: string, format: string) {
     try {
         console.log(`Converting ${inputPath} to format: ${format}`);
@@ -138,15 +167,20 @@ async function convertWithLibreOffice(inputPath: string, outputPath: string, for
         // Copy the input file to the temp directory with a simple name
         const tempInputPath = join(tempDir, 'input.pdf');
         await copyFile(inputPath, tempInputPath);
-
         console.log(`Copied input file to ${tempInputPath}`);
+
+        // Get appropriate filter for the format
+        let formatFilter = format in FORMAT_FILTERS ? FORMAT_FILTERS[format] : format;
+        console.log(`Using format filter: ${formatFilter}`);
 
         // Try different LibreOffice conversion approaches
         let conversionSuccessful = false;
+        let errorMessage = '';
 
-        // Approach 1: Use the standard command with explicit format
+        // Approach 1: Use the standard command with explicit format filter
         try {
-            const libreOfficeCommand = `libreoffice --headless --convert-to ${format} --outdir "${tempDir}" "${tempInputPath}"`;
+            // Use the format filter when available
+            const libreOfficeCommand = `libreoffice --headless --convert-to "${formatFilter}" --outdir "${tempDir}" "${tempInputPath}"`;
             console.log(`Executing: ${libreOfficeCommand}`);
 
             const { stdout, stderr } = await execPromise(libreOfficeCommand);
@@ -155,43 +189,41 @@ async function convertWithLibreOffice(inputPath: string, outputPath: string, for
 
             conversionSuccessful = true;
         } catch (error) {
-            console.error('First conversion attempt failed:', error);
+            errorMessage = error instanceof Error ? error.message : String(error);
+            console.error('First conversion attempt failed:', errorMessage);
         }
 
         // Approach 2: Try with soffice command (alternative entry point)
         if (!conversionSuccessful) {
             try {
-                const libreOfficeCommand = `soffice --headless --convert-to ${format} --outdir "${tempDir}" "${tempInputPath}"`;
-                console.log(`Trying alternative command: ${libreOfficeCommand}`);
+                const sofficeCommand = `soffice --headless --convert-to "${formatFilter}" --outdir "${tempDir}" "${tempInputPath}"`;
+                console.log(`Trying alternative command: ${sofficeCommand}`);
 
-                const { stdout, stderr } = await execPromise(libreOfficeCommand);
+                const { stdout, stderr } = await execPromise(sofficeCommand);
                 console.log('Alternative command stdout:', stdout);
                 if (stderr) console.error('Alternative command stderr:', stderr);
 
                 conversionSuccessful = true;
             } catch (error) {
-                console.error('Second conversion attempt failed:', error);
+                errorMessage = error instanceof Error ? error.message : String(error);
+                console.error('Second conversion attempt failed:', errorMessage);
             }
         }
 
-        // Approach 3: Try with specific format options
+        // Approach 3: Try with just the basic format (without filter options)
         if (!conversionSuccessful) {
             try {
-                const formatOption = format === 'docx' ? 'docx:Office Open XML Text' :
-                    format === 'xlsx' ? 'xlsx:Office Open XML Spreadsheet' :
-                        format === 'pptx' ? 'pptx:Office Open XML Presentation' :
-                            format;
+                const basicFormatCommand = `libreoffice --headless --convert-to ${format} --outdir "${tempDir}" "${tempInputPath}"`;
+                console.log(`Trying with basic format: ${basicFormatCommand}`);
 
-                const libreOfficeCommand = `libreoffice --headless --convert-to "${formatOption}" --outdir "${tempDir}" "${tempInputPath}"`;
-                console.log(`Trying with format option: ${libreOfficeCommand}`);
-
-                const { stdout, stderr } = await execPromise(libreOfficeCommand);
-                console.log('Format option stdout:', stdout);
-                if (stderr) console.error('Format option stderr:', stderr);
+                const { stdout, stderr } = await execPromise(basicFormatCommand);
+                console.log('Basic format stdout:', stdout);
+                if (stderr) console.error('Basic format stderr:', stderr);
 
                 conversionSuccessful = true;
             } catch (error) {
-                console.error('Third conversion attempt failed:', error);
+                errorMessage = error instanceof Error ? error.message : String(error);
+                console.error('Third conversion attempt failed:', errorMessage);
             }
         }
 
@@ -202,8 +234,19 @@ async function convertWithLibreOffice(inputPath: string, outputPath: string, for
         const tempFiles = await readdir(tempDir);
         console.log(`Files in temp directory: ${tempFiles.join(', ')}`);
 
-        // Look for any file with the correct extension
-        const convertedFile = tempFiles.find(file => file.endsWith(`.${format}`));
+        // Look for any file with the correct extension or format
+        const convertedFile = tempFiles.find(file => {
+            // Look for exact extension match
+            if (file.endsWith(`.${format}`)) return true;
+
+            // Special case: RTF files might have .rtf.fodt extension
+            if (format === 'rtf' && file.includes('.rtf')) return true;
+
+            // Special case: HTML files might have multiple extensions
+            if (format === 'html' && (file.endsWith('.html') || file.endsWith('.htm'))) return true;
+
+            return false;
+        });
 
         if (convertedFile) {
             const convertedFilePath = join(tempDir, convertedFile);
@@ -234,25 +277,41 @@ async function convertWithLibreOffice(inputPath: string, outputPath: string, for
             try {
                 const inputBuffer = await readFile(inputPath);
 
-                // Adjust format if necessary (LibreOffice uses different format strings)
-                let outputFormat = format;
-                if (format === 'docx') outputFormat = 'docx:Office Open XML Text';
-                else if (format === 'xlsx') outputFormat = 'xlsx:Office Open XML Spreadsheet';
-                else if (format === 'pptx') outputFormat = 'pptx:Office Open XML Presentation';
+                // Use the format filter when available
+                const outputFormat = formatFilter;
 
                 const outputBuffer = await libreConvert(inputBuffer, outputFormat, undefined);
                 await writeFile(outputPath, outputBuffer);
 
                 console.log(`Successfully converted using libreoffice-convert library to ${outputPath}`);
+
+                // Clean up temp directory
+                for (const file of tempFiles) {
+                    await unlink(join(tempDir, file));
+                }
+                await rmdir(tempDir);
+
                 return true;
             } catch (libError) {
-                console.error('Fallback conversion failed:', libError);
-                throw new Error(`No converted file with extension .${format} found in ${tempDir} and fallback conversion failed`);
+                const libErrorMsg = libError instanceof Error ? libError.message : String(libError);
+                console.error('Fallback conversion failed:', libErrorMsg);
+
+                // Clean up temp directory even on failure
+                try {
+                    for (const file of tempFiles) {
+                        await unlink(join(tempDir, file));
+                    }
+                    await rmdir(tempDir);
+                } catch (cleanupError) {
+                    console.error('Failed to clean up temp directory:', cleanupError);
+                }
+
+                throw new Error(`Conversion failed. Original error: ${errorMessage}. Fallback error: ${libErrorMsg}`);
             }
         }
     } catch (error) {
         console.error('LibreOffice conversion error:', error);
-        throw new Error('Failed to convert with LibreOffice: ' + (error as Error).message);
+        throw new Error('Failed to convert with LibreOffice: ' + (error instanceof Error ? error.message : String(error)));
     }
 }
 
