@@ -9,6 +9,7 @@ import libre from 'libreoffice-convert';
 import { PDFDocument } from 'pdf-lib';
 import { createWorker } from 'tesseract.js';
 import { copyFile, rmdir, unlink, readdir } from 'fs/promises';
+import path from 'path';
 
 // Convert callback-based functions to Promise-based
 const execPromise = promisify(exec);
@@ -16,37 +17,37 @@ const libreConvert = promisify(libre.convert);
 
 const UPLOAD_DIR = join(process.cwd(), 'uploads');
 const CONVERSION_DIR = join(process.cwd(), 'public', 'conversions');
-const FORMAT_FILTERS: Record<string, string> = {
-    // Text Documents
-    'doc': 'doc:MS Word 97',
-    'docx': 'docx:Office Open XML Text',
-    'docm': 'docm:MS Word 2007-2013 XML (macro enabled)',
-    'dotx': 'dotx:Office Open XML Text Template',
-    'dotm': 'dotm:Office Open XML Text Template (macro enabled)',
-    'rtf': 'rtf:Rich Text Format',
-    'txt': 'txt:Text',
-    'odt': 'odt:writer8',
-    'html': 'html:HTML (StarWriter)',
 
-    // Spreadsheets
-    'xls': 'xls:MS Excel 97',
-    'xlsx': 'xlsx:Office Open XML Spreadsheet',
-    'xlsm': 'xlsm:MS Excel 2007-2013 XML (macro enabled)',
-    'xltx': 'xltx:Office Open XML Spreadsheet Template',
-    'xltm': 'xltm:Office Open XML Spreadsheet Template (macro enabled)',
-    'csv': 'csv:Text - txt - csv (StarCalc)',
+// Define supported input and output formats
+const SUPPORTED_INPUT_FORMATS = [
+    'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'odt', 'ods', 'odp', 'rtf', 'txt', 'html', 'jpg', 'jpeg', 'png'
+];
 
-    // Presentations
-    'ppt': 'ppt:MS PowerPoint 97',
-    'pptx': 'pptx:Office Open XML Presentation',
-    'pptm': 'pptm:MS PowerPoint 2007-2013 XML (macro enabled)',
-    'potx': 'potx:Office Open XML Presentation Template',
-    'potm': 'potm:Office Open XML Presentation Template (macro enabled)',
+const SUPPORTED_OUTPUT_FORMATS = [
+    'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'odt', 'ods', 'odp', 'rtf', 'txt', 'html', 'jpg', 'jpeg', 'png', 'csv'
+];
 
-    // Other formats
-    'xml': 'xml:DocBook File',
-    'pdf': 'pdf:writer_pdf_Export'
+// MIME type mapping for file validation
+const MIME_TYPES: Record<string, string[]> = {
+    'pdf': ['application/pdf'],
+    'doc': ['application/msword'],
+    'docx': ['application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+    'xls': ['application/vnd.ms-excel'],
+    'xlsx': ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'],
+    'ppt': ['application/vnd.ms-powerpoint'],
+    'pptx': ['application/vnd.openxmlformats-officedocument.presentationml.presentation'],
+    'rtf': ['application/rtf', 'text/rtf'],
+    'txt': ['text/plain'],
+    'html': ['text/html'],
+    'jpg': ['image/jpeg'],
+    'jpeg': ['image/jpeg'],
+    'png': ['image/png'],
+    'odt': ['application/vnd.oasis.opendocument.text'],
+    'ods': ['application/vnd.oasis.opendocument.spreadsheet'],
+    'odp': ['application/vnd.oasis.opendocument.presentation'],
+    'csv': ['text/csv']
 };
+
 // Ensure directories exist
 async function ensureDirectories() {
     if (!existsSync(UPLOAD_DIR)) {
@@ -57,25 +58,48 @@ async function ensureDirectories() {
     }
 }
 
-// Process form data to get file
+// Get file format from extension
+function getFormatFromFilename(filename: string): string | null {
+    const extension = filename.split('.').pop()?.toLowerCase();
+    if (extension && SUPPORTED_INPUT_FORMATS.includes(extension)) {
+        return extension;
+    }
+    return null;
+}
+
+// Process form data to get file and conversion options
 async function processFormData(request: NextRequest) {
     const formData = await request.formData();
-    const file = formData.get('pdf') as File;
+    const file = formData.get('file') as File;
 
     if (!file) {
-        throw new Error('No PDF file provided');
+        throw new Error('No file provided');
     }
 
-    // Get form fields
-    const format = (formData.get('format') as string) || 'docx';
+    // Get input format either from file extension or specified format
+    let inputFormat = getFormatFromFilename(file.name);
+    if (!inputFormat) {
+        inputFormat = formData.get('inputFormat') as string;
+        if (!inputFormat || !SUPPORTED_INPUT_FORMATS.includes(inputFormat)) {
+            throw new Error('Invalid or unsupported input format');
+        }
+    }
+
+    // Get output format
+    const outputFormat = formData.get('outputFormat') as string;
+    if (!outputFormat || !SUPPORTED_OUTPUT_FORMATS.includes(outputFormat)) {
+        throw new Error('Invalid or unsupported output format');
+    }
+
+    // Get additional options
     const ocr = formData.get('ocr') === 'true';
     const quality = parseInt((formData.get('quality') as string) || '90');
     const password = formData.get('password') as string || '';
 
-    // Create file paths
+    // Create unique names for files
     const uniqueId = uuidv4();
-    const inputPath = join(UPLOAD_DIR, `${uniqueId}.pdf`);
-    const outputPath = join(CONVERSION_DIR, `${uniqueId}.${format}`);
+    const inputPath = join(UPLOAD_DIR, `${uniqueId}-input.${inputFormat}`);
+    const outputPath = join(CONVERSION_DIR, `${uniqueId}-output.${outputFormat}`);
 
     // Write file to disk
     const buffer = Buffer.from(await file.arrayBuffer());
@@ -83,7 +107,8 @@ async function processFormData(request: NextRequest) {
 
     return {
         file,
-        format,
+        inputFormat,
+        outputFormat,
         ocr,
         quality,
         password,
@@ -94,228 +119,7 @@ async function processFormData(request: NextRequest) {
     };
 }
 
-// Add this function for direct text extraction from PDF
-async function extractTextFromPdf(inputPath: string, outputPath: string) {
-    try {
-        console.log(`Extracting text directly from PDF: ${inputPath}`);
-
-        // We'll use pdftotext if available (better output quality)
-        try {
-            await execPromise(`pdftotext "${inputPath}" "${outputPath}"`);
-            console.log(`Successfully extracted text using pdftotext to ${outputPath}`);
-            return true;
-        } catch (pdftoTextError) {
-            console.error('pdftotext extraction failed:', pdftoTextError);
-            console.log('Trying alternative text extraction method...');
-
-            // Fallback to using PDFDocument from pdf-lib to get basic page text
-            const pdfBytes = await readFile(inputPath);
-            const pdfDoc = await PDFDocument.load(pdfBytes);
-            const pageCount = pdfDoc.getPageCount();
-
-            let extractedText = `Extracted from PDF (${pageCount} pages)\n\n`;
-
-            // We can't extract much text directly with pdf-lib, 
-            // so we'll add a placeholder message
-            extractedText += "PDF text content was extracted with limited formatting.\n";
-            extractedText += "For better results, try using the OCR option or convert to DOCX format.\n\n";
-
-            // Write the extracted text to file
-            await writeFile(outputPath, extractedText);
-            console.log(`Created basic text extraction to ${outputPath}`);
-            return true;
-        }
-    } catch (error) {
-        console.error('PDF text extraction error:', error);
-        throw new Error('Failed to extract text from PDF: ' + (error as Error).message);
-    }
-}
-
-// Updated OCR function to match the current Tesseract.js API
-async function extractTextWithOCR(inputPath: string, outputPath: string) {
-    try {
-        // Create a worker
-        const worker = await createWorker('eng');
-
-        // Recognize text from the PDF
-        const { data } = await worker.recognize(inputPath);
-
-        // Write the extracted text to file
-        await writeFile(outputPath, data.text);
-
-        // Terminate the worker
-        await worker.terminate();
-
-        console.log(`Successfully extracted text with OCR to ${outputPath}`);
-        return true;
-    } catch (error) {
-        console.error('OCR error:', error);
-        throw new Error('Failed to extract text with OCR: ' + (error as Error).message);
-    }
-}
-async function convertWithLibreOffice(inputPath: string, outputPath: string, format: string) {
-    try {
-        console.log(`Converting ${inputPath} to format: ${format}`);
-        console.log(`Desired output: ${outputPath}`);
-
-        // Create a temporary directory specifically for this conversion
-        const tempDir = join(process.cwd(), 'libreoffice-temp', Date.now().toString());
-        if (!existsSync(tempDir)) {
-            await mkdir(tempDir, { recursive: true });
-        }
-
-        // Copy the input file to the temp directory with a simple name
-        const tempInputPath = join(tempDir, 'input.pdf');
-        await copyFile(inputPath, tempInputPath);
-        console.log(`Copied input file to ${tempInputPath}`);
-
-        // Get appropriate filter for the format
-        let formatFilter = format in FORMAT_FILTERS ? FORMAT_FILTERS[format] : format;
-        console.log(`Using format filter: ${formatFilter}`);
-
-        // Try different LibreOffice conversion approaches
-        let conversionSuccessful = false;
-        let errorMessage = '';
-
-        // Approach 1: Use the standard command with explicit format filter
-        try {
-            // Use the format filter when available
-            const libreOfficeCommand = `libreoffice --headless --convert-to "${formatFilter}" --outdir "${tempDir}" "${tempInputPath}"`;
-            console.log(`Executing: ${libreOfficeCommand}`);
-
-            const { stdout, stderr } = await execPromise(libreOfficeCommand);
-            console.log('LibreOffice stdout:', stdout);
-            if (stderr) console.error('LibreOffice stderr:', stderr);
-
-            conversionSuccessful = true;
-        } catch (error) {
-            errorMessage = error instanceof Error ? error.message : String(error);
-            console.error('First conversion attempt failed:', errorMessage);
-        }
-
-        // Approach 2: Try with soffice command (alternative entry point)
-        if (!conversionSuccessful) {
-            try {
-                const sofficeCommand = `soffice --headless --convert-to "${formatFilter}" --outdir "${tempDir}" "${tempInputPath}"`;
-                console.log(`Trying alternative command: ${sofficeCommand}`);
-
-                const { stdout, stderr } = await execPromise(sofficeCommand);
-                console.log('Alternative command stdout:', stdout);
-                if (stderr) console.error('Alternative command stderr:', stderr);
-
-                conversionSuccessful = true;
-            } catch (error) {
-                errorMessage = error instanceof Error ? error.message : String(error);
-                console.error('Second conversion attempt failed:', errorMessage);
-            }
-        }
-
-        // Approach 3: Try with just the basic format (without filter options)
-        if (!conversionSuccessful) {
-            try {
-                const basicFormatCommand = `libreoffice --headless --convert-to ${format} --outdir "${tempDir}" "${tempInputPath}"`;
-                console.log(`Trying with basic format: ${basicFormatCommand}`);
-
-                const { stdout, stderr } = await execPromise(basicFormatCommand);
-                console.log('Basic format stdout:', stdout);
-                if (stderr) console.error('Basic format stderr:', stderr);
-
-                conversionSuccessful = true;
-            } catch (error) {
-                errorMessage = error instanceof Error ? error.message : String(error);
-                console.error('Third conversion attempt failed:', errorMessage);
-            }
-        }
-
-        // Wait to ensure file operations complete
-        await new Promise(resolve => setTimeout(resolve, 2000));
-
-        // List all files in the temp directory for debugging
-        const tempFiles = await readdir(tempDir);
-        console.log(`Files in temp directory: ${tempFiles.join(', ')}`);
-
-        // Look for any file with the correct extension or format
-        const convertedFile = tempFiles.find(file => {
-            // Look for exact extension match
-            if (file.endsWith(`.${format}`)) return true;
-
-            // Special case: RTF files might have .rtf.fodt extension
-            if (format === 'rtf' && file.includes('.rtf')) return true;
-
-            // Special case: HTML files might have multiple extensions
-            if (format === 'html' && (file.endsWith('.html') || file.endsWith('.htm'))) return true;
-
-            return false;
-        });
-
-        if (convertedFile) {
-            const convertedFilePath = join(tempDir, convertedFile);
-            console.log(`Found converted file at: ${convertedFilePath}`);
-
-            // Copy the converted file to the desired output location
-            console.log(`Copying to ${outputPath}`);
-            await copyFile(convertedFilePath, outputPath);
-
-            // Verify the file was copied successfully
-            if (existsSync(outputPath)) {
-                console.log(`Successfully created ${outputPath}`);
-
-                // Clean up temp directory
-                for (const file of tempFiles) {
-                    await unlink(join(tempDir, file));
-                }
-                await rmdir(tempDir);
-
-                return true;
-            } else {
-                throw new Error(`Failed to copy output file to ${outputPath}`);
-            }
-        } else {
-            // If we can't find the converted file, try using the libreoffice-convert library as a fallback
-            console.log('No converted file found. Trying libreoffice-convert library as fallback...');
-
-            try {
-                const inputBuffer = await readFile(inputPath);
-
-                // Use the format filter when available
-                const outputFormat = formatFilter;
-
-                const outputBuffer = await libreConvert(inputBuffer, outputFormat, undefined);
-                await writeFile(outputPath, outputBuffer);
-
-                console.log(`Successfully converted using libreoffice-convert library to ${outputPath}`);
-
-                // Clean up temp directory
-                for (const file of tempFiles) {
-                    await unlink(join(tempDir, file));
-                }
-                await rmdir(tempDir);
-
-                return true;
-            } catch (libError) {
-                const libErrorMsg = libError instanceof Error ? libError.message : String(libError);
-                console.error('Fallback conversion failed:', libErrorMsg);
-
-                // Clean up temp directory even on failure
-                try {
-                    for (const file of tempFiles) {
-                        await unlink(join(tempDir, file));
-                    }
-                    await rmdir(tempDir);
-                } catch (cleanupError) {
-                    console.error('Failed to clean up temp directory:', cleanupError);
-                }
-
-                throw new Error(`Conversion failed. Original error: ${errorMessage}. Fallback error: ${libErrorMsg}`);
-            }
-        }
-    } catch (error) {
-        console.error('LibreOffice conversion error:', error);
-        throw new Error('Failed to convert with LibreOffice: ' + (error instanceof Error ? error.message : String(error)));
-    }
-}
-
-// Handle encrypted PDF
+// Handle password-protected PDF
 async function decryptPdf(inputPath: string, password: string, outputPath: string) {
     try {
         const pdfBytes = await readFile(inputPath);
@@ -327,54 +131,518 @@ async function decryptPdf(inputPath: string, password: string, outputPath: strin
         return true;
     } catch (error) {
         console.error('PDF decryption error:', error);
-        throw new Error('Failed to decrypt PDF: ' + (error as Error).message);
+        throw new Error('Failed to decrypt PDF: ' + (error instanceof Error ? error.message : String(error)));
     }
 }
 
-// Convert PDF to image
+// Extract text from PDF
+async function extractTextFromPdf(inputPath: string, outputPath: string) {
+    try {
+        console.log(`Extracting text from PDF: ${inputPath}`);
+
+        // Try pdftotext if available
+        try {
+            await execPromise(`pdftotext "${inputPath}" "${outputPath}"`);
+            console.log(`Successfully extracted text using pdftotext to ${outputPath}`);
+            return true;
+        } catch (pdftoTextError) {
+            console.error('pdftotext extraction failed:', pdftoTextError);
+
+            // Fallback to using PDFDocument
+            const pdfBytes = await readFile(inputPath);
+            const pdfDoc = await PDFDocument.load(pdfBytes);
+            const pageCount = pdfDoc.getPageCount();
+
+            let extractedText = `Extracted from PDF (${pageCount} pages)\n\n`;
+            extractedText += "PDF text content was extracted with limited formatting.\n";
+            extractedText += "For better results, try using the OCR option or convert to DOCX format.\n\n";
+
+            await writeFile(outputPath, extractedText);
+            console.log(`Created basic text extraction to ${outputPath}`);
+            return true;
+        }
+    } catch (error) {
+        console.error('PDF text extraction error:', error);
+        throw new Error('Failed to extract text from PDF: ' + (error instanceof Error ? error.message : String(error)));
+    }
+}
+
+// OCR text extraction
+async function extractTextWithOCR(inputPath: string, outputPath: string) {
+    try {
+        const worker = await createWorker('eng');
+        const { data } = await worker.recognize(inputPath);
+        await writeFile(outputPath, data.text);
+        await worker.terminate();
+        console.log(`Successfully extracted text with OCR to ${outputPath}`);
+        return true;
+    } catch (error) {
+        console.error('OCR error:', error);
+        throw new Error('Failed to extract text with OCR: ' + (error instanceof Error ? error.message : String(error)));
+    }
+}
+
+// Convert to image using appropriate tools
 async function convertToImage(inputPath: string, outputPath: string, format: string, quality: number) {
     try {
-        // We'll use different approaches based on the platform
-        if (process.platform === 'win32') {
-            // On Windows, we can use Ghostscript
-            await execPromise(`gswin64c -sDEVICE=${format === 'jpg' ? 'jpeg' : 'png16m'} -dNOPAUSE -dBATCH -dSAFER -r300 -dJPEGQ=${quality} -sOutputFile="${outputPath}" "${inputPath}"`);
-        } else {
-            // On Linux/Mac, try pdftoppm first
+        // Check if input is already an image
+        const inputExt = path.extname(inputPath).toLowerCase().substring(1);
+        if (['jpg', 'jpeg', 'png'].includes(inputExt)) {
+            // If input is already an image, we can use ImageMagick or similar
             try {
-                const tempOutputPath = outputPath.substring(0, outputPath.lastIndexOf('.'));
-                await execPromise(`pdftoppm -${format === 'jpg' ? 'jpeg' : 'png'} -r 300 -jpegopt quality=${quality} -singlefile "${inputPath}" "${tempOutputPath}"`);
-
-                // Check if the file exists with the expected name
-                const expectedOutputFile = `${tempOutputPath}.${format}`;
-                if (existsSync(expectedOutputFile)) {
-                    await copyFile(expectedOutputFile, outputPath);
-                    return true;
-                }
-            } catch (error) {
-                console.error('pdftoppm conversion failed:', error);
+                // Using ImageMagick convert
+                await execPromise(`convert "${inputPath}" -quality ${quality} "${outputPath}"`);
+                return true;
+            } catch (imgError) {
+                console.error('ImageMagick conversion failed:', imgError);
+                // Just copy the file as fallback for image-to-image conversion
+                await copyFile(inputPath, outputPath);
+                return true;
             }
-
-            // Fallback to Ghostscript if pdftoppm failed
-            await execPromise(`gs -sDEVICE=${format === 'jpg' ? 'jpeg' : 'png16m'} -dNOPAUSE -dBATCH -dSAFER -r300 -dJPEGQ=${quality} -sOutputFile="${outputPath}" "${inputPath}"`);
         }
+
+        // If input is PDF, use PDF specific tools
+        if (inputExt === 'pdf') {
+            if (process.platform === 'win32') {
+                // On Windows, use Ghostscript
+                await execPromise(`gswin64c -sDEVICE=${format === 'jpg' || format === 'jpeg' ? 'jpeg' : 'png16m'} -dNOPAUSE -dBATCH -dSAFER -r300 -dJPEGQ=${quality} -sOutputFile="${outputPath}" "${inputPath}"`);
+            } else {
+                // On Linux/Mac, try pdftoppm first
+                try {
+                    const tempOutputPath = outputPath.substring(0, outputPath.lastIndexOf('.'));
+                    await execPromise(`pdftoppm -${format === 'jpg' || format === 'jpeg' ? 'jpeg' : 'png'} -r 300 -jpegopt quality=${quality} -singlefile "${inputPath}" "${tempOutputPath}"`);
+
+                    // Check if the file exists with the expected name
+                    const expectedOutputFile = `${tempOutputPath}.${format}`;
+                    if (existsSync(expectedOutputFile)) {
+                        await copyFile(expectedOutputFile, outputPath);
+                        return true;
+                    }
+                } catch (error) {
+                    console.error('pdftoppm conversion failed:', error);
+                }
+
+                // Fallback to Ghostscript
+                await execPromise(`gs -sDEVICE=${format === 'jpg' || format === 'jpeg' ? 'jpeg' : 'png16m'} -dNOPAUSE -dBATCH -dSAFER -r300 -dJPEGQ=${quality} -sOutputFile="${outputPath}" "${inputPath}"`);
+            }
+            return true;
+        }
+
+        // For other formats, use LibreOffice to convert to PDF first, then to image
+        const tempPdfPath = outputPath.replace(/\.[^.]+$/, '.pdf');
+        await convertWithLibreOffice(inputPath, tempPdfPath, 'pdf');
+
+        // Now convert the PDF to image
+        await convertToImage(tempPdfPath, outputPath, format, quality);
+
+        // Clean up temporary PDF
+        await unlink(tempPdfPath);
 
         return true;
     } catch (error) {
         console.error('Image conversion error:', error);
-        throw new Error('Failed to convert to image: ' + (error as Error).message);
+        throw new Error('Failed to convert to image: ' + (error instanceof Error ? error.message : String(error)));
+    }
+}
+// Enhanced LibreOffice conversion function with improved PDF and Office format handling
+async function convertWithLibreOffice(inputPath: string, outputPath: string, format: string) {
+    try {
+        console.log(`Converting ${inputPath} to ${format} format...`);
+
+        // Create a temporary directory with a timestamp to avoid conflicts
+        const timestamp = Date.now();
+        const tempDir = join(process.cwd(), 'temp-conversions', `${timestamp}`);
+        await mkdir(tempDir, { recursive: true });
+
+        // Copy the input file to the temp directory with a simple name
+        const inputExt = path.extname(inputPath).toLowerCase();
+        const tempInputPath = join(tempDir, `input${inputExt}`);
+        await copyFile(inputPath, tempInputPath);
+
+        // Special handling for PDF to Office formats (DOCX, XLSX, PPTX)
+        if (inputPath.toLowerCase().endsWith('.pdf') &&
+            ['docx', 'xlsx', 'pptx'].includes(format)) {
+            console.log(`Using specific approach for PDF to ${format.toUpperCase()} conversion...`);
+
+            // Try specific PDF to Office format conversion approach
+            try {
+                // For PDF to DOCX, use specific filter
+                if (format === 'docx') {
+                    const pdfToDocxCommand = `libreoffice --headless --infilter="writer_pdf_import" --convert-to docx:"MS Word 2007 XML" --outdir "${tempDir}" "${tempInputPath}"`;
+                    console.log(`Executing PDF to DOCX command: ${pdfToDocxCommand}`);
+
+                    const { stdout, stderr } = await execPromise(pdfToDocxCommand);
+                    console.log('PDF to DOCX conversion stdout:', stdout);
+                    if (stderr) console.error('PDF to DOCX conversion stderr:', stderr);
+                }
+                // For PDF to PPTX
+                else if (format === 'pptx') {
+                    const pdfToPptxCommand = `libreoffice --headless --infilter="impress_pdf_import" --convert-to pptx:"Impress MS PowerPoint 2007 XML" --outdir "${tempDir}" "${tempInputPath}"`;
+                    console.log(`Executing PDF to PPTX command: ${pdfToPptxCommand}`);
+
+                    const { stdout, stderr } = await execPromise(pdfToPptxCommand);
+                    console.log('PDF to PPTX conversion stdout:', stdout);
+                    if (stderr) console.error('PDF to PPTX conversion stderr:', stderr);
+                }
+                // For PDF to XLSX
+                else if (format === 'xlsx') {
+                    const pdfToXlsxCommand = `libreoffice --headless --infilter="calc_pdf_import" --convert-to xlsx:"Calc MS Excel 2007 XML" --outdir "${tempDir}" "${tempInputPath}"`;
+                    console.log(`Executing PDF to XLSX command: ${pdfToXlsxCommand}`);
+
+                    const { stdout, stderr } = await execPromise(pdfToXlsxCommand);
+                    console.log('PDF to XLSX conversion stdout:', stdout);
+                    if (stderr) console.error('PDF to XLSX conversion stderr:', stderr);
+                }
+
+                // Wait for file operations to complete
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // Look for the converted file
+                const files = await readdir(tempDir);
+                console.log(`Files in temp directory after conversion: ${files.join(', ')}`);
+
+                const convertedFile = files.find(file =>
+                    file !== 'input.pdf' &&
+                    file.endsWith(`.${format}`)
+                );
+
+                if (convertedFile) {
+                    const convertedPath = join(tempDir, convertedFile);
+                    await copyFile(convertedPath, outputPath);
+                    console.log(`Successfully converted PDF to ${format.toUpperCase()} at ${outputPath}`);
+
+                    // Clean up
+                    for (const file of files) {
+                        try {
+                            await unlink(join(tempDir, file));
+                        } catch (err) {
+                            console.error(`Error deleting temp file ${file}:`, err);
+                        }
+                    }
+                    try {
+                        await rmdir(tempDir);
+                    } catch (err) {
+                        console.error(`Error removing temp directory:`, err);
+                    }
+
+                    return true;
+                }
+            } catch (pdfConversionError) {
+                console.error(`PDF to ${format.toUpperCase()} specific conversion failed:`, pdfConversionError);
+            }
+
+            // Try an alternative approach for PDF conversion
+            try {
+                // Use soffice command as an alternative
+                const altCommand = `soffice --headless --convert-to ${format} --outdir "${tempDir}" "${tempInputPath}"`;
+                console.log(`Trying alternative PDF conversion command: ${altCommand}`);
+
+                const { stdout, stderr } = await execPromise(altCommand);
+                console.log('Alternative command stdout:', stdout);
+                if (stderr) console.error('Alternative command stderr:', stderr);
+
+                // Wait for file operations to complete
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // Look for the converted file
+                const files = await readdir(tempDir);
+                const convertedFile = files.find(file =>
+                    file !== 'input.pdf' &&
+                    file.endsWith(`.${format}`)
+                );
+
+                if (convertedFile) {
+                    const convertedPath = join(tempDir, convertedFile);
+                    await copyFile(convertedPath, outputPath);
+                    console.log(`Successfully converted PDF to ${format.toUpperCase()} using alternative command at ${outputPath}`);
+
+                    // Clean up
+                    for (const file of files) {
+                        try {
+                            await unlink(join(tempDir, file));
+                        } catch (err) {
+                            console.error(`Error deleting temp file ${file}:`, err);
+                        }
+                    }
+                    try {
+                        await rmdir(tempDir);
+                    } catch (err) {
+                        console.error(`Error removing temp directory:`, err);
+                    }
+
+                    return true;
+                }
+            } catch (altError) {
+                console.error(`Alternative PDF to ${format.toUpperCase()} conversion failed:`, altError);
+            }
+        }
+
+        // Special handling for DOCX/DOC to PPTX
+        if ((inputPath.toLowerCase().endsWith('.docx') ||
+            inputPath.toLowerCase().endsWith('.doc')) &&
+            format === 'pptx') {
+            console.log('Using specific approach for DOCX/DOC to PPTX conversion...');
+
+            try {
+                // DOCX to PPTX with specific filter
+                const docxToPptxCommand = `libreoffice --headless --convert-to pptx:"Impress MS PowerPoint 2007 XML" --outdir "${tempDir}" "${tempInputPath}"`;
+                console.log(`Executing DOCX to PPTX command: ${docxToPptxCommand}`);
+
+                const { stdout, stderr } = await execPromise(docxToPptxCommand);
+                console.log('DOCX to PPTX conversion stdout:', stdout);
+                if (stderr) console.error('DOCX to PPTX conversion stderr:', stderr);
+
+                // Wait for file operations to complete
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // Look for the converted file
+                const files = await readdir(tempDir);
+                console.log(`Files in temp directory after DOCX to PPTX conversion: ${files.join(', ')}`);
+
+                const pptxFile = files.find(file => file.endsWith('.pptx'));
+                if (pptxFile) {
+                    const pptxPath = join(tempDir, pptxFile);
+                    await copyFile(pptxPath, outputPath);
+                    console.log(`Successfully converted DOCX to PPTX at ${outputPath}`);
+
+                    // Clean up
+                    for (const file of files) {
+                        try {
+                            await unlink(join(tempDir, file));
+                        } catch (err) {
+                            console.error(`Error deleting temp file ${file}:`, err);
+                        }
+                    }
+                    try {
+                        await rmdir(tempDir);
+                    } catch (err) {
+                        console.error(`Error removing temp directory:`, err);
+                    }
+
+                    return true;
+                }
+            } catch (docxToPptxError) {
+                console.error('DOCX to PPTX specific conversion failed:', docxToPptxError);
+            }
+
+            // Try two-step conversion via PDF
+            try {
+                console.log('Attempting two-step DOCX to PPTX conversion via PDF...');
+
+                // First convert to PDF
+                const tempPdfPath = join(tempDir, 'intermediate.pdf');
+                const toPdfCommand = `libreoffice --headless --convert-to pdf --outdir "${tempDir}" "${tempInputPath}"`;
+
+                console.log(`Step 1: Converting DOCX to PDF: ${toPdfCommand}`);
+                await execPromise(toPdfCommand);
+
+                // Wait for PDF conversion to complete
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // Verify PDF was created
+                if (existsSync(join(tempDir, 'input.pdf'))) {
+                    const tempPdfPath = join(tempDir, 'input.pdf');
+
+                    // Then convert PDF to PPTX
+                    const pdfToPptxCommand = `libreoffice --headless --infilter="impress_pdf_import" --convert-to pptx:"Impress MS PowerPoint 2007 XML" --outdir "${tempDir}" "${tempPdfPath}"`;
+                    console.log(`Step 2: Converting PDF to PPTX: ${pdfToPptxCommand}`);
+                    await execPromise(pdfToPptxCommand);
+
+                    // Wait for PPTX conversion to complete
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+
+                    // Look for the final PPTX file
+                    const files = await readdir(tempDir);
+                    console.log(`Files after two-step conversion: ${files.join(', ')}`);
+
+                    const pptxFile = files.find(file => file.endsWith('.pptx'));
+                    if (pptxFile) {
+                        const pptxPath = join(tempDir, pptxFile);
+                        await copyFile(pptxPath, outputPath);
+                        console.log(`Successfully created PPTX using two-step conversion at ${outputPath}`);
+
+                        // Clean up
+                        for (const file of files) {
+                            try {
+                                await unlink(join(tempDir, file));
+                            } catch (err) {
+                                console.error(`Error deleting temp file ${file}:`, err);
+                            }
+                        }
+                        try {
+                            await rmdir(tempDir);
+                        } catch (err) {
+                            console.error(`Error removing temp directory:`, err);
+                        }
+
+                        return true;
+                    }
+                } else {
+                    console.log('Intermediate PDF file was not created');
+                }
+            } catch (twoStepError) {
+                console.error('Two-step conversion failed:', twoStepError);
+            }
+        }
+
+        // First approach: Use libreoffice-convert library directly
+        try {
+            console.log('Trying direct libreoffice-convert library conversion...');
+            const inputBuffer = await readFile(inputPath);
+            // The third parameter is for filter options
+            const outputBuffer = await libreConvert(inputBuffer, format, undefined);
+            await writeFile(outputPath, outputBuffer);
+            console.log(`Successfully converted with libreoffice-convert library to ${outputPath}`);
+
+            // Clean up temp directory if it still exists
+            if (existsSync(tempDir)) {
+                const tempFiles = await readdir(tempDir);
+                for (const file of tempFiles) {
+                    try {
+                        await unlink(join(tempDir, file));
+                    } catch (err) {
+                        console.error(`Error deleting temp file ${file}:`, err);
+                    }
+                }
+                try {
+                    await rmdir(tempDir);
+                } catch (err) {
+                    console.error(`Error removing temp directory:`, err);
+                }
+            }
+
+            return true;
+        } catch (libError) {
+            console.log('Direct library conversion failed, trying CLI approach:', libError);
+        }
+
+        // Try conversion with basic LibreOffice command
+        try {
+            const libreOfficeCommand = `libreoffice --headless --convert-to ${format} --outdir "${tempDir}" "${tempInputPath}"`;
+            console.log(`Executing standard conversion command: ${libreOfficeCommand}`);
+
+            const { stdout, stderr } = await execPromise(libreOfficeCommand);
+            console.log('LibreOffice stdout:', stdout);
+            if (stderr) console.error('LibreOffice stderr:', stderr);
+
+            // Wait for file operations to complete
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Look for the converted file
+            const tempFiles = await readdir(tempDir);
+            console.log(`Files in temp directory: ${tempFiles.join(', ')}`);
+
+            const convertedFile = tempFiles.find(file =>
+                file !== path.basename(tempInputPath) &&
+                (file.endsWith(`.${format}`) || file.includes(`.${format}`))
+            );
+
+            if (convertedFile) {
+                const convertedFilePath = join(tempDir, convertedFile);
+                await copyFile(convertedFilePath, outputPath);
+                console.log(`Successfully converted with standard LibreOffice command to ${outputPath}`);
+
+                // Clean up
+                for (const file of tempFiles) {
+                    try {
+                        await unlink(join(tempDir, file));
+                    } catch (err) {
+                        console.error(`Error deleting temp file ${file}:`, err);
+                    }
+                }
+                try {
+                    await rmdir(tempDir);
+                } catch (err) {
+                    console.error(`Error removing temp directory:`, err);
+                }
+
+                return true;
+            }
+        } catch (error) {
+            console.log('Standard conversion command failed, trying alternative command...', error);
+        }
+
+        // Try with soffice command
+        try {
+            const sofficeCommand = `soffice --headless --convert-to ${format} --outdir "${tempDir}" "${tempInputPath}"`;
+            console.log(`Executing alternative conversion command: ${sofficeCommand}`);
+
+            const { stdout, stderr } = await execPromise(sofficeCommand);
+            console.log('Alternative command stdout:', stdout);
+            if (stderr) console.error('Alternative command stderr:', stderr);
+
+            // Wait for file operations to complete
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Look for the converted file
+            const tempFiles = await readdir(tempDir);
+            const convertedFile = tempFiles.find(file =>
+                file !== path.basename(tempInputPath) &&
+                (file.endsWith(`.${format}`) || file.includes(`.${format}`))
+            );
+
+            if (convertedFile) {
+                const convertedFilePath = join(tempDir, convertedFile);
+                await copyFile(convertedFilePath, outputPath);
+                console.log(`Successfully converted with alternative command to ${outputPath}`);
+
+                // Clean up
+                for (const file of tempFiles) {
+                    try {
+                        await unlink(join(tempDir, file));
+                    } catch (err) {
+                        console.error(`Error deleting temp file ${file}:`, err);
+                    }
+                }
+                try {
+                    await rmdir(tempDir);
+                } catch (err) {
+                    console.error(`Error removing temp directory:`, err);
+                }
+
+                return true;
+            }
+        } catch (error) {
+            console.log('Alternative command failed:', error);
+        }
+
+        // Clean up temp directory if all approaches failed
+        try {
+            if (existsSync(tempDir)) {
+                const tempFiles = await readdir(tempDir);
+                for (const file of tempFiles) {
+                    try {
+                        await unlink(join(tempDir, file));
+                    } catch (err) {
+                        console.error(`Error deleting temp file ${file}:`, err);
+                    }
+                }
+                try {
+                    await rmdir(tempDir);
+                } catch (err) {
+                    console.error(`Error removing temp directory:`, err);
+                }
+            }
+        } catch (cleanupError) {
+            console.error('Error cleaning up temp directory:', cleanupError);
+        }
+
+        throw new Error(`Failed to convert ${path.basename(inputPath)} to ${format.toUpperCase()}`);
+    } catch (error) {
+        console.error('LibreOffice conversion error:', error);
+        throw new Error('Failed to convert with LibreOffice: ' + (error instanceof Error ? error.message : String(error)));
     }
 }
 
 export async function POST(request: NextRequest) {
     try {
-        // Log the request headers for debugging
-        console.log('Request headers:', Object.fromEntries(request.headers.entries()));
-
+        console.log('Starting conversion process...');
         await ensureDirectories();
 
         const {
             file,
-            format,
+            inputFormat,
+            outputFormat,
             ocr,
             quality,
             password,
@@ -384,21 +652,22 @@ export async function POST(request: NextRequest) {
             fileSize
         } = await processFormData(request);
 
-        console.log(`Processing file: ${file.name}, format: ${format}, size: ${fileSize} bytes`);
+        console.log(`Processing file: ${file.name}, from ${inputFormat} to ${outputFormat}, size: ${fileSize} bytes`);
 
         // Handle password-protected PDF
         let workingInputPath = inputPath;
-        if (password) {
-            const decryptedPath = join(UPLOAD_DIR, `${uniqueId}_decrypted.pdf`);
+        if (inputFormat === 'pdf' && password) {
+            const decryptedPath = join(UPLOAD_DIR, `${uniqueId}-decrypted.pdf`);
             await decryptPdf(inputPath, password, decryptedPath);
             workingInputPath = decryptedPath;
         }
 
-        // Perform the conversion based on format
-        if (['jpg', 'jpeg', 'png'].includes(format)) {
-            await convertToImage(workingInputPath, outputPath, format, quality);
-        } else if (format === 'txt') {
-            // For text format, try direct extraction first, then fall back to OCR if requested
+        // Perform the conversion based on input and output formats
+        if (['jpg', 'jpeg', 'png'].includes(outputFormat)) {
+            // Convert to image
+            await convertToImage(workingInputPath, outputPath, outputFormat, quality);
+        } else if (outputFormat === 'txt' && inputFormat === 'pdf') {
+            // Special case for PDF to TXT
             try {
                 await extractTextFromPdf(workingInputPath, outputPath);
             } catch (error) {
@@ -411,7 +680,8 @@ export async function POST(request: NextRequest) {
                 }
             }
         } else {
-            await convertWithLibreOffice(workingInputPath, outputPath, format);
+            // For all other conversions, use LibreOffice
+            await convertWithLibreOffice(workingInputPath, outputPath, outputFormat);
         }
 
         // Verify the output file exists
@@ -420,15 +690,16 @@ export async function POST(request: NextRequest) {
         }
 
         // Create relative URL for the converted file
-        const fileUrl = `/conversions/${uniqueId}.${format}`;
+        const fileUrl = `/conversions/${uniqueId}-output.${outputFormat}`;
 
         return NextResponse.json({
             success: true,
             message: 'Conversion successful',
             fileUrl,
-            filename: `${uniqueId}.${format}`,
+            filename: `${uniqueId}-output.${outputFormat}`,
             originalName: file.name,
-            format
+            inputFormat,
+            outputFormat
         });
     } catch (error) {
         console.error('Conversion error:', error);
