@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cleanupFiles } from '@/lib/cleanup-service';
 
 // Secret API key for protecting this endpoint
-const API_KEY = process.env.ADMIN_API_KEY || 'default-api-key-change-me';
+const API_KEY = process.env.ADMIN_API_KEY || 'qeOe99-deJzz7WmJG0=Y37!78S9CK7JT7406wjed5IfrojFu-30=hnwn37zLuiHl';
 
 export async function GET(request: NextRequest) {
     try {

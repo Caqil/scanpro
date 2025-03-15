@@ -45,11 +45,12 @@ export function Header() {
             Features
           </Link>
           <Link 
-            href="/api-docs" 
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary after:content-[''] after:block after:h-0.5 after:scale-x-0 after:bg-primary after:transition-transform hover:after:scale-x-100"
-          >
-            API
-          </Link>
+              href="/editor" 
+              className="flex items-center px-2 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary hover:bg-primary/5 rounded-md"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              PDF Editor
+            </Link>
           <Link 
             href="/pricing" 
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary after:content-[''] after:block after:h-0.5 after:scale-x-0 after:bg-primary after:transition-transform hover:after:scale-x-100"
@@ -98,11 +99,11 @@ export function Header() {
               Features
             </Link>
             <Link 
-              href="/api-docs" 
+              href="/editor" 
               className="flex items-center px-2 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary hover:bg-primary/5 rounded-md"
               onClick={() => setMobileMenuOpen(false)}
             >
-              API
+              PDF Editor
             </Link>
             
           </div>
