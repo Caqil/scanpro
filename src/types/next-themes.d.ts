@@ -7,7 +7,7 @@ declare module 'next-themes' {
       enableSystem?: boolean;
       storageKey?: string;
       children?: React.ReactNode;
-      value?: any;
+      value?: unknown;
     }
     
     export interface UseThemeProps {
@@ -30,6 +30,6 @@ declare module 'next-themes' {
       enableSystem?: boolean;
       storageKey?: string;
       children?: React.ReactNode;
-      value?: any;
+      value?: unknown;
     }
   }

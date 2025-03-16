@@ -5,7 +5,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { 
-  CheckIcon, 
   FileTextIcon, 
   ImageIcon, 
   TableIcon,
@@ -38,8 +37,8 @@ export default function Home() {
                 <Link href="#converter" className="inline-flex">
                   <Button size="lg">Convert Now</Button>
                 </Link>
-                <Link href="/features" className="inline-flex">
-                  <Button size="lg" variant="outline">Learn More</Button>
+                <Link href="/compress" className="inline-flex">
+                  <Button size="lg" variant="outline">Compress PDF</Button>
                 </Link>
               </div>
             </div>
@@ -98,7 +97,7 @@ export default function Home() {
 {`curl -X POST \\
   -F "pdf=@document.pdf" \\
   -F "format=docx" \\
-  https://pdfconverter.pro/api/convert`}
+  https://scanpro.cc/api/convert`}
                           </code>
                         </pre>
                       </div>

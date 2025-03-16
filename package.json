@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev:pm2": "pm2 start ecosystem.config.js",
+    "dev:pm2:stop": "pm2 stop ecosystem.config.js",
+    "dev:pm2:logs": "pm2 logs next-dev-server",
+    "dev:pm2:restart": "pm2 restart next-dev-server"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",
@@ -23,6 +27,7 @@
     "archiver": "^7.0.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "compress-pdf": "^0.5.2",
     "formidable": "^3.5.2",
     "libreoffice-convert": "^1.6.1",
     "lucide-react": "^0.479.0",

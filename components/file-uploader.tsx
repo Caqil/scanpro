@@ -55,9 +55,7 @@ const FORMAT_CATEGORIES = [
     formats: [
       { value: "pdf", label: "PDF Document (.pdf)", accept: "application/pdf" },
       { value: "docx", label: "Word Document (.docx)", accept: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" },
-      { value: "doc", label: "Word Document - Legacy (.doc)", accept: "application/msword" },
       { value: "rtf", label: "Rich Text Format (.rtf)", accept: "application/rtf" },
-      { value: "odt", label: "OpenDocument Text (.odt)", accept: "application/vnd.oasis.opendocument.text" },
       { value: "txt", label: "Text File (.txt)", accept: "text/plain" },
       { value: "html", label: "HTML Document (.html)", accept: "text/html" },
     ]
@@ -67,9 +65,6 @@ const FORMAT_CATEGORIES = [
     icon: <TableIcon className="h-4 w-4" />,
     formats: [
       { value: "xlsx", label: "Excel Spreadsheet (.xlsx)", accept: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" },
-      { value: "xls", label: "Excel Spreadsheet - Legacy (.xls)", accept: "application/vnd.ms-excel" },
-      { value: "csv", label: "CSV File (.csv)", accept: "text/csv" },
-      { value: "ods", label: "OpenDocument Spreadsheet (.ods)", accept: "application/vnd.oasis.opendocument.spreadsheet" },
     ]
   },
   {
@@ -77,8 +72,6 @@ const FORMAT_CATEGORIES = [
     icon: <FileTextIcon className="h-4 w-4" />,
     formats: [
       { value: "pptx", label: "PowerPoint Presentation (.pptx)", accept: "application/vnd.openxmlformats-officedocument.presentationml.presentation" },
-      { value: "ppt", label: "PowerPoint Presentation - Legacy (.ppt)", accept: "application/vnd.ms-powerpoint" },
-      { value: "odp", label: "OpenDocument Presentation (.odp)", accept: "application/vnd.oasis.opendocument.presentation" },
     ]
   },
   {
@@ -118,9 +111,9 @@ const getAcceptedFileTypes = (inputFormat: string) => {
 const getFileIcon = (format: string) => {
   if (['jpg', 'jpeg', 'png'].includes(format)) {
     return <ImageIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />;
-  } else if (['xlsx', 'xls', 'csv', 'ods'].includes(format)) {
+  } else if (['xlsx', 'xls'].includes(format)) {
     return <TableIcon className="h-6 w-6 text-green-600 dark:text-green-400" />;
-  } else if (['pptx', 'ppt', 'odp'].includes(format)) {
+  } else if (['pptx'].includes(format)) {
     return <FileTextIcon className="h-6 w-6 text-orange-600 dark:text-orange-400" />;
   } else {
     return <FileIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />;
@@ -365,28 +358,6 @@ export function FileUploader() {
                 </div>
               )}
             </div>
-            
-            {/* Password for protected PDFs */}
-            {inputFormat === 'pdf' && (
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password (if protected)</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="Leave empty if not password-protected"
-                        {...field}
-                        disabled={isUploading}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            )}
           </div>
           
           {/* Right column: Conversion options */}

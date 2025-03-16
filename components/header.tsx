@@ -9,7 +9,6 @@ import {
 } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -21,9 +20,9 @@ export function Header() {
             <div className="bg-primary/10 p-2 rounded-md">
               <FileIcon className="h-5 w-5 text-primary" />
             </div>
-            <span className="font-bold text-xl hidden sm:inline-block">
-              PDF Converter Pro
-            </span>
+            <span className="font-bold text-xl hidden sm:inline-block" suppressHydrationWarning={true}>
+                ScanPro
+              </span>
             <Badge variant="outline" className="hidden lg:flex ml-2">
               Beta
             </Badge>

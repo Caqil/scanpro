@@ -269,7 +269,7 @@ console.log(data);`}
                       </tr>
                       <tr>
                         <td className="p-2 font-mono text-sm">Content-Disposition</td>
-                        <td className="p-2">attachment; filename="filename.ext"</td>
+                        <td className="p-2">attachment; filename=&#34;filename.ext&#34;</td>
                       </tr>
                       <tr>
                         <td className="p-2 font-mono text-sm">Content-Length</td>

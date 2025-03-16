@@ -15,12 +15,9 @@ import {
   IdCardIcon,
   CodeIcon,
   LockClosedIcon,
-  EyeOpenIcon,
-  ReaderIcon,
-  UpdateIcon,
-  DownloadIcon,
   MixerHorizontalIcon,
   LayersIcon,
+  MinusCircledIcon,
 } from "@radix-ui/react-icons";
 
 export const metadata = {
@@ -36,12 +33,12 @@ export default function FeaturesPage() {
           Advanced Features
         </h1>
         <p className="mt-4 text-xl text-muted-foreground max-w-[800px]">
-          Our PDF converter leverages LibreOffice technology to provide high-quality conversions
-          with perfect formatting and layout preservation.
+          Our PDF tools leverage cutting-edge technology to provide high-quality conversions
+          and optimization with perfect formatting and layout preservation.
         </p>
       </div>
 
-      {/* Feature Categories */}
+      {/* Feature Categories with new Compression Feature */}
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         <FeatureCard
           icon={<FileTextIcon className="h-10 w-10" />}
@@ -80,6 +77,20 @@ export default function FeaturesPage() {
             "Quality settings",
             "First page or all pages conversion"
           ]}
+        />
+
+        <FeatureCard
+          icon={<MinusCircledIcon className="h-10 w-10" />}
+          title="PDF Compression"
+          description="Reduce PDF file size while maintaining visual quality"
+          features={[
+            "Multiple compression levels",
+            "Maintain document quality",
+            "Reduce file size up to 90%",
+            "Perfect for email sharing",
+            "Preserve document structure"
+          ]}
+          link="/compress"
         />
 
         <FeatureCard
@@ -146,22 +157,9 @@ export default function FeaturesPage() {
             "Batch processing settings"
           ]}
         />
-
-        <FeatureCard
-          icon={<ReaderIcon className="h-10 w-10" />}
-          title="Cloud API"
-          description="Integrate PDF conversion capabilities into your applications"
-          features={[
-            "RESTful API access",
-            "Simple integration",
-            "High-volume processing",
-            "Custom webhooks",
-            "Comprehensive documentation"
-          ]}
-        />
       </div>
 
-      {/* Comparison Table */}
+      {/* Comparison Table - now with Compression Feature */}
       <div className="mt-20 mb-12">
         <h2 className="text-3xl font-bold text-center mb-8">How We Compare</h2>
         <div className="overflow-x-auto">
@@ -186,6 +184,12 @@ export default function FeaturesPage() {
                 ours="Included" 
                 basic="Not available" 
                 premium="Premium feature"
+              />
+              <ComparisonRow 
+                feature="PDF Compression" 
+                ours="Advanced options" 
+                basic="Basic only" 
+                premium="Limited options"
               />
               <ComparisonRow 
                 feature="Conversion Quality" 
@@ -220,14 +224,14 @@ export default function FeaturesPage() {
       <div className="mt-16 text-center">
         <h3 className="text-2xl font-bold mb-4">Ready to start converting?</h3>
         <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-          Try our PDF converter today and experience the power of high-quality, accurate PDF conversions.
+          Try our PDF tools today and experience the power of high-quality, accurate PDF conversions and compression.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link href="/#converter">
             <Button size="lg">Start Converting</Button>
           </Link>
-          <Link href="/pricing">
-            <Button variant="outline" size="lg">View Pricing</Button>
+          <Link href="/compress">
+            <Button variant="outline" size="lg">Compress PDF</Button>
           </Link>
         </div>
       </div>
@@ -239,15 +243,17 @@ function FeatureCard({
   icon, 
   title, 
   description, 
-  features 
+  features,
+  link
 }: { 
   icon: React.ReactNode; 
   title: string; 
   description: string; 
-  features: string[] 
+  features: string[];
+  link?: string;
 }) {
-  return (
-    <Card className="h-full">
+  const cardContent = (
+    <>
       <CardHeader>
         <div className="p-2 w-fit rounded-lg bg-primary/10 mb-3">
           {icon}
@@ -280,6 +286,27 @@ function FeatureCard({
           ))}
         </ul>
       </CardContent>
+      {link && (
+        <CardFooter>
+          <Link href={link} className="text-sm text-primary hover:underline w-full text-center">
+            Try this feature →
+          </Link>
+        </CardFooter>
+      )}
+    </>
+  );
+
+  if (link) {
+    return (
+      <Card className="h-full hover:border-primary/50 transition-colors">
+        {cardContent}
+      </Card>
+    );
+  }
+
+  return (
+    <Card className="h-full">
+      {cardContent}
     </Card>
   );
 }

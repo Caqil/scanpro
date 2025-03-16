@@ -20,33 +20,12 @@ const CONVERSION_DIR = join(process.cwd(), 'public', 'conversions');
 
 // Define supported input and output formats
 const SUPPORTED_INPUT_FORMATS = [
-    'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'odt', 'ods', 'odp', 'rtf', 'txt', 'html', 'jpg', 'jpeg', 'png'
+    'pdf', 'docx', 'xlsx', 'pptx', 'rtf', 'txt', 'html', 'jpg', 'jpeg', 'png'
 ];
 
 const SUPPORTED_OUTPUT_FORMATS = [
-    'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'odt', 'ods', 'odp', 'rtf', 'txt', 'html', 'jpg', 'jpeg', 'png', 'csv'
+    'pdf', 'docx', 'xls', 'xlsx', 'pptx', 'rtf', 'txt', 'html', 'jpg', 'jpeg', 'png'
 ];
-
-// MIME type mapping for file validation
-const MIME_TYPES: Record<string, string[]> = {
-    'pdf': ['application/pdf'],
-    'doc': ['application/msword'],
-    'docx': ['application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
-    'xls': ['application/vnd.ms-excel'],
-    'xlsx': ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'],
-    'ppt': ['application/vnd.ms-powerpoint'],
-    'pptx': ['application/vnd.openxmlformats-officedocument.presentationml.presentation'],
-    'rtf': ['application/rtf', 'text/rtf'],
-    'txt': ['text/plain'],
-    'html': ['text/html'],
-    'jpg': ['image/jpeg'],
-    'jpeg': ['image/jpeg'],
-    'png': ['image/png'],
-    'odt': ['application/vnd.oasis.opendocument.text'],
-    'ods': ['application/vnd.oasis.opendocument.spreadsheet'],
-    'odp': ['application/vnd.oasis.opendocument.presentation'],
-    'csv': ['text/csv']
-};
 
 // Ensure directories exist
 async function ensureDirectories() {
@@ -228,7 +207,6 @@ async function convertToImage(inputPath: string, outputPath: string, format: str
             return true;
         }
 
-        // For other formats, use LibreOffice to convert to PDF first, then to image
         const tempPdfPath = outputPath.replace(/\.[^.]+$/, '.pdf');
         await convertWithLibreOffice(inputPath, tempPdfPath, 'pdf');
 
@@ -429,8 +407,6 @@ async function convertWithLibreOffice(inputPath: string, outputPath: string, for
             try {
                 console.log('Attempting two-step DOCX to PPTX conversion via PDF...');
 
-                // First convert to PDF
-                const tempPdfPath = join(tempDir, 'intermediate.pdf');
                 const toPdfCommand = `libreoffice --headless --convert-to pdf --outdir "${tempDir}" "${tempInputPath}"`;
 
                 console.log(`Step 1: Converting DOCX to PDF: ${toPdfCommand}`);
@@ -485,13 +461,17 @@ async function convertWithLibreOffice(inputPath: string, outputPath: string, for
             }
         }
 
-        // First approach: Use libreoffice-convert library directly
         try {
             console.log('Trying direct libreoffice-convert library conversion...');
             const inputBuffer = await readFile(inputPath);
-            // The third parameter is for filter options
             const outputBuffer = await libreConvert(inputBuffer, format, undefined);
-            await writeFile(outputPath, outputBuffer);
+
+            if (outputBuffer instanceof Buffer) {
+                await writeFile(outputPath, outputBuffer);
+            } else {
+                throw new Error("Unexpected output type from libreConvert");
+            }
+
             console.log(`Successfully converted with libreoffice-convert library to ${outputPath}`);
 
             // Clean up temp directory if it still exists

@@ -6,16 +6,16 @@ declare module "pdf-parse" {
             PDFFormatVersion: string
             IsAcroFormPresent: boolean
             IsXFAPresent: boolean
-            [key: string]: any
+            [key: string]: unknown
         }
-        metadata: any
+        metadata: unknown
         text: string
     }
 
     function pdfParse(
         dataBuffer: Buffer,
         options?: {
-            pagerender?: (pageData: any) => string
+            pagerender?: (pageData: unknown) => string
             max?: number
             version?: string
         },
@@ -23,4 +23,3 @@ declare module "pdf-parse" {
 
     export default pdfParse
 }
-

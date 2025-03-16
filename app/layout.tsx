@@ -13,9 +13,9 @@ export const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "PDF Converter Pro",
-  description: "Convert PDF files to various formats using LibreOffice",
-  keywords: ["PDF", "converter", "docx", "xlsx", "libreoffice", "document conversion"],
+  title: "ScanPro | PDF Scanner & Converter",
+  description: "ScanPro is the ultimate document management solution that turns your phone into a professional scanner and format converter.",
+  keywords: ["PDF", "converter", "docx", "xlsx", "document conversion"],
 };
 
 export default function RootLayout({
