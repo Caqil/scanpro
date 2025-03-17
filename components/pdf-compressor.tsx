@@ -329,49 +329,49 @@ export function PdfCompressor() {
           </div>
         )}
         
-        {/* Compression result */}
         {compressedFileUrl && compressionStats && (
-          <Card className="border-green-200 dark:border-green-900">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-green-600 dark:text-green-400 flex items-center gap-2">
-                <CheckCircledIcon className="h-5 w-5" />
-                Compression Successful!
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-3 gap-4 mb-6">
-                <div className="text-center">
-                  <p className="text-sm text-muted-foreground">Original Size</p>
-                  <p className="text-lg font-semibold">{formatFileSize(compressionStats.originalSize)}</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-sm text-muted-foreground">Compressed Size</p>
-                  <p className="text-lg font-semibold">{formatFileSize(compressionStats.compressedSize)}</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-sm text-muted-foreground">Reduction</p>
-                  <p className="text-lg font-semibold text-green-600 dark:text-green-400">
-                    {compressionStats.compressionRatio}
-                  </p>
-                </div>
-              </div>
-              
-              <Button 
-                className="w-full" 
-                asChild
-                variant="default"
-              >
-                <a href={compressedFileUrl} download>
-                  <DownloadIcon className="h-4 w-4 mr-2" />
-                  Download Compressed PDF
-                </a>
-              </Button>
-            </CardContent>
-            <CardFooter className="text-xs text-muted-foreground">
-              Files are automatically deleted after 24 hours for privacy and security.
-            </CardFooter>
-          </Card>
-        )}
+  <Card className="border-green-200 dark:border-green-900">
+    <CardHeader className="pb-2">
+      <CardTitle className="text-green-600 dark:text-green-400 flex items-center gap-2">
+        <CheckCircledIcon className="h-5 w-5" />
+        Compression Successful!
+      </CardTitle>
+    </CardHeader>
+    <CardContent>
+      <div className="grid grid-cols-3 gap-4 mb-6">
+        <div className="text-center">
+          <p className="text-sm text-muted-foreground">Original Size</p>
+          <p className="text-lg font-semibold">{formatFileSize(compressionStats.originalSize)}</p>
+        </div>
+        <div className="text-center">
+          <p className="text-sm text-muted-foreground">Compressed Size</p>
+          <p className="text-lg font-semibold">{formatFileSize(compressionStats.compressedSize)}</p>
+        </div>
+        <div className="text-center">
+          <p className="text-sm text-muted-foreground">Reduction</p>
+          <p className="text-lg font-semibold text-green-600 dark:text-green-400">
+            {compressionStats.compressionRatio}
+          </p>
+        </div>
+      </div>
+      
+      <Button 
+        className="w-full" 
+        asChild
+        variant="default"
+      >
+        {/* CHANGE THIS PART - update the href value */}
+        <a href={`/api/compress/download?file=${compressedFileUrl.split('/').pop()}`} download>
+          <DownloadIcon className="h-4 w-4 mr-2" />
+          Download Compressed PDF
+        </a>
+      </Button>
+    </CardContent>
+    <CardFooter className="text-xs text-muted-foreground">
+      Files are automatically deleted after 24 hours for privacy and security.
+    </CardFooter>
+  </Card>
+)}
       </form>
     </Form>
   );

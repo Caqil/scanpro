@@ -494,35 +494,35 @@ export function FileUploader() {
           </div>
         )}
         
-        {/* Conversion result */}
         {convertedFileUrl && (
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-green-600 dark:text-green-400 flex items-center gap-2">
-                <CheckCircledIcon className="h-5 w-5" />
-                Conversion Successful!
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground mb-4">
-                Your file has been successfully converted and is now ready for download.
-              </p>
-              <Button 
-                className="w-full" 
-                asChild
-                variant="default"
-              >
-                <a href={convertedFileUrl} download>
-                  <DownloadIcon className="h-4 w-4 mr-2" />
-                  Download Converted File
-                </a>
-              </Button>
-            </CardContent>
-            <CardFooter className="text-xs text-muted-foreground">
-              Files are automatically deleted after 24 hours for privacy and security.
-            </CardFooter>
-          </Card>
-        )}
+  <Card>
+    <CardHeader className="pb-2">
+      <CardTitle className="text-green-600 dark:text-green-400 flex items-center gap-2">
+        <CheckCircledIcon className="h-5 w-5" />
+        Conversion Successful!
+      </CardTitle>
+    </CardHeader>
+    <CardContent>
+      <p className="text-sm text-muted-foreground mb-4">
+        Your file has been successfully converted and is now ready for download.
+      </p>
+      <Button 
+        className="w-full" 
+        asChild
+        variant="default"
+      >
+        {/* CHANGE THIS PART - update the href value */}
+        <a href={`/api/convert/download?file=${convertedFileUrl.split('/').pop()}`} download>
+          <DownloadIcon className="h-4 w-4 mr-2" />
+          Download Converted File
+        </a>
+      </Button>
+    </CardContent>
+    <CardFooter className="text-xs text-muted-foreground">
+      Files are automatically deleted after 24 hours for privacy and security.
+    </CardFooter>
+  </Card>
+)}
         
         {/* Submit button */}
         <Button 

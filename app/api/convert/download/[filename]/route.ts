@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
-import { readFile, stat } from "fs/promises";
-import path from "path";
-import { existsSync } from "fs";
-import type { NextRequest } from "next/server";
+// app/api/convert/download/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { readFile, stat } from 'fs/promises';
+import path from 'path';
+import { existsSync } from 'fs';
 
 // Get content type from file extension
 function getContentType(extension: string): string {
@@ -27,20 +27,28 @@ function getContentType(extension: string): string {
   return contentTypes[extension] || "application/octet-stream";
 }
 
-export async function GET(
-  request: NextRequest,
-  context: { params: { filename: string } }
-) {
+export async function GET(request: NextRequest) {
   try {
-    // Get filename from params and sanitize it
-    const filename = context.params.filename.replace(/[^\w.-]/g, "");
+    // Get filename from query parameter
+    const url = new URL(request.url);
+    const filename = url.searchParams.get('file');
 
     if (!filename) {
+      return NextResponse.json(
+        { error: 'No filename provided' },
+        { status: 400 }
+      );
+    }
+
+    // Sanitize the filename
+    const sanitizedFilename = filename.replace(/[^\w.-]/g, "");
+
+    if (!sanitizedFilename) {
       return NextResponse.json({ error: "Invalid filename" }, { status: 400 });
     }
 
     // Get file path
-    const filePath = path.join(process.cwd(), "public", "conversions", filename);
+    const filePath = path.join(process.cwd(), "public", "conversions", sanitizedFilename);
 
     // Check if file exists
     if (!existsSync(filePath)) {
@@ -54,12 +62,12 @@ export async function GET(
     const fileBuffer = await readFile(filePath);
 
     // Get file extension
-    const extension = filename.split(".").pop()?.toLowerCase() || "";
+    const extension = sanitizedFilename.split(".").pop()?.toLowerCase() || "";
 
     // Create response with file
     return new NextResponse(fileBuffer, {
       headers: {
-        "Content-Disposition": `attachment; filename="${filename}"`,
+        "Content-Disposition": `attachment; filename="${sanitizedFilename}"`,
         "Content-Type": getContentType(extension),
         "Content-Length": stats.size.toString(),
       },

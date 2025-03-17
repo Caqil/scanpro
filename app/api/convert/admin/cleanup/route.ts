@@ -1,3 +1,4 @@
+// app/api/convert/admin/cleanup/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { cleanupFiles } from '@/lib/cleanup-service';
 

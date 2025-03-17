@@ -1,17 +1,76 @@
+// app/page.tsx
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FileUploader } from "@/components/file-uploader";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { PdfToolCard } from "@/components/pdf-tool-card";
+import { FeatureCard } from "@/components/feature-card";
 import { 
+  FileIcon, 
   FileTextIcon, 
   ImageIcon, 
   TableIcon,
-  IdCardIcon, 
-  CodeIcon,
-  LightningBoltIcon
-} from "@radix-ui/react-icons";
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ArrowDownIcon,
+  PencilIcon,
+  LightbulbIcon,
+} from "lucide-react";
+
+// Popular tools to showcase
+const popularTools = [
+  {
+    id: "pdf-to-word",
+    name: "PDF to Word",
+    description: "Easily convert your PDF files into easy to edit DOC and DOCX documents.",
+    icon: <FileTextIcon className="h-6 w-6 text-blue-500" />,
+    iconBg: "bg-blue-100 dark:bg-blue-900/30",
+    href: "/convert?output=docx"
+  },
+  {
+    id: "pdf-to-excel",
+    name: "PDF to Excel",
+    description: "Pull data straight from PDFs into Excel spreadsheets in a few short seconds.",
+    icon: <TableIcon className="h-6 w-6 text-green-500" />,
+    iconBg: "bg-green-100 dark:bg-green-900/30",
+    href: "/convert?output=xlsx"
+  },
+  {
+    id: "merge-pdf",
+    name: "Merge PDF",
+    description: "Combine PDFs in the order you want with the easiest PDF merger available.",
+    icon: <ArrowRightIcon className="h-6 w-6 text-red-500" />,
+    iconBg: "bg-red-100 dark:bg-red-900/30",
+    href: "/merge"
+  },
+  {
+    id: "compress-pdf",
+    name: "Compress PDF",
+    description: "Reduce file size while optimizing for maximal PDF quality.",
+    icon: <ArrowDownIcon className="h-6 w-6 text-green-500" />,
+    iconBg: "bg-green-100 dark:bg-green-900/30",
+    href: "/compress"
+  },
+  {
+    id: "split-pdf",
+    name: "Split PDF",
+    description: "Separate one page or a whole set for easy conversion into independent PDF files.",
+    icon: <ArrowLeftIcon className="h-6 w-6 text-red-500" />,
+    iconBg: "bg-red-100 dark:bg-red-900/30",
+    href: "/split"
+  },
+  {
+    id: "edit-pdf",
+    name: "Edit PDF",
+    description: "Add text, images, shapes or freehand annotations to a PDF document.",
+    icon: <PencilIcon className="h-6 w-6 text-purple-500" />,
+    iconBg: "bg-purple-100 dark:bg-purple-900/30",
+    href: "/edit",
+    isNew: true
+  },
+];
 
 export default function Home() {
   return (
@@ -23,7 +82,7 @@ export default function Home() {
             <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
                 <Badge variant="outline" className="w-fit">
-                  <LightningBoltIcon className="mr-1 h-3 w-3" />
+                  <LightbulbIcon className="mr-1 h-3 w-3" />
                   Fast & Reliable
                 </Badge>
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
@@ -37,8 +96,8 @@ export default function Home() {
                 <Link href="#converter" className="inline-flex">
                   <Button size="lg">Convert Now</Button>
                 </Link>
-                <Link href="/compress" className="inline-flex">
-                  <Button size="lg" variant="outline">Compress PDF</Button>
+                <Link href="/tools" className="inline-flex">
+                  <Button size="lg" variant="outline">View All Tools</Button>
                 </Link>
               </div>
             </div>
@@ -65,8 +124,41 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Popular Tools Section */}
+      <section className="w-full py-12 md:py-24">
+        <div className="container px-4 md:px-6">
+          <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Popular PDF Tools</h2>
+            <p className="max-w-[85%] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              Quickly convert, compress, edit and more with our most popular tools
+            </p>
+          </div>
+          <div className="mx-auto grid max-w-6xl items-center gap-6 py-12 md:grid-cols-2 lg:grid-cols-3">
+            {popularTools.map((tool) => (
+              <PdfToolCard
+                key={tool.id}
+                id={tool.id}
+                name={tool.name}
+                description={tool.description}
+                icon={tool.icon}
+                iconBg={tool.iconBg}
+                href={tool.href}
+                isNew={tool.isNew}
+              />
+            ))}
+          </div>
+          <div className="flex justify-center">
+            <Link href="/tools">
+              <Button variant="outline" size="lg">
+                View All PDF Tools
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Converter section */}
-      <section id="converter" className="w-full py-12 md:py-24 lg:py-32">
+      <section id="converter" className="w-full py-12 md:py-24 lg:py-32 bg-muted/30">
         <div className="container px-4 md:px-6">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Start Converting</h2>
@@ -116,7 +208,7 @@ export default function Home() {
       </section>
 
       {/* Features section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+      <section className="w-full py-12 md:py-24 lg:py-32">
         <div className="container px-4 md:px-6">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Features</h2>
@@ -141,17 +233,17 @@ export default function Home() {
               description="Extract high-quality JPG and PNG images from your PDF files with resolution control"
             />
             <FeatureCard 
-              icon={<CodeIcon className="h-10 w-10" />}
+              icon={<FileIcon className="h-10 w-10" />}
               title="Web Formats"
               description="Convert to HTML and other web-friendly formats for online publishing"
             />
             <FeatureCard 
-              icon={<IdCardIcon className="h-10 w-10" />}
+              icon={<FileIcon className="h-10 w-10" />}
               title="OCR Technology"
               description="Extract text from scanned documents with advanced Optical Character Recognition"
             />
             <FeatureCard 
-              icon={<LightningBoltIcon className="h-10 w-10" />}
+              icon={<LightbulbIcon className="h-10 w-10" />}
               title="Batch Processing"
               description="Convert multiple PDFs at once to save time with our efficient batch processing"
             />
@@ -160,7 +252,7 @@ export default function Home() {
       </section>
 
       {/* CTA section */}
-      <section className="w-full py-12 md:py-24 lg:py-32">
+      <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
         <div className="container px-4 md:px-6">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Ready to Convert?</h2>
@@ -171,27 +263,13 @@ export default function Home() {
               <Link href="#converter">
                 <Button size="lg">Start Converting</Button>
               </Link>
-              <Link href="/pricing">
-                <Button size="lg" variant="outline">View Plans</Button>
+              <Link href="/tools">
+                <Button size="lg" variant="outline">Explore All Tools</Button>
               </Link>
             </div>
           </div>
         </div>
       </section>
-    </div>
-  );
-}
-
-function FeatureCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
-  return (
-    <div className="group relative overflow-hidden rounded-lg border bg-background p-6 shadow-sm transition-all hover:shadow-md">
-      <div className="flex flex-col items-center gap-4 text-center">
-        <div className="rounded-full border p-3 group-hover:border-primary group-hover:text-primary transition-colors">
-          {icon}
-        </div>
-        <h3 className="text-xl font-bold">{title}</h3>
-        <p className="text-muted-foreground">{description}</p>
-      </div>
     </div>
   );
 }

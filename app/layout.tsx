@@ -1,3 +1,4 @@
+// app/layout.tsx (updated)
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
@@ -32,9 +33,9 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="relative flex min-h-screen flex-col">
             <Header />
-            <div className="flex-1 mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
-    {children}
-  </div>
+            <main className="flex-1">
+              {children}
+            </main>
             <Footer />
           </div>
           <Toaster />

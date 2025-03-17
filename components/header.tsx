@@ -44,17 +44,17 @@ export function Header() {
             Features
           </Link>
           <Link 
-              href="/editor" 
+              href="/compress" 
               className="flex items-center px-2 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary hover:bg-primary/5 rounded-md"
               onClick={() => setMobileMenuOpen(false)}
             >
-              PDF Editor
+              Compress PDF
             </Link>
-          <Link 
-            href="/pricing" 
+            <Link 
+            href="/tools" 
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary after:content-[''] after:block after:h-0.5 after:scale-x-0 after:bg-primary after:transition-transform hover:after:scale-x-100"
           >
-            Pricing
+            PDF Tools
           </Link>
         </nav>
 

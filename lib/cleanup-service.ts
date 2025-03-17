@@ -24,7 +24,6 @@ export async function cleanupFiles(maxAgeMinutes: number = 60): Promise<CleanupR
     try {
         const now = Date.now();
         const cutoff = now - (maxAgeMinutes * 60 * 1000);
-        let totalBytes = 0;
 
         // Stats tracking
         const stats = {

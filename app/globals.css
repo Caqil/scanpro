@@ -117,7 +117,99 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.tool-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Icon background pulse effect */
+.icon-pulse {
+  position: relative;
+}
+
+.icon-pulse::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  70% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+}
+
+/* Tool type badge styles */
+.tool-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+.tool-badge.convert {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: rgb(59, 130, 246);
+}
+
+.tool-badge.edit {
+  background-color: rgba(139, 92, 246, 0.1);
+  color: rgb(139, 92, 246);
+}
+
+.tool-badge.organize {
+  background-color: rgba(236, 72, 153, 0.1);
+  color: rgb(236, 72, 153);
+}
+
+.tool-badge.security {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: rgb(34, 197, 94);
+}
+
+/* Dark mode adjustments */
+.dark .tool-badge.convert {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+.dark .tool-badge.edit {
+  background-color: rgba(139, 92, 246, 0.2);
+}
+
+.dark .tool-badge.organize {
+  background-color: rgba(236, 72, 153, 0.2);
+}
+
+.dark .tool-badge.security {
+  background-color: rgba(34, 197, 94, 0.2);
 }

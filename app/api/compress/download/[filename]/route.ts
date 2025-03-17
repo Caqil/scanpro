@@ -1,15 +1,21 @@
+// app/api/compress/download/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { readFile, stat } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
 
-export async function GET(
-  request: NextRequest,
-  context: { params: Promise<{ filename: string }> }
-) {
+export async function GET(request: NextRequest) {
   try {
-    // Await the params promise to get the filename
-    const { filename } = await context.params;
+    // Get filename from query parameter
+    const url = new URL(request.url);
+    const filename = url.searchParams.get('file');
+
+    if (!filename) {
+      return NextResponse.json(
+        { error: 'No filename provided' },
+        { status: 400 }
+      );
+    }
 
     // Sanitize the filename
     const sanitizedFilename = filename.replace(/[^\w.-]/g, '');
