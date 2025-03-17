@@ -1,10 +1,9 @@
-// next.config.js
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  typescript: {
-    ignoreBuildErrors: false,
-  },
   reactStrictMode: true,
-  swcMinify: true,
-};
+  experimental: {
+    serverComponentsExternalPackages: ['libreoffice-convert'],
+  },
+}
 
 module.exports = nextConfig;

@@ -7,10 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "dev:pm2": "pm2 start ecosystem.config.js",
-    "dev:pm2:stop": "pm2 stop ecosystem.config.js",
-    "dev:pm2:logs": "pm2 logs next-dev-server",
-    "dev:pm2:restart": "pm2 restart next-dev-server"
+    "prod": "pm2 start ecosystem.config.js --env production",
+    "prod:stop": "pm2 stop ecosystem.config.js",
+    "prod:logs": "pm2 logs scanpro",
+    "prod:restart": "pm2 restart scanpro"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",

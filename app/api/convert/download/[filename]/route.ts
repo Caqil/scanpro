@@ -26,25 +26,37 @@ function getContentType(extension: string): string {
 
   return contentTypes[extension] || "application/octet-stream";
 }
+
 export async function GET(
   request: NextRequest,
   context: { params: { filename: string } }
 ) {
   try {
+    // Get filename from params and sanitize it
     const filename = context.params.filename.replace(/[^\w.-]/g, "");
+
     if (!filename) {
       return NextResponse.json({ error: "Invalid filename" }, { status: 400 });
     }
 
+    // Get file path
     const filePath = path.join(process.cwd(), "public", "conversions", filename);
+
+    // Check if file exists
     if (!existsSync(filePath)) {
       return NextResponse.json({ error: "File not found" }, { status: 404 });
     }
 
+    // Get file stats
     const stats = await stat(filePath);
+
+    // Read file
     const fileBuffer = await readFile(filePath);
+
+    // Get file extension
     const extension = filename.split(".").pop()?.toLowerCase() || "";
 
+    // Create response with file
     return new NextResponse(fileBuffer, {
       headers: {
         "Content-Disposition": `attachment; filename="${filename}"`,
