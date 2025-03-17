@@ -10,10 +10,9 @@ export async function GET(req: Request) {
   const filename = searchParams.get("filename");
 
   // Pastikan folder hanya boleh `conversions` atau `compressions`
-  if (!folder || !filename || !["conversions", "compressions"].includes(folder)) {
+  if (!folder || !filename || !["conversions", "compressions", "merges", "splits", "rotations", "watermarks"].includes(folder)) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
-
   // Path lengkap file
   const filePath = path.join(process.cwd(), "public", folder, filename);
 
