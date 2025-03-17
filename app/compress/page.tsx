@@ -1,10 +1,10 @@
-// app/compress/page.tsx
-import { PdfCompressor } from "@/components/pdf-compressor";
+
 import { cn } from "@/lib/utils";
 import { ArrowDownIcon, FileIcon, ImageIcon, MailIcon } from "lucide-react";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { MultiPdfCompressor } from "@/components/pdf-compressor";
 
 // Metadata for the page
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function CompressPage() {
       <div className="space-y-12">
         {/* Compression Tool Card */}
         <section>
-          <PdfCompressor />
+          <MultiPdfCompressor />
         </section>
 
         {/* How It Works */}

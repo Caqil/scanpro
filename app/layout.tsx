@@ -33,9 +33,9 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="relative flex min-h-screen flex-col">
             <Header />
-            <main className="flex-1">
-              {children}
-            </main>
+            <div className="flex-1 mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
+    {children}
+  </div>
             <Footer />
           </div>
           <Toaster />

@@ -1,6 +1,6 @@
 // app/merge/page.tsx
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRightIcon, FileIcon, InfoIcon } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function MergePDFPage() {
   return (
-    <div className="container max-w-5xl py-12">
+    <div className="container max-w-5xl py-12 mx-auto">
       <div className="mx-auto flex flex-col items-center text-center mb-8">
         <div className="mb-4 p-3 rounded-full bg-red-100 dark:bg-red-900/30">
           <ArrowRightIcon className="h-8 w-8 text-red-500" />
@@ -95,7 +95,7 @@ export default function MergePDFPage() {
             </div>
             <h3 className="text-lg font-medium mb-2">Download</h3>
             <p className="text-sm text-muted-foreground">
-              Click the "Merge PDFs" button and download your combined PDF file.
+              Click the Merge PDFs button and download your combined PDF file.
             </p>
           </div>
         </div>
@@ -129,7 +129,7 @@ export default function MergePDFPage() {
               Can I merge password-protected PDFs?
             </h3>
             <p className="text-sm text-muted-foreground">
-              For password-protected PDFs, you'll need to unlock them first using our "Unlock PDF" tool, and then merge them.
+              For password-protected PDFs, you will need to unlock them first using our Unlock PD; tool, and then merge them.
             </p>
           </div>
         </div>

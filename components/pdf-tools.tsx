@@ -3,23 +3,19 @@
 
 import { PdfToolCard } from "@/components/pdf-tool-card";
 import {
-  FileIcon,
   FileTextIcon,
   ImageIcon,
   TableIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
-  CheckIcon,
   PencilIcon,
   LayoutIcon,
   ArrowDownIcon,
-  ArrowUpIcon,
   RotateCcwIcon,
   ShieldIcon,
   Edit2Icon,
   LockIcon,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 // Define the tool categories and items
 const pdfTools = [

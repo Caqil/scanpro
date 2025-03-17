@@ -1,6 +1,3 @@
-// components/feature-card.tsx
-import { cn } from "@/lib/utils";
-
 interface FeatureCardProps {
   icon: React.ReactNode;
   title: string;

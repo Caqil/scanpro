@@ -14,7 +14,6 @@ interface PdfToolCardProps {
 }
 
 export function PdfToolCard({
-  id,
   name,
   description,
   icon,

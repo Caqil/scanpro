@@ -47,7 +47,6 @@ import {
 } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 
-// Define supported input and output formats with categories
 const FORMAT_CATEGORIES = [
   {
     name: "Documents",
