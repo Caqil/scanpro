@@ -360,8 +360,7 @@ export function PdfCompressor() {
         asChild
         variant="default"
       >
-        {/* CHANGE THIS PART - update the href value */}
-        <a href={`/api/compress/download?file=${compressedFileUrl.split('/').pop()}`} download>
+        <a href={compressedFileUrl} download>
           <DownloadIcon className="h-4 w-4 mr-2" />
           Download Compressed PDF
         </a>

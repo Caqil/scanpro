@@ -120,7 +120,15 @@ const getFileIcon = (format: string) => {
   }
 };
 
-export function FileUploader() {
+interface FileUploaderProps {
+  initialInputFormat?: string;
+  initialOutputFormat?: string;
+}
+
+export function FileUploader({ 
+  initialInputFormat = "pdf", 
+  initialOutputFormat = "docx" 
+}: FileUploaderProps) {
   const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -128,23 +136,38 @@ export function FileUploader() {
   const [error, setError] = useState<string | null>(null);
   const [acceptedFileTypes, setAcceptedFileTypes] = useState<Record<string, string[]>>({});
 
-  // Initialize form
+  // Initialize form with provided initial values
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      inputFormat: "pdf",
-      outputFormat: "docx",
+      inputFormat: initialInputFormat,
+      outputFormat: initialOutputFormat,
       enableOcr: false,
       quality: 90,
       password: "",
     },
   });
 
+  // Update form when initialInputFormat or initialOutputFormat changes
+  useEffect(() => {
+    form.setValue("inputFormat", initialInputFormat);
+    form.setValue("outputFormat", initialOutputFormat);
+    
+    // Also update the accepted file types when initialInputFormat changes
+    setAcceptedFileTypes(getAcceptedFileTypes(initialInputFormat));
+  }, [initialInputFormat, initialOutputFormat, form]);
+
   // Watch inputFormat to update accepted file types for the dropzone
   const inputFormat = form.watch("inputFormat");
 
   useEffect(() => {
     setAcceptedFileTypes(getAcceptedFileTypes(inputFormat));
+    
+    // Reset file if format changes
+    if (file) {
+      setFile(null);
+      setConvertedFileUrl(null);
+    }
   }, [inputFormat]);
 
   // Set up dropzone
@@ -248,6 +271,17 @@ export function FileUploader() {
     return filename.split('.').pop()?.toUpperCase() || "";
   };
 
+  // Format file size for display
+  const formatFileSize = (sizeInBytes: number): string => {
+    if (sizeInBytes < 1024) {
+      return `${sizeInBytes} B`;
+    } else if (sizeInBytes < 1024 * 1024) {
+      return `${(sizeInBytes / 1024).toFixed(2)} KB`;
+    } else {
+      return `${(sizeInBytes / (1024 * 1024)).toFixed(2)} MB`;
+    }
+  };
+
   // Check if format is an image format
   const isImageFormat = form.watch("outputFormat") === "jpg" || form.watch("outputFormat") === "png";
 
@@ -259,50 +293,45 @@ export function FileUploader() {
           <div className="space-y-4">
             <div className="text-lg font-medium">1. Select Input File</div>
             
-            {/* Input Format Dropdown */}
-            <FormField
-              control={form.control}
-              name="inputFormat"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Input Format</FormLabel>
-                  <Select
-                    disabled={isUploading}
-                    onValueChange={(value) => {
-                      field.onChange(value);
-                      // Reset file when format changes
-                      if (file) {
-                        setFile(null);
-                        setConvertedFileUrl(null);
-                      }
-                    }}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select input format" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {FORMAT_CATEGORIES.map((category) => (
-                        <div key={category.name}>
-                          <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground flex items-center">
-                            {category.icon}
-                            <span className="ml-1">{category.name}</span>
+            {/* Input Format Dropdown - Hidden, now controlled by parent */}
+            <div className="hidden">
+              <FormField
+                control={form.control}
+                name="inputFormat"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Input Format</FormLabel>
+                    <Select
+                      disabled={isUploading}
+                      onValueChange={field.onChange}
+                      value={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select input format" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {FORMAT_CATEGORIES.map((category) => (
+                          <div key={category.name}>
+                            <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground flex items-center">
+                              {category.icon}
+                              <span className="ml-1">{category.name}</span>
+                            </div>
+                            {category.formats.map((format) => (
+                              <SelectItem key={format.value} value={format.value}>
+                                {format.label}
+                              </SelectItem>
+                            ))}
                           </div>
-                          {category.formats.map((format) => (
-                            <SelectItem key={format.value} value={format.value}>
-                              {format.label}
-                            </SelectItem>
-                          ))}
-                        </div>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             
             {/* File Drop Zone */}
             <div 
@@ -325,7 +354,7 @@ export function FileUploader() {
                   <div>
                     <p className="text-sm font-medium">{file.name}</p>
                     <p className="text-xs text-muted-foreground">
-                      {(file.size / 1024 / 1024).toFixed(2)} MB • {getFileExtension(file.name)}
+                      {formatFileSize(file.size)} • {getFileExtension(file.name)}
                     </p>
                   </div>
                   <Button 
@@ -364,43 +393,75 @@ export function FileUploader() {
           <div className="space-y-4">
             <div className="text-lg font-medium">2. Choose Conversion Options</div>
             
-            {/* Output Format Selection */}
-            <FormField
-              control={form.control}
-              name="outputFormat"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Output Format</FormLabel>
-                  <Select
-                    disabled={isUploading}
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select output format" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {FORMAT_CATEGORIES.map((category) => (
-                        <div key={category.name}>
-                          <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground flex items-center">
-                            {category.icon}
-                            <span className="ml-1">{category.name}</span>
+            {/* Output Format Dropdown - Hidden, now controlled by parent */}
+            <div className="hidden">
+              <FormField
+                control={form.control}
+                name="outputFormat"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Output Format</FormLabel>
+                    <Select
+                      disabled={isUploading}
+                      onValueChange={field.onChange}
+                      value={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select output format" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {FORMAT_CATEGORIES.map((category) => (
+                          <div key={category.name}>
+                            <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground flex items-center">
+                              {category.icon}
+                              <span className="ml-1">{category.name}</span>
+                            </div>
+                            {category.formats.map((format) => (
+                              <SelectItem key={format.value} value={format.value}>
+                                {format.label}
+                              </SelectItem>
+                            ))}
                           </div>
-                          {category.formats.map((format) => (
-                            <SelectItem key={format.value} value={format.value}>
-                              {format.label}
-                            </SelectItem>
-                          ))}
-                        </div>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            
+            {/* Conversion Info */}
+            <Card className="bg-muted/30">
+              <CardContent className="pt-6">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className={`p-2 rounded-lg ${getFileIcon(inputFormat) === getFileIcon('pdf') ? 'bg-blue-100 dark:bg-blue-900/30' : 
+                      inputFormat === 'xlsx' ? 'bg-green-100 dark:bg-green-900/30' : 
+                      inputFormat === 'pptx' ? 'bg-orange-100 dark:bg-orange-900/30' : 
+                      'bg-blue-100 dark:bg-blue-900/30'}`}>
+                      {getFileIcon(inputFormat)}
+                    </div>
+                    <span className="font-medium">{inputFormat.toUpperCase()}</span>
+                  </div>
+                  <div className="text-muted-foreground">→</div>
+                  <div className="flex items-center gap-2">
+                    <div className={`p-2 rounded-lg ${getFileIcon(form.watch("outputFormat")) === getFileIcon('pdf') ? 'bg-blue-100 dark:bg-blue-900/30' : 
+                      form.watch("outputFormat") === 'xlsx' ? 'bg-green-100 dark:bg-green-900/30' : 
+                      form.watch("outputFormat") === 'pptx' ? 'bg-orange-100 dark:bg-orange-900/30' : 
+                      'bg-blue-100 dark:bg-blue-900/30'}`}>
+                      {getFileIcon(form.watch("outputFormat"))}
+                    </div>
+                    <span className="font-medium">{form.watch("outputFormat").toUpperCase()}</span>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Converting from <span className="font-medium">{inputFormat.toUpperCase()}</span> to <span className="font-medium">{form.watch("outputFormat").toUpperCase()}</span> using LibreOffice technology.
+                </p>
+              </CardContent>
+            </Card>
             
             {/* OCR Option */}
             <FormField
@@ -456,18 +517,6 @@ export function FileUploader() {
                 )}
               />
             )}
-            
-            {/* Conversion Information */}
-            <Card className="bg-muted/30">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm">About This Conversion</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Converting from <span className="font-medium">{inputFormat.toUpperCase()}</span> to <span className="font-medium">{form.watch("outputFormat").toUpperCase()}</span> using LibreOffice technology.
-                </p>
-              </CardContent>
-            </Card>
           </div>
         </div>
         
@@ -495,34 +544,33 @@ export function FileUploader() {
         )}
         
         {convertedFileUrl && (
-  <Card>
-    <CardHeader className="pb-2">
-      <CardTitle className="text-green-600 dark:text-green-400 flex items-center gap-2">
-        <CheckCircledIcon className="h-5 w-5" />
-        Conversion Successful!
-      </CardTitle>
-    </CardHeader>
-    <CardContent>
-      <p className="text-sm text-muted-foreground mb-4">
-        Your file has been successfully converted and is now ready for download.
-      </p>
-      <Button 
-        className="w-full" 
-        asChild
-        variant="default"
-      >
-        {/* CHANGE THIS PART - update the href value */}
-        <a href={`/api/convert/download?file=${convertedFileUrl.split('/').pop()}`} download>
-          <DownloadIcon className="h-4 w-4 mr-2" />
-          Download Converted File
-        </a>
-      </Button>
-    </CardContent>
-    <CardFooter className="text-xs text-muted-foreground">
-      Files are automatically deleted after 24 hours for privacy and security.
-    </CardFooter>
-  </Card>
-)}
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-green-600 dark:text-green-400 flex items-center gap-2">
+                <CheckCircledIcon className="h-5 w-5" />
+                Conversion Successful!
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">
+                Your file has been successfully converted and is now ready for download.
+              </p>
+              <Button 
+                className="w-full" 
+                asChild
+                variant="default"
+              >
+                <a href={convertedFileUrl} download>
+                  <DownloadIcon className="h-4 w-4 mr-2" />
+                  Download Converted File
+                </a>
+              </Button>
+            </CardContent>
+            <CardFooter className="text-xs text-muted-foreground">
+              Files are automatically deleted after 24 hours for privacy and security.
+            </CardFooter>
+          </Card>
+        )}
         
         {/* Submit button */}
         <Button 
@@ -534,5 +582,4 @@ export function FileUploader() {
         </Button>
       </form>
     </Form>
-  );
-}
+  );}

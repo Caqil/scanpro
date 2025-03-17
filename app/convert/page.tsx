@@ -170,7 +170,10 @@ export default function ConvertPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <FileUploader />
+          <FileUploader 
+            initialInputFormat={conversionDetails.inputFormat}
+            initialOutputFormat={conversionDetails.outputFormat}
+          />
         </CardContent>
       </Card>
 
