@@ -9,8 +9,17 @@ import {
 } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
+
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Navigation items array for consistency between desktop and mobile
+  const navItems = [
+    { href: "/", label: "Home" },
+    { href: "/features", label: "Features" },
+    { href: "/compress", label: "Compress PDF" },
+    { href: "/tools", label: "PDF Tools" },
+  ];
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -21,8 +30,8 @@ export function Header() {
               <FileIcon className="h-5 w-5 text-primary" />
             </div>
             <span className="font-bold text-xl hidden sm:inline-block" suppressHydrationWarning={true}>
-                ScanPro
-              </span>
+              ScanPro
+            </span>
             <Badge variant="outline" className="hidden lg:flex ml-2">
               Beta
             </Badge>
@@ -31,41 +40,22 @@ export function Header() {
 
         {/* Desktop navigation */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link 
-            href="/" 
-            className="text-sm font-medium transition-colors hover:text-primary after:content-[''] after:block after:h-0.5 after:scale-x-0 after:bg-primary after:transition-transform hover:after:scale-x-100"
-          >
-            Home
-          </Link>
-          <Link 
-            href="/features" 
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary after:content-[''] after:block after:h-0.5 after:scale-x-0 after:bg-primary after:transition-transform hover:after:scale-x-100"
-          >
-            Features
-          </Link>
-          <Link 
-              href="/compress" 
-              className="flex items-center px-2 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary hover:bg-primary/5 rounded-md"
-              onClick={() => setMobileMenuOpen(false)}
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary after:content-[''] after:block after:h-0.5 after:scale-x-0 after:bg-primary after:transition-transform hover:after:scale-x-100"
             >
-              Compress PDF
+              {item.label}
             </Link>
-            <Link 
-            href="/tools" 
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary after:content-[''] after:block after:h-0.5 after:scale-x-0 after:bg-primary after:transition-transform hover:after:scale-x-100"
-          >
-            PDF Tools
-          </Link>
+          ))}
         </nav>
 
         <div className="flex items-center gap-3">
           <ModeToggle />
-          <div className="hidden md:block">
-           
-          </div>
-          <Button 
-            variant="ghost" 
-            size="icon" 
+          <Button
+            variant="ghost"
+            size="icon"
             className="md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
@@ -81,30 +71,18 @@ export function Header() {
 
       {/* Mobile navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t">
-          <div className="container max-w-6xl mx-auto py-4 space-y-3">
-            <Link 
-              href="/" 
-              className="flex items-center px-2 py-2 text-sm font-medium transition-colors hover:text-primary hover:bg-primary/5 rounded-md"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Home
-            </Link>
-            <Link 
-              href="/features" 
-              className="flex items-center px-2 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary hover:bg-primary/5 rounded-md"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Features
-            </Link>
-            <Link 
-              href="/editor" 
-              className="flex items-center px-2 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary hover:bg-primary/5 rounded-md"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              PDF Editor
-            </Link>
-            
+        <div className="md:hidden border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="container max-w-6xl mx-auto py-4 space-y-1">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="block px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary hover:bg-primary/5 rounded-md"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
       )}

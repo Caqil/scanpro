@@ -9,19 +9,14 @@ function getContentType(extension: string): string {
   const contentTypes: Record<string, string> = {
     pdf: "application/pdf",
     docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    doc: "application/msword",
     xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    xls: "application/vnd.ms-excel",
     pptx: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-    ppt: "application/vnd.ms-powerpoint",
     txt: "text/plain",
     html: "text/html",
     jpg: "image/jpeg",
     jpeg: "image/jpeg",
     png: "image/png",
     rtf: "application/rtf",
-    odt: "application/vnd.oasis.opendocument.text",
-    csv: "text/csv",
   };
 
   return contentTypes[extension] || "application/octet-stream";

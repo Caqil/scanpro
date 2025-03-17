@@ -55,6 +55,14 @@ const conversionTypes: Record<string, ConversionType> = {
     inputFormat: "pdf",
     outputFormat: "jpg",
   },
+  "pdf-to-png": {
+    title: "PDF to JPG",
+    description: "Convert PDF pages to PNG images",
+    icon: <Image className="h-8 w-8 text-yellow-500" />,
+    iconBg: "bg-blue-100 dark:bg-yellow-900/30",
+    inputFormat: "pdf",
+    outputFormat: "png",
+  },
   "pdf-to-html": {
     title: "PDF to HTML",
     description: "Convert PDF to HTML web pages",
@@ -95,6 +103,14 @@ const conversionTypes: Record<string, ConversionType> = {
     icon: <Image className="h-8 w-8 text-yellow-500" />,
     iconBg: "bg-yellow-100 dark:bg-yellow-900/30",
     inputFormat: "jpg",
+    outputFormat: "pdf",
+  },
+  "png-to-pdf": {
+    title: "JPG to PNG",
+    description: "Convert PNG images to PDF",
+    icon: <Image className="h-8 w-8 text-yellow-500" />,
+    iconBg: "bg-yellow-100 dark:bg-yellow-900/30",
+    inputFormat: "png",
     outputFormat: "pdf",
   },
   "html-to-pdf": {

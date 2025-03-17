@@ -56,6 +56,14 @@ const pdfTools = [
         href: "/convert?output=jpg"
       },
       {
+        id: "pdf-to-png",
+        name: "PDF to PNG",
+        description: "Convert each PDF page into a PNG or extract all images contained in a PDF.",
+        icon: <ImageIcon className="h-6 w-6 text-yellow-500" />,
+        iconBg: "bg-yellow-100 dark:bg-yellow-900/30",
+        href: "/convert?output=png"
+      },
+      {
         id: "pdf-to-html",
         name: "PDF to HTML",
         description: "Convert webpages in HTML to PDF. Copy and paste the URL of the page.",
@@ -100,6 +108,14 @@ const pdfTools = [
         icon: <ImageIcon className="h-6 w-6 text-yellow-500" />,
         iconBg: "bg-yellow-100 dark:bg-yellow-900/30",
         href: "/convert?input=jpg"
+      },
+      {
+        id: "png-to-pdf",
+        name: "PNG to PDF",
+        description: "Convert PNG images to PDF in seconds. Easily adjust orientation and margins.",
+        icon: <ImageIcon className="h-6 w-6 text-yellow-500" />,
+        iconBg: "bg-yellow-100 dark:bg-yellow-900/30",
+        href: "/convert?input=png"
       },
       {
         id: "html-to-pdf",

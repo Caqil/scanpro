@@ -1,4 +1,3 @@
-
 import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir, readFile } from 'fs/promises';
 import { existsSync } from 'fs';
@@ -6,7 +5,6 @@ import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import { PDFDocument } from 'pdf-lib';
 
 const execPromise = promisify(exec);
 
@@ -50,65 +48,38 @@ async function processPdfCompression(inputPath: string, outputPath: string, qual
 
         const settings = qualitySettings[quality];
 
-        // First try the pdf-lib approach for a simple optimization
-        try {
-            const pdfBytes = await readFile(inputPath);
-            const pdfDoc = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
+        // Determine the correct Ghostscript command based on the platform
+        const gsCommand = process.platform === 'win32' ? 'gswin64c' : 'gs';
 
-            // Basic PDF optimization
-            const compressedBytes = await pdfDoc.save({
-                useObjectStreams: true,
-                addDefaultPage: false,
-            });
+        // Construct Ghostscript command with quality parameters
+        const gsArgs = [
+            '-sDEVICE=pdfwrite',
+            `-dPDFSETTINGS=${settings.dPDFSETTINGS}`,
+            `-dCompatibilityLevel=${settings.dCompatibilityLevel}`,
+            '-dNOPAUSE',
+            '-dQUIET',
+            '-dBATCH',
+            settings.dCompression ? '-dCompressFonts=true' : '-dCompressFonts=false',
+            settings.dEmbedAllFonts ? '-dEmbedAllFonts=true' : '-dEmbedAllFonts=false',
+            '-dSubsetFonts=true',
+            '-dOptimize=true',
+            '-dDownsampleColorImages=true',
+            '-dColorImageResolution=150',
+            '-dGrayImageResolution=150',
+            '-dMonoImageResolution=150',
+            `-sOutputFile="${outputPath}"`,
+            `"${inputPath}"`
+        ];
 
-            await writeFile(outputPath, compressedBytes);
+        const gsCommand_full = `${gsCommand} ${gsArgs.join(' ')}`;
+        console.log('Executing Ghostscript command:', gsCommand_full);
 
-            // Check if we achieved sufficient compression
-            const originalSize = pdfBytes.length;
-            const newSize = compressedBytes.length;
+        // Execute Ghostscript
+        const { stdout, stderr } = await execPromise(gsCommand_full);
+        console.log('Ghostscript stdout:', stdout);
+        if (stderr) console.error('Ghostscript stderr:', stderr);
 
-            // If compression ratio is not good enough or quality is low, try Ghostscript
-            if (quality === 'low' || (newSize / originalSize > 0.8)) {
-                throw new Error('Insufficient compression, trying Ghostscript');
-            }
-
-            return true;
-        } catch (pdfLibError) {
-            console.log('pdf-lib compression not sufficient, trying Ghostscript:', pdfLibError);
-
-            // Determine the correct Ghostscript command based on the platform
-            const gsCommand = process.platform === 'win32' ? 'gswin64c' : 'gs';
-
-            // Construct Ghostscript command with quality parameters
-            const gsArgs = [
-                '-sDEVICE=pdfwrite',
-                `-dPDFSETTINGS=${settings.dPDFSETTINGS}`,
-                `-dCompatibilityLevel=${settings.dCompatibilityLevel}`,
-                '-dNOPAUSE',
-                '-dQUIET',
-                '-dBATCH',
-                settings.dCompression ? '-dCompressFonts=true' : '-dCompressFonts=false',
-                settings.dEmbedAllFonts ? '-dEmbedAllFonts=true' : '-dEmbedAllFonts=false',
-                '-dSubsetFonts=true',
-                '-dOptimize=true',
-                '-dDownsampleColorImages=true',
-                '-dColorImageResolution=150',
-                '-dGrayImageResolution=150',
-                '-dMonoImageResolution=150',
-                `-sOutputFile="${outputPath}"`,
-                `"${inputPath}"`
-            ];
-
-            const gsCommand_full = `${gsCommand} ${gsArgs.join(' ')}`;
-            console.log('Executing Ghostscript command:', gsCommand_full);
-
-            // Execute Ghostscript
-            const { stdout, stderr } = await execPromise(gsCommand_full);
-            console.log('Ghostscript stdout:', stdout);
-            if (stderr) console.error('Ghostscript stderr:', stderr);
-
-            return true;
-        }
+        return true;
     } catch (error) {
         console.error('PDF compression error:', error);
         throw new Error('Failed to compress PDF: ' + (error instanceof Error ? error.message : String(error)));
