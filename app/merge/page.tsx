@@ -1,9 +1,10 @@
 // app/merge/page.tsx
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRightIcon, FileIcon, InfoIcon } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
+import { PdfMerger } from "@/components/pdf-merger"; // Import the fixed PDF merger component
 
 export const metadata: Metadata = {
   title: "Merge PDF Files | ScanPro - PDF Tools",
@@ -26,46 +27,9 @@ export default function MergePDFPage() {
       </div>
 
       {/* Main Tool Card */}
-      <Card className="mb-8 border shadow-sm">
-        <CardHeader>
-          <CardTitle>Upload PDFs to Merge</CardTitle>
-          <CardDescription>
-            Select multiple PDF files to combine them into a single document
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="border-2 border-dashed rounded-lg p-10 text-center transition-colors cursor-pointer hover:border-muted-foreground/50">
-            <div className="flex flex-col items-center gap-2">
-              <div className="h-12 w-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
-                <FileIcon className="h-6 w-6 text-red-500" />
-              </div>
-              <div className="text-lg font-medium">
-                Drag & drop PDF files here
-              </div>
-              <p className="text-sm text-muted-foreground max-w-sm">
-                Drop your PDF files here or click to browse. You can select multiple files at once.
-              </p>
-              <Button type="button" variant="secondary" size="sm" className="mt-2">
-                Select Files
-              </Button>
-            </div>
-          </div>
-          
-          <div className="mt-6">
-            <h3 className="text-sm font-medium mb-2">PDF Files</h3>
-            <div className="space-y-2 min-h-20 border rounded-md p-4 bg-muted/30">
-              <p className="text-sm text-muted-foreground text-center">
-                No files selected yet
-              </p>
-            </div>
-            <div className="flex justify-end mt-4">
-              <Button type="button" disabled>
-                Merge PDFs
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="mb-8">
+        <PdfMerger />
+      </div>
 
       {/* How It Works */}
       <div className="mb-12">
@@ -75,7 +39,7 @@ export default function MergePDFPage() {
             <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-4">
               <span className="font-bold">1</span>
             </div>
-            <h3 className="text-lg font-medium mb-2">Select Files</h3>
+            <h3 className="text-lg font-medium mb-2">Upload Files</h3>
             <p className="text-sm text-muted-foreground">
               Upload the PDF files you want to combine. You can select multiple files at once.
             </p>
@@ -98,6 +62,7 @@ export default function MergePDFPage() {
               Click the Merge PDFs button and download your combined PDF file.
             </p>
           </div>
+          
         </div>
       </div>
 
@@ -129,7 +94,7 @@ export default function MergePDFPage() {
               Can I merge password-protected PDFs?
             </h3>
             <p className="text-sm text-muted-foreground">
-              For password-protected PDFs, you will need to unlock them first using our Unlock PD; tool, and then merge them.
+              For password-protected PDFs, you will need to unlock them first using our Unlock PDF tool, and then merge them.
             </p>
           </div>
         </div>

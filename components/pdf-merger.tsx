@@ -62,6 +62,10 @@ export function PdfMerger() {
       }
       
       if (acceptedFiles.length > 0) {
+        // Clear any previous errors
+        setError(null);
+        
+        // Add new files to the list, avoid duplicates
         setFiles(prev => {
           const existingFileNames = new Set(prev.map(f => f.file.name));
           const newFiles = acceptedFiles
@@ -69,13 +73,12 @@ export function PdfMerger() {
             .map(file => ({ 
               file,
               id: generateId(),
+              // Create preview URL for PDF files
               preview: URL.createObjectURL(file)
             }));
           
           return [...prev, ...newFiles];
         });
-        
-        setError(null);
       }
     },
     multiple: true,
@@ -108,6 +111,8 @@ export function PdfMerger() {
     const newFiles = [...files];
     const draggedIndex = newFiles.findIndex(f => f.id === dragId);
     const targetIndex = newFiles.findIndex(f => f.id === targetId);
+    
+    if (draggedIndex === -1 || targetIndex === -1) return;
     
     const [draggedItem] = newFiles.splice(draggedIndex, 1);
     newFiles.splice(targetIndex, 0, draggedItem);
@@ -166,11 +171,16 @@ export function PdfMerger() {
 
     const formData = new FormData();
     
-    files.forEach((fileObj, index) => {
+    // Append files in the correct order
+    files.forEach((fileObj) => {
       formData.append('files', fileObj.file);
     });
 
+    // Add the order of files as a separate field
+    formData.append('order', JSON.stringify(files.map((_, index) => index)));
+
     try {
+      // Set up progress tracking
       const progressInterval = setInterval(() => {
         setProgress(prev => {
           if (prev >= 95) {
@@ -181,6 +191,7 @@ export function PdfMerger() {
         });
       }, 300);
 
+      // Make API request
       const response = await fetch('/api/merge', {
         method: 'POST',
         body: formData,
@@ -216,6 +227,7 @@ export function PdfMerger() {
         <CardTitle>Merge PDF Files</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
+        {/* File Drop Zone */}
         <div 
           {...getRootProps()} 
           className={cn(
@@ -245,6 +257,7 @@ export function PdfMerger() {
           </div>
         </div>
         
+        {/* File List */}
         {files.length > 0 && (
           <div className="border rounded-lg">
             <div className="p-3 border-b bg-muted/30 flex justify-between items-center">
@@ -277,7 +290,10 @@ export function PdfMerger() {
                   onDragStart={(e) => handleDragStart(e, fileObj.id)}
                   onDragOver={handleDragOver}
                   onDrop={(e) => handleDrop(e, fileObj.id)}
-                  className="p-3 flex items-center justify-between gap-4 hover:bg-muted/30"
+                  className={cn(
+                    "p-3 flex items-center justify-between gap-4 hover:bg-muted/30",
+                    dragId === fileObj.id && "opacity-50 bg-muted/50"
+                  )}
                 >
                   <div 
                     className="flex items-center justify-center p-1 rounded hover:bg-muted cursor-move"
@@ -337,6 +353,7 @@ export function PdfMerger() {
           </div>
         )}
         
+        {/* Error message */}
         {error && (
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
@@ -344,16 +361,21 @@ export function PdfMerger() {
           </Alert>
         )}
         
+        {/* Progress indicator */}
         {isProcessing && (
           <div className="space-y-2">
             <Progress value={progress} className="h-2" />
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-              <MoveIcon className="h-4 w-4 animate-spin" />
+              <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
               Merging your PDF files... {progress}%
             </div>
           </div>
         )}
         
+        {/* Results */}
         {mergedFileUrl && (
           <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-900/30">
             <div className="flex items-start gap-3">

@@ -22,7 +22,43 @@ async function ensureDirectories() {
     }
 }
 
+// Merge PDFs using pdf-lib
+async function mergePdfsWithPdfLib(inputPaths: string[], outputPath: string) {
+    try {
+        console.log('Merging PDFs with pdf-lib...');
 
+        // Create a new PDF document
+        const mergedPdf = await PDFDocument.create();
+
+        // Process each PDF file
+        for (const inputPath of inputPaths) {
+            // Read the PDF file
+            const pdfBytes = await readFile(inputPath);
+
+            // Load the PDF document
+            const pdfDoc = await PDFDocument.load(pdfBytes);
+
+            // Get all pages
+            const pages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
+
+            // Add each page to the new document
+            pages.forEach(page => {
+                mergedPdf.addPage(page);
+            });
+        }
+
+        // Save the merged document
+        const mergedPdfBytes = await mergedPdf.save();
+
+        // Write to file
+        await writeFile(outputPath, mergedPdfBytes);
+
+        return true;
+    } catch (error) {
+        console.error('PDF-lib merge error:', error);
+        throw new Error('Failed to merge PDFs: ' + (error instanceof Error ? error.message : String(error)));
+    }
+}
 
 // Alternative method using ghostscript if available (better handling of complex PDFs)
 async function mergePdfsWithGhostscript(inputPaths: string[], outputPath: string) {
@@ -65,7 +101,11 @@ export async function POST(request: NextRequest) {
 
         // Process form data
         const formData = await request.formData();
-        const files = formData.getAll('files') as File[];
+
+        // Get all files from the formData
+        const files = formData.getAll('files');
+
+        console.log(`Received ${files.length} files for merging`);
 
         if (!files || files.length === 0) {
             return NextResponse.json(
@@ -111,7 +151,12 @@ export async function POST(request: NextRequest) {
 
         // Write each file to disk
         for (let i = 0; i < files.length; i++) {
-            const file = files[i];
+            const file = files[i] as File;
+
+            if (!file || !file.name) {
+                console.error(`File at index ${i} is invalid or missing name property`);
+                continue;
+            }
 
             // Verify it's a PDF
             if (!file.name.toLowerCase().endsWith('.pdf')) {
@@ -125,6 +170,14 @@ export async function POST(request: NextRequest) {
             const buffer = Buffer.from(await file.arrayBuffer());
             await writeFile(inputPath, buffer);
             inputPaths.push(inputPath);
+            console.log(`Saved file "${file.name}" to ${inputPath}`);
+        }
+
+        if (inputPaths.length < 2) {
+            return NextResponse.json(
+                { error: 'Failed to process all input files' },
+                { status: 500 }
+            );
         }
 
         // Create output path
@@ -135,8 +188,25 @@ export async function POST(request: NextRequest) {
 
         console.log(`Merging ${files.length} PDF files in specified order`);
 
-        await mergePdfsWithGhostscript(orderedInputPaths, outputPath);
+        // Try merging with Ghostscript first
+        let mergeSuccess = false;
+        try {
+            mergeSuccess = await mergePdfsWithGhostscript(orderedInputPaths, outputPath);
+        } catch (error) {
+            console.error('Ghostscript merge failed:', error);
+            mergeSuccess = false;
+        }
 
+        // If Ghostscript fails, try with pdf-lib
+        if (!mergeSuccess) {
+            try {
+                await mergePdfsWithPdfLib(orderedInputPaths, outputPath);
+                mergeSuccess = true;
+            } catch (error) {
+                console.error('PDF-lib merge failed:', error);
+                throw new Error('All PDF merging methods failed');
+            }
+        }
 
         // Verify the output file exists
         if (!existsSync(outputPath)) {
@@ -150,7 +220,10 @@ export async function POST(request: NextRequest) {
         // Calculate total size of input files
         let totalInputSize = 0;
         for (let i = 0; i < files.length; i++) {
-            totalInputSize += files[i].size;
+            const file = files[i] as File;
+            if (file && file.size) {
+                totalInputSize += file.size;
+            }
         }
 
         // Create relative URL for the merged file
