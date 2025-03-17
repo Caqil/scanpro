@@ -243,7 +243,7 @@ export function FileUploader({
 
       const data = await response.json();
       setProgress(100);
-      setConvertedFileUrl(data.fileUrl);
+      setConvertedFileUrl(data.filename);
       
       toast.success("Conversion Successful", {
         description: `Your ${values.inputFormat.toUpperCase()} has been converted to ${values.outputFormat.toUpperCase()}.`,
@@ -559,7 +559,7 @@ export function FileUploader({
                 asChild
                 variant="default"
               >
-                <a href={convertedFileUrl} download>
+                <a href={`/api/file?folder=conversions&filename=${encodeURIComponent(convertedFileUrl)}`} download>
                   <DownloadIcon className="h-4 w-4 mr-2" />
                   Download Converted File
                 </a>

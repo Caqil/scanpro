@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3001",
     "lint": "next lint",
-    "prod": "pm2 start ecosystem.config.js --env production",
+    "prod": "pm2 start ecosystem.config.js",
     "prod:stop": "pm2 stop ecosystem.config.js",
     "prod:logs": "pm2 logs scanpro",
     "prod:restart": "pm2 restart scanpro"

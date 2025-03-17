@@ -85,6 +85,7 @@ interface CompressedFile {
   compressedSize: number;
   compressionRatio: string;
   fileUrl: string;
+  filename: string;
 }
 
 type FormValues = z.infer<typeof formSchema>;
@@ -245,6 +246,7 @@ export function MultiPdfCompressor() {
           compressedSize: data.compressedSize,
           compressionRatio: data.compressionRatio,
           fileUrl: data.fileUrl,
+          filename: data.filename
         } 
       }));
       
@@ -511,7 +513,7 @@ export function MultiPdfCompressor() {
                               className="text-sm"
                             >
                               <a 
-                                href={compressedFiles[fileItem.file.name]?.fileUrl} 
+                                href={`/api/file?folder=compressions&filename=${compressedFiles[fileItem.file.name]?.filename}`}
                                 download
                                 target="_blank"
                               >
