@@ -17,6 +17,7 @@ import {
   ArrowDownIcon,
   PencilIcon,
   LightbulbIcon,
+  FileCheck2,
 } from "lucide-react";
 
 // Popular tools to showcase
@@ -27,7 +28,7 @@ const popularTools = [
     description: "Easily convert your PDF files into easy to edit DOC and DOCX documents.",
     icon: <FileTextIcon className="h-6 w-6 text-blue-500" />,
     iconBg: "bg-blue-100 dark:bg-blue-900/30",
-    href: "/convert?output=docx"
+    href: "/convert/pdf-to-docx"  // Updated URL
   },
   {
     id: "pdf-to-excel",
@@ -35,7 +36,7 @@ const popularTools = [
     description: "Pull data straight from PDFs into Excel spreadsheets in a few short seconds.",
     icon: <TableIcon className="h-6 w-6 text-green-500" />,
     iconBg: "bg-green-100 dark:bg-green-900/30",
-    href: "/convert?output=xlsx"
+    href: "/convert/pdf-to-xlsx"  // Updated URL
   },
   {
     id: "merge-pdf",
@@ -70,6 +71,15 @@ const popularTools = [
     href: "/edit",
     isNew: true
   },
+  { 
+    id: "ocr",
+    name: "OCR", 
+    href: "/ocr", 
+    icon: <FileCheck2 className="h-5 w-5 text-blue-500" />,
+    description: "Extract text from scanned documents",
+    iconBg: "bg-green-100 dark:bg-yellow-900/30",
+    isNew: true
+  }
 ];
 
 export default function Home() {

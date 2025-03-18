@@ -15,6 +15,7 @@ import {
   ShieldIcon,
   Edit2Icon,
   LockIcon,
+  FileCheck2,
 } from "lucide-react";
 
 // Define the tool categories and items
@@ -29,7 +30,7 @@ const pdfTools = [
         description: "Easily convert your PDF files into easy to edit DOC and DOCX documents.",
         icon: <FileTextIcon className="h-6 w-6 text-blue-500" />,
         iconBg: "bg-blue-100 dark:bg-blue-900/30",
-        href: "/convert?output=docx"
+        href: "/convert/pdf-to-docx"  // Updated URL
       },
       {
         id: "pdf-to-powerpoint",
@@ -37,7 +38,7 @@ const pdfTools = [
         description: "Turn your PDF files into easy to edit PPT and PPTX slideshows.",
         icon: <FileTextIcon className="h-6 w-6 text-orange-500" />,
         iconBg: "bg-orange-100 dark:bg-orange-900/30",
-        href: "/convert?output=pptx"
+        href: "/convert/pdf-to-pptx"  // Updated URL
       },
       {
         id: "pdf-to-excel",
@@ -45,7 +46,7 @@ const pdfTools = [
         description: "Pull data straight from PDFs into Excel spreadsheets in a few short seconds.",
         icon: <TableIcon className="h-6 w-6 text-green-500" />,
         iconBg: "bg-green-100 dark:bg-green-900/30",
-        href: "/convert?output=xlsx"
+        href: "/convert/pdf-to-xlsx"  // Updated URL
       },
       {
         id: "pdf-to-jpg",
@@ -53,7 +54,7 @@ const pdfTools = [
         description: "Convert each PDF page into a JPG or extract all images contained in a PDF.",
         icon: <ImageIcon className="h-6 w-6 text-yellow-500" />,
         iconBg: "bg-yellow-100 dark:bg-yellow-900/30",
-        href: "/convert?output=jpg"
+        href: "/convert/pdf-to-jpg"  // Updated URL
       },
       {
         id: "pdf-to-png",
@@ -61,7 +62,7 @@ const pdfTools = [
         description: "Convert each PDF page into a PNG or extract all images contained in a PDF.",
         icon: <ImageIcon className="h-6 w-6 text-yellow-500" />,
         iconBg: "bg-yellow-100 dark:bg-yellow-900/30",
-        href: "/convert?output=png"
+        href: "/convert/pdf-to-png"  // Updated URL
       },
       {
         id: "pdf-to-html",
@@ -69,7 +70,7 @@ const pdfTools = [
         description: "Convert webpages in HTML to PDF. Copy and paste the URL of the page.",
         icon: <LayoutIcon className="h-6 w-6 text-amber-500" />,
         iconBg: "bg-amber-100 dark:bg-amber-900/30",
-        href: "/convert?output=html"
+        href: "/convert/pdf-to-html"  // Updated URL
       },
     ]
   },
@@ -83,7 +84,7 @@ const pdfTools = [
         description: "Make DOC and DOCX files easy to read by converting them to PDF.",
         icon: <FileTextIcon className="h-6 w-6 text-blue-500" />,
         iconBg: "bg-blue-100 dark:bg-blue-900/30",
-        href: "/convert?input=docx"
+        href: "/convert/docx-to-pdf"  // Updated URL
       },
       {
         id: "powerpoint-to-pdf",
@@ -91,7 +92,7 @@ const pdfTools = [
         description: "Make PPT and PPTX slideshows easy to view by converting them to PDF.",
         icon: <FileTextIcon className="h-6 w-6 text-orange-500" />,
         iconBg: "bg-orange-100 dark:bg-orange-900/30",
-        href: "/convert?input=pptx"
+        href: "/convert/pptx-to-pdf"  // Updated URL
       },
       {
         id: "excel-to-pdf",
@@ -99,7 +100,7 @@ const pdfTools = [
         description: "Make EXCEL spreadsheets easy to read by converting them to PDF.",
         icon: <TableIcon className="h-6 w-6 text-green-500" />,
         iconBg: "bg-green-100 dark:bg-green-900/30",
-        href: "/convert?input=xlsx"
+        href: "/convert/xlsx-to-pdf"  // Updated URL
       },
       {
         id: "jpg-to-pdf",
@@ -107,7 +108,7 @@ const pdfTools = [
         description: "Convert JPG images to PDF in seconds. Easily adjust orientation and margins.",
         icon: <ImageIcon className="h-6 w-6 text-yellow-500" />,
         iconBg: "bg-yellow-100 dark:bg-yellow-900/30",
-        href: "/convert?input=jpg"
+        href: "/convert/jpg-to-pdf"  // Updated URL
       },
       {
         id: "png-to-pdf",
@@ -115,7 +116,7 @@ const pdfTools = [
         description: "Convert PNG images to PDF in seconds. Easily adjust orientation and margins.",
         icon: <ImageIcon className="h-6 w-6 text-yellow-500" />,
         iconBg: "bg-yellow-100 dark:bg-yellow-900/30",
-        href: "/convert?input=png"
+        href: "/convert/png-to-pdf"  // Updated URL
       },
       {
         id: "html-to-pdf",
@@ -123,7 +124,7 @@ const pdfTools = [
         description: "Convert webpages to PDF. Copy and paste the URL to convert it to PDF.",
         icon: <LayoutIcon className="h-6 w-6 text-amber-500" />,
         iconBg: "bg-amber-100 dark:bg-amber-900/30",
-        href: "/convert?input=html"
+        href: "/convert/html-to-pdf"  // Updated URL
       },
     ]
   },
@@ -164,6 +165,15 @@ const pdfTools = [
         iconBg: "bg-purple-100 dark:bg-purple-900/30",
         href: "/edit"
       },
+      { 
+        id: "ocr",
+        name: "OCR", 
+        href: "/ocr", 
+        icon: <FileCheck2 className="h-5 w-5 text-blue-500" />,
+        description: "Extract text from scanned documents",
+        iconBg: "bg-green-100 dark:bg-yellow-900/30",
+        new: true
+      }
     ]
   },
   {

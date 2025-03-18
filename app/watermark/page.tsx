@@ -106,8 +106,8 @@ export default function WatermarkPDFPage() {
         </div>
       </div>
 
-      {/* More Tools Section */}
-      <div>
+     {/* More Tools Section */}
+     <div>
         <h2 className="text-2xl font-bold mb-6 text-center">Related PDF Tools</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <Link href="/merge" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
@@ -126,20 +126,20 @@ export default function WatermarkPDFPage() {
               <span className="text-sm font-medium">Split PDF</span>
             </div>
           </Link>
-          <Link href="/rotate" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          <Link href="/convert/pdf-to-docx" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-blue-500" />
               </div>
-              <span className="text-sm font-medium">Rotate PDF</span>
+              <span className="text-sm font-medium">PDF to Word</span>
             </div>
           </Link>
-          <Link href="/compress" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          <Link href="/edit" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
-              <div className="p-2 rounded-full bg-green-100 dark:bg-green-900/30 mb-2">
-                <FileIcon className="h-5 w-5 text-green-500" />
+              <div className="p-2 rounded-full bg-purple-100 dark:bg-purple-900/30 mb-2">
+                <FileIcon className="h-5 w-5 text-purple-500" />
               </div>
-              <span className="text-sm font-medium">Compress PDF</span>
+              <span className="text-sm font-medium">Edit PDF</span>
             </div>
           </Link>
         </div>

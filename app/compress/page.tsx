@@ -98,50 +98,49 @@ export default function CompressPage() {
             />
           </div>
         </section>
-
-        {/* More Tools Section */}
-        <section>
-          <h2 className="text-2xl font-bold mb-6 text-center">More PDF Tools</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Link href="/merge" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
-              <div className="flex flex-col items-center">
-                <div className="p-2 rounded-full bg-red-100 dark:bg-red-900/30 mb-2">
-                  <ArrowDownIcon className="h-5 w-5 text-red-500" />
-                </div>
-                <span className="text-sm font-medium">Merge PDF</span>
+{/* More Tools Section */}
+<section>
+        <h2 className="text-2xl font-bold mb-6 text-center">More PDF Tools</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Link href="/merge" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+            <div className="flex flex-col items-center">
+              <div className="p-2 rounded-full bg-red-100 dark:bg-red-900/30 mb-2">
+                <ArrowDownIcon className="h-5 w-5 text-red-500" />
               </div>
-            </Link>
-            <Link href="/split" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
-              <div className="flex flex-col items-center">
-                <div className="p-2 rounded-full bg-red-100 dark:bg-red-900/30 mb-2">
-                  <ArrowDownIcon className="h-5 w-5 text-red-500" />
-                </div>
-                <span className="text-sm font-medium">Split PDF</span>
+              <span className="text-sm font-medium">Merge PDF</span>
+            </div>
+          </Link>
+          <Link href="/split" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+            <div className="flex flex-col items-center">
+              <div className="p-2 rounded-full bg-red-100 dark:bg-red-900/30 mb-2">
+                <ArrowDownIcon className="h-5 w-5 text-red-500" />
               </div>
-            </Link>
-            <Link href="/convert?output=docx" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
-              <div className="flex flex-col items-center">
-                <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 mb-2">
-                  <FileIcon className="h-5 w-5 text-blue-500" />
-                </div>
-                <span className="text-sm font-medium">PDF to Word</span>
+              <span className="text-sm font-medium">Split PDF</span>
+            </div>
+          </Link>
+          <Link href="/convert/pdf-to-docx" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+            <div className="flex flex-col items-center">
+              <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 mb-2">
+                <FileIcon className="h-5 w-5 text-blue-500" />
               </div>
-            </Link>
-            <Link href="/convert?output=jpg" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
-              <div className="flex flex-col items-center">
-                <div className="p-2 rounded-full bg-yellow-100 dark:bg-yellow-900/30 mb-2">
-                  <ImageIcon className="h-5 w-5 text-yellow-500" />
-                </div>
-                <span className="text-sm font-medium">PDF to JPG</span>
+              <span className="text-sm font-medium">PDF to Word</span>
+            </div>
+          </Link>
+          <Link href="/convert/pdf-to-jpg" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+            <div className="flex flex-col items-center">
+              <div className="p-2 rounded-full bg-yellow-100 dark:bg-yellow-900/30 mb-2">
+                <ImageIcon className="h-5 w-5 text-yellow-500" />
               </div>
-            </Link>
-          </div>
-          <div className="text-center mt-6">
-            <Link href="/tools">
-              <Button variant="outline">View All PDF Tools</Button>
-            </Link>
-          </div>
-        </section>
+              <span className="text-sm font-medium">PDF to JPG</span>
+            </div>
+          </Link>
+        </div>
+        <div className="text-center mt-6">
+          <Link href="/tools">
+            <Button variant="outline">View All PDF Tools</Button>
+          </Link>
+        </div>
+      </section>
       </div>
     </div>
   );

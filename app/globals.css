@@ -166,6 +166,48 @@
   }
 }
 
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s infinite;
+}
+
+/* Additional OCR-related styles */
+.ocr-processing-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ocr-highlight-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  animation: scan-line 2s infinite linear;
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 /* Tool type badge styles */
 .tool-badge {
   display: inline-flex;

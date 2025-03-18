@@ -120,7 +120,7 @@ export default function MergePDFPage() {
               <span className="text-sm font-medium">Compress PDF</span>
             </div>
           </Link>
-          <Link href="/convert?output=docx" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          <Link href="/convert/pdf-to-docx" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-blue-500" />

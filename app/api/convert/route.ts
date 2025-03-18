@@ -149,7 +149,7 @@ async function extractTextFromPdf(inputPath: string, outputPath: string) {
 // OCR text extraction
 async function extractTextWithOCR(inputPath: string, outputPath: string) {
     try {
-        const worker = await createWorker('eng');
+        const worker = createWorker();
         const { data } = await worker.recognize(inputPath);
         await writeFile(outputPath, data.text);
         await worker.terminate();

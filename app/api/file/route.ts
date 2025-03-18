@@ -10,7 +10,7 @@ export async function GET(req: Request) {
   const filename = searchParams.get("filename");
 
   // Pastikan folder hanya boleh `conversions` atau `compressions`
-  if (!folder || !filename || !["conversions", "compressions", "merges", "splits", "watermarks", , "protected", "unlocked"].includes(folder)) {
+  if (!folder || !filename || !["conversions", "compressions", "merges", "splits", "watermarks", , "protected", "unlocked", "signatures", "ocr"].includes(folder)) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
   // Path lengkap file

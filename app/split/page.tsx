@@ -96,9 +96,8 @@ export default function SplitPDFPage() {
           </div>
         </div>
       </div>
-
-      {/* More Tools Section */}
-      <div>
+{/* More Tools Section */}
+<div>
         <h2 className="text-2xl font-bold mb-6 text-center">Related PDF Tools</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <Link href="/merge" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
