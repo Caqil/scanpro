@@ -8,36 +8,27 @@ export function Footer() {
       <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
         <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
           <FileIcon className="h-6 w-6" />
-          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            Built with{" "}
-            <a
-              href="https://nextjs.org"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
+          <nav className="flex gap-4 md:gap-6">
+          
+          <Link
+              href="/about"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
-              Next.js
-            </a>
-            ,{" "}
-            <a
-              href="https://ui.shadcn.com"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
+              About Us
+            </Link>
+            <Link
+              href="/features"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
-              Shadcn UI
-            </a>
-            , and{" "}
-            <a
-              href="https://www.libreoffice.org"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
+              Featuras
+            </Link>
+            <Link
+              href="/api-doc"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
-              LibreOffice
-            </a>
-            .
-          </p>
+              API
+            </Link>
+            </nav>
         </div>
         <div className="flex flex-col items-center gap-4 md:flex-row md:gap-6 md:px-0">
           <nav className="flex gap-4 md:gap-6">
@@ -61,7 +52,7 @@ export function Footer() {
             </Link>
           </nav>
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} PDF Converter Pro. All rights reserved.
+            &copy; {new Date().getFullYear()} ScanPro. All rights reserved.
           </p>
         </div>
       </div>

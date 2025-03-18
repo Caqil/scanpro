@@ -14,7 +14,7 @@ const nextConfig = {
     ];
   },
   //experimental: {
-    //serverComponentsExternalPackages: ['libreoffice-convert'],
+  //serverComponentsExternalPackages: ['libreoffice-convert'],
   //},
   eslint: {
     ignoreDuringBuilds: true,
