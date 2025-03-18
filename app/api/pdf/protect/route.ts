@@ -82,8 +82,6 @@ async function protectPdfWithQpdf(inputPath: string, outputPath: string, options
         return false;
     }
 }
-
-// Function to protect PDF using pdftk command line tool
 async function protectPdfWithPdftk(inputPath: string, outputPath: string, options: {
     userPassword: string;
     ownerPassword?: string;
@@ -92,9 +90,6 @@ async function protectPdfWithPdftk(inputPath: string, outputPath: string, option
     allowEditing?: boolean;
 }) {
     try {
-        // If owner password not specified, use the user password
-        const ownerPassword = options.ownerPassword || options.userPassword;
-
         // Build permission string
         let permissions = [];
 
@@ -106,8 +101,15 @@ async function protectPdfWithPdftk(inputPath: string, outputPath: string, option
             permissions.push('FillIn', 'Assembly');
         }
 
-        // Build pdftk command
-        let command = `pdftk "${inputPath}" output "${outputPath}" user_pw "${options.userPassword}" owner_pw "${ownerPassword}"`;
+        // Build pdftk command - don't set owner_pw if it's the same as user_pw
+        // This follows pdftk's requirement that owner and user passwords must be different,
+        // or the owner password should be omitted
+        let command = `pdftk "${inputPath}" output "${outputPath}" user_pw "${options.userPassword}"`;
+        
+        // Only add owner password if it's different from user password
+        if (options.ownerPassword && options.ownerPassword !== options.userPassword) {
+            command += ` owner_pw "${options.ownerPassword}"`;
+        }
 
         // Add permissions if any
         if (permissions.length > 0) {
@@ -115,7 +117,7 @@ async function protectPdfWithPdftk(inputPath: string, outputPath: string, option
         }
 
         // Execute command (hide passwords in logs)
-        console.log(`Executing: ${command.replace(options.userPassword, '******').replace(ownerPassword, '******')}`);
+        console.log(`Executing: ${command.replace(options.userPassword, '******').replace(options.ownerPassword || '', '******')}`);
 
         const { stdout, stderr } = await execPromise(command);
 
