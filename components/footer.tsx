@@ -23,10 +23,10 @@ export function Footer() {
               Featuras
             </Link>
             <Link
-              href="/api-doc"
+              href="/sitemap"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
-              API
+              Sitemap
             </Link>
             </nav>
         </div>

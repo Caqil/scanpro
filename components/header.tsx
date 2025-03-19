@@ -30,6 +30,7 @@ import {
   Wand2,
   Layers
 } from "lucide-react";
+import { SiteLogo } from "./site-logo";
 
 // Type for tool definition with optional isNew
 type ToolDefinition = {
@@ -292,7 +293,7 @@ export function Header() {
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
             <div className="bg-primary/10 p-2 rounded-md">
-              <FileIcon className="h-5 w-5 text-primary" />
+              <SiteLogo />
             </div>
             <span className="font-bold text-xl hidden sm:inline-block" suppressHydrationWarning={true}>
               ScanPro

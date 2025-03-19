@@ -19,6 +19,7 @@ import {
   LightbulbIcon,
   FileCheck2,
 } from "lucide-react";
+import HeroAnimation from "@/components/hero-animation";
 
 // Popular tools to showcase
 const popularTools = [
@@ -111,25 +112,7 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-            <div className="mx-auto flex flex-col justify-center">
-              <div className="rounded-lg border bg-card p-2">
-                <div className="grid gap-2">
-                  <div className="grid grid-cols-5 gap-2">
-                    {["PDF", "DOCX", "XLSX", "JPG", "HTML"].map((format) => (
-                      <div 
-                        key={format}
-                        className="flex aspect-square items-center justify-center rounded-md border bg-background p-2 text-sm font-medium"
-                      >
-                        {format}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex items-center justify-center rounded-md border bg-background p-2">
-                    <ArrowsAnimation />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <HeroAnimation/>
           </div>
         </div>
       </section>

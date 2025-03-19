@@ -1,10 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
 import Draggable from "react-draggable";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-import "react-pdf/dist/esm/Page/TextLayer.css";
 import { Button } from "@/components/ui/button";
 import { 
   ChevronLeftIcon, 
@@ -12,9 +9,6 @@ import {
   PlusIcon,
   MinusIcon
 } from "lucide-react";
-
-// Set the PDF.js worker source
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 interface PdfPreviewProps {
   file: File;
@@ -31,13 +25,13 @@ export function PdfPreview({
   signatureType,
   onPositionChange,
 }: PdfPreviewProps) {
-  const [numPages, setNumPages] = useState<number | null>(null);
+  const [numPages, setNumPages] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState(1);
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [scale, setScale] = useState(1.0);
-  const [signaturePosition, setSignaturePosition] = useState({ x: 0, y: 0 });
-  const [pageSize, setPageSize] = useState({ width: 0, height: 0 });
+  const [signaturePosition, setSignaturePosition] = useState({ x: 100, y: 100 });
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   
   const containerRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<HTMLDivElement>(null);
@@ -45,21 +39,28 @@ export function PdfPreview({
   // Create URL for the PDF file
   useEffect(() => {
     if (file) {
-      const url = URL.createObjectURL(file);
-      setPdfUrl(url);
-      
-      // Clean up URL when component unmounts
-      return () => {
-        URL.revokeObjectURL(url);
-      };
+      try {
+        const url = URL.createObjectURL(file);
+        setPdfUrl(url);
+        setError(null);
+        
+        // Estimate number of pages based on file size
+        const fileSizeInMB = file.size / (1024 * 1024);
+        const estimatedPages = Math.max(1, Math.round(fileSizeInMB * 5)); // Rough estimate
+        setNumPages(estimatedPages);
+        setLoading(false);
+        
+        // Clean up URL when component unmounts
+        return () => {
+          URL.revokeObjectURL(url);
+        };
+      } catch (err) {
+        console.error("Error creating object URL:", err);
+        setError("Failed to load PDF preview");
+        setLoading(false);
+      }
     }
   }, [file]);
-
-  // Handle document load success
-  function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
-    setNumPages(numPages);
-    setLoading(false);
-  }
 
   // Navigation functions
   const goToPrevPage = () => {
@@ -67,9 +68,7 @@ export function PdfPreview({
   };
 
   const goToNextPage = () => {
-    if (numPages) {
-      setPageNumber(prev => Math.min(prev + 1, numPages));
-    }
+    setPageNumber(prev => Math.min(prev + 1, numPages));
   };
 
   // Zoom functions
@@ -81,40 +80,110 @@ export function PdfPreview({
     setScale(prev => Math.max(prev - 0.1, 0.5));
   };
 
-  // Handle page render success to get dimensions
-  const onPageRenderSuccess = (page: any) => {
-    const viewport = page.getViewport({ scale: 1 });
-    setPageSize({
-      width: viewport.width,
-      height: viewport.height,
-    });
-  };
-
   // Handle signature drag
   const handleDrag = (e: any, ui: any) => {
     const newPosition = {
-      x: signaturePosition.x + ui.deltaX,
-      y: signaturePosition.y + ui.deltaY,
+      x: ui.x,
+      y: ui.y
     };
     setSignaturePosition(newPosition);
     
-    // Get the page element to calculate relative position
-    if (containerRef.current) {
-      const pageElement = containerRef.current.querySelector(".react-pdf__Page");
-      if (pageElement) {
-        const pageRect = pageElement.getBoundingClientRect();
-        const dragElement = dragRef.current;
-        
-        if (dragElement) {
-          const dragRect = dragElement.getBoundingClientRect();
-          const relativeX = (dragRect.left - pageRect.left) / scale;
-          const relativeY = (dragRect.top - pageRect.top) / scale;
-          
-          onPositionChange(relativeX, relativeY, pageNumber);
-        }
-      }
-    }
+    // Send position to parent component
+    onPositionChange(newPosition.x, newPosition.y, pageNumber);
   };
+
+  // Create a simple PDF page preview
+  const renderSimplePdfPreview = () => {
+    // A very basic PDF page preview with placeholder content
+    return (
+      <div 
+        className="bg-white border p-6 relative"
+        style={{ 
+          width: "100%", 
+          height: "500px",
+          transform: `scale(${scale})`,
+          transformOrigin: "top left"
+        }}
+      >
+        <div className="absolute top-2 right-2 text-gray-400 text-xs">
+          Page {pageNumber} of {numPages}
+        </div>
+        
+        {/* Simple fake page content */}
+        <div className="flex flex-col space-y-3 mt-8">
+          <div className="bg-gray-200 h-8 w-3/4 rounded"></div>
+          <div className="bg-gray-200 h-4 w-full rounded"></div>
+          <div className="bg-gray-200 h-4 w-full rounded"></div>
+          <div className="bg-gray-200 h-4 w-5/6 rounded"></div>
+          <div className="h-6"></div>
+          <div className="bg-gray-200 h-4 w-full rounded"></div>
+          <div className="bg-gray-200 h-4 w-full rounded"></div>
+          <div className="bg-gray-200 h-4 w-4/5 rounded"></div>
+        </div>
+        
+        {/* Draggable signature */}
+        {(signatureImage || signatureText) && (
+          <Draggable
+            bounds="parent"
+            onDrag={handleDrag}
+            position={signaturePosition}
+          >
+            <div 
+              ref={dragRef}
+              className="absolute cursor-move border-2 border-dashed border-blue-500 p-2 bg-white/80 z-10"
+              style={{ 
+                zIndex: 1000,
+                display: "inline-block"
+              }}
+            >
+              {signatureType === "draw" && signatureImage ? (
+                <img 
+                  src={signatureImage} 
+                  alt="Your signature" 
+                  className="max-h-20"
+                />
+              ) : signatureType === "type" && signatureText ? (
+                <p className="text-xl font-serif">{signatureText}</p>
+              ) : null}
+            </div>
+          </Draggable>
+        )}
+      </div>
+    );
+  };
+
+  // Loading and error components
+  const LoadingComponent = () => (
+    <div className="flex items-center justify-center h-80">
+      <div className="animate-spin mr-2 h-6 w-6 border-2 border-primary border-t-transparent rounded-full"></div>
+      <span>Loading PDF...</span>
+    </div>
+  );
+
+  const ErrorComponent = () => (
+    <div className="flex flex-col items-center justify-center h-80 text-red-500">
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        width="24" 
+        height="24" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+        className="mb-2"
+      >
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      <span>{error || "Failed to load PDF preview"}</span>
+      <p className="text-xs mt-2 max-w-md text-center text-muted-foreground">
+        You can still sign your document even without the preview by using the other options below.
+      </p>
+    </div>
+  );
 
   return (
     <div className="flex flex-col items-center border rounded-lg p-4 bg-muted/10">
@@ -124,18 +193,18 @@ export function PdfPreview({
             variant="outline" 
             size="sm" 
             onClick={goToPrevPage} 
-            disabled={pageNumber <= 1}
+            disabled={pageNumber <= 1 || loading}
           >
             <ChevronLeftIcon className="h-4 w-4" />
           </Button>
           <span className="text-sm mx-2">
-            Page {pageNumber} of {numPages || '...'}
+            Page {pageNumber} of {numPages}
           </span>
           <Button 
             variant="outline" 
             size="sm" 
             onClick={goToNextPage} 
-            disabled={!numPages || pageNumber >= numPages}
+            disabled={pageNumber >= numPages || loading}
           >
             <ChevronRightIcon className="h-4 w-4" />
           </Button>
@@ -145,7 +214,7 @@ export function PdfPreview({
             variant="outline" 
             size="sm" 
             onClick={zoomOut} 
-            disabled={scale <= 0.5}
+            disabled={scale <= 0.5 || loading}
           >
             <MinusIcon className="h-4 w-4" />
           </Button>
@@ -154,7 +223,7 @@ export function PdfPreview({
             variant="outline" 
             size="sm" 
             onClick={zoomIn} 
-            disabled={scale >= 2.0}
+            disabled={scale >= 2.0 || loading}
           >
             <PlusIcon className="h-4 w-4" />
           </Button>
@@ -163,63 +232,23 @@ export function PdfPreview({
       
       <div 
         ref={containerRef} 
-        className="relative border overflow-auto bg-white rounded-md" 
-        style={{ minHeight: 500 }}
+        className="relative border overflow-auto bg-white rounded-md w-full"
+        style={{ minHeight: 500, maxHeight: 700 }}
       >
-        {pdfUrl && (
-          <Document
-            file={pdfUrl}
-            onLoadSuccess={onDocumentLoadSuccess}
-            loading={<div className="flex items-center justify-center h-80">Loading PDF...</div>}
-            error={<div className="flex items-center justify-center h-80">Failed to load PDF</div>}
-          >
-            <Page 
-              pageNumber={pageNumber} 
-              scale={scale}
-              onRenderSuccess={onPageRenderSuccess}
-              renderTextLayer={false}
-              renderAnnotationLayer={false}
-            />
-            
-            {/* Draggable Signature */}
-            {!loading && (signatureImage || signatureText) && (
-              <Draggable
-                bounds="parent"
-                onDrag={handleDrag}
-                position={signaturePosition}
-              >
-                <div 
-                  ref={dragRef}
-                  className="absolute cursor-move border-2 border-dashed border-blue-500 p-2 bg-white/80 z-10"
-                  style={{ 
-                    zIndex: 1000,
-                    display: "inline-block"
-                  }}
-                >
-                  {signatureType === "draw" && signatureImage ? (
-                    <img 
-                      src={signatureImage} 
-                      alt="Your signature" 
-                      className="max-h-20"
-                    />
-                  ) : signatureType === "type" && signatureText ? (
-                    <p className="text-xl font-signature">{signatureText}</p>
-                  ) : null}
-                </div>
-              </Draggable>
-            )}
-          </Document>
-        )}
-        
-        {!pdfUrl && (
-          <div className="flex items-center justify-center h-80">
-            No PDF loaded
-          </div>
+        {loading ? (
+          <LoadingComponent />
+        ) : error ? (
+          <ErrorComponent />
+        ) : (
+          renderSimplePdfPreview()
         )}
       </div>
       
       <div className="mt-4 text-sm text-muted-foreground text-center">
-        Drag your signature to position it exactly where you want it on the document
+        {!error && (signatureImage || signatureText) ? 
+          "Drag your signature to position it exactly where you want it on the document" :
+          "Upload a PDF and create your signature to position it on the document"
+        }
       </div>
     </div>
   );

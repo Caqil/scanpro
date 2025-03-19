@@ -55,8 +55,8 @@ const formSchema = z.object({
   signatureType: z.enum(["draw", "type"]).default("draw"),
   signatureText: z.string().optional().nullable(),
   position: z.enum(["auto", "custom"]).default("auto"),
-  positionX: z.number().optional(),
-  positionY: z.number().optional(),
+  positionX: z.number().default(100),
+  positionY: z.number().default(100),
   scope: z.enum(["all", "custom"]).default("all"),
   pages: z.string().optional(),
 });
@@ -71,6 +71,7 @@ export function PdfSigner() {
   const [error, setError] = useState<string | null>(null);
   const [totalPages, setTotalPages] = useState<number | null>(null);
   const [signatureImage, setSignatureImage] = useState<string | null>(null);
+  const [previewError, setPreviewError] = useState<string | null>(null);
 
   // Initialize form
   const form = useForm<FormValues>({
@@ -84,6 +85,8 @@ export function PdfSigner() {
       position: "auto",
       scope: "all",
       pages: "",
+      positionX: 100,
+      positionY: 100,
     },
   });
 
@@ -111,16 +114,21 @@ export function PdfSigner() {
       }
       
       if (acceptedFiles.length > 0) {
-        setFile(acceptedFiles[0]);
+        const pdfFile = acceptedFiles[0];
+        setFile(pdfFile);
         setSignedFileUrl(null);
         setError(null);
+        setPreviewError(null);
         
         // When a new file is uploaded, estimate the number of pages
-        // This would typically come from server-side, but we'll use a dummy calculation for now
-        const fileSizeInMB = acceptedFiles[0].size / (1024 * 1024);
+        const fileSizeInMB = pdfFile.size / (1024 * 1024);
         // Rough estimate: 1MB ≈ 10 pages
         const estimatedPages = Math.max(1, Math.round(fileSizeInMB * 10));
         setTotalPages(estimatedPages);
+        
+        toast.success("PDF uploaded successfully", {
+          description: `File name: ${pdfFile.name} (${(fileSizeInMB).toFixed(2)} MB)`,
+        });
       }
     },
   });
@@ -142,6 +150,7 @@ export function PdfSigner() {
     setSignedFileUrl(null);
     setError(null);
     setTotalPages(null);
+    setPreviewError(null);
   };
 
   // Handle signature change
@@ -174,31 +183,40 @@ export function PdfSigner() {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("signatureType", signatureType === "draw" ? "image" : "text");
-    formData.append("signatureData", signatureType === "draw" ? signatureImage as string : values.signatureText as string);
+    formData.append("signatureType", signatureType);
+    
+    // Add appropriate signature data based on type
+    if (signatureType === "draw") {
+      formData.append("signatureData", signatureImage as string);
+    } else {
+      formData.append("signatureData", values.signatureText as string);
+    }
+    
     formData.append("signerName", values.signerName);
-    formData.append("date", values.date || new Date().toLocaleDateString());
+    formData.append("date", values.date || new Date().toISOString().split('T')[0]);
     
     if (values.reason) {
       formData.append("reason", values.reason);
     }
     
     // Position data
-    if (values.position === "auto") {
-      formData.append("position", "auto");
-    } else if (values.positionX !== undefined && values.positionY !== undefined) {
-      const positionData = {
-        x: values.positionX,
-        y: values.positionY,
-        width: 150, // Default signature width
-        height: 50  // Default signature height
-      };
-      formData.append("position", JSON.stringify(positionData));
+    formData.append("position", values.position);
+    
+    if (values.position === "custom") {
+      formData.append("positionX", values.positionX.toString());
+      formData.append("positionY", values.positionY.toString());
+      
+      // Set width and height based on signature type
+      formData.append("width", signatureType === "draw" ? "200" : "150");
+      formData.append("height", signatureType === "draw" ? "80" : "50");
     }
     
     // Page selection
     if (values.scope === "custom" && values.pages) {
       formData.append("pages", values.pages);
+    } else {
+      // Default to the first page if none specified
+      formData.append("pages", "1");
     }
 
     try {
@@ -231,7 +249,7 @@ export function PdfSigner() {
       setSignedFileUrl(data.filename);
       
       toast.success("PDF Signed Successfully", {
-        description: `Document signed by ${data.signerName} on ${data.signatureDate}.`,
+        description: `Document signed by ${values.signerName} on ${values.date || new Date().toLocaleDateString()}.`,
       });
     } catch (err) {
       setError(err instanceof Error ? err.message : "An unknown error occurred");
@@ -447,11 +465,6 @@ export function PdfSigner() {
                           form.setValue("position", "custom");
                         }}
                       />
-                      
-                      {/* Fallback note in case the preview fails */}
-                      <div className="mt-2 text-xs text-muted-foreground">
-                        <p>If the PDF preview doesn't load correctly, you can still sign your document by selecting "Custom Position" below and entering coordinates manually.</p>
-                      </div>
                     </div>
                   </div>
                 )}
@@ -486,49 +499,53 @@ export function PdfSigner() {
                   )}
                 />
                 
-                {/* Custom Position Fields (Hidden but still functional) */}
-                <div className={position === "custom" ? "grid grid-cols-2 gap-4" : "hidden"}>
-                  <FormField
-                    control={form.control}
-                    name="positionX"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>X Position (points from left)</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="number"
-                            min={0}
-                            placeholder="X coordinate"
-                            {...field}
-                            onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
-                            disabled={isProcessing}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="positionY"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Y Position (points from bottom)</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="number"
-                            min={0}
-                            placeholder="Y coordinate"
-                            {...field}
-                            onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
-                            disabled={isProcessing}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                {/* Custom Position Fields */}
+                {position === "custom" && (
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="positionX"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>X Position (points from left)</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              min={0}
+                              placeholder="X coordinate"
+                              {...field}
+                              value={field.value}
+                              onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
+                              disabled={isProcessing}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="positionY"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Y Position (points from bottom)</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              min={0}
+                              placeholder="Y coordinate"
+                              {...field}
+                              value={field.value}
+                              onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
+                              disabled={isProcessing}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                )}
                 
                 {/* Page Selection */}
                 <FormField
