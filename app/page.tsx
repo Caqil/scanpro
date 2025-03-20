@@ -100,7 +100,7 @@ export default function Home() {
                   Convert PDFs to Any Format
                 </h1>
                 <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                  Our powerful PDF converter uses LibreOffice technology to transform your PDF files into various formats with perfect formatting. Free, fast, and secure.
+                Powerful free online PDF tools: Convert to/from Word, Excel, PPG, Compress, Merge, Split, Edit, Add Watermark, OCR text extraction, Sign & Protect PDFs. No installation required. 100% secure.
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">

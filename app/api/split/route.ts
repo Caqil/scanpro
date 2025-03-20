@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
+import { writeFile, mkdir, readdir, stat } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
@@ -23,67 +23,64 @@ async function ensureDirectories() {
     }
 }
 
-// Split PDF using GhostScript (alternative to pdf-lib)
+// Split PDF using Ghostscript
 async function splitPdfWithGhostscript(inputPath: string, outputDir: string, options: {
     mode: 'all' | 'pages' | 'ranges';
     pages?: number[];
     ranges?: { start: number; end: number }[];
 }) {
     try {
-        // Determine the correct Ghostscript command based on the platform
         const gsCommand = process.platform === 'win32' ? 'gswin64c' : 'gs';
-
-        // Results to track
         const results: any[] = [];
 
-        if (options.mode === 'all') {
-            // Get page count first
-            const { stdout } = await execPromise(`${gsCommand} -q -dNODISPLAY -c "(${inputPath}) (r) file runpdfbegin pdfpagecount = quit"`);
-            const pageCount = parseInt(stdout.trim());
-
-            if (isNaN(pageCount) || pageCount <= 0) {
-                throw new Error('Could not determine page count');
-            }
-
-            // Split each page
-            for (let i = 1; i <= pageCount; i++) {
-                const outputFile = join(outputDir, `page-${i}.pdf`);
-                const gsArgs = [
-                    '-sDEVICE=pdfwrite',
-                    '-dNOPAUSE',
-                    '-dBATCH',
-                    '-dSAFER',
-                    `-dFirstPage=${i}`,
-                    `-dLastPage=${i}`,
-                    `-sOutputFile="${outputFile}"`,
-                    `"${inputPath}"`
-                ];
-
-                await execPromise(`${gsCommand} ${gsArgs.join(' ')}`);
-
-                results.push({
-                    pageNumber: i,
-                    path: outputFile,
-                    filename: `page-${i}.pdf`
-                });
-            }
+        // Verify Ghostscript is accessible
+        try {
+            const { stdout } = await execPromise(`${gsCommand} --version`);
+            console.log(`Ghostscript version: ${stdout.trim()}`);
+        } catch (e) {
+            console.error('Ghostscript not found in PATH:', e);
+            throw new Error('Ghostscript is not installed or not in PATH');
         }
-        else if (options.mode === 'pages' && options.pages && options.pages.length > 0) {
-            // Extract specific pages
+
+        if (options.mode === 'all') {
+            const outputFile = join(outputDir, `page-%d.pdf`);
+            const gsCmd = `${gsCommand} -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -q -sOutputFile="${outputFile}" "${inputPath}"`;
+            console.log(`Executing split command: ${gsCmd}`);
+
+            const { stdout, stderr } = await execPromise(gsCmd);
+            console.log(`Ghostscript stdout: ${stdout}`);
+            if (stderr) {
+                console.error(`Ghostscript stderr: ${stderr}`);
+                throw new Error(`Split failed: ${stderr}`);
+            }
+
+            const files = await readdir(outputDir);
+            files
+                .filter(file => file.match(/^page-\d+\.pdf$/))
+                .sort((a, b) => parseInt(a.match(/\d+/)![0]) - parseInt(b.match(/\d+/)![0]))
+                .forEach(file => {
+                    const pageNumber = parseInt(file.match(/\d+/)![0], 10);
+                    results.push({
+                        pageNumber,
+                        path: join(outputDir, file),
+                        filename: file
+                    });
+                });
+
+            if (results.length === 0) {
+                throw new Error('No pages were split from the PDF');
+            }
+            console.log(`Successfully split ${results.length} pages`);
+        } else if (options.mode === 'pages' && options.pages && options.pages.length > 0) {
             for (const page of options.pages) {
                 const outputFile = join(outputDir, `page-${page}.pdf`);
-                const gsArgs = [
-                    '-sDEVICE=pdfwrite',
-                    '-dNOPAUSE',
-                    '-dBATCH',
-                    '-dSAFER',
-                    `-dFirstPage=${page}`,
-                    `-dLastPage=${page}`,
-                    `-sOutputFile="${outputFile}"`,
-                    `"${inputPath}"`
-                ];
-
-                await execPromise(`${gsCommand} ${gsArgs.join(' ')}`);
+                const gsCmd = `${gsCommand} -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -q -dFirstPage=${page} -dLastPage=${page} -sOutputFile="${outputFile}" "${inputPath}"`;
+                console.log(`Extracting page ${page}: ${gsCmd}`);
+                const { stderr } = await execPromise(gsCmd);
+                if (stderr) {
+                    console.error(`Ghostscript stderr: ${stderr}`);
+                    throw new Error(`Failed to extract page ${page}: ${stderr}`);
+                }
 
                 results.push({
                     pageNumber: page,
@@ -91,29 +88,19 @@ async function splitPdfWithGhostscript(inputPath: string, outputDir: string, opt
                     filename: `page-${page}.pdf`
                 });
             }
-        }
-        else if (options.mode === 'ranges' && options.ranges && options.ranges.length > 0) {
-            // Extract page ranges
+        } else if (options.mode === 'ranges' && options.ranges && options.ranges.length > 0) {
             for (const range of options.ranges) {
                 const outputFile = join(outputDir, `pages-${range.start}-to-${range.end}.pdf`);
-                const gsArgs = [
-                    '-sDEVICE=pdfwrite',
-                    '-dNOPAUSE',
-                    '-dBATCH',
-                    '-dSAFER',
-                    `-dFirstPage=${range.start}`,
-                    `-dLastPage=${range.end}`,
-                    `-sOutputFile="${outputFile}"`,
-                    `"${inputPath}"`
-                ];
-
-                await execPromise(`${gsCommand} ${gsArgs.join(' ')}`);
+                const gsCmd = `${gsCommand} -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -q -dFirstPage=${range.start} -dLastPage=${range.end} -sOutputFile="${outputFile}" "${inputPath}"`;
+                console.log(`Extracting pages ${range.start}-${range.end}: ${gsCmd}`);
+                const { stderr } = await execPromise(gsCmd);
+                if (stderr) {
+                    console.error(`Ghostscript stderr: ${stderr}`);
+                    throw new Error(`Failed to extract range ${range.start}-${range.end}: ${stderr}`);
+                }
 
                 results.push({
-                    range: {
-                        start: range.start,
-                        end: range.end
-                    },
+                    range: { start: range.start, end: range.end },
                     path: outputFile,
                     filename: `pages-${range.start}-to-${range.end}.pdf`
                 });
@@ -127,34 +114,40 @@ async function splitPdfWithGhostscript(inputPath: string, outputDir: string, opt
     }
 }
 
-// Create ZIP file using archiver instead of jszip
+// Create ZIP file using archiver
 async function createZipFromFiles(files: { path: string; filename: string }[], outputPath: string): Promise<any> {
     return new Promise((resolve, reject) => {
-        const output = createWriteStream(outputPath);
-        const archive = archiver('zip', {
-            zlib: { level: 9 } // Compression level
-        });
+        try {
+            console.log(`Creating ZIP archive with ${files.length} files at ${outputPath}`);
+            const output = createWriteStream(outputPath);
+            const archive = archiver('zip', { zlib: { level: 9 } });
 
-        output.on('close', () => {
-            resolve({
-                path: outputPath,
-                filename: outputPath.split('/').pop() || 'split-pdfs.zip',
-                size: archive.pointer()
+            output.on('close', () => {
+                console.log(`ZIP archive created successfully. Size: ${archive.pointer()} bytes`);
+                const filename = outputPath.split(process.platform === 'win32' ? '\\' : '/').pop() || 'split-pdfs.zip';
+                resolve({
+                    path: outputPath,
+                    filename: filename,
+                    size: archive.pointer()
+                });
             });
-        });
 
-        archive.on('error', (err) => {
-            reject(err);
-        });
+            output.on('error', reject);
+            archive.on('error', reject);
+            archive.on('warning', (err) => console.warn('Archiver warning:', err));
+            archive.pipe(output);
 
-        archive.pipe(output);
+            for (const file of files) {
+                console.log(`Adding file to archive: ${file.path} as ${file.filename}`);
+                archive.file(file.path, { name: file.filename });
+            }
 
-        // Add each file to the archive
-        for (const file of files) {
-            archive.file(file.path, { name: file.filename });
+            console.log('Finalizing archive...');
+            archive.finalize();
+        } catch (error) {
+            console.error('Exception in createZipFromFiles:', error);
+            reject(error);
         }
-
-        archive.finalize();
     });
 }
 
@@ -182,90 +175,60 @@ export async function POST(request: NextRequest) {
 
         const buffer = Buffer.from(await file.arrayBuffer());
         await writeFile(inputPath, buffer);
+        console.log(`File written to: ${inputPath}`);
+
+        // Verify file exists and is readable
+        if (!existsSync(inputPath)) {
+            throw new Error(`File not found after writing: ${inputPath}`);
+        }
+        const fileStats = await stat(inputPath);
+        console.log(`File size: ${fileStats.size}, permissions: ${fileStats.mode.toString(8)}`);
+        if (!(fileStats.mode & 0o400)) {
+            throw new Error(`File not readable: ${inputPath}`);
+        }
 
         let results;
         let zipResult;
 
-        // Process based on split method
+        console.log(`Starting PDF split using method: ${splitMethod}`);
         if (splitMethod === 'all') {
             results = await splitPdfWithGhostscript(inputPath, outputDir, { mode: 'all' });
             const zipPath = join(SPLIT_DIR, `${uniqueId}-all-pages.zip`);
             zipResult = await createZipFromFiles(results, zipPath);
-        }
-        else if (splitMethod === 'pages') {
+        } else if (splitMethod === 'pages') {
             const pagesParam = formData.get('pages') as string;
-            let pages: number[] = [];
-            try {
-                pages = pagesParam.split(',')
-                    .map(p => p.trim())
-                    .filter(p => /^\d+$/.test(p))
-                    .map(p => parseInt(p));
-            } catch (e) {
-                console.error('Invalid pages parameter:', e);
-                return NextResponse.json(
-                    { error: 'Invalid pages parameter. Use format "1,3,5"' },
-                    { status: 400 }
-                );
-            }
-
+            const pages = pagesParam?.split(',')
+                .map(p => p.trim())
+                .filter(p => /^\d+$/.test(p))
+                .map(p => parseInt(p)) || [];
             if (pages.length === 0) {
-                return NextResponse.json(
-                    { error: 'No valid page numbers provided' },
-                    { status: 400 }
-                );
+                return NextResponse.json({ error: 'No valid page numbers provided' }, { status: 400 });
             }
-
-            results = await splitPdfWithGhostscript(inputPath, outputDir, {
-                mode: 'pages',
-                pages
-            });
-
+            results = await splitPdfWithGhostscript(inputPath, outputDir, { mode: 'pages', pages });
             const zipPath = join(SPLIT_DIR, `${uniqueId}-selected-pages.zip`);
             zipResult = await createZipFromFiles(results, zipPath);
-        }
-        else if (splitMethod === 'ranges') {
+        } else if (splitMethod === 'ranges') {
             const rangesParam = formData.get('ranges') as string;
-            let ranges: { start: number; end: number }[] = [];
-            try {
-                ranges = rangesParam.split(',')
-                    .map(r => r.trim())
-                    .filter(r => /^\d+-\d+$/.test(r))
-                    .map(r => {
-                        const [start, end] = r.split('-').map(p => parseInt(p));
-                        return { start, end };
-                    })
-                    .filter(range => range.start <= range.end);
-            } catch (e) {
-                console.error('Invalid ranges parameter:', e);
-                return NextResponse.json(
-                    { error: 'Invalid ranges parameter. Use format "1-3,5-8"' },
-                    { status: 400 }
-                );
-            }
-
+            const ranges = rangesParam?.split(',')
+                .map(r => r.trim())
+                .filter(r => /^\d+-\d+$/.test(r))
+                .map(r => {
+                    const [start, end] = r.split('-').map(p => parseInt(p));
+                    return { start, end };
+                })
+                .filter(range => range.start <= range.end) || [];
             if (ranges.length === 0) {
-                return NextResponse.json(
-                    { error: 'No valid page ranges provided' },
-                    { status: 400 }
-                );
+                return NextResponse.json({ error: 'No valid page ranges provided' }, { status: 400 });
             }
-
-            results = await splitPdfWithGhostscript(inputPath, outputDir, {
-                mode: 'ranges',
-                ranges
-            });
-
+            results = await splitPdfWithGhostscript(inputPath, outputDir, { mode: 'ranges', ranges });
             const zipPath = join(SPLIT_DIR, `${uniqueId}-page-ranges.zip`);
             zipResult = await createZipFromFiles(results, zipPath);
-        }
-        else {
-            return NextResponse.json(
-                { error: 'Invalid split method. Use "all", "pages", or "ranges"' },
-                { status: 400 }
-            );
+        } else {
+            return NextResponse.json({ error: 'Invalid split method' }, { status: 400 });
         }
 
         const zipUrl = `/splits/${zipResult.filename}`;
+        console.log(`PDF split completed successfully, created ${results.length} files at ${zipUrl}`);
 
         return NextResponse.json({
             success: true,
@@ -283,10 +246,7 @@ export async function POST(request: NextRequest) {
     } catch (error) {
         console.error('Split error:', error);
         return NextResponse.json(
-            {
-                error: error instanceof Error ? error.message : 'An unknown error occurred during splitting',
-                success: false
-            },
+            { error: error instanceof Error ? error.message : 'Unknown error during splitting', success: false },
             { status: 500 }
         );
     }

@@ -1,4 +1,3 @@
-// app/layout.tsx (updated)
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
@@ -8,7 +7,10 @@ import { Toaster } from "@/components/ui/sonner";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
-
+export const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 export const metadata: Metadata = {
   title: {
     default: "ScanPro - All-in-One PDF Converter, Editor & Tools | Free Online",
@@ -77,10 +79,7 @@ export const metadata: Metadata = {
     },
   },
 };
-export const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+
 export default function RootLayout({
   children,
 }: Readonly<{

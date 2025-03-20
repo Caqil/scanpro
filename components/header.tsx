@@ -477,23 +477,6 @@ export function Header() {
               )
             ))}
             
-            {/* Additional Mobile Actions */}
-            <div className="border-t pt-4 space-y-2">
-              <Link
-                href="/pricing"
-                className="block px-3 py-2 text-lg font-medium hover:bg-muted/50 rounded-md"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Pricing
-              </Link>
-              <Link
-                href="#"
-                className="block px-3 py-2 text-lg font-medium bg-primary text-primary-foreground rounded-md text-center"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Start Free
-              </Link>
-            </div>
           </div>
         </div>
       )}

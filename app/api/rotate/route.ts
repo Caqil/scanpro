@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
+import { writeFile, mkdir, stat, unlink } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
@@ -10,14 +10,34 @@ const execPromise = promisify(exec);
 
 const UPLOAD_DIR = join(process.cwd(), 'uploads');
 const ROTATE_DIR = join(process.cwd(), 'public', 'rotations');
+const TEMP_DIR = join(process.cwd(), 'temp'); // For temporary PostScript files
 
 // Ensure directories exist
 async function ensureDirectories() {
-    if (!existsSync(UPLOAD_DIR)) {
-        await mkdir(UPLOAD_DIR, { recursive: true });
-    }
-    if (!existsSync(ROTATE_DIR)) {
-        await mkdir(ROTATE_DIR, { recursive: true });
+    if (!existsSync(UPLOAD_DIR)) await mkdir(UPLOAD_DIR, { recursive: true });
+    if (!existsSync(ROTATE_DIR)) await mkdir(ROTATE_DIR, { recursive: true });
+    if (!existsSync(TEMP_DIR)) await mkdir(TEMP_DIR, { recursive: true });
+}
+
+// Get page count using Ghostscript
+async function getPageCount(filePath: string): Promise<number> {
+    try {
+        const gsCommand = process.platform === 'win32' ? 'gswin64c' : 'gs';
+        const command = `${gsCommand} -q -dNODISPLAY -c "(${filePath}) (r) file runpdfbegin pdfpagecount = quit"`;
+        console.log(`Getting page count with command: ${command}`);
+        const { stdout, stderr } = await execPromise(command);
+        if (stderr) {
+            console.error(`Ghostscript page count stderr: ${stderr}`);
+            throw new Error(`Failed to get page count: ${stderr}`);
+        }
+        const count = parseInt(stdout.trim(), 10);
+        if (isNaN(count) || count <= 0) throw new Error('Invalid page count returned');
+        console.log(`Page count: ${count}`);
+        return count;
+    } catch (error) {
+        console.error('Error getting page count:', error);
+        console.warn('Falling back to default page count of 100');
+        return 100; // Fallback
     }
 }
 
@@ -27,57 +47,81 @@ async function rotatePdfPages(inputPath: string, outputPath: string, rotationInf
     angle: number
 }) {
     try {
-        // Map angle to Ghostscript's rotation values (0, 90, 180, 270)
-        const normalizedAngle = (rotationInfo.angle + 360) % 360; // Ensure positive angle
+        const gsCommand = process.platform === 'win32' ? 'gswin64c' : 'gs';
+        const normalizedAngle = (rotationInfo.angle + 360) % 360; // Normalize to 0, 90, 180, 270
         if (![0, 90, 180, 270].includes(normalizedAngle)) {
             throw new Error('Ghostscript only supports rotation angles of 0, 90, 180, or 270 degrees');
         }
 
-        // Get total pages by reading the PDF (we'll use a simple heuristic here)
-        // Note: Ghostscript doesn't provide an easy way to count pages programmatically,
-        // so we'll assume the page numbers provided are valid or rotate all pages.
-        const pagesToRotate = rotationInfo.pageNumbers.length > 0
-            ? rotationInfo.pageNumbers.map(p => p + 1).join(',') // Convert to 1-based for Ghostscript
-            : 'all';
+        const totalPages = await getPageCount(inputPath);
+        const rotateAll = rotationInfo.pageNumbers.length === 0;
+        const pagesToRotate = rotateAll ? Array.from({ length: totalPages }, (_, i) => i + 1) : rotationInfo.pageNumbers.map(p => p + 1);
+
+        // Validate page numbers
+        const invalidPages = pagesToRotate.filter(p => p < 1 || p > totalPages);
+        if (invalidPages.length > 0) {
+            throw new Error(`Invalid page numbers: ${invalidPages.join(', ')}. Must be between 1 and ${totalPages}`);
+        }
+
+        // Generate PostScript for rotation
+        let psContent: string;
+        if (rotateAll) {
+            // Simple rotation for all pages using a loop in PostScript
+            psContent = `
+        /rotatepage { % pageNum rotatepage
+          1 dict dup /Rotate ${normalizedAngle} put .setpageparams
+        } def
+        1 ${totalPages} { rotatepage } for
+      `;
+        } else {
+            // Specific pages
+            psContent = pagesToRotate.map(page =>
+                `${page} 1 dict dup /Rotate ${normalizedAngle} put .setpageparams`
+            ).join('\n');
+        }
+
+        // Write PostScript to a temporary file
+        const tempPsFile = join(TEMP_DIR, `${uuidv4()}.ps`);
+        await writeFile(tempPsFile, psContent);
+        console.log(`Wrote PostScript to: ${tempPsFile}`);
 
         // Construct Ghostscript command
-        const gsCommand = [
-            'gs',
-            '-sDEVICE=pdfwrite',           // Output as PDF
-            `-dAutoRotatePages=/None`,     // Prevent auto-rotation
-            `-o "${outputPath}"`,          // Output file
-            '-q',                          // Quiet mode
-            '-dNOPAUSE',                   // No pause between pages
-            '-dBATCH',                     // Batch mode
-            `-c "[${pagesToRotate}]{<</Orientation ${normalizedAngle}>> setpagedevice}"`, // Set rotation
-            `-f "${inputPath}"`,           // Input file
-        ].join(' ');
+        const gsArgs = [
+            '-sDEVICE=pdfwrite',
+            '-dAutoRotatePages=/None',
+            `-o "${outputPath}"`,
+            '-q',
+            '-dNOPAUSE',
+            '-dBATCH',
+            `-f "${tempPsFile}"`, // Include the PostScript file
+            `-f "${inputPath}"`,  // Input PDF
+        ];
 
-        // Execute Ghostscript command
-        await execPromise(gsCommand);
+        const fullCommand = `${gsCommand} ${gsArgs.join(' ')}`;
+        console.log(`Executing Ghostscript rotation command: ${fullCommand}`);
 
-        // For response, we'll assume success and calculate rotated pages
-        const rotatedPagesCount = rotationInfo.pageNumbers.length > 0
-            ? rotationInfo.pageNumbers.length
-            : await getPageCount(inputPath); // Optional: implement this if needed
+        const { stdout, stderr } = await execPromise(fullCommand);
+        console.log(`Ghostscript stdout: ${stdout}`);
+        if (stderr) {
+            console.error(`Ghostscript rotation stderr: ${stderr}`);
+            throw new Error(`Ghostscript execution failed: ${stderr}`);
+        }
+
+        // Clean up temporary file
+        await unlink(tempPsFile).catch(err => console.warn(`Failed to delete temp file ${tempPsFile}: ${err}`));
+
+        // Verify output file
+        if (!existsSync(outputPath)) throw new Error('Rotated PDF file was not created');
 
         return {
-            totalPages: rotatedPagesCount, // You might need a separate method to get this accurately
-            rotatedPages: rotatedPagesCount,
-            pageNumbers: rotationInfo.pageNumbers.length > 0
-                ? rotationInfo.pageNumbers.map(i => i + 1)
-                : [] // If 'all', we don't list all pages
+            totalPages,
+            rotatedPages: pagesToRotate.length,
+            pageNumbers: pagesToRotate
         };
     } catch (error) {
         console.error('Ghostscript rotation error:', error);
         throw new Error('Failed to rotate PDF with Ghostscript: ' + (error instanceof Error ? error.message : String(error)));
     }
-}
-
-// Optional: Helper to get page count (simplified, could use gs or another tool)
-async function getPageCount(filePath: string): Promise<number> {
-    const { stdout } = await execPromise(`gs -q -dNODISPLAY -c "(${filePath}) (r) file runpdfbegin pdfpagecount = quit"`);
-    return parseInt(stdout.trim(), 10);
 }
 
 export async function POST(request: NextRequest) {
@@ -88,10 +132,7 @@ export async function POST(request: NextRequest) {
         const formData = await request.formData();
         const file = formData.get('file') as File;
 
-        if (!file) {
-            return NextResponse.json({ error: 'No PDF file provided' }, { status: 400 });
-        }
-
+        if (!file) return NextResponse.json({ error: 'No PDF file provided' }, { status: 400 });
         if (!file.name.toLowerCase().endsWith('.pdf')) {
             return NextResponse.json({ error: 'Only PDF files can be rotated' }, { status: 400 });
         }
@@ -114,7 +155,7 @@ export async function POST(request: NextRequest) {
                     pageNumbers = pagesParam.split(',')
                         .map(p => p.trim())
                         .filter(p => /^\d+$/.test(p))
-                        .map(p => parseInt(p) - 1); // Convert to 0-based indices
+                        .map(p => parseInt(p) - 1); // 0-based
                 }
             } catch (e) {
                 console.error('Invalid pages parameter:', e);
@@ -128,6 +169,9 @@ export async function POST(request: NextRequest) {
 
         const buffer = Buffer.from(await file.arrayBuffer());
         await writeFile(inputPath, buffer);
+
+        const fileStats = await stat(inputPath);
+        console.log(`Input file written: ${inputPath}, size: ${fileStats.size} bytes`);
 
         const rotationResult = await rotatePdfPages(inputPath, outputPath, {
             pageNumbers,

@@ -162,90 +162,94 @@ export function PdfWatermarker() {
     const color = watchedValues.color;
     const rotation = watchedValues.rotation;
     const text = watchedValues.text || "WATERMARK";
+    const width = 300; // SVG width
+const height = 400; // SVG height
+const fontSize = size * (Math.min(width, height) / 100); // Match server-side scaling
+
+const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400">
+    <rect width="300" height="400" fill="#f0f0f0" />
+    <rect x="20" y="20" width="260" height="360" fill="white" stroke="#d0d0d0" />
     
-    // Create a simple SVG preview
-    const svg = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400">
-        <rect width="300" height="400" fill="#f0f0f0" />
-        <rect x="20" y="20" width="260" height="360" fill="white" stroke="#d0d0d0" />
-        
-        <!-- Watermark text -->
-        <g transform="${getTransformForPosition(position, 300, 400, rotation)}">
-          <text 
-            font-family="Arial, sans-serif" 
-            font-weight="bold" 
-            font-size="${size * 3}px" 
-            fill="${color}" 
-            opacity="${opacity}" 
-            text-anchor="middle"
-          >${text}</text>
-        </g>
-        
-        <!-- Page content simulation -->
-        <g>
-          <rect x="40" y="60" width="220" height="10" fill="#d0d0d0" rx="2" />
-          <rect x="40" y="90" width="180" height="10" fill="#d0d0d0" rx="2" />
-          <rect x="40" y="120" width="200" height="10" fill="#d0d0d0" rx="2" />
-          <rect x="40" y="150" width="160" height="10" fill="#d0d0d0" rx="2" />
-          <rect x="40" y="210" width="220" height="10" fill="#d0d0d0" rx="2" />
-          <rect x="40" y="240" width="190" height="10" fill="#d0d0d0" rx="2" />
-          <rect x="40" y="270" width="220" height="10" fill="#d0d0d0" rx="2" />
-          <rect x="40" y="300" width="170" height="10" fill="#d0d0d0" rx="2" />
-        </g>
-      </svg>
-    `;
+    <!-- Watermark text -->
+    <g transform="${getTransformForPosition(position, 300, 400, rotation)}">
+      <text 
+        font-family="Arial, sans-serif" 
+        font-weight="bold" 
+        font-size="${fontSize}px" 
+        fill="${color}" 
+        opacity="${opacity}" 
+        text-anchor="middle"
+      >${text}</text>
+    </g>
+    
+    <!-- Page content simulation -->
+    <g>
+      <rect x="40" y="60" width="220" height="10" fill="#d0d0d0" rx="2" />
+      <rect x="40" y="90" width="180" height="10" fill="#d0d0d0" rx="2" />
+      <rect x="40" y="120" width="200" height="10" fill="#d0d0d0" rx="2" />
+      <rect x="40" y="150" width="160" height="10" fill="#d0d0d0" rx="2" />
+      <rect x="40" y="210" width="220" height="10" fill="#d0d0d0" rx="2" />
+      <rect x="40" y="240" width="190" height="10" fill="#d0d0d0" rx="2" />
+      <rect x="40" y="270" width="220" height="10" fill="#d0d0d0" rx="2" />
+      <rect x="40" y="300" width="170" height="10" fill="#d0d0d0" rx="2" />
+    </g>
+  </svg>
+`;
     
     const dataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
     setPreviewImage(dataUrl);
   };
-
-  // Get transform attribute for SVG based on position
   const getTransformForPosition = (position: string, width: number, height: number, rotation: number): string => {
     let x = width / 2;
     let y = height / 2;
     
+    // Approximate text height (about 1.2 times the font size for most fonts)
+    const fontSize = watchedValues.size * (Math.min(width, height) / 100);
+    const textHeight = fontSize * 1.2;
+
     // Adjust position
     switch (position) {
-      case 'top-left':
-        x = width * 0.2;
-        y = height * 0.2;
-        break;
-      case 'top-center':
-        x = width / 2;
-        y = height * 0.2;
-        break;
-      case 'top-right':
-        x = width * 0.8;
-        y = height * 0.2;
-        break;
-      case 'center-left':
-        x = width * 0.2;
-        y = height / 2;
-        break;
-      case 'center':
-        x = width / 2;
-        y = height / 2;
-        break;
-      case 'center-right':
-        x = width * 0.8;
-        y = height / 2;
-        break;
-      case 'bottom-left':
-        x = width * 0.2;
-        y = height * 0.8;
-        break;
-      case 'bottom-center':
-        x = width / 2;
-        y = height * 0.8;
-        break;
-      case 'bottom-right':
-        x = width * 0.8;
-        y = height * 0.8;
-        break;
+        case 'top-left':
+            x = width * 0.2;
+            y = height * 0.2 - textHeight / 2;
+            break;
+        case 'top-center':
+            x = width / 2;
+            y = height * 0.2 - textHeight / 2;
+            break;
+        case 'top-right':
+            x = width * 0.8;
+            y = height * 0.2 - textHeight / 2;
+            break;
+        case 'center-left':
+            x = width * 0.2;
+            y = height / 2;
+            break;
+        case 'center':
+            x = width / 2;
+            y = height / 2;
+            break;
+        case 'center-right':
+            x = width * 0.8;
+            y = height / 2;
+            break;
+        case 'bottom-left':
+            x = width * 0.2;
+            y = height * 0.8 + textHeight;
+            break;
+        case 'bottom-center':
+            x = width / 2;
+            y = height * 0.8 + textHeight;
+            break;
+        case 'bottom-right':
+            x = width * 0.8;
+            y = height * 0.8 + textHeight;
+            break;
     }
     
     return `translate(${x} ${y}) rotate(${rotation})`;
-  };
+};
 
   // Update preview whenever form values change
   useEffect(() => {
