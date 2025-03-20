@@ -1,6 +1,7 @@
 #!/bin/bash
 # PDF Converter Installation Script for https://github.com/Caqil/pdf-converter
 # Includes PM2 setup for background running and Nginx configuration
+# Fixed permission issues with git clone
 
 # Exit on error
 set -e
@@ -57,7 +58,8 @@ apt-get install -y \
     imagemagick \
     nginx \
     certbot \
-    python3-certbot-nginx
+    python3-certbot-nginx \
+    git
 
 # Create app user if it doesn't exist
 if ! id "${APP_USER}" &>/dev/null; then
@@ -65,19 +67,22 @@ if ! id "${APP_USER}" &>/dev/null; then
     useradd -m -s /bin/bash "${APP_USER}"
 fi
 
-# Create app directory
+# Create app directory with correct permissions
 echo -e "${GREEN}Setting up application directory...${NC}"
 mkdir -p "${APP_DIR}"
-cd "${APP_DIR}"
 
-# Clone the repository
+# Clone the repository as root first, then adjust permissions
 echo -e "${GREEN}Cloning repository from https://github.com/Caqil/pdf-converter...${NC}"
 if [ ! -d "${APP_DIR}/.git" ]; then
-    su - "${APP_USER}" -c "git clone https://github.com/Caqil/pdf-converter.git ${APP_DIR}"
+    # Clone directly as root
+    git clone https://github.com/Caqil/pdf-converter.git "${APP_DIR}"
 else
     echo -e "${YELLOW}Git repository already exists, pulling latest changes...${NC}"
-    su - "${APP_USER}" -c "cd ${APP_DIR} && git pull"
+    cd "${APP_DIR}" && git pull
 fi
+
+# Now set proper ownership of the cloned repository
+chown -R "${APP_USER}:${APP_USER}" "${APP_DIR}"
 
 # Create .env file with port configuration
 echo -e "${GREEN}Setting up environment variables...${NC}"
@@ -86,12 +91,12 @@ if [ ! -f "${APP_DIR}/.env" ]; then
 NODE_ENV=production
 PORT=${APP_PORT}
 EOL
+    chown "${APP_USER}:${APP_USER}" "${APP_DIR}/.env"
 fi
 
 # Switch to app user for npm install and build
 echo -e "${GREEN}Installing Node.js dependencies as ${APP_USER}...${NC}"
-chown -R "${APP_USER}:${APP_USER}" "${APP_DIR}"
-su - "${APP_USER}" -c "cd ${APP_DIR} && npm install"
+cd "${APP_DIR}" && su - "${APP_USER}" -c "cd ${APP_DIR} && npm install"
 
 # Create necessary directories
 echo -e "${GREEN}Creating necessary directories...${NC}"
@@ -231,7 +236,7 @@ su - "${APP_USER}" -c "pm2 save"
 
 # Setup PM2 to start on system boot
 echo -e "${GREEN}Setting PM2 to auto-start on system boot...${NC}"
-pm2 startup systemd -u "${APP_USER}" --hp "/home/${APP_USER}"
+env PATH=$PATH:/usr/bin pm2 startup systemd -u "${APP_USER}" --hp "/home/${APP_USER}"
 systemctl enable pm2-${APP_USER}
 
 echo -e "${GREEN}=== Installation Complete! ===${NC}"
