@@ -137,37 +137,37 @@ const PDF_TOOLS: CategoryDefinition[] = [
         icon: <ArrowRight className="h-5 w-5 text-red-500" />,
         description: "Combine multiple PDFs into one"
       },
-      { 
-        name: "Split PDF", 
-        href: "/split", 
-        icon: <ArrowLeft className="h-5 w-5 text-red-500" />,
-        description: "Extract specific pages from a PDF"
-      },
+      // { 
+      //   name: "Split PDF", 
+      //   href: "/split", 
+      //   icon: <ArrowLeft className="h-5 w-5 text-red-500" />,
+      //   description: "Extract specific pages from a PDF"
+      // },
       { 
         name: "Compress PDF", 
         href: "/compress", 
         icon: <ArrowDown className="h-5 w-5 text-green-500" />,
         description: "Reduce PDF file size"
       },
-      { 
-        name: "Rotate PDF", 
-        href: "/rotate", 
-        icon: <RotateCcw className="h-5 w-5 text-blue-500" />,
-        description: "Adjust page orientation"
-      },
+      // { 
+      //   name: "Rotate PDF", 
+      //   href: "/rotate", 
+      //   icon: <RotateCcw className="h-5 w-5 text-blue-500" />,
+      //   description: "Adjust page orientation"
+      // },
     ]
   },
   {
     category: "PDF Editing",
     description: "Advanced PDF customization",
     tools: [
-      { 
-        name: "Edit PDF", 
-        href: "/edit", 
-        icon: <PenTool className="h-5 w-5 text-purple-500" />,
-        description: "Add text, images, and annotations",
-        isNew: true
-      },
+      // { 
+      //   name: "Edit PDF", 
+      //   href: "/edit", 
+      //   icon: <PenTool className="h-5 w-5 text-purple-500" />,
+      //   description: "Add text, images, and annotations",
+      //   isNew: true
+      // },
       { 
         name: "Add Watermark", 
         href: "/watermark", 
@@ -186,12 +186,12 @@ const PDF_TOOLS: CategoryDefinition[] = [
     category: "PDF Security",
     description: "Protect and manage PDF access",
     tools: [
-      { 
-        name: "Sign PDF", 
-        href: "/sign", 
-        icon: <PenTool className="h-5 w-5 text-blue-500" />,
-        description: "Add electronic signatures"
-      },
+      // { 
+      //   name: "Sign PDF", 
+      //   href: "/sign", 
+      //   icon: <PenTool className="h-5 w-5 text-blue-500" />,
+      //   description: "Add electronic signatures"
+      // },
       { 
         name: "Unlock PDF", 
         href: "/unlock", 
