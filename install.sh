@@ -14,7 +14,7 @@ APP_PORT=3001
 DOMAIN="scanpro.cc"
 APP_USER="pdf-converter"
 APP_DIR="/home/${APP_USER}/pdf-converter"
-REPO_URL="https://github.com/Caqil/pdf-converter.git"
+REPO_URL="https://github.com/Caqil/scanpro.git"
 
 # Check if running as root
 if [ "$EUID" -ne 0 ]; then
