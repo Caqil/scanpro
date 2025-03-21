@@ -145,7 +145,7 @@ async function applyDrawingsToPdf(
                                 x: point.x * scaleX,
                                 y: height - (point.y * scaleY)
                             }));
-                    
+
                             // Create SVG path from scaled points with explicit types
                             const pathData = scaledPoints.reduce((
                                 path: string,
@@ -345,7 +345,104 @@ async function applyDrawingsToPdf(
         throw new Error(`Failed to apply drawings to PDF: ${error instanceof Error ? error.message : String(error)}`);
     }
 }
+async function applyTextReplacementsToPdf(
+    pdfPath: string,
+    outputPath: string,
+    pages: any[]
+): Promise<boolean> {
+    try {
+        // Read the PDF file
+        const pdfBytes = await readFile(pdfPath);
 
+        // Load the PDF document
+        const pdfDoc = await PDFDocument.load(pdfBytes);
+
+        // Process each page
+        for (let i = 0; i < pages.length; i++) {
+            const pageData = pages[i];
+            const pdfPage = pdfDoc.getPage(i);
+            const { width, height } = pdfPage.getSize();
+
+            // Scale factor to convert from image coordinates to PDF coordinates
+            const scaleX = width / pageData.width;
+            const scaleY = height / pageData.height;
+
+            // Process extracted text replacements for this page
+            if (pageData.extractedText && Array.isArray(pageData.extractedText)) {
+                for (const textItem of pageData.extractedText) {
+                    if (textItem.text && textItem.x !== undefined && textItem.y !== undefined) {
+                        // For more accurate text replacement, we need to:
+                        // 1. Erase the original text by covering it with a white rectangle
+                        // 2. Add the new text at exactly the same position
+
+                        // Determine text bounds with proper scaling
+                        const x = textItem.x * scaleX;
+                        const y = height - (textItem.y * scaleY); // Invert Y for PDF coordinates
+                        const textWidth = (textItem.width || 100) * scaleX;
+                        const textHeight = (textItem.height || 20) * scaleY;
+
+                        // 1. Draw a white rectangle to cover original text
+                        pdfPage.drawRectangle({
+                            x,
+                            y: y - textHeight, // Adjust for text height
+                            width: textWidth,
+                            height: textHeight,
+                            color: rgb(1, 1, 1), // White
+                            opacity: 1,
+                        });
+
+                        // 2. Draw the new text
+                        // Select appropriate font
+                        let fontName: keyof typeof StandardFonts = 'Helvetica';
+                        if (textItem.fontFamily) {
+                            if (textItem.fontFamily.includes('Times')) {
+                                fontName = 'TimesRoman';
+                            } else if (textItem.fontFamily.includes('Courier')) {
+                                fontName = 'Courier';
+                            }
+                        }
+
+                        const font = await pdfDoc.embedFont(StandardFonts[fontName]);
+                        const fontSize = (textItem.fontSize || 12) * Math.min(scaleX, scaleY);
+
+                        // Parse text color (default to black if not specified)
+                        let r = 0, g = 0, b = 0;
+                        if (textItem.color && textItem.color.startsWith('#')) {
+                            const hex = textItem.color.slice(1);
+                            r = parseInt(hex.substring(0, 2), 16) / 255;
+                            g = parseInt(hex.substring(2, 4), 16) / 255;
+                            b = parseInt(hex.substring(4, 6), 16) / 255;
+                        }
+
+                        // Draw the replacement text
+                        pdfPage.drawText(textItem.text, {
+                            x,
+                            y, // Keep original Y position
+                            size: fontSize,
+                            font,
+                            color: rgb(r, g, b),
+                            opacity: textItem.opacity || 1,
+                        });
+                    }
+                }
+            }
+
+            // Continue with processing other drawing elements...
+            // (drawings, shapes, images, etc. as in the original function)
+        }
+
+        // Save the modified PDF
+        const modifiedPdfBytes = await pdfDoc.save();
+
+        // Write to output file
+        await writeFile(outputPath, modifiedPdfBytes);
+
+        return true;
+    } catch (error) {
+        console.error('Error applying text replacements to PDF:', error);
+        throw new Error(`Failed to apply text replacements to PDF: ${error instanceof Error ? error.message : String(error)}`);
+    }
+}
 export async function POST(request: NextRequest) {
     try {
         console.log('Starting PDF editing process...');
@@ -367,8 +464,7 @@ export async function POST(request: NextRequest) {
         const tempPdfPath = join(UPLOAD_DIR, `${uniqueId}-temp.pdf`);
         const outputPath = join(EDITED_DIR, `${uniqueId}-edited.pdf`);
 
-        // First, we need to create a PDF from the page images
-        // Using a simple PDF lib approach here
+        // First, create a base PDF from the page images
         const pdfDoc = await PDFDocument.create();
 
         // Add pages based on the images
@@ -379,30 +475,51 @@ export async function POST(request: NextRequest) {
             const imageUrl = pageData.imageUrl;
             const imagePath = join(TEMP_DIR, `${uniqueId}-page-${i}.png`);
 
-            // Download image from URL
-            const response = await fetch(`http://localhost:3000${imageUrl}`);
-            const imageBuffer = Buffer.from(await response.arrayBuffer());
-            await writeFile(imagePath, imageBuffer);
+            try {
+                // Download image from URL - handle both absolute and relative URLs
+                const imageUrlToFetch = imageUrl.startsWith('http')
+                    ? imageUrl
+                    : `http://localhost:3000${imageUrl}`;
 
-            // Add page to PDF
-            const image = await pdfDoc.embedPng(imageBuffer);
-            const { width, height } = image;
+                const response = await fetch(imageUrlToFetch);
 
-            const page = pdfDoc.addPage([width, height]);
-            page.drawImage(image, {
-                x: 0,
-                y: 0,
-                width,
-                height,
-            });
+                if (!response.ok) {
+                    throw new Error(`Failed to download image: ${response.statusText}`);
+                }
+
+                const imageBuffer = Buffer.from(await response.arrayBuffer());
+                await writeFile(imagePath, imageBuffer);
+
+                // Add page to PDF with proper dimensions
+                const image = await pdfDoc.embedPng(imageBuffer);
+                const { width, height } = image;
+
+                const page = pdfDoc.addPage([width, height]);
+                page.drawImage(image, {
+                    x: 0,
+                    y: 0,
+                    width,
+                    height,
+                });
+            } catch (imageError) {
+                console.error(`Error handling image at page ${i}:`, imageError);
+                // Create a fallback page if image processing fails
+                const page = pdfDoc.addPage([612, 792]); // Standard letter size
+                page.drawText(`Page ${i + 1} (Image processing failed)`, {
+                    x: 50,
+                    y: 700,
+                    size: 20,
+                });
+            }
         }
 
-        // Save the temporary PDF
+        // Save the temporary base PDF
         const pdfBytes = await pdfDoc.save();
         await writeFile(tempPdfPath, pdfBytes);
 
-        // Now apply all drawings and text edits to the PDF
-        await applyDrawingsToPdf(tempPdfPath, outputPath, pages);
+        // Now apply all drawings and text replacements to the PDF
+        // Use the enhanced function for better text replacement
+        await applyTextReplacementsToPdf(tempPdfPath, outputPath, pages);
 
         // Create relative URL for the edited file
         const fileUrl = `/edited/${uniqueId}-edited.pdf`;

@@ -141,29 +141,12 @@ const pdfTools = [
         href: "/merge"
       },
       {
-        id: "split-pdf",
-        name: "Split PDF",
-        description: "Separate one page or a whole set for easy conversion into independent PDF files.",
-        icon: <ArrowLeftIcon className="h-6 w-6 text-red-500" />,
-        iconBg: "bg-red-100 dark:bg-red-900/30",
-        href: "/split"
-      },
-      {
         id: "compress-pdf",
         name: "Compress PDF",
         description: "Reduce file size while optimizing for maximal PDF quality.",
         icon: <ArrowDownIcon className="h-6 w-6 text-green-500" />,
         iconBg: "bg-green-100 dark:bg-green-900/30",
         href: "/compress"
-      },
-      {
-        id: "edit-pdf",
-        name: "Edit PDF",
-        description: "Add text, images, shapes or freehand annotations to a PDF document.",
-        new: true,
-        icon: <PencilIcon className="h-6 w-6 text-purple-500" />,
-        iconBg: "bg-purple-100 dark:bg-purple-900/30",
-        href: "/edit"
       },
       { 
         id: "ocr",
@@ -202,14 +185,6 @@ const pdfTools = [
     id: "security",
     label: "PDF Security",
     tools: [
-      {
-        id: "sign-pdf",
-        name: "Sign PDF",
-        description: "Sign yourself or request electronic signatures from others.",
-        icon: <PencilIcon className="h-6 w-6 text-blue-500" />,
-        iconBg: "bg-blue-100 dark:bg-blue-900/30",
-        href: "/sign"
-      },
       {
         id: "unlock-pdf",
         name: "Unlock PDF",
