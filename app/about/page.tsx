@@ -84,7 +84,7 @@ export default function AboutPage() {
         <div className="relative">
           <div className="absolute inset-0 bg-primary/10 rounded-xl -rotate-6"></div>
           <Image 
-            src="/images/team-working.jpg" 
+            src="/images/ic_icon.png" 
             alt="ScanPro Team" 
             width={600} 
             height={400} 
@@ -172,29 +172,45 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* Team */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold text-center mb-12">Meet Our Team</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          <TeamMember 
-            name="Alex Rodriguez" 
-            role="Founder & CEO" 
-            image="/images/team/alex.jpg"
-            quote="Every great product starts with solving a real problem."
-          />
-          <TeamMember 
-            name="Sarah Chen" 
-            role="Chief Technology Officer" 
-            image="/images/team/sarah.jpg"
-            quote="Innovation is about making things simpler, not more complicated."
-          />
-          <TeamMember 
-            name="Michael Thompson" 
-            role="Head of Product Design" 
-            image="/images/team/michael.jpg"
-            quote="User experience is at the heart of everything we create."
-          />
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-6">Meet Our Team</h2>
+        <p className="mb-8 text-muted-foreground">
+          ScanPro is powered by a small, dedicated team focused on creating the best possible PDF tools for our users.
+        </p>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="text-center">
+            <div className="h-32 w-32 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/60 dark:to-blue-800/60 rounded-full mx-auto mb-4 flex items-center justify-center">
+              <span className="text-3xl font-bold text-blue-600 dark:text-blue-400">C</span>
+            </div>
+            <h3 className="text-xl font-bold">Cakra</h3>
+            <p className="text-primary">App Development Lead</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Oversees the development of our applications, implementing robust backend solutions and ensuring our tools work smoothly and efficiently.
+            </p>
+          </div>
+          
+          <div className="text-center">
+            <div className="h-32 w-32 bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900/60 dark:to-green-800/60 rounded-full mx-auto mb-4 flex items-center justify-center">
+              <span className="text-3xl font-bold text-green-600 dark:text-green-400">A</span>
+            </div>
+            <h3 className="text-xl font-bold">Abdi</h3>
+            <p className="text-primary">Frontend Web Developer</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Creates the user interfaces that make our tools intuitive and accessible, focusing on delivering exceptional user experiences across all our web platforms.
+            </p>
+          </div>
+          
+          <div className="text-center">
+            <div className="h-32 w-32 bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900/60 dark:to-purple-800/60 rounded-full mx-auto mb-4 flex items-center justify-center">
+              <span className="text-3xl font-bold text-purple-600 dark:text-purple-400">A</span>
+            </div>
+            <h3 className="text-xl font-bold">Anggi</h3>
+            <p className="text-primary">Marketing Specialist</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Leads our marketing efforts to connect our tools with the people who need them, building awareness and driving the growth of our platform.
+            </p>
+          </div>
         </div>
       </section>
 

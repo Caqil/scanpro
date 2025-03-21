@@ -12,12 +12,12 @@ import {
   FileTextIcon, 
   ImageIcon, 
   TableIcon,
-  ArrowLeftIcon,
   ArrowRightIcon,
   ArrowDownIcon,
   PencilIcon,
   LightbulbIcon,
   FileCheck2,
+  Shield,
 } from "lucide-react";
 import HeroAnimation from "@/components/hero-animation";
 
@@ -55,21 +55,14 @@ const popularTools = [
     iconBg: "bg-green-100 dark:bg-green-900/30",
     href: "/compress"
   },
+  
   {
-    id: "split-pdf",
-    name: "Split PDF",
-    description: "Separate one page or a whole set for easy conversion into independent PDF files.",
-    icon: <ArrowLeftIcon className="h-6 w-6 text-red-500" />,
-    iconBg: "bg-red-100 dark:bg-red-900/30",
-    href: "/split"
-  },
-  {
-    id: "edit-pdf",
+    id: "protect",
     name: "Edit PDF",
     description: "Add text, images, shapes or freehand annotations to a PDF document.",
-    icon: <PencilIcon className="h-6 w-6 text-purple-500" />,
+    icon: <Shield className="h-6 w-6 text-purple-500" />,
     iconBg: "bg-purple-100 dark:bg-purple-900/30",
-    href: "/edit",
+    href: "/protect",
     isNew: true
   },
   { 

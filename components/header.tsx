@@ -55,73 +55,73 @@ const PDF_TOOLS: CategoryDefinition[] = [
     tools: [
       { 
         name: "PDF to Word", 
-        href: "/convert/pdf-to-docx", // Updated URL
+        href: "/convert/pdf-to-docx",
         icon: <FileText className="h-5 w-5 text-blue-500" />,
         description: "Convert PDF to editable Word documents"
       },
       { 
         name: "PDF to Excel", 
-        href: "/convert/pdf-to-xlsx", // Updated URL
+        href: "/convert/pdf-to-xlsx",
         icon: <Table className="h-5 w-5 text-green-500" />,
         description: "Extract data from PDFs into spreadsheets"
       },
       { 
         name: "PDF to PowerPoint", 
-        href: "/convert/pdf-to-pptx", // Updated URL
+        href: "/convert/pdf-to-pptx",
         icon: <FileText className="h-5 w-5 text-orange-500" />,
         description: "Convert PDF slides to PowerPoint"
       },
       { 
         name: "PDF to JPG", 
-        href: "/convert/pdf-to-jpg", // Updated URL
+        href: "/convert/pdf-to-jpg",
         icon: <Image className="h-5 w-5 text-yellow-500" />,
         description: "Extract images from PDF documents"
       },
       { 
         name: "PDF to PNG", 
-        href: "/convert/pdf-to-png", // Updated URL
+        href: "/convert/pdf-to-png",
         icon: <Image className="h-5 w-5 text-yellow-500" />,
         description: "Extract images from PDF documents"
       },
       { 
         name: "PDF to HTML", 
-        href: "/convert/pdf-to-html", // Updated URL
+        href: "/convert/pdf-to-html",
         icon: <LayoutGrid className="h-5 w-5 text-purple-500" />,
         description: "Convert PDFs for web publishing"
       },
       { 
         name: "Word to PDF", 
-        href: "/convert/docx-to-pdf", // Updated URL
+        href: "/convert/docx-to-pdf",
         icon: <FileText className="h-5 w-5 text-blue-500" />,
         description: "Convert Word documents to PDF"
       },
       { 
         name: "Excel to PDF", 
-        href: "/convert/xlsx-to-pdf", // Updated URL
+        href: "/convert/xlsx-to-pdf",
         icon: <Table className="h-5 w-5 text-green-500" />,
         description: "Convert Excel spreadsheets to PDF"
       },
       { 
         name: "PowerPoint to PDF", 
-        href: "/convert/pptx-to-pdf", // Updated URL
+        href: "/convert/pptx-to-pdf",
         icon: <FileText className="h-5 w-5 text-orange-500" />,
         description: "Convert PowerPoint slides to PDF"
       },
       { 
         name: "JPG to PDF", 
-        href: "/convert/jpg-to-pdf", // Updated URL
+        href: "/convert/jpg-to-pdf",
         icon: <Image className="h-5 w-5 text-yellow-500" />,
         description: "Convert images to PDF"
       },
       { 
         name: "PNG to PDF", 
-        href: "/convert/png-to-pdf", // Updated URL
+        href: "/convert/png-to-pdf",
         icon: <Image className="h-5 w-5 text-yellow-500" />,
         description: "Convert images to PDF"
       },
       { 
         name: "HTML to PDF", 
-        href: "/convert/html-to-pdf", // Updated URL
+        href: "/convert/html-to-pdf",
         icon: <LayoutGrid className="h-5 w-5 text-purple-500" />,
         description: "Convert web pages to PDF"
       },
@@ -137,37 +137,18 @@ const PDF_TOOLS: CategoryDefinition[] = [
         icon: <ArrowRight className="h-5 w-5 text-red-500" />,
         description: "Combine multiple PDFs into one"
       },
-      // { 
-      //   name: "Split PDF", 
-      //   href: "/split", 
-      //   icon: <ArrowLeft className="h-5 w-5 text-red-500" />,
-      //   description: "Extract specific pages from a PDF"
-      // },
       { 
         name: "Compress PDF", 
         href: "/compress", 
         icon: <ArrowDown className="h-5 w-5 text-green-500" />,
         description: "Reduce PDF file size"
       },
-      // { 
-      //   name: "Rotate PDF", 
-      //   href: "/rotate", 
-      //   icon: <RotateCcw className="h-5 w-5 text-blue-500" />,
-      //   description: "Adjust page orientation"
-      // },
     ]
   },
   {
     category: "PDF Editing",
     description: "Advanced PDF customization",
     tools: [
-      // { 
-      //   name: "Edit PDF", 
-      //   href: "/edit", 
-      //   icon: <PenTool className="h-5 w-5 text-purple-500" />,
-      //   description: "Add text, images, and annotations",
-      //   isNew: true
-      // },
       { 
         name: "Add Watermark", 
         href: "/watermark", 
@@ -186,12 +167,6 @@ const PDF_TOOLS: CategoryDefinition[] = [
     category: "PDF Security",
     description: "Protect and manage PDF access",
     tools: [
-      // { 
-      //   name: "Sign PDF", 
-      //   href: "/sign", 
-      //   icon: <PenTool className="h-5 w-5 text-blue-500" />,
-      //   description: "Add electronic signatures"
-      // },
       { 
         name: "Unlock PDF", 
         href: "/unlock", 
@@ -260,12 +235,11 @@ const COMPANY_MENU: CategoryDefinition[] = [
   }
 ];
 
-
 export function Header() {
-  // Rest of the component remains the same
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMobileCategory, setActiveMobileCategory] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  
   // Navigation items for desktop and mobile
   const navItems = [
     { 
@@ -292,15 +266,16 @@ export function Header() {
         {/* Logo */}
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
-            <div className="bg-primary/10 p-2 rounded-md">
+            {/* Updated yellow background to match logo color */}
+            <div className="bg-primary p-1 rounded-md">
               <SiteLogo />
             </div>
             <span className="font-bold text-xl hidden sm:inline-block" suppressHydrationWarning={true}>
               ScanPro
             </span>
-            <Badge variant="outline" className="hidden lg:flex ml-2">
+            {/* <Badge variant="outline" className="hidden lg:flex ml-2 border-primary/50 text-primary-foreground bg-primary/20">
               Beta
-            </Badge>
+            </Badge> */}
           </Link>
         </div>
 
@@ -320,8 +295,8 @@ export function Header() {
                 
                 {/* Dropdown Mega Menu */}
                 <div 
-                          className="absolute top-full left-1/2 -translate-x-1/2 w-screen max-w-[1200px] mx-auto mt-4 p-6 bg-background border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 origin-top"
-                        >
+                  className="absolute top-full left-1/2 -translate-x-1/2 w-screen max-w-[1200px] mx-auto mt-4 p-6 bg-background border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 origin-top"
+                >
                   <div className="grid grid-cols-4 gap-6">
                     {/* Categories */}
                     <div className="col-span-1 border-r pr-4">
@@ -330,7 +305,7 @@ export function Header() {
                           key={category.category}
                           className={`w-full text-left px-3 py-2 rounded ${
                             activeCategory === category.category 
-                              ? 'bg-primary/10 text-primary' 
+                              ? 'bg-primary/20 text-primary-foreground' 
                               : 'hover:bg-muted text-muted-foreground'
                           }`}
                           onClick={() => setActiveCategory(category.category)}
@@ -351,7 +326,7 @@ export function Header() {
                             href={tool.href}
                             className="p-3 rounded-lg hover:bg-muted/50 flex items-start gap-3 group"
                           >
-                            <div className="p-2 rounded-md bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                            <div className="p-2 rounded-md bg-primary/10 group-hover:bg-primary/30 transition-colors">
                               {tool.icon}
                             </div>
                             <div>
@@ -360,7 +335,7 @@ export function Header() {
                                 {tool.isNew && (
                                   <Badge 
                                     variant="outline" 
-                                    className="ml-2 bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-400 text-xs"
+                                    className="ml-2 bg-primary/20 text-primary-foreground text-xs border-primary/40"
                                   >
                                     New
                                   </Badge>
@@ -388,7 +363,6 @@ export function Header() {
 
         {/* Right Side Actions */}
         <div className="flex items-center gap-3">
-         
           <ModeToggle />
           
           <Button
@@ -442,7 +416,7 @@ export function Header() {
                               <Link
                                 key={tool.name}
                                 href={tool.href}
-                                className="flex items-center px-3 py-2 hover:bg-muted/50 rounded-md"
+                                className="flex items-center px-3 py-2 hover:bg-primary/10 rounded-md"
                                 onClick={() => setMobileMenuOpen(false)}
                               >
                                 <div className="mr-3">
@@ -452,7 +426,7 @@ export function Header() {
                                 {tool.isNew && (
                                   <Badge 
                                     variant="outline" 
-                                    className="ml-2 bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-400 text-xs"
+                                    className="ml-2 bg-primary/20 text-primary-foreground text-xs border-primary/40"
                                   >
                                     New
                                   </Badge>
@@ -469,14 +443,13 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="block px-3 py-2 text-lg font-medium hover:bg-muted/50 rounded-md"
+                  className="block px-3 py-2 text-lg font-medium hover:bg-primary/10 rounded-md"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.label}
                 </Link>
               )
             ))}
-            
           </div>
         </div>
       )}

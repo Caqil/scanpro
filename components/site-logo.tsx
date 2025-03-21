@@ -11,7 +11,7 @@ export function SiteLogo({ size = 20, className }: SiteLogoProps) {
   return (
     <div className={cn("relative flex-shrink-0", className)} style={{ width: size, height: size }}>
       <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-        {/* Background with rounded corners */}
+        {/* Background with rounded corners - using the logo's yellow color #FFEAA0 */}
         <rect width="512" height="512" rx="128" fill="#FFEAA0" />
         
         {/* Scanner Corners */}
