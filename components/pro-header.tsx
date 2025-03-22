@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { 
   FileIcon, 
   HamburgerMenuIcon,
-  Cross1Icon
+  Cross1Icon,
+  ChevronDownIcon
 } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
@@ -13,12 +14,9 @@ import {
   FileText, 
   Image, 
   Table, 
-  ArrowLeft, 
   ArrowRight, 
-  PenTool, 
   LayoutGrid, 
   ArrowDown, 
-  RotateCcw, 
   Shield, 
   Edit2, 
   Lock,
@@ -29,11 +27,16 @@ import {
   BookOpen,
   Wand2,
   Layers,
-  ImageIcon
+  Globe
 } from "lucide-react";
 import { SiteLogo } from "./site-logo";
-import { US, ID } from 'country-flag-icons/react/3x2'
 import { useLanguageStore } from "@/src/store/store";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 // Type for tool definition with optional isNew
 type ToolDefinition = {
@@ -51,11 +54,25 @@ type CategoryDefinition = {
   tools: ToolDefinition[];
 };
 
+// Language options interface
+interface LanguageOption {
+  code: string;
+  name: string;
+  nativeName: string;
+  flag: string;
+}
+
 export function ProHeader() {
-  const { t, setLanguage } = useLanguageStore()
+  const { t, language, setLanguage } = useLanguageStore();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMobileCategory, setActiveMobileCategory] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  
+  // Language options
+  const languages: LanguageOption[] = [
+    { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
+    { code: 'id', name: 'Indonesian', nativeName: 'Bahasa Indonesia', flag: '🇮🇩' },
+  ];
   
   const PDF_TOOLS: CategoryDefinition[] = [
     {
@@ -274,7 +291,7 @@ export function ProHeader() {
             <div className="bg-primary p-1 rounded-md">
               <SiteLogo />
             </div>
-            <span className="font-bold text-xl hidden sm:inline-block" suppressHydrationWarning={true}>
+            <span className="font-bold text-xl hidden sm:inline-block">
               ScanPro
             </span>
             {/* <Badge variant="outline" className="hidden lg:flex ml-2 border-primary/50 text-primary-foreground bg-primary/20">
@@ -367,9 +384,30 @@ export function ProHeader() {
 
         {/* Right Side Actions */}
         <div className="flex items-center gap-3">
-          Language: 
-          <US title="United States" className="h-5 w-5 cursor-pointer" onClick={() => setLanguage('en')} />
-          <ID title="Indonesia" className="h-5 w-5 cursor-pointer" onClick={() => setLanguage('id')} />
+          {/* Language Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" className="gap-1 h-8 font-normal">
+                <Globe className="h-4 w-4" />
+                <span className="hidden sm:inline-block">
+                  {languages.find(lang => lang.code === language)?.name || 'Language'}
+                </span>
+                <ChevronDownIcon className="h-3 w-3 opacity-50" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-40">
+              {languages.map((lang) => (
+                <DropdownMenuItem 
+                  key={lang.code}
+                  onClick={() => setLanguage(lang.code as any)}
+                  className={`flex items-center gap-2 ${language === lang.code ? 'bg-muted' : ''}`}
+                >
+                  <span className="mr-1">{lang.flag}</span>
+                  <span>{lang.nativeName}</span>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <ModeToggle />
           
@@ -393,6 +431,25 @@ export function ProHeader() {
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 w-full bg-background/95 backdrop-blur border-t max-h-[calc(100vh-4rem)] overflow-y-auto">
           <div className="container max-w-6xl mx-auto py-4 space-y-4">
+            {/* Mobile Language Selector */}
+            <div className="border-b pb-3 mb-3">
+              <div className="text-sm font-medium mb-2">{t('nav.selectLanguage')}</div>
+              <div className="grid grid-cols-2 gap-2">
+                {languages.map((lang) => (
+                  <Button
+                    key={lang.code}
+                    variant={language === lang.code ? "default" : "outline"}
+                    size="sm"
+                    className="justify-start"
+                    onClick={() => setLanguage(lang.code as any)}
+                  >
+                    <span className="mr-2">{lang.flag}</span>
+                    {lang.nativeName}
+                  </Button>
+                ))}
+              </div>
+            </div>
+            
             {navItems.map((item) => (
               item.dropdown ? (
                 <div key={item.label} className="space-y-2">
