@@ -14,18 +14,6 @@ module.exports = {
             watch: false,
             merge_logs: true,
             autorestart: true
-        },
-        {
-            name: 'scanpro-cleanup',
-            script: './dist/scripts/cleanup-job.js', // Using relative path
-            instances: 1,
-            exec_mode: 'fork',
-            autorestart: false,
-            watch: false,
-            cron_restart: '0 */1 * * *', // Run every hour
-            env: {
-                NODE_ENV: 'production',
-            },
         }
     ],
 };
