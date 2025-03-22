@@ -6,16 +6,18 @@ import { Toaster } from "@/components/ui/sonner";
 import { Footer } from "@/components/footer";
 import { ProHeader } from "@/components/pro-header";
 
-export const fontSans = FontSans({
+// Define the font but don't export it
+const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
+
 export default function RootLayout({
   children,
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { lang: string }; // Add params to access the [lang] value
+  params: { lang: string };
 }>) {
   return (
     <html lang={params.lang} suppressHydrationWarning>

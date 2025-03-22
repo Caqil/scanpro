@@ -1,3 +1,4 @@
+// app/[lang]/layout.tsx
 import type React from "react"
 import type { Metadata } from "next"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -5,10 +6,18 @@ import { Toaster } from "@/components/ui/sonner"
 import { Footer } from "@/components/footer"
 import { ProHeader } from "@/components/pro-header"
 import { notFound } from "next/navigation"
+import { Inter as FontSans } from "next/font/google";
+import { cn } from "@/lib/utils";
 import "../globals.css"
 
 // Define supported languages
 const languages = ["en", "id"]
+
+// Font configuration
+export const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 // For static generation of all language variants
 export function generateStaticParams() {
@@ -76,7 +85,7 @@ export default async function Layout({
 
   return (
     <html lang={lang} suppressHydrationWarning>
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="relative flex min-h-screen flex-col">
             <ProHeader urlLanguage={lang} />
@@ -89,4 +98,3 @@ export default async function Layout({
     </html>
   )
 }
-
