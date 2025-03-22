@@ -3,14 +3,14 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 // Supported languages
-const supportedLanguages = ['en', 'id'];
+const supportedLanguages = ['en', 'id', 'es'];
 const defaultLanguage = 'en';
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Skip if already has language prefix or is an API route
-  if (pathname.startsWith('/api/') || /^\/(en|id)/.test(pathname) || pathname.includes('.')) {
+  if (pathname.startsWith('/api/') || /^\/(en|id|es)/.test(pathname) || pathname.includes('.')) {
     return NextResponse.next();
   }
 

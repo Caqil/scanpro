@@ -5,19 +5,21 @@ import { ArrowRightIcon, FileIcon, InfoIcon } from "lucide-react";
 import ClientMergePDFContent from "./client-merge-content";
 import { Button } from "@/components/ui/button";
 import { LanguageLink } from "@/components/language-link";
-
-// Import translation files for server components
 import enTranslations from "@/src/lib/i18n/locales/en";
 import idTranslations from "@/src/lib/i18n/locales/id";
-
-// Type for supported languages
-type Language = "en" | "id";
+import { useLanguageStore } from "@/src/store/store";
+// Define supported languages
+const SUPPORTED_LANGUAGES = ["en", "id", "es"];
+type Language = typeof SUPPORTED_LANGUAGES[number];
 
 // Helper function to get translation based on language
-function getTranslation(lang: Language, key: string): string {
-  const translations = lang === "en" ? enTranslations : idTranslations;
+function getTranslation(lang: string, key: string): string {
+  let translations = enTranslations;
   
-  // Navigate nested objects using dot notation
+  if (lang === "id") {
+    translations = idTranslations;
+  }
+  
   const keys = key.split('.');
   const result = keys.reduce((obj, k) => 
     (obj && obj[k] !== undefined) ? obj[k] : undefined, 
@@ -27,30 +29,33 @@ function getTranslation(lang: Language, key: string): string {
   return result !== undefined ? result : key;
 }
 
-// Generate metadata based on the language parameter
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
-  // Await the params object before accessing its properties
   const { lang: paramLang } = await params;
-  
-  // Validate language parameter
-  const lang = (paramLang === "id" ? "id" : "en") as Language;
-  
-  // Create a translation function for this language
+  const lang = SUPPORTED_LANGUAGES.includes(paramLang as Language) ? paramLang as Language : "en";
   const t = (key: string) => getTranslation(lang, key);
-  
+
   return {
-    title: t("mergePdf.title") + " | " + t("metadata.template").replace("%s", ""),
-    description: t("mergePdf.description"),
+    title: t("metadata.title"), 
+    description: t("metadata.description"),
+    openGraph: {
+      title: t("mergePdf.title"),
+      description: t("mergePdf.description"),
+      url: `/${lang}/merge`,
+      siteName: "ScanPro",
+      locale: lang === "id" ? "id_ID" : lang === "es" ? "es_ES" : "en_US",
+    },
+    alternates: {
+      canonical: `/${lang}/merge`,
+      languages: {
+        "en-US": "/en/merge",
+        "id-ID": "/id/merge",
+        "es-ES": "/es/merge",
+      },
+    },
   };
 }
-
-export default async function MergePDFPage({ params }: { params: Promise<{ lang: string }> }) {
-  // Await the params object before accessing its properties
-  const { lang: paramLang } = await params;
-  
-  // Use the same translation function for server components
-  const lang = (paramLang === "id" ? "id" : "en") as Language;
-  const t = (key: string) => getTranslation(lang, key);
+export default async function MergePDFPage() {
+   const { t } = useLanguageStore()
   
   return (
     <div className="container max-w-5xl py-12 mx-auto">

@@ -82,6 +82,7 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
   const languages: LanguageOption[] = [
     { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
     { code: 'id', name: 'Indonesian', nativeName: 'Bahasa Indonesia', flag: '🇮🇩' },
+    { code: 'es', name: 'español', nativeName: 'español', flag: '🇪🇸' },
   ];
   
   const PDF_TOOLS: CategoryDefinition[] = [

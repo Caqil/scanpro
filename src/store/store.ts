@@ -2,11 +2,13 @@
 import { create } from 'zustand';
 import en from '../lib/i18n/locales/en';
 import id from '../lib/i18n/locales/id';
+import es from '../lib/i18n/locales/es';
 
 // Available languages
 const languages = {
   en,
-  id
+  id,
+  es
 };
 
 // Type for language identifiers
@@ -51,7 +53,7 @@ export const useLanguageStore = create<LanguageState>((set, get) => ({
       if (typeof window !== 'undefined') {
         // Extract current path without language prefix
         const path = window.location.pathname;
-        const pathWithoutLang = path.replace(/^\/(en|id)/, '') || '/';
+        const pathWithoutLang = path.replace(/^\/(en|id|es)/, '') || '/';
 
         // Navigate to new language path
         window.location.href = `/${language}${pathWithoutLang}`;

@@ -10,8 +10,8 @@ import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "../globals.css"
 
-// Define supported languages
-const languages = ["en", "id"]
+// Import language configuration
+import { SUPPORTED_LANGUAGES, getTranslation } from "@/src/lib/i18n/config";
 
 // Font configuration
 export const fontSans = FontSans({
@@ -21,18 +21,7 @@ export const fontSans = FontSans({
 
 // For static generation of all language variants
 export function generateStaticParams() {
-  return languages.map((lang) => ({ lang }))
-}
-
-// Import translation files for server components
-import enTranslations from "@/src/lib/i18n/locales/en"
-import idTranslations from "@/src/lib/i18n/locales/id"
-
-// Helper function to get translation from the translation files
-function getTranslation(translations: any, path: string): string {
-  const keys = path.split(".")
-  const result = keys.reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), translations)
-  return result !== undefined ? result : path
+  return SUPPORTED_LANGUAGES.map((lang) => ({ lang }))
 }
 
 // Generate metadata based on language parameter
@@ -41,15 +30,12 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang } = await params
 
   // Validate language parameter
-  if (!languages.includes(lang)) {
+  if (!SUPPORTED_LANGUAGES.includes(lang)) {
     notFound()
   }
 
-  // Get translations for the current language
-  const translations = lang === "en" ? enTranslations : idTranslations
-
   // Create a translation function similar to t()
-  const t = (key: string) => getTranslation(translations, key)
+  const t = (key: string) => getTranslation(lang, key)
 
   return {
     title: {
@@ -60,10 +46,15 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://scanpro.cc"),
     alternates: {
       canonical: `/${lang}`,
-      languages: {
-        "en-US": "/en",
-        "id-ID": "/id",
-      },
+      languages: Object.fromEntries(
+        SUPPORTED_LANGUAGES.map(code => [
+          code === "en" ? "en-US" : 
+          code === "id" ? "id-ID" : 
+          code === "es" ? "es-ES" : 
+          `${code}`,
+          `/${code}`
+        ])
+      ),
     },
   }
 }
@@ -79,7 +70,7 @@ export default async function Layout({
   const { lang } = await params
 
   // Validate language parameter
-  if (!languages.includes(lang)) {
+  if (!SUPPORTED_LANGUAGES.includes(lang)) {
     notFound()
   }
 
