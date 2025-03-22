@@ -1,4 +1,5 @@
 // app/page.tsx
+'use client'
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FileUploader } from "@/components/file-uploader";
@@ -20,63 +21,66 @@ import {
   Shield,
 } from "lucide-react";
 import HeroAnimation from "@/components/hero-animation";
-
-// Popular tools to showcase
-const popularTools = [
-  {
-    id: "pdf-to-word",
-    name: "PDF to Word",
-    description: "Easily convert your PDF files into easy to edit DOC and DOCX documents.",
-    icon: <FileTextIcon className="h-6 w-6 text-blue-500" />,
-    iconBg: "bg-blue-100 dark:bg-blue-900/30",
-    href: "/convert/pdf-to-docx"  // Updated URL
-  },
-  {
-    id: "pdf-to-excel",
-    name: "PDF to Excel",
-    description: "Pull data straight from PDFs into Excel spreadsheets in a few short seconds.",
-    icon: <TableIcon className="h-6 w-6 text-green-500" />,
-    iconBg: "bg-green-100 dark:bg-green-900/30",
-    href: "/convert/pdf-to-xlsx"  // Updated URL
-  },
-  {
-    id: "merge-pdf",
-    name: "Merge PDF",
-    description: "Combine PDFs in the order you want with the easiest PDF merger available.",
-    icon: <ArrowRightIcon className="h-6 w-6 text-red-500" />,
-    iconBg: "bg-red-100 dark:bg-red-900/30",
-    href: "/merge"
-  },
-  {
-    id: "compress-pdf",
-    name: "Compress PDF",
-    description: "Reduce file size while optimizing for maximal PDF quality.",
-    icon: <ArrowDownIcon className="h-6 w-6 text-green-500" />,
-    iconBg: "bg-green-100 dark:bg-green-900/30",
-    href: "/compress"
-  },
-  
-  {
-    id: "protect",
-    name: "Protect PDF",
-    description: "Add text, images, shapes or freehand annotations to a PDF document.",
-    icon: <Shield className="h-6 w-6 text-purple-500" />,
-    iconBg: "bg-purple-100 dark:bg-purple-900/30",
-    href: "/protect",
-    isNew: true
-  },
-  { 
-    id: "ocr",
-    name: "OCR", 
-    href: "/ocr", 
-    icon: <FileCheck2 className="h-5 w-5 text-blue-500" />,
-    description: "Extract text from scanned documents",
-    iconBg: "bg-green-100 dark:bg-yellow-900/30",
-    isNew: true
-  }
-];
+import { useLanguageStore } from '@/src/store/store'
 
 export default function Home() {
+  const { t } = useLanguageStore()
+
+  // Popular tools to showcase
+  const popularTools = [
+    {
+      id: "pdf-to-word",
+      name: t('popular.pdfToWord'),
+      description: t('popular.pdfToWordDesc'),
+      icon: <FileTextIcon className="h-6 w-6 text-blue-500" />,
+      iconBg: "bg-blue-100 dark:bg-blue-900/30",
+      href: "/convert/pdf-to-docx"  // Updated URL
+    },
+    {
+      id: "pdf-to-excel",
+      name: "PDF to Excel",
+      description: "Pull data straight from PDFs into Excel spreadsheets in a few short seconds.",
+      icon: <TableIcon className="h-6 w-6 text-green-500" />,
+      iconBg: "bg-green-100 dark:bg-green-900/30",
+      href: "/convert/pdf-to-xlsx"  // Updated URL
+    },
+    {
+      id: "merge-pdf",
+      name: "Merge PDF",
+      description: "Combine PDFs in the order you want with the easiest PDF merger available.",
+      icon: <ArrowRightIcon className="h-6 w-6 text-red-500" />,
+      iconBg: "bg-red-100 dark:bg-red-900/30",
+      href: "/merge"
+    },
+    {
+      id: "compress-pdf",
+      name: "Compress PDF",
+      description: "Reduce file size while optimizing for maximal PDF quality.",
+      icon: <ArrowDownIcon className="h-6 w-6 text-green-500" />,
+      iconBg: "bg-green-100 dark:bg-green-900/30",
+      href: "/compress"
+    },
+    
+    {
+      id: "protect",
+      name: "Protect PDF",
+      description: "Add text, images, shapes or freehand annotations to a PDF document.",
+      icon: <Shield className="h-6 w-6 text-purple-500" />,
+      iconBg: "bg-purple-100 dark:bg-purple-900/30",
+      href: "/protect",
+      isNew: true
+    },
+    { 
+      id: "ocr",
+      name: "OCR", 
+      href: "/ocr", 
+      icon: <FileCheck2 className="h-5 w-5 text-blue-500" />,
+      description: "Extract text from scanned documents",
+      iconBg: "bg-green-100 dark:bg-yellow-900/30",
+      isNew: true
+    }
+  ];
+
   return (
     <div>
       {/* Hero section */}
@@ -87,21 +91,21 @@ export default function Home() {
               <div className="space-y-2">
                 <Badge variant="outline" className="w-fit">
                   <LightbulbIcon className="mr-1 h-3 w-3" />
-                  Fast & Reliable
+                  {t('hero.badge')}
                 </Badge>
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                  Convert PDFs to Any Format
+                  {t('hero.title')}
                 </h1>
                 <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                Powerful free online PDF tools: Convert to/from Word, Excel, PPG, Compress, Merge, Split, Edit, Add Watermark, OCR text extraction, Sign & Protect PDFs. No installation required. 100% secure.
+                  {t('hero.description')}
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <Link href="#converter" className="inline-flex">
-                  <Button size="lg">Convert Now</Button>
+                  <Button size="lg">{t('hero.btConvert')}</Button>
                 </Link>
                 <Link href="/tools" className="inline-flex">
-                  <Button size="lg" variant="outline">View All Tools</Button>
+                  <Button size="lg" variant="outline">{t('hero.btTools')}</Button>
                 </Link>
               </div>
             </div>

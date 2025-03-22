@@ -28,9 +28,12 @@ import {
   FileCheck2,
   BookOpen,
   Wand2,
-  Layers
+  Layers,
+  ImageIcon
 } from "lucide-react";
 import { SiteLogo } from "./site-logo";
+import { US, ID } from 'country-flag-icons/react/3x2'
+import { useLanguageStore } from "@/src/store/store";
 
 // Type for tool definition with optional isNew
 type ToolDefinition = {
@@ -48,209 +51,210 @@ type CategoryDefinition = {
   tools: ToolDefinition[];
 };
 
-const PDF_TOOLS: CategoryDefinition[] = [
-  {
-    category: "Convert PDF",
-    description: "Transform documents between formats",
-    tools: [
-      { 
-        name: "PDF to Word", 
-        href: "/convert/pdf-to-docx",
-        icon: <FileText className="h-5 w-5 text-blue-500" />,
-        description: "Convert PDF to editable Word documents"
-      },
-      { 
-        name: "PDF to Excel", 
-        href: "/convert/pdf-to-xlsx",
-        icon: <Table className="h-5 w-5 text-green-500" />,
-        description: "Extract data from PDFs into spreadsheets"
-      },
-      { 
-        name: "PDF to PowerPoint", 
-        href: "/convert/pdf-to-pptx",
-        icon: <FileText className="h-5 w-5 text-orange-500" />,
-        description: "Convert PDF slides to PowerPoint"
-      },
-      { 
-        name: "PDF to JPG", 
-        href: "/convert/pdf-to-jpg",
-        icon: <Image className="h-5 w-5 text-yellow-500" />,
-        description: "Extract images from PDF documents"
-      },
-      { 
-        name: "PDF to PNG", 
-        href: "/convert/pdf-to-png",
-        icon: <Image className="h-5 w-5 text-yellow-500" />,
-        description: "Extract images from PDF documents"
-      },
-      { 
-        name: "PDF to HTML", 
-        href: "/convert/pdf-to-html",
-        icon: <LayoutGrid className="h-5 w-5 text-purple-500" />,
-        description: "Convert PDFs for web publishing"
-      },
-      { 
-        name: "Word to PDF", 
-        href: "/convert/docx-to-pdf",
-        icon: <FileText className="h-5 w-5 text-blue-500" />,
-        description: "Convert Word documents to PDF"
-      },
-      { 
-        name: "Excel to PDF", 
-        href: "/convert/xlsx-to-pdf",
-        icon: <Table className="h-5 w-5 text-green-500" />,
-        description: "Convert Excel spreadsheets to PDF"
-      },
-      { 
-        name: "PowerPoint to PDF", 
-        href: "/convert/pptx-to-pdf",
-        icon: <FileText className="h-5 w-5 text-orange-500" />,
-        description: "Convert PowerPoint slides to PDF"
-      },
-      { 
-        name: "JPG to PDF", 
-        href: "/convert/jpg-to-pdf",
-        icon: <Image className="h-5 w-5 text-yellow-500" />,
-        description: "Convert images to PDF"
-      },
-      { 
-        name: "PNG to PDF", 
-        href: "/convert/png-to-pdf",
-        icon: <Image className="h-5 w-5 text-yellow-500" />,
-        description: "Convert images to PDF"
-      },
-      { 
-        name: "HTML to PDF", 
-        href: "/convert/html-to-pdf",
-        icon: <LayoutGrid className="h-5 w-5 text-purple-500" />,
-        description: "Convert web pages to PDF"
-      },
-    ]
-  },
-  {
-    category: "PDF Management",
-    description: "Essential PDF manipulation tools",
-    tools: [
-      { 
-        name: "Merge PDF", 
-        href: "/merge", 
-        icon: <ArrowRight className="h-5 w-5 text-red-500" />,
-        description: "Combine multiple PDFs into one"
-      },
-      { 
-        name: "Compress PDF", 
-        href: "/compress", 
-        icon: <ArrowDown className="h-5 w-5 text-green-500" />,
-        description: "Reduce PDF file size"
-      },
-    ]
-  },
-  {
-    category: "PDF Editing",
-    description: "Advanced PDF customization",
-    tools: [
-      { 
-        name: "Add Watermark", 
-        href: "/watermark", 
-        icon: <Edit2 className="h-5 w-5 text-purple-500" />,
-        description: "Add text or image watermarks"
-      },
-      { 
-        name: "OCR", 
-        href: "/ocr", 
-        icon: <FileCheck2 className="h-5 w-5 text-blue-500" />,
-        description: "Extract text from scanned documents"
-      },
-    ]
-  },
-  {
-    category: "PDF Security",
-    description: "Protect and manage PDF access",
-    tools: [
-      { 
-        name: "Unlock PDF", 
-        href: "/unlock", 
-        icon: <Lock className="h-5 w-5 text-blue-500" />,
-        description: "Remove password protection"
-      },
-      { 
-        name: "Protect PDF", 
-        href: "/protect", 
-        icon: <Shield className="h-5 w-5 text-blue-500" />,
-        description: "Add password and encryption"
-      },
-    ]
-  }
-];
-
-// Additional company and product information
-const COMPANY_MENU: CategoryDefinition[] = [
-  {
-    category: "About",
-    description: "Learn more about our company",
-    tools: [
-      { 
-        name: "About Us", 
-        href: "/about", 
-        icon: <BookOpen className="h-5 w-5 text-blue-500" />,
-        description: "Our mission and story"
-      },
-      { 
-        name: "Features", 
-        href: "/features", 
-        icon: <Layers className="h-5 w-5 text-purple-500" />,
-        description: "Explore our powerful features"
-      },
-      { 
-        name: "API", 
-        href: "/api-docs", 
-        icon: <CloudDownload className="h-5 w-5 text-green-500" />,
-        description: "Developer integration"
-      },
-    ]
-  },
-  {
-    category: "Support",
-    description: "Get help and resources",
-    tools: [
-      { 
-        name: "Contact", 
-        href: "/contact", 
-        icon: <Printer className="h-5 w-5 text-blue-500" />,
-        description: "Reach out to our team"
-      },
-      { 
-        name: "Help Center", 
-        href: "/help", 
-        icon: <Wand2 className="h-5 w-5 text-purple-500" />,
-        description: "Tutorials and support"
-      },
-      { 
-        name: "Terms of Service", 
-        href: "/terms", 
-        icon: <FileCheck className="h-5 w-5 text-green-500" />,
-        description: "Legal terms and conditions"
-      },
-    ]
-  }
-];
-
 export function ProHeader() {
+  const { t, setLanguage } = useLanguageStore()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMobileCategory, setActiveMobileCategory] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   
+  const PDF_TOOLS: CategoryDefinition[] = [
+    {
+      category: t('nav.convertPdf'),
+      description: t('nav.convertPdfDesc'),
+      tools: [
+        { 
+          name: "PDF to Word", 
+          href: "/convert/pdf-to-docx",
+          icon: <FileText className="h-5 w-5 text-blue-500" />,
+          description: "Convert PDF to editable Word documents"
+        },
+        { 
+          name: "PDF to Excel", 
+          href: "/convert/pdf-to-xlsx",
+          icon: <Table className="h-5 w-5 text-green-500" />,
+          description: "Extract data from PDFs into spreadsheets"
+        },
+        { 
+          name: "PDF to PowerPoint", 
+          href: "/convert/pdf-to-pptx",
+          icon: <FileText className="h-5 w-5 text-orange-500" />,
+          description: "Convert PDF slides to PowerPoint"
+        },
+        { 
+          name: "PDF to JPG", 
+          href: "/convert/pdf-to-jpg",
+          icon: <Image className="h-5 w-5 text-yellow-500" />,
+          description: "Extract images from PDF documents"
+        },
+        { 
+          name: "PDF to PNG", 
+          href: "/convert/pdf-to-png",
+          icon: <Image className="h-5 w-5 text-yellow-500" />,
+          description: "Extract images from PDF documents"
+        },
+        { 
+          name: "PDF to HTML", 
+          href: "/convert/pdf-to-html",
+          icon: <LayoutGrid className="h-5 w-5 text-purple-500" />,
+          description: "Convert PDFs for web publishing"
+        },
+        { 
+          name: "Word to PDF", 
+          href: "/convert/docx-to-pdf",
+          icon: <FileText className="h-5 w-5 text-blue-500" />,
+          description: "Convert Word documents to PDF"
+        },
+        { 
+          name: "Excel to PDF", 
+          href: "/convert/xlsx-to-pdf",
+          icon: <Table className="h-5 w-5 text-green-500" />,
+          description: "Convert Excel spreadsheets to PDF"
+        },
+        { 
+          name: "PowerPoint to PDF", 
+          href: "/convert/pptx-to-pdf",
+          icon: <FileText className="h-5 w-5 text-orange-500" />,
+          description: "Convert PowerPoint slides to PDF"
+        },
+        { 
+          name: "JPG to PDF", 
+          href: "/convert/jpg-to-pdf",
+          icon: <Image className="h-5 w-5 text-yellow-500" />,
+          description: "Convert images to PDF"
+        },
+        { 
+          name: "PNG to PDF", 
+          href: "/convert/png-to-pdf",
+          icon: <Image className="h-5 w-5 text-yellow-500" />,
+          description: "Convert images to PDF"
+        },
+        { 
+          name: "HTML to PDF", 
+          href: "/convert/html-to-pdf",
+          icon: <LayoutGrid className="h-5 w-5 text-purple-500" />,
+          description: "Convert web pages to PDF"
+        },
+      ]
+    },
+    {
+      category: "PDF Management",
+      description: "Essential PDF manipulation tools",
+      tools: [
+        { 
+          name: "Merge PDF", 
+          href: "/merge", 
+          icon: <ArrowRight className="h-5 w-5 text-red-500" />,
+          description: "Combine multiple PDFs into one"
+        },
+        { 
+          name: "Compress PDF", 
+          href: "/compress", 
+          icon: <ArrowDown className="h-5 w-5 text-green-500" />,
+          description: "Reduce PDF file size"
+        },
+      ]
+    },
+    {
+      category: "PDF Editing",
+      description: "Advanced PDF customization",
+      tools: [
+        { 
+          name: "Add Watermark", 
+          href: "/watermark", 
+          icon: <Edit2 className="h-5 w-5 text-purple-500" />,
+          description: "Add text or image watermarks"
+        },
+        { 
+          name: "OCR", 
+          href: "/ocr", 
+          icon: <FileCheck2 className="h-5 w-5 text-blue-500" />,
+          description: "Extract text from scanned documents"
+        },
+      ]
+    },
+    {
+      category: "PDF Security",
+      description: "Protect and manage PDF access",
+      tools: [
+        { 
+          name: "Unlock PDF", 
+          href: "/unlock", 
+          icon: <Lock className="h-5 w-5 text-blue-500" />,
+          description: "Remove password protection"
+        },
+        { 
+          name: "Protect PDF", 
+          href: "/protect", 
+          icon: <Shield className="h-5 w-5 text-blue-500" />,
+          description: "Add password and encryption"
+        },
+      ]
+    }
+  ];
+  
+  // Additional company and product information
+  const COMPANY_MENU: CategoryDefinition[] = [
+    {
+      category: "About",
+      description: "Learn more about our company",
+      tools: [
+        { 
+          name: "About Us", 
+          href: "/about", 
+          icon: <BookOpen className="h-5 w-5 text-blue-500" />,
+          description: "Our mission and story"
+        },
+        { 
+          name: "Features", 
+          href: "/features", 
+          icon: <Layers className="h-5 w-5 text-purple-500" />,
+          description: "Explore our powerful features"
+        },
+        { 
+          name: "API", 
+          href: "/api-docs", 
+          icon: <CloudDownload className="h-5 w-5 text-green-500" />,
+          description: "Developer integration"
+        },
+      ]
+    },
+    {
+      category: "Support",
+      description: "Get help and resources",
+      tools: [
+        { 
+          name: "Contact", 
+          href: "/contact", 
+          icon: <Printer className="h-5 w-5 text-blue-500" />,
+          description: "Reach out to our team"
+        },
+        { 
+          name: "Help Center", 
+          href: "/help", 
+          icon: <Wand2 className="h-5 w-5 text-purple-500" />,
+          description: "Tutorials and support"
+        },
+        { 
+          name: "Terms of Service", 
+          href: "/terms", 
+          icon: <FileCheck className="h-5 w-5 text-green-500" />,
+          description: "Legal terms and conditions"
+        },
+      ]
+    }
+  ];
+
   // Navigation items for desktop and mobile
   const navItems = [
     { 
-      label: "PDF Tools", 
+      label: t('nav.tools'), 
       dropdown: PDF_TOOLS 
     },
     { 
-      label: "Company", 
+      label: t('nav.company'), 
       dropdown: COMPANY_MENU 
     },
-    { href: "/pricing", label: "Pricing" },
+    { href: "/pricing", label: t('nav.pricing') },
   ];
 
   // Function to toggle mobile category
@@ -363,6 +367,10 @@ export function ProHeader() {
 
         {/* Right Side Actions */}
         <div className="flex items-center gap-3">
+          Language: 
+          <US title="United States" className="h-5 w-5 cursor-pointer" onClick={() => setLanguage('en')} />
+          <ID title="Indonesia" className="h-5 w-5 cursor-pointer" onClick={() => setLanguage('id')} />
+
           <ModeToggle />
           
           <Button
