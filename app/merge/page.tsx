@@ -128,12 +128,12 @@ export default function MergePDFPage() {
               <span className="text-sm font-medium">PDF to Word</span>
             </div>
           </Link>
-          <Link href="/edit" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          <Link href="/ocr" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-purple-100 dark:bg-purple-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-purple-500" />
               </div>
-              <span className="text-sm font-medium">Edit PDF</span>
+              <span className="text-sm font-medium">Extract PDF</span>
             </div>
           </Link>
         </div>

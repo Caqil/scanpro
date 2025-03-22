@@ -172,19 +172,6 @@ const Sitemap = () => {
                           style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', borderColor: colors.tools }}
                         >
                           <div className="flex items-center">
-                            <span className="font-medium">Edit PDF</span>
-                            <span className="text-sm text-gray-500 ml-2">/edit</span>
-                            <span className="text-xs bg-red-100 text-red-600 px-1 rounded ml-2">New</span>
-                          </div>
-                          <div className="text-xs text-gray-500">Edit PDF content</div>
-                        </div>
-                      </li>
-                      <li>
-                        <div 
-                          className="sitemap-node"
-                          style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', borderColor: colors.tools }}
-                        >
-                          <div className="flex items-center">
                             <span className="font-medium">OCR</span>
                             <span className="text-sm text-gray-500 ml-2">/ocr</span>
                             <span className="text-xs bg-red-100 text-red-600 px-1 rounded ml-2">New</span>

@@ -58,7 +58,7 @@ const popularTools = [
   
   {
     id: "protect",
-    name: "Edit PDF",
+    name: "Protect PDF",
     description: "Add text, images, shapes or freehand annotations to a PDF document.",
     icon: <Shield className="h-6 w-6 text-purple-500" />,
     iconBg: "bg-purple-100 dark:bg-purple-900/30",
