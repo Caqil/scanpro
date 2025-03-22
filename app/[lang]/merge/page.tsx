@@ -1,21 +1,57 @@
-
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRightIcon, FileIcon, InfoIcon } from "lucide-react";
+// app/[lang]/merge/page.tsx
 import { Metadata } from "next";
 import Link from "next/link";
-import { PdfMerger } from "@/components/pdf-merger"; // Import the fixed PDF merger component
-import { useLanguageStore } from "@/src/store/store";
+import { ArrowRightIcon, FileIcon, InfoIcon } from "lucide-react";
+import ClientMergePDFContent from "./client-merge-content";
+import { Button } from "@/components/ui/button";
 import { LanguageLink } from "@/components/language-link";
 
-export const metadata: Metadata = {
-  title: "Merge PDF Files | ScanPro - PDF Tools",
-  description: "Combine multiple PDF files into a single document with our easy-to-use PDF merger tool.",
-};
+// Import translation files for server components
+import enTranslations from "@/src/lib/i18n/locales/en";
+import idTranslations from "@/src/lib/i18n/locales/id";
 
-export default function MergePDFPage() {
-  const { t } = useLanguageStore();
+// Type for supported languages
+type Language = "en" | "id";
 
+// Helper function to get translation based on language
+function getTranslation(lang: Language, key: string): string {
+  const translations = lang === "en" ? enTranslations : idTranslations;
+  
+  // Navigate nested objects using dot notation
+  const keys = key.split('.');
+  const result = keys.reduce((obj, k) => 
+    (obj && obj[k] !== undefined) ? obj[k] : undefined, 
+    translations as any
+  );
+  
+  return result !== undefined ? result : key;
+}
+
+// Generate metadata based on the language parameter
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  // Await the params object before accessing its properties
+  const { lang: paramLang } = await params;
+  
+  // Validate language parameter
+  const lang = (paramLang === "id" ? "id" : "en") as Language;
+  
+  // Create a translation function for this language
+  const t = (key: string) => getTranslation(lang, key);
+  
+  return {
+    title: t("mergePdf.title") + " | " + t("metadata.template").replace("%s", ""),
+    description: t("mergePdf.description"),
+  };
+}
+
+export default async function MergePDFPage({ params }: { params: Promise<{ lang: string }> }) {
+  // Await the params object before accessing its properties
+  const { lang: paramLang } = await params;
+  
+  // Use the same translation function for server components
+  const lang = (paramLang === "id" ? "id" : "en") as Language;
+  const t = (key: string) => getTranslation(lang, key);
+  
   return (
     <div className="container max-w-5xl py-12 mx-auto">
       <div className="mx-auto flex flex-col items-center text-center mb-8">
@@ -23,82 +59,81 @@ export default function MergePDFPage() {
           <ArrowRightIcon className="h-8 w-8 text-red-500" />
         </div>
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-          {t('mergePdf.title') || "Merge PDF Files"}
+          {t("mergePdf.title")}
         </h1>
         <p className="mt-4 text-xl text-muted-foreground max-w-[700px]">
-          {t('mergePdf.description') || "Combine multiple PDF files into a single document quickly and easily"}
+          {t("mergePdf.description")}
         </p>
       </div>
 
       {/* Main Tool Card */}
       <div className="mb-8">
-        <PdfMerger />
+        <ClientMergePDFContent />
       </div>
 
-      {/* How It Works */}
+      {/* How It Works section */}
       <div className="mb-12">
-        <h2 className="text-2xl font-bold mb-6 text-center">{t('mergePdf.howTo.title') || "How to Merge PDF Files"}</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">{t("mergePdf.howTo.title")}</h2>
         <div className="grid md:grid-cols-3 gap-8">
           <div className="flex flex-col items-center text-center">
             <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-4">
               <span className="font-bold">1</span>
             </div>
-            <h3 className="text-lg font-medium mb-2">{t('mergePdf.howTo.step1.title') || "Upload Files"}</h3>
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.howTo.step1.title")}</h3>
             <p className="text-sm text-muted-foreground">
-              {t('mergePdf.howTo.step1.description') || "Upload the PDF files you want to combine. You can select multiple files at once."}
+              {t("mergePdf.howTo.step1.description")}
             </p>
           </div>
           <div className="flex flex-col items-center text-center">
             <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-4">
               <span className="font-bold">2</span>
             </div>
-            <h3 className="text-lg font-medium mb-2">{t('mergePdf.howTo.step2.title') || "Arrange Order"}</h3>
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.howTo.step2.title")}</h3>
             <p className="text-sm text-muted-foreground">
-              {t('mergePdf.howTo.step2.description') || "Drag and drop to rearrange the files in the order you want them to appear in the final PDF."}
+              {t("mergePdf.howTo.step2.description")}
             </p>
           </div>
           <div className="flex flex-col items-center text-center">
             <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-4">
               <span className="font-bold">3</span>
             </div>
-            <h3 className="text-lg font-medium mb-2">{t('mergePdf.howTo.step3.title') || "Download"}</h3>
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.howTo.step3.title")}</h3>
             <p className="text-sm text-muted-foreground">
-              {t('mergePdf.howTo.step3.description') || "Click the Merge PDFs button and download your combined PDF file."}
+              {t("mergePdf.howTo.step3.description")}
             </p>
           </div>
-          
         </div>
       </div>
 
       {/* FAQ Section */}
       <div className="mb-12">
-        <h2 className="text-2xl font-bold mb-6 text-center">{t('mergePdf.faq.title') || "Frequently Asked Questions"}</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">{t("mergePdf.faq.title")}</h2>
         <div className="space-y-4">
           <div className="border rounded-lg p-4">
             <h3 className="font-medium mb-2 flex items-center">
               <InfoIcon className="h-4 w-4 mr-2 text-primary" />
-              {t('mergePdf.faq.q1.question') || "Is there a limit to how many PDFs I can merge?"}
+              {t("mergePdf.faq.q1.question")}
             </h3>
             <p className="text-sm text-muted-foreground">
-              {t('mergePdf.faq.q1.answer') || "You can merge up to 20 PDF files at once with our free tool. For larger batches, consider our premium plan."}
+              {t("mergePdf.faq.q1.answer")}
             </p>
           </div>
           <div className="border rounded-lg p-4">
             <h3 className="font-medium mb-2 flex items-center">
               <InfoIcon className="h-4 w-4 mr-2 text-primary" />
-              {t('mergePdf.faq.q2.question') || "Will my PDF files remain private?"}
+              {t("mergePdf.faq.q2.question")}
             </h3>
             <p className="text-sm text-muted-foreground">
-              {t('mergePdf.faq.q2.answer') || "Yes, your privacy is our priority. All uploaded files are automatically deleted from our servers after processing."}
+              {t("mergePdf.faq.q2.answer")}
             </p>
           </div>
           <div className="border rounded-lg p-4">
             <h3 className="font-medium mb-2 flex items-center">
               <InfoIcon className="h-4 w-4 mr-2 text-primary" />
-              {t('mergePdf.faq.q3.question') || "Can I merge password-protected PDFs?"}
+              {t("mergePdf.faq.q3.question")}
             </h3>
             <p className="text-sm text-muted-foreground">
-              {t('mergePdf.faq.q3.answer') || "For password-protected PDFs, you will need to unlock them first using our Unlock PDF tool, and then merge them."}
+              {t("mergePdf.faq.q3.answer")}
             </p>
           </div>
         </div>
@@ -106,7 +141,7 @@ export default function MergePDFPage() {
 
       {/* More Tools Section */}
       <div>
-        <h2 className="text-2xl font-bold mb-6 text-center">{t('mergePdf.relatedTools') || "Explore More PDF Tools"}</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">{t("mergePdf.relatedTools")}</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <LanguageLink href="/split" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
@@ -142,9 +177,9 @@ export default function MergePDFPage() {
           </LanguageLink>
         </div>
         <div className="text-center mt-6">
-           <LanguageLink href="/tools"><Button variant="outline" size="lg">
-                          {t('popular.viewAll')}
-                        </Button></LanguageLink>
+          <LanguageLink href="/tools">
+            <Button variant="outline">{t("mergePdf.viewAllTools")}</Button>
+          </LanguageLink>
         </div>
       </div>
     </div>
