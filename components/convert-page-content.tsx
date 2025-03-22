@@ -5,7 +5,7 @@ import { FileUploader } from "@/components/file-uploader";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, Image, Table, File } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { LanguageLink } from "@/components/language-link";
 
 // Define conversion type interface
 interface ConversionType {
@@ -357,7 +357,7 @@ export default function ConvertPageContent({
         <h2 className="text-2xl font-bold mb-6 text-center">More Conversion Tools</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {relatedConversions.map((conversion) => (
-            <Link 
+            <LanguageLink 
               key={conversion.id}
               href={`/convert?${conversion.inputFormat === "pdf" ? `output=${conversion.outputFormat}` : `input=${conversion.inputFormat}`}`} 
               className="border rounded-lg p-4 text-center hover:border-primary transition-colors"
@@ -368,13 +368,13 @@ export default function ConvertPageContent({
                 </div>
                 <span className="text-sm font-medium">{conversion.title}</span>
               </div>
-            </Link>
+            </LanguageLink>
           ))}
         </div>
         <div className="text-center mt-6">
-          <Link href="/tools">
+          <LanguageLink href="/tools">
             <Button variant="outline">View All PDF Tools</Button>
-          </Link>
+          </LanguageLink>
         </div>
       </div>
     </div>

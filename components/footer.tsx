@@ -1,6 +1,7 @@
 "use client"
 import Link from "next/link";
 import { FileIcon } from "@radix-ui/react-icons";
+import { LanguageLink } from "./language-link";
 
 export function Footer() {
   return (
@@ -10,46 +11,46 @@ export function Footer() {
           <FileIcon className="h-6 w-6" />
           <nav className="flex gap-4 md:gap-6">
           
-          <Link
+          <LanguageLink
               href="/about"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
               About Us
-            </Link>
-            <Link
+            </LanguageLink>
+            <LanguageLink
               href="/features"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
               Featuras
-            </Link>
-            <Link
+            </LanguageLink>
+            <LanguageLink
               href="/sitemap"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
               Sitemap
-            </Link>
+            </LanguageLink>
             </nav>
         </div>
         <div className="flex flex-col items-center gap-4 md:flex-row md:gap-6 md:px-0">
           <nav className="flex gap-4 md:gap-6">
-            <Link
+            <LanguageLink
               href="/terms"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
               Terms
-            </Link>
-            <Link
+            </LanguageLink>
+            <LanguageLink
               href="/privacy"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
               Privacy
-            </Link>
-            <Link
+            </LanguageLink>
+            <LanguageLink
               href="/contact"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
               Contact
-            </Link>
+            </LanguageLink>
           </nav>
           <p className="text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} ScanPro. All rights reserved.

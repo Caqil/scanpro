@@ -1,4 +1,5 @@
 "use client"
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
@@ -8,7 +9,6 @@ import {
   Cross1Icon,
   ChevronDownIcon
 } from "@radix-ui/react-icons";
-import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { 
   FileText, 
@@ -37,6 +37,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { LanguageLink } from "./language-link";
 
 // Type for tool definition with optional isNew
 type ToolDefinition = {
@@ -61,12 +62,21 @@ interface LanguageOption {
   nativeName: string;
   flag: string;
 }
-
-export function ProHeader() {
-  const { t, language, setLanguage } = useLanguageStore();
+interface ProHeaderProps {
+  urlLanguage: string;
+}
+export function ProHeader({ urlLanguage }: ProHeaderProps) {
+  const { language, setLanguage, t } = useLanguageStore();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMobileCategory, setActiveMobileCategory] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  
+  useEffect(() => {
+    if (urlLanguage && urlLanguage !== language) {
+      // Update state without triggering navigation
+      useLanguageStore.setState({ language: urlLanguage as any });
+    }
+  }, [urlLanguage, language]);
   
   // Language options
   const languages: LanguageOption[] = [
@@ -286,7 +296,7 @@ export function ProHeader() {
       <div className="container max-w-6xl mx-auto flex h-16 items-center justify-between py-4">
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <Link href="/" className="flex items-center gap-2">
+          <LanguageLink href="/" className="flex items-center gap-2">
             {/* Updated yellow background to match logo color */}
             <div className="bg-primary p-1 rounded-md">
               <SiteLogo />
@@ -297,7 +307,7 @@ export function ProHeader() {
             {/* <Badge variant="outline" className="hidden lg:flex ml-2 border-primary/50 text-primary-foreground bg-primary/20">
               Beta
             </Badge> */}
-          </Link>
+          </LanguageLink>
         </div>
 
         {/* Desktop Navigation */}
@@ -342,7 +352,7 @@ export function ProHeader() {
                       {item.dropdown
                         .find(cat => cat.category === activeCategory || activeCategory === null)
                         ?.tools.map((tool) => (
-                          <Link
+                          <LanguageLink
                             key={tool.name}
                             href={tool.href}
                             className="p-3 rounded-lg hover:bg-muted/50 flex items-start gap-3 group"
@@ -364,20 +374,20 @@ export function ProHeader() {
                               </div>
                               <p className="text-xs text-muted-foreground">{tool.description}</p>
                             </div>
-                          </Link>
+                          </LanguageLink>
                         ))}
                     </div>
                   </div>
                 </div>
               </div>
             ) : (
-              <Link
+              <LanguageLink
                 key={item.href}
                 href={item.href}
                 className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
               >
                 {item.label}
-              </Link>
+              </LanguageLink>
             )
           ))}
         </nav>
@@ -386,28 +396,24 @@ export function ProHeader() {
         <div className="flex items-center gap-3">
           {/* Language Dropdown */}
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="gap-1 h-8 font-normal">
-                <Globe className="h-4 w-4" />
-                <span className="hidden sm:inline-block">
-                  {languages.find(lang => lang.code === language)?.name || 'Language'}
-                </span>
-                <ChevronDownIcon className="h-3 w-3 opacity-50" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-40">
-              {languages.map((lang) => (
-                <DropdownMenuItem 
-                  key={lang.code}
-                  onClick={() => setLanguage(lang.code as any)}
-                  className={`flex items-center gap-2 ${language === lang.code ? 'bg-muted' : ''}`}
-                >
-                  <span className="mr-1">{lang.flag}</span>
-                  <span>{lang.nativeName}</span>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="sm">
+            <Globe className="h-4 w-4" />
+            <span>{languages.find(lang => lang.code === language)?.name || 'Language'}</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          {languages.map((lang) => (
+            <DropdownMenuItem 
+              key={lang.code}
+              onClick={() => setLanguage(lang.code as any)}
+            >
+              <span>{lang.flag}</span>
+              <span>{lang.nativeName}</span>
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
 
           <ModeToggle />
           
@@ -478,7 +484,7 @@ export function ProHeader() {
                           </div>
                           <div className="space-y-1">
                             {category.tools.map((tool) => (
-                              <Link
+                              <LanguageLink
                                 key={tool.name}
                                 href={tool.href}
                                 className="flex items-center px-3 py-2 hover:bg-primary/10 rounded-md"
@@ -496,7 +502,7 @@ export function ProHeader() {
                                     New
                                   </Badge>
                                 )}
-                              </Link>
+                              </LanguageLink>
                             ))}
                           </div>
                         </div>
@@ -505,14 +511,14 @@ export function ProHeader() {
                   )}
                 </div>
               ) : (
-                <Link
+                <LanguageLink
                   key={item.href}
                   href={item.href}
                   className="block px-3 py-2 text-lg font-medium hover:bg-primary/10 rounded-md"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.label}
-                </Link>
+                </LanguageLink>
               )
             ))}
           </div>

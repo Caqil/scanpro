@@ -3,6 +3,7 @@ import { UnlockIcon, FileIcon, InfoIcon } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 import { PdfUnlocker } from "@/components/pdf-unlocker";
+import { LanguageLink } from "@/components/language-link";
 
 export const metadata: Metadata = {
   title: "Unlock PDF Files | ScanPro - PDF Tools",
@@ -110,7 +111,7 @@ export default function UnlockPDFPage() {
       <div>
         <h2 className="text-2xl font-bold mb-6 text-center">Related PDF Security Tools</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Link href="/protect" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          <LanguageLink href="/protect" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-500">
@@ -120,8 +121,8 @@ export default function UnlockPDFPage() {
               </div>
               <span className="text-sm font-medium">Protect PDF</span>
             </div>
-          </Link>
-          <Link href="/sign" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          </LanguageLink>
+          <LanguageLink href="/sign" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-500">
@@ -133,8 +134,8 @@ export default function UnlockPDFPage() {
               </div>
               <span className="text-sm font-medium">Sign PDF</span>
             </div>
-          </Link>
-          <Link href="/watermark" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          </LanguageLink>
+          <LanguageLink href="/watermark" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-purple-100 dark:bg-purple-900/30 mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-purple-500">
@@ -143,8 +144,8 @@ export default function UnlockPDFPage() {
               </div>
               <span className="text-sm font-medium">Watermark PDF</span>
             </div>
-          </Link>
-          <Link href="/compress" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          </LanguageLink>
+          <LanguageLink href="/compress" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-green-100 dark:bg-green-900/30 mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-500">
@@ -153,12 +154,12 @@ export default function UnlockPDFPage() {
               </div>
               <span className="text-sm font-medium">Compress PDF</span>
             </div>
-          </Link>
+          </LanguageLink>
         </div>
         <div className="text-center mt-6">
-          <Link href="/tools">
+          <LanguageLink href="/tools">
             <Button variant="outline">View All PDF Tools</Button>
-          </Link>
+          </LanguageLink>
         </div>
       </div>
     </div>

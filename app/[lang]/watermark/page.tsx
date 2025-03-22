@@ -3,7 +3,7 @@ import { Edit2Icon, FileIcon, InfoIcon } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 import { PdfWatermarker } from "@/components/pdf-watermarker";
-
+import { LanguageLink } from "@/components/language-link";
 export const metadata: Metadata = {
   title: "Add Watermark to PDF | ScanPro - PDF Tools",
   description: "Add text watermarks to your PDF files to protect your documents and indicate ownership or status.",
@@ -110,43 +110,43 @@ export default function WatermarkPDFPage() {
      <div>
         <h2 className="text-2xl font-bold mb-6 text-center">Related PDF Tools</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Link href="/merge" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          <LanguageLink href="/merge" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-red-100 dark:bg-red-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-red-500" />
               </div>
               <span className="text-sm font-medium">Merge PDF</span>
             </div>
-          </Link>
-          <Link href="/split" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          </LanguageLink>
+          <LanguageLink href="/split" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-red-100 dark:bg-red-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-red-500" />
               </div>
               <span className="text-sm font-medium">Split PDF</span>
             </div>
-          </Link>
-          <Link href="/convert/pdf-to-docx" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          </LanguageLink>
+          <LanguageLink href="/convert/pdf-to-docx" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-blue-500" />
               </div>
               <span className="text-sm font-medium">PDF to Word</span>
             </div>
-          </Link>
-          <Link href="/ocr" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          </LanguageLink>
+          <LanguageLink href="/ocr" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-purple-100 dark:bg-purple-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-purple-500" />
               </div>
               <span className="text-sm font-medium">Extract PDF</span>
             </div>
-          </Link>
+          </LanguageLink>
         </div>
         <div className="text-center mt-6">
-          <Link href="/tools">
+          <LanguageLink href="/tools">
             <Button variant="outline">View All PDF Tools</Button>
-          </Link>
+          </LanguageLink>
         </div>
       </div>
     </div>

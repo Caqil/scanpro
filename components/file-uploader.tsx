@@ -46,6 +46,7 @@ import {
   TableIcon
 } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
+import { useLanguageStore } from '@/src/store/store';
 
 const FORMAT_CATEGORIES = [
   {
@@ -128,6 +129,7 @@ export function FileUploader({
   initialInputFormat = "pdf", 
   initialOutputFormat = "docx" 
 }: FileUploaderProps) {
+  const { t } = useLanguageStore();
   const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -178,9 +180,9 @@ export function FileUploader({
       if (rejectedFiles.length > 0) {
         const rejection = rejectedFiles[0];
         if (rejection.file.size > 50 * 1024 * 1024) {
-          setError("File is too large. Maximum size is 50MB.");
+          setError(t('fileUploader.maxSize'));
         } else {
-          setError(`Please upload a valid ${inputFormat.toUpperCase()} file.`);
+          setError(`${t('fileUploader.inputFormat')} ${inputFormat.toUpperCase()}`);
         }
         return;
       }
@@ -196,7 +198,7 @@ export function FileUploader({
   // Handle form submission
   const onSubmit = async (values: FormValues) => {
     if (!file) {
-      setError("Please select a file first");
+      setError(t('compressPdf.error.noFiles'));
       return;
     }
 
@@ -238,20 +240,20 @@ export function FileUploader({
       
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || `Failed to convert ${values.inputFormat.toUpperCase()} to ${values.outputFormat.toUpperCase()}`);
+        throw new Error(errorData.error || `${t('compressPdf.error.failed')} ${values.inputFormat.toUpperCase()} to ${values.outputFormat.toUpperCase()}`);
       }
 
       const data = await response.json();
       setProgress(100);
       setConvertedFileUrl(data.filename);
       
-      toast.success("Conversion Successful", {
-        description: `Your ${values.inputFormat.toUpperCase()} has been converted to ${values.outputFormat.toUpperCase()}.`,
+      toast.success(t('fileUploader.successful'), {
+        description: `${t('fileUploader.successDesc')} ${values.inputFormat.toUpperCase()} to ${values.outputFormat.toUpperCase()}.`,
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An unknown error occurred");
-      toast.error("Conversion Failed", {
-        description: err instanceof Error ? err.message : "Failed to convert your file",
+      setError(err instanceof Error ? err.message : t('compressPdf.error.unknown'));
+      toast.error(t('compressPdf.error.failed'), {
+        description: err instanceof Error ? err.message : t('compressPdf.error.unknown'),
       });
     } finally {
       setIsUploading(false);
@@ -290,7 +292,7 @@ export function FileUploader({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left column: File selection */}
           <div className="space-y-4">
-            <div className="text-lg font-medium">1. Select Input File</div>
+            <div className="text-lg font-medium">1. {t('ui.upload')}</div>
             
             {/* Input Format Dropdown - Hidden, now controlled by parent */}
             <div className="hidden">
@@ -299,7 +301,7 @@ export function FileUploader({
                 name="inputFormat"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Input Format</FormLabel>
+                    <FormLabel>{t('fileUploader.inputFormat')}</FormLabel>
                     <Select
                       disabled={isUploading}
                       onValueChange={field.onChange}
@@ -307,7 +309,7 @@ export function FileUploader({
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select input format" />
+                          <SelectValue placeholder={t('fileUploader.inputFormat')} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -315,7 +317,7 @@ export function FileUploader({
                           <div key={category.name}>
                             <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground flex items-center">
                               {category.icon}
-                              <span className="ml-1">{category.name}</span>
+                              <span className="ml-1">{t(`fileUploader.categories.${category.name.toLowerCase()}`)}</span>
                             </div>
                             {category.formats.map((format) => (
                               <SelectItem key={format.value} value={format.value}>
@@ -366,7 +368,7 @@ export function FileUploader({
                       handleRemoveFile();
                     }}
                   >
-                    <Cross2Icon className="h-4 w-4 mr-1" /> Remove
+                    <Cross2Icon className="h-4 w-4 mr-1" /> {t('fileUploader.remove')}
                   </Button>
                 </div>
               ) : (
@@ -375,13 +377,13 @@ export function FileUploader({
                     <UploadIcon className="h-6 w-6 text-muted-foreground" />
                   </div>
                   <div className="text-lg font-medium">
-                    {isDragActive ? `Drop your ${inputFormat.toUpperCase()} here` : `Drag & drop your ${inputFormat.toUpperCase()}`}
+                    {isDragActive ? t('fileUploader.dropHere') : t('fileUploader.dragAndDrop')}
                   </div>
                   <p className="text-sm text-muted-foreground max-w-sm">
-                    Drop your file here or click to browse. Maximum size is 50MB.
+                    {t('fileUploader.dropHereDesc')} {t('fileUploader.maxSize')}
                   </p>
                   <Button type="button" variant="secondary" size="sm" className="mt-2">
-                    Browse Files
+                    {t('fileUploader.browse')}
                   </Button>
                 </div>
               )}
@@ -390,7 +392,7 @@ export function FileUploader({
           
           {/* Right column: Conversion options */}
           <div className="space-y-4">
-            <div className="text-lg font-medium">2. Choose Conversion Options</div>
+            <div className="text-lg font-medium">2. {t('convert.options.title')}</div>
             
             {/* Output Format Dropdown - Hidden, now controlled by parent */}
             <div className="hidden">
@@ -399,7 +401,7 @@ export function FileUploader({
                 name="outputFormat"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Output Format</FormLabel>
+                    <FormLabel>{t('fileUploader.outputFormat')}</FormLabel>
                     <Select
                       disabled={isUploading}
                       onValueChange={field.onChange}
@@ -407,7 +409,7 @@ export function FileUploader({
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select output format" />
+                          <SelectValue placeholder={t('fileUploader.outputFormat')} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -415,7 +417,7 @@ export function FileUploader({
                           <div key={category.name}>
                             <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground flex items-center">
                               {category.icon}
-                              <span className="ml-1">{category.name}</span>
+                              <span className="ml-1">{t(`fileUploader.categories.${category.name.toLowerCase()}`)}</span>
                             </div>
                             {category.formats.map((format) => (
                               <SelectItem key={format.value} value={format.value}>
@@ -457,7 +459,7 @@ export function FileUploader({
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Converting from <span className="font-medium">{inputFormat.toUpperCase()}</span> to <span className="font-medium">{form.watch("outputFormat").toUpperCase()}</span> using LibreOffice technology.
+                  {t('converter.description')} <span className="font-medium">{inputFormat.toUpperCase()}</span> {t('ui.to')} <span className="font-medium">{form.watch("outputFormat").toUpperCase()}</span>
                 </p>
               </CardContent>
             </Card>
@@ -477,10 +479,10 @@ export function FileUploader({
                   </FormControl>
                   <div className="space-y-1 leading-none">
                     <FormLabel>
-                      Enable OCR
+                      {t('fileUploader.ocr')}
                     </FormLabel>
                     <p className="text-sm text-muted-foreground">
-                      Extract text from scanned documents using Optical Character Recognition
+                      {t('fileUploader.ocrDesc')}
                     </p>
                   </div>
                 </FormItem>
@@ -494,10 +496,10 @@ export function FileUploader({
                 name="quality"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Image Quality: {field.value}%</FormLabel>
+                    <FormLabel>{t('fileUploader.quality')}: {field.value}%</FormLabel>
                     <FormControl>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs">Low</span>
+                        <span className="text-xs">{t('fileUploader.low')}</span>
                         <Input
                           type="range"
                           min={10}
@@ -508,7 +510,7 @@ export function FileUploader({
                           disabled={isUploading}
                           className="[&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4"
                         />
-                        <span className="text-xs">High</span>
+                        <span className="text-xs">{t('fileUploader.high')}</span>
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -537,7 +539,7 @@ export function FileUploader({
             <Progress value={progress} className="h-2" />
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
               <ReloadIcon className="h-4 w-4 animate-spin" />
-              Converting your file... {progress}%
+              {t('fileUploader.converting')}... {progress}%
             </div>
           </div>
         )}
@@ -547,12 +549,12 @@ export function FileUploader({
             <CardHeader className="pb-2">
               <CardTitle className="text-green-600 dark:text-green-400 flex items-center gap-2">
                 <CheckCircledIcon className="h-5 w-5" />
-                Conversion Successful!
+                {t('fileUploader.successful')}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">
-                Your file has been successfully converted and is now ready for download.
+                {t('fileUploader.successDesc')}
               </p>
               <Button 
                 className="w-full" 
@@ -561,12 +563,12 @@ export function FileUploader({
               >
                 <a href={`/api/file?folder=conversions&filename=${encodeURIComponent(convertedFileUrl)}`} download>
                   <DownloadIcon className="h-4 w-4 mr-2" />
-                  Download Converted File
+                  {t('fileUploader.download')}
                 </a>
               </Button>
             </CardContent>
             <CardFooter className="text-xs text-muted-foreground">
-              Files are automatically deleted after 24 hours for privacy and security.
+              {t('fileUploader.filesSecurity')}
             </CardFooter>
           </Card>
         )}
@@ -577,8 +579,9 @@ export function FileUploader({
           className="w-full" 
           disabled={!file || isUploading}
         >
-          {isUploading ? "Converting..." : "Convert File"}
+          {isUploading ? t('ui.processing') : t('convert.howTo.step2.title')}
         </Button>
       </form>
     </Form>
-  );}
+  );
+}

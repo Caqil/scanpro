@@ -25,6 +25,7 @@ import {
 } from "@radix-ui/react-icons";
 import { AlertCircle, ArrowDown, ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguageStore } from "@/src/store/store";
 
 // Interface for file with order
 interface FileWithOrder {
@@ -34,6 +35,7 @@ interface FileWithOrder {
 }
 
 export function PdfMerger() {
+  const { t } = useLanguageStore();
   const [files, setFiles] = useState<FileWithOrder[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -208,13 +210,13 @@ export function PdfMerger() {
       setProgress(100);
       setMergedFileUrl(data.filename);
       
-      toast.success("Merge Successful", {
-        description: `Successfully merged ${data.fileCount} PDF files.`,
+      toast.success(t('mergePdf.success') || "Merge Successful", {
+        description: `${t('mergePdf.successDesc') || "Successfully merged"} ${data.fileCount} ${t('mergePdf.files') || "PDF files"}.`,
       });
     } catch (err) {
       setError(err instanceof Error ? err.message : "An unknown error occurred");
-      toast.error("Merge Failed", {
-        description: err instanceof Error ? err.message : "Failed to merge your files",
+      toast.error(t('mergePdf.error.failed') || "Merge Failed", {
+        description: err instanceof Error ? err.message : t('mergePdf.error.generic') || "Failed to merge your files",
       });
     } finally {
       setIsProcessing(false);
@@ -224,7 +226,7 @@ export function PdfMerger() {
   return (
     <Card className="border shadow-sm">
       <CardHeader>
-        <CardTitle>Merge PDF Files</CardTitle>
+        <CardTitle>{t('mergePdf.title') || "Merge PDF Files"}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         {/* File Drop Zone */}
@@ -245,14 +247,13 @@ export function PdfMerger() {
               <UploadIcon className="h-6 w-6 text-muted-foreground" />
             </div>
             <div className="text-lg font-medium">
-              {isDragActive ? "Drop your PDF files here" : "Drag & drop your PDF files"}
+              {isDragActive ? t('fileUploader.dropHere') || "Drop your PDF files here" : t('fileUploader.dragAndDrop') || "Drag & drop your PDF files"}
             </div>
             <p className="text-sm text-muted-foreground max-w-sm">
-              Drop your PDF files here or click to browse. You can select multiple files.
-              Maximum size is 100MB per file.
+              {t('fileUploader.dropHereDesc') || "Drop your PDF files here or click to browse."} {t('fileUploader.maxSize') || "Maximum size is 100MB per file."}
             </p>
             <Button type="button" variant="secondary" size="sm" className="mt-2">
-              Browse Files
+              {t('fileUploader.browse') || "Browse Files"}
             </Button>
           </div>
         </div>
@@ -261,10 +262,10 @@ export function PdfMerger() {
         {files.length > 0 && (
           <div className="border rounded-lg">
             <div className="p-3 border-b bg-muted/30 flex justify-between items-center">
-              <h3 className="font-medium">Files to Merge ({files.length})</h3>
+              <h3 className="font-medium">{t('mergePdf.filesToMerge') || "Files to Merge"} ({files.length})</h3>
               <div className="flex items-center gap-2">
                 <Badge variant="outline" className="bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
-                  <MoveIcon className="h-3 w-3 mr-1" /> Drag to reorder
+                  <MoveIcon className="h-3 w-3 mr-1" /> {t('mergePdf.dragToReorder') || "Drag to reorder"}
                 </Badge>
                 {!isProcessing && (
                   <Button 
@@ -276,7 +277,7 @@ export function PdfMerger() {
                       setFiles([]);
                     }}
                   >
-                    <TrashIcon className="h-4 w-4 mr-1" /> Clear All
+                    <TrashIcon className="h-4 w-4 mr-1" /> {t('ui.clearAll') || "Clear All"}
                   </Button>
                 )}
               </div>
@@ -370,7 +371,7 @@ export function PdfMerger() {
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              Merging your PDF files... {progress}%
+              {t('mergePdf.merging') || "Merging your PDF files..."} {progress}%
             </div>
           </div>
         )}
@@ -384,10 +385,10 @@ export function PdfMerger() {
               </div>
               <div className="flex-1">
                 <h3 className="font-medium text-green-600 dark:text-green-400">
-                  PDFs successfully merged!
+                  {t('mergePdf.successMessage') || "PDFs successfully merged!"}
                 </h3>
                 <p className="text-sm text-muted-foreground mt-1 mb-3">
-                  Your merged PDF file is now ready for download.
+                  {t('mergePdf.downloadReady') || "Your merged PDF file is now ready for download."}
                 </p>
                 <Button 
                   className="w-full sm:w-auto" 
@@ -396,7 +397,7 @@ export function PdfMerger() {
                 >
                   <a href={`/api/file?folder=merges&filename=${encodeURIComponent(mergedFileUrl)}`} download>
                     <DownloadIcon className="h-4 w-4 mr-2" />
-                    Download Merged PDF
+                    {t('mergePdf.downloadMerged') || "Download Merged PDF"}
                   </a>
                 </Button>
               </div>
@@ -415,7 +416,7 @@ export function PdfMerger() {
             }}
           >
             <TrashIcon className="h-4 w-4 mr-2" />
-            Clear All
+            {t('ui.clear') || "Clear All"}
           </Button>
         )}
         
@@ -427,7 +428,7 @@ export function PdfMerger() {
           onClick={handleMerge}
           disabled={files.length < 2 || isProcessing}
         >
-          {isProcessing ? "Merging..." : "Merge PDFs"}
+          {isProcessing ? t('ui.processing') || "Merging..." : t('mergePdf.mergePdfs') || "Merge PDFs"}
         </Button>
       </CardFooter>
     </Card>

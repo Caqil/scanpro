@@ -12,18 +12,16 @@ const languages = {
 // Type for language identifiers
 type Language = keyof typeof languages;
 
-// Function to get nested properties using dot notation
+// Function to get nested translation
 const getNestedTranslation = (obj: any, path: string): string => {
   const keys = path.split('.');
   let result = keys.reduce((o, k) => (o && o[k] !== undefined) ? o[k] : undefined, obj);
 
-  // Important check: if result is an object, return the path instead to avoid React errors
   if (result !== null && typeof result === 'object') {
-    console.warn(`Translation key "${path}" returned an object instead of a string. Check your usage.`);
-    return path; // Return the key path as fallback
+    console.warn(`Translation key "${path}" returned an object instead of a string.`);
+    return path;
   }
 
-  // If the result is undefined, return the key as fallback
   return result !== undefined ? result : path;
 };
 
@@ -43,8 +41,21 @@ export const useLanguageStore = create<LanguageState>((set, get) => ({
     return getNestedTranslation(translations, key);
   },
 
-  // Function to change the language
+  // Function to change language and redirect to language URL
   setLanguage: (language: Language) => {
-    set({ language });
+    // Only update state if it's different
+    if (get().language !== language) {
+      set({ language });
+
+      // Only run in browser environment
+      if (typeof window !== 'undefined') {
+        // Extract current path without language prefix
+        const path = window.location.pathname;
+        const pathWithoutLang = path.replace(/^\/(en|id)/, '') || '/';
+
+        // Navigate to new language path
+        window.location.href = `/${language}${pathWithoutLang}`;
+      }
+    }
   }
 }));

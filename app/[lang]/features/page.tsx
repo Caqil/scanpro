@@ -19,6 +19,7 @@ import {
   LayersIcon,
   MinusCircledIcon,
 } from "@radix-ui/react-icons";
+import { LanguageLink } from "@/components/language-link";
 
 export const metadata = {
   title: "Features | PDF Converter Pro",
@@ -227,12 +228,12 @@ export default function FeaturesPage() {
           Try our PDF tools today and experience the power of high-quality, accurate PDF conversions and compression.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Link href="/#converter">
+          <LanguageLink href="/#converter">
             <Button size="lg">Start Converting</Button>
-          </Link>
-          <Link href="/compress">
+          </LanguageLink>
+          <LanguageLink href="/compress">
             <Button variant="outline" size="lg">Compress PDF</Button>
-          </Link>
+          </LanguageLink>
         </div>
       </div>
     </div>
@@ -288,9 +289,9 @@ function FeatureCard({
       </CardContent>
       {link && (
         <CardFooter>
-          <Link href={link} className="text-sm text-primary hover:underline w-full text-center">
+          <LanguageLink href={link} className="text-sm text-primary hover:underline w-full text-center">
             Try this feature →
-          </Link>
+          </LanguageLink>
         </CardFooter>
       )}
     </>

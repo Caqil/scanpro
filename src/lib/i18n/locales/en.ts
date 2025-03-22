@@ -1,5 +1,10 @@
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
+  metadata: {
+    title: "ScanPro - All-in-One PDF Converter & Editor | Free Online",
+    template: "%s | ScanPro PDF Tools",
+    description: "Powerful free online PDF tools: Convert, compress, merge, split, edit, OCR and more. No installation required.",
+  },
   nav: {
     tools: "Tools",
     company: "Company",
@@ -45,7 +50,7 @@ export default {
     apiDesc: "Use our REST API to convert PDFs programmatically in your application",
     apiDocs: "View API Docs"
   },
-  
+
   // Convert Page
   convert: {
     title: {
@@ -341,7 +346,7 @@ export default {
       download: "Download .txt"
     },
     languages: {
-      english: "English", 
+      english: "English",
       french: "French",
       german: "German",
       spanish: "Spanish",

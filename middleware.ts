@@ -1,30 +1,30 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+// middleware.ts
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+// Supported languages
+const supportedLanguages = ['en', 'id'];
+const defaultLanguage = 'en';
 
 export function middleware(request: NextRequest) {
-  const { pathname, searchParams } = new URL(request.url);
+  const pathname = request.nextUrl.pathname;
 
-  // Handle /convert with query parameters
-  if (pathname === "/convert") {
-    const input = searchParams.get("input");
-    const output = searchParams.get("output");
-
-    if (input) {
-      // Convert from other format to PDF (e.g., /convert?input=xlsx → /convert/xlsx-to-pdf)
-      return NextResponse.redirect(new URL(`/convert/${input}-to-pdf`, request.url));
-    } else if (output) {
-      // Convert from PDF to other format (e.g., /convert?output=docx → /convert/pdf-to-docx)
-      return NextResponse.redirect(new URL(`/convert/pdf-to-${output}`, request.url));
-    }
-    
-    // If no parameters are provided, redirect to a default conversion
-    return NextResponse.redirect(new URL("/convert/pdf-to-docx", request.url));
+  // Skip if already has language prefix or is an API route
+  if (pathname.startsWith('/api/') || /^\/(en|id)/.test(pathname) || pathname.includes('.')) {
+    return NextResponse.next();
   }
 
-  return NextResponse.next();
+  // Check for preferred language from accept-language header
+  const acceptLanguage = request.headers.get('accept-language')?.split(',')[0]?.split('-')[0] || defaultLanguage;
+
+  // Use browser language if supported, otherwise default to English
+  const language = supportedLanguages.includes(acceptLanguage) ? acceptLanguage : defaultLanguage;
+
+  // Redirect to language-specific path
+  return NextResponse.redirect(new URL(`/${language}${pathname === '/' ? '' : pathname}`, request.url));
 }
 
-// Define which paths this middleware will run on
+// Only run middleware on these paths
 export const config = {
-  matcher: ["/convert"],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\.).*)'],
 };

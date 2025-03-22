@@ -4,6 +4,7 @@ import { FileText, FileIcon, InfoIcon, Languages } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 import { PdfOcrExtractor } from "@/components/pdf-ocr-extractor";
+import { LanguageLink } from "@/components/language-link";
 
 export const metadata: Metadata = {
   title: "OCR Extract Text from PDF | ScanPro - PDF Tools",
@@ -235,43 +236,43 @@ export default function OcrPage() {
       <div>
         <h2 className="text-2xl font-bold mb-6 text-center">Related PDF Tools</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Link href="/convert?output=docx" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          <LanguageLink href="/convert?output=docx" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 mb-2">
                 <FileText className="h-5 w-5 text-blue-500" />
               </div>
               <span className="text-sm font-medium">PDF to Word</span>
             </div>
-          </Link>
-          <Link href="/convert?input=jpg" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          </LanguageLink>
+          <LanguageLink href="/convert?input=jpg" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-green-100 dark:bg-green-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-green-500" />
               </div>
               <span className="text-sm font-medium">JPG to PDF</span>
             </div>
-          </Link>
-          <Link href="/ocr" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          </LanguageLink>
+          <LanguageLink href="/ocr" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-purple-100 dark:bg-purple-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-purple-500" />
               </div>
               <span className="text-sm font-medium">Extract PDF</span>
             </div>
-          </Link>
-          <Link href="/compress" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          </LanguageLink>
+          <LanguageLink href="/compress" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-red-100 dark:bg-red-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-red-500" />
               </div>
               <span className="text-sm font-medium">Compress PDF</span>
             </div>
-          </Link>
+          </LanguageLink>
         </div>
         <div className="text-center mt-6">
-          <Link href="/tools">
+          <LanguageLink href="/tools">
             <Button variant="outline">View All PDF Tools</Button>
-          </Link>
+          </LanguageLink>
         </div>
       </div>
     </div>

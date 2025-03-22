@@ -5,6 +5,7 @@ import { ArrowDownIcon, FileIcon, InfoIcon } from "lucide-react";
 import Link from "next/link";
 import { MultiPdfCompressor } from "@/components/pdf-compressor"; // Import the updated PDF compressor component
 import { useLanguageStore } from "@/src/store/store";
+import { LanguageLink } from "@/components/language-link";
 
 export default function CompressPageContent() {
   const { t } = useLanguageStore();
@@ -100,43 +101,44 @@ export default function CompressPageContent() {
       <div>
         <h2 className="text-2xl font-bold mb-6 text-center">{t('compressPdf.relatedTools')}</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Link href="/merge" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          <LanguageLink href="/merge" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-red-100 dark:bg-red-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-red-500" />
               </div>
               <span className="text-sm font-medium">{t('popular.mergePdf')}</span>
             </div>
-          </Link>
-          <Link href="/convert/pdf-to-docx" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          </LanguageLink>
+          <LanguageLink href="/convert/pdf-to-docx" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-blue-500" />
               </div>
               <span className="text-sm font-medium">{t('popular.pdfToWord')}</span>
             </div>
-          </Link>
-          <Link href="/ocr" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          </LanguageLink>
+          <LanguageLink href="/ocr" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-purple-100 dark:bg-purple-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-purple-500" />
               </div>
               <span className="text-sm font-medium">{t('popular.ocr')}</span>
             </div>
-          </Link>
-          <Link href="/watermark" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          </LanguageLink>
+          <LanguageLink href="/watermark" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-amber-100 dark:bg-amber-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-amber-500" />
               </div>
               <span className="text-sm font-medium">{t('watermark.title')}</span>
             </div>
-          </Link>
+          </LanguageLink>
         </div>
         <div className="text-center mt-6">
-          <Link href="/tools">
-            <Button variant="outline">{t('popular.viewAll')}</Button>
-          </Link>
+           <LanguageLink href="/tools"><Button variant="outline" size="lg">
+                          {t('popular.viewAll')}
+                        </Button></LanguageLink>
+         
         </div>
       </div>
     </div>

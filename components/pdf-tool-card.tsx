@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { LanguageLink } from "./language-link";
 
 interface PdfToolCardProps {
   id: string;
@@ -22,7 +23,7 @@ export function PdfToolCard({
   isNew
 }: PdfToolCardProps) {
   return (
-    <Link href={href} className="block h-full transition-transform hover:scale-[1.02]">
+    <LanguageLink href={href} className="block h-full transition-transform hover:scale-[1.02]">
       <Card className="h-full hover:shadow-md transition-shadow overflow-hidden">
         <CardContent className="p-6 flex flex-col h-full">
           <div className="flex items-start space-x-4 mb-4">
@@ -43,6 +44,6 @@ export function PdfToolCard({
           <p className="text-sm text-muted-foreground flex-1">{description}</p>
         </CardContent>
       </Card>
-    </Link>
+    </LanguageLink>
   );
 }

@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { LanguageLink } from "@/components/language-link";
 
 export const metadata: Metadata = {
   title: "About ScanPro | Transforming Document Management",
@@ -249,16 +250,16 @@ export default function AboutPage() {
           transform your document management experience.
         </p>
         <div className="flex justify-center gap-4">
-          <Link href="/tools">
+          <LanguageLink href="/tools">
             <Button variant="default" size="lg">
               Explore Our Tools
             </Button>
-          </Link>
-          <Link href="/contact">
+          </LanguageLink>
+          <LanguageLink href="/contact">
             <Button variant="outline" size="lg">
               Contact Us
             </Button>
-          </Link>
+          </LanguageLink>
         </div>
       </section>
     </div>
