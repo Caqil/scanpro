@@ -5,7 +5,8 @@ export default {
     company: "Company",
     pricing: "Pricing",
     convertPdf: "Convert PDF",
-    convertPdfDesc: "Transform PDFs to and from other formats"
+    convertPdfDesc: "Transform PDFs to and from other formats",
+    selectLanguage: "Select Language"
   },
 
   // Hero section
@@ -43,6 +44,116 @@ export default {
     apiTitle: "Integrate with our API",
     apiDesc: "Use our REST API to convert PDFs programmatically in your application",
     apiDocs: "View API Docs"
+  },
+  
+  // Convert Page
+  convert: {
+    title: {
+      pdfToWord: "Convert PDF to Word",
+      pdfToExcel: "Convert PDF to Excel",
+      pdfToPowerPoint: "Convert PDF to PowerPoint",
+      pdfToJpg: "Convert PDF to JPG",
+      pdfToPng: "Convert PDF to PNG",
+      pdfToHtml: "Convert PDF to HTML",
+      wordToPdf: "Convert Word to PDF",
+      excelToPdf: "Convert Excel to PDF",
+      powerPointToPdf: "Convert PowerPoint to PDF",
+      jpgToPdf: "Convert JPG to PNG",
+      pngToPdf: "Convert PNG to PDF",
+      htmlToPdf: "Convert HTML to PDF",
+      generic: "Convert Your File"
+    },
+    description: {
+      pdfToWord: "Transform PDF documents to editable Word files quickly and easily",
+      pdfToExcel: "Extract tables and data from PDF files into Excel spreadsheets",
+      pdfToPowerPoint: "Turn PDF presentations into editable PowerPoint slides",
+      pdfToJpg: "Convert PDF pages to high-quality JPG images",
+      pdfToPng: "Convert PDF pages to transparent PNG images",
+      pdfToHtml: "Convert PDF documents to HTML web pages",
+      wordToPdf: "Convert Word documents to PDF format with perfect formatting",
+      excelToPdf: "Transform Excel spreadsheets to PDF documents",
+      powerPointToPdf: "Convert PowerPoint presentations to PDF format",
+      jpgToPdf: "Create PDF files from your JPG images",
+      pngToPdf: "Create PDF files from your PNG images",
+      htmlToPdf: "Convert HTML web pages to PDF documents",
+      generic: "Select a file to convert between formats"
+    },
+    howTo: {
+      title: "How to Convert {from} to {to}",
+      step1: {
+        title: "Upload",
+        description: "Upload the {from} file you want to convert"
+      },
+      step2: {
+        title: "Convert",
+        description: "Click the Convert button and our system will process your file"
+      },
+      step3: {
+        title: "Download",
+        description: "Download your converted {to} file"
+      }
+    },
+    options: {
+      title: "Conversion Options",
+      ocr: "Enable OCR (Optical Character Recognition)",
+      ocrDescription: "Extract text from scanned documents or images",
+      preserveLayout: "Preserve original layout",
+      preserveLayoutDescription: "Maintain the original document's formatting and layout",
+      quality: "Output quality",
+      qualityDescription: "Set the quality level for the converted file",
+      qualityOptions: {
+        low: "Low (smaller file size)",
+        medium: "Medium (balanced)",
+        high: "High (best quality)"
+      },
+      pageOptions: "Page options",
+      allPages: "All pages",
+      selectedPages: "Selected pages",
+      pageRangeDescription: "Enter page numbers and/or page ranges separated by commas",
+      pageRangeExample: "Example: 1,3,5-12"
+    },
+    moreTools: "Related Conversion Tools",
+    expertTips: {
+      title: "Expert Tips",
+      pdfToWord: [
+        "For best results, ensure your PDF has clear, machine-readable text",
+        "Enable OCR for scanned documents or image-based PDFs",
+        "Complex layouts may require minor adjustments after conversion"
+      ],
+      pdfToExcel: [
+        "Tables with clear borders convert more accurately",
+        "Pre-process scanned PDFs with OCR for better data extraction",
+        "Check spreadsheet formulas after conversion as they may not transfer"
+      ],
+      generic: [
+        "Higher quality settings result in larger file sizes",
+        "Use OCR for documents with scanned text or images containing text",
+        "Preview your file after conversion to ensure accuracy"
+      ]
+    },
+    advantages: {
+      title: "Advantages of Converting {from} to {to}",
+      pdfToWord: [
+        "Edit and modify text that was locked in PDF format",
+        "Update content without recreating the entire document",
+        "Extract information for use in other documents"
+      ],
+      pdfToExcel: [
+        "Analyze and manipulate data that was in static PDF form",
+        "Create charts and perform calculations with extracted data",
+        "Easily update financial reports or numerical information"
+      ],
+      wordToPdf: [
+        "Create universally readable documents that maintain formatting",
+        "Protect content from unwanted modifications",
+        "Ensure consistent appearance across all devices and platforms"
+      ],
+      generic: [
+        "Transform your document into a more useful format",
+        "Access and use content in programs that support the target format",
+        "Share files in formats that others can easily open"
+      ]
+    }
   },
 
   // Features section
@@ -154,7 +265,10 @@ export default {
       }
     },
     relatedTools: "Explore More PDF Tools",
-    viewAllTools: "View All PDF Tools"
+    viewAllTools: "View All PDF Tools",
+    of: "of",
+    files: "files",
+    filesToMerge: "Files to Merge"
   },
 
   // OCR Page
@@ -192,9 +306,61 @@ export default {
       tipsForBest: "Tips for best results:"
     },
     faq: {
-      title: "Frequently Asked Questions"
+      title: "Frequently Asked Questions",
+      questions: {
+        accuracy: {
+          question: "How accurate is the OCR text extraction?",
+          answer: "Our OCR technology typically achieves 90-99% accuracy for clearly printed text in well-scanned documents. Accuracy may decrease with poor quality scans, unusual fonts, or complex layouts."
+        },
+        languages: {
+          question: "Which languages are supported?",
+          answer: "We support over 100 languages including English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese, Korean, Russian, Arabic, Hindi and many more."
+        },
+        recognition: {
+          question: "Why isn't my text being recognized correctly?",
+          answer: "Several factors can affect OCR accuracy: document quality, resolution, contrast, complex layouts, handwriting, unusual fonts, or selecting the wrong language."
+        },
+        pageLimit: {
+          question: "Is there a limit to how many pages I can process?",
+          answer: "For free users, there's a limit of 50 pages per PDF. Premium users can process PDFs with up to 500 pages."
+        },
+        security: {
+          question: "Is my data secure during OCR processing?",
+          answer: "Yes, your security is our priority. All uploaded files are processed on secure servers and automatically deleted after processing."
+        }
+      }
     },
-    relatedTools: "Related PDF Tools"
+    relatedTools: "Related PDF Tools",
+    processing: {
+      title: "Processing OCR",
+      message: "OCR processing can take a few minutes depending on document size and complexity"
+    },
+    results: {
+      title: "Extracted Text",
+      copy: "Copy",
+      download: "Download .txt"
+    },
+    languages: {
+      english: "English", 
+      french: "French",
+      german: "German",
+      spanish: "Spanish",
+      chinese: "Chinese",
+      japanese: "Japanese",
+      arabic: "Arabic",
+      russian: "Russian"
+    },
+    options: {
+      scope: "Pages to Extract",
+      all: "All Pages",
+      custom: "Specific Pages",
+      pages: "Page Numbers",
+      pagesHint: "E.g. 1,3,5-9",
+      enhanceScanned: "Enhance scanned images",
+      enhanceScannedHint: "Pre-process images to improve OCR accuracy (recommended for scanned documents)",
+      preserveLayout: "Preserve layout",
+      preserveLayoutHint: "Try to maintain the original layout with paragraphs and line breaks"
+    }
   },
 
   // Protect PDF Page
@@ -276,7 +442,49 @@ export default {
       allowPrinting: "Allow Printing",
       allowCopying: "Allow Copying Text and Images",
       allowEditing: "Allow Editing and Annotations"
-    }
+    },
+    bestPractices: {
+      title: "Password Protection Best Practices",
+      dos: "Do's",
+      donts: "Don'ts",
+      dosList: [
+        "Use strong, unique passwords with a mix of letters, numbers, and special characters",
+        "Store passwords securely in a password manager",
+        "Share passwords through secure channels separate from the PDF",
+        "Use 256-bit encryption for highly sensitive documents"
+      ],
+      dontsList: [
+        "Use simple, easy-to-guess passwords like \"password123\" or \"1234\"",
+        "Send the password in the same email as the PDF",
+        "Use the same password for all your protected PDFs",
+        "Rely solely on password protection for extremely sensitive information"
+      ]
+    },
+    faq: {
+      encryptionDifference: {
+        question: "What's the difference between the encryption levels?",
+        answer: "We offer 128-bit and 256-bit AES encryption. 128-bit is compatible with older PDF readers (Acrobat 7 and later), while 256-bit provides stronger security but requires newer readers (Acrobat X and later)."
+      },
+      removeProtection: {
+        question: "Can I remove the password protection later?",
+        answer: "Yes, you can use our Unlock PDF tool to remove password protection from your PDF files, but you'll need to know the current password to do so."
+      },
+      securityStrength: {
+        question: "How secure is the password protection?",
+        answer: "Our tool uses industry-standard AES encryption. The security depends on the strength of your password and the encryption level you choose. We recommend using strong, unique passwords with a mix of characters."
+      },
+      contentQuality: {
+        question: "Will password protection affect the PDF content or quality?",
+        answer: "No, password protection only adds security to your document and doesn't alter the content, layout, or quality of your PDF in any way."
+      },
+      batchProcessing: {
+        question: "Can I protect multiple PDFs at once?",
+        answer: "Currently, our tool processes one PDF at a time. For batch processing of multiple files, consider our API or premium solutions."
+      }
+    },
+    protecting: "Protecting...",
+    protected: "PDF successfully protected!",
+    protectedDesc: "Your PDF file has been encrypted and password-protected."
   },
 
   // Watermark Page
@@ -311,6 +519,21 @@ export default {
       pageNumbers: "Page Numbers",
       pageNumbersHint: "Enter page numbers separated by commas (e.g. 1,3,5,8)"
     },
+    positions: {
+      topLeft: "Top Left",
+      topCenter: "Top Center",
+      topRight: "Top Right",
+      centerLeft: "Center Left",
+      center: "Center",
+      centerRight: "Center Right",
+      bottomLeft: "Bottom Left",
+      bottomCenter: "Bottom Center",
+      bottomRight: "Bottom Right"
+    },
+    preview: {
+      title: "Watermark Preview",
+      note: "This is a simplified preview. The actual result may vary."
+    },
     faq: {
       title: "Frequently Asked Questions",
       q1: {
@@ -329,7 +552,10 @@ export default {
         question: "Will watermarking affect the file quality?",
         answer: "No, our watermarking tool only adds the specified text without affecting the original document quality or file size significantly."
       }
-    }
+    },
+    addingWatermark: "Adding watermark to your PDF...",
+    watermarkSuccess: "Watermark successfully added!",
+    watermarkSuccessDesc: "Your PDF file has been watermarked and is ready for download."
   },
 
   // Compress PDF
@@ -362,13 +588,78 @@ export default {
       spaceSaved: "Space Saved",
       averageReduction: "Average Reduction",
       downloadAll: "Download All Compressed Files as ZIP"
+    },
+    of: "of",
+    files: "files",
+    filesToCompress: "Files to Compress",
+    compressAll: "Compress Files",
+    qualityPlaceholder: "Select compression quality",
+    reduction: "reduction",
+    zipDownloadSuccess: "All compressed files downloaded successfully",
+    overallProgress: "Overall Progress",
+    reducedBy: "was reduced by",
+    success: "Compression successful",
+    error: {
+      noFiles: "Please select PDF files to compress",
+      noCompressed: "No compressed files available for download",
+      downloadZip: "Failed to download ZIP archive",
+      generic: "Failed to compress PDF file",
+      unknown: "An unknown error occurred",
+      failed: "Failed to compress your file"
     }
   },
 
+  // Unlock PDF
+  unlockPdf: {
+    title: "Unlock PDF Files",
+    description: "Remove password protection from your PDF documents for unrestricted access",
+    howTo: {
+      title: "How to Unlock PDF Files",
+      upload: {
+        title: "Upload",
+        description: "Upload the password-protected PDF file you want to unlock."
+      },
+      enterPassword: {
+        title: "Enter Password",
+        description: "If needed, enter the current password that protects the PDF."
+      },
+      download: {
+        title: "Download",
+        description: "Download your unlocked PDF file with no password restrictions."
+      }
+    },
+    faq: {
+      passwordRequired: {
+        question: "Do I need to know the current password?",
+        answer: "Yes, to unlock a PDF, you need to know the current password. Our tool cannot bypass or crack passwords; it simply removes the protection after you provide the correct password."
+      },
+      security: {
+        question: "Is the unlocking process secure?",
+        answer: "Yes, all processing happens on our secure servers. We do not store your PDFs or passwords. Files are automatically deleted after processing, and all data transfer is encrypted."
+      },
+      restrictions: {
+        question: "Can I unlock a PDF with owner restrictions but no open password?",
+        answer: "Yes, some PDFs don't require a password to open but have restrictions on printing, editing, or copying. Our tool can remove these restrictions too. Just upload the file without entering a password."
+      },
+      quality: {
+        question: "Will unlocking affect the PDF quality or content?",
+        answer: "No, our unlocking process only removes the security settings. It does not alter the content, formatting, or quality of your PDF file in any way."
+      }
+    },
+    passwordProtected: "Password Protected",
+    notPasswordProtected: "Not Password Protected",
+    unlocking: "Unlocking your PDF...",
+    unlockSuccess: "PDF successfully unlocked!",
+    unlockSuccessDesc: "Your PDF file has been unlocked and is ready for download."
+  },
+
+  // File Uploader
   fileUploader: {
     dropHere: "Drop your file here",
+    dropHereaDesc: "Drop your PDF file here or click to browse",
     dragAndDrop: "Drag & drop your file",
     browse: "Browse Files",
+    dropHereDesc: "Drop your file here or click to browse.",
     maxSize: "Maximum size is 100MB.",
     remove: "Remove",
     inputFormat: "Input Format",
@@ -421,6 +712,132 @@ export default {
     addMore: "Add More",
     clear: "Clear",
     clearAll: "Clear All",
-    done: "Done"
+    done: "Done",
+    filesSecurity: "Files are automatically deleted after 24 hours for privacy and security."
+  },
+
+  // Contact Form
+  contact: {
+    title: "Contact Us",
+    description: "Have questions or feedback? We'd love to hear from you.",
+    form: {
+      name: "Your Name",
+      email: "Email Address",
+      subject: "Subject",
+      message: "Message",
+      submit: "Send Message"
+    },
+    success: "Message Sent Successfully",
+    successDesc: "Thank you for reaching out. We'll get back to you as soon as possible.",
+    error: "Failed to Send Message",
+    errorDesc: "There was an error sending your message. Please try again later.",
+    validation: {
+      name: "Name is required",
+      email: "Please enter a valid email address",
+      subject: "Subject is required",
+      message: "Message is required"
+    }
+  },
+
+  // About Page
+  about: {
+    title: "About ScanPro",
+    mission: {
+      title: "Our Mission",
+      description: "We believe in making PDF management accessible to everyone. Our online tools help you work with PDFs quickly and easily, with no software to install."
+    },
+    team: {
+      title: "Our Team",
+      description: "We're a dedicated team of developers and designers passionate about creating simple yet powerful PDF tools."
+    },
+    technology: {
+      title: "Our Technology",
+      description: "Our platform uses cutting-edge technology to provide high-quality PDF conversion, editing, and security while keeping your data safe."
+    }
+  },
+
+  // Pricing Page
+  pricing: {
+    title: "Simple, Transparent Pricing",
+    description: "Choose the plan that fits your needs",
+    free: {
+      title: "Free",
+      description: "Basic PDF tasks for occasional users",
+      features: [
+        "Convert up to 3 files/day",
+        "PDF to Word, Excel, PowerPoint",
+        "Basic compression",
+        "Merge up to 5 PDFs",
+        "Add simple watermarks",
+        "Standard OCR"
+      ]
+    },
+    pro: {
+      title: "Pro",
+      description: "More power for regular PDF users",
+      features: [
+        "Unlimited conversions",
+        "Priority processing",
+        "Advanced compression",
+        "Merge unlimited PDFs",
+        "Custom watermarks",
+        "Advanced OCR with 100+ languages",
+        "Batch processing",
+        "No ads"
+      ]
+    },
+    business: {
+      title: "Business",
+      description: "Complete solution for teams",
+      features: [
+        "Everything in Pro plan",
+        "Multiple team members",
+        "API access",
+        "GDPR compliance",
+        "Dedicated support",
+        "Usage analytics",
+        "Custom branding options"
+      ]
+    },
+    monthly: "Monthly",
+    annually: "Annually",
+    savePercent: "Save 20%",
+    currentPlan: "Current Plan",
+    upgrade: "Upgrade Now",
+    getStarted: "Get Started",
+    contact: "Contact Sales"
+  },
+
+  // Terms and Privacy Pages
+  legal: {
+    termsTitle: "Terms of Service",
+    privacyTitle: "Privacy Policy",
+    lastUpdated: "Last Updated",
+    introduction: {
+      title: "Introduction",
+      description: "Please read these terms carefully before using our service."
+    },
+    dataUse: {
+      title: "How We Use Your Data",
+      description: "We process your files only to provide the service you requested. All files are automatically deleted after 24 hours."
+    },
+    cookies: {
+      title: "Cookies and Tracking",
+      description: "We use cookies to improve your experience and analyze website traffic."
+    },
+    rights: {
+      title: "Your Rights",
+      description: "You have the right to access, correct, or delete your personal information."
+    }
+  },
+
+  // Error Pages
+  error: {
+    notFound: "Page Not Found",
+    notFoundDesc: "Sorry, we couldn't find the page you're looking for.",
+    serverError: "Server Error",
+    serverErrorDesc: "Sorry, something went wrong on our server. Please try again later.",
+    goHome: "Go Home",
+    tryAgain: "Try Again"
   }
 }

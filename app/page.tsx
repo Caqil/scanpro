@@ -34,37 +34,36 @@ export default function Home() {
       description: t('popular.pdfToWordDesc'),
       icon: <FileTextIcon className="h-6 w-6 text-blue-500" />,
       iconBg: "bg-blue-100 dark:bg-blue-900/30",
-      href: "/convert/pdf-to-docx"  // Updated URL
+      href: "/convert/pdf-to-docx"
     },
     {
       id: "pdf-to-excel",
-      name: "PDF to Excel",
-      description: "Pull data straight from PDFs into Excel spreadsheets in a few short seconds.",
+      name: t('popular.pdfToExcel'),
+      description: t('popular.pdfToExcelDesc'),
       icon: <TableIcon className="h-6 w-6 text-green-500" />,
       iconBg: "bg-green-100 dark:bg-green-900/30",
-      href: "/convert/pdf-to-xlsx"  // Updated URL
+      href: "/convert/pdf-to-xlsx"
     },
     {
       id: "merge-pdf",
-      name: "Merge PDF",
-      description: "Combine PDFs in the order you want with the easiest PDF merger available.",
+      name: t('popular.mergePdf'),
+      description: t('popular.mergePdfDesc'),
       icon: <ArrowRightIcon className="h-6 w-6 text-red-500" />,
       iconBg: "bg-red-100 dark:bg-red-900/30",
       href: "/merge"
     },
     {
       id: "compress-pdf",
-      name: "Compress PDF",
-      description: "Reduce file size while optimizing for maximal PDF quality.",
+      name: t('popular.compressPdf'),
+      description: t('popular.compressPdfDesc'),
       icon: <ArrowDownIcon className="h-6 w-6 text-green-500" />,
       iconBg: "bg-green-100 dark:bg-green-900/30",
       href: "/compress"
     },
-    
     {
       id: "protect",
-      name: "Protect PDF",
-      description: "Add text, images, shapes or freehand annotations to a PDF document.",
+      name: t('popular.protectPdf'),
+      description: t('popular.protectPdfDesc'),
       icon: <Shield className="h-6 w-6 text-purple-500" />,
       iconBg: "bg-purple-100 dark:bg-purple-900/30",
       href: "/protect",
@@ -72,10 +71,10 @@ export default function Home() {
     },
     { 
       id: "ocr",
-      name: "OCR", 
+      name: t('popular.ocr'), 
+      description: t('popular.ocrDesc'),
       href: "/ocr", 
       icon: <FileCheck2 className="h-5 w-5 text-blue-500" />,
-      description: "Extract text from scanned documents",
       iconBg: "bg-green-100 dark:bg-yellow-900/30",
       isNew: true
     }
@@ -118,9 +117,11 @@ export default function Home() {
       <section className="w-full py-12 md:py-24">
         <div className="container px-4 md:px-6">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Popular PDF Tools</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+              {t('converter.title')}
+            </h2>
             <p className="max-w-[85%] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Quickly convert, compress, edit and more with our most popular tools
+              {t('converter.description')}
             </p>
           </div>
           <div className="mx-auto grid max-w-6xl items-center gap-6 py-12 md:grid-cols-2 lg:grid-cols-3">
@@ -140,7 +141,7 @@ export default function Home() {
           <div className="flex justify-center">
             <Link href="/tools">
               <Button variant="outline" size="lg">
-                View All PDF Tools
+                {t('popular.viewAll')}
               </Button>
             </Link>
           </div>
@@ -151,9 +152,11 @@ export default function Home() {
       <section id="converter" className="w-full py-12 md:py-24 lg:py-32 bg-muted/30">
         <div className="container px-4 md:px-6">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Start Converting</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+              {t('converter.title')}
+            </h2>
             <p className="max-w-[85%] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Upload your PDF and select the format you want to convert to
+              {t('converter.description')}
             </p>
           </div>
           <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-1">
@@ -161,17 +164,17 @@ export default function Home() {
               <CardContent className="p-6">
                 <Tabs defaultValue="upload" className="w-full">
                   <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="upload">Upload & Convert</TabsTrigger>
-                    <TabsTrigger value="api">API Integration</TabsTrigger>
+                    <TabsTrigger value="upload">{t('converter.tabUpload')}</TabsTrigger>
+                    <TabsTrigger value="api">{t('converter.tabApi')}</TabsTrigger>
                   </TabsList>
                   <TabsContent value="upload" className="mt-6">
                     <FileUploader />
                   </TabsContent>
                   <TabsContent value="api" className="mt-6">
                     <div className="space-y-4">
-                      <h3 className="text-lg font-medium">Integrate with our API</h3>
+                      <h3 className="text-lg font-medium">{t('converter.apiTitle')}</h3>
                       <p className="text-muted-foreground">
-                        Use our REST API to convert PDFs programmatically in your application
+                        {t('converter.apiDesc')}
                       </p>
                       <div className="rounded-md bg-muted p-4">
                         <pre className="text-sm text-left overflow-auto">
@@ -185,7 +188,7 @@ export default function Home() {
                       </div>
                       <div className="flex justify-end">
                         <Link href="/api-docs">
-                          <Button variant="outline">View API Docs</Button>
+                          <Button variant="outline">{t('converter.apiDocs')}</Button>
                         </Link>
                       </div>
                     </div>
@@ -201,41 +204,43 @@ export default function Home() {
       <section className="w-full py-12 md:py-24 lg:py-32">
         <div className="container px-4 md:px-6">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Features</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+              {t('features.title')}
+            </h2>
             <p className="max-w-[85%] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Everything you need to convert and manage your PDF files
+              {t('features.description')}
             </p>
           </div>
           <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3">
             <FeatureCard 
               icon={<FileTextIcon className="h-10 w-10" />}
-              title="Document Formats"
-              description="Convert to DOCX, DOC, RTF, ODT and more with perfect formatting and layout preservation"
+              title={t('features.documentFormats.title')}
+              description={t('features.documentFormats.description')}
             />
             <FeatureCard 
               icon={<TableIcon className="h-10 w-10" />}
-              title="Spreadsheets"
-              description="Transform PDFs to XLSX, CSV and other spreadsheet formats with proper cell structures"
+              title={t('features.spreadsheets.title')}
+              description={t('features.spreadsheets.description')}
             />
             <FeatureCard 
               icon={<ImageIcon className="h-10 w-10" />}
-              title="Images"
-              description="Extract high-quality JPG and PNG images from your PDF files with resolution control"
+              title={t('features.images.title')}
+              description={t('features.images.description')}
             />
             <FeatureCard 
               icon={<FileIcon className="h-10 w-10" />}
-              title="Web Formats"
-              description="Convert to HTML and other web-friendly formats for online publishing"
+              title={t('features.webFormats.title')}
+              description={t('features.webFormats.description')}
             />
             <FeatureCard 
               icon={<FileIcon className="h-10 w-10" />}
-              title="OCR Technology"
-              description="Extract text from scanned documents with advanced Optical Character Recognition"
+              title={t('features.ocrTech.title')}
+              description={t('features.ocrTech.description')}
             />
             <FeatureCard 
               icon={<LightbulbIcon className="h-10 w-10" />}
-              title="Batch Processing"
-              description="Convert multiple PDFs at once to save time with our efficient batch processing"
+              title={t('features.batchProcessing.title')}
+              description={t('features.batchProcessing.description')}
             />
           </div>
         </div>
@@ -245,49 +250,23 @@ export default function Home() {
       <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
         <div className="container px-4 md:px-6">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Ready to Convert?</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+              {t('cta.title')}
+            </h2>
             <p className="max-w-[85%] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Transform your PDFs into any format you need, completely free.
+              {t('cta.description')}
             </p>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
               <Link href="#converter">
-                <Button size="lg">Start Converting</Button>
+                <Button size="lg">{t('cta.startConverting')}</Button>
               </Link>
               <Link href="/tools">
-                <Button size="lg" variant="outline">Explore All Tools</Button>
+                <Button size="lg" variant="outline">{t('cta.exploreTools')}</Button>
               </Link>
             </div>
           </div>
         </div>
       </section>
-    </div>
-  );
-}
-
-function ArrowsAnimation() {
-  return (
-    <div className="flex items-center space-x-2">
-      <div className="animate-bounce delay-100">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
-          <path d="m17 8-4-4-4 4" />
-          <path d="M3 12h18" />
-          <path d="m17 16-4 4-4-4" />
-        </svg>
-      </div>
-      <div className="animate-bounce delay-300">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
-          <path d="m17 8-4-4-4 4" />
-          <path d="M3 12h18" />
-          <path d="m17 16-4 4-4-4" />
-        </svg>
-      </div>
-      <div className="animate-bounce delay-500">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
-          <path d="m17 8-4-4-4 4" />
-          <path d="M3 12h18" />
-          <path d="m17 16-4 4-4-4" />
-        </svg>
-      </div>
     </div>
   );
 }
