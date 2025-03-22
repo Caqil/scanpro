@@ -4,8 +4,8 @@ import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { ProHeader } from "@/components/pro-header";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -93,7 +93,7 @@ export default function RootLayout({
       )}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="relative flex min-h-screen flex-col">
-            <Header />
+          <ProHeader />
             <div className="flex-1 mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
     {children}
   </div>

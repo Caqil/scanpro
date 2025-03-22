@@ -6,11 +6,18 @@ module.exports = {
             args: "start",
             env: {
                 PORT: 3001,
+                NODE_ENV: 'production'
             },
+            exec_mode: "fork",
+            instances: 1,
+            max_memory_restart: "500M",
+            watch: false,
+            merge_logs: true,
+            autorestart: true
         },
         {
             name: 'scanpro-cleanup',
-            script: '/home/scanpro/dist/scripts/cleanup-job.js', // Use absolute path
+            script: './dist/scripts/cleanup-job.js', // Using relative path
             instances: 1,
             exec_mode: 'fork',
             autorestart: false,
