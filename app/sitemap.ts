@@ -1,233 +1,110 @@
 // app/sitemap.ts
 import { MetadataRoute } from 'next';
+import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
 
-// Domain configuration
-const domain = 'https://scanpro.cc';
-const lastModified = new Date();
+// Base URL of your site
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://scanpro.cc';
 
+// Get current date in ISO format for lastModified
+const currentDate = new Date().toISOString();
+
+// Define all static pages
+const staticPages = [
+    '', // Home page
+    '/tools',
+    '/about',
+    '/features',
+    '/privacy',
+    '/terms',
+    '/contact',
+    '/api-docs',
+    '/sitemap'
+];
+
+// Define all tool pages
+const toolPages = [
+    '/compress',
+    '/merge',
+    '/watermark',
+    '/ocr',
+    '/protect',
+    '/unlock'
+];
+
+// Define all conversion pages
+const conversionPages = [
+    // PDF to other formats
+    '/convert/pdf-to-docx',
+    '/convert/pdf-to-xlsx',
+    '/convert/pdf-to-pptx',
+    '/convert/pdf-to-jpg',
+    '/convert/pdf-to-png',
+    '/convert/pdf-to-html',
+
+    // Other formats to PDF
+    '/convert/docx-to-pdf',
+    '/convert/xlsx-to-pdf',
+    '/convert/pptx-to-pdf',
+    '/convert/jpg-to-pdf',
+    '/convert/png-to-pdf',
+    '/convert/html-to-pdf'
+];
+
+// Define page change frequencies and priorities
+const pageSettings = {
+    home: { changeFrequency: 'daily', priority: 1.0 },
+    tools: { changeFrequency: 'weekly', priority: 0.9 },
+    conversion: { changeFrequency: 'weekly', priority: 0.8 },
+    static: { changeFrequency: 'monthly', priority: 0.7 }
+};
+
+// Generate sitemap
 export default function sitemap(): MetadataRoute.Sitemap {
-    // Main pages
-    const mainPages = [
-        {
-            url: `${domain}/`,
-            lastModified,
-            changeFrequency: 'weekly' as const,
-            priority: 1.0,
-        },
-        {
-            url: `${domain}/tools`,
-            lastModified,
-            changeFrequency: 'weekly' as const,
-            priority: 0.9,
-        },
-    ];
+    // Array to store all sitemap entries
+    const sitemapEntries: MetadataRoute.Sitemap = [];
 
-    // Core tools
-    const coreTools = [
-        {
-            url: `${domain}/merge`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.8,
-        },
-        {
-            url: `${domain}/split`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.8,
-        },
-        {
-            url: `${domain}/compress`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.8,
-        },
-        {
-            url: `${domain}/rotate`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-        {
-            url: `${domain}/watermark`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-        {
-            url: `${domain}/edit`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.8,
-        },
-        {
-            url: `${domain}/ocr`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.8,
-        },
-    ];
+    // Add entries for all languages
+    SUPPORTED_LANGUAGES.forEach(language => {
+        // Home page (special case with higher priority)
+        sitemapEntries.push({
+            url: language === 'en' ? baseUrl : `${baseUrl}/${language}`,
+            lastModified: currentDate,
+            changeFrequency: pageSettings.home.changeFrequency as 'daily',
+            priority: pageSettings.home.priority
+        });
 
-    // Conversion tools - PDF to other formats
-    const pdfToOtherFormats = [
-        {
-            url: `${domain}/convert/pdf-to-docx`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.8,
-        },
-        {
-            url: `${domain}/convert/pdf-to-xlsx`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-        {
-            url: `${domain}/convert/pdf-to-pptx`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-        {
-            url: `${domain}/convert/pdf-to-jpg`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-        {
-            url: `${domain}/convert/pdf-to-png`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-        {
-            url: `${domain}/convert/pdf-to-html`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-    ];
+        // Add static pages
+        staticPages.forEach(page => {
+            if (page === '') return; // Skip home page as it's already added
 
-    // Conversion tools - other formats to PDF
-    const otherFormatsToPdf = [
-        {
-            url: `${domain}/convert/docx-to-pdf`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.8,
-        },
-        {
-            url: `${domain}/convert/xlsx-to-pdf`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-        {
-            url: `${domain}/convert/pptx-to-pdf`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-        {
-            url: `${domain}/convert/jpg-to-pdf`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-        {
-            url: `${domain}/convert/png-to-pdf`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-        {
-            url: `${domain}/convert/html-to-pdf`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-    ];
+            sitemapEntries.push({
+                url: `${baseUrl}/${language}${page}`,
+                lastModified: currentDate,
+                changeFrequency: pageSettings.static.changeFrequency as 'monthly',
+                priority: pageSettings.static.priority
+            });
+        });
 
-    // Security tools
-    const securityTools = [
-        {
-            url: `${domain}/protect`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-        {
-            url: `${domain}/unlock`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-        {
-            url: `${domain}/sign`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-    ];
+        // Add tool pages
+        toolPages.forEach(page => {
+            sitemapEntries.push({
+                url: `${baseUrl}/${language}${page}`,
+                lastModified: currentDate,
+                changeFrequency: pageSettings.tools.changeFrequency as 'weekly',
+                priority: pageSettings.tools.priority
+            });
+        });
 
-    // Company pages
-    const companyPages = [
-        {
-            url: `${domain}/about`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.6,
-        },
-        {
-            url: `${domain}/pricing`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.8,
-        },
-        {
-            url: `${domain}/features`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-        },
-        {
-            url: `${domain}/api-docs`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.6,
-        },
-    ];
+        // Add conversion pages
+        conversionPages.forEach(page => {
+            sitemapEntries.push({
+                url: `${baseUrl}/${language}${page}`,
+                lastModified: currentDate,
+                changeFrequency: pageSettings.conversion.changeFrequency as 'weekly',
+                priority: pageSettings.conversion.priority
+            });
+        });
+    });
 
-    // Support pages
-    const supportPages = [
-        {
-            url: `${domain}/contact`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.6,
-        },
-        {
-            url: `${domain}/terms`,
-            lastModified,
-            changeFrequency: 'yearly' as const,
-            priority: 0.4,
-        },
-        {
-            url: `${domain}/privacy`,
-            lastModified,
-            changeFrequency: 'yearly' as const,
-            priority: 0.4,
-        },
-    ];
-
-    // Combine all routes
-    return [
-        ...mainPages,
-        ...coreTools,
-        ...pdfToOtherFormats,
-        ...otherFormatsToPdf,
-        ...securityTools,
-        ...companyPages,
-        ...supportPages,
-    ];
+    return sitemapEntries;
 }
