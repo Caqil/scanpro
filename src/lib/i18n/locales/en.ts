@@ -944,5 +944,6 @@ export default {
     serverErrorDesc: "Sorry, something went wrong on our server. Please try again later.",
     goHome: "Go Home",
     tryAgain: "Try Again"
-  }
+  },
+
 }

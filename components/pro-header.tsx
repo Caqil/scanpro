@@ -199,6 +199,13 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           icon: <ArrowDown className="h-5 w-5 text-green-500" />,
           description: "Reduce PDF file size"
         },
+        { 
+          name: "Universal Compressor", 
+          href: "/compress-files", 
+          icon: <ArrowDown className="h-5 w-5 text-green-500" />,
+          description: "Compress PDF, images, and Office files",
+          isNew: true
+        }
       ]
     },
     {
