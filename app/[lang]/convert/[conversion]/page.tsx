@@ -118,7 +118,6 @@ export async function generateMetadata({
     description: t(conversionInfo.descKey),
   };
 }
-
 export default async function ConversionPage({ 
   params 
 }: { 
@@ -126,7 +125,7 @@ export default async function ConversionPage({
 }) {
   const { lang: paramLang } = await params;
   
-  const supportedLanguages = ["en", "id", "es"];
+  const supportedLanguages = ["en", "id", "es", "fr", "zh", "ar", "hi", "ru", "pt", "de", "ja", "ko", "it", "tr"];
   if (!supportedLanguages.includes(paramLang)) {
     notFound();
   }

@@ -69,9 +69,9 @@ export default async function Layout({
   if (!SUPPORTED_LANGUAGES.includes(lang)) {
     notFound()
   }
-
+  const isRTL = lang === 'ar';
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang={lang} dir={isRTL ? "rtl" : "ltr"} suppressHydrationWarning>
       <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="relative flex min-h-screen flex-col">

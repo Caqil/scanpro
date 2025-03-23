@@ -101,9 +101,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <LanguageLink href="#converter" className="inline-flex">
-                  <Button size="lg">{t('hero.btConvert')}</Button>
-                </LanguageLink>
+               
                 <LanguageLink href="/tools" className="inline-flex">
                   <Button size="lg" variant="outline">{t('hero.btTools')}</Button>
                 </LanguageLink>
