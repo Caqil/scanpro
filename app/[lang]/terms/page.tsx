@@ -14,12 +14,7 @@ export default function TermsOfServicePage() {
   return (
     <div className="container max-w-4xl py-12 mx-auto">
       <div className="mb-8 flex items-center">
-        <LanguageLink href="/" className="mr-4">
-          <Button variant="ghost" size="sm" className="gap-1">
-            <ArrowLeft className="h-4 w-4" />
-            Back to Home
-          </Button>
-        </LanguageLink>
+        
         <h1 className="text-3xl font-bold">Terms of Service</h1>
       </div>
 

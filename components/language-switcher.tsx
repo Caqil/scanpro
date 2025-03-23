@@ -67,7 +67,7 @@ export function LanguageSwitcher({ variant = "default", size = "default" }: {
           <span>{languages.find(lang => lang.code === language)?.name || 'Language'}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="grid grid-cols-3 gap-2 p-2">
+      <DropdownMenuContent className="grid grid-cols-2 gap-2 p-2">
         {languages.map((lang) => (
           <DropdownMenuItem 
             key={lang.code}
