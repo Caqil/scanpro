@@ -34,6 +34,7 @@ import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useLanguageStore } from "@/src/store/store";
 
 // Define form schema
 const formSchema = z.object({
@@ -43,6 +44,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export function PdfUnlocker() {
+  const { t } = useLanguageStore();
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -69,9 +71,9 @@ export function PdfUnlocker() {
       if (rejectedFiles.length > 0) {
         const rejection = rejectedFiles[0];
         if (rejection.file.size > 100 * 1024 * 1024) {
-          setError("File is too large. Maximum size is 100MB.");
+          setError(t('unlockPdf.fileTooBig'));
         } else {
-          setError("Please upload a valid PDF file.");
+          setError(t('unlockPdf.invalidFile'));
         }
         return;
       }
@@ -98,8 +100,8 @@ export function PdfUnlocker() {
           setIsPasswordProtected(data.isPasswordProtected);
           
           if (!data.isPasswordProtected) {
-            toast.info("PDF is not password protected", {
-              description: "This PDF doesn't require a password to unlock.",
+            toast.info(t('unlockPdf.notPasswordProtected'), {
+              description: t('unlockPdf.noPasswordNeeded'),
             });
           }
         } catch (err) {
@@ -136,7 +138,7 @@ export function PdfUnlocker() {
   // Handle form submission
   const onSubmit = async (values: FormValues) => {
     if (!file) {
-      setError("Please select a PDF file to unlock");
+      setError(t('unlockPdf.noFileSelected'));
       return;
     }
 
@@ -175,20 +177,20 @@ export function PdfUnlocker() {
       
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to unlock PDF file");
+        throw new Error(errorData.error || t('unlockPdf.unlockFailed'));
       }
 
       const data = await response.json();
       setProgress(100);
       setUnlockedFileUrl(data.filename);
       
-      toast.success("PDF Unlocked Successfully", {
-        description: data.message || "Your PDF is now unlocked and ready for download.",
+      toast.success(t('unlockPdf.unlockSuccess'), {
+        description: data.message || t('unlockPdf.unlockSuccessDesc'),
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An unknown error occurred");
-      toast.error("Unlock Failed", {
-        description: err instanceof Error ? err.message : "Failed to unlock your file",
+      setError(err instanceof Error ? err.message : t('unlockPdf.unknownError'));
+      toast.error(t('unlockPdf.unlockFailed'), {
+        description: err instanceof Error ? err.message : t('unlockPdf.unknownError'),
       });
     } finally {
       setIsProcessing(false);
@@ -196,9 +198,10 @@ export function PdfUnlocker() {
   };
 
   return (
+    
     <Card className="border shadow-sm">
       <CardHeader>
-        <CardTitle>Unlock PDF File</CardTitle>
+        <CardTitle>{t('unlockPdf.title')}</CardTitle>
       </CardHeader>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -227,8 +230,8 @@ export function PdfUnlocker() {
                       {formatFileSize(file.size)}
                       {isPasswordProtected !== null && (
                         isPasswordProtected 
-                          ? " • Password Protected" 
-                          : " • Not Password Protected"
+                          ? ` • ${t('unlockPdf.passwordProtected')}` 
+                          : ` • ${t('unlockPdf.notPasswordProtected')}`
                       )}
                     </p>
                   </div>
@@ -242,7 +245,7 @@ export function PdfUnlocker() {
                       handleRemoveFile();
                     }}
                   >
-                    <Cross2Icon className="h-4 w-4 mr-1" /> Remove
+                    <Cross2Icon className="h-4 w-4 mr-1" /> {t('ui.remove')}
                   </Button>
                 </div>
               ) : (
@@ -251,13 +254,13 @@ export function PdfUnlocker() {
                     <UploadIcon className="h-6 w-6 text-muted-foreground" />
                   </div>
                   <div className="text-lg font-medium">
-                    {isDragActive ? "Drop your PDF here" : "Drag & drop your PDF"}
+                    {isDragActive ? t('fileUploader.dropHere') : t('fileUploader.dragAndDrop')}
                   </div>
                   <p className="text-sm text-muted-foreground max-w-sm">
-                    Drop your password-protected PDF file here or click to browse. Maximum size is 100MB.
+                    {t('fileUploader.dropHere')} {t('fileUploader.maxSize')}
                   </p>
                   <Button type="button" variant="secondary" size="sm" className="mt-2">
-                    Browse Files
+                    {t('fileUploader.browse')}
                   </Button>
                 </div>
               )}
@@ -271,17 +274,17 @@ export function PdfUnlocker() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel>{t('fileUploader.password')}</FormLabel>
                       <FormControl>
                         <Input
                           type="password"
-                          placeholder="Enter PDF password"
+                          placeholder={t('unlockPdf.enterPassword')}
                           {...field}
                           disabled={isProcessing}
                         />
                       </FormControl>
                       <p className="text-xs text-muted-foreground">
-                        Enter the password used to protect this PDF file.
+                        {t('unlockPdf.passwordProtected')}
                       </p>
                       <FormMessage />
                     </FormItem>
@@ -304,7 +307,7 @@ export function PdfUnlocker() {
                 <Progress value={progress} className="h-2" />
                 <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                   <UnlockIcon className="h-4 w-4 animate-pulse" />
-                  <span>Unlocking your PDF... {progress}%</span>
+                  <span>{t('unlockPdf.unlocking')} {progress}%</span>
                 </div>
               </div>
             )}
@@ -318,10 +321,10 @@ export function PdfUnlocker() {
                   </div>
                   <div className="flex-1">
                     <h3 className="font-medium text-green-600 dark:text-green-400">
-                      PDF successfully unlocked!
+                      {t('unlockPdf.unlockSuccess')}
                     </h3>
                     <p className="text-sm text-muted-foreground mt-1 mb-3">
-                      Your PDF file has been unlocked and is ready for download.
+                      {t('unlockPdf.unlockSuccessDesc')}
                     </p>
                     <Button 
                       className="w-full sm:w-auto" 
@@ -330,7 +333,7 @@ export function PdfUnlocker() {
                     >
                       <a href={`/api/file?folder=unlocked&filename=${encodeURIComponent(unlockedFileUrl)}`} download>
                         <DownloadIcon className="h-4 w-4 mr-2" />
-                        Download Unlocked PDF
+                        {t('fileUploader.download')}
                       </a>
                     </Button>
                   </div>
@@ -344,7 +347,7 @@ export function PdfUnlocker() {
                 type="submit" 
                 disabled={isProcessing}
               >
-                {isProcessing ? "Unlocking..." : "Unlock PDF"}
+                {isProcessing ? t('ui.processing') : t('unlockPdf.title')}
               </Button>
             )}
           </CardFooter>

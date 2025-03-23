@@ -296,19 +296,53 @@ export default {
       }
     },
     whatIsOcr: {
-      title: "Apa itu OCR?",
-      description: "Pengenalan Karakter Optik (OCR) adalah teknologi yang mengonversi berbagai jenis dokumen, seperti dokumen kertas yang dipindai, file PDF, atau gambar yang diambil oleh kamera digital, menjadi data yang dapat diedit dan dicari."
+      title: "Pengenalan Karakter Optik (OCR)",
+      description: "Adalah teknologi yang mengonversi berbagai jenis dokumen, seperti dokumen kertas yang dipindai, file PDF, atau gambar yang diambil oleh kamera digital, menjadi data yang dapat diedit dan dicari.",
+      explanation: "OCR menganalisis struktur gambar dokumen, mengidentifikasi karakter dan elemen teks, kemudian mengonversinya menjadi format yang dapat dibaca mesin.",
+      extractionList: {
+        scannedPdfs: "PDF yang dipindai di mana teks ada sebagai gambar",
+        imageOnlyPdfs: "PDF berbasis gambar tanpa lapisan teks",
+        embeddedImages: "PDF yang berisi gambar dengan teks",
+        textCopyingIssues: "Dokumen di mana penyalinan teks langsung tidak berfungsi"
+      }
     },
     whenToUse: {
       title: "Kapan Menggunakan Ekstraksi Teks OCR",
       idealFor: "Ideal untuk:",
-      notNecessaryFor: "Tidak diperlukan untuk:"
+      idealForList: {
+        scannedDocuments: "Dokumen yang dipindai dan disimpan sebagai PDF",
+        oldDocuments: "Dokumen lama tanpa lapisan teks digital",
+        textSelectionIssues: "PDF di mana pemilihan/penyalinan teks tidak berfungsi",
+        textInImages: "Gambar yang berisi teks yang perlu diekstraksi",
+        searchableArchives: "Membuat arsip yang dapat dicari dari dokumen yang dipindai"
+      },
+      notNecessaryFor: "Tidak diperlukan untuk:",
+      notNecessaryForList: {
+        digitalPdfs: "PDF digital asli di mana teks dapat dipilih",
+        createdDigitally: "PDF yang dibuat langsung dari dokumen digital",
+        copyPasteAvailable: "Dokumen di mana Anda sudah dapat menyalin dan menempel teks",
+        formatPreservation: "File yang memerlukan preservasi format (gunakan konversi PDF ke DOCX kami)"
+      }
     },
     limitations: {
       title: "Keterbatasan & Tips OCR",
       description: "Meskipun teknologi OCR kami kuat, ada beberapa keterbatasan yang perlu diperhatikan:",
       factorsAffecting: "Faktor yang memengaruhi akurasi OCR:",
-      tipsForBest: "Tips untuk hasil terbaik:"
+      factorsList: {
+        documentQuality: "Kualitas dokumen (resolusi, kontras)",
+        complexLayouts: "Tata letak dan pemformatan yang kompleks",
+        handwrittenText: "Teks tulisan tangan (pengenalan terbatas)",
+        specialCharacters: "Karakter dan simbol khusus",
+        multipleLanguages: "Beberapa bahasa dalam satu dokumen"
+      },
+      tipsForBest: "Tips untuk hasil terbaik:",
+      tipsList: {
+        highQualityScans: "Gunakan pemindaian berkualitas tinggi (300 DPI atau lebih)",
+        correctLanguage: "Pilih bahasa yang benar untuk dokumen Anda",
+        enhanceScannedImages: "Aktifkan \"Tingkatkan gambar yang dipindai\" untuk akurasi lebih baik",
+        smallerPageRanges: "Proses rentang halaman yang lebih kecil untuk dokumen besar",
+        reviewText: "Tinjau dan koreksi teks yang diekstraksi"
+      }
     },
     faq: {
       title: "Pertanyaan yang Sering Diajukan",
@@ -718,6 +752,7 @@ export default {
     clear: "Hapus",
     clearAll: "Hapus Semua",
     done: "Selesai",
+    extract: "ekstrak",
     filesSecurity: "File akan otomatis dihapus setelah 24 jam demi privasi dan keamanan."
   },
 

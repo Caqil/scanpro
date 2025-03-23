@@ -295,21 +295,6 @@ export default {
         description: "Copy the extracted text or download it as a text file for further use."
       }
     },
-    whatIsOcr: {
-      title: "What is OCR?",
-      description: "Optical Character Recognition (OCR) is a technology that converts different types of documents, such as scanned paper documents, PDF files, or images captured by a digital camera, into editable and searchable data."
-    },
-    whenToUse: {
-      title: "When to Use OCR Text Extraction",
-      idealFor: "Ideal for:",
-      notNecessaryFor: "Not necessary for:"
-    },
-    limitations: {
-      title: "OCR Limitations & Tips",
-      description: "While our OCR technology is powerful, there are some limitations to be aware of:",
-      factorsAffecting: "Factors affecting OCR accuracy:",
-      tipsForBest: "Tips for best results:"
-    },
     faq: {
       title: "Frequently Asked Questions",
       questions: {
@@ -354,6 +339,55 @@ export default {
       japanese: "Japanese",
       arabic: "Arabic",
       russian: "Russian"
+    },
+    whatIsOcr: {
+      title: "Optical Character Recognition (OCR)",
+      description: "Is a technology that converts different types of documents, such as scanned paper documents, PDF files, or images captured by a digital camera, into editable and searchable data.",
+      explanation: "OCR analyzes the structure of the document image, identifies characters and text elements, and then converts them into a machine-readable format.",
+      extractionList: {
+        scannedPdfs: "Scanned PDFs where the text exists as an image",
+        imageOnlyPdfs: "Image-only PDFs with no underlying text layer",
+        embeddedImages: "PDFs containing embedded images with text",
+        textCopyingIssues: "Documents where copying text directly doesn't work"
+      }
+    },
+    whenToUse: {
+      title: "When to Use OCR Text Extraction",
+      idealFor: "Ideal for:",
+      idealForList: {
+        scannedDocuments: "Scanned documents saved as PDFs",
+        oldDocuments: "Old documents without digital text layers",
+        textSelectionIssues: "PDFs where text selection/copying doesn't work",
+        textInImages: "Images containing text that needs to be extracted",
+        searchableArchives: "Creating searchable archives from scanned documents"
+      },
+      notNecessaryFor: "Not necessary for:",
+      notNecessaryForList: {
+        digitalPdfs: "Native digital PDFs where text can already be selected",
+        createdDigitally: "PDFs created directly from digital documents",
+        copyPasteAvailable: "Documents where you can already copy and paste text",
+        formatPreservation: "Files that need format preservation (use our PDF to DOCX conversion instead)"
+      }
+    },
+    limitations: {
+      title: "OCR Limitations & Tips",
+      description: "While our OCR technology is powerful, there are some limitations to be aware of:",
+      factorsAffecting: "Factors affecting OCR accuracy:",
+      factorsList: {
+        documentQuality: "Document quality (resolution, contrast)",
+        complexLayouts: "Complex layouts and formatting",
+        handwrittenText: "Handwritten text (limited recognition)",
+        specialCharacters: "Special characters and symbols",
+        multipleLanguages: "Multiple languages in one document"
+      },
+      tipsForBest: "Tips for best results:",
+      tipsList: {
+        highQualityScans: "Use high-quality scans (300 DPI or higher)",
+        correctLanguage: "Select the correct language for your document",
+        enhanceScannedImages: "Enable \"Enhance scanned images\" for better accuracy",
+        smallerPageRanges: "Process smaller page ranges for large documents",
+        reviewText: "Review and correct the extracted text afterward"
+      }
     },
     options: {
       scope: "Pages to Extract",
@@ -718,6 +752,7 @@ export default {
     clear: "Clear",
     clearAll: "Clear All",
     done: "Done",
+    extract: "extract",
     filesSecurity: "Files are automatically deleted after 24 hours for privacy and security."
   },
 

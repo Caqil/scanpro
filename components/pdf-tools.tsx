@@ -2,6 +2,7 @@
 "use client";
 
 import { PdfToolCard } from "@/components/pdf-tool-card";
+import { useLanguageStore } from "@/src/lib/i18n";
 import {
   FileTextIcon,
   ImageIcon,
@@ -206,6 +207,7 @@ const pdfTools = [
 ];
 
 export function PdfTools() {
+  
   return (
     <div className="container max-w-6xl py-8 mx-auto">
       <div className="space-y-8">

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { LanguageLink } from "./language-link";
+import { useLanguageStore } from "@/src/store/store";
 
 interface PdfToolCardProps {
   id: string;
@@ -21,7 +22,8 @@ export function PdfToolCard({
   iconBg,
   href,
   isNew
-}: PdfToolCardProps) {
+}: PdfToolCardProps) { 
+  const { t } = useLanguageStore()
   return (
     <LanguageLink href={href} className="block h-full transition-transform hover:scale-[1.02]">
       <Card className="h-full hover:shadow-md transition-shadow overflow-hidden">
