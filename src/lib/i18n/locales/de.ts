@@ -944,5 +944,51 @@ export default {
       serverErrorDesc: "Entschuldigung, auf unserem Server ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.",
       goHome: "Zur Startseite",
       tryAgain: "Erneut versuchen"
+    },
+    universalCompressor: {
+      title: "Universeller Dateikompressor",
+      description: "PDFs, Bilder und Office-Dokumente komprimieren, ohne Qualität zu verlieren",
+      dropHereDesc: "Dateien hierher ziehen und ablegen (PDF, JPG, PNG, DOCX, PPTX, XLSX)",
+      filesToCompress: "Zu komprimierende Dateien",
+      compressAll: "Alle Dateien komprimieren",
+      results: {
+        title: "Komprimierungsergebnisse",
+        downloadAll: "Alle komprimierten Dateien herunterladen"
+      },
+      fileTypes: {
+        pdf: "PDF-Dokument",
+        image: "Bild",
+        office: "Office-Dokument",
+        unknown: "Unbekannte Datei"
+      },
+      howTo: {
+        title: "Wie man Dateien komprimiert",
+        step1: {
+          title: "Dateien hochladen",
+          description: "Laden Sie die Dateien hoch, die Sie komprimieren möchten"
+        },
+        step2: {
+          title: "Qualität wählen",
+          description: "Wählen Sie Ihr bevorzugtes Komprimierungslevel"
+        },
+        step3: {
+          title: "Herunterladen",
+          description: "Klicken Sie auf Komprimieren und laden Sie Ihre komprimierten Dateien herunter"
+        }
+      },
+      faq: {
+        compressionRate: {
+          question: "Wie stark können Dateien komprimiert werden?",
+          answer: "Die Komprimierungsraten variieren je nach Dateityp und Inhalt. PDFs werden typischerweise um 20-70 %, Bilder um 30-80 % und Office-Dokumente um 10-50 % komprimiert."
+        },
+        quality: {
+          question: "Beeinflusst die Komprimierung die Qualität meiner Dateien?",
+          answer: "Unsere Komprimierungsalgorithmen balancieren Größenreduktion mit Qualitätserhalt. Die Einstellung 'Hohe Qualität' erhält nahezu identische visuelle Qualität."
+        },
+        sizeLimit: {
+          question: "Gibt es eine Dateigrößenbeschränkung?",
+          answer: "Ja, Sie können Dateien bis zu 100 MB pro Datei komprimieren."
+        }
+      }
     }
   }

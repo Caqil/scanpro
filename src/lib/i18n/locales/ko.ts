@@ -944,5 +944,51 @@ export default {
     serverErrorDesc: "죄송합니다. 서버에서 문제가 발생했습니다. 나중에 다시 시도해 주세요.",
     goHome: "홈으로 가기",
     tryAgain: "다시 시도"
+  },
+  universalCompressor: {
+    title: "유니버설 파일 압축기",
+    description: "PDF, 이미지, 오피스 문서를 품질을 유지하면서 압축하세요",
+    dropHereDesc: "여기에 파일을 드래그 앤 드롭하세요 (PDF, JPG, PNG, DOCX, PPTX, XLSX)",
+    filesToCompress: "압축할 파일",
+    compressAll: "모든 파일 압축",
+    results: {
+      title: "압축 결과",
+      downloadAll: "모든 압축 파일 다운로드"
+    },
+    fileTypes: {
+      pdf: "PDF 문서",
+      image: "이미지",
+      office: "오피스 문서",
+      unknown: "알 수 없는 파일"
+    },
+    howTo: {
+      title: "파일 압축 방법",
+      step1: {
+        title: "파일 업로드",
+        description: "압축하고 싶은 파일을 업로드하세요"
+      },
+      step2: {
+        title: "품질 선택",
+        description: "원하는 압축 수준을 선택하세요"
+      },
+      step3: {
+        title: "다운로드",
+        description: "압축을 클릭하고 압축된 파일을 다운로드하세요"
+      }
+    },
+    faq: {
+      compressionRate: {
+        question: "파일을 얼마나 압축할 수 있나요?",
+        answer: "압축률은 파일 유형과 내용에 따라 다릅니다. PDF는 보통 20-70%, 이미지는 30-80%, 오피스 문서는 10-50% 압축됩니다."
+      },
+      quality: {
+        question: "압축이 파일 품질에 영향을 미치나요?",
+        answer: "저희 압축 알고리즘은 크기 감소와 품질 유지를 균형 있게 조정합니다. '높은 품질' 설정은 거의 동일한 시각적 품질을 유지합니다."
+      },
+      sizeLimit: {
+        question: "파일 크기 제한이 있나요?",
+        answer: "네, 파일당 최대 100MB까지 압축할 수 있습니다."
+      }
+    }
   }
 }

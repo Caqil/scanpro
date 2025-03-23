@@ -1,82 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ClientConversionContent } from "./client-conversion-content";
-import enTranslations from '@/src/lib/i18n/locales/en';
-import idTranslations from '@/src/lib/i18n/locales/id';
-import esTranslations from '@/src/lib/i18n/locales/es';
-import frTranslations from '@/src/lib/i18n/locales/fr';
-import zhTranslations from '@/src/lib/i18n/locales/zh';
-import arTranslations from '@/src/lib/i18n/locales/ar';
-import hiTranslations from '@/src/lib/i18n/locales/hi';
-import ruTranslations from '@/src/lib/i18n/locales/ru';
-import ptTranslations from '@/src/lib/i18n/locales/pt';
-import deTranslations from '@/src/lib/i18n/locales/de';
-import jaTranslations from '@/src/lib/i18n/locales/ja';
-import koTranslations from '@/src/lib/i18n/locales/ko';
-import itTranslations from '@/src/lib/i18n/locales/it';
-import trTranslations from '@/src/lib/i18n/locales/tr';
-import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
-
-type Language = typeof SUPPORTED_LANGUAGES[number];
-
-// Helper function to get translation based on language
-function getTranslation(lang: string, key: string): string {
-  let translations = enTranslations;
-  
-  // Check which language to use
-  switch (lang) {
-    case "id":
-      translations = idTranslations;
-      break;
-    case "es":
-      translations = esTranslations;
-      break;
-    case "fr":
-      translations = frTranslations;
-      break;
-    case "zh":
-      translations = zhTranslations;
-      break;
-    case "ar":
-      translations = arTranslations;
-      break;
-    case "hi":
-      translations = hiTranslations;
-      break;
-    case "ru":
-      translations = ruTranslations;
-      break;
-    case "pt":
-      translations = ptTranslations;
-      break;
-    case "de":
-      translations = deTranslations;
-      break;
-    case "ja":
-      translations = jaTranslations;
-      break;
-    case "ko":
-      translations = koTranslations;
-      break;
-    case "it":
-      translations = itTranslations;
-      break;
-    case "tr":
-      translations = trTranslations;
-      break;
-    default:
-      translations = enTranslations; // Fallback to English
-  }
-  
-  // Navigate through nested keys
-  const keys = key.split('.');
-  const result = keys.reduce((obj, k) => 
-    (obj && obj[k] !== undefined) ? obj[k] : undefined, 
-    translations as any
-  );
-  
-  return result !== undefined ? result : key;
-}
+import { SUPPORTED_LANGUAGES, getTranslation } from '@/src/lib/i18n/config';
 
 // Define conversion types mapping for metadata generation
 const conversionTitles: Record<string, { titleKey: string, descKey: string }> = {
@@ -116,8 +41,38 @@ export async function generateMetadata({
   return {
     title: t(conversionInfo.titleKey) + " | " + t("metadata.template").replace("%s", ""),
     description: t(conversionInfo.descKey),
+    openGraph: {
+      title:  t(conversionInfo.titleKey) + " | " + t("metadata.template").replace("%s", ""),
+      description: t(conversionInfo.descKey),
+      url: `/${lang}/convert/${conversion}`,
+      siteName: "ScanPro",
+      locale: lang === "id" ? "id_ID" : lang === "es" ? "es_ES" : "en_US",
+    },
+    alternates: {
+      canonical: `/${lang}/convert/${conversion}`,
+      languages: Object.fromEntries(
+        SUPPORTED_LANGUAGES.map(code => {
+          const langCode = code === 'en' ? 'en-US' : 
+                          code === 'id' ? 'id-ID' : 
+                          code === 'es' ? 'es-ES' :
+                          code === 'fr' ? 'fr-FR' :
+                          code === 'zh' ? 'zh-CN' :
+                          code === 'ar' ? 'ar-SA' :
+                          code === 'hi' ? 'hi-IN' :
+                          code === 'ru' ? 'ru-RU' :
+                          code === 'pt' ? 'pt-BR' :
+                          code === 'de' ? 'de-DE' :
+                          code === 'ja' ? 'ja-JP' :
+                          code === 'ko' ? 'ko-KR' :
+                          code === 'it' ? 'it-IT' :
+                          code === 'tr' ? 'tr-TR' : `${code}`;
+          return [langCode, `/${code}/convert/${conversion}`];
+        })
+      ),
+    },
   };
 }
+
 export default async function ConversionPage({ 
   params 
 }: { 
@@ -125,8 +80,7 @@ export default async function ConversionPage({
 }) {
   const { lang: paramLang } = await params;
   
-  const supportedLanguages = ["en", "id", "es", "fr", "zh", "ar", "hi", "ru", "pt", "de", "ja", "ko", "it", "tr"];
-  if (!supportedLanguages.includes(paramLang)) {
+  if (!SUPPORTED_LANGUAGES.includes(paramLang)) {
     notFound();
   }
   

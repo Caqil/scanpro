@@ -96,11 +96,28 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     },
     alternates: {
       canonical: `/${lang}/tools`,
-      languages: {
-        "en-US": "/en/tools",
-        "id-ID": "/id/tools",
-        "es-ES": "/es/tools",
-      },
+      languages: Object.fromEntries(
+        SUPPORTED_LANGUAGES.map(code => {
+          const langCode = {
+            'en': 'en-US',
+            'id': 'id-ID',
+            'es': 'es-ES',
+            'fr': 'fr-FR',
+            'zh': 'zh-CN',
+            'ar': 'ar-SA',
+            'hi': 'hi-IN',
+            'ru': 'ru-RU',
+            'pt': 'pt-BR',
+            'de': 'de-DE',
+            'ja': 'ja-JP',
+            'ko': 'ko-KR',
+            'it': 'it-IT',
+            'tr': 'tr-TR'
+          }[code] || `${code}`;
+          
+          return [langCode, `/${code}/tools`];
+        })
+      ),
     },
   };
 }

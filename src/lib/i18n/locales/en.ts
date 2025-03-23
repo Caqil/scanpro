@@ -945,5 +945,50 @@ export default {
     goHome: "Go Home",
     tryAgain: "Try Again"
   },
-
+  universalCompressor: {
+    title: "Universal File Compressor",
+    description: "Compress PDF, images, and Office documents while maintaining quality",
+    dropHereDesc: "Drag and drop files here (PDF, JPG, PNG, DOCX, PPTX, XLSX)",
+    filesToCompress: "Files to Compress",
+    compressAll: "Compress All Files",
+    results: {
+      title: "Compression Results",
+      downloadAll: "Download All Compressed Files"
+    },
+    fileTypes: {
+      pdf: "PDF Document",
+      image: "Image",
+      office: "Office Document",
+      unknown: "Unknown File"
+    },
+    howTo: {
+      title: "How to Compress Files",
+      step1: {
+        title: "Upload Files",
+        description: "Upload the files you want to compress"
+      },
+      step2: {
+        title: "Choose Quality",
+        description: "Select your preferred compression level"
+      },
+      step3: {
+        title: "Download",
+        description: "Click compress and download your compressed files"
+      }
+    },
+    faq: {
+      compressionRate: {
+        question: "How much can files be compressed?",
+        answer: "Compression rates vary by file type and content. PDFs typically compress by 20-70%, images by 30-80%, and Office documents by 10-50%."
+      },
+      quality: {
+        question: "Will compression affect the quality of my files?",
+        answer: "Our compression algorithms balance size reduction with quality preservation. The 'High' quality setting will maintain nearly identical visual quality."
+      },
+      sizeLimit: {
+        question: "Is there a file size limit?",
+        answer: "Yes, you can compress files up to 100MB each."
+      }
+    }
+  }
 }

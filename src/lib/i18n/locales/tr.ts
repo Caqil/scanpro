@@ -944,5 +944,52 @@ export default {
         serverErrorDesc: "Üzgünüz, sunucumuzda bir şeyler ters gitti. Lütfen daha sonra tekrar deneyin.",
         goHome: "Ana Sayfaya Git",
         tryAgain: "Tekrar Dene"
-    }
+    },
+    universalCompressor: {
+        title: "Evrensel Dosya Sıkıştırıcı",
+        description: "PDF, resimler ve Office belgelerini kaliteyi koruyarak sıkıştırın",
+        dropHereDesc: "Dosyaları buraya sürükleyip bırakın (PDF, JPG, PNG, DOCX, PPTX, XLSX)",
+        filesToCompress: "Sıkıştırılacak Dosyalar",
+        compressAll: "Tüm Dosyaları Sıkıştır",
+        results: {
+            title: "Sıkıştırma Sonuçları",
+            downloadAll: "Tüm Sıkıştırılmış Dosyaları İndir"
+        },
+        fileTypes: {
+            pdf: "PDF Belgesi",
+            image: "Resim",
+            office: "Office Belgesi",
+            unknown: "Bilinmeyen Dosya"
+        },
+        howTo: {
+            title: "Dosyalar Nasıl Sıkıştırılır",
+            step1: {
+                title: "Dosyaları Yükle",
+                description: "Sıkıştırmak istediğiniz dosyaları yükleyin"
+            },
+            step2: {
+                title: "Kalite Seç",
+                description: "Tercih ettiğiniz sıkıştırma seviyesini seçin"
+            },
+            step3: {
+                title: "İndir",
+                description: "Sıkıştır’a tıklayın ve sıkıştırılmış dosyalarınızı indirin"
+            }
+        },
+        faq: {
+            compressionRate: {
+                question: "Dosyalar ne kadar sıkıştırılabilir?",
+                answer: "Sıkıştırma oranları dosya türüne ve içeriğine göre değişir. PDF’ler genellikle %20-70, resimler %30-80 ve Office belgeleri %10-50 oranında sıkıştırılır."
+            },
+            quality: {
+                question: "Sıkıştırma dosyalarımın kalitesini etkiler mi?",
+                answer: "Sıkıştırma algoritmalarımız boyut küçültme ile kalite koruma arasında denge sağlar. 'Yüksek Kalite' ayarı neredeyse aynı görsel kaliteyi korur."
+            },
+            sizeLimit: {
+                question: "Dosya boyutu sınırı var mı?",
+                answer: "Evet, her biri 100 MB’a kadar olan dosyaları sıkıştırabilirsiniz."
+            }
+        }
+    },
+    
 }

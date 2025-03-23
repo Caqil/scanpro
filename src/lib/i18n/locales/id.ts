@@ -945,5 +945,51 @@ export default {
     serverErrorDesc: "Maaf, ada yang salah di server kami. Silakan coba lagi nanti.",
     goHome: "Kembali ke Beranda",
     tryAgain: "Coba Lagi"
+  },
+  universalCompressor: {
+    title: "Kompresor File Universal",
+    description: "Kompres PDF, gambar, dan dokumen Office sambil mempertahankan kualitas",
+    dropHereDesc: "Seret dan lepaskan file di sini (PDF, JPG, PNG, DOCX, PPTX, XLSX)",
+    filesToCompress: "File untuk Dikompres",
+    compressAll: "Kompres Semua File",
+    results: {
+      title: "Hasil Kompresi",
+      downloadAll: "Unduh Semua File Terkompresi"
+    },
+    fileTypes: {
+      pdf: "Dokumen PDF",
+      image: "Gambar",
+      office: "Dokumen Office",
+      unknown: "File Tidak Dikenal"
+    },
+    howTo: {
+      title: "Cara Mengompres File",
+      step1: {
+        title: "Unggah File",
+        description: "Unggah file yang ingin Anda kompres"
+      },
+      step2: {
+        title: "Pilih Kualitas",
+        description: "Pilih tingkat kompresi yang Anda inginkan"
+      },
+      step3: {
+        title: "Unduh",
+        description: "Klik kompres dan unduh file terkompresi Anda"
+      }
+    },
+    faq: {
+      compressionRate: {
+        question: "Seberapa banyak file bisa dikompresi?",
+        answer: "Tingkat kompresi bervariasi tergantung pada jenis file dan konten. PDF biasanya dikompresi 20-70%, gambar 30-80%, dan dokumen Office 10-50%."
+      },
+      quality: {
+        question: "Apakah kompresi akan memengaruhi kualitas file saya?",
+        answer: "Algoritma kompresi kami menyeimbangkan pengurangan ukuran dengan pelestarian kualitas. Pengaturan 'Kualitas Tinggi' akan mempertahankan kualitas visual yang hampir identik."
+      },
+      sizeLimit: {
+        question: "Apakah ada batas ukuran file?",
+        answer: "Ya, Anda dapat mengompresi file hingga 100 MB per file."
+      }
+    }
   }
 }

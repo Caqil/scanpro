@@ -944,5 +944,51 @@ export default {
     serverErrorDesc: "Lo sentimos, algo salió mal en nuestro servidor. Por favor intenta de nuevo más tarde.",
     goHome: "Ir a Inicio",
     tryAgain: "Intentar de Nuevo"
+  },
+  universalCompressor: {
+    title: "Compresor de Archivos Universal",
+    description: "Comprime PDF, imágenes y documentos de Office manteniendo la calidad",
+    dropHereDesc: "Arrastra y suelta archivos aquí (PDF, JPG, PNG, DOCX, PPTX, XLSX)",
+    filesToCompress: "Archivos a comprimir",
+    compressAll: "Comprimir todos los archivos",
+    results: {
+      title: "Resultados de compresión",
+      downloadAll: "Descargar todos los archivos comprimidos"
+    },
+    fileTypes: {
+      pdf: "Documento PDF",
+      image: "Imagen",
+      office: "Documento de Office",
+      unknown: "Archivo desconocido"
+    },
+    howTo: {
+      title: "Cómo comprimir archivos",
+      step1: {
+        title: "Subir archivos",
+        description: "Sube los archivos que deseas comprimir"
+      },
+      step2: {
+        title: "Elegir calidad",
+        description: "Selecciona tu nivel de compresión preferido"
+      },
+      step3: {
+        title: "Descargar",
+        description: "Haz clic en comprimir y descarga tus archivos comprimidos"
+      }
+    },
+    faq: {
+      compressionRate: {
+        question: "¿Cuánto se pueden comprimir los archivos?",
+        answer: "Las tasas de compresión varían según el tipo de archivo y el contenido. Los PDF suelen comprimirse entre un 20-70 %, las imágenes entre un 30-80 % y los documentos de Office entre un 10-50 %."
+      },
+      quality: {
+        question: "¿Afectará la compresión la calidad de mis archivos?",
+        answer: "Nuestros algoritmos de compresión equilibran la reducción de tamaño con la preservación de la calidad. La configuración de 'Alta calidad' mantendrá una calidad visual casi idéntica."
+      },
+      sizeLimit: {
+        question: "¿Hay un límite de tamaño de archivo?",
+        answer: "Sí, puedes comprimir archivos de hasta 100 MB cada uno."
+      }
+    }
   }
 }

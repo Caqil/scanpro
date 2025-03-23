@@ -944,5 +944,51 @@ export default {
         serverErrorDesc: "抱歉，我们的服务器出现了问题。请稍后再试。",
         goHome: "返回首页",
         tryAgain: "再次尝试"
+    },
+    universalCompressor: {
+        title: "通用文件压缩器",
+        description: "压缩PDF、图片和Office文档，同时保持质量",
+        dropHereDesc: "将文件拖放到此处（PDF、JPG、PNG、DOCX、PPTX、XLSX）",
+        filesToCompress: "要压缩的文件",
+        compressAll: "压缩所有文件",
+        results: {
+            title: "压缩结果",
+            downloadAll: "下载所有压缩文件"
+        },
+        fileTypes: {
+            pdf: "PDF文档",
+            image: "图片",
+            office: "Office文档",
+            unknown: "未知文件"
+        },
+        howTo: {
+            title: "如何压缩文件",
+            step1: {
+                title: "上传文件",
+                description: "上传您想压缩的文件"
+            },
+            step2: {
+                title: "选择质量",
+                description: "选择您偏好的压缩级别"
+            },
+            step3: {
+                title: "下载",
+                description: "点击压缩并下载您的压缩文件"
+            }
+        },
+        faq: {
+            compressionRate: {
+                question: "文件可以压缩多少？",
+                answer: "压缩率因文件类型和内容而异。PDF通常压缩20-70%，图片压缩30-80%，Office文档压缩10-50%。"
+            },
+            quality: {
+                question: "压缩会影响文件质量吗？",
+                answer: "我们的压缩算法在减少文件大小和保持质量之间取得平衡。'高质量'设置将保持几乎相同的视觉质量。"
+            },
+            sizeLimit: {
+                question: "有文件大小限制吗？",
+                answer: "是的，您可以压缩每个文件高达100MB。"
+            }
+        }
     }
 }

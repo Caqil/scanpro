@@ -95,12 +95,29 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     },
     alternates: {
       canonical: `/${lang}/contact`,
-      languages: {
-        "en-US": "/en/contact",
-        "id-ID": "/id/contact",
-        "es-ES": "/es/contact",
-      },
-    },
+      languages: Object.fromEntries(
+        SUPPORTED_LANGUAGES.map(code => {
+          const langCode = {
+            'en': 'en-US',
+            'id': 'id-ID',
+            'es': 'es-ES',
+            'fr': 'fr-FR',
+            'zh': 'zh-CN',
+            'ar': 'ar-SA',
+            'hi': 'hi-IN',
+            'ru': 'ru-RU',
+            'pt': 'pt-BR',
+            'de': 'de-DE',
+            'ja': 'ja-JP',
+            'ko': 'ko-KR',
+            'it': 'it-IT',
+            'tr': 'tr-TR'
+          }[code] || `${code}`;
+          
+          return [langCode, `/${code}/contact`];
+        })
+      ),
+    }
   };
 }
 

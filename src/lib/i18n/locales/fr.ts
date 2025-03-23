@@ -944,5 +944,51 @@ export default {
         serverErrorDesc: "Désolé, quelque chose s’est mal passé sur notre serveur. Veuillez réessayer plus tard.",
         goHome: "Retourner à l’Accueil",
         tryAgain: "Réessayer"
+    },
+    universalCompressor: {
+        title: "Compresseur de fichiers universel",
+        description: "Compressez des PDF, images et documents Office tout en maintenant la qualité",
+        dropHereDesc: "Glissez et déposez les fichiers ici (PDF, JPG, PNG, DOCX, PPTX, XLSX)",
+        filesToCompress: "Fichiers à compresser",
+        compressAll: "Compresser tous les fichiers",
+        results: {
+            title: "Résultats de la compression",
+            downloadAll: "Télécharger tous les fichiers compressés"
+        },
+        fileTypes: {
+            pdf: "Document PDF",
+            image: "Image",
+            office: "Document Office",
+            unknown: "Fichier inconnu"
+        },
+        howTo: {
+            title: "Comment compresser des fichiers",
+            step1: {
+                title: "Télécharger des fichiers",
+                description: "Téléchargez les fichiers que vous souhaitez compresser"
+            },
+            step2: {
+                title: "Choisir la qualité",
+                description: "Sélectionnez votre niveau de compression préféré"
+            },
+            step3: {
+                title: "Télécharger",
+                description: "Cliquez sur compresser et téléchargez vos fichiers compressés"
+            }
+        },
+        faq: {
+            compressionRate: {
+                question: "De combien les fichiers peuvent-ils être compressés ?",
+                answer: "Les taux de compression varient selon le type de fichier et le contenu. Les PDF sont généralement compressés de 20 à 70 %, les images de 30 à 80 % et les documents Office de 10 à 50 %."
+            },
+            quality: {
+                question: "La compression affectera-t-elle la qualité de mes fichiers ?",
+                answer: "Nos algorithmes de compression équilibrent la réduction de taille avec la préservation de la qualité. Le réglage 'Haute qualité' maintient une qualité visuelle presque identique."
+            },
+            sizeLimit: {
+                question: "Y a-t-il une limite de taille de fichier ?",
+                answer: "Oui, vous pouvez compresser des fichiers jusqu'à 100 Mo chacun."
+            }
+        }
     }
 }
