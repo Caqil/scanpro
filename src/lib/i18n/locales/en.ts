@@ -23,20 +23,53 @@ export default {
     btTools: "Explore All Tools"
   },
 
-  // Popular tools section
   popular: {
     pdfToWord: "PDF to Word",
     pdfToWordDesc: "Easily convert your PDF files into easy to edit DOC and DOCX documents.",
     pdfToExcel: "PDF to Excel",
     pdfToExcelDesc: "Pull data straight from PDFs into Excel spreadsheets in a few short seconds.",
+    pdfToPowerPoint: "PDF to PowerPoint",
+    pdfToPowerPointDesc: "Transform your PDF presentations into editable PowerPoint slides.",
+    pdfToJpg: "PDF to JPG",
+    pdfToJpgDesc: "Convert PDF pages to JPG images or extract all images from a PDF.",
+    pdfToPng: "PDF to PNG",
+    pdfToPngDesc: "Convert PDF pages to transparent PNG images with high quality.",
+    pdfToHtml: "PDF to HTML",
+    pdfToHtmlDesc: "Transform PDF documents into web-friendly HTML format.",
+    wordToPdf: "Word to PDF",
+    wordToPdfDesc: "Convert Word documents to PDF with perfect formatting and layout.",
+    excelToPdf: "Excel to PDF",
+    excelToPdfDesc: "Turn your Excel spreadsheets into perfectly formatted PDF documents.",
+    powerPointToPdf: "PowerPoint to PDF",
+    powerPointToPdfDesc: "Convert PowerPoint presentations to PDF for easy sharing.",
+    jpgToPdf: "JPG to PDF",
+    jpgToPdfDesc: "Create PDF files from your JPG images with customizable options.",
+    pngToPdf: "PNG to PDF",
+    pngToPdfDesc: "Convert PNG images to PDF with transparent background support.",
+    htmlToPdf: "HTML to PDF",
+    htmlToPdfDesc: "Convert webpages and HTML content to PDF documents.",
     mergePdf: "Merge PDF",
     mergePdfDesc: "Combine PDFs in the order you want with the easiest PDF merger available.",
+    splitPdf: "Split PDF",
+    splitPdfDesc: "Extract specific pages or split PDF into multiple documents.",
     compressPdf: "Compress PDF",
     compressPdfDesc: "Reduce file size while optimizing for maximal PDF quality.",
+    rotatePdf: "Rotate PDF",
+    rotatePdfDesc: "Change page orientation by rotating PDF pages as needed.",
+    watermark: "Add Watermark",
+    watermarkDesc: "Add text or image watermarks to protect and brand your PDF documents.",
+    unlockPdf: "Unlock PDF",
+    unlockPdfDesc: "Remove password protection and restrictions from PDF files.",
     protectPdf: "Protect PDF",
     protectPdfDesc: "Add password protection to secure your PDF documents.",
+    signPdf: "Sign PDF",
+    signPdfDesc: "Add digital signatures to your PDF documents securely.",
     ocr: "OCR",
-    ocrDesc: "Extract text from scanned documents",
+    ocrDesc: "Extract text from scanned documents using Optical Character Recognition.",
+    editPdf: "Edit PDF",
+    editPdfDesc: "Make changes to text, images and pages in your PDF documents.",
+    redactPdf: "Redact PDF",
+    redactPdfDesc: "Permanently remove sensitive information from your PDF files.",
     viewAll: "View All PDF Tools"
   },
 
@@ -753,14 +786,18 @@ export default {
     clearAll: "Clear All",
     done: "Done",
     extract: "extract",
+    new: "New!",
+    phone: "Phone",
+    address: "Address",
     filesSecurity: "Files are automatically deleted after 24 hours for privacy and security."
   },
 
-  // Contact Form
   contact: {
     title: "Contact Us",
     description: "Have questions or feedback? We'd love to hear from you.",
     form: {
+      title: "Send Us a Message",
+      description: "Fill out the form below and we'll get back to you as soon as possible.",
       name: "Your Name",
       email: "Email Address",
       subject: "Subject",
@@ -776,9 +813,37 @@ export default {
       email: "Please enter a valid email address",
       subject: "Subject is required",
       message: "Message is required"
+    },
+    supportHours: {
+      title: "Support Hours",
+      description: "When we're available to help",
+      weekdays: "Monday - Friday",
+      weekdayHours: "9:00 AM - 6:00 PM EST",
+      saturday: "Saturday",
+      saturdayHours: "10:00 AM - 4:00 PM EST",
+      sunday: "Sunday",
+      closed: "Closed"
+    },
+    faq: {
+      title: "Frequently Asked Questions",
+      responseTime: {
+        question: "How long does it take to get a response?",
+        answer: "We aim to respond to all inquiries within 24-48 business hours. During peak times, it may take up to 72 hours."
+      },
+      technicalSupport: {
+        question: "Can I get support for a technical issue?",
+        answer: "Yes, our technical support team is available to help you with any issues you're experiencing with our PDF tools."
+      },
+      phoneSupport: {
+        question: "Do you offer phone support?",
+        answer: "We provide phone support during our listed support hours. For immediate assistance, email is often the fastest way to get help."
+      },
+      security: {
+        question: "Is my personal information secure?",
+        answer: "We take your privacy seriously. All communication is encrypted, and we never share your personal information with third parties."
+      }
     }
   },
-
   // About Page
   about: {
     title: "About ScanPro",

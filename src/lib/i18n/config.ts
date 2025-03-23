@@ -2,14 +2,34 @@
 import enTranslations from './locales/en';
 import idTranslations from './locales/id';
 import esTranslations from './locales/es';
-// import frTranslations from './locales/fr';
+import frTranslations from './locales/fr';
+import zhTranslations from './locales/zh';
+import arTranslations from './locales/ar';
+import hiTranslations from './locales/hi';
+import ruTranslations from './locales/ru';
+import ptTranslations from './locales/pt';
+import deTranslations from './locales/de';
+import jaTranslations from './locales/ja';
+import koTranslations from './locales/ko';
+import itTranslations from './locales/it';
+import trTranslations from './locales/tr';
 
 // Define all available translations
 export const translations = {
     en: enTranslations,
     id: idTranslations,
     es: esTranslations,
-    // fr: frTranslations,
+    fr: frTranslations,
+    zh: zhTranslations,
+    ar: arTranslations,
+    hi: hiTranslations,
+    ru: ruTranslations,
+    pt: ptTranslations,
+    de: deTranslations,
+    ja: jaTranslations,
+    ko: koTranslations,
+    it: itTranslations,
+    tr: trTranslations,
 };
 
 // Define supported languages for the application
@@ -49,4 +69,60 @@ export const languageMetadata = {
         nativeName: 'Español',
         flag: '🇪🇸',
     },
+    fr: {
+        name: 'French',
+        nativeName: 'Français',
+        flag: '🇫🇷',
+    },
+    zh: {
+        name: 'Chinese',
+        nativeName: '中文 (Zhōngwén)',
+        flag: '🇨🇳',
+    },
+    ar: {
+        name: 'Arabic',
+        nativeName: 'العربية (al-ʿArabiyyah)',
+        flag: '🇸🇦',
+    },
+    hi: {
+        name: 'Hindi',
+        nativeName: 'हिन्दी (Hindī)',
+        flag: '🇮🇳',
+    },
+    ru: {
+        name: 'Russian',
+        nativeName: 'Русский (Russkiy)',
+        flag: '🇷🇺',
+    },
+    pt: {
+        name: 'Portuguese',
+        nativeName: 'Português',
+        flag: '🇧🇷',
+    },
+    de: {
+        name: 'German',
+        nativeName: 'Deutsch',
+        flag: '🇩🇪',
+    },
+    ja: {
+        name: 'Japanese',
+        nativeName: '日本語 (Nihongo)',
+        flag: '🇯🇵',
+    },
+    ko: {
+        name: 'Korean',
+        nativeName: '한국어 (Hangugeo)',
+        flag: '🇰🇷',
+    },
+    it: {
+        name: 'Italian',
+        nativeName: 'Italiano',
+        flag: '🇮🇹',
+    },
+    tr: {
+        name: 'Turkish',
+        nativeName: 'Türkçe',
+        flag: '🇹🇷',
+    },
+   
 };

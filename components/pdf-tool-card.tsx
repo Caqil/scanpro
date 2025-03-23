@@ -37,7 +37,7 @@ export function PdfToolCard({
                 <h3 className="font-semibold">{name}</h3>
                 {isNew && (
                   <span className="text-xs px-2 py-0.5 bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-400 rounded-full">
-                    New!
+                    {t('ui.new')}
                   </span>
                 )}
               </div>

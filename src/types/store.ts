@@ -3,3 +3,4 @@ export interface LanguageState {
   setLanguage: (lang: string) => void
   t: (key: string) => string
 }
+

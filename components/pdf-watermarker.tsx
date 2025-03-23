@@ -43,6 +43,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useLanguageStore } from "@/src/store/store";
 
 // Define position options
 const WATERMARK_POSITIONS = [
@@ -72,6 +73,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export function PdfWatermarker() {
+  const { t } = useLanguageStore();
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -110,9 +112,9 @@ export function PdfWatermarker() {
       if (rejectedFiles.length > 0) {
         const rejection = rejectedFiles[0];
         if (rejection.file.size > 100 * 1024 * 1024) {
-          setError("File is too large. Maximum size is 100MB.");
+          setError(t('fileUploader.maxSize'));
         } else {
-          setError("Please upload a valid PDF file.");
+          setError(t('fileUploader.inputFormat'));
         }
         return;
       }
@@ -163,43 +165,44 @@ export function PdfWatermarker() {
     const rotation = watchedValues.rotation;
     const text = watchedValues.text || "WATERMARK";
     const width = 300; // SVG width
-const height = 400; // SVG height
-const fontSize = size * (Math.min(width, height) / 100); // Match server-side scaling
+    const height = 400; // SVG height
+    const fontSize = size * (Math.min(width, height) / 100); // Match server-side scaling
 
-const svg = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400">
-    <rect width="300" height="400" fill="#f0f0f0" />
-    <rect x="20" y="20" width="260" height="360" fill="white" stroke="#d0d0d0" />
-    
-    <!-- Watermark text -->
-    <g transform="${getTransformForPosition(position, 300, 400, rotation)}">
-      <text 
-        font-family="Arial, sans-serif" 
-        font-weight="bold" 
-        font-size="${fontSize}px" 
-        fill="${color}" 
-        opacity="${opacity}" 
-        text-anchor="middle"
-      >${text}</text>
-    </g>
-    
-    <!-- Page content simulation -->
-    <g>
-      <rect x="40" y="60" width="220" height="10" fill="#d0d0d0" rx="2" />
-      <rect x="40" y="90" width="180" height="10" fill="#d0d0d0" rx="2" />
-      <rect x="40" y="120" width="200" height="10" fill="#d0d0d0" rx="2" />
-      <rect x="40" y="150" width="160" height="10" fill="#d0d0d0" rx="2" />
-      <rect x="40" y="210" width="220" height="10" fill="#d0d0d0" rx="2" />
-      <rect x="40" y="240" width="190" height="10" fill="#d0d0d0" rx="2" />
-      <rect x="40" y="270" width="220" height="10" fill="#d0d0d0" rx="2" />
-      <rect x="40" y="300" width="170" height="10" fill="#d0d0d0" rx="2" />
-    </g>
-  </svg>
-`;
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400">
+        <rect width="300" height="400" fill="#f0f0f0" />
+        <rect x="20" y="20" width="260" height="360" fill="white" stroke="#d0d0d0" />
+        
+        <!-- Watermark text -->
+        <g transform="${getTransformForPosition(position, 300, 400, rotation)}">
+          <text 
+            font-family="Arial, sans-serif" 
+            font-weight="bold" 
+            font-size="${fontSize}px" 
+            fill="${color}" 
+            opacity="${opacity}" 
+            text-anchor="middle"
+          >${text}</text>
+        </g>
+        
+        <!-- Page content simulation -->
+        <g>
+          <rect x="40" y="60" width="220" height="10" fill="#d0d0d0" rx="2" />
+          <rect x="40" y="90" width="180" height="10" fill="#d0d0d0" rx="2" />
+          <rect x="40" y="120" width="200" height="10" fill="#d0d0d0" rx="2" />
+          <rect x="40" y="150" width="160" height="10" fill="#d0d0d0" rx="2" />
+          <rect x="40" y="210" width="220" height="10" fill="#d0d0d0" rx="2" />
+          <rect x="40" y="240" width="190" height="10" fill="#d0d0d0" rx="2" />
+          <rect x="40" y="270" width="220" height="10" fill="#d0d0d0" rx="2" />
+          <rect x="40" y="300" width="170" height="10" fill="#d0d0d0" rx="2" />
+        </g>
+      </svg>
+    `;
     
     const dataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
     setPreviewImage(dataUrl);
   };
+
   const getTransformForPosition = (position: string, width: number, height: number, rotation: number): string => {
     let x = width / 2;
     let y = height / 2;
@@ -249,7 +252,7 @@ const svg = `
     }
     
     return `translate(${x} ${y}) rotate(${rotation})`;
-};
+  };
 
   // Update preview whenever form values change
   useEffect(() => {
@@ -261,7 +264,7 @@ const svg = `
   // Handle form submission
   const onSubmit = async (values: FormValues) => {
     if (!file) {
-      setError("Please select a PDF file to watermark");
+      setError(t('compressPdf.error.noFiles'));
       return;
     }
 
@@ -305,30 +308,42 @@ const svg = `
       
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to add watermark to PDF file");
+        throw new Error(errorData.error || t('compressPdf.error.generic'));
       }
 
       const data = await response.json();
       setProgress(100);
       setWatermarkResult(data);
       
-      toast.success("Watermark Added Successfully", {
-        description: `Successfully added watermark to ${data.watermarkedPages} pages.`,
+      toast.success(t('watermark.watermarkSuccess'), {
+        description: `${t('watermark.watermarkSuccessDesc')}`,
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An unknown error occurred");
-      toast.error("Watermark Failed", {
-        description: err instanceof Error ? err.message : "Failed to add watermark to your file",
+      setError(err instanceof Error ? err.message : t('compressPdf.error.unknown'));
+      toast.error(t('ui.error'), {
+        description: err instanceof Error ? err.message : t('compressPdf.error.failed'),
       });
     } finally {
       setIsProcessing(false);
     }
   };
 
+  // Get translated position labels
+  const getPositionLabel = (positionValue: string): string => {
+    const positionKey = `watermark.positions.${positionValue.replace('-', '')}`;
+    return t(positionKey) || positionValue;
+  };
+
+  // Update position options with translated labels
+  const translatedPositions = WATERMARK_POSITIONS.map(pos => ({
+    value: pos.value,
+    label: getPositionLabel(pos.value)
+  }));
+
   return (
     <Card className="border shadow-sm">
       <CardHeader>
-        <CardTitle>Add Watermark to PDF</CardTitle>
+        <CardTitle>{t('watermark.title')}</CardTitle>
       </CardHeader>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -358,7 +373,7 @@ const svg = `
                         <p className="text-sm font-medium">{file.name}</p>
                         <p className="text-xs text-muted-foreground">
                           {formatFileSize(file.size)} 
-                          {totalPages && ` • Approximately ${totalPages} pages`}
+                          {totalPages && ` • ${t('compressPdf.files')} ${totalPages} ${t('compressPdf.of')}`}
                         </p>
                       </div>
                       <Button 
@@ -371,7 +386,7 @@ const svg = `
                           handleRemoveFile();
                         }}
                       >
-                        <Cross2Icon className="h-4 w-4 mr-1" /> Remove
+                        <Cross2Icon className="h-4 w-4 mr-1" /> {t('ui.remove')}
                       </Button>
                     </div>
                   ) : (
@@ -380,13 +395,13 @@ const svg = `
                         <UploadIcon className="h-6 w-6 text-muted-foreground" />
                       </div>
                       <div className="text-lg font-medium">
-                        {isDragActive ? "Drop your PDF here" : "Drag & drop your PDF"}
+                        {isDragActive ? t('fileUploader.dropHere') : t('fileUploader.dragAndDrop')}
                       </div>
                       <p className="text-sm text-muted-foreground max-w-sm">
-                        Drop your PDF file here or click to browse. Maximum size is 100MB.
+                        {t('fileUploader.dropHereDesc')} {t('fileUploader.maxSize')}
                       </p>
                       <Button type="button" variant="secondary" size="sm" className="mt-2">
-                        Browse Files
+                        {t('fileUploader.browse')}
                       </Button>
                     </div>
                   )}
@@ -395,7 +410,7 @@ const svg = `
                 {/* Watermark Preview */}
                 {file && previewImage && (
                   <div className="border rounded-lg p-4">
-                    <h3 className="text-sm font-medium mb-2">Watermark Preview</h3>
+                    <h3 className="text-sm font-medium mb-2">{t('watermark.preview.title')}</h3>
                     <div className="flex justify-center">
                       <img 
                         src={previewImage} 
@@ -404,7 +419,7 @@ const svg = `
                       />
                     </div>
                     <p className="text-xs text-muted-foreground text-center mt-2">
-                      This is a simplified preview. The actual result may vary.
+                      {t('watermark.preview.note')}
                     </p>
                   </div>
                 )}
@@ -418,7 +433,7 @@ const svg = `
                   name="text"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Watermark Text</FormLabel>
+                      <FormLabel>{t('watermark.form.text')}</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. CONFIDENTIAL, DRAFT, etc."
@@ -437,7 +452,7 @@ const svg = `
                   name="color"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Text Color</FormLabel>
+                      <FormLabel>{t('watermark.form.textColor')}</FormLabel>
                       <div className="flex gap-2">
                         <FormControl>
                           <input
@@ -466,7 +481,7 @@ const svg = `
                   name="opacity"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Opacity: {Math.round(field.value * 100)}%</FormLabel>
+                      <FormLabel>{t('watermark.form.opacity')}: {Math.round(field.value * 100)}%</FormLabel>
                       <FormControl>
                         <Slider
                           min={0.1}
@@ -488,7 +503,7 @@ const svg = `
                   name="size"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Size: {field.value}%</FormLabel>
+                      <FormLabel>{t('watermark.form.size')}: {field.value}%</FormLabel>
                       <FormControl>
                         <Slider
                           min={5}
@@ -510,7 +525,7 @@ const svg = `
                   name="rotation"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Rotation: {field.value}°</FormLabel>
+                      <FormLabel>{t('watermark.form.rotation')}: {field.value}°</FormLabel>
                       <FormControl>
                         <Slider
                           min={0}
@@ -532,7 +547,7 @@ const svg = `
                   name="position"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Position</FormLabel>
+                      <FormLabel>{t('watermark.form.position')}</FormLabel>
                       <Select
                         disabled={isProcessing}
                         onValueChange={field.onChange}
@@ -540,11 +555,11 @@ const svg = `
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select position" />
+                            <SelectValue placeholder={t('watermark.form.position')} />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {WATERMARK_POSITIONS.map((pos) => (
+                          {translatedPositions.map((pos) => (
                             <SelectItem key={pos.value} value={pos.value}>
                               {pos.label}
                             </SelectItem>
@@ -562,7 +577,7 @@ const svg = `
                   name="scope"
                   render={({ field }) => (
                     <FormItem className="space-y-3">
-                      <FormLabel>Pages to Watermark</FormLabel>
+                      <FormLabel>{t('watermark.form.pages')}</FormLabel>
                       <FormControl>
                         <RadioGroup
                           onValueChange={field.onChange}
@@ -571,11 +586,11 @@ const svg = `
                         >
                           <div className="flex items-center space-x-2">
                             <RadioGroupItem value="all" id="all-pages" />
-                            <label htmlFor="all-pages" className="cursor-pointer">All pages</label>
+                            <label htmlFor="all-pages" className="cursor-pointer">{t('watermark.form.allPages')}</label>
                           </div>
                           <div className="flex items-center space-x-2">
                             <RadioGroupItem value="custom" id="custom-pages" />
-                            <label htmlFor="custom-pages" className="cursor-pointer">Specific pages</label>
+                            <label htmlFor="custom-pages" className="cursor-pointer">{t('watermark.form.specificPages')}</label>
                           </div>
                         </RadioGroup>
                       </FormControl>
@@ -590,7 +605,7 @@ const svg = `
                     name="pages"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Page Numbers</FormLabel>
+                        <FormLabel>{t('watermark.form.pageNumbers')}</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="e.g. 1,3,5,8"
@@ -599,7 +614,7 @@ const svg = `
                           />
                         </FormControl>
                         <p className="text-xs text-muted-foreground">
-                          Enter page numbers separated by commas (e.g. 1,3,5,8)
+                          {t('watermark.form.pageNumbersHint')}
                         </p>
                         <FormMessage />
                       </FormItem>
@@ -623,7 +638,7 @@ const svg = `
                 <Progress value={progress} className="h-2" />
                 <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                   <Edit2Icon className="h-4 w-4 animate-pulse" />
-                  <span>Adding watermark to your PDF... {progress}%</span>
+                  <span>{t('watermark.addingWatermark')} {progress}%</span>
                 </div>
               </div>
             )}
@@ -637,12 +652,12 @@ const svg = `
                   </div>
                   <div className="flex-1">
                     <h3 className="font-medium text-green-600 dark:text-green-400">
-                      Watermark successfully added!
+                      {t('watermark.watermarkSuccess')}
                     </h3>
                     <p className="text-sm text-muted-foreground mt-1 mb-3">
                       {watermarkResult.watermarkedPages === watermarkResult.totalPages
-                        ? `Watermark "${watermarkResult.text}" added to all ${watermarkResult.totalPages} pages.`
-                        : `Watermark "${watermarkResult.text}" added to ${watermarkResult.watermarkedPages} out of ${watermarkResult.totalPages} pages.`
+                        ? `${t('watermark.form.text')} "${watermarkResult.text}" ${t('compressPdf.of')} ${watermarkResult.totalPages} ${t('watermark.form.allPages')}.`
+                        : `${t('watermark.form.text')} "${watermarkResult.text}" ${t('compressPdf.of')} ${watermarkResult.watermarkedPages} ${t('compressPdf.of')} ${watermarkResult.totalPages} ${t('watermark.form.pages')}.`
                       }
                     </p>
                     <Button 
@@ -652,7 +667,7 @@ const svg = `
                     >
                       <a href={`/api/file?folder=watermarks&filename=${encodeURIComponent(watermarkResult.filename)}`} download>
                         <DownloadIcon className="h-4 w-4 mr-2" />
-                        Download Watermarked PDF
+                        {t('ui.download')} {t('watermark.form.text')} PDF
                       </a>
                     </Button>
                   </div>
@@ -666,7 +681,7 @@ const svg = `
                 type="submit" 
                 disabled={!file || isProcessing}
               >
-                {isProcessing ? "Adding Watermark..." : "Add Watermark"}
+                {isProcessing ? t('watermark.addingWatermark') : t('watermark.title')}
               </Button>
             )}
           </CardFooter>

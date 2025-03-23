@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { FileText, Image, Table, File } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageLink } from "@/components/language-link";
+import { useLanguageStore } from "@/src/store/store";
 
 // Define conversion type interface
 interface ConversionType {
@@ -180,7 +181,7 @@ export default function ConvertPageContent({
   const [inputFormat, setInputFormat] = useState<string>("pdf");
   const [outputFormat, setOutputFormat] = useState<string>("docx");
   const [conversionDetails, setConversionDetails] = useState<ConversionType>(conversionTypes["pdf-to-docx"]);
-
+  const { t } = useLanguageStore();
   // Debug logging
   useEffect(() => {
     const info = {
@@ -278,7 +279,6 @@ export default function ConvertPageContent({
   };
 
   const relatedConversions = getRelatedConversions();
-
   return (
     <div className="container max-w-5xl py-12 mx-auto">
       <div className="mx-auto flex flex-col items-center text-center mb-8">
@@ -296,11 +296,11 @@ export default function ConvertPageContent({
       {/* Conversion Tool */}
       <Card className="mb-8 border shadow-sm">
         <CardHeader>
-          <CardTitle>Upload File to Convert</CardTitle>
+          <CardTitle>{t('convert.options.title')}</CardTitle>
           <CardDescription>
             {inputFormat === "pdf" 
-              ? `Select a PDF file to convert to ${outputFormat.toUpperCase()}`
-              : `Select a ${inputFormat.toUpperCase()} file to convert to PDF`}
+              ? t('convert.description.generic').replace('{format}', outputFormat.toUpperCase())
+              : t('convert.description.generic').replace('{format}', 'PDF')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -315,38 +315,38 @@ export default function ConvertPageContent({
       {/* How It Works */}
       <div className="mb-12">
         <h2 className="text-2xl font-bold mb-6 text-center">
-          How to Convert {inputFormat.toUpperCase()} to {outputFormat.toUpperCase()}
+          {t('convert.howTo.title').replace('{from}', inputFormat.toUpperCase()).replace('{to}', outputFormat.toUpperCase())}
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           <div className="flex flex-col items-center text-center">
             <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-4">
               <span className="font-bold">1</span>
             </div>
-            <h3 className="text-lg font-medium mb-2">Upload</h3>
+            <h3 className="text-lg font-medium mb-2">{t('convert.howTo.step1.title')}</h3>
             <p className="text-sm text-muted-foreground">
               {inputFormat === "pdf" 
-                ? "Upload the PDF file you want to convert"
-                : `Upload the ${inputFormat.toUpperCase()} file you want to convert to PDF`}
+                ? t('convert.howTo.step1.description').replace('{from}', 'PDF')
+                : t('convert.howTo.step1.description').replace('{from}', inputFormat.toUpperCase())}
             </p>
           </div>
           <div className="flex flex-col items-center text-center">
             <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-4">
               <span className="font-bold">2</span>
             </div>
-            <h3 className="text-lg font-medium mb-2">Convert</h3>
+            <h3 className="text-lg font-medium mb-2">{t('convert.howTo.step2.title')}</h3>
             <p className="text-sm text-muted-foreground">
-              Click the Convert button and our system will process your file
+              {t('convert.howTo.step2.description')}
             </p>
           </div>
           <div className="flex flex-col items-center text-center">
             <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-4">
               <span className="font-bold">3</span>
             </div>
-            <h3 className="text-lg font-medium mb-2">Download</h3>
+            <h3 className="text-lg font-medium mb-2">{t('convert.howTo.step3.title')}</h3>
             <p className="text-sm text-muted-foreground">
               {inputFormat === "pdf" 
-                ? `Download your converted ${outputFormat.toUpperCase()} file`
-                : "Download your converted PDF file"}
+                ? t('convert.howTo.step3.description').replace('{to}', outputFormat.toUpperCase())
+                : t('convert.howTo.step3.description').replace('{to}', 'PDF')}
             </p>
           </div>
         </div>
@@ -354,7 +354,7 @@ export default function ConvertPageContent({
 
       {/* More Conversions Section */}
       <div>
-        <h2 className="text-2xl font-bold mb-6 text-center">More Conversion Tools</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">{t('convert.moreTools')}</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {relatedConversions.map((conversion) => (
             <LanguageLink 
@@ -373,7 +373,7 @@ export default function ConvertPageContent({
         </div>
         <div className="text-center mt-6">
           <LanguageLink href="/tools">
-            <Button variant="outline">View All PDF Tools</Button>
+            <Button variant="outline">{t('popular.viewAll')}</Button>
           </LanguageLink>
         </div>
       </div>

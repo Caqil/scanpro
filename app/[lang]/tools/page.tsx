@@ -1,24 +1,115 @@
 import { PdfTools } from "@/components/pdf-tools";
 import { Metadata } from "next";
+import { ToolsHeaderSection } from "./tools-header-content";
+import enTranslations from '@/src/lib/i18n/locales/en';
+import idTranslations from '@/src/lib/i18n/locales/id';
+import esTranslations from '@/src/lib/i18n/locales/es';
+import frTranslations from '@/src/lib/i18n/locales/fr';
+import zhTranslations from '@/src/lib/i18n/locales/zh';
+import arTranslations from '@/src/lib/i18n/locales/ar';
+import hiTranslations from '@/src/lib/i18n/locales/hi';
+import ruTranslations from '@/src/lib/i18n/locales/ru';
+import ptTranslations from '@/src/lib/i18n/locales/pt';
+import deTranslations from '@/src/lib/i18n/locales/de';
+import jaTranslations from '@/src/lib/i18n/locales/ja';
+import koTranslations from '@/src/lib/i18n/locales/ko';
+import itTranslations from '@/src/lib/i18n/locales/it';
+import trTranslations from '@/src/lib/i18n/locales/tr';
+import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
 
-export const metadata: Metadata = {
-  title: "PDF Tools | ScanPro - PDF Converter & Editor",
-  description: "All the PDF tools you need in one place. Convert, edit, merge, split, compress, and more.",
-};
+type Language = typeof SUPPORTED_LANGUAGES[number];
 
+// Helper function to get translation based on language
+function getTranslation(lang: string, key: string): string {
+  let translations = enTranslations;
+  
+  // Check which language to use
+  switch (lang) {
+    case "id":
+      translations = idTranslations;
+      break;
+    case "es":
+      translations = esTranslations;
+      break;
+    case "fr":
+      translations = frTranslations;
+      break;
+    case "zh":
+      translations = zhTranslations;
+      break;
+    case "ar":
+      translations = arTranslations;
+      break;
+    case "hi":
+      translations = hiTranslations;
+      break;
+    case "ru":
+      translations = ruTranslations;
+      break;
+    case "pt":
+      translations = ptTranslations;
+      break;
+    case "de":
+      translations = deTranslations;
+      break;
+    case "ja":
+      translations = jaTranslations;
+      break;
+    case "ko":
+      translations = koTranslations;
+      break;
+    case "it":
+      translations = itTranslations;
+      break;
+    case "tr":
+      translations = trTranslations;
+      break;
+   
+    default:
+      translations = enTranslations; // Fallback to English
+  }
+  
+  // Navigate through nested keys
+  const keys = key.split('.');
+  const result = keys.reduce((obj, k) => 
+    (obj && obj[k] !== undefined) ? obj[k] : undefined, 
+    translations as any
+  );
+  
+  return result !== undefined ? result : key;
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang: paramLang } = await params;
+  const lang = SUPPORTED_LANGUAGES.includes(paramLang as Language) ? paramLang as Language : "en";
+  const t = (key: string) => getTranslation(lang, key);
+
+  return {
+    title: t("pdfTools.title"),
+    description: t("pdfTools.description"),
+    openGraph: {
+      title: t("pdfTools.title"),
+      description: t("pdfTools.description"),
+      url: `/${lang}/tools`,
+      siteName: "ScanPro",
+      locale: lang === "id" ? "id_ID" : lang === "es" ? "es_ES" : "en_US",
+    },
+    alternates: {
+      canonical: `/${lang}/tools`,
+      languages: {
+        "en-US": "/en/tools",
+        "id-ID": "/id/tools",
+        "es-ES": "/es/tools",
+      },
+    },
+  };
+}
 export default function ToolsPage() {
   return (
     <main className="py-8">
       <div className="container max-w-6xl mx-auto px-4">
-        <div className="mx-auto max-w-3xl text-center mb-8 md:mb-12">
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-            All PDF Tools
-          </h1>
-          <p className="mt-4 text-xl text-muted-foreground">
-            Everything you need to work with PDFs in one place
-          </p>
-        </div>
-        
+       
+        <ToolsHeaderSection/>
         <PdfTools />
       </div>
     </main>

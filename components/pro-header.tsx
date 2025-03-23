@@ -38,6 +38,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { LanguageLink } from "./language-link";
+import { LanguageSwitcher } from "./language-switcher";
 
 // Type for tool definition with optional isNew
 type ToolDefinition = {
@@ -78,12 +79,23 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
     }
   }, [urlLanguage, language]);
   
-  // Language options
   const languages: LanguageOption[] = [
     { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
     { code: 'id', name: 'Indonesian', nativeName: 'Bahasa Indonesia', flag: '🇮🇩' },
-    { code: 'es', name: 'español', nativeName: 'español', flag: '🇪🇸' },
-  ];
+    { code: 'es', name: 'Spanish', nativeName: 'Español', flag: '🇪🇸' },
+    { code: 'fr', name: 'French', nativeName: 'Français', flag: '🇫🇷' },
+    { code: 'zh', name: 'Chinese', nativeName: '中文 (Zhōngwén)', flag: '🇨🇳' },
+    { code: 'ar', name: 'Arabic', nativeName: 'العربية (al-ʿArabiyyah)', flag: '🇸🇦' },
+    { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी (Hindī)', flag: '🇮🇳' },
+    { code: 'ru', name: 'Russian', nativeName: 'Русский (Russkiy)', flag: '🇷🇺' },
+    { code: 'pt', name: 'Portuguese', nativeName: 'Português', flag: '🇧🇷' },
+    { code: 'de', name: 'German', nativeName: 'Deutsch', flag: '🇩🇪' },
+    { code: 'ja', name: 'Japanese', nativeName: '日本語 (Nihongo)', flag: '🇯🇵' },
+    { code: 'ko', name: 'Korean', nativeName: '한국어 (Hangugeo)', flag: '🇰🇷' },
+    { code: 'it', name: 'Italian', nativeName: 'Italiano', flag: '🇮🇹' },
+    { code: 'tr', name: 'Turkish', nativeName: 'Türkçe', flag: '🇹🇷' },
+    { code: 'vi', name: 'Vietnamese', nativeName: 'Tiếng Việt', flag: '🇻🇳' },
+];
   
   const PDF_TOOLS: CategoryDefinition[] = [
     {
@@ -396,25 +408,7 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
         {/* Right Side Actions */}
         <div className="flex items-center gap-3">
           {/* Language Dropdown */}
-          <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm">
-            <Globe className="h-4 w-4" />
-            <span>{languages.find(lang => lang.code === language)?.name || 'Language'}</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          {languages.map((lang) => (
-            <DropdownMenuItem 
-              key={lang.code}
-              onClick={() => setLanguage(lang.code as any)}
-            >
-              <span>{lang.flag}</span>
-              <span>{lang.nativeName}</span>
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
+          <LanguageSwitcher />
 
           <ModeToggle />
           
@@ -440,22 +434,22 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           <div className="container max-w-6xl mx-auto py-4 space-y-4">
             {/* Mobile Language Selector */}
             <div className="border-b pb-3 mb-3">
-              <div className="text-sm font-medium mb-2">{t('nav.selectLanguage')}</div>
-              <div className="grid grid-cols-2 gap-2">
-                {languages.map((lang) => (
-                  <Button
-                    key={lang.code}
-                    variant={language === lang.code ? "default" : "outline"}
-                    size="sm"
-                    className="justify-start"
-                    onClick={() => setLanguage(lang.code as any)}
-                  >
-                    <span className="mr-2">{lang.flag}</span>
-                    {lang.nativeName}
-                  </Button>
-                ))}
-              </div>
-            </div>
+    <div className="text-sm font-medium mb-2">{t('nav.selectLanguage')}</div>
+    <div className="grid grid-cols-2 gap-2">
+      {languages.map((lang) => (
+        <Button
+          key={lang.code}
+          variant={language === lang.code ? "default" : "outline"}
+          size="sm"
+          className="justify-start"
+          onClick={() => setLanguage(lang.code as any)}
+        >
+          <span className="mr-2">{lang.flag}</span>
+          {lang.nativeName}
+        </Button>
+      ))}
+    </div>
+  </div>
             
             {navItems.map((item) => (
               item.dropdown ? (

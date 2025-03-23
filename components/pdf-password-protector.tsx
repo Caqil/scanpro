@@ -43,29 +43,31 @@ import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-
-// Define form schema
-const formSchema = z.object({
-  password: z.string().min(1, "Password is required"),
-  confirmPassword: z.string().min(1, "Please confirm your password"),
-  permission: z.enum(["all", "restricted"]).default("restricted"),
-  allowPrinting: z.boolean().default(true),
-  allowCopying: z.boolean().default(false),
-  allowEditing: z.boolean().default(false),
-  protectionLevel: z.enum(["128", "256"]).default("256"),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
-});
-
-type FormValues = z.infer<typeof formSchema>;
+import { useLanguageStore } from "@/src/store/store";
 
 export function PdfPasswordProtector() {
+  const { t } = useLanguageStore();
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [protectedFileUrl, setProtectedFileUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  // Define form schema with localized error messages
+  const formSchema = z.object({
+    password: z.string().min(1, t('protectPdf.form.password')),
+    confirmPassword: z.string().min(1, t('fileUploader.password')),
+    permission: z.enum(["all", "restricted"]).default("restricted"),
+    allowPrinting: z.boolean().default(true),
+    allowCopying: z.boolean().default(false),
+    allowEditing: z.boolean().default(false),
+    protectionLevel: z.enum(["128", "256"]).default("256"),
+  }).refine((data) => data.password === data.confirmPassword, {
+    message: t('protectPdf.form.confirmPassword'),
+    path: ["confirmPassword"],
+  });
+
+  type FormValues = z.infer<typeof formSchema>;
 
   // Initialize form
   const form = useForm<FormValues>({
@@ -95,9 +97,9 @@ export function PdfPasswordProtector() {
       if (rejectedFiles.length > 0) {
         const rejection = rejectedFiles[0];
         if (rejection.file.size > 100 * 1024 * 1024) {
-          setError("File is too large. Maximum size is 100MB.");
+          setError(t('fileUploader.maxSize'));
         } else {
-          setError("Please upload a valid PDF file.");
+          setError(t('fileUploader.inputFormat'));
         }
         return;
       }
@@ -131,7 +133,7 @@ export function PdfPasswordProtector() {
   // Handle form submission
   const onSubmit = async (values: FormValues) => {
     if (!file) {
-      setError("Please select a PDF file to protect");
+      setError(t('compressPdf.error.noFiles'));
       return;
     }
 
@@ -174,20 +176,20 @@ export function PdfPasswordProtector() {
       
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to protect PDF file");
+        throw new Error(errorData.error || t('protectPdf.error.failed'));
       }
 
       const data = await response.json();
       setProgress(100);
       setProtectedFileUrl(data.filename);
       
-      toast.success("Password Protection Added", {
-        description: "Your PDF has been successfully protected with a password.",
+      toast.success(t('protectPdf.protected'), {
+        description: t('protectPdf.protectedDesc'),
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An unknown error occurred");
-      toast.error("Protection Failed", {
-        description: err instanceof Error ? err.message : "Failed to protect your file",
+      setError(err instanceof Error ? err.message : t('ui.error'));
+      toast.error(t('compressPdf.error.failed'), {
+        description: err instanceof Error ? err.message : t('compressPdf.error.unknown'),
       });
     } finally {
       setIsProcessing(false);
@@ -197,7 +199,7 @@ export function PdfPasswordProtector() {
   return (
     <Card className="border shadow-sm">
       <CardHeader>
-        <CardTitle>Password Protect PDF</CardTitle>
+        <CardTitle>{t('protectPdf.title')}</CardTitle>
       </CardHeader>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -236,7 +238,7 @@ export function PdfPasswordProtector() {
                       handleRemoveFile();
                     }}
                   >
-                    <Cross2Icon className="h-4 w-4 mr-1" /> Remove
+                    <Cross2Icon className="h-4 w-4 mr-1" /> {t('ui.remove')}
                   </Button>
                 </div>
               ) : (
@@ -245,13 +247,13 @@ export function PdfPasswordProtector() {
                     <UploadIcon className="h-6 w-6 text-muted-foreground" />
                   </div>
                   <div className="text-lg font-medium">
-                    {isDragActive ? "Drop your PDF here" : "Drag & drop your PDF"}
+                    {isDragActive ? t('fileUploader.dropHere') : t('fileUploader.dragAndDrop')}
                   </div>
                   <p className="text-sm text-muted-foreground max-w-sm">
-                    Drop your PDF file here or click to browse. Maximum size is 100MB.
+                    {t('fileUploader.dropHereDesc')} {t('fileUploader.maxSize')}
                   </p>
                   <Button type="button" variant="secondary" size="sm" className="mt-2">
-                    Browse Files
+                    {t('fileUploader.browse')}
                   </Button>
                 </div>
               )}
@@ -267,11 +269,11 @@ export function PdfPasswordProtector() {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel>{t('protectPdf.form.password')}</FormLabel>
                         <FormControl>
                           <Input
                             type="password"
-                            placeholder="Enter password"
+                            placeholder={t('protectPdf.form.password')}
                             {...field}
                             disabled={isProcessing}
                           />
@@ -287,11 +289,11 @@ export function PdfPasswordProtector() {
                     name="confirmPassword"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Confirm Password</FormLabel>
+                        <FormLabel>{t('protectPdf.form.confirmPassword')}</FormLabel>
                         <FormControl>
                           <Input
                             type="password"
-                            placeholder="Confirm password"
+                            placeholder={t('protectPdf.form.confirmPassword')}
                             {...field}
                             disabled={isProcessing}
                           />
@@ -308,7 +310,7 @@ export function PdfPasswordProtector() {
                   name="protectionLevel"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Encryption Level</FormLabel>
+                      <FormLabel>{t('protectPdf.form.encryptionLevel')}</FormLabel>
                       <Select
                         disabled={isProcessing}
                         onValueChange={field.onChange}
@@ -316,16 +318,16 @@ export function PdfPasswordProtector() {
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select encryption level" />
+                            <SelectValue placeholder={t('protectPdf.form.encryptionLevel')} />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="128">128-bit AES (Compatible with Acrobat 7 and later)</SelectItem>
-                          <SelectItem value="256">256-bit AES (Compatible with Acrobat X and later)</SelectItem>
+                          <SelectItem value="128">{t('protectPdf.security.encryption.aes128')}</SelectItem>
+                          <SelectItem value="256">{t('protectPdf.security.encryption.aes256')}</SelectItem>
                         </SelectContent>
                       </Select>
                       <p className="text-xs text-muted-foreground mt-1">
-                        Higher encryption provides better security but may reduce compatibility with older PDF readers.
+                        {t('protectPdf.faq.encryptionDifference.answer')}
                       </p>
                       <FormMessage />
                     </FormItem>
@@ -338,7 +340,7 @@ export function PdfPasswordProtector() {
                   name="permission"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Access Permissions</FormLabel>
+                      <FormLabel>{t('protectPdf.form.permissions.title')}</FormLabel>
                       <Select
                         disabled={isProcessing}
                         onValueChange={field.onChange}
@@ -346,12 +348,12 @@ export function PdfPasswordProtector() {
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select permission level" />
+                            <SelectValue placeholder={t('protectPdf.form.permissions.title')} />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="all">Allow All (Password to Open Only)</SelectItem>
-                          <SelectItem value="restricted">Restricted Access (Custom Permissions)</SelectItem>
+                          <SelectItem value="all">{t('protectPdf.form.permissions.allowAll')}</SelectItem>
+                          <SelectItem value="restricted">{t('protectPdf.form.permissions.restricted')}</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -362,7 +364,7 @@ export function PdfPasswordProtector() {
                 {/* Restricted Permissions */}
                 {permission === "restricted" && (
                   <div className="space-y-4 border p-4 rounded-lg">
-                    <h3 className="text-sm font-medium">Allowed Actions:</h3>
+                    <h3 className="text-sm font-medium">{t('protectPdf.form.allowedActions')}</h3>
                     
                     <FormField
                       control={form.control}
@@ -378,7 +380,7 @@ export function PdfPasswordProtector() {
                           </FormControl>
                           <div className="space-y-1 leading-none">
                             <FormLabel>
-                              Allow Printing
+                              {t('protectPdf.form.allowPrinting')}
                             </FormLabel>
                           </div>
                         </FormItem>
@@ -399,7 +401,7 @@ export function PdfPasswordProtector() {
                           </FormControl>
                           <div className="space-y-1 leading-none">
                             <FormLabel>
-                              Allow Copying Text and Images
+                              {t('protectPdf.form.allowCopying')}
                             </FormLabel>
                           </div>
                         </FormItem>
@@ -420,7 +422,7 @@ export function PdfPasswordProtector() {
                           </FormControl>
                           <div className="space-y-1 leading-none">
                             <FormLabel>
-                              Allow Editing and Annotations
+                              {t('protectPdf.form.allowEditing')}
                             </FormLabel>
                           </div>
                         </FormItem>
@@ -445,7 +447,7 @@ export function PdfPasswordProtector() {
                 <Progress value={progress} className="h-2" />
                 <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                   <LockIcon className="h-4 w-4 animate-pulse" />
-                  <span>Encrypting your PDF... {progress}%</span>
+                  <span>{t('protectPdf.protecting')} {progress}%</span>
                 </div>
               </div>
             )}
@@ -459,10 +461,10 @@ export function PdfPasswordProtector() {
                   </div>
                   <div className="flex-1">
                     <h3 className="font-medium text-green-600 dark:text-green-400">
-                      PDF successfully protected!
+                      {t('protectPdf.protected')}
                     </h3>
                     <p className="text-sm text-muted-foreground mt-1 mb-3">
-                      Your PDF file has been encrypted and password-protected.
+                      {t('protectPdf.protectedDesc')}
                     </p>
                     <Button 
                       className="w-full sm:w-auto" 
@@ -471,7 +473,7 @@ export function PdfPasswordProtector() {
                     >
                       <a href={`/api/file?folder=protected&filename=${encodeURIComponent(protectedFileUrl)}`} download>
                         <DownloadIcon className="h-4 w-4 mr-2" />
-                        Download Protected PDF
+                        {t('ui.download')}
                       </a>
                     </Button>
                   </div>
@@ -486,7 +488,7 @@ export function PdfPasswordProtector() {
                 type="submit" 
                 disabled={!file || isProcessing}
               >
-                {isProcessing ? "Protecting..." : "Protect PDF"}
+                {isProcessing ? t('ui.processing') : t('protectPdf.title')}
               </Button>
             )}
           </CardFooter>

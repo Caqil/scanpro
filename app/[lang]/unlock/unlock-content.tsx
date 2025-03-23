@@ -95,7 +95,7 @@ export function FAQSection() {
   return (
     <div className="mb-12">
       <h2 className="text-2xl font-bold mb-6 text-center">
-        {t('faq.title')}
+        {t('contact.faq.title')}
       </h2>
       <div className="space-y-4">
         {faqs.map((faq, index) => (

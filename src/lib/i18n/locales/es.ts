@@ -23,21 +23,54 @@ export default {
     btTools: "Explorar Todas las Herramientas"
   },
 
-  // Sección de herramientas populares
   popular: {
     pdfToWord: "PDF a Word",
     pdfToWordDesc: "Convierte fácilmente tus archivos PDF en documentos DOC y DOCX editables.",
     pdfToExcel: "PDF a Excel",
-    pdfToExcelDesc: "Extrae datos directamente de PDFs a hojas de cálculo de Excel en pocos segundos.",
+    pdfToExcelDesc: "Extrae datos directamente de PDF a hojas de cálculo de Excel en pocos segundos.",
+    pdfToPowerPoint: "PDF a PowerPoint",
+    pdfToPowerPointDesc: "Transforma tus presentaciones en PDF a diapositivas de PowerPoint editables.",
+    pdfToJpg: "PDF a JPG",
+    pdfToJpgDesc: "Convierte páginas de PDF a imágenes JPG o extrae todas las imágenes de un PDF.",
+    pdfToPng: "PDF a PNG",
+    pdfToPngDesc: "Convierte páginas de PDF a imágenes PNG transparentes de alta calidad.",
+    pdfToHtml: "PDF a HTML",
+    pdfToHtmlDesc: "Transforma documentos PDF en formato HTML compatible con la web.",
+    wordToPdf: "Word a PDF",
+    wordToPdfDesc: "Convierte documentos de Word a PDF con formato y diseño perfectos.",
+    excelToPdf: "Excel a PDF",
+    excelToPdfDesc: "Convierte tus hojas de cálculo de Excel en documentos PDF perfectamente formateados.",
+    powerPointToPdf: "PowerPoint a PDF",
+    powerPointToPdfDesc: "Convierte presentaciones de PowerPoint a PDF para compartir fácilmente.",
+    jpgToPdf: "JPG a PDF",
+    jpgToPdfDesc: "Crea archivos PDF a partir de tus imágenes JPG con opciones personalizables.",
+    pngToPdf: "PNG a PDF",
+    pngToPdfDesc: "Convierte imágenes PNG a PDF con soporte para fondo transparente.",
+    htmlToPdf: "HTML a PDF",
+    htmlToPdfDesc: "Convierte páginas web y contenido HTML en documentos PDF.",
     mergePdf: "Combinar PDF",
-    mergePdfDesc: "Combina PDFs en el orden que desees con el combinador de PDF más fácil disponible.",
+    mergePdfDesc: "Combina PDFs en el orden que desees con el fusionador de PDF más fácil disponible.",
+    splitPdf: "Dividir PDF",
+    splitPdfDesc: "Extrae páginas específicas o divide un PDF en varios documentos.",
     compressPdf: "Comprimir PDF",
-    compressPdfDesc: "Reduce el tamaño del archivo mientras optimizas para la máxima calidad PDF.",
+    compressPdfDesc: "Reduce el tamaño del archivo mientras optimizas la máxima calidad del PDF.",
+    rotatePdf: "Rotar PDF",
+    rotatePdfDesc: "Cambia la orientación de las páginas rotando las páginas del PDF según sea necesario.",
+    watermark: "Agregar marca de agua",
+    watermarkDesc: "Agrega marcas de agua de texto o imagen para proteger y marcar tus documentos PDF.",
+    unlockPdf: "Desbloquear PDF",
+    unlockPdfDesc: "Elimina la protección por contraseña y las restricciones de los archivos PDF.",
     protectPdf: "Proteger PDF",
     protectPdfDesc: "Agrega protección con contraseña para asegurar tus documentos PDF.",
+    signPdf: "Firmar PDF",
+    signPdfDesc: "Agrega firmas digitales a tus documentos PDF de forma segura.",
     ocr: "OCR",
-    ocrDesc: "Extrae texto de documentos escaneados",
-    viewAll: "Ver Todas las Herramientas PDF"
+    ocrDesc: "Extrae texto de documentos escaneados usando Reconocimiento Óptico de Caracteres.",
+    editPdf: "Editar PDF",
+    editPdfDesc: "Realiza cambios en texto, imágenes y páginas de tus documentos PDF.",
+    redactPdf: "Redactar PDF",
+    redactPdfDesc: "Elimina permanentemente información sensible de tus archivos PDF.",
+    viewAll: "Ver todas las herramientas de PDF"
   },
 
   // Sección de convertidor
@@ -753,29 +786,61 @@ export default {
     clearAll: "Limpiar Todo",
     done: "Hecho",
     extract: "extracto",
+    new: "¡Nuevo!",
+    phone: "Teléfono",
+    address: "Dirección",
     filesSecurity: "Los archivos se eliminan automáticamente después de 24 horas por privacidad y seguridad."
   },
-
-  // Formulario de contacto
   contact: {
-    title: "Contáctanos",
-    description: "¿Tienes preguntas o comentarios? Nos encantaría saber de ti.",
+    title: "Contáctenos",
+    description: "¿Tiene preguntas o comentarios? Nos encantaría saber de usted.",
     form: {
-      name: "Tu Nombre",
+      title: "Envíenos un Mensaje",
+      description: "Complete el formulario a continuación y nos pondremos en contacto con usted lo antes posible.",
+      name: "Su Nombre",
       email: "Dirección de Correo Electrónico",
       subject: "Asunto",
       message: "Mensaje",
       submit: "Enviar Mensaje"
     },
-    success: "Mensaje Enviado con Éxito",
-    successDesc: "Gracias por contactarnos. Te responderemos lo antes posible.",
-    error: "Fallo al Enviar Mensaje",
-    errorDesc: "Hubo un error al enviar tu mensaje. Por favor intenta de nuevo más tarde.",
+    success: "¡Mensaje Enviado Exitosamente!",
+    successDesc: "Gracias por contactarnos. Nos pondremos en contacto con usted lo antes posible.",
+    error: "Error al Enviar el Mensaje",
+    errorDesc: "Hubo un error al enviar su mensaje. Por favor intente de nuevo más tarde.",
     validation: {
       name: "El nombre es requerido",
-      email: "Por favor ingresa una dirección de correo válida",
+      email: "Por favor ingrese una dirección de correo electrónico válida",
       subject: "El asunto es requerido",
       message: "El mensaje es requerido"
+    },
+    supportHours: {
+      title: "Horario de Soporte",
+      description: "Cuándo estamos disponibles para ayudar",
+      weekdays: "Lunes - Viernes",
+      weekdayHours: "9:00 AM - 6:00 PM EST",
+      saturday: "Sábado",
+      saturdayHours: "10:00 AM - 4:00 PM EST",
+      sunday: "Domingo",
+      closed: "Cerrado"
+    },
+    faq: {
+      title: "Preguntas Frecuentes",
+      responseTime: {
+        question: "¿Cuánto tiempo tarda en recibir una respuesta?",
+        answer: "Tratamos de responder a todas las consultas dentro de 24-48 horas hábiles. Durante períodos de alta demanda, puede tomar hasta 72 horas."
+      },
+      technicalSupport: {
+        question: "¿Puedo obtener soporte para un problema técnico?",
+        answer: "Sí, nuestro equipo de soporte técnico está disponible para ayudarle con cualquier problema que experimente con nuestras herramientas PDF."
+      },
+      phoneSupport: {
+        question: "¿Ofrecen soporte telefónico?",
+        answer: "Proporcionamos soporte telefónico durante nuestro horario de atención indicado. Para asistencia inmediata, el correo electrónico suele ser la forma más rápida de obtener ayuda."
+      },
+      security: {
+        question: "¿Está segura mi información personal?",
+        answer: "Tomamos su privacidad muy en serio. Toda la comunicación está encriptada y nunca compartimos su información personal con terceros."
+      }
     }
   },
 

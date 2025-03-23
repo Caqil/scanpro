@@ -23,20 +23,53 @@ export default {
     btTools: "Jelajahi Semua Alat"
   },
 
-  // Bagian Alat Populer
   popular: {
     pdfToWord: "PDF ke Word",
-    pdfToWordDesc: "Ubah file PDF Anda menjadi dokumen DOC dan DOCX yang mudah diedit.",
+    pdfToWordDesc: "Konversi file PDF Anda dengan mudah menjadi dokumen DOC dan DOCX yang mudah diedit.",
     pdfToExcel: "PDF ke Excel",
     pdfToExcelDesc: "Tarik data langsung dari PDF ke spreadsheet Excel dalam beberapa detik.",
+    pdfToPowerPoint: "PDF ke PowerPoint",
+    pdfToPowerPointDesc: "Ubah presentasi PDF Anda menjadi slide PowerPoint yang dapat diedit.",
+    pdfToJpg: "PDF ke JPG",
+    pdfToJpgDesc: "Konversi halaman PDF menjadi gambar JPG atau ekstrak semua gambar dari PDF.",
+    pdfToPng: "PDF ke PNG",
+    pdfToPngDesc: "Konversi halaman PDF menjadi gambar PNG transparan dengan kualitas tinggi.",
+    pdfToHtml: "PDF ke HTML",
+    pdfToHtmlDesc: "Ubah dokumen PDF menjadi format HTML yang ramah web.",
+    wordToPdf: "Word ke PDF",
+    wordToPdfDesc: "Konversi dokumen Word ke PDF dengan format dan tata letak sempurna.",
+    excelToPdf: "Excel ke PDF",
+    excelToPdfDesc: "Ubah spreadsheet Excel Anda menjadi dokumen PDF yang diformat dengan baik.",
+    powerPointToPdf: "PowerPoint ke PDF",
+    powerPointToPdfDesc: "Konversi presentasi PowerPoint ke PDF untuk berbagi dengan mudah.",
+    jpgToPdf: "JPG ke PDF",
+    jpgToPdfDesc: "Buat file PDF dari gambar JPG Anda dengan opsi yang dapat disesuaikan.",
+    pngToPdf: "PNG ke PDF",
+    pngToPdfDesc: "Konversi gambar PNG ke PDF dengan dukungan latar belakang transparan.",
+    htmlToPdf: "HTML ke PDF",
+    htmlToPdfDesc: "Konversi halaman web dan konten HTML ke dokumen PDF.",
     mergePdf: "Gabungkan PDF",
-    mergePdfDesc: "Gabungkan PDF sesuai urutan yang Anda inginkan dengan penggabung PDF termudah yang tersedia.",
+    mergePdfDesc: "Gabungkan PDF dalam urutan yang Anda inginkan dengan penggabung PDF termudah yang tersedia.",
+    splitPdf: "Pisahkan PDF",
+    splitPdfDesc: "Ekstrak halaman tertentu atau pisahkan PDF menjadi beberapa dokumen.",
     compressPdf: "Kompres PDF",
-    compressPdfDesc: "Kurangi ukuran file sambil mengoptimalkan kualitas PDF maksimal.",
+    compressPdfDesc: "Kurangi ukuran file sambil mengoptimalkan kualitas PDF secara maksimal.",
+    rotatePdf: "Putar PDF",
+    rotatePdfDesc: "Ubah orientasi halaman dengan memutar halaman PDF sesuai kebutuhan.",
+    watermark: "Tambahkan Tanda Air",
+    watermarkDesc: "Tambahkan tanda air teks atau gambar untuk melindungi dan memberi merek pada dokumen PDF Anda.",
+    unlockPdf: "Buka Kunci PDF",
+    unlockPdfDesc: "Hapus perlindungan kata sandi dan pembatasan dari file PDF.",
     protectPdf: "Lindungi PDF",
     protectPdfDesc: "Tambahkan perlindungan kata sandi untuk mengamankan dokumen PDF Anda.",
+    signPdf: "Tandatangani PDF",
+    signPdfDesc: "Tambahkan tanda tangan digital ke dokumen PDF Anda dengan aman.",
     ocr: "OCR",
-    ocrDesc: "Ekstrak teks dari dokumen yang dipindai",
+    ocrDesc: "Ekstrak teks dari dokumen yang dipindai menggunakan Pengenalan Karakter Optik.",
+    editPdf: "Edit PDF",
+    editPdfDesc: "Lakukan perubahan pada teks, gambar, dan halaman di dokumen PDF Anda.",
+    redactPdf: "Redaksi PDF",
+    redactPdfDesc: "Hapus informasi sensitif secara permanen dari file PDF Anda.",
     viewAll: "Lihat Semua Alat PDF"
   },
 
@@ -753,22 +786,26 @@ export default {
     clearAll: "Hapus Semua",
     done: "Selesai",
     extract: "ekstrak",
+    new: "Baru!",
+    phone: "Telepon",
+    address: "Alamat",
     filesSecurity: "File akan otomatis dihapus setelah 24 jam demi privasi dan keamanan."
   },
 
-  // Formulir Kontak
   contact: {
     title: "Hubungi Kami",
     description: "Punya pertanyaan atau masukan? Kami senang mendengar dari Anda.",
     form: {
-      name: "Nama Anda",
+      title: "Kirim Pesan Kepada Kami",
+      description: "Isi formulir di bawah ini dan kami akan segera menghubungi Anda.",
+      name: "Nama Lengkap",
       email: "Alamat Email",
       subject: "Subjek",
       message: "Pesan",
       submit: "Kirim Pesan"
     },
-    success: "Pesan Berhasil Terkirim",
-    successDesc: "Terima kasih telah menghubungi kami. Kami akan kembali kepada Anda secepat mungkin.",
+    success: "Pesan Berhasil Dikirim",
+    successDesc: "Terima kasih telah menghubungi kami. Kami akan segera menghubungi Anda.",
     error: "Gagal Mengirim Pesan",
     errorDesc: "Terjadi kesalahan saat mengirim pesan Anda. Silakan coba lagi nanti.",
     validation: {
@@ -776,6 +813,35 @@ export default {
       email: "Masukkan alamat email yang valid",
       subject: "Subjek diperlukan",
       message: "Pesan diperlukan"
+    },
+    supportHours: {
+      title: "Jam Dukungan",
+      description: "Kapan kami tersedia untuk membantu",
+      weekdays: "Senin - Jumat",
+      weekdayHours: "9:00 - 18:00 EST",
+      saturday: "Sabtu",
+      saturdayHours: "10:00 - 16:00 EST",
+      sunday: "Minggu",
+      closed: "Tutup"
+    },
+    faq: {
+      title: "Pertanyaan yang Sering Diajukan",
+      responseTime: {
+        question: "Berapa lama waktu yang dibutuhkan untuk mendapatkan respons?",
+        answer: "Kami berusaha merespons semua pertanyaan dalam waktu 24-48 jam kerja. Pada saat sibuk, mungkin memerlukan waktu hingga 72 jam."
+      },
+      technicalSupport: {
+        question: "Bisakah saya mendapatkan dukungan untuk masalah teknis?",
+        answer: "Ya, tim dukungan teknis kami tersedia untuk membantu Anda dengan masalah yang Anda alami dengan alat PDF kami."
+      },
+      phoneSupport: {
+        question: "Apakah Anda menawarkan dukungan telepon?",
+        answer: "Kami menyediakan dukungan telepon selama jam dukungan yang tercantum. Untuk bantuan segera, email seringkali merupakan cara tercepat untuk mendapatkan bantuan."
+      },
+      security: {
+        question: "Apakah informasi pribadi saya aman?",
+        answer: "Kami menjaga privasi Anda dengan serius. Semua komunikasi dienkripsi, dan kami tidak pernah membagikan informasi pribadi Anda kepada pihak ketiga."
+      }
     }
   },
 
