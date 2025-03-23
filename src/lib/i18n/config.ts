@@ -124,5 +124,5 @@ export const languageMetadata = {
         nativeName: 'Türkçe',
         flag: '🇹🇷',
     },
-   
+
 };

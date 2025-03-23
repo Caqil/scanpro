@@ -71,10 +71,17 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMobileCategory, setActiveMobileCategory] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  // Use a state to ensure consistent rendering between server and client
+  // This avoids hydration mismatches where the text differs between server/client renders
+  const [isClient, setIsClient] = useState(false);
   
   useEffect(() => {
+    // Prevent hydration mismatch by only updating language state and UI after initial render
+    setIsClient(true);
+    
+    // Update language state without triggering navigation
     if (urlLanguage && urlLanguage !== language) {
-      // Update state without triggering navigation
       useLanguageStore.setState({ language: urlLanguage as any });
     }
   }, [urlLanguage, language]);
@@ -99,8 +106,8 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
   
   const PDF_TOOLS: CategoryDefinition[] = [
     {
-      category: t('nav.convertPdf'),
-      description: t('nav.convertPdfDesc'),
+      category: isClient ? t('nav.convertPdf') : "", // Empty on server, populated on client
+      description: isClient ? t('nav.convertPdfDesc') : "",
       tools: [
         { 
           name: "PDF to Word", 
@@ -284,17 +291,17 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
     }
   ];
 
-  // Navigation items for desktop and mobile
+  // Navigation items for desktop and mobile - only populate text after client-side render
   const navItems = [
     { 
-      label: t('nav.tools'), 
+      label: isClient ? t('nav.tools') : "Tools", // Fallback for server render
       dropdown: PDF_TOOLS 
     },
     { 
-      label: t('nav.company'), 
+      label: isClient ? t('nav.company') : "Company", 
       dropdown: COMPANY_MENU 
     },
-    { href: "/pricing", label: t('nav.pricing') },
+    { href: "/pricing", label: isClient ? t('nav.pricing') : "Pricing" },
   ];
 
   // Function to toggle mobile category
@@ -434,22 +441,22 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           <div className="container max-w-6xl mx-auto py-4 space-y-4">
             {/* Mobile Language Selector */}
             <div className="border-b pb-3 mb-3">
-    <div className="text-sm font-medium mb-2">{t('nav.selectLanguage')}</div>
-    <div className="grid grid-cols-2 gap-2">
-      {languages.map((lang) => (
-        <Button
-          key={lang.code}
-          variant={language === lang.code ? "default" : "outline"}
-          size="sm"
-          className="justify-start"
-          onClick={() => setLanguage(lang.code as any)}
-        >
-          <span className="mr-2">{lang.flag}</span>
-          {lang.nativeName}
-        </Button>
-      ))}
-    </div>
-  </div>
+              <div className="text-sm font-medium mb-2">{isClient ? t('nav.selectLanguage') : "Select Language"}</div>
+              <div className="grid grid-cols-2 gap-2">
+                {languages.map((lang) => (
+                  <Button
+                    key={lang.code}
+                    variant={language === lang.code ? "default" : "outline"}
+                    size="sm"
+                    className="justify-start"
+                    onClick={() => setLanguage(lang.code as any)}
+                  >
+                    <span className="mr-2">{lang.flag}</span>
+                    {lang.nativeName}
+                  </Button>
+                ))}
+              </div>
+            </div>
             
             {navItems.map((item) => (
               item.dropdown ? (

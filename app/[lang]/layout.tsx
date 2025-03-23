@@ -23,7 +23,6 @@ export const fontSans = FontSans({
 export function generateStaticParams() {
   return SUPPORTED_LANGUAGES.map((lang) => ({ lang }))
 }
-
 // Generate metadata based on language parameter
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   // Await the params object before accessing its properties
@@ -48,10 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       canonical: `/${lang}`,
       languages: Object.fromEntries(
         SUPPORTED_LANGUAGES.map(code => [
-          code === "en" ? "en-US" : 
-          code === "id" ? "id-ID" : 
-          code === "es" ? "es-ES" : 
-          `${code}`,
+          code,
           `/${code}`
         ])
       ),

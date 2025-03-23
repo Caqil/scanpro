@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useLanguageStore } from "@/src/store/store";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,6 +23,12 @@ export function LanguageSwitcher({ variant = "default", size = "default" }: {
   size?: "default" | "sm" | "lg" | "icon"; 
 }) {
   const { language, setLanguage } = useLanguageStore();
+  // Add client-side rendering protection
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   
   const languages: LanguageOption[] = [
     { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
@@ -38,31 +45,40 @@ export function LanguageSwitcher({ variant = "default", size = "default" }: {
     { code: 'ko', name: 'Korean', nativeName: '한국어 (Hangugeo)', flag: '🇰🇷' },
     { code: 'it', name: 'Italian', nativeName: 'Italiano', flag: '🇮🇹' },
     { code: 'tr', name: 'Turkish', nativeName: 'Türkçe', flag: '🇹🇷' },
-    { code: 'vi', name: 'Vietnamese', nativeName: 'Tiếng Việt', flag: '🇻🇳' },
-];
+  ];
 
   const currentLanguage = languages.find(lang => lang.code === language) || languages[0];
 
-  return (
-<DropdownMenu>
-    <DropdownMenuTrigger asChild>
+  // Don't render language content until after client-side hydration is complete
+  if (!mounted) {
+    return (
       <Button variant="ghost" size="sm">
         <Globe className="h-4 w-4" />
-        <span>{languages.find(lang => lang.code === language)?.name || 'Language'}</span>
+        <span>Language</span>
       </Button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent className="grid grid-cols-3 gap-2 p-2">
-      {languages.map((lang) => (
-        <DropdownMenuItem 
-          key={lang.code}
-          onClick={() => setLanguage(lang.code as any)}
-          className="flex items-center space-x-2"
-        >
-          <span>{lang.flag}</span>
-          <span>{lang.nativeName}</span>
-        </DropdownMenuItem>
-      ))}
-    </DropdownMenuContent>
-  </DropdownMenu>
+    );
+  }
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="sm">
+          <Globe className="h-4 w-4" />
+          <span>{languages.find(lang => lang.code === language)?.name || 'Language'}</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="grid grid-cols-3 gap-2 p-2">
+        {languages.map((lang) => (
+          <DropdownMenuItem 
+            key={lang.code}
+            onClick={() => setLanguage(lang.code as any)}
+            className="flex items-center space-x-2"
+          >
+            <span>{lang.flag}</span>
+            <span>{lang.nativeName}</span>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
