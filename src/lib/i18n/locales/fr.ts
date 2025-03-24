@@ -11,7 +11,11 @@ export default {
         pricing: "Tarification",
         convertPdf: "Convertir PDF",
         convertPdfDesc: "Transformer les PDF vers et depuis d'autres formats",
-        selectLanguage: "Sélectionner la langue"
+        selectLanguage: "Sélectionner la langue",
+        downloadApp: "Télécharger l’Application",
+        getApp: "Obtenez notre application mobile pour des outils PDF en déplacement",
+        appStores: "Obtenez l’Application ScanPro",
+        mobileTools: "Outils PDF en déplacement"
     },
 
     // Section Héros
@@ -260,6 +264,7 @@ export default {
         pngToPdf: "Convertissez les images PNG en PDF en quelques secondes. Ajustez facilement l’orientation et les marges.",
         htmlToPdf: "Convertissez des pages web en PDF. Copiez et collez l’URL pour la convertir en PDF.",
         mergePdf: "Combinez les PDF dans l’ordre souhaité avec le fusionneur PDF le plus simple disponible.",
+        splitPdf: "Divisez les fichiers PDF en plusieurs documents ou extrayez des pages spécifiques de votre PDF.",
         compressPdf: "Réduisez la taille des fichiers tout en optimisant la qualité maximale du PDF.",
         rotatePdf: "Faites pivoter vos PDF comme vous en avez besoin. Vous pouvez même faire pivoter plusieurs PDF à la fois !",
         watermark: "Ajoutez une image ou un texte en filigrane sur votre PDF en quelques secondes. Choisissez la typographie, la transparence et la position.",
@@ -267,7 +272,83 @@ export default {
         protectPdf: "Protégez les fichiers PDF avec un mot de passe. Chiffrez les documents PDF pour empêcher tout accès non autorisé.",
         ocr: "Extrayez le texte des documents numérisés grâce à la reconnaissance optique de caractères."
     },
-
+    splitPdf: {
+        title: "Diviser PDF",
+        description: "Divisez des fichiers PDF en plusieurs documents ou extrayez des pages spécifiques",
+        howTo: {
+            title: "Comment Diviser des Fichiers PDF",
+            step1: {
+                title: "Télécharger",
+                description: "Téléchargez le fichier PDF que vous souhaitez diviser ou dont vous voulez extraire des pages"
+            },
+            step2: {
+                title: "Choisir la Méthode de Division",
+                description: "Sélectionnez comment vous voulez diviser votre PDF : par plages de pages, extraire chaque page, ou diviser toutes les N pages"
+            },
+            step3: {
+                title: "Télécharger",
+                description: "Téléchargez vos fichiers PDF divisés individuellement"
+            }
+        },
+        options: {
+            splitMethod: "Méthode de Division",
+            byRange: "Diviser par plages de pages",
+            extractAll: "Extraire toutes les pages en PDFs séparés",
+            everyNPages: "Diviser toutes les N pages",
+            everyNPagesNumber: "Nombre de pages par fichier",
+            everyNPagesHint: "Chaque fichier de sortie contiendra ce nombre de pages",
+            pageRanges: "Plages de Pages",
+            pageRangesHint: "Entrez les plages de pages séparées par des virgules. Exemple : 1-5, 8, 11-13 créera 3 fichiers PDF"
+        },
+        splitting: "Division du PDF...",
+        splitDocument: "Diviser le Document",
+        splitSuccess: "PDF divisé avec succès !",
+        splitSuccessDesc: "Votre PDF a été divisé en {count} fichiers séparés",
+        results: {
+            title: "Résultats de la Division PDF",
+            part: "Partie",
+            pages: "Pages",
+            pagesCount: "pages"
+        },
+        faq: {
+            title: "Questions Fréquemment Posées",
+            q1: {
+                question: "Que deviennent mes fichiers PDF après la division ?",
+                answer: "Tous les fichiers téléchargés et générés sont automatiquement supprimés de nos serveurs après 24 heures pour votre confidentialité et sécurité."
+            },
+            q2: {
+                question: "Y a-t-il une limite au nombre de pages que je peux diviser ?",
+                answer: "La version gratuite permet de diviser des PDFs jusqu’à 100 pages. Pour des documents plus volumineux, envisagez notre plan premium."
+            },
+            q3: {
+                question: "Puis-je extraire des pages spécifiques d’un PDF ?",
+                answer: "Oui, vous pouvez utiliser l’option \"Diviser par plages de pages\" pour extraire des pages ou plages de pages spécifiques de votre document PDF."
+            },
+            q4: {
+                question: "Puis-je réorganiser les pages pendant la division ?",
+                answer: "Actuellement, l’outil de division conserve l’ordre original des pages. Pour réorganiser les pages, vous devrez utiliser notre outil de Fusion PDF avec les pages extraites."
+            }
+        },
+        useCases: {
+            title: "Utilisations Populaires de la Division PDF",
+            chapters: {
+                title: "Séparation des Chapitres",
+                description: "Divisez de gros livres ou rapports en chapitres individuels pour une navigation et un partage plus faciles"
+            },
+            extract: {
+                title: "Extraction de Pages",
+                description: "Extrayez des pages spécifiques comme des formulaires, certificats ou sections importantes de documents plus longs"
+            },
+            remove: {
+                title: "Supprimer des Pages",
+                description: "Extrayez toutes les pages nécessaires et laissez de côté le contenu indésirable comme les publicités ou les pages blanches"
+            },
+            size: {
+                title: "Réduction de Taille",
+                description: "Divisez de gros PDFs en fichiers plus petits pour faciliter le partage par email ou applications de messagerie"
+            }
+        }
+    },
     // Page Fusionner PDF
     mergePdf: {
         title: "Fusionner des Fichiers PDF",

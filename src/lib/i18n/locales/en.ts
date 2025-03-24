@@ -11,7 +11,12 @@ export default {
     pricing: "Pricing",
     convertPdf: "Convert PDF",
     convertPdfDesc: "Transform PDFs to and from other formats",
-    selectLanguage: "Select Language"
+    selectLanguage: "Select Language",
+    downloadApp: "Download App",
+    getApp: "Get our mobile app for on-the-go PDF tools",
+    appStores: "Get ScanPro App",
+    mobileTools: "PDF tools on the go"
+
   },
 
   // Hero section
@@ -260,6 +265,7 @@ export default {
     pngToPdf: "Convert PNG images to PDF in seconds. Easily adjust orientation and margins.",
     htmlToPdf: "Convert webpages to PDF. Copy and paste the URL to convert it to PDF.",
     mergePdf: "Combine PDFs in the order you want with the easiest PDF merger available.",
+    splitPdf: "Split PDF files into multiple documents or extract specific pages from your PDF.",
     compressPdf: "Reduce file size while optimizing for maximal PDF quality.",
     rotatePdf: "Rotate your PDFs the way you need them. You can even rotate multiple PDFs at once!",
     watermark: "Stamp an image or text over your PDF in seconds. Choose the typography, transparency and position.",
@@ -267,7 +273,83 @@ export default {
     protectPdf: "Protect PDF files with a password. Encrypt PDF documents to prevent unauthorized access.",
     ocr: "Extract text from scanned documents using Optical Character Recognition."
   },
-
+  splitPdf: {
+    title: "Split PDF",
+    description: "Split PDF files into multiple documents or extract specific pages",
+    howTo: {
+      title: "How to Split PDF Files",
+      step1: {
+        title: "Upload",
+        description: "Upload the PDF file you want to split or extract pages from"
+      },
+      step2: {
+        title: "Choose Split Method",
+        description: "Select how you want to split your PDF: by page ranges, extract each page, or split every N pages"
+      },
+      step3: {
+        title: "Download",
+        description: "Download your split PDF files individually"
+      }
+    },
+    options: {
+      splitMethod: "Split Method",
+      byRange: "Split by page ranges",
+      extractAll: "Extract all pages as separate PDFs",
+      everyNPages: "Split every N pages",
+      everyNPagesNumber: "Number of pages per file",
+      everyNPagesHint: "Each output file will contain this many pages",
+      pageRanges: "Page Ranges",
+      pageRangesHint: "Enter page ranges separated by commas. Example: 1-5, 8, 11-13 will create 3 PDF files"
+    },
+    splitting: "Splitting PDF...",
+    splitDocument: "Split Document",
+    splitSuccess: "PDF successfully split!",
+    splitSuccessDesc: "Your PDF has been split into {count} separate files",
+    results: {
+      title: "Split PDF Results",
+      part: "Part",
+      pages: "Pages",
+      pagesCount: "pages"
+    },
+    faq: {
+      title: "Frequently Asked Questions",
+      q1: {
+        question: "What happens to my PDF files after splitting?",
+        answer: "All uploaded and generated files are automatically deleted from our servers after 24 hours for your privacy and security."
+      },
+      q2: {
+        question: "Is there a limit to how many pages I can split?",
+        answer: "The free version allows you to split PDFs with up to 100 pages. For larger documents, consider our premium plan."
+      },
+      q3: {
+        question: "Can I extract specific pages from a PDF?",
+        answer: "Yes, you can use the \"Split by page ranges\" option to extract specific pages or page ranges from your PDF document."
+      },
+      q4: {
+        question: "Can I re-order pages while splitting?",
+        answer: "Currently, the split tool maintains the original page order. To reorder pages, you would need to use our PDF Merger tool with the extracted pages."
+      }
+    },
+    useCases: {
+      title: "Popular Uses for PDF Splitting",
+      chapters: {
+        title: "Chapter Separation",
+        description: "Split large books or reports into individual chapters for easier navigation and sharing"
+      },
+      extract: {
+        title: "Page Extraction",
+        description: "Extract specific pages like forms, certificates, or important sections from longer documents"
+      },
+      remove: {
+        title: "Remove Pages",
+        description: "Extract all needed pages and leave out unwanted content like advertisements or blank pages"
+      },
+      size: {
+        title: "Size Reduction",
+        description: "Break large PDFs into smaller files for easier sharing via email or messaging apps"
+      }
+    }
+  },
   // Merge PDF Page
   mergePdf: {
     title: "Merge PDF Files",

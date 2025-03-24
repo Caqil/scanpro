@@ -11,7 +11,11 @@ export default {
     pricing: "Harga",
     convertPdf: "Konversi PDF",
     convertPdfDesc: "Ubah PDF ke dan dari format lain",
-    selectLanguage: "Pilih Bahasa"
+    selectLanguage: "Pilih Bahasa",
+    downloadApp: "Unduh Aplikasi",
+    getApp: "Dapatkan aplikasi seluler kami untuk alat PDF saat bepergian",
+    appStores: "Dapatkan Aplikasi ScanPro",
+    mobileTools: "Alat PDF saat bepergian"
   },
 
   // Bagian Hero
@@ -260,6 +264,7 @@ export default {
     pngToPdf: "Konversi gambar PNG ke PDF dalam hitungan detik. Sesuaikan orientasi dan margin dengan mudah.",
     htmlToPdf: "Konversi halaman web ke PDF. Salin dan tempel URL untuk mengonversinya ke PDF.",
     mergePdf: "Gabungkan PDF sesuai urutan yang Anda inginkan dengan penggabung PDF termudah yang tersedia.",
+    splitPdf: "Pisahkan file PDF menjadi beberapa dokumen atau ekstrak halaman tertentu dari PDF Anda.",
     compressPdf: "Kurangi ukuran file sambil mengoptimalkan kualitas PDF maksimal.",
     rotatePdf: "Putar PDF Anda sesuai kebutuhan. Anda bahkan bisa memutar beberapa PDF sekaligus!",
     watermark: "Tambahkan stempel gambar atau teks pada PDF Anda dalam hitungan detik. Pilih tipografi, transparansi, dan posisi.",
@@ -267,7 +272,83 @@ export default {
     protectPdf: "Lindungi file PDF dengan kata sandi. Enkripsi dokumen PDF untuk mencegah akses yang tidak sah.",
     ocr: "Ekstrak teks dari dokumen yang dipindai menggunakan Pengenalan Karakter Optik."
   },
-
+  splitPdf: {
+    title: "Pisah PDF",
+    description: "Pisahkan file PDF menjadi beberapa dokumen atau ekstrak halaman tertentu",
+    howTo: {
+      title: "Cara Memisahkan File PDF",
+      step1: {
+        title: "Unggah",
+        description: "Unggah file PDF yang ingin Anda pisahkan atau ekstrak halamannya"
+      },
+      step2: {
+        title: "Pilih Metode Pemisahan",
+        description: "Pilih cara Anda ingin memisahkan PDF: berdasarkan rentang halaman, ekstrak setiap halaman, atau pisah setiap N halaman"
+      },
+      step3: {
+        title: "Unduh",
+        description: "Unduh file PDF yang telah dipisahkan secara individu"
+      }
+    },
+    options: {
+      splitMethod: "Metode Pemisahan",
+      byRange: "Pisah berdasarkan rentang halaman",
+      extractAll: "Ekstrak semua halaman sebagai PDF terpisah",
+      everyNPages: "Pisah setiap N halaman",
+      everyNPagesNumber: "Jumlah halaman per file",
+      everyNPagesHint: "Setiap file keluaran akan berisi jumlah halaman ini",
+      pageRanges: "Rentang Halaman",
+      pageRangesHint: "Masukkan rentang halaman yang dipisahkan dengan koma. Contoh: 1-5, 8, 11-13 akan menghasilkan 3 file PDF"
+    },
+    splitting: "Memisahkan PDF...",
+    splitDocument: "Pisah Dokumen",
+    splitSuccess: "PDF berhasil dipisahkan!",
+    splitSuccessDesc: "PDF Anda telah dipisahkan menjadi {count} file terpisah",
+    results: {
+      title: "Hasil Pemisahan PDF",
+      part: "Bagian",
+      pages: "Halaman",
+      pagesCount: "halaman"
+    },
+    faq: {
+      title: "Pertanyaan yang Sering Diajukan",
+      q1: {
+        question: "Apa yang terjadi pada file PDF saya setelah dipisahkan?",
+        answer: "Semua file yang diunggah dan dihasilkan akan otomatis dihapus dari server kami setelah 24 jam demi privasi dan keamanan Anda."
+      },
+      q2: {
+        question: "Apakah ada batasan jumlah halaman yang bisa dipisahkan?",
+        answer: "Versi gratis memungkinkan Anda memisahkan PDF hingga 100 halaman. Untuk dokumen yang lebih besar, pertimbangkan paket premium kami."
+      },
+      q3: {
+        question: "Apakah saya bisa mengekstrak halaman tertentu dari PDF?",
+        answer: "Ya, Anda bisa menggunakan opsi \"Pisah berdasarkan rentang halaman\" untuk mengekstrak halaman atau rentang halaman tertentu dari dokumen PDF Anda."
+      },
+      q4: {
+        question: "Apakah saya bisa mengatur ulang halaman saat memisahkan?",
+        answer: "Saat ini, alat pemisahan mempertahankan urutan halaman asli. Untuk mengatur ulang halaman, Anda perlu menggunakan alat Penggabung PDF kami dengan halaman yang telah diekstrak."
+      }
+    },
+    useCases: {
+      title: "Penggunaan Populer untuk Pemisahan PDF",
+      chapters: {
+        title: "Pemisahan Bab",
+        description: "Pisahkan buku atau laporan besar menjadi bab-bab individu untuk navigasi dan berbagi yang lebih mudah"
+      },
+      extract: {
+        title: "Ekstraksi Halaman",
+        description: "Ekstrak halaman tertentu seperti formulir, sertifikat, atau bagian penting dari dokumen yang lebih panjang"
+      },
+      remove: {
+        title: "Hapus Halaman",
+        description: "Ekstrak semua halaman yang dibutuhkan dan tinggalkan konten yang tidak diinginkan seperti iklan atau halaman kosong"
+      },
+      size: {
+        title: "Pengurangan Ukuran",
+        description: "Pecah PDF besar menjadi file yang lebih kecil untuk memudahkan berbagi melalui email atau aplikasi pesan"
+      }
+    },
+  },
   // Halaman Gabung PDF
   mergePdf: {
     title: "Gabungkan File PDF",

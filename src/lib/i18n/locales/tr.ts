@@ -11,7 +11,11 @@ export default {
         pricing: "Fiyatlandırma",
         convertPdf: "PDF Dönüştür",
         convertPdfDesc: "PDF'leri diğer formatlara ve tam tersine dönüştürün",
-        selectLanguage: "Dil Seç"
+        selectLanguage: "Dil Seç",
+        downloadApp: "Uygulamayı İndir",
+        getApp: "Hareket halindeyken PDF araçları için mobil uygulamamızı edinin",
+        appStores: "ScanPro Uygulamasını Edinin",
+        mobileTools: "Hareket halindeyken PDF araçları"
     },
 
     // Hero Bölümü
@@ -260,6 +264,7 @@ export default {
         pngToPdf: "PNG resimlerini saniyeler içinde PDF'ye dönüştürün. Yönlendirme ve kenar boşluklarını kolayca ayarlayın.",
         htmlToPdf: "Web sayfalarını PDF'ye dönüştürün. PDF'ye dönüştürmek için URL'yi kopyalayıp yapıştırın.",
         mergePdf: "PDF'leri istediğiniz sırayla en basit araçla birleştirin.",
+        splitPdf: "PDF dosyalarını birden fazla belgeye ayırın veya PDF'nizden belirli sayfaları çıkarın.",
         compressPdf: "Dosya boyutunu küçültün, maksimum PDF kalitesini optimize edin.",
         rotatePdf: "PDF'lerinizi gerektiği gibi döndürün. Hatta birden fazla PDF'yi aynı anda döndürebilirsiniz!",
         watermark: "PDF'nizin üzerine saniyeler içinde bir resim veya metin yerleştirin. Yazı tipini, şeffaflığı ve konumu seçin.",
@@ -267,7 +272,83 @@ export default {
         protectPdf: "PDF dosyalarını parola ile koruyun. Yetkisiz erişimi önlemek için PDF belgelerini şifreleyin.",
         ocr: "Tarama belgelerinden optik karakter tanıma ile metin çıkarın."
     },
-
+    splitPdf: {
+        title: "PDF’yi Böl",
+        description: "PDF dosyalarını birden fazla belgeye ayırın veya belirli sayfaları çıkarın",
+        howTo: {
+            title: "PDF Dosyaları Nasıl Bölünür",
+            step1: {
+                title: "Yükle",
+                description: "Bölmek veya sayfa çıkarmak istediğiniz PDF dosyasını yükleyin"
+            },
+            step2: {
+                title: "Bölme Yöntemini Seç",
+                description: "PDF’nizi nasıl bölmek istediğinizi seçin: sayfa aralıklarına göre, her sayfayı çıkararak veya her N sayfada bir bölerek"
+            },
+            step3: {
+                title: "İndir",
+                description: "Bölünmüş PDF dosyalarınızı tek tek indirin"
+            }
+        },
+        options: {
+            splitMethod: "Bölme Yöntemi",
+            byRange: "Sayfa aralıklarına göre böl",
+            extractAll: "Tüm sayfaları ayrı PDF’ler olarak çıkar",
+            everyNPages: "Her N sayfada bir böl",
+            everyNPagesNumber: "Dosya başına sayfa sayısı",
+            everyNPagesHint: "Her çıktı dosyası bu kadar sayfa içerecek",
+            pageRanges: "Sayfa Aralıkları",
+            pageRangesHint: "Virgülle ayrılmış sayfa aralıklarını girin. Örnek: 1-5, 8, 11-13, 3 PDF dosyası oluşturur"
+        },
+        splitting: "PDF bölünüyor...",
+        splitDocument: "Belgeyi Böl",
+        splitSuccess: "PDF başarıyla bölündü!",
+        splitSuccessDesc: "PDF’niz {count} ayrı dosyaya bölündü",
+        results: {
+            title: "PDF Bölme Sonuçları",
+            part: "Bölüm",
+            pages: "Sayfalar",
+            pagesCount: "sayfa"
+        },
+        faq: {
+            title: "Sıkça Sorulan Sorular",
+            q1: {
+                question: "PDF dosyalarım bölündükten sonra ne oluyor?",
+                answer: "Gizliliğiniz ve güvenliğiniz için tüm yüklenen ve oluşturulan dosyalar 24 saat sonra sunucularımızdan otomatik olarak silinir."
+            },
+            q2: {
+                question: "Bölebileceğim sayfa sayısında bir sınır var mı?",
+                answer: "Ücretsiz sürüm, 100 sayfaya kadar PDF’leri bölmenize izin verir. Daha büyük belgeler için premium planımızı düşünebilirsiniz."
+            },
+            q3: {
+                question: "PDF’den belirli sayfaları çıkarabilir miyim?",
+                answer: "Evet, PDF belgenizden belirli sayfaları veya sayfa aralıklarını çıkarmak için \"Sayfa aralıklarına göre böl\" seçeneğini kullanabilirsiniz."
+            },
+            q4: {
+                question: "Bölme sırasında sayfaları yeniden sıralayabilir miyim?",
+                answer: "Şu anda bölme aracı orijinal sayfa sırasını korur. Sayfaları yeniden sıralamak için, çıkarılan sayfalarla PDF Birleştirme aracımızı kullanmanız gerekir."
+            }
+        },
+        useCases: {
+            title: "PDF Bölme için Popüler Kullanımlar",
+            chapters: {
+                title: "Bölüm Ayırma",
+                description: "Büyük kitapları veya raporları ayrı bölümlere ayırarak gezinmeyi ve paylaşmayı kolaylaştırın"
+            },
+            extract: {
+                title: "Sayfa Çıkarma",
+                description: "Uzun belgelerden formlar, sertifikalar veya önemli bölümler gibi belirli sayfaları çıkarın"
+            },
+            remove: {
+                title: "Sayfaları Kaldır",
+                description: "İhtiyacınız olan tüm sayfaları çıkarın ve reklamlar veya boş sayfalar gibi istenmeyen içeriği dışarıda bırakın"
+            },
+            size: {
+                title: "Boyut Küçültme",
+                description: "Büyük PDF’leri daha küçük dosyalara ayırarak e-posta veya mesajlaşma uygulamalarıyla paylaşımı kolaylaştırın"
+            }
+        }
+    },
     // PDF Birleştirme Sayfası
     mergePdf: {
         title: "PDF Dosyalarını Birleştir",
@@ -991,5 +1072,5 @@ export default {
             }
         }
     },
-    
+
 }

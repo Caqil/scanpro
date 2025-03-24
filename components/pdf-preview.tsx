@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Draggable from "react-draggable";
 import { Button } from "@/components/ui/button";
 import { 
   ChevronLeftIcon, 
@@ -9,14 +8,20 @@ import {
   PlusIcon,
   MinusIcon
 } from "lucide-react";
+import * as pdfjsLib from 'pdfjs-dist';
 
 interface PdfPreviewProps {
   file: File;
   signatureImage: string | null;
-  signatureText: string | null;
+  signatureText: string | null | undefined;
   signatureType: "draw" | "type";
-  onPositionChange: (x: number, y: number, pageNumber: number) => void;
+  onPositionChange: (x: number, y: number, pageNumber: number, scale: number, pageHeight: number) => void; // Added pageHeight
 }
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url,
+).toString();
 
 export function PdfPreview({
   file,
@@ -25,134 +30,149 @@ export function PdfPreview({
   signatureType,
   onPositionChange,
 }: PdfPreviewProps) {
-  const [numPages, setNumPages] = useState<number>(1);
+  const [numPages, setNumPages] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState(1);
-  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [scale, setScale] = useState(1.0);
+  const [pageHeight, setPageHeight] = useState<number>(0); // Added to store page height
   const [signaturePosition, setSignaturePosition] = useState({ x: 100, y: 100 });
+  const [signatureSize, setSignatureSize] = useState({ width: 150, height: 50 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
+  const [isDragging, setIsDragging] = useState(false);
+  const [isResizing, setIsResizing] = useState(false);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const dragRef = useRef<HTMLDivElement>(null);
+  const signatureRef = useRef<HTMLDivElement>(null);
+  const pdfRef = useRef<pdfjsLib.PDFDocumentProxy | undefined>(undefined);
 
-  // Create URL for the PDF file
   useEffect(() => {
-    if (file) {
+    const loadPdf = async () => {
       try {
-        const url = URL.createObjectURL(file);
-        setPdfUrl(url);
-        setError(null);
-        
-        // Estimate number of pages based on file size
-        const fileSizeInMB = file.size / (1024 * 1024);
-        const estimatedPages = Math.max(1, Math.round(fileSizeInMB * 5)); // Rough estimate
-        setNumPages(estimatedPages);
+        setLoading(true);
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+        pdfRef.current = pdf;
+        setNumPages(pdf.numPages);
         setLoading(false);
-        
-        // Clean up URL when component unmounts
-        return () => {
-          URL.revokeObjectURL(url);
-        };
       } catch (err) {
-        console.error("Error creating object URL:", err);
-        setError("Failed to load PDF preview");
+        console.error("Error loading PDF:", err);
+        setError("Failed to load PDF");
         setLoading(false);
       }
+    };
+
+    if (file) {
+      loadPdf();
     }
+
+    return () => {
+      if (pdfRef.current) {
+        pdfRef.current.destroy();
+      }
+    };
   }, [file]);
 
-  // Navigation functions
-  const goToPrevPage = () => {
-    setPageNumber(prev => Math.max(prev - 1, 1));
-  };
+  useEffect(() => {
+    const renderPage = async () => {
+      if (!pdfRef.current || !canvasRef.current) return;
 
-  const goToNextPage = () => {
-    setPageNumber(prev => Math.min(prev + 1, numPages));
-  };
+      try {
+        const page = await pdfRef.current.getPage(pageNumber);
+        const viewport = page.getViewport({ scale });
+        
+        const canvas = canvasRef.current;
+        const context = canvas.getContext('2d');
+        if (!context) return;
 
-  // Zoom functions
-  const zoomIn = () => {
-    setScale(prev => Math.min(prev + 0.1, 2.0));
-  };
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        setPageHeight(viewport.height / scale); // Store unscaled page height
 
-  const zoomOut = () => {
-    setScale(prev => Math.max(prev - 0.1, 0.5));
-  };
+        const renderContext = {
+          canvasContext: context,
+          viewport: viewport
+        };
 
-  // Handle signature drag
-  const handleDrag = (e: any, ui: any) => {
-    const newPosition = {
-      x: ui.x,
-      y: ui.y
+        await page.render(renderContext).promise;
+      } catch (err) {
+        console.error("Error rendering page:", err);
+        setError("Failed to render PDF page");
+      }
     };
-    setSignaturePosition(newPosition);
+
+    if (!loading && !error) {
+      renderPage();
+    }
+  }, [pageNumber, scale, loading, error]);
+
+  const goToPrevPage = () => setPageNumber(prev => Math.max(prev - 1, 1));
+  const goToNextPage = () => setPageNumber(prev => Math.min(prev + 1, numPages));
+  const zoomIn = () => setScale(prev => Math.min(prev + 0.1, 2.0));
+  const zoomOut = () => setScale(prev => Math.max(prev - 0.1, 0.5));
+
+  const handleDragStart = (e: React.MouseEvent) => {
+    if (!signatureRef.current) return;
     
-    // Send position to parent component
-    onPositionChange(newPosition.x, newPosition.y, pageNumber);
+    setIsDragging(true);
+    const rect = signatureRef.current.getBoundingClientRect();
+    setDragOffset({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+    e.preventDefault();
   };
 
-  // Create a simple PDF page preview
-  const renderSimplePdfPreview = () => {
-    // A very basic PDF page preview with placeholder content
-    return (
-      <div 
-        className="bg-white border p-6 relative"
-        style={{ 
-          width: "100%", 
-          height: "500px",
-          transform: `scale(${scale})`,
-          transformOrigin: "top left"
-        }}
-      >
-        <div className="absolute top-2 right-2 text-gray-400 text-xs">
-          Page {pageNumber} of {numPages}
-        </div>
-        
-        {/* Simple fake page content */}
-        <div className="flex flex-col space-y-3 mt-8">
-          <div className="bg-gray-200 h-8 w-3/4 rounded"></div>
-          <div className="bg-gray-200 h-4 w-full rounded"></div>
-          <div className="bg-gray-200 h-4 w-full rounded"></div>
-          <div className="bg-gray-200 h-4 w-5/6 rounded"></div>
-          <div className="h-6"></div>
-          <div className="bg-gray-200 h-4 w-full rounded"></div>
-          <div className="bg-gray-200 h-4 w-full rounded"></div>
-          <div className="bg-gray-200 h-4 w-4/5 rounded"></div>
-        </div>
-        
-        {/* Draggable signature */}
-        {(signatureImage || signatureText) && (
-          <Draggable
-            bounds="parent"
-            onDrag={handleDrag}
-            position={signaturePosition}
-          >
-            <div 
-              ref={dragRef}
-              className="absolute cursor-move border-2 border-dashed border-blue-500 p-2 bg-white/80 z-10"
-              style={{ 
-                zIndex: 1000,
-                display: "inline-block"
-              }}
-            >
-              {signatureType === "draw" && signatureImage ? (
-                <img 
-                  src={signatureImage} 
-                  alt="Your signature" 
-                  className="max-h-20"
-                />
-              ) : signatureType === "type" && signatureText ? (
-                <p className="text-xl font-serif">{signatureText}</p>
-              ) : null}
-            </div>
-          </Draggable>
-        )}
-      </div>
-    );
+  const handleResizeStart = (e: React.MouseEvent) => {
+    setIsResizing(true);
+    e.stopPropagation();
+    e.preventDefault();
   };
 
-  // Loading and error components
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!containerRef.current || (!isDragging && !isResizing)) return;
+    
+    const containerRect = containerRef.current.getBoundingClientRect();
+    
+    if (isDragging) {
+      let newX = (e.clientX - containerRect.left - dragOffset.x) / scale;
+      let newY = (e.clientY - containerRect.top - dragOffset.y) / scale;
+      
+      const maxX = (containerRect.width - signatureSize.width * scale) / scale;
+      const maxY = (containerRect.height - signatureSize.height * scale) / scale;
+      
+      newX = Math.max(0, Math.min(maxX, newX));
+      newY = Math.max(0, Math.min(maxY, newY));
+      
+      setSignaturePosition({ x: newX, y: newY });
+      
+      // Transform y-coordinate to PDF coordinate system (bottom-left origin)
+      const pdfY = pageHeight - newY - signatureSize.height;
+      onPositionChange(newX, pdfY, pageNumber, scale, pageHeight);
+    }
+    
+    if (isResizing && signatureRef.current) {
+      const newWidth = Math.max(50, (e.clientX - containerRect.left - signaturePosition.x * scale) / scale);
+      const newHeight = Math.max(20, (e.clientY - containerRect.top - signaturePosition.y * scale) / scale);
+      setSignatureSize({ width: newWidth, height: newHeight });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    setIsResizing(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, isResizing, dragOffset, signaturePosition, signatureSize, scale, pageHeight]);
+
   const LoadingComponent = () => (
     <div className="flex items-center justify-center h-80">
       <div className="animate-spin mr-2 h-6 w-6 border-2 border-primary border-t-transparent rounded-full"></div>
@@ -179,9 +199,6 @@ export function PdfPreview({
         <line x1="12" y1="16" x2="12.01" y2="16"></line>
       </svg>
       <span>{error || "Failed to load PDF preview"}</span>
-      <p className="text-xs mt-2 max-w-md text-center text-muted-foreground">
-        You can still sign your document even without the preview by using the other options below.
-      </p>
     </div>
   );
 
@@ -189,42 +206,20 @@ export function PdfPreview({
     <div className="flex flex-col items-center border rounded-lg p-4 bg-muted/10">
       <div className="flex justify-between w-full mb-4">
         <div className="flex items-center gap-1">
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={goToPrevPage} 
-            disabled={pageNumber <= 1 || loading}
-          >
+          <Button variant="outline" size="sm" onClick={goToPrevPage} disabled={pageNumber <= 1 || loading}>
             <ChevronLeftIcon className="h-4 w-4" />
           </Button>
-          <span className="text-sm mx-2">
-            Page {pageNumber} of {numPages}
-          </span>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={goToNextPage} 
-            disabled={pageNumber >= numPages || loading}
-          >
+          <span className="text-sm mx-2">Page {pageNumber} of {numPages}</span>
+          <Button variant="outline" size="sm" onClick={goToNextPage} disabled={pageNumber >= numPages || loading}>
             <ChevronRightIcon className="h-4 w-4" />
           </Button>
         </div>
         <div className="flex items-center gap-1">
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={zoomOut} 
-            disabled={scale <= 0.5 || loading}
-          >
+          <Button variant="outline" size="sm" onClick={zoomOut} disabled={scale <= 0.5 || loading}>
             <MinusIcon className="h-4 w-4" />
           </Button>
           <span className="text-sm mx-2">{Math.round(scale * 100)}%</span>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={zoomIn} 
-            disabled={scale >= 2.0 || loading}
-          >
+          <Button variant="outline" size="sm" onClick={zoomIn} disabled={scale >= 2.0 || loading}>
             <PlusIcon className="h-4 w-4" />
           </Button>
         </div>
@@ -232,7 +227,7 @@ export function PdfPreview({
       
       <div 
         ref={containerRef} 
-        className="relative border overflow-auto bg-white rounded-md w-full"
+        className="relative border overflow-hidden bg-white rounded-md w-full"
         style={{ minHeight: 500, maxHeight: 700 }}
       >
         {loading ? (
@@ -240,14 +235,50 @@ export function PdfPreview({
         ) : error ? (
           <ErrorComponent />
         ) : (
-          renderSimplePdfPreview()
+          <div className="relative">
+            <canvas ref={canvasRef} className="w-full" />
+            {(signatureImage || signatureText) && (
+              <div 
+                ref={signatureRef}
+                className="absolute border-2 border-dashed border-blue-500 bg-white/80 z-10"
+                style={{
+                  left: signaturePosition.x * scale,
+                  top: signaturePosition.y * scale,
+                  width: signatureSize.width * scale,
+                  height: signatureSize.height * scale,
+                  cursor: isDragging ? 'grabbing' : 'grab',
+                }}
+                onMouseDown={handleDragStart}
+              >
+                {signatureType === "draw" && signatureImage ? (
+                  <img 
+                    src={signatureImage} 
+                    alt="Your signature" 
+                    className="w-full h-full object-contain"
+                    draggable="false"
+                  />
+                ) : signatureType === "type" && signatureText ? (
+                  <p 
+                    className="w-full h-full flex items-center justify-center font-serif"
+                    style={{ fontSize: `${16 * scale}px` }}
+                  >
+                    {signatureText}
+                  </p>
+                ) : null}
+                <div
+                  className="absolute bottom-0 right-0 w-4 h-4 bg-blue-500 cursor-se-resize"
+                  onMouseDown={handleResizeStart}
+                />
+              </div>
+            )}
+          </div>
         )}
       </div>
       
       <div className="mt-4 text-sm text-muted-foreground text-center">
-        {!error && (signatureImage || signatureText) ? 
-          "Drag your signature to position it exactly where you want it on the document" :
-          "Upload a PDF and create your signature to position it on the document"
+        {!error && (signatureImage || signatureText) 
+          ? "Drag your signature to position it exactly where you want it on the document"
+          : "Upload a PDF and create your signature to position it on the document"
         }
       </div>
     </div>

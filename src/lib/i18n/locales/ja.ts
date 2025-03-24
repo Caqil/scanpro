@@ -11,7 +11,11 @@ export default {
     pricing: "価格",
     convertPdf: "PDF変換",
     convertPdfDesc: "PDFを他の形式に、または他の形式からPDFに変換",
-    selectLanguage: "言語選択"
+    selectLanguage: "言語選択",
+    downloadApp: "アプリをダウンロード",
+    getApp: "外出先で使えるPDFツールのためにモバイルアプリを入手",
+    appStores: "ScanProアプリを入手",
+    mobileTools: "外出先でのPDFツール"
   },
 
   // ヒーローセクション
@@ -260,6 +264,7 @@ export default {
     pngToPdf: "PNG画像を数秒でPDFに変換。向きやマージンを簡単に調整。",
     htmlToPdf: "ウェブページをPDFに変換。URLをコピー＆ペーストしてPDFに変換。",
     mergePdf: "利用可能な最も簡単なPDF結合ツールで、希望する順序でPDFを結合。",
+    splitPdf: "PDFファイルを複数のドキュメントに分割するか、PDFから特定のページを抽出します。",
     compressPdf: "最大限のPDF品質を保ちつつファイルサイズを削減。",
     rotatePdf: "必要な方法でPDFを回転。複数のPDFを一度に回転も可能！",
     watermark: "数秒でPDFに画像またはテキストの透かしを追加。タイポグラフィ、透明度、位置を選択。",
@@ -267,7 +272,83 @@ export default {
     protectPdf: "PDFファイルにパスワード保護を追加。不正アクセスを防ぐためにPDFを暗号化。",
     ocr: "光学文字認識を使用してスキャンされたドキュメントからテキストを抽出。"
   },
-
+  splitPdf: {
+    title: "PDFを分割",
+    description: "PDFファイルを複数のドキュメントに分割するか、特定のページを抽出します",
+    howTo: {
+      title: "PDFファイルを分割する方法",
+      step1: {
+        title: "アップロード",
+        description: "分割またはページを抽出したいPDFファイルをアップロードします"
+      },
+      step2: {
+        title: "分割方法を選択",
+        description: "PDFの分割方法を選択します：ページ範囲ごと、各ページを抽出、またはNページごとに分割"
+      },
+      step3: {
+        title: "ダウンロード",
+        description: "分割されたPDFファイルを個別にダウンロードします"
+      }
+    },
+    options: {
+      splitMethod: "分割方法",
+      byRange: "ページ範囲で分割",
+      extractAll: "すべてのページを個別のPDFとして抽出",
+      everyNPages: "Nページごとに分割",
+      everyNPagesNumber: "ファイルごとのページ数",
+      everyNPagesHint: "各出力ファイルにはこの数のページが含まれます",
+      pageRanges: "ページ範囲",
+      pageRangesHint: "カンマで区切ったページ範囲を入力します。例：1-5, 8, 11-13 で3つのPDFファイルが作成されます"
+    },
+    splitting: "PDFを分割中...",
+    splitDocument: "ドキュメントを分割",
+    splitSuccess: "PDFが正常に分割されました！",
+    splitSuccessDesc: "あなたのPDFは{count}個の個別ファイルに分割されました",
+    results: {
+      title: "PDF分割結果",
+      part: "パート",
+      pages: "ページ",
+      pagesCount: "ページ"
+    },
+    faq: {
+      title: "よくある質問",
+      q1: {
+        question: "分割後のPDFファイルはどうなりますか？",
+        answer: "アップロードおよび生成されたすべてのファイルは、プライバシーとセキュリティのために24時間後にサーバーから自動的に削除されます。"
+      },
+      q2: {
+        question: "分割できるページ数に制限はありますか？",
+        answer: "無料版では最大100ページのPDFを分割できます。より大きなドキュメントにはプレミアムプランをご検討ください。"
+      },
+      q3: {
+        question: "PDFから特定のページを抽出できますか？",
+        answer: "はい、「ページ範囲で分割」オプションを使用して、PDFドキュメントから特定のページまたはページ範囲を抽出できます。"
+      },
+      q4: {
+        question: "分割中にページを並べ替えることはできますか？",
+        answer: "現在、分割ツールは元のページ順序を保持します。ページを並べ替えるには、抽出したページでPDF結合ツールを使用する必要があります。"
+      }
+    },
+    useCases: {
+      title: "PDF分割の一般的な用途",
+      chapters: {
+        title: "章の分離",
+        description: "大きな本やレポートを個別の章に分割して、ナビゲーションと共有を容易にします"
+      },
+      extract: {
+        title: "ページ抽出",
+        description: "長いドキュメントからフォーム、証明書、重要なセクションなどの特定のページを抽出します"
+      },
+      remove: {
+        title: "ページの削除",
+        description: "必要なすべてのページを抽出し、広告や空白ページなどの不要なコンテンツを除外します"
+      },
+      size: {
+        title: "サイズ縮小",
+        description: "大きなPDFを小さなファイルに分割して、メールやメッセージアプリでの共有を容易にします"
+      }
+    }
+  },
   // PDF結合ページ
   mergePdf: {
     title: "PDFファイルの結合",

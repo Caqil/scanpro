@@ -23,11 +23,9 @@ async function ensureDirectories() {
         await mkdir(SIGNED_DIR, { recursive: true });
     }
 }
-
-// Function to add signature to PDF using pdf-lib
 async function addSignatureToPdf(
-    inputPath: string, 
-    outputPath: string, 
+    inputPath: string,
+    outputPath: string,
     options: {
         signatureImage?: string,
         signatureText?: string,
@@ -41,50 +39,63 @@ async function addSignatureToPdf(
     try {
         // Read the PDF file
         const pdfBytes = await readFile(inputPath);
-        
+
         // Load the PDF document
         const pdfDoc = await PDFDocument.load(pdfBytes);
-        
+
         // Get the specified page (defaulting to first page if page is out of bounds)
-        const pageIndex = options.signaturePage > 0 && options.signaturePage <= pdfDoc.getPageCount() 
-            ? options.signaturePage - 1 
+        const pageIndex = options.signaturePage > 0 && options.signaturePage <= pdfDoc.getPageCount()
+            ? options.signaturePage - 1
             : 0;
-        
+
         const page = pdfDoc.getPage(pageIndex);
         const { width, height } = page.getSize();
-        
+
         // Make sure signature coordinates are within page bounds
         const x = Math.max(0, Math.min(options.signatureX, width - 100));
+
+        // PDF coordinates have (0,0) at bottom-left, but our UI has (0,0) at top-left
+        // So we need to flip the Y coordinate
         const y = height - Math.max(0, Math.min(options.signatureY, height - 50));
-        
+
+        console.log(`Adding signature at coordinates: (${x}, ${y}) on page ${pageIndex + 1}`);
+        console.log(`Page dimensions: ${width} x ${height}`);
+
         // Handle different signature types
         if (options.signatureType === 'draw' && options.signatureImage) {
             // For drawn signature, add the signature image
             // First, remove the data:image/png;base64, prefix if it exists
             const signatureImageData = options.signatureImage.replace(/^data:image\/\w+;base64,/, '');
             const signatureBuffer = Buffer.from(signatureImageData, 'base64');
-            
-            // Embed the image in the PDF
-            const signatureImage = await pdfDoc.embedPng(signatureBuffer);
-            
-            // Determine a reasonable size for the signature image
-            const signatureWidth = Math.min(200, width / 4);
-            const signatureHeight = signatureWidth * (signatureImage.height / signatureImage.width);
-            
-            // Draw the signature image on the page
-            page.drawImage(signatureImage, {
-                x,
-                y: y - signatureHeight, // Adjust y to account for image height
-                width: signatureWidth,
-                height: signatureHeight,
-                opacity: 0.9, // Slight transparency
-            });
-        } 
+
+            try {
+                // Embed the image in the PDF
+                const signatureImage = await pdfDoc.embedPng(signatureBuffer);
+
+                // Determine a reasonable size for the signature image
+                const signatureWidth = Math.min(200, width / 4);
+                const signatureHeight = signatureWidth * (signatureImage.height / signatureImage.width);
+
+                // Draw the signature image on the page
+                page.drawImage(signatureImage, {
+                    x,
+                    y: y - signatureHeight, // Adjust y to account for image height
+                    width: signatureWidth,
+                    height: signatureHeight,
+                    opacity: 1.0, // Full opacity
+                });
+
+                console.log(`Drew signature image with dimensions: ${signatureWidth} x ${signatureHeight}`);
+            } catch (imageError) {
+                console.error('Error processing signature image:', imageError);
+                throw new Error('Failed to process the signature image. Please try a different signature.');
+            }
+        }
         else if (options.signatureType === 'type' && options.signatureText) {
             // For typed signature, add the text
             // Determine which standard font to use based on the signatureFont option
             let fontName: typeof StandardFonts[keyof typeof StandardFonts] = StandardFonts.Helvetica;
-            
+
             if (options.signatureFont) {
                 if (options.signatureFont.includes('Times')) {
                     fontName = StandardFonts.TimesRoman;
@@ -93,29 +104,38 @@ async function addSignatureToPdf(
                 }
                 // Add more font mappings as needed
             }
-            
-            const font = await pdfDoc.embedFont(fontName);
-            
-            // Determine a reasonable font size
-            const fontSize = 24;
-            
-            // Draw the text on the page
-            page.drawText(options.signatureText, {
-                x,
-                y,
-                size: fontSize,
-                font,
-                color: rgb(0, 0, 0),
-                opacity: 1,
-            });
+
+            try {
+                const font = await pdfDoc.embedFont(fontName);
+
+                // Determine a reasonable font size
+                const fontSize = 24;
+
+                // Draw the text on the page
+                page.drawText(options.signatureText, {
+                    x,
+                    y,
+                    size: fontSize,
+                    font,
+                    color: rgb(0, 0, 0),
+                    opacity: 1,
+                });
+
+                console.log(`Drew signature text: "${options.signatureText}" with font ${fontName} at size ${fontSize}`);
+            } catch (textError) {
+                console.error('Error processing signature text:', textError);
+                throw new Error('Failed to process the signature text. Please try a different text or font.');
+            }
+        } else {
+            throw new Error('Invalid signature data provided. Please create a signature first.');
         }
-        
+
         // Save the modified PDF
         const signedPdfBytes = await pdfDoc.save();
-        
+
         // Write to output file
         await writeFile(outputPath, signedPdfBytes);
-        
+
         return {
             success: true,
             pageCount: pdfDoc.getPageCount(),
@@ -135,7 +155,7 @@ export async function POST(request: NextRequest) {
         // Process form data
         const formData = await request.formData();
         const file = formData.get('file') as File;
-        
+
         if (!file) {
             return NextResponse.json(
                 { error: 'No PDF file provided' },
@@ -156,7 +176,7 @@ export async function POST(request: NextRequest) {
         const signatureImage = formData.get('signatureImage') as string || undefined;
         const signatureText = formData.get('signatureText') as string || undefined;
         const signatureFont = formData.get('signatureFont') as string || undefined;
-        
+
         // Get signature position
         const signatureX = parseFloat(formData.get('signatureX') as string || '100');
         const signatureY = parseFloat(formData.get('signatureY') as string || '100');
@@ -169,7 +189,7 @@ export async function POST(request: NextRequest) {
                 { status: 400 }
             );
         }
-        
+
         if (signatureType === 'type' && !signatureText) {
             return NextResponse.json(
                 { error: 'Signature text is required for typed signatures' },

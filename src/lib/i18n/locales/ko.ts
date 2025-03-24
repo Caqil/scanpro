@@ -11,7 +11,11 @@ export default {
     pricing: "가격",
     convertPdf: "PDF 변환",
     convertPdfDesc: "PDF를 다른 형식으로 또는 다른 형식에서 PDF로 변환",
-    selectLanguage: "언어 선택"
+    selectLanguage: "언어 선택",
+    downloadApp: "앱 다운로드",
+    getApp: "이동 중 PDF 도구를 위해 모바일 앱을 다운로드하세요",
+    appStores: "ScanPro 앱 다운로드",
+    mobileTools: "이동 중 PDF 도구"
   },
 
   // Hero section
@@ -260,6 +264,7 @@ export default {
     pngToPdf: "PNG 이미지를 몇 초 안에 PDF로 변환합니다. 방향과 여백을 쉽게 조정하세요.",
     htmlToPdf: "웹페이지를 PDF로 변환합니다. URL을 복사하여 붙여넣으면 PDF로 변환됩니다.",
     mergePdf: "가장 쉬운 PDF 병합 도구로 원하는 순서대로 PDF를 결합합니다.",
+    splitPdf: "PDF 파일을 여러 문서로 분할하거나 PDF에서 특정 페이지를 추출하세요.",
     compressPdf: "최대 PDF 품질을 유지하면서 파일 크기를 줄입니다.",
     rotatePdf: "필요한 대로 PDF를 회전하세요. 여러 PDF를 한 번에 회전할 수도 있습니다!",
     watermark: "몇 초 안에 PDF 위에 이미지나 텍스트를 스탬프하세요. 글꼴, 투명도, 위치를 선택하세요.",
@@ -267,7 +272,83 @@ export default {
     protectPdf: "PDF 파일을 비밀번호로 보호하세요. 무단 접근을 방지하기 위해 PDF 문서를 암호화합니다.",
     ocr: "광학 문자 인식(OCR)을 사용하여 스캔된 문서에서 텍스트를 추출합니다."
   },
-
+  splitPdf: {
+    title: "PDF 분할",
+    description: "PDF 파일을 여러 문서로 분할하거나 특정 페이지를 추출하세요",
+    howTo: {
+      title: "PDF 파일을 분할하는 방법",
+      step1: {
+        title: "업로드",
+        description: "분할하거나 페이지를 추출하려는 PDF 파일을 업로드하세요"
+      },
+      step2: {
+        title: "분할 방법 선택",
+        description: "PDF를 분할하는 방법을 선택하세요: 페이지 범위별, 각 페이지 추출, 또는 N페이지마다 분할"
+      },
+      step3: {
+        title: "다운로드",
+        description: "분할된 PDF 파일을 개별적으로 다운로드하세요"
+      }
+    },
+    options: {
+      splitMethod: "분할 방법",
+      byRange: "페이지 범위별 분할",
+      extractAll: "모든 페이지를 개별 PDF로 추출",
+      everyNPages: "N페이지마다 분할",
+      everyNPagesNumber: "파일당 페이지 수",
+      everyNPagesHint: "각 출력 파일은 이 수의 페이지를 포함합니다",
+      pageRanges: "페이지 범위",
+      pageRangesHint: "쉼표로 구분된 페이지 범위를 입력하세요. 예: 1-5, 8, 11-13은 3개의 PDF 파일을 생성합니다"
+    },
+    splitting: "PDF 분할 중...",
+    splitDocument: "문서 분할",
+    splitSuccess: "PDF가 성공적으로 분할되었습니다!",
+    splitSuccessDesc: "당신의 PDF는 {count}개의 개별 파일로 분할되었습니다",
+    results: {
+      title: "PDF 분할 결과",
+      part: "부분",
+      pages: "페이지",
+      pagesCount: "페이지"
+    },
+    faq: {
+      title: "자주 묻는 질문",
+      q1: {
+        question: "분할 후 PDF 파일은 어떻게 되나요?",
+        answer: "업로드 및 생성된 모든 파일은 개인정보 보호와 보안을 위해 24시간 후에 서버에서 자동으로 삭제됩니다."
+      },
+      q2: {
+        question: "분할할 수 있는 페이지 수에 제한이 있나요?",
+        answer: "무료 버전에서는 최대 100페이지까지 PDF를 분할할 수 있습니다. 더 큰 문서의 경우 프리미엄 플랜을 고려하세요."
+      },
+      q3: {
+        question: "PDF에서 특정 페이지를 추출할 수 있나요?",
+        answer: "네, \"페이지 범위별 분할\" 옵션을 사용하여 PDF 문서에서 특정 페이지 또는 페이지 범위를 추출할 수 있습니다."
+      },
+      q4: {
+        question: "분할 중에 페이지를 재정렬할 수 있나요?",
+        answer: "현재 분할 도구는 원래 페이지 순서를 유지합니다. 페이지를 재정렬하려면 추출된 페이지로 PDF 병합 도구를 사용해야 합니다."
+      }
+    },
+    useCases: {
+      title: "PDF 분할의 인기 있는 사용 사례",
+      chapters: {
+        title: "챕터 분리",
+        description: "큰 책이나 보고서를 개별 챕터로 분할하여 탐색과 공유를 쉽게 합니다"
+      },
+      extract: {
+        title: "페이지 추출",
+        description: "긴 문서에서 양식, 증명서, 중요한 섹션과 같은 특정 페이지를 추출합니다"
+      },
+      remove: {
+        title: "페이지 제거",
+        description: "필요한 모든 페이지를 추출하고 광고나 빈 페이지와 같은 불필요한 콘텐츠를 제외합니다"
+      },
+      size: {
+        title: "크기 축소",
+        description: "큰 PDF를 작은 파일로 나누어 이메일이나 메시지 앱을 통해 쉽게 공유합니다"
+      }
+    }
+  },
   // Merge PDF Page
   mergePdf: {
     title: "PDF 파일 병합",

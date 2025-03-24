@@ -4,88 +4,80 @@ import Link from "next/link";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { 
-  FileIcon, 
   HamburgerMenuIcon,
   Cross1Icon,
   ChevronDownIcon
 } from "@radix-ui/react-icons";
-import { Badge } from "@/components/ui/badge";
 import { 
   FileText, 
   Image, 
   Table, 
   ArrowRight, 
-  LayoutGrid, 
   ArrowDown, 
   Shield, 
-  Edit2, 
   Lock,
-  Printer,
-  CloudDownload,
-  FileCheck,
-  FileCheck2,
-  BookOpen,
-  Wand2,
-  Layers,
-  Globe
+  Download,
+  Apple,
+  Phone,
+  File
 } from "lucide-react";
-import { SiteLogo } from "./site-logo";
 import { useLanguageStore } from "@/src/store/store";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { LanguageLink } from "./language-link";
 import { LanguageSwitcher } from "./language-switcher";
+import { SiteLogo } from "./site-logo";
 
-// Type for tool definition with optional isNew
 type ToolDefinition = {
   name: string;
   href: string;
   icon: React.ReactNode;
   description: string;
-  isNew?: boolean;
 };
 
-// Type for category definition
 type CategoryDefinition = {
   category: string;
   description: string;
   tools: ToolDefinition[];
 };
 
-// Language options interface
 interface LanguageOption {
   code: string;
   name: string;
   nativeName: string;
   flag: string;
 }
+
 interface ProHeaderProps {
   urlLanguage: string;
 }
+
 export function ProHeader({ urlLanguage }: ProHeaderProps) {
   const { language, setLanguage, t } = useLanguageStore();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeMobileCategory, setActiveMobileCategory] = useState<string | null>(null);
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-
-  // Use a state to ensure consistent rendering between server and client
-  // This avoids hydration mismatches where the text differs between server/client renders
+  const [scrolled, setScrolled] = useState(false);
+  const [showAppBanner, setShowAppBanner] = useState(true);
   const [isClient, setIsClient] = useState(false);
-  
+
   useEffect(() => {
-    // Prevent hydration mismatch by only updating language state and UI after initial render
     setIsClient(true);
-    
-    // Update language state without triggering navigation
     if (urlLanguage && urlLanguage !== language) {
       useLanguageStore.setState({ language: urlLanguage as any });
     }
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [urlLanguage, language]);
-  
+
   const languages: LanguageOption[] = [
     { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
     { code: 'id', name: 'Indonesian', nativeName: 'Bahasa Indonesia', flag: '🇮🇩' },
@@ -101,13 +93,12 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
     { code: 'ko', name: 'Korean', nativeName: '한국어 (Hangugeo)', flag: '🇰🇷' },
     { code: 'it', name: 'Italian', nativeName: 'Italiano', flag: '🇮🇹' },
     { code: 'tr', name: 'Turkish', nativeName: 'Türkçe', flag: '🇹🇷' },
-    { code: 'vi', name: 'Vietnamese', nativeName: 'Tiếng Việt', flag: '🇻🇳' },
-];
-  
+  ];
+
   const PDF_TOOLS: CategoryDefinition[] = [
     {
-      category: isClient ? t('nav.convertPdf') : "", // Empty on server, populated on client
-      description: isClient ? t('nav.convertPdfDesc') : "",
+      category: isClient ? t('nav.convertPdf') : "Convert PDF",
+      description: "Convert PDF files to various formats and vice versa",
       tools: [
         { 
           name: "PDF to Word", 
@@ -122,28 +113,10 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           description: "Extract data from PDFs into spreadsheets"
         },
         { 
-          name: "PDF to PowerPoint", 
-          href: "/convert/pdf-to-pptx",
-          icon: <FileText className="h-5 w-5 text-orange-500" />,
-          description: "Convert PDF slides to PowerPoint"
-        },
-        { 
           name: "PDF to JPG", 
           href: "/convert/pdf-to-jpg",
           icon: <Image className="h-5 w-5 text-yellow-500" />,
           description: "Extract images from PDF documents"
-        },
-        { 
-          name: "PDF to PNG", 
-          href: "/convert/pdf-to-png",
-          icon: <Image className="h-5 w-5 text-yellow-500" />,
-          description: "Extract images from PDF documents"
-        },
-        { 
-          name: "PDF to HTML", 
-          href: "/convert/pdf-to-html",
-          icon: <LayoutGrid className="h-5 w-5 text-purple-500" />,
-          description: "Convert PDFs for web publishing"
         },
         { 
           name: "Word to PDF", 
@@ -152,40 +125,16 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           description: "Convert Word documents to PDF"
         },
         { 
-          name: "Excel to PDF", 
-          href: "/convert/xlsx-to-pdf",
-          icon: <Table className="h-5 w-5 text-green-500" />,
-          description: "Convert Excel spreadsheets to PDF"
-        },
-        { 
-          name: "PowerPoint to PDF", 
-          href: "/convert/pptx-to-pdf",
-          icon: <FileText className="h-5 w-5 text-orange-500" />,
-          description: "Convert PowerPoint slides to PDF"
-        },
-        { 
           name: "JPG to PDF", 
           href: "/convert/jpg-to-pdf",
           icon: <Image className="h-5 w-5 text-yellow-500" />,
           description: "Convert images to PDF"
         },
-        { 
-          name: "PNG to PDF", 
-          href: "/convert/png-to-pdf",
-          icon: <Image className="h-5 w-5 text-yellow-500" />,
-          description: "Convert images to PDF"
-        },
-        { 
-          name: "HTML to PDF", 
-          href: "/convert/html-to-pdf",
-          icon: <LayoutGrid className="h-5 w-5 text-purple-500" />,
-          description: "Convert web pages to PDF"
-        },
       ]
     },
     {
       category: "PDF Management",
-      description: "Essential PDF manipulation tools",
+      description: "Tools to organize and modify PDF files",
       tools: [
         { 
           name: "Merge PDF", 
@@ -194,35 +143,16 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           description: "Combine multiple PDFs into one"
         },
         { 
+          name: "Split PDF", 
+          href: "/split", 
+          icon: <ArrowDown className="h-5 w-5 text-green-500" />,
+          description: "Divide a PDF into multiple files"
+        },
+        { 
           name: "Compress PDF", 
           href: "/compress", 
-          icon: <ArrowDown className="h-5 w-5 text-green-500" />,
+          icon: <Download className="h-5 w-5 text-purple-500" />,
           description: "Reduce PDF file size"
-        },
-        { 
-          name: "Universal Compressor", 
-          href: "/compress-files", 
-          icon: <ArrowDown className="h-5 w-5 text-green-500" />,
-          description: "Compress PDF, images, and Office files",
-          isNew: true
-        }
-      ]
-    },
-    {
-      category: "PDF Editing",
-      description: "Advanced PDF customization",
-      tools: [
-        { 
-          name: "Add Watermark", 
-          href: "/watermark", 
-          icon: <Edit2 className="h-5 w-5 text-purple-500" />,
-          description: "Add text or image watermarks"
-        },
-        { 
-          name: "OCR", 
-          href: "/ocr", 
-          icon: <FileCheck2 className="h-5 w-5 text-blue-500" />,
-          description: "Extract text from scanned documents"
         },
       ]
     },
@@ -243,274 +173,180 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           description: "Add password and encryption"
         },
       ]
-    }
-  ];
-  
-  // Additional company and product information
-  const COMPANY_MENU: CategoryDefinition[] = [
-    {
-      category: "About",
-      description: "Learn more about our company",
-      tools: [
-        { 
-          name: "About Us", 
-          href: "/about", 
-          icon: <BookOpen className="h-5 w-5 text-blue-500" />,
-          description: "Our mission and story"
-        },
-        { 
-          name: "Features", 
-          href: "/features", 
-          icon: <Layers className="h-5 w-5 text-purple-500" />,
-          description: "Explore our powerful features"
-        },
-        { 
-          name: "API", 
-          href: "/api-docs", 
-          icon: <CloudDownload className="h-5 w-5 text-green-500" />,
-          description: "Developer integration"
-        },
-      ]
     },
     {
-      category: "Support",
-      description: "Get help and resources",
+      category: "Compress File",
+      description: "Compress various file types",
       tools: [
         { 
-          name: "Contact", 
-          href: "/contact", 
-          icon: <Printer className="h-5 w-5 text-blue-500" />,
-          description: "Reach out to our team"
+          name: "Compress PDF", 
+          href: "/compress/pdf", 
+          icon: <File className="h-5 w-5 text-purple-500" />,
+          description: "Reduce PDF file size"
         },
         { 
-          name: "Help Center", 
-          href: "/help", 
-          icon: <Wand2 className="h-5 w-5 text-purple-500" />,
-          description: "Tutorials and support"
+          name: "Compress Images", 
+          href: "/compress/images", 
+          icon: <Image className="h-5 w-5 text-yellow-500" />,
+          description: "Reduce image file size"
         },
         { 
-          name: "Terms of Service", 
-          href: "/terms", 
-          icon: <FileCheck className="h-5 w-5 text-green-500" />,
-          description: "Legal terms and conditions"
+          name: "Compress Documents", 
+          href: "/compress/documents", 
+          icon: <FileText className="h-5 w-5 text-blue-500" />,
+          description: "Compress document files"
         },
       ]
     }
   ];
 
-  // Navigation items for desktop and mobile - only populate text after client-side render
   const navItems = [
-    { 
-      label: isClient ? t('nav.tools') : "Tools", // Fallback for server render
-      dropdown: PDF_TOOLS 
-    },
-    { 
-      label: isClient ? t('nav.company') : "Company", 
-      dropdown: COMPANY_MENU 
-    },
-    { href: "/pricing", label: isClient ? t('nav.pricing') : "Pricing" },
+    { label: "PDF Management", dropdown: PDF_TOOLS.filter(cat => cat.category === "PDF Management") },
+    { label: "Convert PDF", dropdown: PDF_TOOLS.filter(cat => cat.category === (isClient ? t('nav.convertPdf') : "Convert PDF")) },
+    { label: "PDF Security", dropdown: PDF_TOOLS.filter(cat => cat.category === "PDF Security") },
+    { label: "Compress File", dropdown: PDF_TOOLS.filter(cat => cat.category === "Compress File") },
+    { label: "All Tools", dropdown: PDF_TOOLS },
   ];
-
-  // Function to toggle mobile category
-  const toggleMobileCategory = (category: string) => {
-    setActiveMobileCategory(
-      activeMobileCategory === category ? null : category
-    );
-  };
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container max-w-6xl mx-auto flex h-16 items-center justify-between py-4">
-        {/* Logo */}
-        <div className="flex items-center gap-2">
-          <LanguageLink href="/" className="flex items-center gap-2">
-            {/* Updated yellow background to match logo color */}
-            <div className="bg-primary p-1 rounded-md">
-              <SiteLogo />
+    <>
+      {/* App Download Banner */}
+      {showAppBanner && (
+        <div className="bg-gradient-to-r from-primary/90 to-primary/70 text-primary-foreground">
+          <div className="container max-w-6xl mx-auto py-2 px-4 flex items-center justify-between">
+            <div className="flex items-center">
+              <Phone className="h-4 w-4 mr-2 hidden sm:inline-block" />
+              <p className="text-sm font-medium">
+                {isClient ? t('nav.getApp') || "Get our mobile app for on-the-go PDF tools" : "Get our mobile app for on-the-go PDF tools"}
+              </p>
             </div>
-            <span className="font-bold text-xl hidden sm:inline-block">
-              ScanPro
-            </span>
-            {/* <Badge variant="outline" className="hidden lg:flex ml-2 border-primary/50 text-primary-foreground bg-primary/20">
-              Beta
-            </Badge> */}
-          </LanguageLink>
-        </div>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          {navItems.map((item) => (
-            item.dropdown ? (
-              <div 
-                key={item.label} 
-                className="relative group"
-                onMouseEnter={() => setActiveCategory(item.dropdown[0].category)}
-                onMouseLeave={() => setActiveCategory(null)}
+            <div className="flex items-center gap-2">
+              <a href="https://apps.apple.com/us/app/scanpro-pdf-scanner-app/id6743518395" target="_blank" rel="noopener noreferrer" className="text-xs font-medium bg-black text-white px-2 py-1 rounded-md flex items-center">
+                <Apple className="h-3 w-3 mr-1" /> iOS
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.scanpro.documentconverter" target="_blank" rel="noopener noreferrer" className="text-xs font-medium bg-primary-foreground text-primary px-2 py-1 rounded-md flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+                  <polygon points="3 3 21 12 3 21 3 3"></polygon>
+                </svg> 
+                Android
+              </a>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="h-6 w-6 text-primary-foreground hover:bg-primary/20"
+                onClick={() => setShowAppBanner(false)}
               >
-                <button className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-                  {item.label}
-                </button>
-                
-                {/* Dropdown Mega Menu */}
-                <div 
-                  className="absolute top-full left-1/2 -translate-x-1/2 w-screen max-w-[1200px] mx-auto mt-4 p-6 bg-background border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 origin-top"
-                >
-                  <div className="grid grid-cols-4 gap-6">
-                    {/* Categories */}
-                    <div className="col-span-1 border-r pr-4">
-                      {item.dropdown.map((category) => (
-                        <button
-                          key={category.category}
-                          className={`w-full text-left px-3 py-2 rounded ${
-                            activeCategory === category.category 
-                              ? 'bg-primary/20 text-primary-foreground' 
-                              : 'hover:bg-muted text-muted-foreground'
-                          }`}
-                          onClick={() => setActiveCategory(category.category)}
-                        >
-                          <div className="font-semibold">{category.category}</div>
-                          <p className="text-xs text-muted-foreground">{category.description}</p>
-                        </button>
-                      ))}
-                    </div>
+                <Cross1Icon className="h-3 w-3" />
+                <span className="sr-only">Close banner</span>
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
-                    {/* Active Category Tools */}
-                    <div className="col-span-3 grid grid-cols-3 gap-4">
-                      {item.dropdown
-                        .find(cat => cat.category === activeCategory || activeCategory === null)
-                        ?.tools.map((tool) => (
+      {/* Main Header */}
+      <header className={`sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ${scrolled ? 'shadow-sm' : 'border-b'} transition-all duration-200`}>
+        <div className="container max-w-6xl mx-auto flex h-16 items-center justify-between py-4 px-4">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <LanguageLink href="/" className="flex items-center gap-2">
+              <span className="font-bold text-xl flex items-center">
+                <SiteLogo />
+                <span className="text-red-500"></span>  ScanPro
+              </span>
+            </LanguageLink>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-6">
+            {navItems.map((item) => (
+              <div key={item.label} className="relative group">
+                <LanguageLink
+                  href="#"
+                  className="text-sm font-medium text-foreground transition-colors hover:text-primary flex items-center gap-1"
+                >
+                  {item.label}
+                  <ChevronDownIcon className="h-4 w-4 opacity-70" />
+                </LanguageLink>
+
+                {/* Dropdown Menu */}
+                <div className="absolute top-full left-0 mt-2 w-[600px] bg-background border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 p-4">
+                  {item.dropdown.map((category) => (
+                    <div key={category.category} className="mb-4">
+                      <div className="font-semibold text-sm text-foreground mb-2">{category.category}</div>
+                      <div className="grid grid-cols-3 gap-4">
+                        {category.tools.map((tool) => (
                           <LanguageLink
                             key={tool.name}
                             href={tool.href}
-                            className="p-3 rounded-lg hover:bg-muted/50 flex items-start gap-3 group"
+                            className="flex items-start gap-3 p-2 hover:bg-muted rounded-md transition-colors"
                           >
-                            <div className="p-2 rounded-md bg-primary/10 group-hover:bg-primary/30 transition-colors">
+                            <div className="p-1 rounded-md bg-primary/10">
                               {tool.icon}
                             </div>
                             <div>
-                              <div className="font-medium flex items-center">
-                                {tool.name}
-                                {tool.isNew && (
-                                  <Badge 
-                                    variant="outline" 
-                                    className="ml-2 bg-primary/20 text-primary-foreground text-xs border-primary/40"
-                                  >
-                                    New
-                                  </Badge>
-                                )}
-                              </div>
+                              <div className="text-sm font-medium">{tool.name}</div>
                               <p className="text-xs text-muted-foreground">{tool.description}</p>
                             </div>
                           </LanguageLink>
                         ))}
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
               </div>
-            ) : (
-              <LanguageLink
-                key={item.href}
-                href={item.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-              >
-                {item.label}
-              </LanguageLink>
-            )
-          ))}
-        </nav>
+            ))}
+          </nav>
 
-        {/* Right Side Actions */}
-        <div className="flex items-center gap-3">
-          {/* Language Dropdown */}
-          <LanguageSwitcher />
-
-          <ModeToggle />
-          
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? (
-              <Cross1Icon className="h-5 w-5" />
-            ) : (
-              <HamburgerMenuIcon className="h-5 w-5" />
-            )}
-            <span className="sr-only">Toggle menu</span>
-          </Button>
+          {/* Right Side Actions */}
+          <div className="flex items-center gap-3">
+            <LanguageSwitcher />
+            <ModeToggle />
+            <Button
+              variant="outline"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? (
+                <Cross1Icon className="h-5 w-5" />
+              ) : (
+                <HamburgerMenuIcon className="h-5 w-5" />
+              )}
+              <span className="sr-only">Toggle menu</span>
+            </Button>
+          </div>
         </div>
-      </div>
 
-      {/* Mobile Navigation */}
-      {mobileMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 w-full bg-background/95 backdrop-blur border-t max-h-[calc(100vh-4rem)] overflow-y-auto">
-          <div className="container max-w-6xl mx-auto py-4 space-y-4">
-            {/* Mobile Language Selector */}
-            <div className="border-b pb-3 mb-3">
-              <div className="text-sm font-medium mb-2">{isClient ? t('nav.selectLanguage') : "Select Language"}</div>
-              <div className="grid grid-cols-2 gap-2">
-                {languages.map((lang) => (
-                  <Button
-                    key={lang.code}
-                    variant={language === lang.code ? "default" : "outline"}
-                    size="sm"
-                    className="justify-start"
-                    onClick={() => setLanguage(lang.code as any)}
-                  >
-                    <span className="mr-2">{lang.flag}</span>
-                    {lang.nativeName}
-                  </Button>
-                ))}
-              </div>
-            </div>
-            
-            {navItems.map((item) => (
-              item.dropdown ? (
+        {/* Mobile Navigation */}
+        {mobileMenuOpen && (
+          <div className="md:hidden absolute top-16 left-0 w-full bg-background/95 backdrop-blur border-t max-h-[calc(100vh-4rem)] overflow-y-auto shadow-md">
+            <div className="container max-w-6xl mx-auto py-4 space-y-4">
+              {navItems.map((item) => (
                 <div key={item.label} className="space-y-2">
-                  <div 
-                    className="px-3 py-2 text-lg font-semibold text-foreground flex justify-between items-center"
-                    onClick={() => toggleMobileCategory(item.label)}
-                  >
+                  <div className="block px-3 py-3 text-lg font-medium hover:bg-primary/5 rounded-md transition-colors">
                     {item.label}
-                    <span>
-                      {activeMobileCategory === item.label ? '−' : '+'}
-                    </span>
                   </div>
-                  
-                  {activeMobileCategory === item.label && (
-                    <div>
+                  {item.dropdown && (
+                    <div className="pl-4 space-y-2">
                       {item.dropdown.map((category) => (
-                        <div 
-                          key={category.category} 
-                          className="space-y-2 border-b pb-4 last:border-b-0"
-                        >
-                          <div className="px-3 text-sm font-medium text-primary">
-                            {category.category}
-                            <p className="text-xs text-muted-foreground">
-                              {category.description}
-                            </p>
-                          </div>
-                          <div className="space-y-1">
+                        <div key={category.category}>
+                          <div className="text-sm font-medium text-primary mb-2">{category.category}</div>
+                          <div className="grid grid-cols-2 gap-2">
                             {category.tools.map((tool) => (
                               <LanguageLink
                                 key={tool.name}
                                 href={tool.href}
-                                className="flex items-center px-3 py-2 hover:bg-primary/10 rounded-md"
+                                className="flex items-start gap-3 p-2 hover:bg-muted rounded-md transition-colors"
                                 onClick={() => setMobileMenuOpen(false)}
                               >
-                                <div className="mr-3">
+                                <div className="p-1 rounded-md bg-primary/10">
                                   {tool.icon}
                                 </div>
-                                <span className="flex-grow">{tool.name}</span>
-                                {tool.isNew && (
-                                  <Badge 
-                                    variant="outline" 
-                                    className="ml-2 bg-primary/20 text-primary-foreground text-xs border-primary/40"
-                                  >
-                                    New
-                                  </Badge>
-                                )}
+                                <div>
+                                  <div className="text-sm font-medium">{tool.name}</div>
+                                  <p className="text-xs text-muted-foreground">{tool.description}</p>
+                                </div>
                               </LanguageLink>
                             ))}
                           </div>
@@ -519,20 +355,11 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
                     </div>
                   )}
                 </div>
-              ) : (
-                <LanguageLink
-                  key={item.href}
-                  href={item.href}
-                  className="block px-3 py-2 text-lg font-medium hover:bg-primary/10 rounded-md"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </LanguageLink>
-              )
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      )}
-    </header>
+        )}
+      </header>
+    </>
   );
 }

@@ -11,7 +11,11 @@ export default {
     pricing: "Precios",
     convertPdf: "Convertir PDF",
     convertPdfDesc: "Transforma PDFs hacia y desde otros formatos",
-    selectLanguage: "Seleccionar Idioma"
+    selectLanguage: "Seleccionar Idioma",
+    downloadApp: "Scarica l’App",
+    getApp: "Scarica la nostra app mobile per strumenti PDF in movimento",
+    appStores: "Scarica l’App ScanPro",
+    mobileTools: "Strumenti PDF in movimento"
   },
 
   // Hero section
@@ -260,6 +264,7 @@ export default {
     pngToPdf: "Convierte imágenes PNG a PDF en segundos. Ajusta fácilmente la orientación y los márgenes.",
     htmlToPdf: "Convierte páginas web a PDF. Copia y pega la URL para convertirla a PDF.",
     mergePdf: "Combina PDFs en el orden que desees con el fusionador de PDF más sencillo disponible.",
+    splitPdf: "Dividi i file PDF in più documenti o estrai pagine specifiche dal tuo PDF.",
     compressPdf: "Reduce el tamaño del archivo mientras optimizas la calidad máxima del PDF.",
     rotatePdf: "Rota tus PDFs como los necesites. ¡Incluso puedes rotar múltiples PDFs a la vez!",
     watermark: "Estampa una imagen o texto sobre tu PDF en segundos. Elige la tipografía, transparencia y posición.",
@@ -267,7 +272,83 @@ export default {
     protectPdf: "Protege archivos PDF con una contraseña. Encripta documentos PDF para prevenir accesos no autorizados.",
     ocr: "Extrae texto de documentos escaneados usando Reconocimiento Óptico de Caracteres."
   },
-
+  splitPdf: {
+    title: "Dividi PDF",
+    description: "Dividi file PDF in più documenti o estrai pagine specifiche",
+    howTo: {
+      title: "Come Dividere File PDF",
+      step1: {
+        title: "Carica",
+        description: "Carica il file PDF che desideri dividere o da cui vuoi estrarre pagine"
+      },
+      step2: {
+        title: "Scegli Metodo di Divisione",
+        description: "Seleziona come vuoi dividere il tuo PDF: per intervalli di pagine, estrai ogni pagina o dividi ogni N pagine"
+      },
+      step3: {
+        title: "Scarica",
+        description: "Scarica i tuoi file PDF divisi singolarmente"
+      }
+    },
+    options: {
+      splitMethod: "Metodo di Divisione",
+      byRange: "Dividi per intervalli di pagine",
+      extractAll: "Estrai tutte le pagine come PDF separati",
+      everyNPages: "Dividi ogni N pagine",
+      everyNPagesNumber: "Numero di pagine per file",
+      everyNPagesHint: "Ogni file di output conterrà questo numero di pagine",
+      pageRanges: "Intervalli di Pagine",
+      pageRangesHint: "Inserisci intervalli di pagine separati da virgole. Esempio: 1-5, 8, 11-13 creerà 3 file PDF"
+    },
+    splitting: "Divisione del PDF in corso...",
+    splitDocument: "Dividi Documento",
+    splitSuccess: "PDF diviso con successo!",
+    splitSuccessDesc: "Il tuo PDF è stato diviso in {count} file separati",
+    results: {
+      title: "Risultati della Divisione PDF",
+      part: "Parte",
+      pages: "Pagine",
+      pagesCount: "pagine"
+    },
+    faq: {
+      title: "Domande Frequenti",
+      q1: {
+        question: "Cosa succede ai miei file PDF dopo la divisione?",
+        answer: "Tutti i file caricati e generati vengono automaticamente eliminati dai nostri server dopo 24 ore per la tua privacy e sicurezza."
+      },
+      q2: {
+        question: "C’è un limite al numero di pagine che posso dividere?",
+        answer: "La versione gratuita permette di dividere PDF fino a 100 pagine. Per documenti più grandi, considera il nostro piano premium."
+      },
+      q3: {
+        question: "Posso estrarre pagine specifiche da un PDF?",
+        answer: "Sì, puoi usare l’opzione \"Dividi per intervalli di pagine\" per estrarre pagine specifiche o intervalli di pagine dal tuo documento PDF."
+      },
+      q4: {
+        question: "Posso riordinare le pagine durante la divisione?",
+        answer: "Attualmente, lo strumento di divisione mantiene l’ordine originale delle pagine. Per riordinarle, dovrai usare il nostro strumento di Fusione PDF con le pagine estratte."
+      }
+    },
+    useCases: {
+      title: "Usi Popolari per la Divisione di PDF",
+      chapters: {
+        title: "Separazione dei Capitoli",
+        description: "Dividi libri o rapporti voluminosi in capitoli individuali per una navigazione e condivisione più semplice"
+      },
+      extract: {
+        title: "Estrazione di Pagine",
+        description: "Estrai pagine specifiche come moduli, certificati o sezioni importanti da documenti più lunghi"
+      },
+      remove: {
+        title: "Rimozione di Pagine",
+        description: "Estrai tutte le pagine necessarie ed escludi contenuti indesiderati come pubblicità o pagine bianche"
+      },
+      size: {
+        title: "Riduzione delle Dimensioni",
+        description: "Dividi PDF grandi in file più piccoli per facilitare la condivisione tramite email o app di messaggistica"
+      }
+    }
+  },
   // Merge PDF Page
   mergePdf: {
     title: "Fusionar Archivos PDF",

@@ -11,7 +11,11 @@ export default {
         pricing: "定价",
         convertPdf: "转换PDF",
         convertPdfDesc: "将PDF转换为其他格式或从其他格式转换为PDF",
-        selectLanguage: "选择语言"
+        selectLanguage: "选择语言",
+        downloadApp: "下载应用",
+        getApp: "获取我们的移动应用以便随时使用PDF工具",
+        appStores: "获取ScanPro应用",
+        mobileTools: "随时使用的PDF工具"
     },
 
     // 英雄部分
@@ -260,6 +264,7 @@ export default {
         pngToPdf: "在几秒钟内将PNG图片转换为PDF。轻松调整方向和边距。",
         htmlToPdf: "将网页转换为PDF。复制并粘贴URL以转换为PDF。",
         mergePdf: "使用最简单的PDF合并工具按您想要的顺序合并PDF。",
+        splitPdf: "将PDF文件拆分为多个文档或从您的PDF中提取特定页面。",
         compressPdf: "减小文件大小，同时优化PDF的最大质量。",
         rotatePdf: "根据需要旋转您的PDF。甚至可以一次旋转多个PDF！",
         watermark: "在几秒钟内在您的PDF上添加图片或文本水印。选择字体、透明度和位置。",
@@ -267,7 +272,83 @@ export default {
         protectPdf: "使用密码保护PDF文件。加密PDF文档以防止未经授权的访问。",
         ocr: "使用光学字符识别从扫描文档中提取文本。"
     },
-
+    splitPdf: {
+        title: "拆分PDF",
+        description: "将PDF文件拆分为多个文档或提取特定页面",
+        howTo: {
+            title: "如何拆分PDF文件",
+            step1: {
+                title: "上传",
+                description: "上传您想要拆分或提取页面的PDF文件"
+            },
+            step2: {
+                title: "选择拆分方法",
+                description: "选择您希望如何拆分PDF：按页面范围、提取每页或每N页拆分"
+            },
+            step3: {
+                title: "下载",
+                description: "单独下载您拆分后的PDF文件"
+            }
+        },
+        options: {
+            splitMethod: "拆分方法",
+            byRange: "按页面范围拆分",
+            extractAll: "将所有页面提取为单独的PDF",
+            everyNPages: "每N页拆分",
+            everyNPagesNumber: "每个文件的页面数",
+            everyNPagesHint: "每个输出文件将包含此数量的页面",
+            pageRanges: "页面范围",
+            pageRangesHint: "输入以逗号分隔的页面范围。例如：1-5, 8, 11-13 将创建3个PDF文件"
+        },
+        splitting: "正在拆分PDF...",
+        splitDocument: "拆分文档",
+        splitSuccess: "PDF拆分成功！",
+        splitSuccessDesc: "您的PDF已拆分为{count}个单独文件",
+        results: {
+            title: "PDF拆分结果",
+            part: "部分",
+            pages: "页面",
+            pagesCount: "页"
+        },
+        faq: {
+            title: "常见问题",
+            q1: {
+                question: "拆分后我的PDF文件会怎么样？",
+                answer: "所有上传和生成的文件将在24小时后从我们的服务器自动删除，以保护您的隐私和安全。"
+            },
+            q2: {
+                question: "拆分的页面数量有限制吗？",
+                answer: "免费版允许拆分最多100页的PDF。对于更大的文档，请考虑我们的高级计划。"
+            },
+            q3: {
+                question: "我可以从PDF中提取特定页面吗？",
+                answer: "是的，您可以使用“按页面范围拆分”选项从PDF文档中提取特定页面或页面范围。"
+            },
+            q4: {
+                question: "我可以在拆分时重新排序页面吗？",
+                answer: "目前，拆分工具保持原始页面顺序。要重新排序页面，您需要使用我们的PDF合并工具处理提取的页面。"
+            }
+        },
+        useCases: {
+            title: "PDF拆分的常见用途",
+            chapters: {
+                title: "章节分离",
+                description: "将大部头书籍或报告拆分为单独的章节，便于导航和分享"
+            },
+            extract: {
+                title: "页面提取",
+                description: "从较长的文档中提取特定页面，如表格、证书或重要部分"
+            },
+            remove: {
+                title: "删除页面",
+                description: "提取所有需要的页面，剔除不需要的内容，如广告或空白页"
+            },
+            size: {
+                title: "减小文件大小",
+                description: "将大型PDF拆分为较小的文件，便于通过电子邮件或消息应用分享"
+            }
+        }
+    },
     // 合并PDF页面
     mergePdf: {
         title: "合并PDF文件",

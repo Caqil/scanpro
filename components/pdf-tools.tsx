@@ -15,6 +15,7 @@ import {
   Edit2Icon,
   LockIcon,
   FileCheck2,
+  FileBadge2Icon,
 } from "lucide-react";
 
 export function PdfTools() {
@@ -149,6 +150,23 @@ export function PdfTools() {
           icon: <ArrowDownIcon className="h-6 w-6 text-green-500" />,
           iconBg: "bg-green-100 dark:bg-green-900/30",
           href: "/compress"
+        },
+        {
+          id: "compress-file",
+          name: t('popular.compressPdf'),
+          description: t('toolDescriptions.compressPdf'),
+          icon: <FileBadge2Icon className="h-6 w-6 text-green-500" />,
+          iconBg: "bg-green-100 dark:bg-green-900/30",
+          href: "/compress-file"
+        },
+        {
+          id: "split-pdf",
+          name: t('popular.splitPdf'),
+          description: t('toolDescriptions.compressPdf'),
+          icon: <ArrowDownIcon className="h-6 w-6 text-green-500" />,
+          iconBg: "bg-green-100 dark:bg-green-900/30",
+          href: "/split",
+          isNew: true
         },
         { 
           id: "ocr",
