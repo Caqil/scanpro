@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { 
   HamburgerMenuIcon,
   Cross1Icon,
-  ChevronDownIcon
+  ChevronDownIcon,
+  MobileIcon
 } from "@radix-ui/react-icons";
 import { 
   FileText, 
@@ -19,7 +20,12 @@ import {
   Download,
   Apple,
   Phone,
-  File
+  File,
+  FileBoxIcon,
+  FileCheck2,
+  PenTool,
+  FileImage,
+  Palette
 } from "lucide-react";
 import { useLanguageStore } from "@/src/store/store";
 import {
@@ -94,118 +100,185 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
     { code: 'it', name: 'Italian', nativeName: 'Italiano', flag: '🇮🇹' },
     { code: 'tr', name: 'Turkish', nativeName: 'Türkçe', flag: '🇹🇷' },
   ];
-
   const PDF_TOOLS: CategoryDefinition[] = [
     {
-      category: isClient ? t('nav.convertPdf') : "Convert PDF",
-      description: "Convert PDF files to various formats and vice versa",
+      
+      category: isClient ? t('pdfTools.categories.convertFromPdf') : "Convert PDF",
+      description: t('pdfTools.categories.convertFromPdfDesc') || "Convert PDF files to various formats and vice versa",
       tools: [
+        
         { 
-          name: "PDF to Word", 
+          name: t('popular.pdfToWord'), 
           href: "/convert/pdf-to-docx",
           icon: <FileText className="h-5 w-5 text-blue-500" />,
-          description: "Convert PDF to editable Word documents"
+          description: t('popular.pdfToWordDesc')
         },
         { 
-          name: "PDF to Excel", 
+          name: t('popular.pdfToExcel'), 
           href: "/convert/pdf-to-xlsx",
           icon: <Table className="h-5 w-5 text-green-500" />,
-          description: "Extract data from PDFs into spreadsheets"
+          description: t('popular.pdfToExcelDesc')
         },
         { 
-          name: "PDF to JPG", 
+          name: t('popular.pdfToJpg'), 
           href: "/convert/pdf-to-jpg",
           icon: <Image className="h-5 w-5 text-yellow-500" />,
-          description: "Extract images from PDF documents"
+          description: t('popular.pdfToJpgDesc')
         },
         { 
-          name: "Word to PDF", 
+          name: t('popular.wordToPdf'), 
           href: "/convert/docx-to-pdf",
           icon: <FileText className="h-5 w-5 text-blue-500" />,
-          description: "Convert Word documents to PDF"
+          description: t('popular.wordToPdfDesc')
         },
         { 
-          name: "JPG to PDF", 
+          name: t('popular.jpgToPdf'), 
           href: "/convert/jpg-to-pdf",
           icon: <Image className="h-5 w-5 text-yellow-500" />,
-          description: "Convert images to PDF"
+          description: t('popular.jpgToPdfDesc')
         },
       ]
     },
     {
-      category: "PDF Management",
-      description: "Tools to organize and modify PDF files",
+      category: t('pdfTools.categories.organizePdf') || "PDF Management",
+      description: t('pdfTools.categories.organizePdfDesc') || "Tools to organize and modify PDF files",
       tools: [
         { 
-          name: "Merge PDF", 
+          name: t('popular.mergePdf'), 
           href: "/merge", 
           icon: <ArrowRight className="h-5 w-5 text-red-500" />,
-          description: "Combine multiple PDFs into one"
+          description: t('popular.mergePdfDesc')
         },
         { 
-          name: "Split PDF", 
+          name: t('popular.splitPdf'), 
           href: "/split", 
           icon: <ArrowDown className="h-5 w-5 text-green-500" />,
-          description: "Divide a PDF into multiple files"
+          description: t('popular.splitPdfDesc')
         },
         { 
-          name: "Compress PDF", 
+          name: t('popular.compressPdf'), 
           href: "/compress", 
           icon: <Download className="h-5 w-5 text-purple-500" />,
-          description: "Reduce PDF file size"
+          description: t('popular.compressPdfDesc')
+        },
+        { 
+          name: t('universalCompressor.title'), 
+          href: "/compress-files", 
+          icon: <FileBoxIcon className="h-5 w-5 text-purple-500" />,
+          description: t('universalCompressor.description'),
         },
       ]
     },
     {
-      category: "PDF Security",
+      category: t('pdfTools.categories.pdfSecurity') || "PDF Security",
       description: "Protect and manage PDF access",
       tools: [
         { 
-          name: "Unlock PDF", 
+          name: t('popular.unlockPdf'), 
           href: "/unlock", 
           icon: <Lock className="h-5 w-5 text-blue-500" />,
-          description: "Remove password protection"
+          description: t('popular.unlockPdfDesc')
         },
         { 
-          name: "Protect PDF", 
+          name: t('popular.protectPdf'), 
           href: "/protect", 
           icon: <Shield className="h-5 w-5 text-blue-500" />,
-          description: "Add password and encryption"
-        },
-      ]
-    },
-    {
-      category: "Compress File",
-      description: "Compress various file types",
-      tools: [
-        { 
-          name: "Compress PDF", 
-          href: "/compress/pdf", 
-          icon: <File className="h-5 w-5 text-purple-500" />,
-          description: "Reduce PDF file size"
+          description: t('popular.protectPdfDesc')
         },
         { 
-          name: "Compress Images", 
-          href: "/compress/images", 
-          icon: <Image className="h-5 w-5 text-yellow-500" />,
-          description: "Reduce image file size"
+          name: t('popular.signPdf'), 
+          href: "/sign", 
+          icon: <PenTool className="h-5 w-5 text-green-500" />,
+          description: t('popular.signPdfDesc')
         },
         { 
-          name: "Compress Documents", 
-          href: "/compress/documents", 
-          icon: <FileText className="h-5 w-5 text-blue-500" />,
-          description: "Compress document files"
+          name: t('popular.ocr'), 
+          href: "/ocr", 
+          icon: <FileCheck2 className="h-5 w-5 text-blue-500" />,
+          description: t('popular.ocrDesc')
         },
       ]
     }
   ];
-
+  // Add this near your PDF_TOOLS definition
+const IMAGE_TOOLS: CategoryDefinition[] = [
+  {
+    category: "Image Conversion",
+    description: "Convert between image formats",
+    tools: [
+      { 
+        name: "PNG to JPG", 
+        href: "/image-tools/png-to-jpg", 
+        icon: <FileImage className="h-5 w-5 text-blue-500" />,
+        description: "Convert PNG images to JPG format"
+      },
+      { 
+        name: "JPG to PNG", 
+        href: "/image-tools/jpg-to-png", 
+        icon: <FileImage className="h-5 w-5 text-green-500" />,
+        description: "Convert JPG images to PNG format"
+      },
+      { 
+        name: "PNG to WebP", 
+        href: "/image-tools/png-to-webp", 
+        icon: <FileImage className="h-5 w-5 text-purple-500" />,
+        description: "Convert PNG images to WebP format"
+      },
+      { 
+        name: "WebP to PNG", 
+        href: "/image-tools/webp-to-png", 
+        icon: <FileImage className="h-5 w-5 text-orange-500" />,
+        description: "Convert WebP images to PNG format"
+      },
+    ]
+  },
+  {
+    category: "Image Editing",
+    description: "Edit and manipulate images",
+    tools: [
+      { 
+        name: "Make PNG Transparent", 
+        href: "/image-tools/make-transparent", 
+        icon: <Image className="h-5 w-5 text-blue-500" />,
+        description: "Remove backgrounds from PNG images"
+      },
+      { 
+        name: "Change Colors", 
+        href: "/image-tools/change-colors", 
+        icon: <Palette className="h-5 w-5 text-green-500" />,
+        description: "Swap colors in PNG images"
+      },
+      { 
+        name: "Compress Images", 
+        href: "/image-tools/compress", 
+        icon: <ArrowDown className="h-5 w-5 text-red-500" />,
+        description: "Reduce image file sizes"
+      },
+    ]
+  }
+];
   const navItems = [
-    { label: "PDF Management", dropdown: PDF_TOOLS.filter(cat => cat.category === "PDF Management") },
-    { label: "Convert PDF", dropdown: PDF_TOOLS.filter(cat => cat.category === (isClient ? t('nav.convertPdf') : "Convert PDF")) },
-    { label: "PDF Security", dropdown: PDF_TOOLS.filter(cat => cat.category === "PDF Security") },
-    { label: "Compress File", dropdown: PDF_TOOLS.filter(cat => cat.category === "Compress File") },
-    { label: "All Tools", dropdown: PDF_TOOLS },
+    { 
+      label: t('imageTools.title') || "Image Tools", 
+      dropdown: IMAGE_TOOLS || [] 
+    },
+    { 
+      label: t('nav.convertPdf'), 
+      dropdown: PDF_TOOLS.filter(cat => cat.category === (isClient ? t('pdfTools.categories.convertFromPdf') : "Convert PDF")) 
+    },
+    { 
+      label: t('pdfTools.categories.organizePdf'), 
+      dropdown: PDF_TOOLS.filter(cat => cat.category === (isClient ? t('pdfTools.categories.organizePdf') : "PDF Management")) 
+    },
+    { 
+      label: t('pdfTools.categories.pdfSecurity'), 
+      dropdown: PDF_TOOLS.filter(cat => cat.category === (isClient ? t('pdfTools.categories.pdfSecurity') : "PDF Security")) 
+    },
+    
+    { 
+      label: t('popular.viewAll'), 
+      dropdown: PDF_TOOLS 
+    },
   ];
 
   return (
@@ -215,7 +288,7 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
         <div className="bg-gradient-to-r from-primary/90 to-primary/70 text-primary-foreground">
           <div className="container max-w-6xl mx-auto py-2 px-4 flex items-center justify-between">
             <div className="flex items-center">
-              <Phone className="h-4 w-4 mr-2 hidden sm:inline-block" />
+              <MobileIcon className="h-4 w-4 mr-2 hidden sm:inline-block" />
               <p className="text-sm font-medium">
                 {isClient ? t('nav.getApp') || "Get our mobile app for on-the-go PDF tools" : "Get our mobile app for on-the-go PDF tools"}
               </p>

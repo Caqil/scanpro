@@ -153,11 +153,12 @@ export function PdfTools() {
         },
         {
           id: "compress-file",
-          name: t('popular.compressPdf'),
-          description: t('toolDescriptions.compressPdf'),
+          name: t('compressPdf.compressAll'),
+          description: t('compressPdf.compressAll'),
           icon: <FileBadge2Icon className="h-6 w-6 text-green-500" />,
           iconBg: "bg-green-100 dark:bg-green-900/30",
-          href: "/compress-file"
+          href: "/compress-files",
+          isNew: true
         },
         {
           id: "split-pdf",
