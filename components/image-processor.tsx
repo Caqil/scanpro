@@ -1,4 +1,4 @@
-// components/image-processor.tsx
+// components/enhanced-image-processor.tsx
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -33,6 +33,7 @@ interface ImageProcessorProps {
   fileTypes?: string[];
   processOptions?: Record<string, any>;
   renderOptions?: React.ReactNode;
+  onImageLoaded?: (file: File) => void;
 }
 
 export function ImageProcessor({ 
@@ -41,7 +42,8 @@ export function ImageProcessor({
   processEndpoint,
   fileTypes = ["image/png"],
   processOptions = {},
-  renderOptions
+  renderOptions,
+  onImageLoaded
 }: ImageProcessorProps) {
   const { t } = useLanguageStore();
   const [file, setFile] = useState<File | null>(null);
@@ -76,13 +78,20 @@ export function ImageProcessor({
       }
       
       if (acceptedFiles.length > 0) {
-        setFile(acceptedFiles[0]);
+        const file = acceptedFiles[0];
+        setFile(file);
+        
         // Generate preview URL for the uploaded file
-        const previewUrl = URL.createObjectURL(acceptedFiles[0]);
+        const previewUrl = URL.createObjectURL(file);
         setFilePreviewUrl(previewUrl);
         setProcessedImageUrl(null);
         setProcessedFilename(null);
         setError(null);
+        
+        // Call onImageLoaded callback if provided
+        if (onImageLoaded) {
+          onImageLoaded(file);
+        }
       }
     },
   });
@@ -233,7 +242,7 @@ export function ImageProcessor({
                   handleRemoveFile();
                 }}
               >
-                <Cross2Icon className="h-4 w-4 mr-1" /> Remove
+                <Cross2Icon className="h-4 w-4 mr-1" /> {t('ui.remove') || "Remove"}
               </Button>
             </div>
           ) : (
@@ -242,13 +251,13 @@ export function ImageProcessor({
                 <UploadIcon className="h-6 w-6 text-muted-foreground" />
               </div>
               <div className="text-lg font-medium">
-                {isDragActive ? 'Drop your image here' : 'Drag & drop your image'}
+                {isDragActive ? t('fileUploader.dropHere') || 'Drop your image here' : t('fileUploader.dragAndDrop') || 'Drag & drop your image'}
               </div>
               <p className="text-sm text-muted-foreground max-w-sm">
-                Drop your image here or click to browse. Maximum size is 50MB.
+                {t('fileUploader.dropHereDesc') || "Drop your image here or click to browse."} {t('fileUploader.maxSize') || "Maximum size is 50MB."}
               </p>
               <Button type="button" variant="secondary" size="sm" className="mt-2">
-                Browse Files
+                {t('fileUploader.browse') || "Browse Files"}
               </Button>
             </div>
           )}
@@ -257,7 +266,7 @@ export function ImageProcessor({
         {/* File Preview (after upload, before processing) */}
         {filePreviewUrl && !processedImageUrl && (
           <div className="p-4 border rounded-lg bg-background">
-            <h3 className="text-sm font-medium mb-3">Original Image Preview</h3>
+            <h3 className="text-sm font-medium mb-3">{t('ui.preview') || "Original Image Preview"}</h3>
             <div className="flex justify-center">
               <img 
                 src={filePreviewUrl} 
@@ -271,7 +280,7 @@ export function ImageProcessor({
         {/* Additional Options */}
         {renderOptions && (
           <div className="p-4 border rounded-lg bg-muted/10">
-            <h3 className="text-sm font-medium mb-3">Processing Options</h3>
+            <h3 className="text-sm font-medium mb-3">{t('convert.options.title') || "Processing Options"}</h3>
             {renderOptions}
           </div>
         )}
@@ -290,7 +299,7 @@ export function ImageProcessor({
             <Progress value={progress} className="h-2" />
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
               <Image className="h-4 w-4 animate-pulse" />
-              <span>Processing image... {progress}%</span>
+              <span>{t('ui.processing') || "Processing image..."} {progress}%</span>
             </div>
           </div>
         )}
@@ -304,7 +313,7 @@ export function ImageProcessor({
               </div>
               <div className="flex-1">
                 <h3 className="font-medium text-green-600 dark:text-green-400">
-                  Image processed successfully!
+                  {t('ui.success') || "Image processed successfully!"}
                 </h3>
                 <div className="my-3 border rounded overflow-hidden bg-white dark:bg-black p-3 flex justify-center">
                   <img 
@@ -323,7 +332,7 @@ export function ImageProcessor({
                     download={processedFilename}
                   >
                     <DownloadIcon className="h-4 w-4 mr-2" />
-                    Download Processed Image
+                    {t('ui.download') || "Download Processed Image"}
                   </a>
                 </Button>
               </div>
@@ -337,7 +346,7 @@ export function ImageProcessor({
             onClick={processImage} 
             disabled={!file || isProcessing}
           >
-            {isProcessing ? 'Processing...' : 'Process Image'}
+            {isProcessing ? t('ui.processing') || 'Processing...' : t('ui.process') || 'Process Image'}
           </Button>
         )}
         
@@ -346,7 +355,7 @@ export function ImageProcessor({
             variant="outline"
             onClick={handleRemoveFile}
           >
-            Process Another Image
+            {t('ui.reupload') || "Process Another Image"}
           </Button>
         )}
       </CardFooter>
