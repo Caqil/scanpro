@@ -58,6 +58,7 @@ export function MakeTransparentTool() {
         processEndpoint="image/make-transparent"
         fileTypes={["image/png"]}
         processOptions={{ color }}
+        
         renderOptions={renderColorOptions}
       />
       

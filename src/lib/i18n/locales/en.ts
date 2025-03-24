@@ -1,9 +1,10 @@
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   metadata: {
-    title: "ScanPro - All-in-One PDF Converter & Editor | Free Online",
-    template: "%s | ScanPro PDF Tools",
-    description: "Powerful free online PDF tools: Convert, compress, merge, split, edit, OCR and more. No installation required.",
+    title: "ScanPro - All-in-One PDF & Image Converter | Free Online",
+    template: "%s | ScanPro PDF & Image Tools",
+    description: "Powerful free online tools for PDF and images: Convert, compress, merge, split, edit, OCR, and more. No installation required.",
+    keywords: "PDF converter, PDF editor, image converter, OCR online, compress PDF, merge PDF, split PDF, free PDF tools, online image editor, ScanPro"
   },
   nav: {
     tools: "Tools",

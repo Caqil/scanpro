@@ -1,5 +1,4 @@
-// app/[lang]/image-tools/crop/crop-tool.tsx
-"use client"
+"use client";
 import React, { useState } from "react";
 import { ImageProcessor } from "@/components/image-processor";
 import { Label } from "@/components/ui/label";
@@ -23,42 +22,101 @@ export function CropImageTool() {
   const [aspectRatio, setAspectRatio] = useState("1:1"); // 1:1, 4:3, 16:9, etc.
   const [width, setWidth] = useState(800);
   const [height, setHeight] = useState(600);
-  const [freeRotation, setFreeRotation] = useState(0); // 0-360 degrees for free rotation
+  const [freeRotation, setFreeRotation] = useState(0); // 0-360 degrees
   const [preserveAspectRatio, setPreserveAspectRatio] = useState(true);
 
   const handleWidthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newWidth = parseInt(e.target.value) || 0;
     setWidth(newWidth);
-    
-    if (preserveAspectRatio && aspectRatio !== "custom") {
+    if (preserveAspectRatio && aspectRatio !== "custom" && cropMode !== "custom") {
       const [x, y] = aspectRatio.split(':').map(Number);
-      if (x && y) {
-        setHeight(Math.round((newWidth * y) / x));
-      }
+      if (x && y) setHeight(Math.round((newWidth * y) / x));
     }
   };
 
   const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newHeight = parseInt(e.target.value) || 0;
     setHeight(newHeight);
-    
-    if (preserveAspectRatio && aspectRatio !== "custom") {
+    if (preserveAspectRatio && aspectRatio !== "custom" && cropMode !== "custom") {
       const [x, y] = aspectRatio.split(':').map(Number);
-      if (x && y) {
-        setWidth(Math.round((newHeight * x) / y));
-      }
+      if (x && y) setWidth(Math.round((newHeight * x) / y));
     }
   };
 
   const handleAspectRatioChange = (value: string) => {
     setAspectRatio(value);
-    
-    if (value !== "custom" && preserveAspectRatio) {
+    if (value !== "custom" && preserveAspectRatio && cropMode !== "custom") {
       const [x, y] = value.split(':').map(Number);
-      if (x && y) {
-        setHeight(Math.round((width * y) / x));
-      }
+      if (x && y) setHeight(Math.round((width * y) / x));
     }
+  };
+
+  const previewRenderer = async (file: File, options: Record<string, any>): Promise<string> => {
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+    await new Promise((resolve) => (img.onload = resolve));
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d")!;
+    const { cropMode, aspectRatio, width, height, freeRotation } = options;
+
+    // Calculate dimensions based on crop mode
+    let cropWidth = width;
+    let cropHeight = height;
+
+    if (cropMode === "fixed-ratio" && aspectRatio !== "custom") {
+      const [ratioX, ratioY] = aspectRatio.split(':').map(Number);
+      const imgAspect = img.width / img.height;
+      const targetAspect = ratioX / ratioY;
+
+      if (imgAspect > targetAspect) {
+        cropWidth = img.height * targetAspect;
+        cropHeight = img.height;
+      } else {
+        cropWidth = img.width;
+        cropHeight = img.width / targetAspect;
+      }
+    } else if (cropMode === "custom") {
+      cropWidth = img.width;
+      cropHeight = img.height;
+    }
+
+    // Adjust for circle mode
+    const isCircle = cropMode === "circle";
+    const minDimension = Math.min(cropWidth, cropHeight);
+    if (isCircle) {
+      cropWidth = minDimension;
+      cropHeight = minDimension;
+    }
+
+    // Set canvas size to the crop dimensions
+    canvas.width = cropWidth;
+    canvas.height = cropHeight;
+
+    // Apply rotation
+    ctx.save();
+    ctx.translate(cropWidth / 2, cropHeight / 2);
+    ctx.rotate((freeRotation * Math.PI) / 180);
+    ctx.translate(-cropWidth / 2, -cropHeight / 2);
+
+    // Calculate source coordinates to center the crop
+    const srcX = (img.width - cropWidth) / 2;
+    const srcY = (img.height - cropHeight) / 2;
+
+    // Draw the image with cropping
+    ctx.drawImage(img, srcX, srcY, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
+
+    // Apply circle mask if needed
+    if (isCircle) {
+      ctx.globalCompositeOperation = "destination-in";
+      ctx.beginPath();
+      ctx.arc(cropWidth / 2, cropHeight / 2, minDimension / 2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalCompositeOperation = "source-over";
+    }
+
+    ctx.restore();
+    return canvas.toDataURL("image/png");
   };
 
   const renderOptions = (
@@ -101,50 +159,18 @@ export function CropImageTool() {
         <div className="space-y-2">
           <Label htmlFor="aspect-ratio">Aspect Ratio</Label>
           <div className="flex flex-wrap gap-2">
-            <Button
-              variant={aspectRatio === "1:1" ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleAspectRatioChange("1:1")}
-              className="flex items-center gap-2"
-            >
-              <SquareIcon className="h-4 w-4" />
-              1:1
-            </Button>
-            <Button
-              variant={aspectRatio === "4:3" ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleAspectRatioChange("4:3")}
-            >
-              4:3
-            </Button>
-            <Button
-              variant={aspectRatio === "16:9" ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleAspectRatioChange("16:9")}
-            >
-              16:9
-            </Button>
-            <Button
-              variant={aspectRatio === "3:2" ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleAspectRatioChange("3:2")}
-            >
-              3:2
-            </Button>
-            <Button
-              variant={aspectRatio === "2:3" ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleAspectRatioChange("2:3")}
-            >
-              2:3
-            </Button>
-            <Button
-              variant={aspectRatio === "custom" ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleAspectRatioChange("custom")}
-            >
-              Custom
-            </Button>
+            {["1:1", "4:3", "16:9", "3:2", "2:3", "custom"].map((ratio) => (
+              <Button
+                key={ratio}
+                variant={aspectRatio === ratio ? "default" : "outline"}
+                size="sm"
+                onClick={() => handleAspectRatioChange(ratio)}
+                className={ratio === "1:1" ? "flex items-center gap-2" : ""}
+              >
+                {ratio === "1:1" && <SquareIcon className="h-4 w-4" />}
+                {ratio}
+              </Button>
+            ))}
           </div>
         </div>
       )}
@@ -227,6 +253,7 @@ export function CropImageTool() {
           preserveAspectRatio
         }}
         renderOptions={renderOptions}
+        previewRenderer={previewRenderer}
       />
       
       <div className="mt-12 space-y-6">
@@ -239,7 +266,7 @@ export function CropImageTool() {
             <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
               <li>Remove unwanted elements from the edges of your photos</li>
               <li>Improve composition by reframing the subject</li>
-              <li>Create specific aspect ratios for different platforms (social media, printing, etc.)</li>
+              <li>Create specific aspect ratios for different platforms</li>
               <li>Focus attention on the most important part of an image</li>
               <li>Prepare images for profile pictures, thumbnails, or headers</li>
               <li>Create product images with consistent dimensions</li>
@@ -253,25 +280,25 @@ export function CropImageTool() {
             <div className="space-y-2">
               <h3 className="text-base font-medium">Free Crop</h3>
               <p className="text-sm text-muted-foreground">
-                Freely select any area of your image to keep, with no restrictions on size or proportions. This gives you maximum flexibility for creative cropping.
+                Freely select any area of your image to keep, with no restrictions on size or proportions.
               </p>
             </div>
             <div className="space-y-2">
               <h3 className="text-base font-medium">Fixed Aspect Ratio</h3>
               <p className="text-sm text-muted-foreground">
-                Maintain a specific width-to-height ratio like 1:1 (square), 4:3, 16:9 (widescreen), while still being able to choose the size of the crop area. Ideal for platforms that require specific aspect ratios.
+                Maintain a specific width-to-height ratio like 1:1, 4:3, 16:9, ideal for platforms requiring specific aspect ratios.
               </p>
             </div>
             <div className="space-y-2">
               <h3 className="text-base font-medium">Fixed Size</h3>
               <p className="text-sm text-muted-foreground">
-                Crop to exact pixel dimensions (e.g., 800x600). Perfect when you need images with very specific sizes for websites, profiles, or print materials.
+                Crop to exact pixel dimensions (e.g., 800x600), perfect for specific size requirements.
               </p>
             </div>
             <div className="space-y-2">
               <h3 className="text-base font-medium">Circle/Oval</h3>
               <p className="text-sm text-muted-foreground">
-                Create circular or oval crops with transparency around the edges. Ideal for profile pictures, logos, and circular UI elements.
+                Create circular or oval crops with transparency, ideal for profile pictures or logos.
               </p>
             </div>
           </div>
@@ -281,13 +308,13 @@ export function CropImageTool() {
           <h2 className="text-xl font-medium mb-4">Tips for Perfect Cropping</h2>
           <div className="space-y-3">
             <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
-              <li>Use the Rule of Thirds: place key elements at the intersection points of an imaginary 3×3 grid</li>
-              <li>Leave some breathing room around your subject rather than cropping too tightly</li>
-              <li>For portraits, usually crop at natural points (like joints) rather than cutting through limbs</li>
-              <li>Consider the direction your subject is facing or moving and leave more space in front of them</li>
-              <li>Use rotation to straighten horizons or align architectural elements</li>
-              <li>Choose the right aspect ratio for your intended use (social media platforms often have specific requirements)</li>
-              <li>When in doubt, crop less—you can always crop more later, but you can't recover what you've cut away</li>
+              <li>Use the Rule of Thirds: place key elements at intersection points of a 3×3 grid</li>
+              <li>Leave breathing room around your subject</li>
+              <li>For portraits, crop at natural points rather than through limbs</li>
+              <li>Consider subject direction and leave space in front</li>
+              <li>Use rotation to straighten horizons or align elements</li>
+              <li>Choose the right aspect ratio for your use case</li>
+              <li>Crop conservatively—you can always crop more later</li>
             </ul>
           </div>
         </div>

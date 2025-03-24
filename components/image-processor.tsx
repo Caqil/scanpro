@@ -1,4 +1,3 @@
-// components/enhanced-image-processor.tsx
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -10,7 +9,6 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -20,12 +18,13 @@ import {
   CheckCircledIcon, 
   UploadIcon, 
   DownloadIcon,
+  ReloadIcon
 } from "@radix-ui/react-icons";
 import { AlertCircle, Image } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguageStore } from "@/src/store/store";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-// Define props interface for the processor
 interface ImageProcessorProps {
   title: string;
   description: string;
@@ -34,6 +33,7 @@ interface ImageProcessorProps {
   processOptions?: Record<string, any>;
   renderOptions?: React.ReactNode;
   onImageLoaded?: (file: File) => void;
+  previewRenderer?: (file: File, options: Record<string, any>) => Promise<string>;
 }
 
 export function ImageProcessor({ 
@@ -43,92 +43,153 @@ export function ImageProcessor({
   fileTypes = ["image/png"],
   processOptions = {},
   renderOptions,
-  onImageLoaded
+  onImageLoaded,
+  previewRenderer
 }: ImageProcessorProps) {
   const { t } = useLanguageStore();
   const [file, setFile] = useState<File | null>(null);
   const [filePreviewUrl, setFilePreviewUrl] = useState<string | null>(null);
+  const [processedPreviewUrl, setProcessedPreviewUrl] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isGeneratingPreview, setIsGeneratingPreview] = useState(false);
   const [progress, setProgress] = useState(0);
   const [processedImageUrl, setProcessedImageUrl] = useState<string | null>(null);
   const [processedFilename, setProcessedFilename] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<"original" | "preview">("original");
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const optionsRef = useRef<string>(JSON.stringify(processOptions));
+  const filePreviewUrlRef = useRef<string | null>(null); // Track URL for cleanup
 
-  // Set up dropzone for image files
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: { 
-      'image/*': fileTypes.map(type => {
-        if (type.includes('/')) {
-          return `.${type.split('/')[1]}`;
-        }
-        return `.${type}`;
-      })
+      'image/*': fileTypes.map(type => `.${type.split('/')[1] || type}`)
     },
-    maxSize: 50 * 1024 * 1024, // 50MB
+    maxSize: 50 * 1024 * 1024,
     maxFiles: 1,
     onDrop: (acceptedFiles, rejectedFiles) => {
       if (rejectedFiles.length > 0) {
         const rejection = rejectedFiles[0];
-        if (rejection.file.size > 50 * 1024 * 1024) {
-          setError('File size is too large. Maximum size is 50MB.');
-        } else {
-          setError('Please upload a valid image file.');
-        }
+        setError(rejection.file.size > 50 * 1024 * 1024 
+          ? 'File size is too large. Maximum size is 50MB.'
+          : 'Please upload a valid image file.');
         return;
       }
       
       if (acceptedFiles.length > 0) {
-        const file = acceptedFiles[0];
-        setFile(file);
-        
-        // Generate preview URL for the uploaded file
-        const previewUrl = URL.createObjectURL(file);
+        const newFile = acceptedFiles[0];
+        // Revoke previous URL if it exists
+        if (filePreviewUrlRef.current?.startsWith('blob:')) {
+          console.log("Revoking previous filePreviewUrl:", filePreviewUrlRef.current);
+          URL.revokeObjectURL(filePreviewUrlRef.current);
+        }
+        const previewUrl = URL.createObjectURL(newFile);
+        filePreviewUrlRef.current = previewUrl;
+        setFile(newFile);
         setFilePreviewUrl(previewUrl);
+        console.log("Set new filePreviewUrl:", previewUrl); // Debug log
+        setProcessedPreviewUrl(null);
         setProcessedImageUrl(null);
         setProcessedFilename(null);
         setError(null);
-        
-        // Call onImageLoaded callback if provided
-        if (onImageLoaded) {
-          onImageLoaded(file);
-        }
+        setActiveTab("original");
+        optionsRef.current = JSON.stringify(processOptions);
+        onImageLoaded?.(newFile);
+        generatePreview();
       }
     },
   });
 
-  // Clean up preview URL when component unmounts or file changes
+  // Cleanup URLs only on component unmount or explicit reset
   useEffect(() => {
+    // Cleanup function runs only when component unmounts
     return () => {
-      if (filePreviewUrl) {
-        URL.revokeObjectURL(filePreviewUrl);
+      if (filePreviewUrlRef.current?.startsWith('blob:')) {
+        console.log("Revoking filePreviewUrl on unmount:", filePreviewUrlRef.current);
+        URL.revokeObjectURL(filePreviewUrlRef.current);
+        filePreviewUrlRef.current = null;
+      }
+      if (processedPreviewUrl?.startsWith('blob:')) {
+        console.log("Revoking processedPreviewUrl on unmount:", processedPreviewUrl);
+        URL.revokeObjectURL(processedPreviewUrl);
       }
     };
-  }, [filePreviewUrl]);
+  }, []); // Empty dependency array to run cleanup only on unmount
 
-  // Format file size for display
-  const formatFileSize = (sizeInBytes: number): string => {
-    if (sizeInBytes < 1024) {
-      return `${sizeInBytes} B`;
-    } else if (sizeInBytes < 1024 * 1024) {
-      return `${(sizeInBytes / 1024).toFixed(2)} KB`;
-    } else {
-      return `${(sizeInBytes / (1024 * 1024)).toFixed(2)} MB`;
+  // Watch for option changes
+  useEffect(() => {
+    if (!file) return;
+
+    const currentOptions = JSON.stringify(processOptions);
+    if (optionsRef.current !== currentOptions) {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => {
+        optionsRef.current = currentOptions;
+        generatePreview();
+      }, 500);
     }
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [processOptions, file]);
+
+  const formatFileSize = (sizeInBytes: number): string => {
+    if (sizeInBytes < 1024) return `${sizeInBytes} B`;
+    if (sizeInBytes < 1024 * 1024) return `${(sizeInBytes / 1024).toFixed(2)} KB`;
+    return `${(sizeInBytes / (1024 * 1024)).toFixed(2)} MB`;
   };
 
-  // Handle file removal
   const handleRemoveFile = () => {
-    if (filePreviewUrl) {
-      URL.revokeObjectURL(filePreviewUrl);
+    if (filePreviewUrlRef.current?.startsWith('blob:')) {
+      console.log("Revoking filePreviewUrl on remove:", filePreviewUrlRef.current);
+      URL.revokeObjectURL(filePreviewUrlRef.current);
+      filePreviewUrlRef.current = null;
+    }
+    if (processedPreviewUrl?.startsWith('blob:')) {
+      console.log("Revoking processedPreviewUrl on remove:", processedPreviewUrl);
+      URL.revokeObjectURL(processedPreviewUrl);
     }
     setFile(null);
     setFilePreviewUrl(null);
+    setProcessedPreviewUrl(null);
     setProcessedImageUrl(null);
     setProcessedFilename(null);
     setError(null);
+    setActiveTab("original");
   };
 
-  // Process the image
+  const defaultPreviewRenderer = async (file: File): Promise<string> => {
+    return URL.createObjectURL(file);
+  };
+
+  const generatePreview = async () => {
+    if (!file) return;
+
+    setIsGeneratingPreview(true);
+    setError(null);
+
+    try {
+      const renderer = previewRenderer || defaultPreviewRenderer;
+      const oldUrl = processedPreviewUrl;
+      const newPreviewUrl = await renderer(file, processOptions);
+      if (oldUrl?.startsWith('blob:')) {
+        console.log("Revoking old processedPreviewUrl:", oldUrl);
+        URL.revokeObjectURL(oldUrl);
+      }
+      setProcessedPreviewUrl(newPreviewUrl);
+      setActiveTab("preview");
+    } catch (err) {
+      console.error("Preview generation error:", err);
+      setError(err instanceof Error ? err.message : 'Failed to generate preview');
+      toast.error('Preview failed', {
+        description: err instanceof Error ? err.message : 'An unknown error occurred',
+      });
+    } finally {
+      setIsGeneratingPreview(false);
+    }
+  };
+
   const processImage = async () => {
     if (!file) {
       setError('Please upload an image first.');
@@ -141,53 +202,30 @@ export function ImageProcessor({
 
     const formData = new FormData();
     formData.append("file", file);
-    
-    // Add any additional options to the form data
     Object.entries(processOptions).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
-        if (typeof value === 'object') {
-          formData.append(key, JSON.stringify(value));
-        } else {
-          formData.append(key, String(value));
-        }
+        formData.append(key, typeof value === 'object' ? JSON.stringify(value) : String(value));
       }
     });
 
     try {
-      // Set up progress tracking
       const progressInterval = setInterval(() => {
-        setProgress(prev => {
-          if (prev >= 95) {
-            clearInterval(progressInterval);
-            return 95;
-          }
-          return prev + 5;
-        });
+        setProgress(prev => (prev >= 95 ? (clearInterval(progressInterval), 95) : prev + 5));
       }, 200);
 
-      // Make API request
       const response = await fetch(`/api/${processEndpoint}`, {
         method: 'POST',
         body: formData,
       });
 
       clearInterval(progressInterval);
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to process image');
-      }
+      if (!response.ok) throw new Error((await response.json()).error || 'Failed to process image');
 
       const data = await response.json();
       setProgress(100);
-      
-      // Store both the display URL and filename for downloading
       setProcessedFilename(data.filename);
-      
-      // Use the API file route to both display and download images
       const fileUrl = `/api/file?folder=processed-images&filename=${encodeURIComponent(data.filename)}`;
       setProcessedImageUrl(fileUrl);
-      
       toast.success('Image processed successfully', {
         description: 'Your image has been processed and is ready for download.',
       });
@@ -208,44 +246,15 @@ export function ImageProcessor({
         <p className="text-sm text-muted-foreground">{description}</p>
       </CardHeader>
       <CardContent className="space-y-6">
-        {/* File Drop Zone */}
-        <div 
-          {...getRootProps()} 
-          className={cn(
-            "border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer",
-            isDragActive ? "border-primary bg-primary/10" : 
-            file ? "border-green-500 bg-green-50 dark:bg-green-950/20" : 
-            "border-muted-foreground/25 hover:border-muted-foreground/50",
-            isProcessing && "pointer-events-none opacity-80"
-          )}
-        >
-          <input {...getInputProps()} disabled={isProcessing} />
-          
-          {file ? (
-            <div className="flex flex-col items-center gap-2">
-              <div className="h-12 w-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
-                <FileIcon className="h-6 w-6 text-green-600 dark:text-green-400" />
-              </div>
-              <div>
-                <p className="text-sm font-medium">{file.name}</p>
-                <p className="text-xs text-muted-foreground">
-                  {formatFileSize(file.size)}
-                </p>
-              </div>
-              <Button 
-                type="button" 
-                variant="outline" 
-                size="sm" 
-                disabled={isProcessing}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleRemoveFile();
-                }}
-              >
-                <Cross2Icon className="h-4 w-4 mr-1" /> {t('ui.remove') || "Remove"}
-              </Button>
-            </div>
-          ) : (
+        {!file && (
+          <div 
+            {...getRootProps()} 
+            className={cn(
+              "border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer",
+              isDragActive ? "border-primary bg-primary/10" : "border-muted-foreground/25 hover:border-muted-foreground/50"
+            )}
+          >
+            <input {...getInputProps()} />
             <div className="flex flex-col items-center gap-2">
               <div className="h-12 w-12 rounded-full bg-muted flex items-center justify-center">
                 <UploadIcon className="h-6 w-6 text-muted-foreground" />
@@ -260,32 +269,115 @@ export function ImageProcessor({
                 {t('fileUploader.browse') || "Browse Files"}
               </Button>
             </div>
-          )}
-        </div>
+          </div>
+        )}
         
-        {/* File Preview (after upload, before processing) */}
-        {filePreviewUrl && !processedImageUrl && (
-          <div className="p-4 border rounded-lg bg-background">
-            <h3 className="text-sm font-medium mb-3">{t('ui.preview') || "Original Image Preview"}</h3>
-            <div className="flex justify-center">
-              <img 
-                src={filePreviewUrl} 
-                alt="Preview" 
-                className="max-h-60 max-w-full object-contain" 
-              />
+        {file && !processedImageUrl && (
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-medium">{t('ui.preview') || "Preview"}</h3>
+                <Button variant="ghost" size="sm" onClick={handleRemoveFile}>
+                  <Cross2Icon className="h-4 w-4 mr-1" />
+                  {t('ui.remove') || "Remove"}
+                </Button>
+              </div>
+              
+              <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "original" | "preview")}>
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="original">Original</TabsTrigger>
+                  <TabsTrigger value="preview" disabled={!processedPreviewUrl && !isGeneratingPreview}>Preview</TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="original" className="p-2 mt-2 border rounded-md min-h-80 flex items-center justify-center overflow-hidden">
+                  {filePreviewUrl ? (
+                    <img 
+                      src={filePreviewUrl} 
+                      alt="Original" 
+                      className="max-w-full max-h-80 object-contain"
+                      onError={(e) => console.error("Failed to load original image:", filePreviewUrl, e)}
+                      onLoad={() => console.log("Original image loaded successfully:", filePreviewUrl)}
+                    />
+                  ) : (
+                    <p className="text-muted-foreground">No original image available</p>
+                  )}
+                </TabsContent>
+                
+                <TabsContent value="preview" className="p-2 mt-2 border rounded-md min-h-80 flex items-center justify-center overflow-hidden">
+                  {isGeneratingPreview ? (
+                    <div className="flex flex-col items-center justify-center p-8 text-center text-muted-foreground">
+                      <ReloadIcon className="h-8 w-8 animate-spin mb-4" />
+                      <p>Generating preview...</p>
+                    </div>
+                  ) : processedPreviewUrl ? (
+                    <img 
+                      src={processedPreviewUrl} 
+                      alt="Preview" 
+                      className="max-w-full max-h-80 object-contain" 
+                      key={processedPreviewUrl}
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center p-8 text-center text-muted-foreground">
+                      <p>No preview available yet</p>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="mt-4"
+                        onClick={generatePreview}
+                        disabled={isGeneratingPreview}
+                      >
+                        <ReloadIcon className="h-4 w-4 mr-2" />
+                        Generate Preview
+                      </Button>
+                    </div>
+                  )}
+                </TabsContent>
+              </Tabs>
+              
+              <div className="flex justify-center">
+                <Button onClick={processImage} disabled={isProcessing || isGeneratingPreview} className="w-full">
+                  {isProcessing ? (
+                    <>
+                      <ReloadIcon className="h-4 w-4 mr-2 animate-spin" />
+                      {t('ui.processing') || 'Processing...'}
+                    </>
+                  ) : (
+                    t('ui.process') || 'Process Image'
+                  )}
+                </Button>
+              </div>
+              
+              <div className="flex items-center gap-3 p-3 border rounded-md bg-muted/10">
+                <div className="h-10 w-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                  <FileIcon className="h-5 w-5 text-green-600 dark:text-green-400" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium">{file?.name || "Unknown file"}</p>
+                  <p className="text-xs text-muted-foreground">{file ? formatFileSize(file.size) : "N/A"}</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <h3 className="text-sm font-medium">{t('convert.options.title') || "Editing Options"}</h3>
+              <div className="p-4 border rounded-lg bg-muted/10">
+                {renderOptions}
+                <div className="flex justify-end mt-4">
+                  <Button 
+                    variant="secondary" 
+                    size="sm" 
+                    onClick={generatePreview}
+                    disabled={isGeneratingPreview}
+                  >
+                    <ReloadIcon className={cn("h-4 w-4 mr-2", isGeneratingPreview && "animate-spin")} />
+                    {isGeneratingPreview ? "Generating..." : "Update Preview"}
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         )}
         
-        {/* Additional Options */}
-        {renderOptions && (
-          <div className="p-4 border rounded-lg bg-muted/10">
-            <h3 className="text-sm font-medium mb-3">{t('convert.options.title') || "Processing Options"}</h3>
-            {renderOptions}
-          </div>
-        )}
-        
-        {/* Error message */}
         {error && (
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
@@ -293,7 +385,6 @@ export function ImageProcessor({
           </Alert>
         )}
         
-        {/* Progress indicator */}
         {isProcessing && (
           <div className="space-y-2">
             <Progress value={progress} className="h-2" />
@@ -304,7 +395,6 @@ export function ImageProcessor({
           </div>
         )}
         
-        {/* Results */}
         {processedImageUrl && processedFilename && (
           <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-900/30">
             <div className="flex items-start gap-3">
@@ -312,53 +402,28 @@ export function ImageProcessor({
                 <CheckCircledIcon className="h-5 w-5 text-green-600 dark:text-green-400" />
               </div>
               <div className="flex-1">
-                <h3 className="font-medium text-green-600 dark:text-green-400">
+                <h3 className="font-medium text-green-600 dark:text-green-400 mb-3">
                   {t('ui.success') || "Image processed successfully!"}
                 </h3>
                 <div className="my-3 border rounded overflow-hidden bg-white dark:bg-black p-3 flex justify-center">
-                  <img 
-                    src={processedImageUrl} 
-                    alt="Processed" 
-                    className="max-h-60 object-contain" 
-                  />
+                  <img src={processedImageUrl} alt="Processed" className="max-h-80 object-contain" />
                 </div>
-                <Button 
-                  className="w-full sm:w-auto" 
-                  variant="default"
-                  asChild
-                >
-                  <a 
-                    href={processedImageUrl}
-                    download={processedFilename}
-                  >
-                    <DownloadIcon className="h-4 w-4 mr-2" />
-                    {t('ui.download') || "Download Processed Image"}
-                  </a>
-                </Button>
+                <div className="flex gap-2">
+                  <Button className="flex-1" variant="default" asChild>
+                    <a href={processedImageUrl} download={processedFilename}>
+                      <DownloadIcon className="h-4 w-4 mr-2" />
+                      {t('ui.download') || "Download Processed Image"}
+                    </a>
+                  </Button>
+                  <Button variant="outline" onClick={handleRemoveFile} className="flex-1">
+                    {t('ui.reupload') || "Process Another Image"}
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         )}
       </CardContent>
-      <CardFooter className="flex justify-end">
-        {file && !processedImageUrl && (
-          <Button 
-            onClick={processImage} 
-            disabled={!file || isProcessing}
-          >
-            {isProcessing ? t('ui.processing') || 'Processing...' : t('ui.process') || 'Process Image'}
-          </Button>
-        )}
-        
-        {processedImageUrl && (
-          <Button
-            variant="outline"
-            onClick={handleRemoveFile}
-          >
-            {t('ui.reupload') || "Process Another Image"}
-          </Button>
-        )}
-      </CardFooter>
     </Card>
   );
 }
