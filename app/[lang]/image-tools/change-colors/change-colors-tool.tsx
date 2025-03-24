@@ -42,7 +42,7 @@ export function ChangeColorsTool() {
     <div className="space-y-6">
       <div className="space-y-4">
         <div className="flex justify-between items-center">
-          <Label>Color Mappings</Label>
+          <Label>{t('imageTools.changeColors.colorMappings') || "Color Mappings"}</Label>
           <Button 
             type="button" 
             size="sm" 
@@ -51,7 +51,7 @@ export function ChangeColorsTool() {
             disabled={colorMappings.length >= 5}
           >
             <PlusCircle className="h-4 w-4 mr-1" />
-            Add Color
+            {t('imageTools.changeColors.addColor') || "Add Color"}
           </Button>
         </div>
         
@@ -59,7 +59,7 @@ export function ChangeColorsTool() {
           <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border rounded-md bg-muted/10">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor={`source-${index}`}>Source Color</Label>
+                <Label htmlFor={`source-${index}`}>{t('imageTools.changeColors.sourceColor') || "Source Color"}</Label>
                 <div 
                   className="w-6 h-6 rounded-md border" 
                   style={{ backgroundColor: mapping.sourceColor }}
@@ -85,7 +85,7 @@ export function ChangeColorsTool() {
             
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor={`target-${index}`}>Target Color</Label>
+                <Label htmlFor={`target-${index}`}>{t('imageTools.changeColors.targetColor') || "Target Color"}</Label>
                 <div 
                   className="w-6 h-6 rounded-md border" 
                   style={{ backgroundColor: mapping.targetColor }}
@@ -125,7 +125,7 @@ export function ChangeColorsTool() {
       
       <div className="space-y-2">
         <div className="flex justify-between items-center">
-          <Label htmlFor="tolerance">Color Matching Tolerance: {tolerance}</Label>
+          <Label htmlFor="tolerance">{t('imageTools.changeColors.tolerance') || "Color Matching Tolerance"}: {tolerance}</Label>
         </div>
         <Slider
           id="tolerance"
@@ -136,7 +136,7 @@ export function ChangeColorsTool() {
           onValueChange={(values) => setTolerance(values[0])}
         />
         <p className="text-xs text-muted-foreground">
-          Higher values will match a wider range of similar colors. Lower values require more exact color matching.
+          {t('imageTools.changeColors.toleranceHint') || "Higher values will match a wider range of similar colors. Lower values require more exact color matching."}
         </p>
       </div>
     </div>
@@ -145,15 +145,15 @@ export function ChangeColorsTool() {
   return (
     <div>
       <div className="mx-auto flex flex-col items-center text-center mb-8">
-        <h1 className="text-3xl font-bold">Change Colors in PNG</h1>
+        <h1 className="text-3xl font-bold">{t('imageTools.changeColors.title') || "Change Colors in PNG"}</h1>
         <p className="mt-2 text-muted-foreground">
-          Replace specific colors in your PNG images with new colors
+          {t('imageTools.changeColors.description') || "Replace specific colors in your PNG images with new colors"}
         </p>
       </div>
       
       <ImageProcessor
-        title="PNG Color Changer"
-        description="Upload a PNG image to change specific colors within it."
+        title={t('imageTools.changeColors.toolTitle') || "PNG Color Changer"}
+        description={t('imageTools.changeColors.toolDescription') || "Upload a PNG image to change specific colors within it."}
         processEndpoint="image/change-colors"
         fileTypes={["image/png"]}
         processOptions={{ 
@@ -165,46 +165,46 @@ export function ChangeColorsTool() {
       
       <div className="mt-12 space-y-6">
         <div className="border rounded-lg p-4">
-          <h2 className="text-xl font-medium mb-4">How to Change Colors in PNG Images</h2>
+          <h2 className="text-xl font-medium mb-4">{t('imageTools.changeColors.howToTitle') || "How to Change Colors in PNG Images"}</h2>
           <div className="space-y-3">
             <ol className="list-decimal pl-5 text-sm text-muted-foreground space-y-2">
-              <li>Upload your PNG image</li>
-              <li>Select the color you want to replace by clicking the color picker or entering a hex code</li>
-              <li>Choose the new color that will replace the selected color</li>
-              <li>Adjust the tolerance to control how strict the color matching should be</li>
-              <li>Add more color mappings if needed (up to 5 color pairs)</li>
-              <li>Click the "Process Image" button to apply your changes</li>
+              <li>{t('imageTools.changeColors.step1') || "Upload your PNG image"}</li>
+              <li>{t('imageTools.changeColors.step2') || "Select the color you want to replace by clicking the color picker or entering a hex code"}</li>
+              <li>{t('imageTools.changeColors.step3') || "Choose the new color that will replace the selected color"}</li>
+              <li>{t('imageTools.changeColors.step4') || "Adjust the tolerance to control how strict the color matching should be"}</li>
+              <li>{t('imageTools.changeColors.step5') || "Add more color mappings if needed (up to 5 color pairs)"}</li>
+              <li>{t('imageTools.changeColors.step6') || "Click the \"Process Image\" button to apply your changes"}</li>
             </ol>
           </div>
         </div>
         
         <div className="border rounded-lg p-4">
-          <h2 className="text-xl font-medium mb-4">What You Can Do With This Tool</h2>
+          <h2 className="text-xl font-medium mb-4">{t('imageTools.changeColors.useCasesTitle') || "What You Can Do With This Tool"}</h2>
           <div className="space-y-3">
             <p className="text-sm text-muted-foreground">
-              The Color Changer tool is useful for various image editing needs:
+              {t('imageTools.changeColors.useCasesDesc') || "The Color Changer tool is useful for various image editing needs:"}
             </p>
             <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
-              <li>Change the color scheme of icons or graphics</li>
-              <li>Match artwork colors to your brand colors</li>
-              <li>Create variations of the same image with different color themes</li>
-              <li>Fix or adjust colors in clip art and illustrations</li>
-              <li>Change background or foreground colors without complex editing software</li>
-              <li>Create seasonal or themed versions of your images</li>
+              <li>{t('imageTools.changeColors.useCase1') || "Change the color scheme of icons or graphics"}</li>
+              <li>{t('imageTools.changeColors.useCase2') || "Match artwork colors to your brand colors"}</li>
+              <li>{t('imageTools.changeColors.useCase3') || "Create variations of the same image with different color themes"}</li>
+              <li>{t('imageTools.changeColors.useCase4') || "Fix or adjust colors in clip art and illustrations"}</li>
+              <li>{t('imageTools.changeColors.useCase5') || "Change background or foreground colors without complex editing software"}</li>
+              <li>{t('imageTools.changeColors.useCase6') || "Create seasonal or themed versions of your images"}</li>
             </ul>
           </div>
         </div>
         
         <div className="border rounded-lg p-4">
-          <h2 className="text-xl font-medium mb-4">Tips for Best Results</h2>
+          <h2 className="text-xl font-medium mb-4">{t('imageTools.changeColors.tipsTitle') || "Tips for Best Results"}</h2>
           <div className="space-y-3">
             <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
-              <li>For more precise color replacement, use a lower tolerance value (10-20)</li>
-              <li>To replace similar shades of a color, use a higher tolerance value (30-50)</li>
-              <li>This tool works best with images that have solid colors like logos, clip art, and illustrations</li>
-              <li>Photos and images with gradients may not get ideal results</li>
-              <li>PNG transparency is preserved during color replacement</li>
-              <li>Process one color at a time for complex changes</li>
+              <li>{t('imageTools.changeColors.tip1') || "For more precise color replacement, use a lower tolerance value (10-20)"}</li>
+              <li>{t('imageTools.changeColors.tip2') || "To replace similar shades of a color, use a higher tolerance value (30-50)"}</li>
+              <li>{t('imageTools.changeColors.tip3') || "This tool works best with images that have solid colors like logos, clip art, and illustrations"}</li>
+              <li>{t('imageTools.changeColors.tip4') || "Photos and images with gradients may not get ideal results"}</li>
+              <li>{t('imageTools.changeColors.tip5') || "PNG transparency is preserved during color replacement"}</li>
+              <li>{t('imageTools.changeColors.tip6') || "Process one color at a time for complex changes"}</li>
             </ul>
           </div>
         </div>

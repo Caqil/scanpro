@@ -1,7 +1,7 @@
 // components/image-processor.tsx
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -45,15 +45,22 @@ export function ImageProcessor({
 }: ImageProcessorProps) {
   const { t } = useLanguageStore();
   const [file, setFile] = useState<File | null>(null);
+  const [filePreviewUrl, setFilePreviewUrl] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [processedImageUrl, setProcessedImageUrl] = useState<string | null>(null);
+  const [processedFilename, setProcessedFilename] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   // Set up dropzone for image files
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: { 
-      'image/*': fileTypes.map(type => `.${type.split('/')[1]}`) 
+      'image/*': fileTypes.map(type => {
+        if (type.includes('/')) {
+          return `.${type.split('/')[1]}`;
+        }
+        return `.${type}`;
+      })
     },
     maxSize: 50 * 1024 * 1024, // 50MB
     maxFiles: 1,
@@ -70,11 +77,24 @@ export function ImageProcessor({
       
       if (acceptedFiles.length > 0) {
         setFile(acceptedFiles[0]);
+        // Generate preview URL for the uploaded file
+        const previewUrl = URL.createObjectURL(acceptedFiles[0]);
+        setFilePreviewUrl(previewUrl);
         setProcessedImageUrl(null);
+        setProcessedFilename(null);
         setError(null);
       }
     },
   });
+
+  // Clean up preview URL when component unmounts or file changes
+  useEffect(() => {
+    return () => {
+      if (filePreviewUrl) {
+        URL.revokeObjectURL(filePreviewUrl);
+      }
+    };
+  }, [filePreviewUrl]);
 
   // Format file size for display
   const formatFileSize = (sizeInBytes: number): string => {
@@ -89,8 +109,13 @@ export function ImageProcessor({
 
   // Handle file removal
   const handleRemoveFile = () => {
+    if (filePreviewUrl) {
+      URL.revokeObjectURL(filePreviewUrl);
+    }
     setFile(null);
+    setFilePreviewUrl(null);
     setProcessedImageUrl(null);
+    setProcessedFilename(null);
     setError(null);
   };
 
@@ -110,7 +135,13 @@ export function ImageProcessor({
     
     // Add any additional options to the form data
     Object.entries(processOptions).forEach(([key, value]) => {
-      formData.append(key, String(value));
+      if (value !== undefined && value !== null) {
+        if (typeof value === 'object') {
+          formData.append(key, JSON.stringify(value));
+        } else {
+          formData.append(key, String(value));
+        }
+      }
     });
 
     try {
@@ -140,7 +171,13 @@ export function ImageProcessor({
 
       const data = await response.json();
       setProgress(100);
-      setProcessedImageUrl(data.fileUrl);
+      
+      // Store both the display URL and filename for downloading
+      setProcessedFilename(data.filename);
+      
+      // Use the API file route to both display and download images
+      const fileUrl = `/api/file?folder=processed-images&filename=${encodeURIComponent(data.filename)}`;
+      setProcessedImageUrl(fileUrl);
       
       toast.success('Image processed successfully', {
         description: 'Your image has been processed and is ready for download.',
@@ -217,6 +254,20 @@ export function ImageProcessor({
           )}
         </div>
         
+        {/* File Preview (after upload, before processing) */}
+        {filePreviewUrl && !processedImageUrl && (
+          <div className="p-4 border rounded-lg bg-background">
+            <h3 className="text-sm font-medium mb-3">Original Image Preview</h3>
+            <div className="flex justify-center">
+              <img 
+                src={filePreviewUrl} 
+                alt="Preview" 
+                className="max-h-60 max-w-full object-contain" 
+              />
+            </div>
+          </div>
+        )}
+        
         {/* Additional Options */}
         {renderOptions && (
           <div className="p-4 border rounded-lg bg-muted/10">
@@ -245,7 +296,7 @@ export function ImageProcessor({
         )}
         
         {/* Results */}
-        {processedImageUrl && (
+        {processedImageUrl && processedFilename && (
           <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-900/30">
             <div className="flex items-start gap-3">
               <div className="mt-1">
@@ -255,19 +306,22 @@ export function ImageProcessor({
                 <h3 className="font-medium text-green-600 dark:text-green-400">
                   Image processed successfully!
                 </h3>
-                <div className="my-3 border rounded overflow-hidden">
+                <div className="my-3 border rounded overflow-hidden bg-white dark:bg-black p-3 flex justify-center">
                   <img 
                     src={processedImageUrl} 
                     alt="Processed" 
-                    className="max-w-full h-auto" 
+                    className="max-h-60 object-contain" 
                   />
                 </div>
                 <Button 
                   className="w-full sm:w-auto" 
-                  asChild
                   variant="default"
+                  asChild
                 >
-                  <a href={processedImageUrl} download target="_blank">
+                  <a 
+                    href={processedImageUrl}
+                    download={processedFilename}
+                  >
                     <DownloadIcon className="h-4 w-4 mr-2" />
                     Download Processed Image
                   </a>

@@ -1,17 +1,16 @@
-// components/image-tools-list.tsx
+// components/simple-image-tools-list.tsx
 "use client"
-import { useRouter } from "next/navigation";
 import { useLanguageStore } from "@/src/store/store";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LanguageLink } from "@/components/language-link";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles } from "lucide-react";
+import { MagicCard } from "@/src/components/magicui/magic-card";
 
 export function ImageToolsList() {
-  const router = useRouter();
   const { t } = useLanguageStore();
   
   const imageTools = [
+    // Original tools
     {
       id: "make-transparent",
       name: "Make a PNG Transparent",
@@ -33,13 +32,6 @@ export function ImageToolsList() {
       href: "/image-tools/change-tone",
       description: "Quickly replace all colors in a PNG with a single color tone.",
       icon: "🎨"
-    },
-    {
-      id: "add-noise",
-      name: "Add Noise to a PNG",
-      href: "/image-tools/add-noise",
-      description: "Quickly add noisy pixels (white noise) to your PNG image.",
-      icon: "🔄"
     },
     {
       id: "compress-png",
@@ -96,6 +88,72 @@ export function ImageToolsList() {
       href: "/image-tools/base64-to-png",
       description: "Quickly convert a base64-encoded image to PNG.",
       icon: "🔢"
+    },
+    
+    // New additional tools
+    {
+      id: "resize-image",
+      name: "Resize Image",
+      href: "/image-tools/resize",
+      description: "Resize images to exact dimensions while preserving quality.",
+      icon: "📏",
+      isNew: true
+    },
+    {
+      id: "crop-image",
+      name: "Crop Image",
+      href: "/image-tools/crop",
+      description: "Crop images to remove unwanted areas and focus on important content.",
+      icon: "✂️",
+      isNew: true
+    },
+    {
+      id: "rotate-image",
+      name: "Rotate & Flip",
+      href: "/image-tools/rotate",
+      description: "Rotate and flip images to correct orientation.",
+      icon: "🔄",
+      isNew: true
+    },
+    {
+      id: "add-text",
+      name: "Add Text to Image",
+      href: "/image-tools/add-text",
+      description: "Add custom text, captions, or watermarks to your images.",
+      icon: "📝",
+      isNew: true
+    },
+    {
+      id: "image-filters",
+      name: "Apply Image Filters",
+      href: "/image-tools/filters",
+      description: "Enhance images with professional filters like grayscale, sepia, and more.",
+      icon: "🎭",
+      isNew: true
+    },
+    {
+      id: "compress-jpg",
+      name: "Compress JPG",
+      href: "/image-tools/compress-jpg",
+      description: "Optimize JPG images with adjustable quality settings.",
+      icon: "📉",
+      isNew: true
+    },
+    {
+      id: "remove-background",
+      name: "Remove Background",
+      href: "/image-tools/remove-background",
+      description: "Automatically remove backgrounds from photos and images.",
+      icon: "✨",
+      isNew: true
+    },
+    {
+      id: "image-to-pdf",
+      name: "Images to PDF",
+      href: "/image-tools/images-to-pdf",
+      description: "Convert multiple images to a single PDF document.",
+      icon: "📄",
+      isNew: true
     }
   ];
 
@@ -104,25 +162,30 @@ export function ImageToolsList() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {imageTools.map((tool) => (
           <LanguageLink key={tool.id} href={tool.href} className="block h-full">
-            <Card className="h-full cursor-pointer hover:shadow-md transition-all tool-card">
-              <CardHeader className="flex flex-row items-center gap-3 pb-2">
-                <div className="p-2 rounded-lg text-2xl icon-pulse">{tool.icon}</div>
-                <div>
-                  <CardTitle className="text-base flex items-center">
-                    {tool.name}
-                    {tool.isNew && (
-                      <Badge className="ml-2 bg-primary/20 text-primary-foreground text-xs" variant="outline">
-                        <Sparkles className="h-3 w-3 mr-1" />
-                        New
-                      </Badge>
-                    )}
-                  </CardTitle>
+            <MagicCard 
+              className="h-full cursor-pointer hover:shadow-md transition-all tool-card"
+              gradientColor="rgba(59, 130, 246, 0.05)"
+              borderColor="rgba(59, 130, 246, 0.1)"
+              spotlight
+            >
+              <div className="p-5">
+                <div className="flex flex-row items-center gap-3 pb-2">
+                  <div className="p-2 rounded-lg text-2xl icon-pulse">{tool.icon}</div>
+                  <div>
+                    <div className="text-base font-medium flex items-center">
+                      {tool.name}
+                      {tool.isNew && (
+                        <Badge className="ml-2 bg-primary/20 text-primary-foreground text-xs" variant="outline">
+                          <Sparkles className="h-3 w-3 mr-1" />
+                          New
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </CardHeader>
-              <CardContent>
                 <p className="text-sm text-muted-foreground">{tool.description}</p>
-              </CardContent>
-            </Card>
+              </div>
+            </MagicCard>
           </LanguageLink>
         ))}
       </div>

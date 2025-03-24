@@ -200,67 +200,51 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
       ]
     }
   ];
-  // Add this near your PDF_TOOLS definition
-const IMAGE_TOOLS: CategoryDefinition[] = [
-  {
-    category: "Image Conversion",
-    description: "Convert between image formats",
-    tools: [
-      { 
-        name: "PNG to JPG", 
-        href: "/image-tools/png-to-jpg", 
-        icon: <FileImage className="h-5 w-5 text-blue-500" />,
-        description: "Convert PNG images to JPG format"
-      },
-      { 
-        name: "JPG to PNG", 
-        href: "/image-tools/jpg-to-png", 
-        icon: <FileImage className="h-5 w-5 text-green-500" />,
-        description: "Convert JPG images to PNG format"
-      },
-      { 
-        name: "PNG to WebP", 
-        href: "/image-tools/png-to-webp", 
-        icon: <FileImage className="h-5 w-5 text-purple-500" />,
-        description: "Convert PNG images to WebP format"
-      },
-      { 
-        name: "WebP to PNG", 
-        href: "/image-tools/webp-to-png", 
-        icon: <FileImage className="h-5 w-5 text-orange-500" />,
-        description: "Convert WebP images to PNG format"
-      },
-    ]
-  },
-  {
-    category: "Image Editing",
-    description: "Edit and manipulate images",
-    tools: [
-      { 
-        name: "Make PNG Transparent", 
-        href: "/image-tools/make-transparent", 
-        icon: <Image className="h-5 w-5 text-blue-500" />,
-        description: "Remove backgrounds from PNG images"
-      },
-      { 
-        name: "Change Colors", 
-        href: "/image-tools/change-colors", 
-        icon: <Palette className="h-5 w-5 text-green-500" />,
-        description: "Swap colors in PNG images"
-      },
-      { 
-        name: "Compress Images", 
-        href: "/image-tools/compress", 
-        icon: <ArrowDown className="h-5 w-5 text-red-500" />,
-        description: "Reduce image file sizes"
-      },
-    ]
-  }
-];
+  
+  // Image tools for direct navigation
+  const IMAGE_TOOLS = [
+    { 
+      name: "Make Transparent", 
+      href: "/image-tools/make-transparent", 
+      icon: <FileImage className="h-5 w-5 text-blue-500" />,
+      description: "Remove backgrounds by replacing colors with transparency"
+    },
+    { 
+      name: "Change Colors", 
+      href: "/image-tools/change-colors", 
+      icon: <Palette className="h-5 w-5 text-purple-500" />,
+      description: "Replace specific colors in your images"
+    },
+    { 
+      name: "Change Color Tone", 
+      href: "/image-tools/change-tone", 
+      icon: <Palette className="h-5 w-5 text-amber-500" />,
+      description: "Apply color tones and tints to your images"
+    },
+    { 
+      name: "Compress PNG", 
+      href: "/image-tools/compress", 
+      icon: <Image className="h-5 w-5 text-green-500" />,
+      description: "Reduce PNG file sizes while maintaining quality"
+    },
+    { 
+      name: "PNG to JPG", 
+      href: "/image-tools/png-to-jpg", 
+      icon: <FileImage className="h-5 w-5 text-blue-500" />,
+      description: "Convert PNG images to JPG format"
+    },
+    { 
+      name: "JPG to PNG", 
+      href: "/image-tools/jpg-to-png", 
+      icon: <FileImage className="h-5 w-5 text-blue-500" />,
+      description: "Convert JPG images to PNG format"
+    }
+  ];
+
   const navItems = [
     { 
-      label: t('imageTools.title') || "Image Tools", 
-      dropdown: IMAGE_TOOLS || [] 
+      label: isClient ? t('imageTools.title') || "Image Tools" : "Image Tools", 
+      href: "/image-tools"
     },
     { 
       label: t('nav.convertPdf'), 
@@ -274,7 +258,6 @@ const IMAGE_TOOLS: CategoryDefinition[] = [
       label: t('pdfTools.categories.pdfSecurity'), 
       dropdown: PDF_TOOLS.filter(cat => cat.category === (isClient ? t('pdfTools.categories.pdfSecurity') : "PDF Security")) 
     },
-    
     { 
       label: t('popular.viewAll'), 
       dropdown: PDF_TOOLS 
@@ -332,41 +315,54 @@ const IMAGE_TOOLS: CategoryDefinition[] = [
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            {navItems.map((item) => (
+            {/* Direct link to Image Tools */}
+            <LanguageLink
+              href="/image-tools"
+              className="text-sm font-medium text-foreground transition-colors hover:text-primary"
+            >
+              {isClient ? t('imageTools.title') || "Image Tools" : "Image Tools"}
+            </LanguageLink>
+            
+            {/* PDF Tool Dropdowns */}
+            {navItems.slice(1).map((item) => (
               <div key={item.label} className="relative group">
-                <LanguageLink
-                  href="#"
-                  className="text-sm font-medium text-foreground transition-colors hover:text-primary flex items-center gap-1"
-                >
-                  {item.label}
-                  <ChevronDownIcon className="h-4 w-4 opacity-70" />
-                </LanguageLink>
+                {item.dropdown && (
+                  <>
+                    <LanguageLink
+                      href="#"
+                      className="text-sm font-medium text-foreground transition-colors hover:text-primary flex items-center gap-1"
+                    >
+                      {item.label}
+                      <ChevronDownIcon className="h-4 w-4 opacity-70" />
+                    </LanguageLink>
 
-                {/* Dropdown Menu */}
-                <div className="absolute top-full left-0 mt-2 w-[600px] bg-background border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 p-4">
-                  {item.dropdown.map((category) => (
-                    <div key={category.category} className="mb-4">
-                      <div className="font-semibold text-sm text-foreground mb-2">{category.category}</div>
-                      <div className="grid grid-cols-3 gap-4">
-                        {category.tools.map((tool) => (
-                          <LanguageLink
-                            key={tool.name}
-                            href={tool.href}
-                            className="flex items-start gap-3 p-2 hover:bg-muted rounded-md transition-colors"
-                          >
-                            <div className="p-1 rounded-md bg-primary/10">
-                              {tool.icon}
-                            </div>
-                            <div>
-                              <div className="text-sm font-medium">{tool.name}</div>
-                              <p className="text-xs text-muted-foreground">{tool.description}</p>
-                            </div>
-                          </LanguageLink>
-                        ))}
-                      </div>
+                    {/* Dropdown Menu */}
+                    <div className="absolute top-full left-0 mt-2 w-[600px] bg-background border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 p-4">
+                      {item.dropdown.map((category) => (
+                        <div key={category.category} className="mb-4">
+                          <div className="font-semibold text-sm text-foreground mb-2">{category.category}</div>
+                          <div className="grid grid-cols-3 gap-4">
+                            {category.tools.map((tool) => (
+                              <LanguageLink
+                                key={tool.name}
+                                href={tool.href}
+                                className="flex items-start gap-3 p-2 hover:bg-muted rounded-md transition-colors"
+                              >
+                                <div className="p-1 rounded-md bg-primary/10">
+                                  {tool.icon}
+                                </div>
+                                <div>
+                                  <div className="text-sm font-medium">{tool.name}</div>
+                                  <p className="text-xs text-muted-foreground">{tool.description}</p>
+                                </div>
+                              </LanguageLink>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </>
+                )}
               </div>
             ))}
           </nav>
@@ -395,7 +391,39 @@ const IMAGE_TOOLS: CategoryDefinition[] = [
         {mobileMenuOpen && (
           <div className="md:hidden absolute top-16 left-0 w-full bg-background/95 backdrop-blur border-t max-h-[calc(100vh-4rem)] overflow-y-auto shadow-md">
             <div className="container max-w-6xl mx-auto py-4 space-y-4">
-              {navItems.map((item) => (
+              {/* Direct link to Image Tools */}
+              <LanguageLink 
+                href="/image-tools"
+                className="block px-3 py-3 text-lg font-medium hover:bg-primary/5 rounded-md transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {isClient ? t('imageTools.title') || "Image Tools" : "Image Tools"}
+              </LanguageLink>
+              
+              {/* Image Tools Sub-Items */}
+              <div className="pl-4 space-y-2">
+                <div className="text-sm font-medium text-primary mb-2">Popular Image Tools</div>
+                <div className="grid grid-cols-2 gap-2">
+                  {IMAGE_TOOLS.map((tool) => (
+                    <LanguageLink
+                      key={tool.name}
+                      href={tool.href}
+                      className="flex items-start gap-3 p-2 hover:bg-muted rounded-md transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <div className="p-1 rounded-md bg-primary/10">
+                        {tool.icon}
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium">{tool.name}</div>
+                      </div>
+                    </LanguageLink>
+                  ))}
+                </div>
+              </div>
+              
+              {/* PDF Tools Sections */}
+              {navItems.slice(1).map((item) => (
                 <div key={item.label} className="space-y-2">
                   <div className="block px-3 py-3 text-lg font-medium hover:bg-primary/5 rounded-md transition-colors">
                     {item.label}
@@ -418,7 +446,6 @@ const IMAGE_TOOLS: CategoryDefinition[] = [
                                 </div>
                                 <div>
                                   <div className="text-sm font-medium">{tool.name}</div>
-                                  <p className="text-xs text-muted-foreground">{tool.description}</p>
                                 </div>
                               </LanguageLink>
                             ))}

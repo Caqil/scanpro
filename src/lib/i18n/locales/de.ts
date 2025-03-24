@@ -1071,5 +1071,513 @@ export default {
         answer: "Ja, Sie können Dateien bis zu 100 MB pro Datei komprimieren."
       }
     }
+  },
+  imageTools: {
+    title: "Bildwerkzeuge",
+    description: "Kostenlose Online-Tools zum Konvertieren, Bearbeiten und Transformieren Ihrer Bilder",
+    headerSection: "Bildverarbeitungswerkzeuge",
+    headerDescription: "Kostenlose Online-Tools zum Konvertieren, Transformieren und Bearbeiten Ihrer Bilder",
+    supportedFormats: "Unterstützte Formate",
+    howToUse: {
+      title: "Wie Sie Unsere Bildwerkzeuge Verwenden",
+      step1: {
+        title: "Werkzeug Auswählen",
+        description: "Wählen Sie das Bildverarbeitungswerkzeug aus, das Sie aus unserer breiten Auswahl benötigen."
+      },
+      step2: {
+        title: "Ihr Bild Hochladen",
+        description: "Laden Sie das Bild hoch, das Sie bearbeiten möchten. Wir unterstützen die Formate PNG, JPG und WebP."
+      },
+      step3: {
+        title: "Herunterladen",
+        description: "Bearbeiten Sie Ihr Bild und laden Sie das Ergebnis mit einem einzigen Klick herunter."
+      }
+    },
+    noiseGenerator: {
+      title: "Rauschen zu PNG Hinzufügen",
+      description: "Fügen Sie Ihren PNG-Bildern Filmkorn- oder Rauscheffekte für künstlerische Gestaltung hinzu",
+      toolTitle: "PNG-Rauschgenerator",
+      toolDescription: "Laden Sie ein PNG-Bild hoch, um Rausch- oder Koreneffekte hinzuzufügen.",
+      options: {
+        noiseAmount: "Rauschmenge",
+        noiseAmountHint: "Höhere Werte erzeugen stärker wahrnehmbares Rauschen. Für subtile Effekte verwenden Sie Werte unter 30%.",
+        noiseType: "Rauschtyp",
+        noiseTypeHint: "Gaußsches Rauschen fügt subtiles Korn hinzu, während Salt & Pepper zufällige weiße und schwarze Pixel hinzufügt.",
+        gaussianNoise: "Gaußsch (Gleichmäßig)",
+        saltPepperNoise: "Salt & Pepper (Sprenkel)",
+        monochrome: "Monochromes Rauschen",
+        monochromeHint: "Wenn aktiviert, ist das Rauschen nur schwarz-weiß. Wenn deaktiviert, wird farbiges Rauschen verwendet."
+      },
+      why: {
+        title: "Warum Rauschen zu Bildern Hinzufügen?",
+        description: "Das Hinzufügen von Rauschen oder Korn zu Bildern kann verschiedene künstlerische und praktische Zwecke erfüllen:",
+        reasons: [
+          "Erstellen einer Vintage- oder Filmlook-Ästhetik",
+          "Hinzufügen von Textur zu flachen oder digital wirkenden Bildern",
+          "Reduzieren von Banding in Farbverlaufsbereichen",
+          "Erstellen von abgenutzten oder verwitterten Effekten",
+          "Hinzufügen von visuellem Interesse zu einfachen oder minimalistischen Designs",
+          "Simulieren von Fotografie bei schwachem Licht"
+        ]
+      },
+      types: {
+        title: "Arten von Rauscheffekten",
+        gaussian: {
+          title: "Gaußsches Rauschen",
+          description: "Gaußsches Rauschen erzeugt ein gleichmäßiges, filmlike Korn, indem es zufällige Variationen zu den Pixelwerten hinzufügt. Die Verteilung folgt einer normalen (Gaußschen) Kurve und erzeugt einen natürlich wirkenden Effekt, ähnlich wie Filmkorn."
+        },
+        saltPepper: {
+          title: "Salt & Pepper Rauschen",
+          description: "Dieser Rauschtyp fügt zufällige weiße und schwarze Pixel zum Bild hinzu und erzeugt einen gesprenkelten Effekt. Es ähnelt dem Aussehen kleiner Staubpartikel oder Defekte und verleiht einen raueren, texturierten Look."
+        }
+      },
+      tips: {
+        title: "Tipps für Beste Ergebnisse",
+        tips: [
+          "Für subtile Filmkorneffekte verwenden Sie Gaußsches Rauschen mit 10-20% Intensität",
+          "Monochromes Rauschen sieht eher wie klassisches Filmkorn aus",
+          "Salt & Pepper Rauschen bei niedrigen Werten (5-15%) kann interessante Textur zu einfarbigen Bereichen hinzufügen",
+          "Farbige Rauschen können eine einzigartige Ästhetik zu Bildern mit begrenzten Farbpaletten hinzufügen",
+          "Höhere Rauschmengen (50%+) erzeugen dramatischere, stilisierte Effekte",
+          "Für Vintage-Fotoeffekte kombinieren Sie Rauschen mit einem Sepia- oder verblassten Farbton"
+        ]
+      }
+    },
+    makeTransparent: {
+      title: "PNG Transparent Machen",
+      description: "Ersetzen Sie jede Farbe in Ihrem PNG-Bild mit Transparenz",
+      toolTitle: "PNG Transparent Machen",
+      toolDescription: "Laden Sie ein PNG-Bild hoch und wählen Sie die Farbe aus, die Sie transparent machen möchten.",
+      options: {
+        color: "Farbe, die transparent gemacht werden soll:",
+        colorPickerHint: "Klicken Sie auf das Quadrat, um den Farbwähler zu verwenden, oder geben Sie einen Hex-Farbcode ein (z.B. #ff0000)"
+      },
+      how: {
+        title: "Wie Man ein PNG Transparent Macht",
+        description: "Dieses Tool hilft Ihnen, transparente PNGs zu erstellen, indem es bestimmte Farben aus Ihrem Bild entfernt. Dies ist besonders nützlich für:",
+        uses: [
+          "Entfernen weißer Hintergründe von Logos",
+          "Erstellen von Produktbildern mit transparentem Hintergrund",
+          "Vorbereiten von Grafiken für Webdesign, wo Transparenz benötigt wird",
+          "Erstellen von Überlagerungen für Präsentationen oder Marketingmaterialien"
+        ]
+      },
+      tips: {
+        title: "Tipps für Beste Ergebnisse",
+        choosing: {
+          title: "Farben Auswählen",
+          description: "Für beste Ergebnisse wählen Sie Farben, die sich von den Elementen unterscheiden, die Sie behalten möchten. Das Tool gleicht Farben innerhalb eines kleinen Toleranzbereichs ab."
+        },
+        complex: {
+          title: "Komplexe Bilder",
+          description: "Für Bilder mit Farbverläufen oder Schatten müssen Sie das Bild möglicherweise mehrmals mit verschiedenen Farbauswahlen bearbeiten."
+        }
+      }
+    },
+    changeColors: {
+      title: "Farben in PNG Ändern",
+      description: "Ersetzen Sie bestimmte Farben in Ihren PNG-Bildern mit neuen Farben",
+      toolTitle: "PNG-Farbwechsler",
+      toolDescription: "Laden Sie ein PNG-Bild hoch, um bestimmte Farben darin zu ändern.",
+      options: {
+        mappings: "Farbumzuordnungen",
+        addColor: "Farbe Hinzufügen",
+        sourceColor: "Quellfarbe",
+        targetColor: "Zielfarbe",
+        tolerance: "Farbanpassungstoleranz",
+        toleranceHint: "Höhere Werte passen eine breitere Palette ähnlicher Farben an. Niedrigere Werte erfordern eine genauere Farbübereinstimmung."
+      },
+      how: {
+        title: "Wie Man Farben in PNG-Bildern Ändert",
+        steps: [
+          "Laden Sie Ihr PNG-Bild hoch",
+          "Wählen Sie die zu ersetzende Farbe durch Klicken auf den Farbwähler oder Eingabe eines Hex-Codes",
+          "Wählen Sie die neue Farbe, die die ausgewählte Farbe ersetzen soll",
+          "Passen Sie die Toleranz an, um zu steuern, wie streng die Farbübereinstimmung sein soll",
+          "Fügen Sie bei Bedarf weitere Farbumzuordnungen hinzu (bis zu 5 Farbpaare)",
+          "Klicken Sie auf die Schaltfläche \"Bild Verarbeiten\", um Ihre Änderungen anzuwenden"
+        ]
+      },
+      uses: {
+        title: "Was Sie Mit Diesem Tool Tun Können",
+        description: "Das Farbwechsler-Tool ist nützlich für verschiedene Bildbearbeitungsbedürfnisse:",
+        uses: [
+          "Ändern des Farbschemas von Symbolen oder Grafiken",
+          "Anpassen von Kunstwerkfarben an Ihre Markenfarben",
+          "Erstellen von Variationen desselben Bildes mit unterschiedlichen Farbthemen",
+          "Korrigieren oder Anpassen von Farben in Cliparts und Illustrationen",
+          "Ändern von Hintergrund- oder Vordergrundfarben ohne komplexe Bearbeitungssoftware",
+          "Erstellen saisonaler oder thematischer Versionen Ihrer Bilder"
+        ]
+      },
+      tips: {
+        title: "Tipps für Beste Ergebnisse",
+        tips: [
+          "Für präzisere Farbersetzung verwenden Sie einen niedrigeren Toleranzwert (10-20)",
+          "Um ähnliche Farbtöne zu ersetzen, verwenden Sie einen höheren Toleranzwert (30-50)",
+          "Dieses Tool funktioniert am besten mit Bildern, die einfarbige Bereiche wie Logos, Cliparts und Illustrationen haben",
+          "Fotos und Bilder mit Farbverläufen erzielen möglicherweise nicht die idealen Ergebnisse",
+          "PNG-Transparenz bleibt während der Farbersetzung erhalten",
+          "Bearbeiten Sie eine Farbe nach der anderen für komplexe Änderungen"
+        ]
+      }
+    },
+    changeTone: {
+      title: "PNG-Farbton Ändern",
+      description: "Wenden Sie einen Farbton oder eine Tönung auf Ihre PNG-Bilder für künstlerische Effekte an",
+      toolTitle: "PNG-Farbtonwechsler",
+      toolDescription: "Laden Sie ein PNG-Bild hoch, um einen Farbtoneffekt anzuwenden.",
+      options: {
+        preset: "Farbton-Voreinstellung",
+        presetHint: "Wählen Sie eine Voreinstellung oder wählen Sie \"Benutzerdefinierte Farbe\", um Ihren eigenen Ton zu definieren",
+        custom: "Benutzerdefinierte Farbe",
+        sepia: "Sepia",
+        coolBlue: "Kühles Blau",
+        forestGreen: "Waldgrün",
+        warmRed: "Warmes Rot",
+        richPurple: "Reiches Lila",
+        cyan: "Cyan",
+        vintage: "Vintage",
+        toneColor: "Tonfarbe",
+        toneColorHint: "Wählen Sie die Farbe, mit der Ihr Bild getönt werden soll",
+        intensity: "Effektintensität",
+        intensityHint: "Höhere Werte erzeugen einen stärkeren Farbeffekt, niedrigere Werte sind subtiler",
+        preserveGrays: "Graustufenfarben erhalten",
+        preserveGraysHint: "Wenn aktiviert, bleiben Schwarz-, Weiß- und Graubereiche im Originalbild erhalten"
+      },
+      what: {
+        title: "Was ist Farbtonung?",
+        description: "Farbtonung (oder Tönung) ist eine Technik, die eine Farbüberlagerung auf ein Bild anwendet und dessen gesamtes Farbschema zu einem bestimmten Farbton verschiebt. Dies erzeugt einen zusammenhängenden Look und kann die Stimmung und das Gefühl Ihrer Bilder drastisch verändern.",
+        examples: "Häufige Beispiele sind Sepiaton (bräunlich) für Vintage-Effekte, Blauton für kühle/Nachtatmosphären und warme Töne (Rot/Orange) für Sonnenuntergangs- oder nostalgische Gefühle."
+      },
+      popular: {
+        title: "Beliebte Farbtoneffekte",
+        sepia: {
+          title: "Sepiaton",
+          description: "Erzeugt einen warmen, bräunlichen Ton, der an alte Fotografien erinnert. Perfekt, um ein gealtertes, nostalgisches Gefühl zu erzeugen."
+        },
+        blue: {
+          title: "Blau/Cyan-Ton",
+          description: "Erzeugt eine kühle, beruhigende Atmosphäre. Oft verwendet für Nachtszenen, Winterthemen oder um Gefühle von Ruhe und Gelassenheit hervorzurufen."
+        },
+        green: {
+          title: "Grünton",
+          description: "Fügt ein natürliches, erdiges Gefühl hinzu. Ideal für Umweltthemen, Waldszenen oder um einen matrixartigen digitalen Effekt bei höheren Intensitäten zu erzeugen."
+        },
+        red: {
+          title: "Rot/Orange-Ton",
+          description: "Fügt Wärme und Energie zu Bildern hinzu. Nützlich für Sonnenuntergangseffekte, um ein Gefühl von Wärme zu erzeugen oder dramatische Spannung in dunklen Szenen hinzuzufügen."
+        }
+      },
+      tips: {
+        title: "Tipps für Beste Ergebnisse",
+        tips: [
+          "Für subtile Effekte verwenden Sie niedrigere Intensitätswerte (10-30%)",
+          "Die Option „Graustufen erhalten“ hilft, den Kontrast in Ihrem Bild zu bewahren, indem schwarze und weiße Bereiche intakt bleiben",
+          "Probieren Sie verschiedene Voreinstellungen aus, um die perfekte Stimmung für Ihr Bild zu finden",
+          "Für dramatische Effekte verwenden Sie höhere Intensitätswerte (70-100%)",
+          "Komplementärfarben (gegenüberliegend im Farbkreis) können interessante Kontraste erzeugen",
+          "PNG-Transparenz bleibt während der Farbtonanpassung erhalten"
+        ]
+      }
+    },
+    pngToJpg: {
+      title: "PNG in JPG Konvertieren",
+      description: "Konvertieren Sie Ihre PNG-Bilder in das JPG-Format mit anpassbaren Qualitätseinstellungen",
+      toolTitle: "PNG zu JPG Konverter",
+      toolDescription: "Laden Sie ein PNG-Bild hoch, um es in das JPG-Format zu konvertieren.",
+      options: {
+        quality: "JPEG-Qualität",
+        qualityHint: "Höhere Qualität führt zu größeren Dateigrößen. Niedrigere Qualität reduziert die Dateigröße, kann aber Artefakte einführen."
+      },
+      why: {
+        title: "Warum PNG in JPG Konvertieren?",
+        description: "Das Konvertieren von PNGs in JPGs kann aus mehreren Gründen nützlich sein:",
+        reasons: [
+          "Kleinere Dateigrößen für schnelleres Laden von Websites",
+          "Bessere Kompatibilität mit einigen älteren Systemen",
+          "Möglichkeit, Kompressionsstufen nach Ihren Bedürfnissen anzupassen",
+          "Reduzierter Speicherplatzbedarf für Bildbibliotheken"
+        ]
+      },
+      differences: {
+        title: "PNG vs JPG: Wichtige Unterschiede",
+        png: {
+          title: "PNG-Eigenschaften",
+          description: "PNG unterstützt Transparenz und verlustfreie Kompression, was es ideal für Grafiken mit scharfen Kanten und transparenten Hintergründen macht."
+        },
+        jpg: {
+          title: "JPG-Eigenschaften",
+          description: "JPG verwendet verlustbehaftete Kompression, was es ideal für Fotos und komplexe Bilder macht, bei denen ein leichter Qualitätsverlust für kleinere Dateigrößen akzeptabel ist."
+        }
+      }
+    },
+    jpgToPng: {
+      title: "JPG in PNG Konvertieren",
+      description: "Konvertieren Sie Ihre JPG-Bilder in das PNG-Format mit Unterstützung für Transparenz",
+      toolTitle: "JPG zu PNG Konverter",
+      toolDescription: "Laden Sie ein JPG-Bild hoch, um es in das PNG-Format zu konvertieren.",
+      why: {
+        title: "Warum JPG in PNG Konvertieren?",
+        description: "Das Konvertieren von JPGs in PNGs kann aus vielen Gründen vorteilhaft sein:",
+        reasons: [
+          "Bessere Qualität ohne Kompressionsartefakte",
+          "Unterstützung für Transparenz in Ihren Bildern",
+          "Verlustfreies Format bewahrt Bilddetails",
+          "Besser für Bilder mit Text oder scharfen Kanten"
+        ]
+      },
+      differences: {
+        title: "JPG vs PNG: Wichtige Unterschiede",
+        jpg: {
+          title: "JPG-Eigenschaften",
+          description: "JPG verwendet verlustbehaftete Kompression, was es ideal für Fotos und komplexe Bilder macht, bei denen die Dateigröße wichtiger ist als perfekte Qualität."
+        },
+        png: {
+          title: "PNG-Eigenschaften",
+          description: "PNG verwendet verlustfreie Kompression und unterstützt Transparenz. Es ist am besten für Bilder geeignet, die hohe Qualität, scharfe Kanten oder transparente Hintergründe erfordern."
+        }
+      }
+    },
+    pngToWebp: {
+      title: "PNG in WebP Konvertieren",
+      description: "Konvertieren Sie Ihre PNG-Bilder in das WebP-Format für bessere Kompression und Web-Performance",
+      toolTitle: "PNG zu WebP Konverter",
+      toolDescription: "Laden Sie ein PNG-Bild hoch, um es mit anpassbarer Qualität in das WebP-Format zu konvertieren.",
+      options: {
+        quality: "WebP-Qualität",
+        qualityHint: "Höhere Qualität führt zu größeren Dateigrößen. Niedrigere Qualität reduziert die Dateigröße, kann aber Artefakte einführen."
+      },
+      why: {
+        title: "Warum PNG in WebP Konvertieren?",
+        description: "Das Konvertieren von PNGs in das WebP-Format bietet mehrere Vorteile:",
+        reasons: [
+          "WebP bietet bessere Kompression als PNG bei gleichbleibender visueller Qualität",
+          "Kleinere Dateigrößen führen zu schnelleren Ladezeiten von Websites",
+          "WebP unterstützt sowohl verlustfreie als auch verlustbehaftete Kompression",
+          "WebP erhält den Alphakanal-Transparenz wie PNG",
+          "Kann Bilddateigrößen im Vergleich zu PNG um bis zu 30% reduzieren"
+        ]
+      },
+      differences: {
+        title: "PNG vs WebP: Wichtige Unterschiede",
+        png: {
+          title: "PNG-Eigenschaften",
+          description: "PNG verwendet verlustfreie Kompression, die alle Bilddaten erhält. Es wird von allen Browsern und Plattformen weit unterstützt, führt jedoch zu größeren Dateigrößen."
+        },
+        webp: {
+          title: "WebP-Eigenschaften",
+          description: "WebP bietet sowohl verlustbehaftete als auch verlustfreie Kompression mit deutlich kleineren Dateigrößen. Es unterstützt Transparenz wie PNG, hat jedoch bessere Kompressionsalgorithmen, was es ideal für die Webnutzung macht."
+        }
+      },
+      browser: {
+        title: "Browser-Kompatibilität",
+        description: "Obwohl WebP bessere Leistung bietet, ist die Browser-Unterstützung zu beachten:",
+        support: [
+          "Chrome, Edge, Firefox und Opera unterstützen WebP vollständig",
+          "Safari hat ab Version 14 (macOS Big Sur) WebP-Unterstützung hinzugefügt",
+          "Für ältere Browser sollten Sie Fallback-Bilder oder das picture-Element in Betracht ziehen"
+        ]
+      }
+    },
+    webpToPng: {
+      title: "WebP in PNG Konvertieren",
+      description: "Konvertieren Sie WebP-Bilder in das PNG-Format für bessere Kompatibilität und Bearbeitungsoptionen",
+      toolTitle: "WebP zu PNG Konverter",
+      toolDescription: "Laden Sie ein WebP-Bild hoch, um es in das PNG-Format zu konvertieren.",
+      why: {
+        title: "Warum WebP in PNG Konvertieren?",
+        description: "Das Konvertieren von WebP-Bildern in das PNG-Format ist aus mehreren Gründen nützlich:",
+        reasons: [
+          "Bessere Kompatibilität mit älterer Software und Browsern, die WebP nicht unterstützen",
+          "Verlustfreie Qualität für die Bearbeitung in Grafiksoftware",
+          "PNG wird häufiger für Druck und Veröffentlichung akzeptiert",
+          "Erhält Transparenz von WebP-Bildern",
+          "Einfacher zu bearbeiten und zu manipulieren in den meisten Bildbearbeitungsanwendungen"
+        ]
+      },
+      differences: {
+        title: "WebP vs PNG: Formatunterschiede",
+        webp: {
+          title: "WebP-Eigenschaften",
+          description: "WebP wurde von Google als modernes Bildformat mit überlegener Kompression entwickelt. Es bietet sowohl verlustbehaftete als auch verlustfreie Kompression mit kleineren Dateigrößen als herkömmliche Formate."
+        },
+        png: {
+          title: "PNG-Eigenschaften",
+          description: "PNG ist ein weit unterstütztes Bildformat, das verlustfreie Kompression verwendet. Es ist mit nahezu aller Software, Geräten und Plattformen kompatibel und daher eine ausgezeichnete Wahl für universelle Kompatibilität."
+        }
+      },
+      when: {
+        title: "Wann Diese Konvertierung Verwenden",
+        description: "Erwägen Sie die Konvertierung von WebP in PNG in diesen Situationen:",
+        situations: [
+          "Wenn Sie das Bild in Software bearbeiten müssen, die WebP nicht unterstützt",
+          "Für die Weitergabe an Nutzer, die möglicherweise ältere Browser oder Software verwenden",
+          "Für Druckzwecke, da viele Druckdienste PNG bevorzugen",
+          "Wenn Bildqualität wichtiger ist als Dateigröße"
+        ]
+      }
+    },
+    svgToPng: {
+      title: "SVG in PNG Konvertieren",
+      description: "Konvertieren Sie Vektorgrafiken im SVG-Format in Rasterbilder im PNG-Format mit benutzerdefinierten Abmessungen",
+      toolTitle: "SVG zu PNG Konverter",
+      toolDescription: "Laden Sie eine SVG-Datei hoch, um sie in ein PNG-Bild zu konvertieren.",
+      options: {
+        width: "Breite (px)",
+        height: "Höhe (px)",
+        dimensionsHint: "Legen Sie Ihre gewünschten Ausgabeabmessungen fest. SVG wird skaliert, um diese Abmessungen zu passen, während das Seitenverhältnis erhalten bleibt."
+      },
+      why: {
+        title: "Warum SVG in PNG Konvertieren?",
+        description: "Das Konvertieren von SVG in PNG ist in vielen Szenarien nützlich:",
+        reasons: [
+          "Erstellen von Rasterbildern für Plattformen, die SVG nicht unterstützen",
+          "Sicherstellen einer konsistenten Anzeige über verschiedene Browser und Geräte hinweg",
+          "Erzeugen von Vorschaubildern oder Previews von Vektorgrafiken",
+          "Erstellen von Bildern mit fester Größe für spezifische Anwendungsfälle wie soziale Medien",
+          "Verhindern von Änderungen am ursprünglichen Vektorkunstwerk"
+        ]
+      },
+      differences: {
+        title: "SVG vs PNG: Formatunterschiede",
+        svg: {
+          title: "SVG-Eigenschaften",
+          description: "SVG (Scalable Vector Graphics) ist ein Vektorformat, das mathematische Formeln verwendet, um Formen zu definieren. Dies macht SVGs auflösungsunabhängig und perfekt für responsive Designs und hochwertigen Druck in jeder Größe."
+        },
+        png: {
+          title: "PNG-Eigenschaften",
+          description: "PNG (Portable Network Graphics) ist ein Rasterformat, das aus Pixeln besteht. Es hat eine feste Auflösung, bietet jedoch hervorragende Qualität mit Unterstützung für Transparenz und ist universell mit allen Anwendungen und Plattformen kompatibel."
+        }
+      },
+      tips: {
+        title: "Tipps für Beste Ergebnisse",
+        tips: [
+          "Wählen Sie Abmessungen, die für Ihren beabsichtigten Anwendungsfall geeignet sind",
+          "Für scharfe Icons sollten Sie Abmessungen verwenden, die Vielfache des ursprünglichen SVG-ViewBox sind",
+          "Wenn Ihr SVG kleine Details hat, verwenden Sie größere Abmessungen, um diese zu erhalten",
+          "Für die Webnutzung sollten Sie die Balance zwischen Qualität und Dateigröße berücksichtigen",
+          "PNG unterstützt Transparenz, sodass transparente Bereiche Ihres SVG erhalten bleiben"
+        ]
+      }
+    },
+    compressPng: {
+      title: "PNG-Bilder Komprimieren",
+      description: "Reduzieren Sie die Dateigröße von PNGs bei gleichbleibender Qualität für schnelleres Laden von Websites und Teilen",
+      toolTitle: "PNG-Kompressor",
+      toolDescription: "Laden Sie ein PNG-Bild hoch, um es mit anpassbaren Qualitätseinstellungen zu komprimieren.",
+      options: {
+        quality: "Qualität",
+        qualityHint: "Höhere Qualität führt zu größeren Dateigrößen. Niedrigere Qualität reduziert die Dateigröße, kann aber Artefakte einführen.",
+        lossless: "Verlustfreie Kompression verwenden",
+        losslessHint: "Verlustfreie Kompression bewahrt alle Bilddetails, führt jedoch zu größeren Dateien als verlustbehaftete Kompression.",
+        preserveTransparency: "Transparenz erhalten",
+        preserveTransparencyHint: "Behalten Sie transparente Bereiche in Ihrem PNG-Bild. Das Deaktivieren kann zu kleineren Dateien führen, fügt jedoch einen weißen Hintergrund hinzu."
+      },
+      why: {
+        title: "Warum PNG-Bilder Komprimieren?",
+        description: "Das Komprimieren von PNG-Bildern bietet mehrere Vorteile:",
+        benefits: [
+          "Schnellere Ladezeiten von Websites",
+          "Reduzierter Speicherplatzverbrauch",
+          "Geringerer Bandbreitenverbrauch beim Teilen von Dateien",
+          "Verbesserte Benutzererfahrung auf Mobilgeräten",
+          "Bessere SEO-Leistung (Google berücksichtigt die Seitenladegeschwindigkeit)"
+        ]
+      },
+      compression: {
+        title: "Verlustbehaftete vs. Verlustfreie Kompression",
+        lossy: {
+          title: "Verlustbehaftete Kompression",
+          description: "Verlustbehaftete Kompression reduziert die Dateigröße, indem einige Bilddaten dauerhaft entfernt werden. Dies führt zu kleineren Dateien, kann jedoch die Bildqualität beeinträchtigen, insbesondere bei niedrigen Qualitätseinstellungen."
+        },
+        lossless: {
+          title: "Verlustfreie Kompression",
+          description: "Verlustfreie Kompression reduziert die Dateigröße, ohne Bilddaten zu entfernen. Dies bewahrt 100% der ursprünglichen Bildqualität, führt jedoch im Vergleich zu verlustbehafteter Kompression zu größeren Dateigrößen."
+        }
+      },
+      tips: {
+        title: "Tipps für Beste Ergebnisse",
+        tips: [
+          "Für Fotos und komplexe Bilder bietet verlustbehaftete Kompression mit einer Qualität von etwa 80-90% normalerweise die beste Balance",
+          "Für Grafiken, Logos oder Bilder mit Text verwenden Sie verlustfreie Kompression, um Schärfe zu bewahren",
+          "Wenn Transparenz für Ihren Anwendungsfall wichtig ist, stellen Sie sicher, dass die Option „Transparenz erhalten“ aktiviert bleibt",
+          "Vorschau des komprimierten Bildes vor dem Herunterladen, um sicherzustellen, dass es Ihren Qualitätserwartungen entspricht",
+          "Verwenden Sie höhere Qualität (90%+), für Bilder, die weiter bearbeitet werden sollen"
+        ]
+      }
+    },
+    pngToBase64: {
+      title: "PNG in Base64 Konvertieren",
+      description: "Konvertieren Sie PNG-Bilder in Base64-codierte Zeichenfolgen zum Einbetten in Websites und Anwendungen",
+      toolTitle: "PNG zu Base64 Konverter",
+      toolDescription: "Laden Sie ein PNG-Bild hoch, um es in eine Base64-codierte Zeichenfolge zu konvertieren.",
+      why: {
+        title: "Warum PNG in Base64 Konvertieren?",
+        description: "Das Konvertieren von PNG-Bildern in Base64 ist für mehrere Zwecke nützlich:",
+        reasons: [
+          "Bilder direkt in HTML, CSS oder JavaScript ohne externe Dateien einbetten",
+          "Reduzieren von HTTP-Anfragen für kleine Bilder, um die Ladeleistung der Seite zu verbessern",
+          "Bilder in Daten-URIs für Inline-Nutzung einfügen",
+          "Bilddaten in JSON oder anderen Textformaten speichern",
+          "Bilder über APIs senden, die nur Textdaten akzeptieren"
+        ]
+      },
+      usage: {
+        title: "Wie Man Base64-Bilder Verwendet",
+        html: {
+          title: "In HTML",
+          description: "Verwenden Sie die Base64-Zeichenfolge im src-Attribut eines img-Tags:"
+        },
+        css: {
+          title: "In CSS",
+          description: "Verwenden Sie die Base64-Zeichenfolge als Hintergrundbild:"
+        },
+        js: {
+          title: "In JavaScript",
+          description: "Erstellen Sie ein Bildelement mit den Base64-Daten:"
+        }
+      },
+      considerations: {
+        title: "Wichtige Überlegungen",
+        considerations: [
+          "Base64-Codierung erhöht die Dateigröße um etwa 33%",
+          "Am besten für kleine Bilder (unter 10KB), um eine Überladung Ihres Codes zu vermeiden",
+          "Kann nicht separat von Ihren HTML/CSS/JS-Dateien zwischengespeichert werden",
+          "Kann die anfängliche Seitenladezeit bei größeren Bildern erhöhen"
+        ]
+      }
+    },
+    base64ToPng: {
+      title: "Base64 in PNG Konvertieren",
+      description: "Konvertieren Sie Base64-codierte Zeichenfolgen zurück in PNG-Bilder",
+      toolTitle: "Base64 zu PNG Konverter",
+      toolDescription: "Fügen Sie eine Base64-codierte Zeichenfolge ein, um sie zurück in ein PNG-Bild zu konvertieren.",
+      options: {
+        input: "Base64-Zeichenfolge",
+        inputHint: "Fügen Sie hier die Base64-codierte Zeichenfolge ein. Sie können das Daten-URI-Präfix einbeziehen oder weglassen."
+      },
+      why: {
+        title: "Warum Base64 in PNG Konvertieren?",
+        description: "Das Konvertieren von Base64 zurück in PNG ist nützlich, wenn:",
+        reasons: [
+          "Extrahieren von Bildern, die in HTML, CSS oder JavaScript eingebettet sind",
+          "Speichern eingebetteter Bilder als separate Dateien",
+          "Bearbeiten oder Verarbeiten von Bildern, die als Base64 gespeichert wurden",
+          "Konvertieren von Daten, die von APIs empfangen wurden, die Base64-Codierung verwenden",
+          "Debuggen oder Überprüfen von eingebetteten Bildinhalten"
+        ]
+      },
+      finding: {
+        title: "Base64-Bilder Finden",
+        description: "Sie können Base64-codierte Bilder an verschiedenen Stellen finden:",
+        sources: [
+          "Untersuchen Sie den HTML-Quellcode auf img-Tags mit src-Attributen, die mit 'data:image/' beginnen",
+          "Suchen Sie in CSS-Dateien nach background-image-Eigenschaften mit Daten-URIs",
+          "Überprüfen Sie JavaScript-Code auf String-Variablen, die Bilddaten enthalten",
+          "Untersuchen Sie API-Antworten, die Bilddaten enthalten"
+        ]
+      }
+    }
   }
 }

@@ -1,6 +1,6 @@
-// app/[lang]/image-tools/change-tone/page.tsx
+// app/[lang]/image-tools/add-noise/page.tsx
 import { Metadata } from "next";
-import { ChangeToneTool } from "./change-tone-tool";
+import { AddNoiseTool } from "./add-noise-tool";
 import { SUPPORTED_LANGUAGES, getTranslation } from '@/src/lib/i18n/config';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
@@ -10,8 +10,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   // Create a translation function similar to t()
   const t = (key: string) => getTranslation(lang, key);
   
-  const title = t('imageTools.changeTone.metaTitle') || "Change PNG Color Tone | Image Tools";
-  const description = t('imageTools.changeTone.metaDescription') || "Apply color tones and tints to your PNG images for artistic effects";
+  const title = t('imageTools.noise.metaTitle') || "Add Noise to PNG | Image Tools";
+  const description = t('imageTools.noise.metaDescription') || "Add film grain or noise effects to your PNG images for artistic styling";
   
   return {
     title,
@@ -19,11 +19,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     openGraph: {
       title,
       description,
-      url: `/${lang}/image-tools/change-tone`,
+      url: `/${lang}/image-tools/add-noise`,
       siteName: t('metadata.title') || "ScanPro",
     },
     alternates: {
-      canonical: `/${lang}/image-tools/change-tone`,
+      canonical: `/${lang}/image-tools/add-noise`,
       languages: Object.fromEntries(
         SUPPORTED_LANGUAGES.map(code => {
           const langCode = {
@@ -43,17 +43,17 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             'tr': 'tr-TR'
           }[code] || `${code}`;
           
-          return [langCode, `/${code}/image-tools/change-tone`];
+          return [langCode, `/${code}/image-tools/add-noise`];
         })
       ),
     }
   };
 }
 
-export default function ChangeTonePage() {
+export default function AddNoisePage() {
   return (
     <div className="container max-w-5xl py-12 mx-auto">
-      <ChangeToneTool />
+      <AddNoiseTool />
     </div>
   );
 }

@@ -1,29 +1,23 @@
-// app/[lang]/image-tools/change-tone/page.tsx
+// app/[lang]/image-tools/png-to-base64/page.tsx
 import { Metadata } from "next";
-import { ChangeToneTool } from "./change-tone-tool";
-import { SUPPORTED_LANGUAGES, getTranslation } from '@/src/lib/i18n/config';
+import { PngToBase64Tool } from "./png-to-base64-tool";
+import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang: paramLang } = await params;
   const lang = SUPPORTED_LANGUAGES.includes(paramLang as any) ? paramLang : "en";
   
-  // Create a translation function similar to t()
-  const t = (key: string) => getTranslation(lang, key);
-  
-  const title = t('imageTools.changeTone.metaTitle') || "Change PNG Color Tone | Image Tools";
-  const description = t('imageTools.changeTone.metaDescription') || "Apply color tones and tints to your PNG images for artistic effects";
-  
   return {
-    title,
-    description,
+    title: "Convert PNG to Base64 | Image Tools",
+    description: "Convert PNG images to Base64 encoded strings for embedding in websites and applications",
     openGraph: {
-      title,
-      description,
-      url: `/${lang}/image-tools/change-tone`,
-      siteName: t('metadata.title') || "ScanPro",
+      title: "Convert PNG to Base64 | Image Tools",
+      description: "Convert PNG images to Base64 encoded strings for embedding in websites and applications",
+      url: `/${lang}/image-tools/png-to-base64`,
+      siteName: "ScanPro",
     },
     alternates: {
-      canonical: `/${lang}/image-tools/change-tone`,
+      canonical: `/${lang}/image-tools/png-to-base64`,
       languages: Object.fromEntries(
         SUPPORTED_LANGUAGES.map(code => {
           const langCode = {
@@ -43,17 +37,17 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             'tr': 'tr-TR'
           }[code] || `${code}`;
           
-          return [langCode, `/${code}/image-tools/change-tone`];
+          return [langCode, `/${code}/image-tools/png-to-base64`];
         })
       ),
     }
   };
 }
 
-export default function ChangeTonePage() {
+export default function PngToBase64Page() {
   return (
     <div className="container max-w-5xl py-12 mx-auto">
-      <ChangeToneTool />
+      <PngToBase64Tool />
     </div>
   );
 }

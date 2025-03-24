@@ -1,20 +1,26 @@
 // app/[lang]/image-tools/change-colors/page.tsx
 import { Metadata } from "next";
 import { ChangeColorsTool } from "./change-colors-tool";
-import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
+import { SUPPORTED_LANGUAGES, getTranslation } from '@/src/lib/i18n/config';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang: paramLang } = await params;
   const lang = SUPPORTED_LANGUAGES.includes(paramLang as any) ? paramLang : "en";
   
+  // Create a translation function similar to t()
+  const t = (key: string) => getTranslation(lang, key);
+  
+  const title = t('imageTools.changeColors.metaTitle') || "Change Colors in PNG | Image Tools";
+  const description = t('imageTools.changeColors.metaDescription') || "Easily replace specific colors in PNG images with new colors";
+  
   return {
-    title: "Change Colors in PNG | Image Tools",
-    description: "Easily replace specific colors in PNG images with new colors",
+    title,
+    description,
     openGraph: {
-      title: "Change Colors in PNG | Image Tools",
-      description: "Easily replace specific colors in PNG images with new colors",
+      title,
+      description,
       url: `/${lang}/image-tools/change-colors`,
-      siteName: "ScanPro",
+      siteName: t('metadata.title') || "ScanPro",
     },
     alternates: {
       canonical: `/${lang}/image-tools/change-colors`,

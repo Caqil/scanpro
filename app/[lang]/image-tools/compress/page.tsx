@@ -1,20 +1,26 @@
 // app/[lang]/image-tools/compress/page.tsx
 import { Metadata } from "next";
 import { CompressPngTool } from "./compress-tool";
-import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
+import { SUPPORTED_LANGUAGES, getTranslation } from '@/src/lib/i18n/config';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang: paramLang } = await params;
   const lang = SUPPORTED_LANGUAGES.includes(paramLang as any) ? paramLang : "en";
   
+  // Create a translation function similar to t()
+  const t = (key: string) => getTranslation(lang, key);
+  
+  const title = t('imageTools.compress.metaTitle') || "Compress PNG Images | Image Tools";
+  const description = t('imageTools.compress.metaDescription') || "Reduce PNG file sizes while maintaining quality for faster website loading and efficient storage";
+  
   return {
-    title: "Compress PNG Images | Image Tools",
-    description: "Reduce PNG file sizes while maintaining quality for faster website loading and efficient storage",
+    title,
+    description,
     openGraph: {
-      title: "Compress PNG Images | Image Tools",
-      description: "Reduce PNG file sizes while maintaining quality for faster website loading and efficient storage",
+      title,
+      description,
       url: `/${lang}/image-tools/compress`,
-      siteName: "ScanPro",
+      siteName: t('metadata.title') || "ScanPro",
     },
     alternates: {
       canonical: `/${lang}/image-tools/compress`,

@@ -1,6 +1,6 @@
-// app/[lang]/image-tools/change-tone/page.tsx
+// app/[lang]/image-tools/base64-to-png/page.tsx
 import { Metadata } from "next";
-import { ChangeToneTool } from "./change-tone-tool";
+import { Base64ToPngTool } from "./base64-to-png-tool";
 import { SUPPORTED_LANGUAGES, getTranslation } from '@/src/lib/i18n/config';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
@@ -10,8 +10,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   // Create a translation function similar to t()
   const t = (key: string) => getTranslation(lang, key);
   
-  const title = t('imageTools.changeTone.metaTitle') || "Change PNG Color Tone | Image Tools";
-  const description = t('imageTools.changeTone.metaDescription') || "Apply color tones and tints to your PNG images for artistic effects";
+  const title = t('imageTools.base64ToPng.metaTitle') || "Convert Base64 to PNG | Image Tools";
+  const description = t('imageTools.base64ToPng.metaDescription') || "Convert Base64 encoded image data to PNG image files";
   
   return {
     title,
@@ -19,11 +19,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     openGraph: {
       title,
       description,
-      url: `/${lang}/image-tools/change-tone`,
+      url: `/${lang}/image-tools/base64-to-png`,
       siteName: t('metadata.title') || "ScanPro",
     },
     alternates: {
-      canonical: `/${lang}/image-tools/change-tone`,
+      canonical: `/${lang}/image-tools/base64-to-png`,
       languages: Object.fromEntries(
         SUPPORTED_LANGUAGES.map(code => {
           const langCode = {
@@ -43,17 +43,17 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             'tr': 'tr-TR'
           }[code] || `${code}`;
           
-          return [langCode, `/${code}/image-tools/change-tone`];
+          return [langCode, `/${code}/image-tools/base64-to-png`];
         })
       ),
     }
   };
 }
 
-export default function ChangeTonePage() {
+export default function Base64ToPngPage() {
   return (
     <div className="container max-w-5xl py-12 mx-auto">
-      <ChangeToneTool />
+      <Base64ToPngTool />
     </div>
   );
 }

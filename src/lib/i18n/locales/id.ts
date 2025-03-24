@@ -1072,5 +1072,513 @@ export default {
         answer: "Ya, Anda dapat mengompresi file hingga 100 MB per file."
       }
     }
+  },
+  imageTools: {
+    title: "Alat Gambar",
+    description: "Alat online gratis untuk mengonversi, mengedit, dan mengubah gambar Anda",
+    headerSection: "Alat Pemrosesan Gambar",
+    headerDescription: "Alat online gratis untuk mengonversi, mengubah, dan mengedit gambar Anda",
+    supportedFormats: "Format yang Didukung",
+    howToUse: {
+      title: "Cara Menggunakan Alat Gambar Kami",
+      step1: {
+        title: "Pilih Alat",
+        description: "Pilih alat pemrosesan gambar yang Anda butuhkan dari berbagai pilihan kami."
+      },
+      step2: {
+        title: "Unggah Gambar Anda",
+        description: "Unggah gambar yang ingin Anda proses. Kami mendukung format PNG, JPG, dan WebP."
+      },
+      step3: {
+        title: "Unduh",
+        description: "Proses gambar Anda dan unduh hasilnya dengan satu klik."
+      }
+    },
+    noiseGenerator: {
+      title: "Tambahkan Noise ke PNG",
+      description: "Tambahkan efek butiran film atau noise ke gambar PNG Anda untuk gaya artistik",
+      toolTitle: "Generator Noise PNG",
+      toolDescription: "Unggah gambar PNG untuk menambahkan efek noise atau butiran.",
+      options: {
+        noiseAmount: "Jumlah Noise",
+        noiseAmountHint: "Nilai yang lebih tinggi menciptakan noise yang lebih terlihat. Untuk efek halus, gunakan nilai di bawah 30%.",
+        noiseType: "Jenis Noise",
+        noiseTypeHint: "Noise Gaussian menambahkan butiran halus, sedangkan Salt & Pepper menambahkan piksel putih dan hitam acak.",
+        gaussianNoise: "Gaussian (Halus)",
+        saltPepperNoise: "Salt & Pepper (Bintik)",
+        monochrome: "Noise Monokrom",
+        monochromeHint: "Jika diaktifkan, noise hanya akan berwarna hitam dan putih. Jika dinonaktifkan, noise berwarna akan digunakan."
+      },
+      why: {
+        title: "Mengapa Menambahkan Noise ke Gambar?",
+        description: "Menambahkan noise atau butiran ke gambar dapat memiliki beberapa tujuan artistik dan praktis:",
+        reasons: [
+          "Menciptakan estetika vintage atau seperti film",
+          "Menambahkan tekstur pada gambar yang datar atau terlihat digital",
+          "Mengurangi banding pada area gradien",
+          "Menciptakan efek usang atau lapuk",
+          "Menambahkan minat visual pada desain sederhana atau minimalis",
+          "Mensimulasikan fotografi dengan cahaya rendah"
+        ]
+      },
+      types: {
+        title: "Jenis Efek Noise",
+        gaussian: {
+          title: "Noise Gaussian",
+          description: "Noise Gaussian menciptakan butiran halus seperti film dengan menambahkan variasi acak pada nilai piksel. Distribusinya mengikuti kurva normal (Gaussian), menciptakan efek alami yang mirip dengan butiran film."
+        },
+        saltPepper: {
+          title: "Noise Salt & Pepper",
+          description: "Jenis noise ini menambahkan piksel putih dan hitam acak pada gambar, menciptakan efek bintik. Ini menyerupai tampilan partikel debu kecil atau cacat, memberikan tampilan tekstur yang lebih kasar."
+        }
+      },
+      tips: {
+        title: "Tips untuk Hasil Terbaik",
+        tips: [
+          "Untuk efek butiran film yang halus, gunakan noise Gaussian pada intensitas 10-20%",
+          "Noise monokrom cenderung terlihat lebih seperti butiran film klasik",
+          "Noise Salt & Pepper pada tingkat rendah (5-15%) dapat menambahkan tekstur menarik pada area solid",
+          "Noise berwarna dapat menambahkan estetika unik pada gambar dengan palet warna terbatas",
+          "Jumlah noise yang lebih tinggi (50%+) menciptakan efek dramatis dan bergaya",
+          "Untuk efek foto vintage, kombinasikan noise dengan nada sepia atau warna pudar"
+        ]
+      }
+    },
+    makeTransparent: {
+      title: "Jadikan PNG Transparan",
+      description: "Ganti warna apa pun di gambar PNG Anda dengan transparansi",
+      toolTitle: "Jadikan PNG Transparan",
+      toolDescription: "Unggah gambar PNG dan pilih warna yang ingin dijadikan transparan.",
+      options: {
+        color: "Warna yang akan dijadikan transparan:",
+        colorPickerHint: "Klik kotak untuk menggunakan pemilih warna atau masukkan kode warna hex (misalnya #ff0000)"
+      },
+      how: {
+        title: "Cara Membuat PNG Transparan",
+        description: "Alat ini membantu Anda membuat PNG transparan dengan menghapus warna tertentu dari gambar Anda. Ini sangat berguna untuk:",
+        uses: [
+          "Menghapus latar belakang putih dari logo",
+          "Membuat gambar produk dengan latar belakang transparan",
+          "Mempersiapkan grafik untuk desain web yang membutuhkan transparansi",
+          "Membuat overlay untuk presentasi atau materi pemasaran"
+        ]
+      },
+      tips: {
+        title: "Tips untuk Hasil Terbaik",
+        choosing: {
+          title: "Memilih Warna",
+          description: "Untuk hasil terbaik, pilih warna yang berbeda dari elemen yang ingin Anda pertahankan. Alat ini akan mencocokkan warna dalam rentang toleransi kecil."
+        },
+        complex: {
+          title: "Gambar Kompleks",
+          description: "Untuk gambar dengan gradien atau bayangan, Anda mungkin perlu memproses gambar beberapa kali dengan pemilihan warna yang berbeda."
+        }
+      }
+    },
+    changeColors: {
+      title: "Ubah Warna di PNG",
+      description: "Ganti warna tertentu di gambar PNG Anda dengan warna baru",
+      toolTitle: "Pengubah Warna PNG",
+      toolDescription: "Unggah gambar PNG untuk mengubah warna tertentu di dalamnya.",
+      options: {
+        mappings: "Pemetaan Warna",
+        addColor: "Tambah Warna",
+        sourceColor: "Warna Sumber",
+        targetColor: "Warna Target",
+        tolerance: "Toleransi Pencocokan Warna",
+        toleranceHint: "Nilai yang lebih tinggi akan mencocokkan rentang warna serupa yang lebih luas. Nilai yang lebih rendah memerlukan pencocokan warna yang lebih tepat."
+      },
+      how: {
+        title: "Cara Mengubah Warna di Gambar PNG",
+        steps: [
+          "Unggah gambar PNG Anda",
+          "Pilih warna yang ingin diganti dengan mengklik pemilih warna atau memasukkan kode hex",
+          "Pilih warna baru yang akan menggantikan warna yang dipilih",
+          "Sesuaikan toleransi untuk mengontrol seberapa ketat pencocokan warna",
+          "Tambahkan lebih banyak pemetaan warna jika diperlukan (hingga 5 pasang warna)",
+          "Klik tombol 'Proses Gambar' untuk menerapkan perubahan Anda"
+        ]
+      },
+      uses: {
+        title: "Apa yang Bisa Dilakukan dengan Alat Ini",
+        description: "Alat Pengubah Warna berguna untuk berbagai kebutuhan pengeditan gambar:",
+        uses: [
+          "Mengubah skema warna ikon atau grafik",
+          "Mencocokkan warna karya seni dengan warna merek Anda",
+          "Membuat variasi gambar yang sama dengan tema warna berbeda",
+          "Memperbaiki atau menyesuaikan warna pada clip art dan ilustrasi",
+          "Mengubah warna latar belakang atau depan tanpa perangkat lunak pengeditan yang rumit",
+          "Membuat versi musiman atau bertema dari gambar Anda"
+        ]
+      },
+      tips: {
+        title: "Tips untuk Hasil Terbaik",
+        tips: [
+          "Untuk penggantian warna yang lebih presisi, gunakan nilai toleransi rendah (10-20)",
+          "Untuk mengganti nuansa warna yang serupa, gunakan nilai toleransi lebih tinggi (30-50)",
+          "Alat ini bekerja paling baik dengan gambar yang memiliki warna solid seperti logo, clip art, dan ilustrasi",
+          "Foto dan gambar dengan gradien mungkin tidak mendapatkan hasil ideal",
+          "Transparansi PNG dipertahankan selama penggantian warna",
+          "Proses satu warna pada satu waktu untuk perubahan yang kompleks"
+        ]
+      }
+    },
+    changeTone: {
+      title: "Ubah Nada Warna PNG",
+      description: "Terapkan nada warna atau tint pada gambar PNG Anda untuk efek artistik",
+      toolTitle: "Pengubah Nada Warna PNG",
+      toolDescription: "Unggah gambar PNG untuk menerapkan efek nada warna.",
+      options: {
+        preset: "Preset Nada Warna",
+        presetHint: "Pilih preset atau pilih 'Warna Kustom' untuk menentukan nada Anda sendiri",
+        custom: "Warna Kustom",
+        sepia: "Sepia",
+        coolBlue: "Biru Dingin",
+        forestGreen: "Hijau Hutan",
+        warmRed: "Merah Hangat",
+        richPurple: "Ungu Kaya",
+        cyan: "Sian",
+        vintage: "Vintage",
+        toneColor: "Warna Nada",
+        toneColorHint: "Pilih warna untuk mewarnai gambar Anda",
+        intensity: "Intensitas Efek",
+        intensityHint: "Nilai yang lebih tinggi menciptakan efek warna yang lebih kuat, nilai yang lebih rendah lebih halus",
+        preserveGrays: "Pertahankan warna skala abu-abu",
+        preserveGraysHint: "Jika diaktifkan, mempertahankan area hitam, putih, dan abu-abu pada gambar asli"
+      },
+      what: {
+        title: "Apa itu Penyetelan Warna?",
+        description: "Penyetelan warna (atau tinting) adalah teknik yang menerapkan lapisan warna pada gambar, menggeser skema warna keseluruhan menuju rona tertentu. Ini menciptakan tampilan yang kohesif dan dapat secara dramatis mengubah suasana dan nuansa gambar Anda.",
+        examples: "Contoh umum termasuk nada sepia (keabu-abuan) untuk efek vintage, nada biru untuk suasana dingin/malam, dan nada hangat (merah/oranye) untuk matahari terbenam atau perasaan nostalgia."
+      },
+      popular: {
+        title: "Efek Nada Warna Populer",
+        sepia: {
+          title: "Nada Sepia",
+          description: "Menciptakan nada hangat berwarna cokelat yang mengingatkan pada foto vintage. Sempurna untuk menciptakan nuansa tua dan nostalgia."
+        },
+        blue: {
+          title: "Nada Biru/Sian",
+          description: "Menciptakan suasana dingin dan menenangkan. Sering digunakan untuk adegan malam, tema musim dingin, atau membangkitkan perasaan ketenangan dan kedamaian."
+        },
+        green: {
+          title: "Nada Hijau",
+          description: "Menambahkan nuansa alami dan bersahaja. Bagus untuk tema lingkungan, adegan hutan, atau menciptakan efek digital seperti matriks pada intensitas tinggi."
+        },
+        red: {
+          title: "Nada Merah/Oranye",
+          description: "Menambahkan kehangatan dan energi pada gambar. Berguna untuk efek matahari terbenam, menciptakan rasa hangat, atau menambahkan ketegangan dramatis pada adegan gelap."
+        }
+      },
+      tips: {
+        title: "Tips untuk Hasil Terbaik",
+        tips: [
+          "Untuk efek halus, gunakan nilai intensitas rendah (10-30%)",
+          "Opsi 'Pertahankan skala abu-abu' membantu menjaga kontras pada gambar Anda dengan mempertahankan area hitam dan putih",
+          "Coba berbagai preset untuk menemukan suasana yang sempurna untuk gambar Anda",
+          "Untuk efek dramatis, gunakan nilai intensitas tinggi (70-100%)",
+          "Warna komplementer (berlawanan pada roda warna) dapat menciptakan kontras yang menarik",
+          "Transparansi PNG dipertahankan selama penyesuaian nada warna"
+        ]
+      }
+    },
+    pngToJpg: {
+      title: "Konversi PNG ke JPG",
+      description: "Konversi gambar PNG Anda ke format JPG dengan pengaturan kualitas yang dapat disesuaikan",
+      toolTitle: "Konverter PNG ke JPG",
+      toolDescription: "Unggah gambar PNG untuk mengonversinya ke format JPG.",
+      options: {
+        quality: "Kualitas JPEG",
+        qualityHint: "Kualitas yang lebih tinggi menghasilkan ukuran file yang lebih besar. Kualitas yang lebih rendah mengurangi ukuran file tetapi dapat menimbulkan artefak."
+      },
+      why: {
+        title: "Mengapa Mengonversi PNG ke JPG?",
+        description: "Mengonversi PNG ke JPG dapat berguna untuk beberapa alasan:",
+        reasons: [
+          "Ukuran file lebih kecil untuk pemuatan situs web yang lebih cepat",
+          "Kompatibilitas yang lebih baik dengan beberapa sistem lama",
+          "Kemampuan untuk menyesuaikan tingkat kompresi berdasarkan kebutuhan Anda",
+          "Pengurangan ruang penyimpanan untuk perpustakaan gambar"
+        ]
+      },
+      differences: {
+        title: "PNG vs JPG: Perbedaan Utama",
+        png: {
+          title: "Fitur PNG",
+          description: "PNG mendukung transparansi dan kompresi tanpa kehilangan, menjadikannya ideal untuk grafik dengan tepi tajam dan latar belakang transparan."
+        },
+        jpg: {
+          title: "Fitur JPG",
+          description: "JPG menggunakan kompresi lossy, menjadikannya bagus untuk foto dan gambar kompleks di mana sedikit kehilangan kualitas dapat diterima demi ukuran file yang lebih kecil."
+        }
+      }
+    },
+    jpgToPng: {
+      title: "Konversi JPG ke PNG",
+      description: "Konversi gambar JPG Anda ke format PNG dengan dukungan transparansi",
+      toolTitle: "Konverter JPG ke PNG",
+      toolDescription: "Unggah gambar JPG untuk mengonversinya ke format PNG.",
+      why: {
+        title: "Mengapa Mengonversi JPG ke PNG?",
+        description: "Mengonversi JPG ke PNG dapat bermanfaat untuk banyak alasan:",
+        reasons: [
+          "Kualitas lebih baik tanpa artefak kompresi",
+          "Dukungan untuk transparansi pada gambar Anda",
+          "Format tanpa kehilangan menjaga detail gambar",
+          "Lebih baik untuk gambar dengan teks atau tepi tajam"
+        ]
+      },
+      differences: {
+        title: "JPG vs PNG: Perbedaan Utama",
+        jpg: {
+          title: "Fitur JPG",
+          description: "JPG menggunakan kompresi lossy, menjadikannya ideal untuk foto dan gambar kompleks di mana ukuran file lebih penting daripada kualitas sempurna."
+        },
+        png: {
+          title: "Fitur PNG",
+          description: "PNG menggunakan kompresi tanpa kehilangan dan mendukung transparansi. Ini terbaik untuk gambar yang memerlukan kualitas tinggi, tepi tajam, atau latar belakang transparan."
+        }
+      }
+    },
+    pngToWebp: {
+      title: "Konversi PNG ke WebP",
+      description: "Konversi gambar PNG Anda ke format WebP untuk kompresi yang lebih baik dan performa web",
+      toolTitle: "Konverter PNG ke WebP",
+      toolDescription: "Unggah gambar PNG untuk mengonversinya ke format WebP dengan kualitas yang dapat disesuaikan.",
+      options: {
+        quality: "Kualitas WebP",
+        qualityHint: "Kualitas yang lebih tinggi menghasilkan ukuran file yang lebih besar. Kualitas yang lebih rendah mengurangi ukuran file tetapi dapat menimbulkan artefak."
+      },
+      why: {
+        title: "Mengapa Mengonversi PNG ke WebP?",
+        description: "Mengonversi PNG ke format WebP menawarkan beberapa keuntungan:",
+        reasons: [
+          "WebP menawarkan kompresi yang lebih baik daripada PNG sambil mempertahankan kualitas visual",
+          "Ukuran file yang lebih kecil menghasilkan waktu pemuatan situs web yang lebih cepat",
+          "WebP mendukung kompresi lossy dan tanpa kehilangan",
+          "WebP mempertahankan transparansi saluran alpha seperti PNG",
+          "Dapat mengurangi ukuran file gambar hingga 30% dibandingkan PNG"
+        ]
+      },
+      differences: {
+        title: "PNG vs WebP: Perbedaan Utama",
+        png: {
+          title: "Fitur PNG",
+          description: "PNG menggunakan kompresi tanpa kehilangan yang mempertahankan semua data gambar. Ini didukung secara luas di semua browser dan platform tetapi menghasilkan ukuran file yang lebih besar."
+        },
+        webp: {
+          title: "Fitur WebP",
+          description: "WebP menawarkan kompresi lossy dan tanpa kehilangan dengan ukuran file yang jauh lebih kecil. Ini mendukung transparansi seperti PNG tetapi memiliki algoritma kompresi yang lebih baik, menjadikannya ideal untuk penggunaan web."
+        }
+      },
+      browser: {
+        title: "Kompatibilitas Browser",
+        description: "Meskipun WebP menawarkan performa yang lebih baik, perlu diperhatikan dukungan browser:",
+        support: [
+          "Chrome, Edge, Firefox, dan Opera mendukung WebP sepenuhnya",
+          "Safari menambahkan dukungan WebP mulai dari versi 14 (macOS Big Sur)",
+          "Untuk browser lama, pertimbangkan menggunakan gambar cadangan atau elemen picture"
+        ]
+      }
+    },
+    webpToPng: {
+      title: "Konversi WebP ke PNG",
+      description: "Konversi gambar WebP ke format PNG untuk kompatibilitas dan opsi pengeditan yang lebih baik",
+      toolTitle: "Konverter WebP ke PNG",
+      toolDescription: "Unggah gambar WebP untuk mengonversinya ke format PNG.",
+      why: {
+        title: "Mengapa Mengonversi WebP ke PNG?",
+        description: "Mengonversi gambar WebP ke format PNG berguna untuk beberapa alasan:",
+        reasons: [
+          "Kompatibilitas yang lebih baik dengan perangkat lunak dan browser lama yang tidak mendukung WebP",
+          "Kualitas tanpa kehilangan untuk pengeditan di perangkat lunak grafis",
+          "PNG lebih diterima secara luas untuk pencetakan dan penerbitan",
+          "Mempertahankan transparansi dari gambar WebP",
+          "Lebih mudah diedit dan dimanipulasi di sebagian besar aplikasi pengeditan gambar"
+        ]
+      },
+      differences: {
+        title: "WebP vs PNG: Perbedaan Format",
+        webp: {
+          title: "Fitur WebP",
+          description: "WebP dikembangkan oleh Google sebagai format gambar modern dengan kompresi yang lebih baik. Ini menawarkan kompresi lossy dan tanpa kehilangan dengan ukuran file yang lebih kecil daripada format tradisional."
+        },
+        png: {
+          title: "Fitur PNG",
+          description: "PNG adalah format gambar yang didukung secara luas yang menggunakan kompresi tanpa kehilangan. Ini kompatibel dengan hampir semua perangkat lunak, perangkat, dan platform, menjadikannya pilihan yang sangat baik untuk kompatibilitas universal."
+        }
+      },
+      when: {
+        title: "Kapan Menggunakan Konversi Ini",
+        description: "Pertimbangkan mengonversi WebP ke PNG dalam situasi berikut:",
+        situations: [
+          "Ketika Anda perlu mengedit gambar di perangkat lunak yang tidak mendukung WebP",
+          "Untuk berbagi dengan pengguna yang mungkin menggunakan browser atau perangkat lunak lama",
+          "Untuk keperluan pencetakan, karena banyak layanan cetak lebih menyukai PNG",
+          "Ketika kualitas gambar lebih penting daripada ukuran file"
+        ]
+      }
+    },
+    svgToPng: {
+      title: "Konversi SVG ke PNG",
+      description: "Konversi grafik vektor SVG ke gambar raster PNG dengan dimensi kustom",
+      toolTitle: "Konverter SVG ke PNG",
+      toolDescription: "Unggah file SVG untuk mengonversinya ke gambar PNG.",
+      options: {
+        width: "Lebar (px)",
+        height: "Tinggi (px)",
+        dimensionsHint: "Tetapkan dimensi keluaran yang diinginkan. SVG akan diskalakan agar sesuai dengan dimensi ini sambil mempertahankan rasio aspek."
+      },
+      why: {
+        title: "Mengapa Mengonversi SVG ke PNG?",
+        description: "Mengonversi SVG ke PNG berguna dalam banyak skenario:",
+        reasons: [
+          "Membuat gambar raster untuk platform yang tidak mendukung SVG",
+          "Memastikan tampilan yang konsisten di berbagai browser dan perangkat",
+          "Menghasilkan thumbnail atau pratinjau dari grafik vektor",
+          "Membuat gambar berukuran tetap untuk kasus penggunaan tertentu seperti media sosial",
+          "Mencegah modifikasi pada karya seni vektor asli"
+        ]
+      },
+      differences: {
+        title: "SVG vs PNG: Perbedaan Format",
+        svg: {
+          title: "Fitur SVG",
+          description: "SVG (Scalable Vector Graphics) adalah format vektor yang menggunakan rumus matematika untuk mendefinisikan bentuk. Ini membuat SVG independen dari resolusi dan sempurna untuk desain responsif dan pencetakan berkualitas tinggi pada ukuran apa pun."
+        },
+        png: {
+          title: "Fitur PNG",
+          description: "PNG (Portable Network Graphics) adalah format raster yang terdiri dari piksel. Ini memiliki resolusi tetap tetapi menawarkan kualitas yang sangat baik dengan dukungan untuk transparansi dan kompatibel secara universal dengan semua aplikasi dan platform."
+        }
+      },
+      tips: {
+        title: "Tips untuk Hasil Terbaik",
+        tips: [
+          "Pilih dimensi yang sesuai untuk kasus penggunaan yang Anda inginkan",
+          "Untuk ikon yang tajam, pertimbangkan menggunakan dimensi yang merupakan kelipatan dari viewBox SVG asli",
+          "Jika SVG Anda memiliki detail kecil, gunakan dimensi yang lebih besar untuk mempertahankannya",
+          "Untuk penggunaan web, pertimbangkan keseimbangan antara kualitas dan ukuran file",
+          "PNG mendukung transparansi, sehingga area transparan SVG Anda akan dipertahankan"
+        ]
+      }
+    },
+    compressPng: {
+      title: "Kompres Gambar PNG",
+      description: "Kurangi ukuran file PNG sambil mempertahankan kualitas untuk pemuatan situs web dan berbagi yang lebih cepat",
+      toolTitle: "Kompresor PNG",
+      toolDescription: "Unggah gambar PNG untuk mengompresnya dengan pengaturan kualitas yang dapat disesuaikan.",
+      options: {
+        quality: "Kualitas",
+        qualityHint: "Kualitas yang lebih tinggi menghasilkan ukuran file yang lebih besar. Kualitas yang lebih rendah mengurangi ukuran file tetapi dapat menimbulkan artefak.",
+        lossless: "Gunakan kompresi tanpa kehilangan",
+        losslessHint: "Kompresi tanpa kehilangan mempertahankan semua detail gambar tetapi menghasilkan file yang lebih besar daripada kompresi lossy.",
+        preserveTransparency: "Pertahankan transparansi",
+        preserveTransparencyHint: "Pertahankan area transparan di gambar PNG Anda. Menonaktifkan ini dapat menghasilkan file yang lebih kecil tetapi akan menambahkan latar belakang putih."
+      },
+      why: {
+        title: "Mengapa Mengompres Gambar PNG?",
+        description: "Mengompres gambar PNG menawarkan beberapa manfaat:",
+        benefits: [
+          "Waktu pemuatan situs web yang lebih cepat",
+          "Penggunaan ruang penyimpanan yang lebih sedikit",
+          "Konsumsi bandwidth yang lebih rendah saat berbagi file",
+          "Pengalaman pengguna yang lebih baik di perangkat seluler",
+          "Performa SEO yang lebih baik (Google mempertimbangkan kecepatan halaman)"
+        ]
+      },
+      compression: {
+        title: "Kompresi Lossy vs Tanpa Kehilangan",
+        lossy: {
+          title: "Kompresi Lossy",
+          description: "Kompresi lossy mengurangi ukuran file dengan menghapus beberapa data gambar secara permanen. Ini menghasilkan file yang lebih kecil tetapi dapat mengurangi kualitas gambar, terutama dengan pengaturan kualitas rendah."
+        },
+        lossless: {
+          title: "Kompresi Tanpa Kehilangan",
+          description: "Kompresi tanpa kehilangan mengurangi ukuran file tanpa menghapus data gambar apa pun. Ini mempertahankan 100% kualitas gambar asli tetapi menghasilkan ukuran file yang lebih besar dibandingkan dengan kompresi lossy."
+        }
+      },
+      tips: {
+        title: "Tips untuk Hasil Terbaik",
+        tips: [
+          "Untuk foto dan gambar kompleks, kompresi lossy dengan kualitas sekitar 80-90% biasanya menawarkan keseimbangan terbaik",
+          "Untuk grafik, logo, atau gambar dengan teks, gunakan kompresi tanpa kehilangan untuk menjaga ketajaman",
+          "Jika transparansi penting untuk kasus penggunaan Anda, pastikan untuk mengaktifkan opsi 'Pertahankan transparansi'",
+          "Pratinjau gambar yang dikompresi sebelum mengunduh untuk memastikan memenuhi harapan kualitas Anda",
+          "Gunakan kualitas lebih tinggi (90%+) untuk gambar yang akan diedit lebih lanjut"
+        ]
+      }
+    },
+    pngToBase64: {
+      title: "Konversi PNG ke Base64",
+      description: "Konversi gambar PNG ke string yang dikodekan Base64 untuk disematkan di situs web dan aplikasi",
+      toolTitle: "Konverter PNG ke Base64",
+      toolDescription: "Unggah gambar PNG untuk mengonversinya ke string yang dikodekan Base64.",
+      why: {
+        title: "Mengapa Mengonversi PNG ke Base64?",
+        description: "Mengonversi gambar PNG ke Base64 berguna untuk beberapa tujuan:",
+        reasons: [
+          "Sematkan gambar langsung di HTML, CSS, atau JavaScript tanpa file eksternal",
+          "Kurangi permintaan HTTP untuk gambar kecil untuk meningkatkan performa pemuatan halaman",
+          "Sertakan gambar dalam URI data untuk penggunaan inline",
+          "Simpan data gambar dalam format JSON atau teks lainnya",
+          "Kirim gambar melalui API yang hanya menerima data teks"
+        ]
+      },
+      usage: {
+        title: "Cara Menggunakan Gambar Base64",
+        html: {
+          title: "Di HTML",
+          description: "Gunakan string Base64 di atribut src tag img:"
+        },
+        css: {
+          title: "Di CSS",
+          description: "Gunakan string Base64 sebagai gambar latar belakang:"
+        },
+        js: {
+          title: "Di JavaScript",
+          description: "Buat elemen gambar dengan data Base64:"
+        }
+      },
+      considerations: {
+        title: "Pertimbangan Penting",
+        considerations: [
+          "Pengkodean Base64 meningkatkan ukuran file sekitar 33%",
+          "Paling baik digunakan untuk gambar kecil (di bawah 10KB) untuk menghindari pembengkakan kode Anda",
+          "Tidak dapat di-cache secara terpisah dari file HTML/CSS/JS Anda",
+          "Mungkin meningkatkan waktu pemuatan halaman awal untuk gambar yang lebih besar"
+        ]
+      }
+    },
+    base64ToPng: {
+      title: "Konversi Base64 ke PNG",
+      description: "Konversi string yang dikodekan Base64 kembali ke gambar PNG",
+      toolTitle: "Konverter Base64 ke PNG",
+      toolDescription: "Tempelkan string yang dikodekan Base64 untuk mengonversinya kembali ke gambar PNG.",
+      options: {
+        input: "String Base64",
+        inputHint: "Tempelkan string yang dikodekan Base64 di sini. Anda dapat menyertakan atau mengecualikan prefiks URI data."
+      },
+      why: {
+        title: "Mengapa Mengonversi Base64 ke PNG?",
+        description: "Mengonversi Base64 kembali ke PNG berguna ketika:",
+        reasons: [
+          "Mengekstrak gambar yang disematkan di HTML, CSS, atau JavaScript",
+          "Menyimpan gambar yang disematkan sebagai file terpisah",
+          "Memproses atau mengedit gambar yang disimpan sebagai Base64",
+          "Mengonversi data yang diterima dari API yang menggunakan pengkodean Base64",
+          "Debugging atau memeriksa konten gambar yang disematkan"
+        ]
+      },
+      finding: {
+        title: "Menemukan Gambar Base64",
+        description: "Anda dapat menemukan gambar yang dikodekan Base64 di berbagai tempat:",
+        sources: [
+          "Periksa kode sumber HTML untuk tag img dengan atribut src yang dimulai dengan 'data:image/'",
+          "Lihat di file CSS untuk properti background-image dengan URI data",
+          "Periksa kode JavaScript untuk variabel string yang berisi data gambar",
+          "Periksa respons API yang menyertakan data gambar"
+        ]
+      }
+    }
   }
 }
