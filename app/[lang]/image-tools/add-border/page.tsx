@@ -12,6 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const title = t('imageTools.addBorder.metaTitle') || "Add Border to Images | Image Tools";
   const description = t('imageTools.addBorder.metaDescription') || "Enhance your images with custom borders, frames, and effects";
   
+  
   return {
     title,
     description,

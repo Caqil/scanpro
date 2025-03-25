@@ -1074,510 +1074,139 @@ export default {
   },
   imageTools: {
     title: "Herramientas de Imagen",
-    description: "Herramientas en línea gratuitas para convertir, editar y transformar tus imágenes",
-    headerSection: "Herramientas de Procesamiento de Imágenes",
-    headerDescription: "Herramientas en línea gratuitas para convertir, transformar y editar tus imágenes",
-    supportedFormats: "Formatos Soportados",
-    howToUse: {
-      title: "Cómo Usar Nuestras Herramientas de Imagen",
-      step1: {
-        title: "Seleccionar Herramienta",
-        description: "Elige la herramienta de procesamiento de imágenes que necesites de nuestra amplia selección."
-      },
-      step2: {
-        title: "Subir Tu Imagen",
-        description: "Sube la imagen que deseas editar. Soportamos formatos PNG, JPG y WebP."
-      },
-      step3: {
-        title: "Descargar",
-        description: "Edita tu imagen y descarga el resultado con un solo clic."
-      }
+    description: "Herramientas gratuitas en línea para convertir, editar y transformar tus imágenes",
+    categories: {
+      conversion: "Conversión de Formato",
+      editing: "Edición de Imágenes",
+      enhancement: "Mejora de Imágenes",
+      optimization: "Optimización",
+      advanced: "Herramientas Avanzadas"
     },
-    noiseGenerator: {
-      title: "Agregar Ruido a PNG",
-      description: "Añade efectos de grano de película o ruido a tus изображения PNG para diseño artístico",
-      toolTitle: "Generador de Ruido PNG",
-      toolDescription: "Sube una imagen PNG para agregar efectos de ruido o grano.",
-      options: {
-        noiseAmount: "Cantidad de Ruido",
-        noiseAmountHint: "Valores más altos generan ruido más perceptible. Para efectos sutiles, usa valores por debajo del 30%.",
-        noiseType: "Tipo de Ruido",
-        noiseTypeHint: "El ruido gaussiano agrega un grano sutil, mientras que Salt & Pepper añade píxeles blancos y negros aleatorios.",
-        gaussianNoise: "Gaussiano (Uniforme)",
-        saltPepperNoise: "Salt & Pepper (Salpicado)",
-        monochrome: "Ruido Monocromático",
-        monochromeHint: "Si está activado, el ruido será solo en blanco y negro. Si está desactivado, se usará ruido de color."
-      },
-      why: {
-        title: "¿Por Qué Agregar Ruido a las Imágenes?",
-        description: "Agregar ruido o grano a las imágenes puede cumplir varios propósitos artísticos y prácticos:",
-        reasons: [
-          "Crear una estética vintage o de apariencia cinematográfica",
-          "Añadir textura a imágenes planas o de aspecto digital",
-          "Reducir el banding en áreas de degradado de color",
-          "Crear efectos desgastados o envejecidos",
-          "Añadir interés visual a diseños simples o minimalistas",
-          "Simular fotografía en condiciones de poca luz"
-        ]
-      },
-      types: {
-        title: "Tipos de Efectos de Ruido",
-        gaussian: {
-          title: "Ruido Gaussiano",
-          description: "El ruido gaussiano crea un grano uniforme similar al de una película al agregar variaciones aleatorias a los valores de los píxeles. La distribución sigue una curva normal (gaussiana) y produce un efecto de aspecto natural, similar al grano de película."
-        },
-        saltPepper: {
-          title: "Ruido Salt & Pepper",
-          description: "Este tipo de ruido agrega píxeles blancos y negros aleatorios a la imagen, creando un efecto salpicado. Se asemeja a la apariencia de pequeñas partículas de polvo o defectos y proporciona un aspecto más áspero y texturizado."
-        }
-      },
-      tips: {
-        title: "Consejos para Mejores Resultados",
-        tips: [
-          "Para efectos de grano de película sutiles, usa ruido gaussiano con una intensidad del 10-20%",
-          "El ruido monocromático se parece más al grano de película clásico",
-          "El ruido Salt & Pepper en valores bajos (5-15%) puede agregar una textura interesante a áreas de color sólido",
-          "El ruido de color puede añadir una estética única a imágenes con paletas de colores limitadas",
-          "Cantidades de ruido más altas (50%+) crean efectos estilizados más dramáticos",
-          "Para efectos de fotos vintage, combina el ruido con un tono sepia o desvaído"
-        ]
-      }
+    compressPng: {
+      title: "Comprimir PNG",
+      description: "Reducir el tamaño de archivos PNG manteniendo la calidad",
+      metaTitle: "Comprimir Imágenes PNG | Herramientas de Imagen",
+      metaDescription: "Reducir el tamaño de archivos PNG manteniendo la calidad para una carga más rápida en sitios web y almacenamiento eficiente",
+      metaKeywords: "comprimir PNG, reducir tamaño de imagen, optimizar imágenes, compresión de imágenes, compresión sin pérdida, reducción de tamaño de archivo"
     },
     makeTransparent: {
-      title: "Hacer PNG Transparente",
-      description: "Reemplaza cualquier color en tu imagen PNG con transparencia",
-      toolTitle: "Hacer PNG Transparente",
-      toolDescription: "Sube una imagen PNG y selecciona el color que deseas hacer transparente.",
-      options: {
-        color: "Color a hacer transparente:",
-        colorPickerHint: "Haz clic en el cuadrado para usar el selector de color o ingresa un código de color hexadecimal (por ejemplo, #ff0000)"
-      },
-      how: {
-        title: "Cómo Hacer un PNG Transparente",
-        description: "Esta herramienta te ayuda a crear PNGs transparentes eliminando colores específicos de tu imagen. Esto es especialmente útil para:",
-        uses: [
-          "Eliminar fondos blancos de logotipos",
-          "Crear imágenes de productos con fondo transparente",
-          "Preparar gráficos para diseño web donde se necesita transparencia",
-          "Crear superposiciones para presentaciones o materiales de marketing"
-        ]
-      },
-      tips: {
-        title: "Consejos para Mejores Resultados",
-        choosing: {
-          title: "Elegir Colores",
-          description: "Para mejores resultados, selecciona colores que contrasten con los elementos que deseas conservar. La herramienta ajusta colores dentro de un pequeño rango de tolerancia."
-        },
-        complex: {
-          title: "Imágenes Complejas",
-          description: "Para imágenes con degradados o sombras, es posible que necesites editar la imagen varias veces con diferentes selecciones de color."
-        }
-      }
-    },
-    changeColors: {
-      title: "Cambiar Colores en PNG",
-      description: "Reemplaza colores específicos en tus imágenes PNG con nuevos colores",
-      toolTitle: "Cambiador de Colores PNG",
-      toolDescription: "Sube una imagen PNG para cambiar colores específicos en ella.",
-      options: {
-        mappings: "Mapeo de Colores",
-        addColor: "Agregar Color",
-        sourceColor: "Color de Origen",
-        targetColor: "Color de Destino",
-        tolerance: "Tolerancia de Coincidencia de Color",
-        toleranceHint: "Valores más altos ajustan una gama más amplia de colores similares. Valores más bajos requieren una coincidencia de color más precisa."
-      },
-      how: {
-        title: "Cómo Cambiar Colores en Imágenes PNG",
-        steps: [
-          "Sube tu imagen PNG",
-          "Selecciona el color a reemplazar haciendo clic en el selector de color o ingresando un código hexadecimal",
-          "Elige el nuevo color que reemplazará al seleccionado",
-          "Ajusta la tolerancia para controlar qué tan estricta debe ser la coincidencia de color",
-          "Agrega más mapeos de colores si es necesario (hasta 5 pares de colores)",
-          "Haz clic en el botón 'Procesar Imagen' para aplicar tus cambios"
-        ]
-      },
-      uses: {
-        title: "Qué Puedes Hacer con Esta Herramienta",
-        description: "La herramienta de cambio de color es útil para diversas necesidades de edición de imágenes:",
-        uses: [
-          "Cambiar el esquema de color de íconos o gráficos",
-          "Ajustar los colores de una obra de arte a los colores de tu marca",
-          "Crear variaciones de la misma imagen con diferentes temas de color",
-          "Corregir o ajustar colores en cliparts e ilustraciones",
-          "Cambiar colores de fondo o primer plano sin software de edición complejo",
-          "Crear versiones estacionales o temáticas de tus imágenes"
-        ]
-      },
-      tips: {
-        title: "Consejos para Mejores Resultados",
-        tips: [
-          "Para un reemplazo de color más preciso, usa un valor de tolerancia más bajo (10-20)",
-          "Para reemplazar tonos similares, usa un valor de tolerancia más alto (30-50)",
-          "Esta herramienta funciona mejor con imágenes que tienen áreas de color sólido como logotipos, cliparts e ilustraciones",
-          "Fotos e imágenes con degradados pueden no obtener resultados ideales",
-          "La transparencia PNG se mantiene durante el reemplazo de color",
-          "Edita un color a la vez para cambios complejos"
-        ]
-      }
-    },
-    changeTone: {
-      title: "Cambiar Tono de PNG",
-      description: "Aplica un tono o matiz a tus imágenes PNG para efectos artísticos",
-      toolTitle: "Cambiador de Tono PNG",
-      toolDescription: "Sube una imagen PNG para aplicar un efecto de tono de color.",
-      options: {
-        preset: "Preajuste de Tono",
-        presetHint: "Elige un preajuste o selecciona 'Color Personalizado' para definir tu propio tono",
-        custom: "Color Personalizado",
-        sepia: "Sepia",
-        coolBlue: "Azul Frío",
-        forestGreen: "Verde Bosque",
-        warmRed: "Rojo Cálido",
-        richPurple: "Púrpura Rico",
-        cyan: "Cian",
-        vintage: "Vintage",
-        toneColor: "Color del Tono",
-        toneColorHint: "Elige el color con el que se tonificará tu imagen",
-        intensity: "Intensidad del Efecto",
-        intensityHint: "Valores más altos producen un efecto de color más fuerte, valores más bajos son más sutiles",
-        preserveGrays: "Preservar Colores en Escala de Grises",
-        preserveGraysHint: "Si está activado, las áreas negras, blancas y grises de la imagen original se mantienen"
-      },
-      what: {
-        title: "¿Qué es la Tonificación?",
-        description: "La tonificación (o matizado) es una técnica que aplica una superposición de color a una imagen, cambiando todo su esquema de color hacia un tono específico. Esto crea una apariencia cohesiva y puede alterar drásticamente el estado de ánimo y la sensación de tus imágenes.",
-        examples: "Ejemplos comunes incluyen el tono sepia (marrón) para efectos vintage, tono azul para atmósferas frías/nocturnas y tonos cálidos (rojo/naranja) para sensaciones de atardecer o nostalgia."
-      },
-      popular: {
-        title: "Efectos de Tono Populares",
-        sepia: {
-          title: "Tono Sepia",
-          description: "Crea un tono cálido y marrón que recuerda a las fotografías antiguas. Perfecto para generar una sensación envejecida y nostálgica."
-        },
-        blue: {
-          title: "Tono Azul/Cian",
-          description: "Crea una atmósfera fresca y relajante. A menudo se usa para escenas nocturnas, temas de invierno o para evocar sentimientos de calma y serenidad."
-        },
-        green: {
-          title: "Tono Verde",
-          description: "Añade una sensación natural y terrosa. Ideal para temas ambientales, escenas de bosques o para crear un efecto digital tipo Matrix con intensidades más altas."
-        },
-        red: {
-          title: "Tono Rojo/Naranja",
-          description: "Añade calidez y energía a las imágenes. Útil para efectos de atardecer, para generar una sensación de calidez o para añadir tensión dramática en escenas oscuras."
-        }
-      },
-      tips: {
-        title: "Consejos para Mejores Resultados",
-        tips: [
-          "Para efectos sutiles, usa valores de intensidad más bajos (10-30%)",
-          "La opción 'Preservar Escala de Grises' ayuda a mantener el contraste en tu imagen al dejar intactas las áreas negras y blancas",
-          "Prueba diferentes preajustes para encontrar el estado de ánimo perfecto para tu imagen",
-          "Para efectos dramáticos, usa valores de intensidad más altos (70-100%)",
-          "Los colores complementarios (opuestos en la rueda de colores) pueden crear contrastes interesantes",
-          "La transparencia PNG se mantiene durante el ajuste de tono"
-        ]
-      }
+      title: "Hacer un PNG transparente",
+      description: "Reemplazar cualquier color en un archivo PNG con transparencia",
+      metaTitle: "Hacer un PNG transparente | Herramientas de Imagen",
+      metaDescription: "Reemplazar rápidamente cualquier color en un archivo PNG con transparencia",
+      metaKeywords: "quitar fondo, PNG transparente, reemplazo de color, edición de imágenes, eliminación de fondo, imágenes transparentes"
     },
     pngToJpg: {
       title: "Convertir PNG a JPG",
-      description: "Convierte tus imágenes PNG al formato JPG con configuraciones de calidad ajustables",
-      toolTitle: "Convertidor de PNG a JPG",
-      toolDescription: "Sube una imagen PNG para convertirla al formato JPG.",
-      options: {
-        quality: "Calidad JPEG",
-        qualityHint: "Una mayor calidad resulta en tamaños de archivo más grandes. Una menor calidad reduce el tamaño del archivo, pero puede introducir artefactos."
-      },
-      why: {
-        title: "¿Por Qué Convertir PNG a JPG?",
-        description: "Convertir PNG a JPG puede ser útil por varias razones:",
-        reasons: [
-          "Tamaños de archivo más pequeños para una carga más rápida en sitios web",
-          "Mejor compatibilidad con algunos sistemas más antiguos",
-          "Capacidad de ajustar los niveles de compresión según tus necesidades",
-          "Menor espacio de almacenamiento necesario para bibliotecas de imágenes"
-        ]
-      },
-      differences: {
-        title: "PNG vs JPG: Diferencias Clave",
-        png: {
-          title: "Características de PNG",
-          description: "PNG soporta transparencia y compresión sin pérdida, lo que lo hace ideal para gráficos con bordes nítidos y fondos transparentes."
-        },
-        jpg: {
-          title: "Características de JPG",
-          description: "JPG utiliza compresión con pérdida, lo que lo hace ideal para fotos e imágenes complejas donde una ligera pérdida de calidad es aceptable para tamaños de archivo más pequeños."
-        }
-      }
+      description: "Convertir imágenes PNG a formato JPG con configuraciones de calidad personalizables",
+      metaTitle: "Convertir PNG a JPG | Herramientas de Imagen",
+      metaDescription: "Convertir imágenes PNG a formato JPG con calidad ajustable",
+      metaKeywords: "PNG a JPG, conversión de imágenes, formato de imagen, compresión con pérdida, calidad de imagen"
     },
     jpgToPng: {
       title: "Convertir JPG a PNG",
-      description: "Convierte tus imágenes JPG al formato PNG con soporte para transparencia",
-      toolTitle: "Convertidor de JPG a PNG",
-      toolDescription: "Sube una imagen JPG para convertirla al formato PNG.",
-      why: {
-        title: "¿Por Qué Convertir JPG a PNG?",
-        description: "Convertir JPG a PNG puede ser ventajoso por muchas razones:",
-        reasons: [
-          "Mejor calidad sin artefactos de compresión",
-          "Soporte para transparencia en tus imágenes",
-          "Formato sin pérdida que preserva los detalles de la imagen",
-          "Mejor para imágenes con texto o bordes nítidos"
-        ]
-      },
-      differences: {
-        title: "JPG vs PNG: Diferencias Clave",
-        jpg: {
-          title: "Características de JPG",
-          description: "JPG utiliza compresión con pérdida, lo que lo hace ideal para fotos e imágenes complejas donde el tamaño del archivo es más importante que la calidad perfecta."
-        },
-        png: {
-          title: "Características de PNG",
-          description: "PNG utiliza compresión sin pérdida y soporta transparencia. Es mejor para imágenes que requieren alta calidad, bordes nítidos o fondos transparentes."
-        }
-      }
+      description: "Convertir imágenes JPG a formato PNG con soporte para transparencia",
+      metaTitle: "Convertir JPG a PNG | Herramientas de Imagen",
+      metaDescription: "Convertir imágenes JPG a formato PNG con calidad sin pérdida",
+      metaKeywords: "JPG a PNG, conversión de imágenes, transparencia, formato sin pérdida, calidad de imagen"
     },
     pngToWebp: {
       title: "Convertir PNG a WebP",
-      description: "Convierte tus imágenes PNG al formato WebP para una mejor compresión y rendimiento web",
-      toolTitle: "Convertidor de PNG a WebP",
-      toolDescription: "Sube una imagen PNG para convertirla al formato WebP con calidad ajustable.",
-      options: {
-        quality: "Calidad WebP",
-        qualityHint: "Una mayor calidad resulta en tamaños de archivo más grandes. Una menor calidad reduce el tamaño del archivo, pero puede introducir artefactos."
-      },
-      why: {
-        title: "¿Por Qué Convertir PNG a WebP?",
-        description: "Convertir PNG al formato WebP ofrece varias ventajas:",
-        reasons: [
-          "WebP ofrece mejor compresión que PNG manteniendo la calidad visual",
-          "Tamaños de archivo más pequeños conducen a tiempos de carga de sitios web más rápidos",
-          "WebP soporta tanto compresión sin pérdida como con pérdida",
-          "WebP conserva la transparencia del canal alfa como PNG",
-          "Puede reducir el tamaño de los archivos de imagen hasta un 30% en comparación con PNG"
-        ]
-      },
-      differences: {
-        title: "PNG vs WebP: Diferencias Clave",
-        png: {
-          title: "Características de PNG",
-          description: "PNG utiliza compresión sin pérdida que conserva todos los datos de la imagen. Es ampliamente soportado por todos los navegadores y plataformas, pero resulta en tamaños de archivo más grandes."
-        },
-        webp: {
-          title: "Características de WebP",
-          description: "WebP ofrece compresión tanto con pérdida como sin pérdida con tamaños de archivo significativamente más pequeños. Soporta transparencia como PNG, pero tiene mejores algoritmos de compresión, lo que lo hace ideal para uso web."
-        }
-      },
-      browser: {
-        title: "Compatibilidad con Navegadores",
-        description: "Aunque WebP ofrece mejor rendimiento, la compatibilidad con navegadores debe tenerse en cuenta:",
-        support: [
-          "Chrome, Edge, Firefox y Opera soportan WebP completamente",
-          "Safari agregó soporte para WebP a partir de la versión 14 (macOS Big Sur)",
-          "Para navegadores más antiguos, considera usar imágenes de respaldo o el elemento picture"
-        ]
-      }
+      description: "Convertir imágenes PNG a formato WebP para un mejor rendimiento web",
+      metaTitle: "Convertir PNG a WebP | Herramientas de Imagen",
+      metaDescription: "Convertir imágenes PNG a formato WebP para tamaños de archivo más pequeños",
+      metaKeywords: "PNG a WebP, conversión de imágenes, optimización web, compresión de imágenes"
     },
     webpToPng: {
       title: "Convertir WebP a PNG",
-      description: "Convierte imágenes WebP al formato PNG para mejor compatibilidad y opciones de edición",
-      toolTitle: "Convertidor de WebP a PNG",
-      toolDescription: "Sube una imagen WebP para convertirla al formato PNG.",
-      why: {
-        title: "¿Por Qué Convertir WebP a PNG?",
-        description: "Convertir imágenes WebP al formato PNG es útil por varias razones:",
-        reasons: [
-          "Mejor compatibilidad con software y navegadores más antiguos que no soportan WebP",
-          "Calidad sin pérdida para edición en software gráfico",
-          "PNG es más aceptado para impresión y publicación",
-          "Conserva la transparencia de las imágenes WebP",
-          "Más fácil de editar y manipular en la mayoría de las aplicaciones de edición de imágenes"
-        ]
-      },
-      differences: {
-        title: "WebP vs PNG: Diferencias de Formato",
-        webp: {
-          title: "Características de WebP",
-          description: "WebP fue desarrollado por Google como un formato de imagen moderno con compresión superior. Ofrece compresión tanto con pérdida como sin pérdida con tamaños de archivo más pequeños que los formatos tradicionales."
-        },
-        png: {
-          title: "Características de PNG",
-          description: "PNG es un formato de imagen ampliamente soportado que utiliza compresión sin pérdida. Es compatible con casi todo el software, dispositivos y plataformas, lo que lo convierte en una excelente opción para compatibilidad universal."
-        }
-      },
-      when: {
-        title: "Cuándo Usar Esta Conversión",
-        description: "Considera convertir WebP a PNG en estas situaciones:",
-        situations: [
-          "Cuando necesites editar la imagen en software que no soporta WebP",
-          "Para compartir con usuarios que podrían usar navegadores o software más antiguos",
-          "Para fines de impresión, ya que muchos servicios de impresión prefieren PNG",
-          "Cuando la calidad de la imagen es más importante que el tamaño del archivo"
-        ]
-      }
+      description: "Convertir imágenes WebP a formato PNG para mayor compatibilidad",
+      metaTitle: "Convertir WebP a PNG | Herramientas de Imagen",
+      metaDescription: "Convertir imágenes WebP a formato PNG con compatibilidad total",
+      metaKeywords: "WebP a PNG, conversión de imágenes, formato de imagen, compatibilidad"
     },
     svgToPng: {
       title: "Convertir SVG a PNG",
-      description: "Convierte gráficos vectoriales en formato SVG a imágenes rasterizadas en formato PNG con dimensiones personalizadas",
-      toolTitle: "Convertidor de SVG a PNG",
-      toolDescription: "Sube un archivo SVG para convertirlo en una imagen PNG.",
-      options: {
-        width: "Ancho (px)",
-        height: "Alto (px)",
-        dimensionsHint: "Establece las dimensiones de salida deseadas. El SVG se escalará para ajustarse a estas dimensiones manteniendo la relación de aspecto."
-      },
-      why: {
-        title: "¿Por Qué Convertir SVG a PNG?",
-        description: "Convertir SVG a PNG es útil en muchos escenarios:",
-        reasons: [
-          "Crear imágenes rasterizadas para plataformas que no soportan SVG",
-          "Asegurar una visualización consistente en diferentes navegadores y dispositivos",
-          "Generar miniaturas o vistas previas de gráficos vectoriales",
-          "Crear imágenes de tamaño fijo para casos de uso específicos como redes sociales",
-          "Evitar modificaciones en la obra de arte vectorial original"
-        ]
-      },
-      differences: {
-        title: "SVG vs PNG: Diferencias de Formato",
-        svg: {
-          title: "Características de SVG",
-          description: "SVG (Scalable Vector Graphics) es un formato vectorial que utiliza fórmulas matemáticas para definir formas. Esto hace que los SVG sean independientes de la resolución y perfectos para diseños responsivos e impresión de alta calidad en cualquier tamaño."
-        },
-        png: {
-          title: "Características de PNG",
-          description: "PNG (Portable Network Graphics) es un formato rasterizado compuesto por píxeles. Tiene una resolución fija, pero ofrece excelente calidad con soporte para transparencia y es universalmente compatible con todas las aplicaciones y plataformas."
-        }
-      },
-      tips: {
-        title: "Consejos para Mejores Resultados",
-        tips: [
-          "Elige dimensiones adecuadas para tu caso de uso previsto",
-          "Para íconos nítidos, usa dimensiones que sean múltiplos de la vista original del SVG",
-          "Si tu SVG tiene detalles pequeños, usa dimensiones más grandes para preservarlos",
-          "Para uso web, considera el equilibrio entre calidad y tamaño del archivo",
-          "PNG soporta transparencia, por lo que las áreas transparentes de tu SVG se conservarán"
-        ]
-      }
-    },
-    compressPng: {
-      title: "Comprimir Imágenes PNG",
-      description: "Reduce el tamaño de archivo de los PNG manteniendo la calidad para una carga más rápida en sitios web y compartir",
-      toolTitle: "Compresor de PNG",
-      toolDescription: "Sube una imagen PNG para comprimirla con configuraciones de calidad ajustables.",
-      options: {
-        quality: "Calidad",
-        qualityHint: "Una mayor calidad resulta en tamaños de archivo más grandes. Una menor calidad reduce el tamaño del archivo, pero puede introducir artefactos.",
-        lossless: "Usar Compresión sin Pérdida",
-        losslessHint: "La compresión sin pérdida conserva todos los detalles de la imagen, pero resulta en archivos más grandes que la compresión con pérdida.",
-        preserveTransparency: "Preservar Transparencia",
-        preserveTransparencyHint: "Mantén las áreas transparentes en tu imagen PNG. Desactivarlo puede resultar en archivos más pequeños, pero agrega un fondo blanco."
-      },
-      why: {
-        title: "¿Por Qué Comprimir Imágenes PNG?",
-        description: "Comprimir imágenes PNG ofrece varios beneficios:",
-        benefits: [
-          "Tiempos de carga de sitios web más rápidos",
-          "Menor consumo de espacio de almacenamiento",
-          "Menor uso de ancho de banda al compartir archivos",
-          "Mejor experiencia de usuario en dispositivos móviles",
-          "Mejor rendimiento SEO (Google considera la velocidad de carga de la página)"
-        ]
-      },
-      compression: {
-        title: "Compresión con Pérdida vs. Sin Pérdida",
-        lossy: {
-          title: "Compresión con Pérdida",
-          description: "La compresión con pérdida reduce el tamaño del archivo eliminando permanentemente algunos datos de la imagen. Esto resulta en archivos más pequeños, pero puede afectar la calidad de la imagen, especialmente con configuraciones de baja calidad."
-        },
-        lossless: {
-          title: "Compresión sin Pérdida",
-          description: "La compresión sin pérdida reduce el tamaño del archivo sin eliminar datos de la imagen. Esto preserva el 100% de la calidad original de la imagen, pero resulta en tamaños de archivo más grandes en comparación con la compresión con pérdida."
-        }
-      },
-      tips: {
-        title: "Consejos para Mejores Resultados",
-        tips: [
-          "Para fotos e imágenes complejas, la compresión con pérdida con una calidad de alrededor del 80-90% suele ofrecer el mejor equilibrio",
-          "Para gráficos, logotipos o imágenes con texto, usa compresión sin pérdida para mantener la nitidez",
-          "Si la transparencia es importante para tu caso de uso, asegúrate de que la opción 'Preservar Transparencia' esté activada",
-          "Previsualiza la imagen comprimida antes de descargarla para asegurarte de que cumple con tus expectativas de calidad",
-          "Usa una calidad más alta (90%+) para imágenes que serán editadas ulteriormente"
-        ]
-      }
+      description: "Convertir archivos SVG vectoriales a imágenes PNG rasterizadas",
+      metaTitle: "Convertir SVG a PNG | Herramientas de Imagen",
+      metaDescription: "Convertir gráficos vectoriales SVG a imágenes PNG rasterizadas con dimensiones personalizadas",
+      metaKeywords: "SVG a PNG, vector a ráster, conversión de imágenes, diseño gráfico"
     },
     pngToBase64: {
       title: "Convertir PNG a Base64",
-      description: "Convierte imágenes PNG en cadenas codificadas en Base64 para incrustarlas en sitios web y aplicaciones",
-      toolTitle: "Convertidor de PNG a Base64",
-      toolDescription: "Sube una imagen PNG para convertirla en una cadena codificada en Base64.",
-      why: {
-        title: "¿Por Qué Convertir PNG a Base64?",
-        description: "Convertir imágenes PNG a Base64 es útil para varios propósitos:",
-        reasons: [
-          "Incrustar imágenes directamente en HTML, CSS o JavaScript sin archivos externos",
-          "Reducir solicitudes HTTP para imágenes pequeñas, mejorando el rendimiento de carga de la página",
-          "Insertar imágenes en URIs de datos para uso en línea",
-          "Almacenar datos de imágenes en JSON u otros formatos de texto",
-          "Enviar imágenes a través de APIs que solo aceptan datos de texto"
-        ]
-      },
-      usage: {
-        title: "Cómo Usar Imágenes Base64",
-        html: {
-          title: "En HTML",
-          description: "Usa la cadena Base64 en el atributo src de una etiqueta img:"
-        },
-        css: {
-          title: "En CSS",
-          description: "Usa la cadena Base64 como imagen de fondo:"
-        },
-        js: {
-          title: "En JavaScript",
-          description: "Crea un elemento de imagen con los datos Base64:"
-        }
-      },
-      considerations: {
-        title: "Consideraciones Importantes",
-        considerations: [
-          "La codificación Base64 aumenta el tamaño del archivo en aproximadamente un 33%",
-          "Mejor para imágenes pequeñas (menos de 10KB) para evitar sobrecargar tu código",
-          "No se puede almacenar en caché por separado de tus archivos HTML/CSS/JS",
-          "Puede aumentar el tiempo de carga inicial de la página con imágenes más grandes"
-        ]
-      }
+      description: "Convertir imágenes PNG a codificación Base64 para incrustarlas en páginas web",
+      metaTitle: "Convertir PNG a Base64 | Herramientas de Imagen",
+      metaDescription: "Convertir imágenes PNG a cadenas Base64 para incrustación web",
+      metaKeywords: "PNG a Base64, codificación de imágenes, desarrollo web, incrustación de imágenes"
     },
     base64ToPng: {
       title: "Convertir Base64 a PNG",
-      description: "Convierte cadenas codificadas en Base64 de vuelta a imágenes PNG",
-      toolTitle: "Convertidor de Base64 a PNG",
-      toolDescription: "Pega una cadena codificada en Base64 para convertirla de nuevo en una imagen PNG.",
-      options: {
-        input: "Cadena Base64",
-        inputHint: "Pega aquí la cadena codificada en Base64. Puedes incluir o omitir el prefijo URI de datos."
-      },
-      why: {
-        title: "¿Por Qué Convertir Base64 a PNG?",
-        description: "Convertir Base64 de vuelta a PNG es útil cuando:",
-        reasons: [
-          "Extraer imágenes incrustadas en HTML, CSS o JavaScript",
-          "Guardar imágenes incrustadas como archivos separados",
-          "Editar o procesar imágenes que se almacenaron como Base64",
-          "Convertir datos recibidos de APIs que usan codificación Base64",
-          "Depurar o verificar contenido de imágenes incrustadas"
-        ]
-      },
-      finding: {
-        title: "Encontrar Imágenes Base64",
-        description: "Puedes encontrar imágenes codificadas en Base64 en varios lugares:",
-        sources: [
-          "Inspecciona el código fuente HTML en busca de etiquetas img con atributos src que comiencen con 'data:image/'",
-          "Busca en archivos CSS propiedades background-image con URIs de datos",
-          "Revisa el código JavaScript en busca de variables de cadena que contengan datos de imagen",
-          "Examina respuestas de API que contengan datos de imagen"
-        ]
-      }
+      description: "Convertir cadenas de imágenes codificadas en Base64 de vuelta a archivos PNG",
+      metaTitle: "Convertir Base64 a PNG | Herramientas de Imagen",
+      metaDescription: "Convertir cadenas de imágenes Base64 de vuelta a archivos de imagen PNG",
+      metaKeywords: "Base64 a PNG, decodificación de imágenes, desarrollo web, conversión de imágenes"
+    },
+    changeColors: {
+      title: "Cambiar colores en PNG",
+      description: "Reemplazar colores específicos en imágenes PNG con nuevos colores",
+      metaTitle: "Cambiar colores en PNG | Herramientas de Imagen",
+      metaDescription: "Reemplazar fácilmente colores específicos en imágenes PNG con nuevos colores",
+      metaKeywords: "cambiar colores de imagen, reemplazo de color, edición de PNG, cambiador de color de imagen, intercambio de colores"
+    },
+    changeTone: {
+      title: "Cambiar tono de color",
+      description: "Aplicar tonos y matices de color a tus imágenes para efectos artísticos",
+      metaTitle: "Cambiar tono de color en PNG | Herramientas de Imagen",
+      metaDescription: "Aplicar tonos y matices de color a tus imágenes PNG para efectos artísticos",
+      metaKeywords: "tono de color, tintado de imágenes, efectos artísticos, superposición de color, filtro fotográfico"
+    },
+    addNoise: {
+      title: "Agregar ruido a PNG",
+      description: "Agregar efectos de grano de película o ruido a tus imágenes PNG para un estilo artístico",
+      metaTitle: "Agregar ruido a PNG | Herramientas de Imagen",
+      metaDescription: "Agregar efectos de grano de película o ruido a tus imágenes PNG para un estilo artístico",
+      metaKeywords: "agregar ruido, grano de película, textura de imagen, filtro artístico, efecto de foto vintage"
+    },
+    resize: {
+      title: "Redimensionar imagen",
+      description: "Redimensionar imágenes a dimensiones exactas manteniendo la calidad",
+      metaTitle: "Redimensionar imágenes | Herramientas de Imagen",
+      metaDescription: "Redimensionar fácilmente tus imágenes a dimensiones exactas manteniendo la calidad",
+      metaKeywords: "redimensionar imagen, cambiar tamaño de imagen, escalar imagen, dimensiones de imagen, redimensionamiento de imagen"
+    },
+    rotate: {
+      title: "Rotar y voltear",
+      description: "Rotar y voltear imágenes para obtener la orientación correcta",
+      metaTitle: "Rotar y voltear imágenes | Herramientas de Imagen",
+      metaDescription: "Rotar fácilmente imágenes en cualquier ángulo y voltearlas horizontal o verticalmente",
+      metaKeywords: "rotar imagen, voltear imagen, orientación de imagen, girar imagen, volteo vertical"
+    },
+    crop: {
+      title: "Recortar imagen",
+      description: "Recortar imágenes para eliminar áreas no deseadas y enfocarse en contenido importante",
+      metaTitle: "Recortar imágenes | Herramientas de Imagen",
+      metaDescription: "Recortar imágenes para eliminar áreas no deseadas y mejorar la composición",
+      metaKeywords: "recortar imagen, recorte de imagen, eliminar fondo, composición de imagen"
+    },
+    addText: {
+      title: "Agregar texto a imagen",
+      description: "Agregar texto personalizado, subtítulos o marcas de agua a tus imágenes",
+      metaTitle: "Agregar texto a imágenes | Herramientas de Imagen",
+      metaDescription: "Agregar texto personalizado, subtítulos y marcas de agua a tus imágenes con opciones de formato fáciles",
+      metaKeywords: "agregar texto a imagen, subtítulo de imagen, marca de agua, superposición de texto, anotación de imagen"
+    },
+    addBorder: {
+      title: "Agregar borde",
+      description: "Agregar bordes personalizados a tus imágenes con varios estilos y colores",
+      metaTitle: "Agregar borde a imágenes | Herramientas de Imagen",
+      metaDescription: "Mejorar tus imágenes con bordes personalizados, marcos y efectos",
+      metaKeywords: "agregar borde a imagen, marco de foto, enmarcado de imagen, estilo de borde, mejora de imagen"
+    },
+    addWatermark: {
+      title: "Agregar marca de agua",
+      description: "Agregar marcas de agua de texto o imagen para proteger tus fotos",
+      metaTitle: "Agregar marca de agua a imágenes | Herramientas de Imagen",
+      metaDescription: "Agregar marcas de agua de texto o imagen para proteger y marcar tus imágenes",
+      metaKeywords: "agregar marca de agua, protección de imágenes, branding, derechos de autor, seguridad de imágenes"
     }
   }
 }

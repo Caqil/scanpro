@@ -1074,510 +1074,139 @@ export default {
   },
   imageTools: {
     title: "이미지 도구",
-    description: "이미지를 변환, 편집, 변형할 수 있는 무료 온라인 도구",
-    headerSection: "이미지 처리 도구",
-    headerDescription: "이미지를 변환, 변형, 편집할 수 있는 무료 온라인 도구",
-    supportedFormats: "지원 형식",
-    howToUse: {
-      title: "이미지 도구 사용 방법",
-      step1: {
-        title: "도구 선택",
-        description: "다양한 선택지 중에서 필요한 이미지 처리 도구를 선택하세요."
-      },
-      step2: {
-        title: "이미지 업로드",
-        description: "처리하고 싶은 이미지를 업로드하세요. PNG, JPG, WebP 형식을 지원합니다."
-      },
-      step3: {
-        title: "다운로드",
-        description: "이미지를 처리하고 한 번의 클릭으로 결과를 다운로드하세요."
-      }
+    description: "이미지를 변환, 편집, 변형하기 위한 무료 온라인 도구",
+    categories: {
+      conversion: "형식 변환",
+      editing: "이미지 편집",
+      enhancement: "이미지 개선",
+      optimization: "최적화",
+      advanced: "고급 도구"
     },
-    noiseGenerator: {
-      title: "PNG에 노이즈 추가",
-      description: "PNG 이미지에 필름 그레인 또는 노이즈 효과를 추가하여 예술적 스타일을 만드세요",
-      toolTitle: "PNG 노이즈 생성기",
-      toolDescription: "PNG 이미지를 업로드하여 노이즈 또는 그레인 효과를 추가하세요.",
-      options: {
-        noiseAmount: "노이즈 양",
-        noiseAmountHint: "값이 높을수록 노이즈가 더 두드러집니다. 미세한 효과를 위해 30% 미만의 값을 사용하세요.",
-        noiseType: "노이즈 유형",
-        noiseTypeHint: "가우시안 노이즈는 미세한 그레인을 추가하며, 솔트 앤 페퍼는 무작위 흰색과 검은색 픽셀을 추가합니다.",
-        gaussianNoise: "가우시안 (부드러움)",
-        saltPepperNoise: "솔트 앤 페퍼 (점박이)",
-        monochrome: "단색 노이즈",
-        monochromeHint: "활성화하면 노이즈가 흑백으로만 표시됩니다. 비활성화하면 컬러 노이즈가 사용됩니다."
-      },
-      why: {
-        title: "이미지에 노이즈를 추가하는 이유는?",
-        description: "이미지에 노이즈나 그레인을 추가하는 것은 예술적 및 실용적 목적을 위해 사용됩니다:",
-        reasons: [
-          "빈티지 또는 필름 같은 미학 창조",
-          "평평하거나 디지털처럼 보이는 이미지에 질감 추가",
-          "그라디언트 영역의 밴딩 감소",
-          "낡거나 풍화된 효과 생성",
-          "단순하거나 미니멀한 디자인에 시각적 흥미 추가",
-          "저조도 사진 시뮬레이션"
-        ]
-      },
-      types: {
-        title: "노이즈 효과 유형",
-        gaussian: {
-          title: "가우시안 노이즈",
-          description: "가우시안 노이즈는 픽셀 값에 무작위 변화를 추가하여 부드럽고 필름 같은 그레인을 만듭니다. 분포는 정규(가우시안) 곡선을 따르며, 필름 그레인과 유사한 자연스러운 효과를 생성합니다."
-        },
-        saltPepper: {
-          title: "솔트 앤 페퍼 노이즈",
-          description: "이 노이즈 유형은 이미지에 무작위 흰색과 검은색 픽셀을 추가하여 점박이 효과를 만듭니다. 작은 먼지 입자나 결함처럼 보이며, 더 거칠고 텍스처가 있는 모습을 줍니다."
-        }
-      },
-      tips: {
-        title: "최상의 결과를 위한 팁",
-        tips: [
-          "미세한 필름 그레인 효과를 위해 가우시안 노이즈를 10-20% 강도로 사용",
-          "단색 노이즈는 클래식 필름 그레인처럼 보이는 경향이 있음",
-          "솔트 앤 페퍼 노이즈를 낮은 수준(5-15%)으로 사용하면 단색 영역에 흥미로운 텍스처 추가 가능",
-          "컬러 노이즈는 제한된 색상 팔레트의 이미지에 독특한 미학 추가 가능",
-          "노이즈 양이 높을수록(50% 이상) 더 극적이고 스타일화된 효과 생성",
-          "빈티지 사진 효과를 위해 노이즈와 세피아 또는 퇴색된 컬러 톤 결합"
-        ]
-      }
+    compressPng: {
+      title: "PNG 압축",
+      description: "품질을 유지하면서 PNG 파일 크기를 줄임",
+      metaTitle: "PNG 이미지 압축 | 이미지 도구",
+      metaDescription: "웹사이트 로딩 속도를 높이고 효율적인 저장을 위해 품질을 유지하면서 PNG 파일 크기를 줄임",
+      metaKeywords: "PNG 압축, 이미지 크기 줄이기, 이미지 최적화, 이미지 압축, 무손실 압축, 파일 크기 감소"
     },
     makeTransparent: {
       title: "PNG 투명화",
-      description: "PNG 이미지의 특정 색상을 투명으로 대체",
-      toolTitle: "PNG 투명화",
-      toolDescription: "PNG 이미지를 업로드하고 투명하게 만들고 싶은 색상을 선택하세요.",
-      options: {
-        color: "투명화할 색상:",
-        colorPickerHint: "사각형을 클릭하여 색상 선택기를 사용하거나 헥스 컬러 코드(예: #ff0000)를 입력하세요."
-      },
-      how: {
-        title: "PNG를 투명하게 만드는 방법",
-        description: "이 도구는 이미지에서 특정 색상을 제거하여 투명한 PNG를 만드는 데 도움을 줍니다. 특히 다음에 유용합니다:",
-        uses: [
-          "로고에서 흰색 배경 제거",
-          "투명 배경이 있는 제품 이미지 생성",
-          "웹 디자인에서 투명성이 필요한 그래픽 준비",
-          "프레젠테이션이나 마케팅 자료용 오버레이 생성"
-        ]
-      },
-      tips: {
-        title: "최상의 결과를 위한 팁",
-        choosing: {
-          title: "색상 선택",
-          description: "최상의 결과를 위해 유지하고 싶은 요소와 구분되는 색상을 선택하세요. 이 도구는 작은 허용 범위 내에서 색상을 매칭합니다."
-        },
-        complex: {
-          title: "복잡한 이미지",
-          description: "그라디언트나 그림자가 있는 이미지의 경우, 다른 색상 선택으로 여러 번 처리해야 할 수도 있습니다."
-        }
-      }
-    },
-    changeColors: {
-      title: "PNG 색상 변경",
-      description: "PNG 이미지의 특정 색상을 새로운 색상으로 교체",
-      toolTitle: "PNG 색상 변경기",
-      toolDescription: "PNG 이미지를 업로드하여 그 안의 특정 색상을 변경하세요.",
-      options: {
-        mappings: "색상 매핑",
-        addColor: "색상 추가",
-        sourceColor: "원본 색상",
-        targetColor: "대상 색상",
-        tolerance: "색상 매칭 허용 범위",
-        toleranceHint: "값이 높을수록 비슷한 색상의 범위가 넓어집니다. 값이 낮을수록 더 정확한 색상 매칭이 필요합니다."
-      },
-      how: {
-        title: "PNG 이미지의 색상을 변경하는 방법",
-        steps: [
-          "PNG 이미지 업로드",
-          "색상 선택기를 클릭하거나 헥스 코드를 입력하여 교체하고 싶은 색상 선택",
-          "선택한 색상을 대체할 새로운 색상 선택",
-          "색상 매칭의 엄격함을 조절하기 위해 허용 범위 조정",
-          "필요한 경우 더 많은 색상 매핑 추가 (최대 5개 색상 쌍)",
-          "변경 사항을 적용하려면 '이미지 처리' 버튼 클릭"
-        ]
-      },
-      uses: {
-        title: "이 도구로 할 수 있는 일",
-        description: "색상 변경 도구는 다양한 이미지 편집 요구에 유용합니다:",
-        uses: [
-          "아이콘이나 그래픽의 색상 체계 변경",
-          "브랜드 색상에 맞게 아트워크 색상 조정",
-          "동일한 이미지의 다양한 색상 테마 변형 생성",
-          "클립 아트 및 일러스트의 색상 수정 또는 조정",
-          "복잡한 편집 소프트웨어 없이 배경 또는 전경 색상 변경",
-          "계절별 또는 테마별 이미지 버전 생성"
-        ]
-      },
-      tips: {
-        title: "최상의 결과를 위한 팁",
-        tips: [
-          "더 정밀한 색상 교체를 위해 낮은 허용 범위 값(10-20) 사용",
-          "비슷한 색조를 교체하려면 높은 허용 범위 값(30-50) 사용",
-          "이 도구는 로고, 클립 아트, 일러스트와 같이 단색이 있는 이미지에서 가장 잘 작동",
-          "사진이나 그라디언트가 있는 이미지는 이상적인 결과를 얻지 못할 수 있음",
-          "PNG 투명성은 색상 교체 중 유지됨",
-          "복잡한 변경을 위해 한 번에 한 색상씩 처리"
-        ]
-      }
-    },
-    changeTone: {
-      title: "PNG 색조 변경",
-      description: "예술적 효과를 위해 PNG 이미지에 색조 또는 틴트를 적용",
-      toolTitle: "PNG 색조 변경기",
-      toolDescription: "PNG 이미지를 업로드하여 색조 효과를 적용하세요.",
-      options: {
-        preset: "색조 프리셋",
-        presetHint: "프리셋을 선택하거나 '사용자 지정 색상'을 선택하여 자신만의 톤을 정의하세요",
-        custom: "사용자 지정 색상",
-        sepia: "세피아",
-        coolBlue: "쿨 블루",
-        forestGreen: "포레스트 그린",
-        warmRed: "웜 레드",
-        richPurple: "리치 퍼플",
-        cyan: "시안",
-        vintage: "빈티지",
-        toneColor: "톤 색상",
-        toneColorHint: "이미지에 틴트할 색상을 선택하세요",
-        intensity: "효과 강도",
-        intensityHint: "값이 높을수록 색상 효과가 강해지고, 낮을수록 더 미세해집니다",
-        preserveGrays: "그레이스케일 색상 유지",
-        preserveGraysHint: "활성화하면 원본 이미지의 검정, 흰색, 회색 영역을 유지합니다"
-      },
-      what: {
-        title: "색조란 무엇인가요?",
-        description: "색조(또는 틴팅)는 이미지에 색상 오버레이를 적용하여 전체 색상 체계를 특정 색조로 이동시키는 기술입니다. 이를 통해 일관된 모습을 만들고 이미지의 분위기와 느낌을 극적으로 변화시킬 수 있습니다.",
-        examples: "일반적인 예로는 빈티지 효과를 위한 세피아 톤(갈색), 쿨/밤 분위기를 위한 블루 톤, 일몰이나 향수를 불러일으키는 느낌을 위한 웜 톤(빨강/주황)이 있습니다."
-      },
-      popular: {
-        title: "인기 있는 색조 효과",
-        sepia: {
-          title: "세피아 톤",
-          description: "빈티지 사진을 연상시키는 따뜻한 갈색 톤을 만듭니다. 오래되고 향수 어린 느낌을 만드는 데 완벽합니다."
-        },
-        blue: {
-          title: "블루/시안 톤",
-          description: "시원하고 차분한 분위기를 만듭니다. 밤 장면, 겨울 테마, 평온과 고요함을 불러일으키는 데 자주 사용됩니다."
-        },
-        green: {
-          title: "그린 톤",
-          description: "자연스럽고 흙 같은 느낌을 더합니다. 환경 테마, 숲 장면, 또는 높은 강도에서 매트릭스 같은 디지털 효과를 만드는 데 좋습니다."
-        },
-        red: {
-          title: "레드/오렌지 톤",
-          description: "이미지에 따뜻함과 에너지를 더합니다. 일몰 효과, 따뜻함의 느낌, 또는 어두운 장면에 극적인 긴장감을 더하는 데 유용합니다."
-        }
-      },
-      tips: {
-        title: "최상의 결과를 위한 팁",
-        tips: [
-          "미세한 효과를 위해 낮은 강도 값(10-30%) 사용",
-          "'그레이스케일 유지' 옵션은 검정과 흰색 영역을 그대로 유지하여 이미지의 대비를 유지하는 데 도움",
-          "이미지의 완벽한 분위기를 찾기 위해 다양한 프리셋 시도",
-          "극적인 효과를 위해 높은 강도 값(70-100%) 사용",
-          "보색(색상환에서 반대편에 있는 색상)은 흥미로운 대비를 만들 수 있음",
-          "PNG 투명성은 색조 조정 중 유지됨"
-        ]
-      }
+      description: "PNG 파일 내의 임의의 색상을 투명으로 대체",
+      metaTitle: "PNG 투명화 | 이미지 도구",
+      metaDescription: "PNG 파일 내의 임의의 색상을 빠르게 투명으로 대체",
+      metaKeywords: "배경 제거, 투명 PNG, 색상 대체, 이미지 편집, 배경 제거, 투명 이미지"
     },
     pngToJpg: {
       title: "PNG를 JPG로 변환",
-      description: "PNG 이미지를 사용자 정의 품질 설정으로 JPG 형식으로 변환",
-      toolTitle: "PNG to JPG 변환기",
-      toolDescription: "PNG 이미지를 업로드하여 JPG 형식으로 변환하세요.",
-      options: {
-        quality: "JPEG 품질",
-        qualityHint: "품질이 높을수록 파일 크기가 커집니다. 품질이 낮을수록 파일 크기가 줄어들지만 아티팩트가 발생할 수 있습니다."
-      },
-      why: {
-        title: "PNG를 JPG로 변환하는 이유는?",
-        description: "PNG를 JPG로 변환하는 것은 여러 가지 이유로 유용합니다:",
-        reasons: [
-          "웹사이트 로딩 속도를 높이기 위한 작은 파일 크기",
-          "일부 오래된 시스템과의 더 나은 호환성",
-          "필요에 따라 압축 수준 조정 가능",
-          "이미지 라이브러리의 저장 공간 절약"
-        ]
-      },
-      differences: {
-        title: "PNG vs JPG: 주요 차이점",
-        png: {
-          title: "PNG 특징",
-          description: "PNG는 투명성과 무손실 압축을 지원하여 날카로운 가장자리와 투명 배경이 있는 그래픽에 이상적입니다."
-        },
-        jpg: {
-          title: "JPG 특징",
-          description: "JPG는 손실 압축을 사용하여 사진 및 복잡한 이미지에 적합합니다. 약간의 품질 손실은 작은 파일 크기를 위해 허용됩니다."
-        }
-      }
+      description: "사용자 정의 가능한 품질 설정으로 PNG 이미지를 JPG 형식으로 변환",
+      metaTitle: "PNG를 JPG로 변환 | 이미지 도구",
+      metaDescription: "조정 가능한 품질로 PNG 이미지를 JPG 형식으로 변환",
+      metaKeywords: "PNG에서 JPG로, 이미지 변환, 이미지 형식, 손실 압축, 이미지 품질"
     },
     jpgToPng: {
       title: "JPG를 PNG로 변환",
-      description: "JPG 이미지를 투명성을 지원하는 PNG 형식으로 변환",
-      toolTitle: "JPG to PNG 변환기",
-      toolDescription: "JPG 이미지를 업로드하여 PNG 형식으로 변환하세요.",
-      why: {
-        title: "JPG를 PNG로 변환하는 이유는?",
-        description: "JPG를 PNG로 변환하는 것은 여러 가지 이유로 유익합니다:",
-        reasons: [
-          "압축 아티팩트 없이 더 나은 품질",
-          "이미지의 투명성 지원",
-          "무손실 형식으로 이미지 세부 사항 보존",
-          "텍스트나 날카로운 가장자리가 있는 이미지에 더 적합"
-        ]
-      },
-      differences: {
-        title: "JPG vs PNG: 주요 차이점",
-        jpg: {
-          title: "JPG 특징",
-          description: "JPG는 손실 압축을 사용하여 사진 및 복잡한 이미지에 이상적이며, 파일 크기가 완벽한 품질보다 중요한 경우에 적합합니다."
-        },
-        png: {
-          title: "PNG 특징",
-          description: "PNG는 무손실 압축을 사용하며 투명성을 지원합니다. 높은 품질, 날카로운 가장자리, 또는 투명 배경이 필요한 이미지에 최적입니다."
-        }
-      }
+      description: "투명도를 지원하여 JPG 이미지를 PNG 형식으로 변환",
+      metaTitle: "JPG를 PNG로 변환 | 이미지 도구",
+      metaDescription: "무손실 품질로 JPG 이미지를 PNG 형식으로 변환",
+      metaKeywords: "JPG에서 PNG로, 이미지 변환, 투명도, 무손실 형식, 이미지 품질"
     },
     pngToWebp: {
       title: "PNG를 WebP로 변환",
-      description: "더 나은 압축과 웹 성능을 위해 PNG 이미지를 WebP 형식으로 변환",
-      toolTitle: "PNG to WebP 변환기",
-      toolDescription: "PNG 이미지를 업로드하여 사용자 정의 품질로 WebP 형식으로 변환하세요.",
-      options: {
-        quality: "WebP 품질",
-        qualityHint: "품질이 높을수록 파일 크기가 커집니다. 품질이 낮을수록 파일 크기가 줄어들지만 아티팩트가 발생할 수 있습니다."
-      },
-      why: {
-        title: "PNG를 WebP로 변환하는 이유는?",
-        description: "PNG를 WebP 형식으로 변환하면 여러 가지 장점이 있습니다:",
-        reasons: [
-          "WebP는 PNG보다 더 나은 압축을 제공하며 시각적 품질 유지",
-          "작은 파일 크기로 웹사이트 로딩 시간 단축",
-          "WebP는 무손실 및 손실 압축 모두 지원",
-          "PNG처럼 알파 채널 투명성 유지",
-          "PNG에 비해 최대 30%까지 이미지 파일 크기 감소 가능"
-        ]
-      },
-      differences: {
-        title: "PNG vs WebP: 주요 차이점",
-        png: {
-          title: "PNG 특징",
-          description: "PNG는 무손실 압축을 사용하여 모든 이미지 데이터를 보존합니다. 모든 브라우저와 플랫폼에서 널리 지원되지만 파일 크기가 큽니다."
-        },
-        webp: {
-          title: "WebP 특징",
-          description: "WebP는 손실 및 무손실 압축을 모두 제공하며 파일 크기가 훨씬 작습니다. PNG처럼 투명성을 지원하며 더 나은 압축 알고리즘을 제공하여 웹 사용에 이상적입니다."
-        }
-      },
-      browser: {
-        title: "브라우저 호환성",
-        description: "WebP가 더 나은 성능을 제공하지만 브라우저 지원을 고려해야 합니다:",
-        support: [
-          "Chrome, Edge, Firefox, Opera는 WebP를 완전히 지원",
-          "Safari는 버전 14(macOS Big Sur)부터 WebP 지원 추가",
-          "구형 브라우저의 경우 대체 이미지나 picture 요소 사용 고려"
-        ]
-      }
+      description: "웹 성능 향상을 위해 PNG 이미지를 WebP 형식으로 변환",
+      metaTitle: "PNG를 WebP로 변환 | 이미지 도구",
+      metaDescription: "파일 크기를 줄이기 위해 PNG 이미지를 WebP 형식으로 변환",
+      metaKeywords: "PNG에서 WebP로, 이미지 변환, 웹 최적화, 이미지 압축"
     },
     webpToPng: {
       title: "WebP를 PNG로 변환",
-      description: "더 나은 호환성과 편집 옵션을 위해 WebP 이미지를 PNG 형식으로 변환",
-      toolTitle: "WebP to PNG 변환기",
-      toolDescription: "WebP 이미지를 업로드하여 PNG 형식으로 변환하세요.",
-      why: {
-        title: "WebP를 PNG로 변환하는 이유는?",
-        description: "WebP 이미지를 PNG 형식으로 변환하는 것은 여러 가지 이유로 유용합니다:",
-        reasons: [
-          "WebP를 지원하지 않는 구형 소프트웨어 및 브라우저와의 더 나은 호환성",
-          "그래픽 소프트웨어에서 편집을 위한 무손실 품질",
-          "PNG는 인쇄 및 출판에 더 널리 수용됨",
-          "WebP 이미지의 투명성 보존",
-          "대부분의 이미지 편집 응용 프로그램에서 편집 및 조작이 더 쉬움"
-        ]
-      },
-      differences: {
-        title: "WebP vs PNG: 형식 차이점",
-        webp: {
-          title: "WebP 특징",
-          description: "WebP는 Google에서 개발한 현대적인 이미지 형식으로 뛰어난 압축을 제공합니다. 손실 및 무손실 압축을 모두 제공하며 전통적인 형식보다 작은 파일 크기를 가집니다."
-        },
-        png: {
-          title: "PNG 특징",
-          description: "PNG는 무손실 압축을 사용하는 널리 지원되는 이미지 형식입니다. 거의 모든 소프트웨어, 장치, 플랫폼과 호환되며 범용 호환성에 탁월한 선택입니다."
-        }
-      },
-      when: {
-        title: "이 변환을 사용해야 할 때",
-        description: "다음 상황에서 WebP를 PNG로 변환하는 것을 고려하세요:",
-        situations: [
-          "WebP를 지원하지 않는 소프트웨어에서 이미지를 편집해야 할 때",
-          "구형 브라우저나 소프트웨어를 사용하는 사용자와 공유할 때",
-          "인쇄 목적으로, 많은 인쇄 서비스가 PNG를 선호",
-          "파일 크기보다 이미지 품질이 더 중요한 경우"
-        ]
-      }
+      description: "호환성 향상을 위해 WebP 이미지를 PNG 형식으로 변환",
+      metaTitle: "WebP를 PNG로 변환 | 이미지 도구",
+      metaDescription: "완전한 호환성으로 WebP 이미지를 PNG 형식으로 변환",
+      metaKeywords: "WebP에서 PNG로, 이미지 변환, 이미지 형식, 호환성"
     },
     svgToPng: {
       title: "SVG를 PNG로 변환",
-      description: "벡터 SVG 그래픽을 사용자 정의 크기의 래스터 PNG 이미지로 변환",
-      toolTitle: "SVG to PNG 변환기",
-      toolDescription: "SVG 파일을 업로드하여 PNG 이미지로 변환하세요.",
-      options: {
-        width: "너비 (px)",
-        height: "높이 (px)",
-        dimensionsHint: "원하는 출력 크기를 설정하세요. SVG는 종횡비를 유지하면서 이 크기에 맞게 조정됩니다."
-      },
-      why: {
-        title: "SVG를 PNG로 변환하는 이유는?",
-        description: "SVG를 PNG로 변환하는 것은 여러 시나리오에서 유용합니다:",
-        reasons: [
-          "SVG를 지원하지 않는 플랫폼을 위한 래스터 이미지 생성",
-          "다양한 브라우저와 장치에서 일관된 표시 보장",
-          "벡터 그래픽의 썸네일 또는 미리보기 생성",
-          "소셜 미디어와 같은 특정 사용 사례를 위한 고정 크기 이미지 생성",
-          "원본 벡터 아트워크의 수정 방지"
-        ]
-      },
-      differences: {
-        title: "SVG vs PNG: 형식 차이점",
-        svg: {
-          title: "SVG 특징",
-          description: "SVG(스케일러블 벡터 그래픽)는 모양을 정의하기 위해 수학 공식을 사용하는 벡터 형식입니다. 이를 통해 SVG는 해상도에 독립적이며 반응형 디자인과 모든 크기에서 고품질 인쇄에 완벽합니다."
-        },
-        png: {
-          title: "PNG 특징",
-          description: "PNG(포터블 네트워크 그래픽)는 픽셀로 구성된 래스터 형식입니다. 고정 해상도를 가지지만 투명성을 지원하며 모든 응용 프로그램 및 플랫폼과 보편적으로 호환됩니다."
-        }
-      },
-      tips: {
-        title: "최상의 결과를 위한 팁",
-        tips: [
-          "사용 사례에 적합한 크기 선택",
-          "선명한 아이콘을 위해 원본 SVG의 viewBox의 배수인 크기 사용 고려",
-          "SVG에 작은 세부 사항이 있는 경우, 이를 보존하기 위해 더 큰 크기 사용",
-          "웹 사용을 위해 품질과 파일 크기 간의 균형 고려",
-          "PNG는 투명성을 지원하므로 SVG의 투명 영역이 보존됨"
-        ]
-      }
-    },
-    compressPng: {
-      title: "PNG 이미지 압축",
-      description: "품질을 유지하면서 PNG 파일 크기를 줄여 웹사이트 로딩 및 공유 속도 향상",
-      toolTitle: "PNG 압축기",
-      toolDescription: "PNG 이미지를 업로드하여 사용자 정의 품질 설정으로 압축하세요.",
-      options: {
-        quality: "품질",
-        qualityHint: "품질이 높을수록 파일 크기가 커집니다. 품질이 낮을수록 파일 크기가 줄어들지만 아티팩트가 발생할 수 있습니다.",
-        lossless: "무손실 압축 사용",
-        losslessHint: "무손실 압축은 모든 이미지 세부 사항을 보존하지만 손실 압축보다 파일 크기가 큽니다.",
-        preserveTransparency: "투명성 유지",
-        preserveTransparencyHint: "PNG 이미지의 투명 영역을 유지합니다. 비활성화하면 파일 크기가 작아질 수 있지만 흰색 배경이 추가됩니다."
-      },
-      why: {
-        title: "PNG 이미지를 압축하는 이유는?",
-        description: "PNG 이미지를 압축하면 여러 가지 이점이 있습니다:",
-        benefits: [
-          "더 빠른 웹사이트 로딩 시간",
-          "저장 공간 사용 감소",
-          "파일 공유 시 대역폭 소비 감소",
-          "모바일 장치에서의 사용자 경험 개선",
-          "더 나은 SEO 성능 (Google은 페이지 속도를 고려)"
-        ]
-      },
-      compression: {
-        title: "손실 vs 무손실 압축",
-        lossy: {
-          title: "손실 압축",
-          description: "손실 압축은 일부 이미지 데이터를 영구적으로 제거하여 파일 크기를 줄입니다. 파일 크기가 작아지지만 품질이 낮은 설정에서는 이미지 품질이 저하될 수 있습니다."
-        },
-        lossless: {
-          title: "무손실 압축",
-          description: "무손실 압축은 이미지 데이터를 제거하지 않고 파일 크기를 줄입니다. 원본 이미지 품질을 100% 보존하지만 손실 압축에 비해 파일 크기가 큽니다."
-        }
-      },
-      tips: {
-        title: "최상의 결과를 위한 팁",
-        tips: [
-          "사진 및 복잡한 이미지의 경우, 품질 80-90%의 손실 압축이 일반적으로 최적의 균형 제공",
-          "그래픽, 로고, 텍스트가 있는 이미지의 경우, 선명도를 유지하기 위해 무손실 압축 사용",
-          "사용 사례에서 투명성이 중요한 경우, '투명성 유지' 옵션을 활성화 상태로 유지",
-          "다운로드 전에 압축된 이미지를 미리 확인하여 품질 기대치 충족 여부 확인",
-          "추가 편집이 필요한 이미지의 경우 높은 품질(90% 이상) 사용"
-        ]
-      }
+      description: "벡터 SVG 파일을 래스터 PNG 이미지로 변환",
+      metaTitle: "SVG를 PNG로 변환 | 이미지 도구",
+      metaDescription: "사용자 정의 치수로 벡터 SVG 그래픽을 래스터 PNG 이미지로 변환",
+      metaKeywords: "SVG에서 PNG로, 벡터에서 래스터로, 이미지 변환, 그래픽 디자인"
     },
     pngToBase64: {
       title: "PNG를 Base64로 변환",
-      description: "웹사이트 및 응용 프로그램에 임베드하기 위해 PNG 이미지를 Base64 인코딩 문자열로 변환",
-      toolTitle: "PNG to Base64 변환기",
-      toolDescription: "PNG 이미지를 업로드하여 Base64 인코딩 문자열로 변환하세요.",
-      why: {
-        title: "PNG를 Base64로 변환하는 이유는?",
-        description: "PNG 이미지를 Base64로 변환하는 것은 여러 목적에 유용합니다:",
-        reasons: [
-          "외부 파일 없이 HTML, CSS, JavaScript에 이미지 직접 임베드",
-          "페이지 로드 성능을 개선하기 위해 작은 이미지에 대한 HTTP 요청 감소",
-          "인라인 사용을 위한 데이터 URI에 이미지 포함",
-          "JSON 또는 기타 텍스트 형식에 이미지 데이터 저장",
-          "텍스트 데이터만 허용하는 API를 통해 이미지 전송"
-        ]
-      },
-      usage: {
-        title: "Base64 이미지 사용 방법",
-        html: {
-          title: "HTML에서",
-          description: "img 태그의 src 속성에 Base64 문자열 사용:"
-        },
-        css: {
-          title: "CSS에서",
-          description: "배경 이미지로 Base64 문자열 사용:"
-        },
-        js: {
-          title: "JavaScript에서",
-          description: "Base64 데이터로 이미지 요소 생성:"
-        }
-      },
-      considerations: {
-        title: "중요 고려 사항",
-        considerations: [
-          "Base64 인코딩은 파일 크기를 약 33% 증가시킴",
-          "코드 부풀림을 피하기 위해 작은 이미지(10KB 미만)에 가장 적합",
-          "HTML/CSS/JS 파일과 별도로 캐시 불가능",
-          "큰 이미지의 경우 초기 페이지 로드 시간이 증가할 수 있음"
-        ]
-      }
+      description: "웹 페이지에 삽입하기 위해 PNG 이미지를 Base64 인코딩으로 변환",
+      metaTitle: "PNG를 Base64로 변환 | 이미지 도구",
+      metaDescription: "웹 삽입용으로 PNG 이미지를 Base64 문자열로 변환",
+      metaKeywords: "PNG에서 Base64로, 이미지 인코딩, 웹 개발, 이미지 삽입"
     },
     base64ToPng: {
       title: "Base64를 PNG로 변환",
-      description: "Base64 인코딩 문자열을 다시 PNG 이미지로 변환",
-      toolTitle: "Base64 to PNG 변환기",
-      toolDescription: "Base64 인코딩 문자열을 붙여넣어 PNG 이미지로 다시 변환하세요.",
-      options: {
-        input: "Base64 문자열",
-        inputHint: "여기에 Base64 인코딩 문자열을 붙여넣으세요. 데이터 URI 접두사를 포함하거나 제외할 수 있습니다."
-      },
-      why: {
-        title: "Base64를 PNG로 변환하는 이유는?",
-        description: "Base64를 PNG로 변환하는 것은 다음 경우에 유용합니다:",
-        reasons: [
-          "HTML, CSS, JavaScript에 임베드된 이미지 추출",
-          "임베드된 이미지를 별도의 파일로 저장",
-          "Base64로 저장된 이미지를 처리 또는 편집",
-          "Base64 인코딩을 사용하는 API에서 받은 데이터 변환",
-          "임베드된 이미지 콘텐츠 디버깅 또는 검사"
-        ]
-      },
-      finding: {
-        title: "Base64 이미지 찾기",
-        description: "Base64 인코딩 이미지는 다양한 곳에서 찾을 수 있습니다:",
-        sources: [
-          "'data:image/'로 시작하는 src 속성을 가진 img 태그를 찾기 위해 HTML 소스 코드 검사",
-          "데이터 URI가 있는 background-image 속성을 위해 CSS 파일 확인",
-          "이미지 데이터를 포함하는 문자열 변수를 위해 JavaScript 코드 확인",
-          "이미지 데이터를 포함하는 API 응답 조사"
-        ]
-      }
+      description: "Base64로 인코딩된 이미지 문자열을 PNG 파일로 재변환",
+      metaTitle: "Base64를 PNG로 변환 | 이미지 도구",
+      metaDescription: "Base64 이미지 문자열을 PNG 이미지 파일로 재변환",
+      metaKeywords: "Base64에서 PNG로, 이미지 디코딩, 웹 개발, 이미지 변환"
+    },
+    changeColors: {
+      title: "PNG 색상 변경",
+      description: "PNG 이미지 내의 특정 색상을 새로운 색상으로 대체",
+      metaTitle: "PNG 색상 변경 | 이미지 도구",
+      metaDescription: "PNG 이미지 내의 특정 색상을 쉽게 새로운 색상으로 대체",
+      metaKeywords: "이미지 색상 변경, 색상 대체, PNG 편집, 이미지 색상 변경기, 색상 교환"
+    },
+    changeTone: {
+      title: "색조 변경",
+      description: "예술적 효과를 위해 이미지에 색조와 톤을 적용",
+      metaTitle: "PNG 색조 변경 | 이미지 도구",
+      metaDescription: "예술적 효과를 위해 PNG 이미지에 색조와 톤을 적용",
+      metaKeywords: "색조, 이미지 톤 조정, 예술적 효과, 색상 오버레이, 사진 필터"
+    },
+    addNoise: {
+      title: "PNG에 노이즈 추가",
+      description: "예술적 스타일을 위해 PNG 이미지에 필름 그레인 또는 노이즈 효과 추가",
+      metaTitle: "PNG에 노이즈 추가 | 이미지 도구",
+      metaDescription: "예술적 스타일을 위해 PNG 이미지에 필름 그레인 또는 노이즈 효과 추가",
+      metaKeywords: "노이즈 추가, 필름 그레인, 이미지 텍스처, 예술적 필터, 빈티지 사진 효과"
+    },
+    resize: {
+      title: "이미지 크기 조정",
+      description: "품질을 유지하면서 이미지를 정확한 치수로 크기 조정",
+      metaTitle: "이미지 크기 조정 | 이미지 도구",
+      metaDescription: "품질을 유지하면서 이미지를 정확한 치수로 쉽게 크기 조정",
+      metaKeywords: "이미지 크기 조정, 이미지 크기 변경, 이미지 스케일, 이미지 치수, 이미지 크기 조정"
+    },
+    rotate: {
+      title: "회전 및 뒤집기",
+      description: "올바른 방향을 위해 이미지를 회전 및 뒤집기",
+      metaTitle: "이미지 회전 및 뒤집기 | 이미지 도구",
+      metaDescription: "이미지를 원하는 각도로 쉽게 회전하고 수평 또는 수직으로 뒤집기",
+      metaKeywords: "이미지 회전, 이미지 뒤집기, 이미지 방향, 이미지 돌리기, 수직 뒤집기"
+    },
+    crop: {
+      title: "이미지 자르기",
+      description: "불필요한 영역을 제거하고 중요한 콘텐츠에 초점을 맞추기 위해 이미지 자르기",
+      metaTitle: "이미지 자르기 | 이미지 도구",
+      metaDescription: "구성을 개선하기 위해 불필요한 영역을 제거하며 이미지 자르기",
+      metaKeywords: "이미지 자르기, 이미지 트리밍, 배경 제거, 이미지 구성"
+    },
+    addText: {
+      title: "이미지에 텍스트 추가",
+      description: "사용자 정의 텍스트, 캡션 또는 워터마크를 이미지에 추가",
+      metaTitle: "이미지에 텍스트 추가 | 이미지 도구",
+      metaDescription: "간단한 서식 옵션으로 사용자 정의 텍스트, 캡션, 워터마크를 이미지에 추가",
+      metaKeywords: "이미지에 텍스트 추가, 이미지 캡션, 워터마크, 텍스트 오버레이, 이미지 주석"
+    },
+    addBorder: {
+      title: "테두리 추가",
+      description: "다양한 스타일과 색상으로 사용자 정의 테두리를 이미지에 추가",
+      metaTitle: "이미지에 테두리 추가 | 이미지 도구",
+      metaDescription: "사용자 정의 테두리, 프레임, 효과로 이미지를 개선",
+      metaKeywords: "이미지 테두리 추가, 포토 프레임, 이미지 프레이밍, 테두리 스타일, 이미지 개선"
+    },
+    addWatermark: {
+      title: "워터마크 추가",
+      description: "사진을 보호하기 위해 텍스트 또는 이미지 워터마크 추가",
+      metaTitle: "이미지에 워터마크 추가 | 이미지 도구",
+      metaDescription: "이미지를 보호하고 브랜드화하기 위해 텍스트 또는 이미지 워터마크 추가",
+      metaKeywords: "워터마크 추가, 이미지 보호, 브랜딩, 저작권, 이미지 보안"
     }
   }
 }

@@ -1074,510 +1074,139 @@ export default {
     },
     imageTools: {
         title: "Görüntü Araçları",
-        description: "Görüntüleri dönüştürmek, düzenlemek ve değiştirmek için ücretsiz çevrimiçi araçlar",
-        headerSection: "Görüntü İşleme Araçları",
-        headerDescription: "Görüntüleri dönüştürmek, değiştirmek ve düzenlemek için ücretsiz çevrimiçi araçlar",
-        supportedFormats: "Desteklenen Formatlar",
-        howToUse: {
-            title: "Görüntü Araçları Nasıl Kullanılır",
-            step1: {
-                title: "Araç Seçimi",
-                description: "Çok sayıda mevcut seçenek arasından istediğiniz görüntü işleme aracını seçin."
-            },
-            step2: {
-                title: "Görüntü Yükleme",
-                description: "İşlemek istediğiniz görüntüyü yükleyin. PNG, JPG ve WebP formatları desteklenir."
-            },
-            step3: {
-                title: "İndirme",
-                description: "Görüntüyü işleyin ve sonucu tek bir tıklamayla indirin."
-            }
+        description: "Görüntülerinizi dönüştürmek, düzenlemek ve değiştirmek için ücretsiz çevrimiçi araçlar",
+        categories: {
+            conversion: "Format Dönüştürme",
+            editing: "Görüntü Düzenleme",
+            enhancement: "Görüntü İyileştirme",
+            optimization: "Optimizasyon",
+            advanced: "Gelişmiş Araçlar"
         },
-        noiseGenerator: {
-            title: "PNG'ye Gürültü Ekleme",
-            description: "Sanatsal bir stil oluşturmak için PNG görüntülerine gren veya gürültü efektleri ekleyin",
-            toolTitle: "PNG için Gürültü Üreticisi",
-            toolDescription: "Gürültü veya gren efektleri eklemek için bir PNG görüntüsü yükleyin.",
-            options: {
-                noiseAmount: "Gürültü Miktarı",
-                noiseAmountHint: "Daha yüksek değerler gürültüyü daha belirgin hale getirir. İnce bir etki için %30'dan az kullanın.",
-                noiseType: "Gürültü Türü",
-                noiseTypeHint: "Gaussian gürültü ince bir gren eklerken, tuz ve biber gürültüsü rastgele beyaz ve siyah pikseller ekler.",
-                gaussianNoise: "Gaussian (yumuşak)",
-                saltPepperNoise: "Tuz ve Biber (lekeli)",
-                monochrome: "Monokrom Gürültü",
-                monochromeHint: "Etkinleştirildiğinde gürültü yalnızca siyah-beyaz renkte görünür. Devre dışı bırakıldığında renkli gürültü kullanılır."
-            },
-            why: {
-                title: "Görüntüye Neden Gürültü Eklenir?",
-                description: "Görüntülere gürültü veya gren eklemek sanatsal ve pratik amaçlar için kullanılır:",
-                reasons: [
-                    "Vintage estetiği veya film efekti oluşturma",
-                    "Düz veya dijital görüntülere doku ekleme",
-                    "Gradyan alanlarda bantlaşmayı azaltma",
-                    "Aşınmış veya eskimiş bir efekt yaratma",
-                    "Basit veya minimalist tasarımlara görsel ilgi ekleme",
-                    "Düşük ışıkta çekilmiş fotoğrafları taklit etme"
-                ]
-            },
-            types: {
-                title: "Gürültü Efekt Türleri",
-                gaussian: {
-                    title: "Gaussian Gürültü",
-                    description: "Gaussian gürültü, piksel değerlerine rastgele değişiklikler ekleyerek film grenine benzer yumuşak bir doku oluşturur. Dağılım normal (Gaussian) eğriyi takip eder ve doğal bir film gren efekti yaratır."
-                },
-                saltPepper: {
-                    title: "Tuz ve Biber Gürültüsü",
-                    description: "Bu gürültü türü, görüntüye rastgele beyaz ve siyah pikseller ekleyerek lekeli bir etki oluşturur. Toz parçacıkları veya kusurlar gibi görünür ve daha kaba, dokulu bir görünüm sağlar."
-                }
-            },
-            tips: {
-                title: "En İyi Sonuçlar İçin İpuçları",
-                tips: [
-                    "İnce bir film gren efekti için %10-20 yoğunlukta Gaussian gürültü kullanın",
-                    "Monokrom gürültü klasik film grenine daha çok benzer",
-                    "Monokrom alanlara ilginç bir doku eklemek için düşük seviyelerde (%5-15) tuz ve biber gürültüsü kullanın",
-                    "Renkli gürültü, sınırlı renk paletine sahip görüntülere benzersiz bir estetik katabilir",
-                    "Yüksek gürültü miktarları (%50'den fazla) daha dramatik ve stilize efektler yaratır",
-                    "Vintage fotoğraf efekti için gürültüyü sepya veya soluk tonlarla birleştirin"
-                ]
-            }
+        compressPng: {
+            title: "PNG Sıkıştırma",
+            description: "Kaliteyi korurken PNG dosya boyutlarını küçültme",
+            metaTitle: "PNG Görüntüleri Sıkıştırma | Görüntü Araçları",
+            metaDescription: "Web sitelerinin daha hızlı yüklenmesi ve verimli depolama için kaliteyi korurken PNG dosya boyutlarını küçültme",
+            metaKeywords: "PNG sıkıştırma, görüntü boyutunu küçültme, görüntü optimizasyonu, görüntü sıkıştırma, kayıpsız sıkıştırma, dosya boyutu azaltma"
         },
         makeTransparent: {
             title: "PNG'yi Şeffaf Yapma",
-            description: "PNG görüntüsündeki belirli bir rengi şeffaflıkla değiştirin",
-            toolTitle: "PNG Şeffaflığı",
-            toolDescription: "Bir PNG görüntüsü yükleyin ve şeffaf yapmak istediğiniz rengi seçin.",
-            options: {
-                color: "Şeffaf Yapılacak Renk:",
-                colorPickerHint: "Renk seçiciyi kullanmak için kareye tıklayın veya bir onaltılık renk kodu girin (örneğin, #ff0000)."
-            },
-            how: {
-                title: "PNG Nasıl Şeffaf Yapılır",
-                description: "Bu araç, görüntüden belirli bir rengi kaldırarak şeffaf bir PNG oluşturmanıza yardımcı olur. Özellikle şu durumlarda kullanışlıdır:",
-                uses: [
-                    "Logolardan beyaz arka planı kaldırma",
-                    "Şeffaf arka planlı ürün görselleri oluşturma",
-                    "Web tasarımı için şeffaf grafik hazırlama",
-                    "Sunumlar veya pazarlama materyalleri için kaplamalar oluşturma"
-                ]
-            },
-            tips: {
-                title: "En İyi Sonuçlar İçin İpuçları",
-                choosing: {
-                    title: "Renk Seçimi",
-                    description: "En iyi sonuçlar için, korumak istediğiniz unsurlardan farklı bir renk seçin. Araç, renkleri küçük bir hata payıyla eşleştirir."
-                },
-                complex: {
-                    title: "Karmaşık Görüntüler",
-                    description: "Gradyan veya gölgeli görüntüler için farklı renk seçimleriyle birden fazla işlem gerekebilir."
-                }
-            }
-        },
-        changeColors: {
-            title: "PNG Renklerini Değiştirme",
-            description: "PNG görüntüsündeki belirli renkleri yeni renklerle değiştirin",
-            toolTitle: "PNG Renk Değiştirme",
-            toolDescription: "Belirli renkleri değiştirmek için bir PNG görüntüsü yükleyin.",
-            options: {
-                mappings: "Renk Eşleştirmeleri",
-                addColor: "Renk Ekle",
-                sourceColor: "Kaynak Renk",
-                targetColor: "Hedef Renk",
-                tolerance: "Renk Eşleme Toleransı",
-                toleranceHint: "Daha yüksek değerler benzer renklerin aralığını genişletir. Daha düşük değerler daha kesin renk eşleşmesi gerektirir."
-            },
-            how: {
-                title: "PNG'deki Renkler Nasıl Değiştirilir",
-                steps: [
-                    "Bir PNG görüntüsü yükleyin",
-                    "Değiştirmek istediğiniz rengi seçmek için renk seçiciye tıklayın veya onaltılık kod girin",
-                    "Seçilen rengin yerine geçecek yeni bir renk seçin",
-                    "Renk eşleme doğruluğunu kontrol etmek için toleransı ayarlayın",
-                    "Gerekirse ek renk eşleştirmeleri ekleyin (en fazla 5 renk çifti)",
-                    "Değişiklikleri uygulamak için 'Görüntüyü İşle' düğmesine tıklayın"
-                ]
-            },
-            uses: {
-                title: "Bu Araçla Neler Yapılabilir",
-                description: "Renk değiştirme aracı, çeşitli görüntü düzenleme görevleri için kullanışlıdır:",
-                uses: [
-                    "Simge veya grafiklerin renk şemasını değiştirme",
-                    "Sanat eserlerinin renklerini marka renklerine uydurma",
-                    "Tek bir görüntünün renk teması varyasyonlarını oluşturma",
-                    "Küçük resimler ve illüstrasyonların renklerini değiştirme veya ayarlama",
-                    "Karmaşık düzenleme yazılımlarına ihtiyaç duymadan arka plan veya ön plan renklerini değiştirme",
-                    "Görüntülerin mevsimsel veya tematik versiyonlarını oluşturma"
-                ]
-            },
-            tips: {
-                title: "En İyi Sonuçlar İçin İpuçları",
-                tips: [
-                    "Daha kesin renk değişimi için düşük tolerans değerleri (10-20) kullanın",
-                    "Benzer tonları değiştirmek için yüksek tolerans değerleri (30-50) kullanın",
-                    "Bu araç, logolar, küçük resimler ve illüstrasyonlar gibi düz renkli görüntülerde daha iyi çalışır",
-                    "Fotoğraflar veya gradyanlı görüntüler mükemmel sonuçlar vermeyebilir",
-                    "Renk değişimi sırasında PNG şeffaflığı korunur",
-                    "Karmaşık değişiklikler için bir seferde bir renk işleyin"
-                ]
-            }
-        },
-        changeTone: {
-            title: "PNG Tonunu Değiştirme",
-            description: "Sanatsal efektler için PNG görüntüsüne bir ton veya renk tonu uygulayın",
-            toolTitle: "PNG Ton Değiştirme",
-            toolDescription: "Ton efekti uygulamak için bir PNG görüntüsü yükleyin.",
-            options: {
-                preset: "Ton Ön Ayarları",
-                presetHint: "Bir ön ayar seçin veya özel bir ton belirlemek için 'Özel Renk' seçeneğini seçin",
-                custom: "Özel Renk",
-                sepia: "Sepya",
-                coolBlue: "Soğuk Mavi",
-                forestGreen: "Orman Yeşili",
-                warmRed: "Sıcak Kırmızı",
-                richPurple: "Zengin Mor",
-                cyan: "Camgöbeği",
-                vintage: "Vintage",
-                toneColor: "Ton Rengi",
-                toneColorHint: "Görüntüyü tonlandırmak için bir renk seçin",
-                intensity: "Efekt Yoğunluğu",
-                intensityHint: "Daha yüksek değerler renk efektini artırır, daha düşük değerler daha ince bir etki sağlar",
-                preserveGrays: "Gri Tonları Koru",
-                preserveGraysHint: "Etkinleştirildiğinde orijinal görüntünün siyah, beyaz ve gri alanlarını korur"
-            },
-            what: {
-                title: "Ton Nedir?",
-                description: "Tonlama (veya renk tonu kaplama), görüntünün tüm renk şemasını belirli bir tona kaydırarak renkli bir kaplama uygulayan bir tekniktir. Bu, tutarlı bir görünüm yaratabilir ve görüntünün havasını ve hissini kökten değiştirebilir.",
-                examples: "Yaygın örnekler arasında vintage bir etki için sepya (kahverengi) tonlar, soğuk/gece atmosferi için mavi tonlar ve gün batımı veya nostalji hissi için sıcak tonlar (kırmızı/turuncu) bulunur."
-            },
-            popular: {
-                title: "Popüler Ton Efektleri",
-                sepia: {
-                    title: "Sepya Tonu",
-                    description: "Vintage fotoğrafları anımsatan sıcak kahverengi bir ton oluşturur. Eski ve nostaljik bir görünüm için idealdir."
-                },
-                blue: {
-                    title: "Mavi/Camgöbeği Tonu",
-                    description: "Soğuk ve sakin bir his yaratır. Genellikle gece sahneleri, kış temaları veya huzur ve sakinlik uyandırmak için kullanılır."
-                },
-                green: {
-                    title: "Yeşil Ton",
-                    description: "Doğal ve dünyevi bir his katar. Çevresel temalar, orman sahneleri veya yüksek yoğunlukta 'Matrix' gibi dijital efektler için harikadır."
-                },
-                red: {
-                    title: "Kırmızı/Turuncu Ton",
-                    description: "Görüntüye sıcaklık ve enerji katar. Gün batımı efektleri, sıcaklık hissi veya karanlık sahnelerde dramatik gerilim eklemek için kullanışlıdır."
-                }
-            },
-            tips: {
-                title: "En İyi Sonuçlar İçin İpuçları",
-                tips: [
-                    "İnce bir etki için düşük yoğunluk değerleri (%10-30) kullanın",
-                    "'Gri Tonları Koru' seçeneği, siyah ve beyaz alanları dokunulmaz bırakarak görüntünün kontrastını korumaya yardımcı olur",
-                    "Görüntünüz için mükemmel havayı bulmak için farklı ön ayarlarla deney yapın",
-                    "Dramatik efektler için yüksek yoğunluk değerleri (%70-100) kullanın",
-                    "Renk çarkında zıt renkler ilginç kontrastlar yaratabilir",
-                    "Ton ayarı sırasında PNG şeffaflığı korunur"
-                ]
-            }
+            description: "Bir PNG dosyasındaki herhangi bir rengi şeffaflıkla değiştirme",
+            metaTitle: "PNG'yi Şeffaf Yapma | Görüntü Araçları",
+            metaDescription: "Bir PNG dosyasındaki herhangi bir rengi hızlıca şeffaflıkla değiştirme",
+            metaKeywords: "arkaplan kaldırma, şeffaf PNG, renk değiştirme, görüntü düzenleme, arkaplan temizleme, şeffaf görüntüler"
         },
         pngToJpg: {
             title: "PNG'yi JPG'ye Dönüştürme",
-            description: "PNG görüntülerini özelleştirilebilir kalite ayarlarıyla JPG formatına dönüştürün",
-            toolTitle: "PNG'den JPG'ye Dönüştürücü",
-            toolDescription: "JPG formatına dönüştürmek için bir PNG görüntüsü yükleyin.",
-            options: {
-                quality: "JPEG Kalitesi",
-                qualityHint: "Daha yüksek kalite, daha büyük dosya boyutlarına neden olur. Daha düşük kalite dosya boyutunu küçültür ancak artefaktlar ekleyebilir."
-            },
-            why: {
-                title: "PNG Neden JPG'ye Dönüştürülür?",
-                description: "PNG'yi JPG'ye dönüştürmek birkaç nedenden dolayı faydalıdır:",
-                reasons: [
-                    "Web sitelerinin daha hızlı yüklenmesi için daha küçük dosya boyutu",
-                    "Bazı eski sistemlerle daha iyi uyumluluk",
-                    "Gerektiğinde ayarlanabilir sıkıştırma seviyesi",
-                    "Görüntü kütüphanelerinde yer tasarrufu"
-                ]
-            },
-            differences: {
-                title: "PNG ve JPG: Temel Farklar",
-                png: {
-                    title: "PNG Özellikleri",
-                    description: "PNG, şeffaflığı destekler ve kayıpsız sıkıştırma kullanır; bu, net kenarlı grafikler ve şeffaf arka planlar için idealdir."
-                },
-                jpg: {
-                    title: "JPG Özellikleri",
-                    description: "JPG, kayıplı sıkıştırma kullanır ve fotoğraflar ile karmaşık görüntüler için uygundur. Dosya boyutunu küçültmek için bir miktar kalite kaybı kabul edilebilir."
-                }
-            }
+            description: "Özelleştirilebilir kalite ayarlarıyla PNG görüntülerini JPG formatına dönüştürme",
+            metaTitle: "PNG'yi JPG'ye Dönüştürme | Görüntü Araçları",
+            metaDescription: "Ayarlanabilir kalite ile PNG görüntülerini JPG formatına dönüştürme",
+            metaKeywords: "PNG'den JPG'ye, görüntü dönüştürme, görüntü formatı, kayıplı sıkıştırma, görüntü kalitesi"
         },
         jpgToPng: {
             title: "JPG'yi PNG'ye Dönüştürme",
-            description: "JPG görüntülerini şeffaflık desteğiyle PNG formatına dönüştürün",
-            toolTitle: "JPG'den PNG'ye Dönüştürücü",
-            toolDescription: "PNG formatına dönüştürmek için bir JPG görüntüsü yükleyin.",
-            why: {
-                title: "JPG Neden PNG'ye Dönüştürülür?",
-                description: "JPG'yi PNG'ye dönüştürmek birkaç nedenden dolayı faydalıdır:",
-                reasons: [
-                    "Sıkıştırma artefaktları olmadan daha iyi kalite",
-                    "Görüntülerde şeffaflık desteği",
-                    "Kayıpsız formatta görüntü detaylarının korunması",
-                    "Metin veya net kenarlı görüntüler için daha uygun"
-                ]
-            },
-            differences: {
-                title: "JPG ve PNG: Temel Farklar",
-                jpg: {
-                    title: "JPG Özellikleri",
-                    description: "JPG, kayıplı sıkıştırma kullanır; bu, dosya boyutunun mükemmel kaliteden daha önemli olduğu fotoğraflar ve karmaşık görüntüler için idealdir."
-                },
-                png: {
-                    title: "PNG Özellikleri",
-                    description: "PNG, kayıpsız sıkıştırma kullanır ve şeffaflığı destekler. Yüksek kaliteli görüntüler, net kenarlar veya şeffaf arka planlar için idealdir."
-                }
-            }
+            description: "Şeffaflık desteğiyle JPG görüntülerini PNG formatına dönüştürme",
+            metaTitle: "JPG'yi PNG'ye Dönüştürme | Görüntü Araçları",
+            metaDescription: "Kayıpsız kalite ile JPG görüntülerini PNG formatına dönüştürme",
+            metaKeywords: "JPG'den PNG'ye, görüntü dönüştürme, şeffaflık, kayıpsız format, görüntü kalitesi"
         },
         pngToWebp: {
             title: "PNG'yi WebP'ye Dönüştürme",
-            description: "Web'deki daha iyi sıkıştırma ve performans için PNG görüntülerini WebP formatına dönüştürün",
-            toolTitle: "PNG'den WebP'ye Dönüştürücü",
-            toolDescription: "Özelleştirilebilir kalite ile WebP formatına dönüştürmek için bir PNG görüntüsü yükleyin.",
-            options: {
-                quality: "WebP Kalitesi",
-                qualityHint: "Daha yüksek kalite, daha büyük dosya boyutlarına neden olur. Daha düşük kalite dosya boyutunu küçültür ancak artefaktlar ekleyebilir."
-            },
-            why: {
-                title: "PNG Neden WebP'ye Dönüştürülür?",
-                description: "PNG'yi WebP formatına dönüştürmek birkaç avantaj sunar:",
-                reasons: [
-                    "WebP, PNG'den daha iyi sıkıştırma sağlar ve görsel kaliteyi korur",
-                    "Daha küçük dosya boyutları web sitesi yükleme süresini azaltır",
-                    "WebP hem kayıplı hem de kayıpsız sıkıştırmayı destekler",
-                    "PNG gibi alfa kanalı şeffaflığını korur",
-                    "PNG'ye kıyasla görüntü dosya boyutunu %30'a kadar küçültebilir"
-                ]
-            },
-            differences: {
-                title: "PNG ve WebP: Temel Farklar",
-                png: {
-                    title: "PNG Özellikleri",
-                    description: "PNG, kayıpsız sıkıştırma kullanır ve tüm görüntü verilerini korur. Tüm tarayıcılarda ve platformlarda geniş çapta desteklenir ancak dosyalar daha büyüktür."
-                },
-                webp: {
-                    title: "WebP Özellikleri",
-                    description: "WebP, kayıplı ve kayıpsız sıkıştırma sunar ve önemli ölçüde daha küçük dosya boyutları sağlar. PNG gibi şeffaflığı destekler ve üstün sıkıştırma algoritmalarıyla web kullanımı için idealdir."
-                }
-            },
-            browser: {
-                title: "Tarayıcı Uyumluluğu",
-                description: "WebP daha iyi performans sunsa da tarayıcı uyumluluğunu göz önünde bulundurmak önemlidir:",
-                support: [
-                    "Chrome, Edge, Firefox ve Opera WebP'yi tam olarak destekler",
-                    "Safari, WebP desteğini 14. sürümden itibaren ekledi (macOS Big Sur)",
-                    "Eski tarayıcılar için alternatif görüntüler veya picture elementi kullanmayı düşünün"
-                ]
-            }
+            description: "Web performansı için PNG görüntülerini WebP formatına dönüştürme",
+            metaTitle: "PNG'yi WebP'ye Dönüştürme | Görüntü Araçları",
+            metaDescription: "Dosya boyutlarını küçültmek için PNG görüntülerini WebP formatına dönüştürme",
+            metaKeywords: "PNG'den WebP'ye, görüntü dönüştürme, web optimizasyonu, görüntü sıkıştırma"
         },
         webpToPng: {
             title: "WebP'yi PNG'ye Dönüştürme",
-            description: "Daha iyi uyumluluk ve düzenleme seçenekleri için WebP görüntülerini PNG formatına dönüştürün",
-            toolTitle: "WebP'den PNG'ye Dönüştürücü",
-            toolDescription: "PNG formatına dönüştürmek için bir WebP görüntüsü yükleyin.",
-            why: {
-                title: "WebP Neden PNG'ye Dönüştürülür?",
-                description: "WebP görüntülerini PNG formatına dönüştürmek birkaç nedenden dolayı faydalıdır:",
-                reasons: [
-                    "WebP'yi desteklemeyen eski yazılımlar ve tarayıcılarla daha iyi uyumluluk",
-                    "Grafik programlarında düzenleme için kayıpsız kalite",
-                    "Baskı ve yayın için PNG daha yaygın kabul görür",
-                    "WebP görüntülerinin şeffaflığını korur",
-                    "Çoğu görüntü düzenleme uygulamasında düzenleme ve manipülasyon daha kolay"
-                ]
-            },
-            differences: {
-                title: "WebP ve PNG: Format Farkları",
-                webp: {
-                    title: "WebP Özellikleri",
-                    description: "WebP, Google tarafından geliştirilen modern bir görüntü formatıdır ve üstün sıkıştırma sunar. Kayıplı ve kayıpsız sıkıştırmayı destekler ve geleneksel formatlara kıyasla daha küçük dosya boyutları sağlar."
-                },
-                png: {
-                    title: "PNG Özellikleri",
-                    description: "PNG, kayıpsız sıkıştırma kullanan ve geniş çapta desteklenen bir görüntü formatıdır. Neredeyse tüm yazılımlar, cihazlar ve platformlarla uyumludur, bu da onu evrensel uyumluluk için mükemmel bir seçim haline getirir."
-                }
-            },
-            when: {
-                title: "Bu Dönüşüm Ne Zaman Kullanılır",
-                description: "WebP'yi PNG'ye şu durumlarda dönüştürmeyi düşünün:",
-                situations: [
-                    "WebP'yi desteklemeyen bir programda görüntü düzenlenmesi gerektiğinde",
-                    "Eski tarayıcılar veya yazılımlar kullanan kullanıcılarla paylaşım yaparken",
-                    "Baskı için, çünkü birçok baskı servisi PNG'yi tercih eder",
-                    "Görüntü kalitesinin dosya boyutundan daha önemli olduğu durumlarda"
-                ]
-            }
+            description: "Daha iyi uyumluluk için WebP görüntülerini PNG formatına dönüştürme",
+            metaTitle: "WebP'yi PNG'ye Dönüştürme | Görüntü Araçları",
+            metaDescription: "Tam uyumluluk ile WebP görüntülerini PNG formatına dönüştürme",
+            metaKeywords: "WebP'den PNG'ye, görüntü dönüştürme, görüntü formatı, uyumluluk"
         },
         svgToPng: {
             title: "SVG'yi PNG'ye Dönüştürme",
-            description: "SVG vektör grafiklerini özelleştirilebilir boyutlarla PNG raster görüntülere dönüştürün",
-            toolTitle: "SVG'den PNG'ye Dönüştürücü",
-            toolDescription: "PNG görüntüsüne dönüştürmek için bir SVG dosyası yükleyin.",
-            options: {
-                width: "Genişlik (piksel)",
-                height: "Yükseklik (piksel)",
-                dimensionsHint: "İstenen çıktı boyutunu ayarlayın. SVG, oranları korunarak bu boyuta ölçeklendirilir."
-            },
-            why: {
-                title: "SVG Neden PNG'ye Dönüştürülür?",
-                description: "SVG'yi PNG'ye dönüştürmek çeşitli senaryolarda faydalıdır:",
-                reasons: [
-                    "SVG'yi desteklemeyen platformlar için raster görüntüler oluşturma",
-                    "Farklı tarayıcılarda ve cihazlarda tutarlı görüntüleme sağlama",
-                    "Vektör grafiklerin küçük resimler veya önizlemeler oluşturma",
-                    "Sosyal medya gibi belirli durumlar için sabit boyutlu görüntüler üretme",
-                    "Orijinal vektör dosyasını değiştirmekten kaçınma"
-                ]
-            },
-            differences: {
-                title: "SVG ve PNG: Format Farkları",
-                svg: {
-                    title: "SVG Özellikleri",
-                    description: "SVG (Ölçeklenebilir Vektör Grafikleri), şekilleri tanımlamak için matematiksel formüller kullanan bir vektör formatıdır. Çözünürlükten bağımsızdır ve uyarlanabilir tasarım ile her boyutta yüksek kaliteli baskı için idealdir."
-                },
-                png: {
-                    title: "PNG Özellikleri",
-                    description: "PNG (Taşınabilir Ağ Grafikleri), piksellerden oluşan bir raster formattır. Sabit bir çözünürlüğe sahiptir ancak şeffaflığı destekler ve tüm uygulamalar ile platformlarla evrensel olarak uyumludur."
-                }
-            },
-            tips: {
-                title: "En İyi Sonuçlar İçin İpuçları",
-                tips: [
-                    "Kullanım durumunuza uygun bir boyut seçin",
-                    "Net simgeler için orijinal SVG'nin viewBox'ına крат boyutlar kullanın",
-                    "SVG'nin ince detaylarını korumak için büyük boyutlar kullanın",
-                    "Web kullanımı için kalite ve dosya boyutu arasında denge kurun",
-                    "PNG şeffaflığı destekler, bu nedenle SVG'nin şeffaf alanları korunur"
-                ]
-            }
-        },
-        compressPng: {
-            title: "PNG Görüntüsünü Sıkıştırma",
-            description: "Web sitesi yüklemelerini ve dosya paylaşımını iyileştirmek için PNG dosya boyutunu kaliteyi koruyarak küçültün",
-            toolTitle: "PNG Sıkıştırıcı",
-            toolDescription: "Özelleştirilebilir kalite ayarlarıyla sıkıştırmak için bir PNG görüntüsü yükleyin.",
-            options: {
-                quality: "Kalite",
-                qualityHint: "Daha yüksek kalite, daha büyük dosya boyutlarına neden olur. Daha düşük kalite dosya boyutunu küçültür ancak artefaktlar ekleyebilir.",
-                lossless: "Kayıpsız Sıkıştırma Kullan",
-                losslessHint: "Kayıpsız sıkıştırma, tüm görüntü detaylarını korur ancak kayıplı sıkıştırmaya göre daha büyük dosyalara neden olur.",
-                preserveTransparency: "Şeffaflığı Koru",
-                preserveTransparencyHint: "PNG görüntüsünün şeffaf alanlarını korur. Devre dışı bırakmak dosya boyutunu küçültebilir ancak beyaz bir arka plan ekler."
-            },
-            why: {
-                title: "PNG Görüntüleri Neden Sıkıştırılır?",
-                description: "PNG görüntülerini sıkıştırmak birkaç avantaj sunar:",
-                benefits: [
-                    "Web sitelerinin daha hızlı yüklenme süresi",
-                    "Depolama alanından tasarruf",
-                    "Dosya paylaşımında daha az bant genişliği kullanımı",
-                    "Mobil cihazlarda daha iyi kullanıcı deneyimi",
-                    "Daha iyi SEO performansı (Google sayfa hızını dikkate alır)"
-                ]
-            },
-            compression: {
-                title: "Kayıplı ve Kayıpsız Sıkıştırma",
-                lossy: {
-                    title: "Kayıplı Sıkıştırma",
-                    description: "Kayıplı sıkıştırma, dosya boyutunu küçültmek için bazı görüntü verilerini kalıcı olarak kaldırır. Bu, daha küçük dosyalar sağlar ancak düşük ayarlarda kalite düşebilir."
-                },
-                lossless: {
-                    title: "Kayıpsız Sıkıştırma",
-                    description: "Kayıpsız sıkıştırma, görüntü verilerini kaldırmadan dosya boyutunu küçültür. Orijinal kalitenin %100'ünü korur ancak kayıplı sıkıştırmaya göre daha büyük dosyalara neden olur."
-                }
-            },
-            tips: {
-                title: "En İyi Sonuçlar İçin İpuçları",
-                tips: [
-                    "Fotoğraflar ve karmaşık görüntüler için %80-90 kalitede kayıplı sıkıştırma genellikle ideal bir denge sağlar",
-                    "Grafikler, logolar veya metinli görüntüler için netliği korumak amacıyla kayıpsız sıkıştırma kullanın",
-                    "Kullanım durumunuz için şeffaflık önemliyse 'Şeffaflığı Koru' seçeneğini açık bırakın",
-                    "Kalitenin beklentilerinizi karşıladığından emin olmak için sıkıştırılmış görüntüyü indirmeden önce önizleyin",
-                    "Ek düzenleme gerektiren görüntüler için yüksek kalite (%90 veya üzeri) kullanın"
-                ]
-            }
+            description: "Vektör SVG dosyalarını raster PNG görüntülerine dönüştürme",
+            metaTitle: "SVG'yi PNG'ye Dönüştürme | Görüntü Araçları",
+            metaDescription: "Özel boyutlarla vektör SVG grafiklerini raster PNG görüntülerine dönüştürme",
+            metaKeywords: "SVG'den PNG'ye, vektörden rastere, görüntü dönüştürme, grafik tasarım"
         },
         pngToBase64: {
             title: "PNG'yi Base64'e Dönüştürme",
-            description: "PNG görüntülerini web sitelerine ve uygulamalara gömmek için Base64 kodlu dizelere dönüştürün",
-            toolTitle: "PNG'den Base64'e Dönüştürücü",
-            toolDescription: "Base64 kodlu bir dizeye dönüştürmek için bir PNG görüntüsü yükleyin.",
-            why: {
-                title: "PNG Neden Base64'e Dönüştürülür?",
-                description: "PNG'yi Base64'e dönüştürmek çeşitli amaçlar için faydalıdır:",
-                reasons: [
-                    "Harici dosyalar olmadan doğrudan HTML, CSS veya JavaScript'e görüntü gömme",
-                    "Küçük görüntüler için HTTP isteklerini azaltarak sayfa yükleme performansını iyileştirme",
-                    "Satır içi kullanım için veri URI'lerinde görüntü kullanımı",
-                    "Görüntü verilerini JSON veya diğer metin formatlarında saklama",
-                    "Yalnızca metin verisi kabul eden API'ler aracılığıyla görüntü gönderme"
-                ]
-            },
-            usage: {
-                title: "Base64 Görüntüler Nasıl Kullanılır",
-                html: {
-                    title: "HTML'de",
-                    description: "Img etiketinin src özniteliğinde Base64 dizesini kullanın:"
-                },
-                css: {
-                    title: "CSS'de",
-                    description: "Base64 dizesini arka plan görüntüsü olarak kullanın:"
-                },
-                js: {
-                    title: "JavaScript'te",
-                    description: "Base64 verileriyle bir görüntü elementi oluşturun:"
-                }
-            },
-            considerations: {
-                title: "Önemli Hususlar",
-                considerations: [
-                    "Base64 kodlaması dosya boyutunu yaklaşık %33 artırır",
-                    "Kod şişmesini önlemek için küçük görüntüler (10 KB'den az) için daha uygundur",
-                    "HTML/CSS/JS dosyalarından ayrı olarak önbelleğe alınamaz",
-                    "Büyük görüntüler başlangıç sayfa yükleme süresini artırabilir"
-                ]
-            }
+            description: "Web sayfalarına gömmek için PNG görüntülerini Base64 kodlamasına dönüştürme",
+            metaTitle: "PNG'yi Base64'e Dönüştürme | Görüntü Araçları",
+            metaDescription: "Web gömme için PNG görüntülerini Base64 dizelerine dönüştürme",
+            metaKeywords: "PNG'den Base64'e, görüntü kodlama, web geliştirme, görüntü gömme"
         },
         base64ToPng: {
             title: "Base64'ü PNG'ye Dönüştürme",
-            description: "Base64 kodlu bir dizeyi tekrar PNG görüntüsüne dönüştürün",
-            toolTitle: "Base64'ten PNG'ye Dönüştürücü",
-            toolDescription: "Base64 kodlu bir dizeyi PNG görüntüsüne geri dönüştürmek için yapıştırın.",
-            options: {
-                input: "Base64 Dizesi",
-                inputHint: "Base64 kodlu dizeyi buraya yapıştırın. Veri URI öneki dahil veya hariç olabilir."
-            },
-            why: {
-                title: "Base64 Neden PNG'ye Dönüştürülür?",
-                description: "Base64'ü PNG'ye dönüştürmek şu durumlarda faydalıdır:",
-                reasons: [
-                    "HTML, CSS veya JavaScript'ten gömülü görüntüleri çıkarma",
-                    "Gömülü görüntüleri ayrı dosyalar olarak kaydetme",
-                    "Base64'te saklanan görüntüleri işleme veya düzenleme",
-                    "Base64 kodlaması kullanan API'lerden alınan verileri dönüştürme",
-                    "Gömülü görüntülerin içeriğini hata ayıklama veya doğrulama"
-                ]
-            },
-            finding: {
-                title: "Base64 Görüntüleri Bulma",
-                description: "Base64 kodlu görüntüler çeşitli yerlerde bulunabilir:",
-                sources: [
-                    "'data:image/' ile başlayan src özniteliklerine sahip img etiketlerini bulmak için HTML kaynak kodunu kontrol edin",
-                    "Veri URI'leri ile background-image özelliklerini kontrol etmek için CSS dosyalarını inceleyin",
-                    "Görüntü verilerini içeren dize değişkenleri için JavaScript kodunu gözden geçirin",
-                    "Görüntü verilerini içeren API yanıtlarını araştırın"
-                ]
-            }
+            description: "Base64 ile kodlanmış görüntü dizelerini tekrar PNG dosyalarına dönüştürme",
+            metaTitle: "Base64'ü PNG'ye Dönüştürme | Görüntü Araçları",
+            metaDescription: "Base64 görüntü dizelerini tekrar PNG görüntü dosyalarına dönüştürme",
+            metaKeywords: "Base64'ten PNG'ye, görüntü kod çözme, web geliştirme, görüntü dönüştürme"
+        },
+        changeColors: {
+            title: "PNG'de Renkleri Değiştirme",
+            description: "PNG görüntülerindeki belirli renkleri yeni renklerle değiştirme",
+            metaTitle: "PNG'de Renkleri Değiştirme | Görüntü Araçları",
+            metaDescription: "PNG görüntülerindeki belirli renkleri kolayca yeni renklerle değiştirme",
+            metaKeywords: "görüntü renklerini değiştirme, renk değiştirme, PNG düzenleme, görüntü renk değiştirici, renk takası"
+        },
+        changeTone: {
+            title: "Renk Tonunu Değiştirme",
+            description: "Sanatsal efektler için görüntülerinize renk tonları ve gölgeler uygulama",
+            metaTitle: "PNG Renk Tonunu Değiştirme | Görüntü Araçları",
+            metaDescription: "Sanatsal efektler için PNG görüntülerinize renk tonları ve gölgeler uygulama",
+            metaKeywords: "renk tonu, görüntü tonlama, sanatsal efektler, renk kaplama, fotoğraf filtresi"
+        },
+        addNoise: {
+            title: "PNG'ye Gürültü Ekleme",
+            description: "Sanatsal stil için PNG görüntülerinize film tanecikleri veya gürültü efektleri ekleme",
+            metaTitle: "PNG'ye Gürültü Ekleme | Görüntü Araçları",
+            metaDescription: "Sanatsal stil için PNG görüntülerinize film tanecikleri veya gürültü efektleri ekleme",
+            metaKeywords: "gürültü ekleme, film tanecikleri, görüntü dokusu, sanatsal filtre, vintage fotoğraf efekti"
+        },
+        resize: {
+            title: "Görüntü Boyutunu Değiştirme",
+            description: "Kaliteyi korurken görüntüleri tam boyutlara yeniden boyutlandırma",
+            metaTitle: "Görüntüleri Yeniden Boyutlandırma | Görüntü Araçları",
+            metaDescription: "Kaliteyi korurken görüntülerinizi tam boyutlara kolayca yeniden boyutlandırma",
+            metaKeywords: "görüntü boyutunu değiştirme, görüntü boyutunu ayarlama, görüntü ölçeklendirme, görüntü boyutları, görüntü yeniden boyutlandırma"
+        },
+        rotate: {
+            title: "Döndürme ve Çevirme",
+            description: "Doğru yönlendirme için görüntüleri döndürme ve çevirme",
+            metaTitle: "Görüntüleri Döndürme ve Çevirme | Görüntü Araçları",
+            metaDescription: "Görüntüleri herhangi bir açıda kolayca döndürme ve yatay veya dikey olarak çevirme",
+            metaKeywords: "görüntü döndürme, görüntü çevirme, görüntü yönlendirme, görüntü döndürme, dikey çevirme"
+        },
+        crop: {
+            title: "Görüntü Kırpma",
+            description: "İstenmeyen alanları kaldırmak ve önemli içeriğe odaklanmak için görüntüleri kırpma",
+            metaTitle: "Görüntüleri Kırpma | Görüntü Araçları",
+            metaDescription: "Kompozisyonu iyileştirmek için istenmeyen alanları kaldırmak üzere görüntüleri kırpma",
+            metaKeywords: "görüntü kırpma, görüntü kesme, arkaplan kaldırma, görüntü kompozisyonu"
+        },
+        addText: {
+            title: "Görüntüye Metin Ekleme",
+            description: "Görüntülerinize özel metin, altyazı veya filigran ekleme",
+            metaTitle: "Görüntülere Metin Ekleme | Görüntü Araçları",
+            metaDescription: "Kolay biçimlendirme seçenekleriyle görüntülerinize özel metin, altyazı ve filigran ekleme",
+            metaKeywords: "görüntüye metin ekleme, görüntü altyazısı, filigran, metin kaplama, görüntü notu"
+        },
+        addBorder: {
+            title: "Kenarlık Ekleme",
+            description: "Çeşitli stiller ve renklerle görüntülerinize özel kenarlıklar ekleme",
+            metaTitle: "Görüntülere Kenarlık Ekleme | Görüntü Araçları",
+            metaDescription: "Özel kenarlıklar, çerçeveler ve efektlerle görüntülerinizi geliştirme",
+            metaKeywords: "görüntü kenarlığı ekleme, fotoğraf çerçevesi, görüntü çerçeveleme, kenarlık stili, görüntü iyileştirme"
+        },
+        addWatermark: {
+            title: "Filigran Ekleme",
+            description: "Fotoğraflarınızı korumak için metin veya görüntü filigranı ekleme",
+            metaTitle: "Görüntülere Filigran Ekleme | Görüntü Araçları",
+            metaDescription: "Görüntülerinizi korumak ve markalamak için metin veya görüntü filigranı ekleme",
+            metaKeywords: "filigran ekleme, görüntü koruma, markalama, telif hakkı, görüntü güvenliği"
         }
     }
 }

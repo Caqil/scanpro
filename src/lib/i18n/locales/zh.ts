@@ -1073,511 +1073,140 @@ export default {
         }
     },
     imageTools: {
-        title: "图片工具",
-        description: "免费在线转换、编辑和处理图片的工具集",
-        headerSection: "图片处理工具",
-        headerDescription: "免费在线转换、编辑和处理图片的工具",
-        supportedFormats: "支持的格式",
-        howToUse: {
-            title: "如何使用我们的图片工具",
-            step1: {
-                title: "选择工具",
-                description: "从我们丰富的工具库中选择您需要的图片处理工具"
-            },
-            step2: {
-                title: "上传图片",
-                description: "上传需要处理的图片。我们支持PNG、JPG和WebP格式"
-            },
-            step3: {
-                title: "下载",
-                description: "一键处理并下载结果图片"
-            }
-        },
-        noiseGenerator: {
-            title: "PNG添加噪点",
-            description: "为PNG图片添加胶片颗粒或噪点效果以实现艺术风格",
-            toolTitle: "PNG噪点生成器",
-            toolDescription: "上传PNG图片添加噪点或颗粒效果",
-            options: {
-                noiseAmount: "噪点强度",
-                noiseAmountHint: "数值越高噪点越明显。如需微妙效果，建议使用30%以下值",
-                noiseType: "噪点类型",
-                noiseTypeHint: "高斯噪点添加细腻颗粒，椒盐噪点添加随机黑白像素点",
-                gaussianNoise: "高斯噪点(平滑)",
-                saltPepperNoise: "椒盐噪点(斑点)",
-                monochrome: "单色噪点",
-                monochromeHint: "启用后噪点仅为黑白两色，禁用则使用彩色噪点"
-            },
-            why: {
-                title: "为什么要给图片添加噪点？",
-                description: "为图片添加噪点或颗粒效果有多种艺术和实用用途：",
-                reasons: [
-                    "营造复古或胶片质感",
-                    "为平面化或数字感过强的图片增加纹理",
-                    "减少渐变区域的色带现象",
-                    "创建破损或做旧效果",
-                    "为简约设计增加视觉趣味",
-                    "模拟低光摄影效果"
-                ]
-            },
-            types: {
-                title: "噪点效果类型",
-                gaussian: {
-                    title: "高斯噪点",
-                    description: "通过随机改变像素值创建平滑的胶片颗粒感。其分布遵循正态(高斯)曲线，能产生类似胶片颗粒的自然效果"
-                },
-                saltPepper: {
-                    title: "椒盐噪点",
-                    description: "在图片中添加随机黑白像素点，产生斑点效果。类似细小灰尘颗粒或瑕疵的外观，呈现更粗糙的质感"
-                }
-            },
-            tips: {
-                title: "最佳实践技巧",
-                tips: [
-                    "如需微妙胶片颗粒，使用10-20%强度的高斯噪点",
-                    "单色噪点更接近经典胶片颗粒效果",
-                    "5-15%强度的椒盐噪点可为纯色区域增加有趣纹理",
-                    "彩色噪点能为有限色调的图片增添独特美感",
-                    "50%以上的高强度噪点可创造戏剧化的风格效果",
-                    "制作复古照片效果时，建议将噪点与棕褐色调或褪色效果结合使用"
-                ]
-            }
-        },
-        makeTransparent: {
-            title: "PNG透明化处理",
-            description: "将PNG图片中的指定颜色替换为透明",
-            toolTitle: "PNG透明化工具",
-            toolDescription: "上传PNG图片并选择需要透明化的颜色",
-            options: {
-                color: "设为透明的颜色：",
-                colorPickerHint: "点击色块使用取色器，或输入十六进制颜色代码(如#ff0000)"
-            },
-            how: {
-                title: "如何制作透明PNG",
-                description: "本工具通过移除图片中特定颜色来创建透明PNG，特别适用于：",
-                uses: [
-                    "去除Logo的白色背景",
-                    "制作透明背景的产品图片",
-                    "为网页设计准备需要透明度的图形素材",
-                    "创建演示文稿或营销材料的叠加层"
-                ]
-            },
-            tips: {
-                title: "最佳实践技巧",
-                choosing: {
-                    title: "颜色选择技巧",
-                    description: "为获得最佳效果，请选择与需要保留元素区别明显的颜色。工具会匹配小容差范围内的相似颜色"
-                },
-                complex: {
-                    title: "复杂图片处理",
-                    description: "对于含渐变或阴影的图片，可能需要使用不同颜色选择进行多次处理"
-                }
-            }
-        },
-        changeColors: {
-            title: "PNG换色工具",
-            description: "将PNG图片中的特定颜色替换为新颜色",
-            toolTitle: "PNG颜色替换器",
-            toolDescription: "上传PNG图片修改其中的特定颜色",
-            options: {
-                mappings: "颜色映射",
-                addColor: "添加颜色",
-                sourceColor: "源颜色",
-                targetColor: "目标颜色",
-                tolerance: "颜色匹配容差",
-                toleranceHint: "数值越高匹配的相似颜色范围越广，数值越低则要求颜色匹配越精确"
-            },
-            how: {
-                title: "如何修改PNG图片颜色",
-                steps: [
-                    "上传PNG图片",
-                    "通过取色器或输入十六进制代码选择要替换的颜色",
-                    "选择替换后的新颜色",
-                    "调整容差参数控制颜色匹配严格度",
-                    "如需替换多组颜色可继续添加(最多5组颜色对)",
-                    "点击\"处理图片\"按钮应用修改"
-                ]
-            },
-            uses: {
-                title: "工具使用场景",
-                description: "颜色替换工具适用于多种图片编辑需求：",
-                uses: [
-                    "修改图标或图形的配色方案",
-                    "使艺术作品颜色符合品牌色系",
-                    "创建不同色彩主题的图片变体",
-                    "修正剪贴画和插图中的颜色",
-                    "无需复杂软件即可更改背景或前景色",
-                    "制作季节性/主题性图片版本"
-                ]
-            },
-            tips: {
-                title: "最佳实践技巧",
-                tips: [
-                    "精确颜色替换建议使用较低容差值(10-20)",
-                    "替换相似色系建议使用较高容差值(30-50)",
-                    "最适合处理Logo、剪贴画等纯色图片",
-                    "照片和渐变图片可能效果不佳",
-                    "PNG透明度在颜色替换过程中会保留",
-                    "复杂修改建议逐个颜色处理"
-                ]
-            }
-        },
-        changeTone: {
-            title: "PNG色调调整",
-            description: "为PNG图片应用色调效果实现艺术风格",
-            toolTitle: "PNG色调调节器",
-            toolDescription: "上传PNG图片应用色调效果",
-            options: {
-                preset: "预设色调",
-                presetHint: "选择预设或使用\"自定义颜色\"定义专属色调",
-                custom: "自定义颜色",
-                sepia: "棕褐色",
-                coolBlue: "冷蓝色",
-                forestGreen: "森林绿",
-                warmRed: "暖红色",
-                richPurple: "深紫色",
-                cyan: "青色",
-                vintage: "复古色",
-                toneColor: "色调颜色",
-                toneColorHint: "选择用于着色的颜色",
-                intensity: "效果强度",
-                intensityHint: "数值越高色彩效果越强烈，数值越低效果越微妙",
-                preserveGrays: "保留灰度",
-                preserveGraysHint: "启用后将保持原图中的黑白灰区域不受影响"
-            },
-            what: {
-                title: "什么是色彩调色？",
-                description: "色彩调色(或称着色)是通过为图片叠加颜色来整体改变其色彩倾向的技术。这能创造统一的视觉效果，显著改变图片的氛围和感觉。",
-                examples: "常见应用包括：棕褐色调营造复古效果，蓝色调创造冷冽/夜晚氛围，暖色调(红/橙)表现日落或怀旧情感。"
-            },
-            popular: {
-                title: "流行色调效果",
-                sepia: {
-                    title: "棕褐色调",
-                    description: "创造温暖的棕褐色调， reminiscent of vintage photographs. Perfect for creating an aged, nostalgic feel."
-                },
-                blue: {
-                    title: "蓝/青色调",
-                    description: "营造冷静平和的氛围。常用于夜景、冬季主题或表现宁静安详的情绪"
-                },
-                green: {
-                    title: "绿色调",
-                    description: "增添自然质朴感。适用于环保主题、森林场景，或在较高强度下创造矩阵风格的数码效果"
-                },
-                red: {
-                    title: "红/橙色调",
-                    description: "为图片注入温暖和活力。适用于日落效果、营造温暖感受，或为暗调场景增加戏剧张力"
-                }
-            },
-            tips: {
-                title: "最佳实践技巧",
-                tips: [
-                    "微妙效果建议使用10-30%的强度值",
-                    "\"保留灰度\"选项通过保持黑白区域来维护图片对比度",
-                    "尝试不同预设寻找最适合图片氛围的效果",
-                    "强烈效果可使用70-100%的强度值",
-                    "互补色(色轮上相对的颜色)能创造有趣的对比效果",
-                    "PNG透明度在色调调整过程中会保留"
-                ]
-            }
-        },
-        pngToJpg: {
-            title: "PNG转JPG",
-            description: "将PNG图片转换为JPG格式并自定义质量参数",
-            toolTitle: "PNG转JPG转换器",
-            toolDescription: "上传PNG图片转换为JPG格式",
-            options: {
-                quality: "JPEG质量",
-                qualityHint: "高质量产生较大文件，低质量减小文件但可能出现压缩瑕疵"
-            },
-            why: {
-                title: "为什么要转换PNG为JPG？",
-                description: "PNG转JPG的多种实用场景：",
-                reasons: [
-                    "获得更小文件加快网页加载",
-                    "更好的旧系统兼容性",
-                    "根据需求灵活调整压缩级别",
-                    "减少图片库存储空间"
-                ]
-            },
-            differences: {
-                title: "PNG与JPG核心区别",
-                png: {
-                    title: "PNG特性",
-                    description: "支持透明度和无损压缩，适合边缘锐利的图形和透明背景"
-                },
-                jpg: {
-                    title: "JPG特性",
-                    description: "采用有损压缩，适合照片等复杂图像，在可接受轻微质量损失的情况下获得较小文件"
-                }
-            }
-        },
-        jpgToPng: {
-            title: "JPG转PNG",
-            description: "将JPG图片转换为支持透明度的PNG格式",
-            toolTitle: "JPG转PNG转换器",
-            toolDescription: "上传JPG图片转换为PNG格式",
-            why: {
-                title: "为什么要转换JPG为PNG？",
-                description: "JPG转PNG的多种优势：",
-                reasons: [
-                    "更高质量无压缩瑕疵",
-                    "支持图片透明度",
-                    "无损格式保留图像细节",
-                    "更适合含文字或锐利边缘的图片"
-                ]
-            },
-            differences: {
-                title: "JPG与PNG核心区别",
-                jpg: {
-                    title: "JPG特性",
-                    description: "采用有损压缩，适合文件大小比完美画质更重要的照片和复杂图像"
-                },
-                png: {
-                    title: "PNG特性",
-                    description: "采用无损压缩并支持透明度。最适合需要高质量、锐利边缘或透明背景的图像"
-                }
-            }
-        },
-        pngToWebp: {
-            title: "PNG转WebP",
-            description: "将PNG转换为WebP格式以获得更好压缩率和网页性能",
-            toolTitle: "PNG转WebP转换器",
-            toolDescription: "上传PNG图片转换为可调质量的WebP格式",
-            options: {
-                quality: "WebP质量",
-                qualityHint: "高质量产生较大文件，低质量减小文件但可能出现压缩瑕疵"
-            },
-            why: {
-                title: "为什么要转换PNG为WebP？",
-                description: "PNG转WebP的多种优势：",
-                reasons: [
-                    "WebP在保持画质的同时提供比PNG更好的压缩率",
-                    "更小文件加快网页加载速度",
-                    "WebP同时支持无损和有损压缩",
-                    "与PNG一样支持Alpha通道透明度",
-                    "相比PNG最多可减少30%文件大小"
-                ]
-            },
-            differences: {
-                title: "PNG与WebP核心区别",
-                png: {
-                    title: "PNG特性",
-                    description: "采用无损压缩保留所有图像数据。全浏览器和平台兼容，但文件较大"
-                },
-                webp: {
-                    title: "WebP特性",
-                    description: "提供有损/无损压缩且文件显著更小。与PNG一样支持透明度但采用更先进的压缩算法，是网页使用的理想选择"
-                }
-            },
-            browser: {
-                title: "浏览器兼容性",
-                description: "虽然WebP性能优越，但需注意浏览器支持情况：",
-                support: [
-                    "Chrome、Edge、Firefox和Opera全面支持",
-                    "Safari从14版本(macOS Big Sur)开始支持",
-                    "针对旧版浏览器建议使用备用图片或picture元素"
-                ]
-            }
-        },
-        webpToPng: {
-            title: "WebP转PNG",
-            description: "将WebP图片转换为PNG格式以获得更好兼容性和编辑选项",
-            toolTitle: "WebP转PNG转换器",
-            toolDescription: "上传WebP图片转换为PNG格式",
-            why: {
-                title: "为什么要转换WebP为PNG？",
-                description: "WebP转PNG的多种实用场景：",
-                reasons: [
-                    "更好的旧版软件和浏览器兼容性",
-                    "无损质量便于图形软件编辑",
-                    "PNG更广泛被印刷出版业接受",
-                    "保留WebP图片的透明度",
-                    "在多数图像编辑应用中更易操作"
-                ]
-            },
-            differences: {
-                title: "WebP与PNG格式区别",
-                webp: {
-                    title: "WebP特性",
-                    description: "由Google开发的现代图像格式，具有卓越压缩率。提供有损/无损压缩，文件比传统格式更小"
-                },
-                png: {
-                    title: "PNG特性",
-                    description: "广泛支持的图像格式，采用无损压缩。兼容几乎所有软件、设备和平台，具有最佳通用性"
-                }
-            },
-            when: {
-                title: "何时使用本转换",
-                description: "以下情况建议转换WebP为PNG：",
-                situations: [
-                    "需要使用不支持WebP的软件编辑图片时",
-                    "分享给使用旧版浏览器/软件的用户时",
-                    "用于印刷目的(多数印刷服务偏好PNG)",
-                    "当图像质量比文件大小更重要时"
-                ]
-            }
-        },
-        svgToPng: {
-            title: "SVG转PNG",
-            description: "将矢量SVG图形转换为自定义尺寸的位图PNG图片",
-            toolTitle: "SVG转PNG转换器",
-            toolDescription: "上传SVG文件转换为PNG图片",
-            options: {
-                width: "宽度(像素)",
-                height: "高度(像素)",
-                dimensionsHint: "设置输出尺寸。SVG将按比例缩放至该尺寸"
-            },
-            why: {
-                title: "为什么要转换SVG为PNG？",
-                description: "SVG转PNG的多种应用场景：",
-                reasons: [
-                    "为不支持SVG的平台创建位图",
-                    "确保不同浏览器设备显示一致",
-                    "生成矢量图形的缩略图或预览图",
-                    "创建固定尺寸图片(如社交媒体专用)",
-                    "防止原始矢量作品被修改"
-                ]
-            },
-            differences: {
-                title: "SVG与PNG格式区别",
-                svg: {
-                    title: "SVG特性",
-                    description: "可缩放矢量图形使用数学公式定义形状，具有分辨率无关性，完美适配响应式设计和任意尺寸的高质量印刷"
-                },
-                png: {
-                    title: "PNG特性",
-                    description: "便携式网络图形是由像素组成的位图格式。具有固定分辨率但画质优异，支持透明度，全应用程序和平台通用"
-                }
-            },
-            tips: {
-                title: "最佳实践技巧",
-                tips: [
-                    "根据实际用途选择合适的尺寸",
-                    "清晰图标建议使用原始SVG viewBox的整数倍尺寸",
-                    "含精细细节的SVG建议使用较大尺寸以保留细节",
-                    "网络使用时需权衡质量与文件大小",
-                    "PNG支持透明度，SVG透明区域将得以保留"
-                ]
-            }
+        title: "图像工具",
+        description: "用于转换、编辑和变换您的图像的免费在线工具",
+        categories: {
+            conversion: "格式转换",
+            editing: "图像编辑",
+            enhancement: "图像增强",
+            optimization: "优化",
+            advanced: "高级工具"
         },
         compressPng: {
-            title: "PNG图片压缩",
-            description: "减小PNG文件体积同时保持画质，加速网页加载和文件分享",
-            toolTitle: "PNG压缩工具",
-            toolDescription: "上传PNG图片使用可调质量设置进行压缩",
-            options: {
-                quality: "质量",
-                qualityHint: "高质量产生较大文件，低质量减小文件但可能出现压缩瑕疵",
-                lossless: "使用无损压缩",
-                losslessHint: "无损压缩保留所有图像细节但文件大于有损压缩",
-                preserveTransparency: "保留透明度",
-                preserveTransparencyHint: "保持PNG透明区域。禁用会添加白色背景但文件更小"
-            },
-            why: {
-                title: "为什么要压缩PNG图片？",
-                description: "压缩PNG图片的多种好处：",
-                benefits: [
-                    "加快网页加载速度",
-                    "减少存储空间占用",
-                    "降低文件分享时的带宽消耗",
-                    "提升移动设备用户体验",
-                    "改善SEO表现(Google考量网页速度)"
-                ]
-            },
-            compression: {
-                title: "有损 vs 无损压缩",
-                lossy: {
-                    title: "有损压缩",
-                    description: "通过永久移除部分图像数据减小文件。文件更小但可能降低画质，特别是在低质量设置下"
-                },
-                lossless: {
-                    title: "无损压缩",
-                    description: "在不移除图像数据的情况下减小文件。100%保留原始画质但文件大于有损压缩"
-                }
-            },
-            tips: {
-                title: "最佳实践技巧",
-                tips: [
-                    "照片和复杂图像建议使用80-90%质量的有损压缩",
-                    "图形、Logo或含文字图片建议使用无损压缩保持锐度",
-                    "若透明度对使用场景重要，请确保启用\"保留透明度\"选项",
-                    "下载前预览压缩效果确保符合质量预期",
-                    "需要进一步编辑的图片建议使用90%以上高质量"
-                ]
-            }
+            title: "压缩PNG",
+            description: "在保持质量的同时减小PNG文件大小",
+            metaTitle: "压缩PNG图像 | 图像工具",
+            metaDescription: "在保持质量的同时减小PNG文件大小，以加快网站加载速度和高效存储",
+            metaKeywords: "压缩PNG，减小图像大小，优化图像，图像压缩，无损压缩，文件大小减小"
+        },
+        makeTransparent: {
+            title: "使PNG透明",
+            description: "将PNG文件中的任何颜色替换为透明",
+            metaTitle: "使PNG透明 | 图像工具",
+            metaDescription: "快速将PNG文件中的任何颜色替换为透明",
+            metaKeywords: "移除背景，透明PNG，颜色替换，图像编辑，背景移除，透明图像"
+        },
+        pngToJpg: {
+            title: "将PNG转换为JPG",
+            description: "使用可自定义的质量设置将PNG图像转换为JPG格式",
+            metaTitle: "将PNG转换为JPG | 图像工具",
+            metaDescription: "使用可调整的质量将PNG图像转换为JPG格式",
+            metaKeywords: "PNG转JPG，图像转换，图像格式，有损压缩，图像质量"
+        },
+        jpgToPng: {
+            title: "将JPG转换为PNG",
+            description: "支持透明度将JPG图像转换为PNG格式",
+            metaTitle: "将JPG转换为PNG | 图像工具",
+            metaDescription: "以无损质量将JPG图像转换为PNG格式",
+            metaKeywords: "JPG转PNG，图像转换，透明度，无损格式，图像质量"
+        },
+        pngToWebp: {
+            title: "将PNG转换为WebP",
+            description: "将PNG图像转换为WebP格式以提升网页性能",
+            metaTitle: "将PNG转换为WebP | 图像工具",
+            metaDescription: "将PNG图像转换为WebP格式以减小文件大小",
+            metaKeywords: "PNG转WebP，图像转换，网页优化，图像压缩"
+        },
+        webpToPng: {
+            title: "将WebP转换为PNG",
+            description: "将WebP图像转换为PNG格式以提高兼容性",
+            metaTitle: "将WebP转换为PNG | 图像工具",
+            metaDescription: "以完全兼容性将WebP图像转换为PNG格式",
+            metaKeywords: "WebP转PNG，图像转换，图像格式，兼容性"
+        },
+        svgToPng: {
+            title: "将SVG转换为PNG",
+            description: "将矢量SVG文件转换为光栅PNG图像",
+            metaTitle: "将SVG转换为PNG | 图像工具",
+            metaDescription: "将矢量SVG图形转换为具有自定义尺寸的光栅PNG图像",
+            metaKeywords: "SVG转PNG，矢量转光栅，图像转换，图形设计"
         },
         pngToBase64: {
-            title: "PNG转Base64",
-            description: "将PNG图片转换为Base64编码字符串，便于嵌入网页和应用",
-            toolTitle: "PNG转Base64转换器",
-            toolDescription: "上传PNG图片转换为Base64编码字符串",
-            why: {
-                title: "为什么要转换PNG为Base64？",
-                description: "PNG转Base64的多种用途：",
-                reasons: [
-                    "无需外部文件直接在HTML/CSS/JavaScript中嵌入图片",
-                    "减少小图片的HTTP请求以提升页面加载性能",
-                    "在数据URI中内联使用图片",
-                    "将图像数据存储在JSON等文本格式中",
-                    "通过仅接受文本数据的API发送图片"
-                ]
-            },
-            usage: {
-                title: "Base64图片使用方法",
-                html: {
-                    title: "HTML中使用",
-                    description: "在img标签的src属性中使用Base64字符串："
-                },
-                css: {
-                    title: "CSS中使用",
-                    description: "将Base64字符串作为背景图使用："
-                },
-                js: {
-                    title: "JavaScript中使用",
-                    description: "使用Base64数据创建图片元素："
-                }
-            },
-            considerations: {
-                title: "重要注意事项",
-                considerations: [
-                    "Base64编码会使文件体积增加约33%",
-                    "最适合小图片(10KB以下)避免代码膨胀",
-                    "无法与HTML/CSS/JS文件分开缓存",
-                    "大图片可能增加初始页面加载时间"
-                ]
-            }
+            title: "将PNG转换为Base64",
+            description: "将PNG图像转换为Base64编码以嵌入网页",
+            metaTitle: "将PNG转换为Base64 | 图像工具",
+            metaDescription: "将PNG图像转换为Base64字符串以用于网页嵌入",
+            metaKeywords: "PNG转Base64，图像编码，网页开发，图像嵌入"
         },
         base64ToPng: {
-            title: "Base64转PNG",
-            description: "将Base64编码字符串转换回PNG图片",
-            toolTitle: "Base64转PNG转换器",
-            toolDescription: "粘贴Base64编码字符串转换回PNG图片",
-            options: {
-                input: "Base64字符串",
-                inputHint: "在此粘贴Base64编码字符串。可包含或省略data URI前缀"
-            },
-            why: {
-                title: "为什么要转换Base64为PNG？",
-                description: "Base64转PNG的典型场景：",
-                reasons: [
-                    "从HTML/CSS/JavaScript中提取嵌入图片",
-                    "将内嵌图片另存为独立文件",
-                    "处理或编辑以Base64存储的图片",
-                    "转换API返回的Base64编码图像数据",
-                    "调试或检查内嵌图片内容"
-                ]
-            },
-            finding: {
-                title: "如何查找Base64图片",
-                description: "Base64编码图片可能存在于：",
-                sources: [
-                    "HTML源码中以'data:image/'开头的img标签src属性",
-                    "CSS文件中含数据URI的background-image属性",
-                    "JavaScript代码中包含图片数据的字符串变量",
-                    "包含图像数据的API响应"
-                ]
-            }
+            title: "将Base64转换为PNG",
+            description: "将Base64编码的图像字符串转换回PNG文件",
+            metaTitle: "将Base64转换为PNG | 图像工具",
+            metaDescription: "将Base64图像字符串转换回PNG图像文件",
+            metaKeywords: "Base64转PNG，图像解码，网页开发，图像转换"
+        },
+        changeColors: {
+            title: "更改PNG中的颜色",
+            description: "将PNG图像中的特定颜色替换为新颜色",
+            metaTitle: "更改PNG中的颜色 | 图像工具",
+            metaDescription: "轻松将PNG图像中的特定颜色替换为新颜色",
+            metaKeywords: "更改图像颜色，颜色替换，PNG编辑，图像颜色更换，颜色交换"
+        },
+        changeTone: {
+            title: "更改色调",
+            description: "为艺术效果将色调和色彩应用到您的图像",
+            metaTitle: "更改PNG色调 | 图像工具",
+            metaDescription: "为艺术效果将色调和色彩应用到您的PNG图像",
+            metaKeywords: "色调，图像调色，艺术效果，颜色叠加，照片滤镜"
+        },
+        addNoise: {
+            title: "为PNG添加噪点",
+            description: "为艺术风格将胶片颗粒或噪点效果添加到您的PNG图像",
+            metaTitle: "为PNG添加噪点 | 图像工具",
+            metaDescription: "为艺术风格将胶片颗粒或噪点效果添加到您的PNG图像",
+            metaKeywords: "添加噪点，胶片颗粒，图像纹理，艺术滤镜，复古照片效果"
+        },
+        resize: {
+            title: "调整图像大小",
+            description: "在保持质量的同时将图像调整为精确尺寸",
+            metaTitle: "调整图像大小 | 图像工具",
+            metaDescription: "在保持质量的同时轻松将图像调整为精确尺寸",
+            metaKeywords: "调整图像大小，更改图像尺寸，缩放图像，图像尺寸，图像大小调整"
+        },
+        rotate: {
+            title: "旋转与翻转",
+            description: "旋转和翻转图像以获得正确方向",
+            metaTitle: "旋转与翻转图像 | 图像工具",
+            metaDescription: "轻松将图像旋转到任意角度并水平或垂直翻转",
+            metaKeywords: "旋转图像，翻转图像，图像方向，转动图像，垂直翻转"
+        },
+        crop: {
+            title: "裁剪图像",
+            description: "裁剪图像以移除不需要的区域并专注于重要内容",
+            metaTitle: "裁剪图像 | 图像工具",
+            metaDescription: "裁剪图像以移除不需要的区域并改善构图",
+            metaKeywords: "裁剪图像，图像修剪，移除背景，图像构图"
+        },
+        addText: {
+            title: "为图像添加文本",
+            description: "为您的图像添加自定义文本、字幕或水印",
+            metaTitle: "为图像添加文本 | 图像工具",
+            metaDescription: "使用简单的格式选项为您的图像添加自定义文本、字幕和水印",
+            metaKeywords: "为图像添加文本，图像字幕，水印，文本叠加，图像注释"
+        },
+        addBorder: {
+            title: "添加边框",
+            description: "使用各种样式和颜色为您的图像添加自定义边框",
+            metaTitle: "为图像添加边框 | 图像工具",
+            metaDescription: "使用自定义边框、框架和效果增强您的图像",
+            metaKeywords: "添加图像边框，照片框架，图像框架，边框样式，图像增强"
+        },
+        addWatermark: {
+            title: "添加水印",
+            description: "为保护您的照片添加文本或图像水印",
+            metaTitle: "为图像添加水印 | 图像工具",
+            metaDescription: "为保护和品牌化您的图像添加文本或图像水印",
+            metaKeywords: "添加水印，图像保护，品牌化，版权，图像安全"
         }
     }
 }
