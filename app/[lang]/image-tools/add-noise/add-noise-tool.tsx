@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { addNoisePreview } from "@/lib/image-preview";
 
 export function AddNoiseTool() {
   const { t } = useLanguageStore();
@@ -92,6 +93,7 @@ export function AddNoiseTool() {
           monochrome
         }}
         renderOptions={renderOptions}
+        previewRenderer={addNoisePreview}
       />
       
       <div className="mt-12 space-y-6">

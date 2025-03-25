@@ -2,9 +2,8 @@
 "use client"
 import { useLanguageStore } from "@/src/store/store";
 import { LanguageLink } from "@/components/language-link";
-import { Badge } from "@/components/ui/badge";
-import { Sparkles } from "lucide-react";
 import { MagicCard } from "@/src/components/magicui/magic-card";
+import { Badge } from "./ui/badge";
 
 export function ImageToolsList() {
   const { t } = useLanguageStore();
@@ -329,10 +328,13 @@ export function ImageToolsList() {
                           <div className="text-base font-medium flex items-center gap-2">
                             {tool.name}
                             {tool.isNew && (
-                              <Badge className="bg-primary/20 text-primary-foreground text-xs" variant="outline">
-                                <Sparkles className="h-3 w-3 mr-1" />
-                                New
-                              </Badge>
+                              <Badge 
+                              variant="outline" 
+                              className="bg-primary/10 border-primary/20 text-primary-white text-xs px-1.5 py-0 ml-1.5 h-4"
+                            >
+                              {t('ui.new')}
+                            </Badge>
+                             
                             )}
                           </div>
                         </div>

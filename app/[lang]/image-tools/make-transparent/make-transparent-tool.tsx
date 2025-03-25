@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useLanguageStore } from "@/src/store/store";
+import { makeTransparentPreview } from "@/lib/image-preview";
 
 export function MakeTransparentTool() {
   const { t } = useLanguageStore();
@@ -58,7 +59,7 @@ export function MakeTransparentTool() {
         processEndpoint="image/make-transparent"
         fileTypes={["image/png"]}
         processOptions={{ color }}
-        
+        previewRenderer={makeTransparentPreview} 
         renderOptions={renderColorOptions}
       />
       

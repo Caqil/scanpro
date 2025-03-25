@@ -28,7 +28,7 @@ type Language = typeof SUPPORTED_LANGUAGES[number];
 
 // Helper function to get translation based on language
 function getTranslation(lang: string, key: string): string {
-  let translations = enTranslations;
+  let translations;
   
   // Check which language to use
   switch (lang) {

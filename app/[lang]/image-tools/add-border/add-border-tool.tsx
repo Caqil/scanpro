@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { addBorderPreview } from "@/lib/image-preview";
 
 export function AddBorderTool() {
   const { t } = useLanguageStore();
@@ -476,6 +477,7 @@ export function AddBorderTool() {
           shadowOffsetY
         }}
         renderOptions={renderOptions}
+        previewRenderer={addBorderPreview}
       />
       
       <div className="mt-12 space-y-6">

@@ -1,34 +1,5 @@
 import { Metadata } from "next";
 import MergePDFClient from "./merge-pdf-client";
-
-
-// import { LanguageLink } from "@/components/language-link";
-// import enTranslations from "@/src/lib/i18n/locales/en";
-// import idTranslations from "@/src/lib/i18n/locales/id";
-// import esTranslations from "@/src/lib/i18n/locales/es";
-// // Define supported languages
-// const SUPPORTED_LANGUAGES = ["en", "id", "es"];
-// type Language = typeof SUPPORTED_LANGUAGES[number];
-
-// // Helper function to get translation based on language
-// function getTranslation(lang: string, key: string): string {
-//   let translations = enTranslations;
-  
-//   if (lang === "id") {
-//     translations = idTranslations;
-//   }
-//   else if (lang === "es") {
-//     translations = esTranslations;
-//   }
-  
-//   const keys = key.split('.');
-//   const result = keys.reduce((obj, k) => 
-//     (obj && obj[k] !== undefined) ? obj[k] : undefined, 
-//     translations as any
-//   );
-  
-//   return result !== undefined ? result : key;
-// }
 import enTranslations from '@/src/lib/i18n/locales/en';
 import idTranslations from '@/src/lib/i18n/locales/id';
 import esTranslations from '@/src/lib/i18n/locales/es';
@@ -47,11 +18,9 @@ import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
 
 type Language = typeof SUPPORTED_LANGUAGES[number];
 
-// Helper function to get translation based on language
 function getTranslation(lang: string, key: string): string {
-  let translations = enTranslations;
+  let translations;
   
-  // Check which language to use
   switch (lang) {
     case "id":
       translations = idTranslations;

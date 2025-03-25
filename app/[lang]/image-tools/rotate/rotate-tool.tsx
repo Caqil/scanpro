@@ -14,6 +14,7 @@ import {
 import { RotateCw, RotateCcw, FlipHorizontal, FlipVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { rotateImagePreview } from "@/lib/image-preview";
 
 export function RotateImageTool() {
   const { t } = useLanguageStore();
@@ -116,6 +117,7 @@ export function RotateImageTool() {
           flipDirection
         }}
         renderOptions={renderOptions}
+        previewRenderer={rotateImagePreview}
       />
       
       <div className="mt-12 space-y-6">

@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { changeTonePreview } from "@/lib/image-preview";
 
 export function ChangeToneTool() {
   const { t } = useLanguageStore();
@@ -167,6 +168,7 @@ export function ChangeToneTool() {
           preset: presetMode
         }}
         renderOptions={renderOptions}
+        previewRenderer={changeTonePreview}
       />
       
       <div className="mt-12 space-y-6">

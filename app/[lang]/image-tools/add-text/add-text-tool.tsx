@@ -15,6 +15,7 @@ import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { AlignLeft, AlignCenter, AlignRight, AlignJustify } from "lucide-react";
+import { addTextPreview } from "@/lib/image-preview";
 
 export function AddTextTool() {
   const { t } = useLanguageStore();
@@ -508,6 +509,7 @@ export function AddTextTool() {
           shadowOffsetY
         }}
         renderOptions={renderOptions}
+        previewRenderer={addTextPreview}
       />
       
       <div className="mt-12 space-y-6">

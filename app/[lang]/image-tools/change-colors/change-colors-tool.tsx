@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguageStore } from "@/src/store/store";
 import { PlusCircle, MinusCircle } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
+import { changeColorsPreview } from "@/lib/image-preview";
 
 export function ChangeColorsTool() {
   const { t } = useLanguageStore();
@@ -161,6 +162,7 @@ export function ChangeColorsTool() {
           tolerance
         }}
         renderOptions={renderOptions}
+        previewRenderer={changeColorsPreview}
       />
       
       <div className="mt-12 space-y-6">

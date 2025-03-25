@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { resizeImagePreview } from "@/lib/image-preview";
 
 export function ResizeImageTool() {
   const { t } = useLanguageStore();
@@ -200,6 +201,7 @@ export function ResizeImageTool() {
         }}
         renderOptions={renderOptions}
         onImageLoaded={handleImageLoaded}
+        previewRenderer={resizeImagePreview}
       />
       
       <div className="mt-12 space-y-6">
