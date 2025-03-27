@@ -1,5 +1,5 @@
 // app/api/file/route.ts
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import { Readable } from "stream";
@@ -21,21 +21,8 @@ const ALLOWED_FOLDERS = [
   "processed-images"
 ];
 
-export async function GET(req: NextRequest) {
+export async function GET(req: Request) {
   try {
-    // API Key validation will be handled by middleware
-    // We can get the user ID from the request header that was set by the middleware
-    const apiKeyId = req.headers.get('x-api-key-id');
-    const userId = req.headers.get('x-user-id');
-
-    // If there's no user ID in the headers, the request didn't pass through our auth middleware
-    // This is just a double-check, as the middleware should have already handled authentication
-    if (!apiKeyId || !userId) {
-      // This route is being accessed directly without going through the middleware
-      // This should not happen if the middleware is properly configured
-      console.warn('File API accessed without proper authentication headers');
-    }
-
     // Get URL parameters
     const { searchParams } = new URL(req.url);
     const folder = searchParams.get("folder");
@@ -113,8 +100,6 @@ export async function GET(req: NextRequest) {
 
     const fileStream = fs.createReadStream(filePath);
     const readableStream = Readable.toWeb(fileStream) as ReadableStream;
-
-    // Log API usage - middleware will handle this for authenticated requests
 
     return new Response(readableStream, {
       headers: {
