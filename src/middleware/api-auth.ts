@@ -9,9 +9,53 @@ const prisma = new PrismaClient();
 const MAX_REQUESTS_PER_MINUTE = 60;
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute in milliseconds
 
+// List of public API routes that should be protected
+const PROTECTED_ROUTES = [
+    '/api/compress',
+    '/api/convert',
+    '/api/merge',
+    '/api/split',
+    '/api/ocr',
+    '/api/watermark',
+    '/api/unlock',
+    '/api/protect',
+    '/api/sign',
+    '/api/edit',
+    '/api/redact',
+    '/api/file',
+    '/api/v1'
+];
+
+// List of routes that should be exempted (like auth endpoints)
+const EXCLUDED_ROUTES = [
+    '/api/auth',
+    '/api/user',
+    // Add any other public endpoints that don't require API key auth
+    '/api/webhooks'
+];
+
 export async function apiAuthMiddleware(req: NextRequest) {
-    // Skip middleware for non-API routes
-    if (!req.nextUrl.pathname.startsWith('/api/v1')) {
+    // Get the path to check if it's an API route that should be protected
+    const path = req.nextUrl.pathname;
+
+    // Skip middleware for excluded routes
+    for (const excludedRoute of EXCLUDED_ROUTES) {
+        if (path.startsWith(excludedRoute)) {
+            return NextResponse.next();
+        }
+    }
+
+    // Check if this is a protected API route
+    let isProtectedRoute = false;
+    for (const protectedRoute of PROTECTED_ROUTES) {
+        if (path.startsWith(protectedRoute)) {
+            isProtectedRoute = true;
+            break;
+        }
+    }
+
+    // Skip middleware for non-protected routes
+    if (!isProtectedRoute) {
         return NextResponse.next();
     }
 
@@ -109,14 +153,25 @@ export async function apiAuthMiddleware(req: NextRequest) {
         signal: req.signal,
     });
 
+    // Log API usage
+    try {
+        ApiKeyService.logApiUsage(
+            key.id,
+            key.userId,
+            req.nextUrl.pathname,
+            req.method || 'GET',
+            200, // We'll assume success at this point
+            req.headers.get('x-forwarded-for') || req.headers.get('cf-connecting-ip') || '',
+            req.headers.get('user-agent') || ''
+        ).catch(err => console.error('Error logging API usage:', err));
+    } catch (error) {
+        console.error('Error logging API usage:', error);
+    }
+
     // Continue to the API route
-    const response = NextResponse.next({
+    return NextResponse.next({
         request: modifiedRequest,
     });
-
-    // After the request is processed, log the API usage (will need to be handled in the API route)
-
-    return response;
 }
 
 /**
@@ -130,7 +185,7 @@ function checkPermissions(permissions: any, pathname: string, method?: string): 
     if (permissions['*'] === true) return true;
 
     // Extract the endpoint from the pathname (e.g., /api/v1/pdf/convert -> pdf/convert)
-    const endpoint = pathname.replace(/^\/api\/v1\//, '');
+    const endpoint = pathname.replace(/^\/api\//, '');
 
     // Check exact endpoint match
     if (permissions[endpoint]) {
