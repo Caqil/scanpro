@@ -1,4 +1,4 @@
-// prisma/schema.prisma
+// prisma/schema.prisma (updated)
 generator client {
   provider = "prisma-client-js"
 }
@@ -60,6 +60,14 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model PasswordResetToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+  createdAt DateTime @default(now())
 }
 
 model Subscription {
