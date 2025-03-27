@@ -1,81 +1,124 @@
 // middleware.ts
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config'
+import { NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 
-// This function can be marked `async` if using `await` inside
+// Check if a route requires API key authentication
+function requiresApiAuth(pathname: string): boolean {
+  const protectedRoutes = [
+    '/api/convert',
+    '/api/compress',
+    '/api/merge',
+    '/api/pdf/protect',
+    '/api/pdf/unlock',
+    '/api/watermark',
+    '/api/rotate',
+    '/api/ocr'
+  ];
+
+  // Exclude admin routes and file download routes from strict API key check
+  const exemptRoutes = [
+    '/api/convert/admin/cleanup',
+    '/api/file',
+    '/api/validate-purchase'
+  ];
+
+  // Check if the route is protected but not exempt
+  return protectedRoutes.some(route => pathname.startsWith(route)) &&
+    !exemptRoutes.some(route => pathname.startsWith(route));
+}
+
+// Parse comma-separated or array of admin API keys
+function parseAdminApiKeys(keys: string | undefined): string[] {
+  if (!keys) return [];
+
+  // Split by comma and trim
+  return keys.split(',')
+    .map(key => key.trim())
+    .filter(key => key);
+}
+
+// Get all valid API keys from environment variables
+function getValidApiKeys(): string[] {
+  const keys: string[] = [
+    // Get keys from environment variables
+    ...(parseAdminApiKeys(process.env.ADMIN_API_KEYS) || []),
+    ...(parseAdminApiKeys(process.env.ADMIN_API_KEY) || [])
+  ];
+
+  // Remove duplicates
+  return [...new Set(keys)];
+}
+
 export function middleware(request: NextRequest) {
-  // Get the pathname
-  const { pathname } = request.nextUrl
+  const pathname = request.nextUrl.pathname;
 
-  // Check if the pathname already includes a language
-  // If it starts with one of our supported languages followed by a slash or
-  // is exactly one of our supported languages, we don't need to redirect
-  const pathnameHasLanguage = SUPPORTED_LANGUAGES.some(
-    (lang) => pathname.startsWith(`/${lang}/`) || pathname === `/${lang}`
-  )
+  // Check if this is a web request (from browser)
+  const isWebRequest = request.headers.get('user-agent')?.includes('Mozilla') ||
+    request.headers.get('accept')?.includes('text/html');
 
-  if (pathnameHasLanguage) return NextResponse.next()
+  // Only check routes that require authentication
+  if (requiresApiAuth(pathname)) {
+    // Get the API key from headers or query parameter
+    const apiKey =
+      request.headers.get('x-api-key') ||
+      request.nextUrl.searchParams.get('api_key');
 
-  // No language in the pathname - let's detect the user's preferred language
-  const defaultLanguage = 'en'
+    // If it's a web request and no API key, generate a temporary key
+    if (isWebRequest && !apiKey) {
+      // Try to get a default key from environment
+      const defaultKey = process.env.DEFAULT_WEB_API_KEY ||
+        getValidApiKeys()[0] ||
+        'default_web_key';
 
-  // Get the preferred language from the Accept-Language header
-  const acceptLanguage = request.headers.get('accept-language')
+      // Modify the request headers to include the default key
+      const requestHeaders = new Headers(request.headers);
+      requestHeaders.set('x-api-key', defaultKey);
 
-  // Parse language preferences from the Accept-Language header
-  // Example: "en-US,en;q=0.9,es;q=0.8,fr;q=0.7"
-  let detectedLang = defaultLanguage
+      // Clone the request with the new headers
+      const modifiedRequest = new NextRequest(request.url, {
+        headers: requestHeaders
+      });
 
-  if (acceptLanguage) {
-    // Extract language codes and their quality values
-    const languages = acceptLanguage
-      .split(',')
-      .map(part => {
-        const [code, quality] = part.trim().split(';q=')
-        return {
-          code: code.split('-')[0], // Get the primary language part
-          quality: quality ? parseFloat(quality) : 1.0
+      return NextResponse.next({ request: modifiedRequest });
+    }
+
+    // For non-web requests, check API key strictly
+    if (!apiKey) {
+      return new NextResponse(
+        JSON.stringify({
+          error: 'No API key provided',
+          success: false
+        }),
+        {
+          status: 401,
+          headers: { 'Content-Type': 'application/json' }
         }
-      })
-      .sort((a, b) => b.quality - a.quality) // Sort by quality descending
+      );
+    }
 
-    // Find the first supported language
-    const matchedLang = languages.find(lang =>
-      SUPPORTED_LANGUAGES.includes(lang.code)
-    )
+    // Get valid API keys
+    const validKeys = getValidApiKeys();
 
-    if (matchedLang) {
-      detectedLang = matchedLang.code
+    // Check if the provided key is valid
+    if (!validKeys.includes(apiKey)) {
+      return new NextResponse(
+        JSON.stringify({
+          error: 'Invalid API key',
+          success: false
+        }),
+        {
+          status: 401,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      );
     }
   }
 
-  // Get the cookie with previously user-selected language
-  const languageCookie = request.cookies.get('preferred-language')
-
-  // Use cookie language if available, otherwise use detected language
-  const finalLang = languageCookie?.value || detectedLang
-
-  // Clone the URL and set the pathname to include the language
-  const newUrl = request.nextUrl.clone()
-
-  // Handle root path (/) special case
-  if (pathname === '/') {
-    newUrl.pathname = `/${finalLang}`
-  } else {
-    // For other paths, add the language prefix
-    newUrl.pathname = `/${finalLang}${pathname}`
-  }
-
-  // Redirect to the new URL
-  return NextResponse.redirect(newUrl)
+  // If no issues, allow the request to proceed
+  return NextResponse.next();
 }
 
-// Only run middleware on specific routes that don't have file extensions
-// This ensures we don't attempt to redirect for static assets
+// See "Matching Paths" below to learn more
 export const config = {
-  matcher: [
-    // Skip all internal Next.js paths
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.).*)',
-  ],
+  matcher: '/api/:path*'
 }
