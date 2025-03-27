@@ -1,34 +1,64 @@
-// components/dashboard/dashboard-tabs.tsx
-"use client";
+import type React from "react"
+import type { User } from "@prisma/client"
 
-import { useState } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { SubscriptionInfo } from "@/components/dashboard/subscription-info";
-import { ApiKeyManager } from "@/components/dashboard/api-key-manager";
-import { UsageStats } from "@/components/dashboard/usage-stats";
-
-export function DashboardTabs({ user, usageStats }) {
-  const [activeTab, setActiveTab] = useState("overview");
-  
-  return (
-    <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-      <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="overview">Overview</TabsTrigger>
-        <TabsTrigger value="api-keys">API Keys</TabsTrigger>
-        <TabsTrigger value="subscription">Subscription</TabsTrigger>
-      </TabsList>
-      
-      <TabsContent value="overview" className="py-4">
-        <UsageStats user={user} usageStats={usageStats} />
-      </TabsContent>
-      
-      <TabsContent value="api-keys" className="py-4">
-        <ApiKeyManager user={user} />
-      </TabsContent>
-      
-      <TabsContent value="subscription" className="py-4">
-        <SubscriptionInfo user={user} />
-      </TabsContent>
-    </Tabs>
-  );
+interface DashboardTabsProps {
+  user: User & {
+    subscription: {
+      id: string
+      userId: string
+      tier: string
+      createdAt: Date
+      updatedAt: Date
+      expiresAt: Date | null
+    } | null
+    apiKeys: {
+      id: string
+      userId: string
+      name: string
+      key: string
+      permissions: string[]
+      lastUsed: Date | null
+      expiresAt: Date | null
+      createdAt: Date
+    }[]
+  }
+  usageStats: {
+    totalOperations: number
+    operationCounts: Record<string, number>
+  }
 }
+
+export const DashboardTabs: React.FC<DashboardTabsProps> = ({ user, usageStats }) => {
+  return (
+    <div>
+      <h2>User Information</h2>
+      <p>Name: {user.name}</p>
+      <p>Email: {user.email}</p>
+      <p>Subscription Tier: {user.subscription?.tier || "Free"}</p>
+
+      <h2>API Key Information</h2>
+      {user.apiKeys.length > 0 ? (
+        <ul>
+          {user.apiKeys.map((key) => (
+            <li key={key.id}>
+              {key.name} - {key.key.substring(0, 8)}...{key.key.substring(key.key.length - 4)}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No API keys found.</p>
+      )}
+
+      <h2>Usage Statistics</h2>
+      <p>Total Operations: {usageStats.totalOperations}</p>
+      <ul>
+        {Object.entries(usageStats.operationCounts).map(([operation, count]) => (
+          <li key={operation}>
+            {operation}: {count}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
