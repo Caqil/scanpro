@@ -56,24 +56,21 @@ export const authOptions: NextAuthOptions = {
     ],
     callbacks: {
         session: ({ session, token }) => {
-            return {
-                ...session,
-                user: {
-                    ...session.user,
-                    id: token.id,
-                },
+          if (token) {
+            session.user = {
+              ...session.user,
+              id: token.id,
             };
+          }
+          return session;
         },
         jwt: ({ token, user }) => {
-            if (user) {
-                return {
-                    ...token,
-                    id: user.id,
-                };
-            }
-            return token;
+          if (user) {
+            token.id = user.id;
+          }
+          return token;
         },
-    },
+      },
     debug: process.env.NODE_ENV === 'development',
 };
 

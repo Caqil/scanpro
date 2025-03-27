@@ -25,6 +25,7 @@ import {
 import { Label } from '@/components/ui/label';
 import { KeyRound, Trash2, EyeIcon, EyeOffIcon, CopyIcon, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner';
+import { LanguageLink } from '@/components/language-link';
 
 interface ApiKey {
   id: string;
@@ -366,9 +367,10 @@ export default function ApiKeysPage() {
             <p className="text-sm text-muted-foreground">
               Our comprehensive API documentation provides all the information you need to integrate ScanPro's powerful PDF and image processing capabilities into your applications.
             </p>
-            <Button variant="outline" onClick={() => router.push('/api-docs')}>
-              View Documentation
-            </Button>
+             <LanguageLink href="/api-docs" className="inline-flex">
+                              <Button size="lg" variant="outline"> View Documentation</Button>
+                            </LanguageLink>
+           
           </CardContent>
         </Card>
       </div>
