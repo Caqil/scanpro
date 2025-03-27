@@ -41,16 +41,8 @@ export default async function handler(req, res) {
             // Security tools
             { url: '/protect', changefreq: 'monthly', priority: 0.7 },
             { url: '/unlock', changefreq: 'monthly', priority: 0.7 },
-            { url: '/sign', changefreq: 'monthly', priority: 0.7 },
-            { url: '/image-tools', changefreq: 'weekly', priority: 0.8 },
-            { url: '/image-tools/make-transparent', changefreq: 'monthly', priority: 0.7 },
-            { url: '/image-tools/change-colors', changefreq: 'monthly', priority: 0.7 },
-            { url: '/image-tools/png-to-jpg', changefreq: 'monthly', priority: 0.7 },
-            { url: '/image-tools/jpg-to-png', changefreq: 'monthly', priority: 0.7 },
-            { url: '/image-tools/compress', changefreq: 'monthly', priority: 0.7 },
             // Company pages
             { url: '/about', changefreq: 'monthly', priority: 0.6 },
-            { url: '/pricing', changefreq: 'monthly', priority: 0.8 },
             { url: '/features', changefreq: 'monthly', priority: 0.7 },
             { url: '/api-docs', changefreq: 'monthly', priority: 0.6 },
 

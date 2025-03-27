@@ -51,7 +51,6 @@ export async function GET(req: NextRequest) {
       
       // Info pages
       { url: '/about', changefreq: 'monthly', priority: 0.6 },
-      { url: '/pricing', changefreq: 'monthly', priority: 0.8 },
       { url: '/features', changefreq: 'monthly', priority: 0.7 },
       { url: '/contact', changefreq: 'monthly', priority: 0.6 },
       { url: '/terms', changefreq: 'yearly', priority: 0.4 },

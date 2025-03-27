@@ -83,10 +83,55 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang: paramLang } = await params;
   const lang = SUPPORTED_LANGUAGES.includes(paramLang as Language) ? paramLang as Language : "en";
   const t = (key: string) => getTranslation(lang, key);
-
+  const stopWordsByLanguage: Record<string, string[]> = {
+    en: ["the", "a", "an", "and", "or", "to", "in", "with", "for", "is", "on", "at"],
+    id: ["dan", "di", "ke", "dari", "untuk", "yang", "dengan", "atau", "pada"],
+    es: ["el", "la", "los", "las", "y", "o", "en", "con", "para", "de", "a"],
+    fr: ["le", "la", "les", "et", "ou", "à", "en", "avec", "pour", "de"],
+    zh: ["的", "了", "在", "是", "我", "他", "这", "那", "和", "你"], // Simplified Chinese
+    ar: ["في", "من", "إلى", "على", "و", "هذا", "تلك", "مع", "أو"], // Arabic
+    hi: ["और", "के", "में", "से", "है", "को", "का", "कि", "पर"], // Hindi
+    ru: ["и", "в", "на", "с", "к", "от", "для", "по", "или"], // Russian
+    pt: ["e", "ou", "em", "com", "para", "de", "a", "o", "as"], // Portuguese
+    de: ["und", "in", "mit", "für", "zu", "auf", "an", "oder"], // German
+    ja: ["の", "に", "を", "は", "が", "と", "で", "です"], // Japanese (hiragana)
+    ko: ["은", "는", "이", "가", "을", "를", "에", "와"], // Korean
+    it: ["e", "o", "in", "con", "per", "di", "a", "il", "la"], // Italian
+    tr: ["ve", "ile", "de", "da", "için", "bu", "şu", "veya"] // Turkish
+  };
+  
+  
+  
+  // Keyword extraction function with language-specific stop words
+  const extractKeywords = (text: string, language: string): string[] => {
+    // Select stop words based on language, default to English if not found
+    const stopWords = stopWordsByLanguage[language] || stopWordsByLanguage["en"];
+    
+    // Convert to lowercase (for Latin-based languages) and remove punctuation
+    const words = text.toLowerCase().replace(/[^\w\s]/g, "").split(/\s+/);
+    
+    // Filter out stop words and short words, then count frequency
+    const filteredWords = words
+      .filter(word => !stopWords.includes(word) && word.length > 2)
+      .reduce((acc, word) => {
+        acc[word] = (acc[word] || 0) + 1;
+        return acc;
+      }, {} as Record<string, number>);
+  
+    // Sort by frequency and take top 5
+    return Object.keys(filteredWords)
+      .sort((a, b) => filteredWords[b] - filteredWords[a])
+      .slice(0, 5);
+  };
+  // Get translated title and description
+  const title = t("unlockPdf.title");
+  const description = t("unlockPdf.description");
+  // Combine title and description for keyword extraction
+  const keywords = extractKeywords(`${title} ${description}`, lang);
   return {
-    title: t("unlockPdf.title"),
-    description: t("unlockPdf.description"),
+    title: title,
+    description:description,
+    keywords:keywords,
     openGraph: {
       title: t("unlockPdf.title"),
       description: t("unlockPdf.description"),

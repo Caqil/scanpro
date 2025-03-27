@@ -1,9 +1,10 @@
 
 export default {
   metadata: {
-    title: "ScanPro - 올인원 PDF 변환 및 편집기 | 무료 온라인",
-    template: "%s | ScanPro PDF 도구",
-    description: "강력한 무료 온라인 PDF 도구: 변환, 압축, 병합, 분할, 편집, OCR 등. 설치가 필요 없습니다.",
+    title: "ScanPro - 무료 PDF 변환 및 편집 온라인",
+    template: "%s | ScanPro - PDF 도구",
+    description: "ScanPro로 PDF를 쉽게 변환, 편집, 압축, 병합, 분할, OCR. 무료, 빠른 온라인 도구—다운로드 불필요.",
+    keywords: "PDF 변환, PDF 편집, 온라인 OCR, PDF 압축, PDF 병합, PDF 분할, 무료 PDF 도구, 온라인 PDF 편집, ScanPro"
   },
   nav: {
     tools: "도구",

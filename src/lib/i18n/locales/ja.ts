@@ -1,9 +1,10 @@
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   metadata: {
-    title: "ScanPro - オールインワンPDF変換＆編集 | 無料オンライン",
-    template: "%s | ScanPro PDFツール",
-    description: "強力な無料オンラインツール：変換、圧縮、結合、分割、編集、OCRなど。インストール不要。",
+    title: "ScanPro - 無料PDF変換＆編集オンライン",
+    template: "%s | ScanPro - PDFツール",
+    description: "ScanProでPDFを簡単に変換、編集、圧縮、結合、分割、OCR。無料で高速なオンラインツール、ダウンロード不要。",
+    keywords: "PDF変換, PDF編集, オンラインOCR, PDF圧縮, PDF結合, PDF分割, 無料PDFツール, オンラインPDF編集, ScanPro"
   },
   nav: {
     tools: "ツール",

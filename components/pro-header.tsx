@@ -83,37 +83,6 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [urlLanguage, language]);
 
-  const userMenu = session ? (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="gap-1">
-          {session.user?.name || "Account"}
-          <ChevronDownIcon className="h-4 w-4 opacity-70" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuItem asChild>
-          <LanguageLink href="/dashboard">Dashboard</LanguageLink>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <LanguageLink href="/dashboard/api-keys">
-            <KeyRound className="h-4 w-4 mr-2" /> API Keys
-          </LanguageLink>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="/api/auth/signout">Sign out</Link>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  ) : (
-    <LanguageLink href="/login" legacyBehavior passHref>
-      <Button variant="default" size="sm">
-        Sign in
-      </Button>
-    </LanguageLink>
-  );
-
   const languages: LanguageOption[] = [
     { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
     { code: 'id', name: 'Indonesian', nativeName: 'Bahasa Indonesia', flag: '🇮🇩' },
@@ -434,7 +403,6 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
             <ModeToggle />
-            {userMenu}
             <Button
               variant="outline"
               size="icon"

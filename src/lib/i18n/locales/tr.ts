@@ -1,9 +1,10 @@
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
     metadata: {
-        title: "ScanPro - Evrensel PDF Dönüştürücü ve Düzenleyici | Ücretsiz Çevrimiçi",
-        template: "%s | ScanPro PDF Araçları",
-        description: "Ücretsiz ve güçlü çevrimiçi PDF araçları: dönüştürün, sıkıştırın, birleştirin, ayırın, düzenleyin, OCR kullanın ve daha fazlasını yapın. Kurulum gerekmez.",
+        title: "ScanPro - Ücretsiz PDF Dönüştürücü ve Düzenleyici",
+        template: "%s | ScanPro - PDF Araçları",
+        description: "ScanPro ile PDF’leri kolayca dönüştür, düzenle, sıkıştır, birleştir ve ayır. Ücretsiz, hızlı çevrimiçi araçlar—indirme yok.",
+        keywords: "PDF dönüştürücü, PDF düzenleyici, çevrimiçi OCR, PDF sıkıştırma, PDF birleştirme, PDF ayırma, ücretsiz PDF araçları, çevrimiçi PDF düzenleyici, ScanPro"
     },
     nav: {
         tools: "Araçlar",

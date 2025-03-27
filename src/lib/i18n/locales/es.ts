@@ -1,9 +1,10 @@
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   metadata: {
-    title: "ScanPro - Convertidor y Editor de PDF Todo en Uno | Gratis en Línea",
-    template: "%s | Herramientas PDF ScanPro",
-    description: "Herramientas PDF gratuitas y potentes en línea: Convierte, comprime, combina, divide, edita, OCR y más. No requiere instalación.",
+    title: "ScanPro - Convertidor y Editor PDF Gratis Online",
+    template: "%s | ScanPro - Herramientas PDF",
+    description: "Convierte, edita, comprime, une y divide PDFs con ScanPro. Herramientas gratis y rápidas online, sin descargas.",
+    keywords: "convertidor PDF, editor PDF, OCR online, comprimir PDF, unir PDF, dividir PDF, herramientas PDF gratis, editor PDF online, ScanPro"
   },
   nav: {
     tools: "Herramientas",

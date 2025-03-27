@@ -1,9 +1,10 @@
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   metadata: {
-    title: "ScanPro - Konverter & Editor PDF All-in-One | Gratis Online",
-    template: "%s | Alat PDF ScanPro",
-    description: "Alat PDF online gratis yang powerful: Konversi, kompres, gabung, pisah, edit, OCR, dan lainnya. Tidak memerlukan instalasi.",
+    title: "ScanPro - Konverter & Editor PDF Gratis Online",
+    template: "%s | ScanPro - Alat PDF",
+    description: "Konversi, edit, kompres, gabung, dan pisah PDF dengan ScanPro. Alat gratis dan cepat online, tanpa unduh.",
+    keywords: "konverter PDF, editor PDF, OCR online, kompres PDF, gabung PDF, pisah PDF, alat PDF gratis, editor PDF online, ScanPro"
   },
   nav: {
     tools: "Alat",

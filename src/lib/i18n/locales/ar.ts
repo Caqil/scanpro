@@ -1,9 +1,10 @@
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
     metadata: {
-        title: "ScanPro - محول ومحرر PDF الكل في واحد | مجاني عبر الإنترنت",
-        template: "%s | أدوات ScanPro PDF",
-        description: "أدوات PDF مجانية قوية عبر الإنترنت: تحويل، ضغط، دمج، تقسيم، تعديل، OCR والمزيد. لا يتطلب تثبيت.",
+        title: "سكان برو - محول ومحرر PDF مجاني وOCR عبر الإنترنت",
+        template: "%s | سكان برو - أدوات PDF",
+        description: "حوّل، حرر، ضغط، ادمج، قسم، واستخدم OCR لملفات PDF بسهولة مع سكان برو. أدوات مجانية وسريعة عبر الإنترنت بدون تحميل.",
+        keywords: "محول PDF, محرر PDF, OCR عبر الإنترنت, ضغط PDF, دمج PDF, تقسيم PDF, أدوات PDF مجانية, محرر PDF عبر الإنترنت, سكان برو"
     },
     nav: {
         tools: "الأدوات",

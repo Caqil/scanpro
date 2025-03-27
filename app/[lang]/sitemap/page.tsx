@@ -188,11 +188,7 @@ export default function SitemapPage() {
           url: "/about", 
           icon: <InfoIcon className="h-4 w-4 text-blue-500" />
         },
-        { 
-          title: t('nav.pricing'), 
-          url: "/pricing", 
-          icon: <FileIcon className="h-4 w-4 text-green-500" />
-        },
+       
         { 
           title: "Contact", 
           url: "/contact", 

@@ -6,52 +6,6 @@ import { existsSync } from 'fs';
 import { join } from 'path';
 import { randomBytes } from 'crypto';
 
-// Path to store admin keys
-const ADMIN_KEYS_PATH = join(process.cwd(), 'data', 'admin-keys.json');
-
-// Generate a cryptographically secure random API key
-function generateApiKey(): string {
-    return randomBytes(32).toString('hex');
-}
-
-// Ensure data directory and initial admin keys exist
-async function ensureInitialAdminKeys(): Promise<string[]> {
-    const dataDir = join(process.cwd(), 'data');
-    if (!existsSync(dataDir)) {
-        await mkdir(dataDir, { recursive: true });
-    }
-
-    // Check if keys file exists and has content
-    try {
-        if (existsSync(ADMIN_KEYS_PATH)) {
-            const fileContent = await readFile(ADMIN_KEYS_PATH, 'utf-8');
-            const existingKeys = JSON.parse(fileContent);
-            if (Array.isArray(existingKeys) && existingKeys.length > 0) {
-                return existingKeys;
-            }
-        }
-    } catch (error) {
-        console.error('Error reading existing admin keys:', error);
-    }
-
-    // Generate 3 initial admin keys
-    const initialKeys = [
-        generateApiKey(),
-        generateApiKey(),
-        generateApiKey()
-    ];
-
-    // Write initial keys to file
-    await writeFile(ADMIN_KEYS_PATH, JSON.stringify(initialKeys, null, 2), 'utf-8');
-
-    // Log the generated keys (only during initial setup)
-    console.log('🔐 Initial Admin API Keys:');
-    initialKeys.forEach((key, index) => {
-        console.log(`Admin Key ${index + 1}: ${key}`);
-    });
-
-    return initialKeys;
-}
 
 // Parse comma-separated or array of admin API keys from environment
 function parseAdminApiKeys(keys: string | undefined): string[] {
@@ -65,8 +19,6 @@ function parseAdminApiKeys(keys: string | undefined): string[] {
 
 // Read admin keys from file or environment
 async function getAdminKeys(): Promise<string[]> {
-    // First, ensure initial keys exist
-    const fileKeys = await ensureInitialAdminKeys();
 
     // Get keys from environment variables
     const envKeys = [
@@ -75,13 +27,7 @@ async function getAdminKeys(): Promise<string[]> {
     ];
 
     // Combine and remove duplicates
-    return [...new Set([...fileKeys, ...envKeys])];
-}
-
-// Save admin keys to file
-async function saveAdminKeys(keys: string[]) {
-    const uniqueKeys = [...new Set(keys)]; // Remove duplicates
-    await writeFile(ADMIN_KEYS_PATH, JSON.stringify(uniqueKeys, null, 2), 'utf-8');
+    return [...new Set([...envKeys])];
 }
 
 export async function GET(request: NextRequest) {
@@ -174,8 +120,6 @@ export async function POST(request: NextRequest) {
             updatedKeys = currentKeys.filter(k => k !== key);
         }
 
-        // Save updated keys
-        await saveAdminKeys(updatedKeys);
 
         return NextResponse.json({
             success: true,
