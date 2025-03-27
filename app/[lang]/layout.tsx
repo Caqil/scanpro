@@ -9,6 +9,7 @@ import { notFound } from "next/navigation"
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "../globals.css"
+import { Providers } from "./providers" // Import the auth provider wrapper
 
 // Import language configuration
 import { SUPPORTED_LANGUAGES, getTranslation } from "@/src/lib/i18n/config";
@@ -23,6 +24,7 @@ export const fontSans = FontSans({
 export function generateStaticParams() {
   return SUPPORTED_LANGUAGES.map((lang) => ({ lang }))
 }
+
 // Generate metadata based on language parameter
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   // Await the params object before accessing its properties
@@ -70,17 +72,20 @@ export default async function Layout({
     notFound()
   }
   const isRTL = lang === 'ar';
+  
   return (
     <html lang={lang} dir={isRTL ? "rtl" : "ltr"} suppressHydrationWarning>
       <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="relative flex min-h-screen flex-col">
-            <ProHeader urlLanguage={lang} />
-            <div className="flex-1 mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">{children}</div>
-            <Footer />
-          </div>
-          <Toaster />
-        </ThemeProvider>
+        <Providers>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <div className="relative flex min-h-screen flex-col">
+              <ProHeader urlLanguage={lang} />
+              <div className="flex-1 mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">{children}</div>
+              <Footer />
+            </div>
+            <Toaster />
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   )

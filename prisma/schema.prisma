@@ -1,0 +1,73 @@
+// prisma/schema.prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Existing models (keep these if they exist)
+model User {
+  id                String      @id @default(cuid())
+  name              String?
+  email             String      @unique
+  emailVerified     DateTime?
+  password          String?  // Hashed password
+  image             String?
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  apiKeys           ApiKey[]    // Relation to API keys
+  apiUsage          ApiUsage[]  // Relation to API usage
+}
+
+// New models for API functionality
+model ApiKey {
+  id          String      @id @default(cuid())
+  name        String      // Name/description of the key
+  key         String      @unique // The actual API key (hashed)
+  prefix      String      @unique // The first few characters of the key, used for display
+  hashedKey   String      @unique // Hashed for security
+  userId      String      // Foreign key to User
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isEnabled   Boolean     @default(true)
+  permissions Json?       // Store permissions as JSON (e.g., which endpoints are allowed)
+  lastUsed    DateTime?   // Track when the key was last used
+  expiresAt   DateTime?   // Optional expiration date
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  apiUsage    ApiUsage[]  // Relation to usage
+
+  @@index([userId])
+  @@index([prefix])
+}
+
+model ApiUsage {
+  id          String    @id @default(cuid())
+  userId      String    // Foreign key to User
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  apiKeyId    String    // Foreign key to ApiKey
+  apiKey      ApiKey    @relation(fields: [apiKeyId], references: [id], onDelete: Cascade)
+  endpoint    String    // Which API endpoint was called
+  method      String    // HTTP method (GET, POST, etc.)
+  statusCode  Int       // Response status code
+  ipAddress   String?   // IP address of the request
+  userAgent   String?   // User agent of the request
+  requestBody Json?     // Request body (if applicable)
+  timestamp   DateTime  @default(now())
+
+  @@index([userId])
+  @@index([apiKeyId])
+  @@index([timestamp])
+}
+
+// Rate limiting model to prevent abuse
+model ApiRateLimit {
+  id          String    @id @default(cuid())
+  apiKeyId    String    @unique
+  count       Int       @default(0)  // Number of requests in current window
+  resetAt     DateTime  // When to reset the counter
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}

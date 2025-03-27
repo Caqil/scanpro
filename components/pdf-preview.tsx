@@ -12,9 +12,6 @@ import * as pdfjsLib from 'pdfjs-dist';
 
 interface PdfPreviewProps {
   file: File;
-  signatureImage: string | null;
-  signatureText: string | null | undefined;
-  signatureType: "draw" | "type";
   onPositionChange: (x: number, y: number, pageNumber: number, scale: number, pageHeight: number) => void; // Added pageHeight
 }
 
@@ -25,17 +22,12 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
 
 export function PdfPreview({
   file,
-  signatureImage,
-  signatureText,
-  signatureType,
   onPositionChange,
 }: PdfPreviewProps) {
   const [numPages, setNumPages] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [scale, setScale] = useState(1.0);
   const [pageHeight, setPageHeight] = useState<number>(0); // Added to store page height
-  const [signaturePosition, setSignaturePosition] = useState({ x: 100, y: 100 });
-  const [signatureSize, setSignatureSize] = useState({ width: 150, height: 50 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -129,49 +121,6 @@ export function PdfPreview({
     e.preventDefault();
   };
 
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!containerRef.current || (!isDragging && !isResizing)) return;
-    
-    const containerRect = containerRef.current.getBoundingClientRect();
-    
-    if (isDragging) {
-      let newX = (e.clientX - containerRect.left - dragOffset.x) / scale;
-      let newY = (e.clientY - containerRect.top - dragOffset.y) / scale;
-      
-      const maxX = (containerRect.width - signatureSize.width * scale) / scale;
-      const maxY = (containerRect.height - signatureSize.height * scale) / scale;
-      
-      newX = Math.max(0, Math.min(maxX, newX));
-      newY = Math.max(0, Math.min(maxY, newY));
-      
-      setSignaturePosition({ x: newX, y: newY });
-      
-      // Transform y-coordinate to PDF coordinate system (bottom-left origin)
-      const pdfY = pageHeight - newY - signatureSize.height;
-      onPositionChange(newX, pdfY, pageNumber, scale, pageHeight);
-    }
-    
-    if (isResizing && signatureRef.current) {
-      const newWidth = Math.max(50, (e.clientX - containerRect.left - signaturePosition.x * scale) / scale);
-      const newHeight = Math.max(20, (e.clientY - containerRect.top - signaturePosition.y * scale) / scale);
-      setSignatureSize({ width: newWidth, height: newHeight });
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    setIsResizing(false);
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-    
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [isDragging, isResizing, dragOffset, signaturePosition, signatureSize, scale, pageHeight]);
 
   const LoadingComponent = () => (
     <div className="flex items-center justify-center h-80">
@@ -237,49 +186,9 @@ export function PdfPreview({
         ) : (
           <div className="relative">
             <canvas ref={canvasRef} className="w-full" />
-            {(signatureImage || signatureText) && (
-              <div 
-                ref={signatureRef}
-                className="absolute border-2 border-dashed border-blue-500 bg-white/80 z-10"
-                style={{
-                  left: signaturePosition.x * scale,
-                  top: signaturePosition.y * scale,
-                  width: signatureSize.width * scale,
-                  height: signatureSize.height * scale,
-                  cursor: isDragging ? 'grabbing' : 'grab',
-                }}
-                onMouseDown={handleDragStart}
-              >
-                {signatureType === "draw" && signatureImage ? (
-                  <img 
-                    src={signatureImage} 
-                    alt="Your signature" 
-                    className="w-full h-full object-contain"
-                    draggable="false"
-                  />
-                ) : signatureType === "type" && signatureText ? (
-                  <p 
-                    className="w-full h-full flex items-center justify-center font-serif"
-                    style={{ fontSize: `${16 * scale}px` }}
-                  >
-                    {signatureText}
-                  </p>
-                ) : null}
-                <div
-                  className="absolute bottom-0 right-0 w-4 h-4 bg-blue-500 cursor-se-resize"
-                  onMouseDown={handleResizeStart}
-                />
-              </div>
-            )}
+            
           </div>
         )}
-      </div>
-      
-      <div className="mt-4 text-sm text-muted-foreground text-center">
-        {!error && (signatureImage || signatureText) 
-          ? "Drag your signature to position it exactly where you want it on the document"
-          : "Upload a PDF and create your signature to position it on the document"
-        }
       </div>
     </div>
   );

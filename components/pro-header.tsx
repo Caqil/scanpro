@@ -25,7 +25,8 @@ import {
   FileCheck2,
   PenTool,
   FileImage,
-  Palette
+  Palette,
+  KeyRound
 } from "lucide-react";
 import { useLanguageStore } from "@/src/store/store";
 import {
@@ -38,7 +39,7 @@ import {
 import { LanguageLink } from "./language-link";
 import { LanguageSwitcher } from "./language-switcher";
 import { SiteLogo } from "./site-logo";
-
+import { useSession } from "next-auth/react"; 
 type ToolDefinition = {
   name: string;
   href: string;
@@ -69,7 +70,7 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [showAppBanner, setShowAppBanner] = useState(true);
   const [isClient, setIsClient] = useState(false);
-
+  const { data: session } = useSession();
   useEffect(() => {
     setIsClient(true);
     if (urlLanguage && urlLanguage !== language) {
@@ -83,7 +84,36 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [urlLanguage, language]);
-
+  const userMenu = session ? (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="sm" className="gap-1">
+          {session.user?.name || "Account"}
+          <ChevronDownIcon className="h-4 w-4 opacity-70" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuItem asChild>
+          <LanguageLink href="/dashboard">Dashboard</LanguageLink>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <LanguageLink href="/dashboard/api-keys">
+            <KeyRound className="h-4 w-4 mr-2" /> API Keys
+          </LanguageLink>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link href="/api/auth/signout">Sign out</Link>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  ) : (
+    <LanguageLink href="/login" legacyBehavior passHref>
+      <Button variant="default" size="sm">
+        Sign in
+      </Button>
+    </LanguageLink>
+  );
   const languages: LanguageOption[] = [
     { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
     { code: 'id', name: 'Indonesian', nativeName: 'Bahasa Indonesia', flag: '🇮🇩' },
@@ -200,52 +230,8 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
       ]
     }
   ];
-  
-  // Image tools for direct navigation
-  const IMAGE_TOOLS = [
-    { 
-      name: "Make Transparent", 
-      href: "/image-tools/make-transparent", 
-      icon: <FileImage className="h-5 w-5 text-blue-500" />,
-      description: "Remove backgrounds by replacing colors with transparency"
-    },
-    { 
-      name: "Change Colors", 
-      href: "/image-tools/change-colors", 
-      icon: <Palette className="h-5 w-5 text-purple-500" />,
-      description: "Replace specific colors in your images"
-    },
-    { 
-      name: "Change Color Tone", 
-      href: "/image-tools/change-tone", 
-      icon: <Palette className="h-5 w-5 text-amber-500" />,
-      description: "Apply color tones and tints to your images"
-    },
-    { 
-      name: "Compress PNG", 
-      href: "/image-tools/compress", 
-      icon: <Image className="h-5 w-5 text-green-500" />,
-      description: "Reduce PNG file sizes while maintaining quality"
-    },
-    { 
-      name: "PNG to JPG", 
-      href: "/image-tools/png-to-jpg", 
-      icon: <FileImage className="h-5 w-5 text-blue-500" />,
-      description: "Convert PNG images to JPG format"
-    },
-    { 
-      name: "JPG to PNG", 
-      href: "/image-tools/jpg-to-png", 
-      icon: <FileImage className="h-5 w-5 text-blue-500" />,
-      description: "Convert JPG images to PNG format"
-    }
-  ];
 
   const navItems = [
-    { 
-      label: isClient ? t('imageTools.title') || "Image Tools" : "Image Tools", 
-      href: "/image-tools"
-    },
     { 
       label: t('nav.convertPdf'), 
       dropdown: PDF_TOOLS.filter(cat => cat.category === (isClient ? t('pdfTools.categories.convertFromPdf') : "Convert PDF")) 
@@ -371,6 +357,7 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
             <ModeToggle />
+            {userMenu}
             <Button
               variant="outline"
               size="icon"
@@ -399,30 +386,6 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
               >
                 {isClient ? t('imageTools.title') || "Image Tools" : "Image Tools"}
               </LanguageLink>
-              
-              {/* Image Tools Sub-Items */}
-              <div className="pl-4 space-y-2">
-                <div className="text-sm font-medium text-primary mb-2">Popular Image Tools</div>
-                <div className="grid grid-cols-2 gap-2">
-                  {IMAGE_TOOLS.map((tool) => (
-                    <LanguageLink
-                      key={tool.name}
-                      href={tool.href}
-                      className="flex items-start gap-3 p-2 hover:bg-muted rounded-md transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <div className="p-1 rounded-md bg-primary/10">
-                        {tool.icon}
-                      </div>
-                      <div>
-                        <div className="text-sm font-medium">{tool.name}</div>
-                      </div>
-                    </LanguageLink>
-                  ))}
-                </div>
-              </div>
-              
-              {/* PDF Tools Sections */}
               {navItems.slice(1).map((item) => (
                 <div key={item.label} className="space-y-2">
                   <div className="block px-3 py-3 text-lg font-medium hover:bg-primary/5 rounded-md transition-colors">
