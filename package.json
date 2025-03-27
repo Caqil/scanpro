@@ -68,6 +68,7 @@
     "sharp": "^0.33.5",
     "sitemap": "^8.0.0",
     "sonner": "^2.0.1",
+    "stripe": "^17.7.0",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
     "tesseract.js": "^2.1.5",
