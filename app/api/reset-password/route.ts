@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { randomBytes } from 'crypto';
 import { prisma } from '@/lib/prisma';
-import { sendEmail } from '@/lib/email'; // You would need to implement this
+import { sendEmail } from '@/lib/email';
 
 export async function POST(request: NextRequest) {
     try {
@@ -48,7 +48,6 @@ export async function POST(request: NextRequest) {
         const resetUrl = `${baseUrl}/reset-password?token=${token}`;
 
         // Send email
-        // You would need to implement the sendEmail function
         try {
             await sendEmail({
                 to: user.email as string,

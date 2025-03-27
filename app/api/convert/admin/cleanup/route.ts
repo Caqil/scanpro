@@ -1,137 +1,91 @@
-// app/api/convert/admin/cleanup/route.ts
+// app/api/admin/cleanup/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { cleanupFiles } from '@/lib/cleanup-service';
-import { writeFile, mkdir, readFile, access } from 'fs/promises';
-import { existsSync } from 'fs';
-import { join } from 'path';
-import { randomBytes } from 'crypto';
+import { prisma } from '@/lib/prisma';
 
-
-// Parse comma-separated or array of admin API keys from environment
-function parseAdminApiKeys(keys: string | undefined): string[] {
-    if (!keys) return [];
-
-    // Split by comma and trim
-    return keys.split(',')
-        .map(key => key.trim())
-        .filter(key => key);
-}
-
-// Read admin keys from file or environment
-async function getAdminKeys(): Promise<string[]> {
-
-    // Get keys from environment variables
-    const envKeys = [
-        ...(parseAdminApiKeys(process.env.ADMIN_API_KEYS) || []),
-        ...(parseAdminApiKeys(process.env.ADMIN_API_KEY) || [])
-    ];
-
-    // Combine and remove duplicates
-    return [...new Set([...envKeys])];
+// Get all admin users from database
+async function getAdminUsers(): Promise<string[]> {
+  const adminUsers = await prisma.user.findMany({
+    where: { role: 'admin' },
+    select: { id: true }
+  });
+  
+  return adminUsers.map(user => user.id);
 }
 
 export async function GET(request: NextRequest) {
-    try {
-        // Get admin API keys
-        const adminApiKeys = await getAdminKeys();
+  try {
+    // Get API key from header or query param
+    const apiKey = request.headers.get('x-api-key') || request.nextUrl.searchParams.get('api_key');
 
-        // Check API key
-        const providedKey = request.headers.get('x-api-key');
-
-        // Check if the provided key is in the list of valid admin keys
-        if (!providedKey || !adminApiKeys.includes(providedKey)) {
-            return NextResponse.json(
-                { error: 'Unauthorized - Invalid API key' },
-                { status: 401 }
-            );
-        }
-
-        // Get max age from query string or use default
-        const searchParams = request.nextUrl.searchParams;
-        const maxAgeMinutes = parseInt(searchParams.get('maxAge') || '60');
-
-        // Run cleanup
-        const result = await cleanupFiles(maxAgeMinutes);
-
-        if (!result.success) {
-            return NextResponse.json(
-                { error: result.error },
-                { status: 500 }
-            );
-        }
-
-        return NextResponse.json(result);
-    } catch (error) {
-        console.error('Cleanup API error:', error);
-
-        return NextResponse.json(
-            { error: 'Failed to run cleanup' },
-            { status: 500 }
-        );
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: 'API key is required' },
+        { status: 401 }
+      );
     }
+
+    // Look up the API key in the database
+    const keyRecord = await prisma.apiKey.findUnique({
+      where: { key: apiKey },
+      include: {
+        user: true
+      }
+    });
+
+    if (!keyRecord) {
+      return NextResponse.json(
+        { error: 'Invalid API key' },
+        { status: 401 }
+      );
+    }
+
+    // Check if user has admin role
+    if (keyRecord.user.role !== 'admin') {
+      return NextResponse.json(
+        { error: 'Unauthorized - Admin access required' },
+        { status: 403 }
+      );
+    }
+
+    // Get max age from query string or use default
+    const searchParams = request.nextUrl.searchParams;
+    const maxAgeMinutes = parseInt(searchParams.get('maxAge') || '60');
+
+    // Run cleanup
+    const result = await cleanupFiles(maxAgeMinutes);
+
+    if (!result.success) {
+      return NextResponse.json(
+        { error: result.error },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: `Cleanup completed. Removed ${result.stats?.totalCleaned} files (${formatBytes(result.stats?.totalSize || 0)})`,
+      details: result.stats
+    });
+  } catch (error) {
+    console.error('Cleanup API error:', error);
+
+    return NextResponse.json(
+      { error: 'Failed to run cleanup' },
+      { status: 500 }
+    );
+  }
 }
 
-export async function POST(request: NextRequest) {
-    try {
-        // Get current admin keys
-        const currentKeys = await getAdminKeys();
+// Helper to format bytes into human-readable format
+function formatBytes(bytes: number, decimals: number = 2): string {
+  if (bytes === 0) return '0 Bytes';
 
-        // Check existing admin keys
-        const providedKey = request.headers.get('x-api-key');
-        if (!providedKey || !currentKeys.includes(providedKey)) {
-            return NextResponse.json(
-                { error: 'Unauthorized - Invalid API key' },
-                { status: 401 }
-            );
-        }
+  const k = 1024;
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
-        // Parse request body
-        const body = await request.json();
-        const { action, key } = body;
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-        // Validate required fields
-        if (!action || !['add', 'remove'].includes(action)) {
-            return NextResponse.json(
-                { error: 'Invalid action. Must be "add" or "remove".' },
-                { status: 400 }
-            );
-        }
-
-        // Add or remove key
-        let updatedKeys: string[];
-        if (action === 'add') {
-            if (!key || typeof key !== 'string' || key.trim() === '') {
-                return NextResponse.json(
-                    { error: 'Invalid key. Key must be a non-empty string.' },
-                    { status: 400 }
-                );
-            }
-            // Add key if not already exists
-            updatedKeys = [...new Set([...currentKeys, key.trim()])];
-        } else {
-            // Prevent removing the last key
-            if (currentKeys.length <= 1) {
-                return NextResponse.json(
-                    { error: 'Cannot remove the last admin key.' },
-                    { status: 400 }
-                );
-            }
-            // Remove key
-            updatedKeys = currentKeys.filter(k => k !== key);
-        }
-
-
-        return NextResponse.json({
-            success: true,
-            message: `Key successfully ${action}ed`,
-            totalKeys: updatedKeys.length
-        });
-    } catch (error) {
-        console.error('Admin key management error:', error);
-
-        return NextResponse.json(
-            { error: 'Failed to manage admin keys' },
-            { status: 500 }
-        );
-    }
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }

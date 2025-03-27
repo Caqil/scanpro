@@ -140,8 +140,8 @@ export async function POST(request: NextRequest) {
         // Process each set of pages
         for (let i = 0; i < pageSets.length; i++) {
             const pages = pageSets[i];
-            const outputFilename = `${sessionId}-split-${i + 1}.pdf`;
-            const outputPath = join(SPLIT_DIR, outputFilename);
+            const outputFileName = `${sessionId}-split-${i + 1}.pdf`;
+            const outputPath = join(SPLIT_DIR, outputFileName);
 
             // Create a new PDF document
             const newPdfDoc = await PDFDocument.create();
@@ -157,10 +157,10 @@ export async function POST(request: NextRequest) {
             const newPdfBytes = await newPdfDoc.save();
             await writeFile(outputPath, newPdfBytes);
 
-            // Add result info
+            // Add result info with URL using the file API route
             splitResults.push({
-                fileUrl: `/splits/${outputFilename}`,
-                filename: outputFilename,
+                fileUrl: `/api/file?folder=splits&filename=${outputFileName}`,
+                filename: outputFileName,
                 pages: pages,
                 pageCount: pages.length
             });

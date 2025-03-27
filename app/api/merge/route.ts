@@ -1,3 +1,4 @@
+// app/api/merge/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir, readFile } from 'fs/promises';
 import { existsSync } from 'fs';
@@ -181,7 +182,8 @@ export async function POST(request: NextRequest) {
         }
 
         // Create output path
-        const outputPath = join(MERGE_DIR, `${uniqueId}-merged.pdf`);
+        const outputFileName = `${uniqueId}-merged.pdf`;
+        const outputPath = join(MERGE_DIR, outputFileName);
 
         // Order the input paths according to fileOrder
         const orderedInputPaths = fileOrder.map(i => inputPaths[i]);
@@ -226,14 +228,14 @@ export async function POST(request: NextRequest) {
             }
         }
 
-        // Create relative URL for the merged file
-        const fileUrl = `/merges/${uniqueId}-merged.pdf`;
+        // Create relative URL for the merged file using the file API
+        const fileUrl = `/api/file?folder=merges&filename=${outputFileName}`;
 
         return NextResponse.json({
             success: true,
             message: 'PDF merge successful',
             fileUrl,
-            filename: `${uniqueId}-merged.pdf`,
+            filename: outputFileName,
             mergedSize,
             totalInputSize,
             fileCount: files.length

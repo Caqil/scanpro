@@ -1,35 +1,101 @@
-import { NextResponse } from "next/server";
+// app/api/file/route.ts
+import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import { Readable } from "stream";
 
-export async function GET(req: Request) {
-  // Ambil URL parameter
+// Get content type from file extension
+function getContentType(extension: string): string {
+  const contentTypes: Record<string, string> = {
+    pdf: "application/pdf",
+    docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    doc: "application/msword",
+    xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    xls: "application/vnd.ms-excel",
+    pptx: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    ppt: "application/vnd.ms-powerpoint",
+    txt: "text/plain",
+    html: "text/html",
+    jpg: "image/jpeg",
+    jpeg: "image/jpeg",
+    png: "image/png",
+    rtf: "application/rtf",
+    odt: "application/vnd.oasis.opendocument.text",
+    csv: "text/csv",
+  };
+
+  return contentTypes[extension] || "application/octet-stream";
+}
+
+export async function GET(req: NextRequest) {
+  // Get URL parameters
   const { searchParams } = new URL(req.url);
   const folder = searchParams.get("folder");
   const filename = searchParams.get("filename");
 
-  // Pastikan folder hanya boleh `conversions` atau `compressions`
-  if (!folder || !filename || !["conversions", "compressions", "merges", "splits", "rotations", "watermarks", , "protected", "unlocked", "signatures", "ocr", "edited", "processed"].includes(folder)) {
-    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  // Validate parameters
+  if (!folder || !filename) {
+    return NextResponse.json({ error: "Missing required parameters" }, { status: 400 });
   }
-  // Path lengkap file
-  const filePath = path.join(process.cwd(), "public", folder, filename);
 
-  // Jika file tidak ditemukan, balas 404
+  // Ensure folder is one of the allowed values
+  const allowedFolders = [
+    "conversions", 
+    "compressions", 
+    "merges", 
+    "splits", 
+    "rotations", 
+    "watermarks", 
+    "protected", 
+    "unlocked", 
+    "signatures", 
+    "ocr", 
+    "edited", 
+    "processed"
+  ];
+  
+  if (!allowedFolders.includes(folder)) {
+    return NextResponse.json({ error: "Invalid folder specified" }, { status: 400 });
+  }
+
+  // Sanitize filename to prevent directory traversal
+  const sanitizedFilename = filename.replace(/[^\w.-]/g, "");
+  if (!sanitizedFilename || sanitizedFilename !== filename) {
+    return NextResponse.json({ error: "Invalid filename" }, { status: 400 });
+  }
+
+  // Full path to the file
+  const filePath = path.join(process.cwd(), "public", folder, sanitizedFilename);
+
+  // Check if file exists
   if (!fs.existsSync(filePath)) {
     return NextResponse.json({ error: "File not found" }, { status: 404 });
   }
 
-  // Baca file dan kirim sebagai response
-  const fileStream = fs.createReadStream(filePath);
-  const readableStream = Readable.toWeb(fileStream) as ReadableStream;
+  try {
+    // Get file size
+    const stats = fs.statSync(filePath);
+    
+    // Create a readable stream from the file
+    const fileStream = fs.createReadStream(filePath);
+    const readableStream = Readable.toWeb(fileStream) as ReadableStream;
 
-  return new Response(readableStream, {
-    headers: {
-      "Content-Type": "application/octet-stream",
-      "Content-Disposition": `attachment; filename="${filename}"`,
-      "Cache-Control": "no-store",
-    },
-  });
+    // Get file extension for content type
+    const extension = path.extname(sanitizedFilename).slice(1).toLowerCase();
+    
+    // Return the file as a streaming response
+    return new Response(readableStream, {
+      headers: {
+        "Content-Type": getContentType(extension),
+        "Content-Disposition": `attachment; filename="${sanitizedFilename}"`,
+        "Content-Length": stats.size.toString(),
+        "Cache-Control": "no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0"
+      },
+    });
+  } catch (error) {
+    console.error("Error serving file:", error);
+    return NextResponse.json({ error: "Failed to serve file" }, { status: 500 });
+  }
 }

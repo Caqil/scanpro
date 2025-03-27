@@ -3,80 +3,100 @@ import { unlink, readdir, stat } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
 
-// Directories to clean up
+// Define directories to clean
 const DIRECTORIES = [
-    join(process.cwd(), 'uploads'),
-    join(process.cwd(), 'public', 'conversions'),
-    join(process.cwd(), 'public', 'compressions'),
-    join(process.cwd(), 'public', 'merges'),
-    join(process.cwd(), 'public', 'splits'),
-    join(process.cwd(), 'public', 'rotations'),
-    join(process.cwd(), 'public', 'watermarks'),
-    join(process.cwd(), 'public', 'protected'),
-    join(process.cwd(), 'public', 'unlocked'),
-    join(process.cwd(), 'public', 'edited'),
-    join(process.cwd(), 'public', 'zips'),
-    join(process.cwd(), 'temp'),
+    'uploads',
+    'public/conversions',
+    'public/compressions',
+    'public/merges',
+    'public/splits',
+    'public/rotations',
+    'public/watermarks',
+    'public/protected',
+    'public/unlocked',
+    'public/edited',
+    'temp',
 ];
 
-export async function cleanupFiles(maxAgeMinutes: number = 60) {
+/**
+ * Clean up old temporary files to free up disk space
+ * @param maxAgeMinutes Maximum age of files to keep (in minutes)
+ * @returns Result of cleanup operation
+ */
+export async function cleanupFiles(maxAgeMinutes: number = 60): Promise<{
+    success: boolean;
+    error?: string;
+    stats?: {
+        totalCleaned: number;
+        byDir: Record<string, number>;
+        totalSize: number;
+    };
+}> {
     try {
         const now = Date.now();
         const maxAge = maxAgeMinutes * 60 * 1000; // Convert to milliseconds
-
-        let totalCleaned = 0;
-        const results: Record<string, number> = {};
+        const stats = {
+            totalCleaned: 0,
+            byDir: {} as Record<string, number>,
+            totalSize: 0,
+        };
 
         // Process each directory
         for (const dir of DIRECTORIES) {
-            if (!existsSync(dir)) {
+            const dirPath = join(process.cwd(), dir);
+
+            // Skip if directory doesn't exist
+            if (!existsSync(dirPath)) {
                 continue;
             }
 
-            try {
-                const files = await readdir(dir);
-                let dirCleaned = 0;
+            stats.byDir[dir] = 0;
 
-                for (const file of files) {
-                    const filePath = join(dir, file);
+            // Read all files in the directory
+            const files = await readdir(dirPath);
 
-                    try {
-                        const fileStat = await stat(filePath);
+            // Process each file
+            for (const file of files) {
+                const filePath = join(dirPath, file);
 
-                        // Skip directories
-                        if (fileStat.isDirectory()) {
-                            continue;
-                        }
+                try {
+                    // Get file stats
+                    const fileStat = await stat(filePath);
 
-                        // Check if file is older than maxAge
-                        const fileAge = now - fileStat.mtimeMs;
-
-                        if (fileAge > maxAge) {
-                            await unlink(filePath);
-                            dirCleaned++;
-                            totalCleaned++;
-                        }
-                    } catch (fileError) {
-                        console.warn(`Error processing file ${filePath}:`, fileError);
+                    // Skip directories
+                    if (fileStat.isDirectory()) {
+                        continue;
                     }
-                }
 
-                results[dir] = dirCleaned;
-            } catch (dirError) {
-                console.error(`Error reading directory ${dir}:`, dirError);
+                    // Check if file is older than max age
+                    const fileAge = now - fileStat.mtime.getTime();
+
+                    if (fileAge > maxAge) {
+                        // File is older than max age, delete it
+                        const fileSize = fileStat.size;
+                        await unlink(filePath);
+
+                        // Update stats
+                        stats.totalCleaned++;
+                        stats.byDir[dir]++;
+                        stats.totalSize += fileSize;
+                    }
+                } catch (fileError) {
+                    // Skip files with errors
+                    console.error(`Error processing file ${filePath}:`, fileError);
+                }
             }
         }
 
         return {
             success: true,
-            totalCleaned,
-            results
+            stats,
         };
     } catch (error) {
-        console.error('Cleanup error:', error);
+        console.error('Error cleaning up files:', error);
         return {
             success: false,
-            error: error instanceof Error ? error.message : 'Unknown error'
+            error: error instanceof Error ? error.message : 'Unknown error during cleanup',
         };
     }
 }

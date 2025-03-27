@@ -1,55 +1,61 @@
 // lib/email.ts
 import nodemailer from 'nodemailer';
 
+// Email configuration
+const EMAIL_HOST = process.env.EMAIL_HOST || '';
+const EMAIL_PORT = parseInt(process.env.EMAIL_PORT || '587');
+const EMAIL_USER = process.env.EMAIL_USER || '';
+const EMAIL_PASS = process.env.EMAIL_PASS || '';
+const EMAIL_FROM = process.env.EMAIL_FROM || 'noreply@scanpro.cc';
+
+// Email options interface
 interface EmailOptions {
     to: string;
     subject: string;
     text: string;
-    html?: string;
+    html: string;
 }
 
-export async function sendEmail({ to, subject, text, html }: EmailOptions): Promise<void> {
-    // Create a transport
-    const transport = nodemailer.createTransport({
-        host: process.env.EMAIL_SERVER_HOST,
-        port: Number(process.env.EMAIL_SERVER_PORT),
-        secure: process.env.EMAIL_SERVER_SECURE === 'true',
+/**
+ * Send an email
+ * @param options Email options (to, subject, text, html)
+ */
+export async function sendEmail(options: EmailOptions): Promise<void> {
+    // Check if email is configured
+    if (!EMAIL_HOST || !EMAIL_USER || !EMAIL_PASS) {
+        console.warn('Email is not configured. Would have sent:');
+        console.log({
+            to: options.to,
+            subject: options.subject,
+            text: options.text
+        });
+
+        // In development, just log instead of sending
+        if (process.env.NODE_ENV === 'development') {
+            return;
+        }
+
+        // In production, try to use a fallback service or throw an error
+        throw new Error('Email service is not configured');
+    }
+
+    // Create transporter
+    const transporter = nodemailer.createTransport({
+        host: EMAIL_HOST,
+        port: EMAIL_PORT,
+        secure: EMAIL_PORT === 465, // true for 465, false for other ports
         auth: {
-            user: process.env.EMAIL_SERVER_USER,
-            pass: process.env.EMAIL_SERVER_PASSWORD,
-        },
+            user: EMAIL_USER,
+            pass: EMAIL_PASS
+        }
     });
 
-    // Send the email
-    try {
-        await transport.sendMail({
-            from: process.env.EMAIL_FROM || 'support@scanpro.cc',
-            to,
-            subject,
-            text,
-            html: html || text,
-        });
-    } catch (error) {
-        console.error('Failed to send email:', error);
-        throw new Error('Failed to send email');
-    }
+    // Send email
+    await transporter.sendMail({
+        from: EMAIL_FROM,
+        to: options.to,
+        subject: options.subject,
+        text: options.text,
+        html: options.html
+    });
 }
-
-// For development/testing, you can use this function to log emails to console
-export async function sendTestEmail({ to, subject, text, html }: EmailOptions): Promise<void> {
-    console.log('==================');
-    console.log('Test Email Output:');
-    console.log('------------------');
-    console.log(`To: ${to}`);
-    console.log(`Subject: ${subject}`);
-    console.log('Text:');
-    console.log(text);
-    if (html) {
-        console.log('HTML:');
-        console.log(html);
-    }
-    console.log('==================');
-}
-
-// Choose the appropriate email function based on environment
-export const sendEmailWithEnv = process.env.NODE_ENV === 'production' ? sendEmail : sendTestEmail;

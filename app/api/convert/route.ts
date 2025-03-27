@@ -37,7 +37,6 @@ async function ensureDirectories() {
     }
 }
 
-// Get file format from extension
 function getFormatFromFilename(filename: string): string | null {
     const extension = filename.split('.').pop()?.toLowerCase();
     if (extension && SUPPORTED_INPUT_FORMATS.includes(extension)) {
@@ -45,8 +44,6 @@ function getFormatFromFilename(filename: string): string | null {
     }
     return null;
 }
-
-// Process form data to get file and conversion options
 async function processFormData(request: NextRequest) {
     const formData = await request.formData();
     const file = formData.get('file') as File;
@@ -613,7 +610,6 @@ async function convertWithLibreOffice(inputPath: string, outputPath: string, for
         throw new Error('Failed to convert with LibreOffice: ' + (error instanceof Error ? error.message : String(error)));
     }
 }
-
 export async function POST(request: NextRequest) {
     try {
         console.log('Starting conversion process...');
@@ -670,7 +666,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Create relative URL for the converted file
-        const fileUrl = `/conversions/${uniqueId}-output.${outputFormat}`;
+        const fileUrl = `/api/file?folder=conversions&filename=${uniqueId}-output.${outputFormat}`;
 
         return NextResponse.json({
             success: true,
