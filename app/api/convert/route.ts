@@ -222,6 +222,7 @@ async function convertToImage(inputPath: string, outputPath: string, format: str
         throw new Error('Failed to convert to image: ' + (error instanceof Error ? error.message : String(error)));
     }
 }
+
 // Enhanced LibreOffice conversion function with improved PDF and Office format handling
 async function convertWithLibreOffice(inputPath: string, outputPath: string, format: string) {
     try {
@@ -616,6 +617,19 @@ async function convertWithLibreOffice(inputPath: string, outputPath: string, for
 
 export async function POST(request: NextRequest) {
     try {
+        const providedKey = request.headers.get('x-api-key');
+
+        console.log(`Request authenticated with API Key: ${providedKey}}`);
+
+        // If authentication is required but headers are missing
+        if (!providedKey) {
+            console.error("Missing authentication headers");
+            return NextResponse.json(
+                { error: "Authentication failed", success: false },
+                { status: 401 }
+            );
+        }
+
         console.log('Starting conversion process...');
         await ensureDirectories();
 

@@ -113,38 +113,65 @@ export class ApiKeyService {
     /**
      * Validate an API key from a request
      */
-    static async validateApiKey(apiKey: string): Promise<ApiKey | null> {
-        // Get the prefix from the key
-        const prefix = getKeyPrefix(apiKey);
-        if (!prefix) return null;
-
-        // Look up the key by prefix
-        const storedKey = await prisma.apiKey.findUnique({
-            where: { prefix },
-        });
-
-        if (!storedKey || !storedKey.isEnabled) return null;
-
-        // Check if key is expired
-        if (storedKey.expiresAt && new Date() > storedKey.expiresAt) {
-            await prisma.apiKey.update({
-                where: { id: storedKey.id },
-                data: { isEnabled: false },
-            });
-            return null;
-        }
-
-        // Verify the key
-        if (!verifyApiKey(apiKey, storedKey.hashedKey)) return null;
-
-        // Update the last used timestamp
+    // src/services/api-key-service.ts
+static async validateApiKey(apiKey: string): Promise<ApiKey | null> {
+    console.log(`Attempting to validate API key: ${apiKey.substring(0, 12)}...`);
+    
+    try {
+      // Get the prefix from the key
+      const prefix = getKeyPrefix(apiKey);
+      console.log(`Extracted prefix: ${prefix}`);
+      
+      if (!prefix) {
+        console.log('Invalid API key format (no prefix)');
+        return null;
+      }
+  
+      // Look up the key by prefix
+      console.log(`Looking up key with prefix: ${prefix}`);
+      const storedKey = await prisma.apiKey.findUnique({
+        where: { prefix },
+      });
+  
+      if (!storedKey) {
+        console.log(`No API key found with prefix: ${prefix}`);
+        return null;
+      }
+  
+      console.log(`Found key: ${storedKey.id}, enabled: ${storedKey.isEnabled}`);
+      
+      if (!storedKey.isEnabled) {
+        console.log(`API key is disabled: ${prefix}`);
+        return null;
+      }
+  
+      // Check if key is expired
+      if (storedKey.expiresAt && new Date() > storedKey.expiresAt) {
+        console.log(`API key expired: ${prefix}, expires: ${storedKey.expiresAt}`);
         await prisma.apiKey.update({
-            where: { id: storedKey.id },
-            data: { lastUsed: new Date() },
+          where: { id: storedKey.id },
+          data: { isEnabled: false },
         });
-
-        return storedKey;
+        return null;
+      }
+  
+      // Verify the key
+      console.log(`Verifying key hash...`);
+      const isValid = verifyApiKey(apiKey, storedKey.hashedKey);
+      console.log(`Key verification result: ${isValid}`);
+      
+      if (!isValid) {
+        return null;
+      }
+  
+      // Success!
+      console.log(`API key validation successful: ${prefix}`);
+      return storedKey;
+    } catch (error) {
+      console.error("Error validating API key:", error);
+      return null;
     }
+  }
 
     /**
      * Log API usage

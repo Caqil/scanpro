@@ -48,13 +48,26 @@ export function hashApiKey(key: string): string {
  * Verify an API key against its hashed version
  */
 export function verifyApiKey(providedKey: string, hashedKey: string): boolean {
-    const providedHashed = hashApiKey(providedKey);
-    return crypto.timingSafeEqual(
-        Buffer.from(providedHashed, 'hex'),
-        Buffer.from(hashedKey, 'hex')
-    );
-}
+    try {
+        console.log(`Verifying API key: ${providedKey.substring(0, 10)}...`);
+        console.log(`Stored hash (first 10 chars): ${hashedKey.substring(0, 10)}...`);
 
+        const providedHashed = hashApiKey(providedKey);
+        console.log(`Calculated hash (first 10 chars): ${providedHashed.substring(0, 10)}...`);
+
+        // Use a constant-time comparison to prevent timing attacks
+        const result = crypto.timingSafeEqual(
+            Buffer.from(providedHashed, 'hex'),
+            Buffer.from(hashedKey, 'hex')
+        );
+
+        console.log(`Hash comparison result: ${result}`);
+        return result;
+    } catch (error) {
+        console.error("Error verifying API key:", error);
+        return false;
+    }
+}
 /**
  * Extract the prefix from an API key
  */
