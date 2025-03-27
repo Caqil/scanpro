@@ -11,21 +11,17 @@ import {
 } from "@radix-ui/react-icons";
 import { 
   FileText, 
-  Image, 
   Table, 
+  Image, 
   ArrowRight, 
   ArrowDown, 
   Shield, 
   Lock,
   Download,
   Apple,
-  Phone,
-  File,
   FileBoxIcon,
   FileCheck2,
   PenTool,
-  FileImage,
-  Palette,
   KeyRound
 } from "lucide-react";
 import { useLanguageStore } from "@/src/store/store";
@@ -39,7 +35,8 @@ import {
 import { LanguageLink } from "./language-link";
 import { LanguageSwitcher } from "./language-switcher";
 import { SiteLogo } from "./site-logo";
-import { useSession } from "next-auth/react"; 
+import { useSession } from "next-auth/react";
+
 type ToolDefinition = {
   name: string;
   href: string;
@@ -71,6 +68,7 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
   const [showAppBanner, setShowAppBanner] = useState(true);
   const [isClient, setIsClient] = useState(false);
   const { data: session } = useSession();
+
   useEffect(() => {
     setIsClient(true);
     if (urlLanguage && urlLanguage !== language) {
@@ -84,6 +82,7 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [urlLanguage, language]);
+
   const userMenu = session ? (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -114,6 +113,7 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
       </Button>
     </LanguageLink>
   );
+
   const languages: LanguageOption[] = [
     { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
     { code: 'id', name: 'Indonesian', nativeName: 'Bahasa Indonesia', flag: '🇮🇩' },
@@ -130,13 +130,12 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
     { code: 'it', name: 'Italian', nativeName: 'Italiano', flag: '🇮🇹' },
     { code: 'tr', name: 'Turkish', nativeName: 'Türkçe', flag: '🇹🇷' },
   ];
+
   const PDF_TOOLS: CategoryDefinition[] = [
     {
-      
-      category: isClient ? t('pdfTools.categories.convertFromPdf') : "Convert PDF",
-      description: t('pdfTools.categories.convertFromPdfDesc') || "Convert PDF files to various formats and vice versa",
+      category: "Convert from PDF",
+      description: "Transform PDF files to various formats",
       tools: [
-        
         { 
           name: t('popular.pdfToWord'), 
           href: "/convert/pdf-to-docx",
@@ -150,11 +149,35 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           description: t('popular.pdfToExcelDesc')
         },
         { 
+          name: t('popular.pdfToPowerPoint'), 
+          href: "/convert/pdf-to-pptx",
+          icon: <FileBoxIcon className="h-5 w-5 text-orange-500" />,
+          description: t('popular.pdfToPowerPointDesc')
+        },
+        { 
           name: t('popular.pdfToJpg'), 
           href: "/convert/pdf-to-jpg",
           icon: <Image className="h-5 w-5 text-yellow-500" />,
           description: t('popular.pdfToJpgDesc')
         },
+        { 
+          name: t('popular.pdfToPng'), 
+          href: "/convert/pdf-to-png",
+          icon: <Image className="h-5 w-5 text-green-500" />,
+          description: t('popular.pdfToPngDesc')
+        },
+        { 
+          name: t('popular.pdfToHtml'), 
+          href: "/convert/pdf-to-html",
+          icon: <FileText className="h-5 w-5 text-blue-500" />,
+          description: t('popular.pdfToHtmlDesc')
+        },
+      ]
+    },
+    {
+      category: "Convert to PDF",
+      description: "Transform various files to PDF format",
+      tools: [
         { 
           name: t('popular.wordToPdf'), 
           href: "/convert/docx-to-pdf",
@@ -162,16 +185,40 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           description: t('popular.wordToPdfDesc')
         },
         { 
+          name: t('popular.excelToPdf'), 
+          href: "/convert/xlsx-to-pdf",
+          icon: <Table className="h-5 w-5 text-green-500" />,
+          description: t('popular.excelToPdfDesc')
+        },
+        { 
+          name: t('popular.powerPointToPdf'), 
+          href: "/convert/pptx-to-pdf",
+          icon: <FileBoxIcon className="h-5 w-5 text-orange-500" />,
+          description: t('popular.powerPointToPdfDesc')
+        },
+        { 
           name: t('popular.jpgToPdf'), 
           href: "/convert/jpg-to-pdf",
           icon: <Image className="h-5 w-5 text-yellow-500" />,
           description: t('popular.jpgToPdfDesc')
         },
+        { 
+          name: t('popular.pngToPdf'), 
+          href: "/convert/png-to-pdf",
+          icon: <Image className="h-5 w-5 text-green-500" />,
+          description: t('popular.pngToPdfDesc')
+        },
+        { 
+          name: t('popular.htmlToPdf'), 
+          href: "/convert/html-to-pdf",
+          icon: <FileText className="h-5 w-5 text-blue-500" />,
+          description: t('popular.htmlToPdfDesc')
+        },
       ]
     },
     {
-      category: t('pdfTools.categories.organizePdf') || "PDF Management",
-      description: t('pdfTools.categories.organizePdfDesc') || "Tools to organize and modify PDF files",
+      category: "Organize PDF",
+      description: "Tools to organize and modify PDF files",
       tools: [
         { 
           name: t('popular.mergePdf'), 
@@ -200,7 +247,7 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
       ]
     },
     {
-      category: t('pdfTools.categories.pdfSecurity') || "PDF Security",
+      category: "PDF Security",
       description: "Protect and manage PDF access",
       tools: [
         { 
@@ -233,16 +280,20 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
 
   const navItems = [
     { 
-      label: t('nav.convertPdf'), 
-      dropdown: PDF_TOOLS.filter(cat => cat.category === (isClient ? t('pdfTools.categories.convertFromPdf') : "Convert PDF")) 
+      label: 'Convert from PDF', 
+      dropdown: PDF_TOOLS.filter(cat => cat.category === "Convert from PDF") 
     },
     { 
-      label: t('pdfTools.categories.organizePdf'), 
-      dropdown: PDF_TOOLS.filter(cat => cat.category === (isClient ? t('pdfTools.categories.organizePdf') : "PDF Management")) 
+      label: 'Convert to PDF', 
+      dropdown: PDF_TOOLS.filter(cat => cat.category === "Convert to PDF") 
     },
     { 
-      label: t('pdfTools.categories.pdfSecurity'), 
-      dropdown: PDF_TOOLS.filter(cat => cat.category === (isClient ? t('pdfTools.categories.pdfSecurity') : "PDF Security")) 
+      label: 'Organize PDF', 
+      dropdown: PDF_TOOLS.filter(cat => cat.category === "Organize PDF") 
+    },
+    { 
+      label: 'PDF Security', 
+      dropdown: PDF_TOOLS.filter(cat => cat.category === "PDF Security") 
     },
     { 
       label: t('popular.viewAll'), 
@@ -294,23 +345,14 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
             <LanguageLink href="/" className="flex items-center gap-2">
               <span className="font-bold text-xl flex items-center">
                 <SiteLogo />
-                <span className="text-red-500"></span>  ScanPro
+                <span className="text-red-500"></span> ScanPro
               </span>
             </LanguageLink>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            {/* Direct link to Image Tools */}
-            <LanguageLink
-              href="/image-tools"
-              className="text-sm font-medium text-foreground transition-colors hover:text-primary"
-            >
-              {isClient ? t('imageTools.title') || "Image Tools" : "Image Tools"}
-            </LanguageLink>
-            
-            {/* PDF Tool Dropdowns */}
-            {navItems.slice(1).map((item) => (
+            {navItems.slice(0, -1).map((item) => (
               <div key={item.label} className="relative group">
                 {item.dropdown && (
                   <>
@@ -351,6 +393,41 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
                 )}
               </div>
             ))}
+            <div className="relative group">
+              <LanguageLink
+                href="#"
+                className="text-sm font-medium text-foreground transition-colors hover:text-primary flex items-center gap-1"
+              >
+                {t('popular.viewAll')}
+                <ChevronDownIcon className="h-4 w-4 opacity-70" />
+              </LanguageLink>
+
+              {/* View All Dropdown Menu */}
+              <div className="absolute top-full left-0 mt-2 w-[800px] bg-background border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 p-4">
+                {navItems[navItems.length - 1].dropdown.map((category) => (
+                  <div key={category.category} className="mb-4">
+                    <div className="font-semibold text-sm text-foreground mb-2">{category.category}</div>
+                    <div className="grid grid-cols-4 gap-4">
+                      {category.tools.map((tool) => (
+                        <LanguageLink
+                          key={tool.name}
+                          href={tool.href}
+                          className="flex items-start gap-3 p-2 hover:bg-muted rounded-md transition-colors"
+                        >
+                          <div className="p-1 rounded-md bg-primary/10">
+                            {tool.icon}
+                          </div>
+                          <div>
+                            <div className="text-sm font-medium">{tool.name}</div>
+                            <p className="text-xs text-muted-foreground">{tool.description}</p>
+                          </div>
+                        </LanguageLink>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </nav>
 
           {/* Right Side Actions */}
@@ -378,15 +455,7 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
         {mobileMenuOpen && (
           <div className="md:hidden absolute top-16 left-0 w-full bg-background/95 backdrop-blur border-t max-h-[calc(100vh-4rem)] overflow-y-auto shadow-md">
             <div className="container max-w-6xl mx-auto py-4 space-y-4">
-              {/* Direct link to Image Tools */}
-              <LanguageLink 
-                href="/image-tools"
-                className="block px-3 py-3 text-lg font-medium hover:bg-primary/5 rounded-md transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {isClient ? t('imageTools.title') || "Image Tools" : "Image Tools"}
-              </LanguageLink>
-              {navItems.slice(1).map((item) => (
+              {navItems.map((item) => (
                 <div key={item.label} className="space-y-2">
                   <div className="block px-3 py-3 text-lg font-medium hover:bg-primary/5 rounded-md transition-colors">
                     {item.label}

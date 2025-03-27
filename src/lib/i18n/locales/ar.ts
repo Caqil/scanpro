@@ -1208,5 +1208,41 @@ export default {
             metaDescription: "إضافة علامات مائية نصية أو صورية لحماية صورك وتسويقها",
             metaKeywords: "إضافة علامة مائية، حماية الصورة، العلامة التجارية، حقوق الطبع، أمان الصورة"
         }
+    },
+    "dashboard": {
+        "apiKeys": {
+            "title": "مفاتيح API",
+            "description": "إنشاء وإدارة مفاتيح API للوصول إلى ScanPro من تطبيقاتك",
+            "createButton": "إنشاء مفتاح API",
+            "createTitle": "إنشاء مفتاح API جديد",
+            "createDescription": "تسمح مفاتيح API للتطبيقات الخارجية بالمصادقة مع ScanPro API.",
+            "name": "الاسم",
+            "namePlaceholder": "تطبيقي",
+            "nameRequired": "يرجى إدخال اسم لمفتاح API الخاص بك",
+            "fetchError": "فشل تحميل مفاتيح API",
+            "createError": "فشل إنشاء مفتاح API",
+            "keyCreated": "تم إنشاء مفتاح API",
+            "keyCreatedDescription": "انسخ مفتاح API الآن. لن تتمكن من رؤيته مرة أخرى!",
+            "importantNote": "هام",
+            "keyWarning": "سيتم عرض هذا المفتاح مرة واحدة فقط. احفظه بأمان - ستحتاج إلى إنشاء مفتاح جديد إذا فقدته.",
+            "copyAndClose": "نسخ وإغلاق",
+            "createdOn": "تم الإنشاء في {{date}}",
+            "lastUsed": "آخر استخدام",
+            "expires": "تنتهي صلاحيته",
+            "never": "أبداً",
+            "deleteTitle": "حذف مفتاح API",
+            "deleteDescription": "لا يمكن التراجع عن هذا الإجراء. سيتم حذف مفتاح API نهائيًا.",
+            "deleteConfirm": "هل أنت متأكد أنك تريد حذف مفتاح API \"{{name}}\"؟",
+            "deleteWarning": "لن تتمكن التطبيقات التي تستخدم هذا المفتاح من الوصول إلى API بعد الآن.",
+            "deleteSuccess": "تم حذف مفتاح API بنجاح",
+            "deleteError": "فشل حذف مفتاح API",
+            "copiedToClipboard": "تم نسخ مفتاح API إلى الحافظة",
+            "noKeysTitle": "لا توجد مفاتيح API",
+            "noKeysDescription": "لم تقم بإنشاء أي مفاتيح API حتى الآن. تسمح مفاتيح API لتطبيقاتك بالمصادقة مع ScanPro API.",
+            "documentationTitle": "توثيق API",
+            "documentationDescription": "تعلم كيفية استخدام ScanPro API في تطبيقاتك",
+            "documentationSubtext": "يوفر توثيق API الشامل لدينا جميع المعلومات التي تحتاجها لدمج قدرات معالجة PDF والصور القوية في تطبيقاتك.",
+            "viewDocumentation": "عرض التوثيق"
+        }
     }
 }
