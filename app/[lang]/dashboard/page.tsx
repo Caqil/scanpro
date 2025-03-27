@@ -23,9 +23,9 @@ export default async function DashboardPage({
   searchParams
 }: {
   params: { lang: string };
-  searchParams?: { tab?: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  // Fix: await the getServerSession call
+  // Get the server session
   const session = await getServerSession(authOptions);
 
   if (!session?.user) {
@@ -53,30 +53,36 @@ export default async function DashboardPage({
   firstDayOfMonth.setDate(1);
   firstDayOfMonth.setHours(0, 0, 0, 0);
 
-  const usageStats = await prisma.usageStats.findMany({
-    where: {
-      userId: user.id,
-      date: { gte: firstDayOfMonth },
-    },
-  });
+  let usageStats: UsageStats[] = [];
+  try {
+    usageStats = await prisma.usageStats.findMany({
+      where: {
+        userId: user.id,
+        date: { gte: firstDayOfMonth },
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching usage stats:", error);
+    // Continue with empty stats if there's an error
+  }
 
-  // Calculate total operations
-  const totalOperations = usageStats.reduce(
+  // Calculate total operations and make sure usageStats exists
+  const totalOperations = Array.isArray(usageStats) ? usageStats.reduce(
     (sum: number, stat: UsageStats) => sum + stat.count, 
     0
-  );
+  ) : 0;
 
   // Get usage by operation type
-  const operationCounts = usageStats.reduce(
+  const operationCounts = Array.isArray(usageStats) ? usageStats.reduce(
     (acc: Record<string, number>, stat: UsageStats) => {
       acc[stat.operation] = (acc[stat.operation] || 0) + stat.count;
       return acc;
     },
     {} as Record<string, number>
-  );
+  ) : {};
   
   // Get the tab from search params or use default
-  const activeTab = searchParams?.tab || "overview";
+  const activeTab = typeof searchParams.tab === 'string' ? searchParams.tab : "overview";
 
   return (
     <div className="container max-w-6xl py-8">

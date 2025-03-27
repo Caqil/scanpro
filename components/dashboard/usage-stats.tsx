@@ -8,9 +8,9 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 
 interface UsageStatsProps {
   user: any;
-  usageStats: {
-    totalOperations: number;
-    operationCounts: Record<string, number>;
+  usageStats?: {
+    totalOperations?: number;
+    operationCounts?: Record<string, number>;
   };
 }
 
@@ -24,25 +24,56 @@ export function UsageStats({ user, usageStats }: UsageStatsProps) {
     user?.subscription?.tier === "basic" ? 1000 : 100;
   
   // Format operation name for display
-  const formatOperation = (op: string) => {
+  const formatOperation = (op: string): string => {
     return op.charAt(0).toUpperCase() + op.slice(1);
   };
   
   // Format percentage
-  const formatPercentage = (value: number, total: number) => {
+  const formatPercentage = (value: number, total: number): string => {
     if (total === 0) return "0%";
     return `${Math.round((value / total) * 100)}%`;
   };
   
+  // Get total operations safely
+  const totalOperations = typeof usageStats?.totalOperations === 'number' ? usageStats.totalOperations : 0;
+  
   // Prepare chart data
   useEffect(() => {
-    const data = Object.entries(usageStats.operationCounts).map(([operation, count]) => ({
-      name: formatOperation(operation),
-      value: count
-    }));
-    
-    setChartData(data);
+    if (usageStats?.operationCounts && typeof usageStats.operationCounts === 'object') {
+      try {
+        const data = Object.entries(usageStats.operationCounts).map(([operation, count]) => ({
+          name: formatOperation(operation),
+          value: count
+        }));
+        setChartData(data);
+      } catch (error) {
+        console.error("Error preparing chart data:", error);
+        setChartData([]);
+      }
+    } else {
+      setChartData([]);
+    }
   }, [usageStats]);
+
+  // Get the most used operation
+  const getMostUsedOperation = (): { operation: string, count: number } => {
+    if (!usageStats?.operationCounts || Object.keys(usageStats.operationCounts).length === 0) {
+      return { operation: "None", count: 0 };
+    }
+    
+    try {
+      const entries = Object.entries(usageStats.operationCounts);
+      if (entries.length === 0) return { operation: "None", count: 0 };
+      
+      const [operation, count] = entries.sort((a, b) => b[1] - a[1])[0];
+      return { operation, count: count as number };
+    } catch (error) {
+      console.error("Error getting most used operation:", error);
+      return { operation: "None", count: 0 };
+    }
+  };
+  
+  const mostUsed = getMostUsedOperation();
   
   return (
     <div className="space-y-6">
@@ -52,12 +83,12 @@ export function UsageStats({ user, usageStats }: UsageStatsProps) {
             <CardTitle className="text-sm font-medium">Total Usage</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{usageStats.totalOperations}</div>
+            <div className="text-2xl font-bold">{totalOperations}</div>
             <p className="text-xs text-muted-foreground">
               of {usageLimit} operations this month
             </p>
             <Progress
-              value={(usageStats.totalOperations / usageLimit) * 100}
+              value={(totalOperations / usageLimit) * 100}
               className="mt-2"
             />
           </CardContent>
@@ -98,30 +129,12 @@ export function UsageStats({ user, usageStats }: UsageStatsProps) {
             <CardTitle className="text-sm font-medium">Most Used</CardTitle>
           </CardHeader>
           <CardContent>
-            {Object.entries(usageStats.operationCounts).length > 0 ? (
-              <>
-                <div className="text-2xl font-bold">
-                  {formatOperation(
-                    Object.entries(usageStats.operationCounts)
-                      .sort((a, b) => b[1] - a[1])[0]?.[0] || "None"
-                  )}
-                </div>
-                <p className="text-xs text-muted-foreground">
-                  {formatPercentage(
-                    Object.entries(usageStats.operationCounts)
-                      .sort((a, b) => b[1] - a[1])[0]?.[1] || 0,
-                    usageStats.totalOperations
-                  )} of total usage
-                </p>
-              </>
-            ) : (
-              <>
-                <div className="text-2xl font-bold">None</div>
-                <p className="text-xs text-muted-foreground">
-                  No operations yet
-                </p>
-              </>
-            )}
+            <div className="text-2xl font-bold">
+              {formatOperation(mostUsed.operation)}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {formatPercentage(mostUsed.count, totalOperations)} of total usage
+            </p>
           </CardContent>
         </Card>
       </div>
