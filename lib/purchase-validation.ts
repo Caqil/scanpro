@@ -1,272 +1,251 @@
 // lib/purchase-validation.ts
-import fs from 'fs/promises';
-import path from 'path';
 import crypto from 'crypto';
-import { existsSync } from 'fs';
+import fs from 'fs';
+import path from 'path';
+import axios from 'axios';
 
-// Define the path for storing validated purchase codes
-const DATA_DIR = path.join(process.cwd(), 'data');
-const PURCHASE_CODES_FILE = path.join(DATA_DIR, 'purchase-codes.json');
-const API_KEYS_FILE = path.join(DATA_DIR, 'apikeys.json');
+// Define file path for storing API keys
+const API_KEYS_FILE = path.join(process.cwd(), 'data', 'api-keys.json');
 
-// Define types
-export interface PurchaseCode {
-  code: string;
-  email: string;
-  validated: boolean;
-  validatedAt?: string;
-  apiKeyId?: string;
+// Ensure data directory exists
+const dataDir = path.dirname(API_KEYS_FILE);
+if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
 }
 
-export interface ApiKey {
-  id: string;
-  key: string;
-  purchaseCode: string;
-  email: string;
-  createdAt: string;
-  lastUsed?: string;
+// Define types for API keys
+interface ApiKey {
+    key: string;
+    email: string;
+    purchaseCode: string;
+    createdAt: string;
 }
 
-// Ensure the data directory exists
-async function ensureDirectory() {
-  if (!existsSync(DATA_DIR)) {
-    await fs.mkdir(DATA_DIR, { recursive: true });
-  }
-  
-  if (!existsSync(PURCHASE_CODES_FILE)) {
-    await fs.writeFile(PURCHASE_CODES_FILE, JSON.stringify([]));
-  }
-  
-  if (!existsSync(API_KEYS_FILE)) {
-    await fs.writeFile(API_KEYS_FILE, JSON.stringify([]));
-  }
+// In-memory store for API keys
+let apiKeys: Record<string, ApiKey> = {};
+
+// Load existing API keys from file
+function loadApiKeys() {
+    try {
+        if (fs.existsSync(API_KEYS_FILE)) {
+            const data = fs.readFileSync(API_KEYS_FILE, 'utf8');
+            apiKeys = JSON.parse(data);
+            console.log(`Loaded ${Object.keys(apiKeys).length} API keys from file`);
+        } else {
+            fs.writeFileSync(API_KEYS_FILE, JSON.stringify({}), 'utf8');
+            console.log('Created empty API keys file');
+        }
+    } catch (error) {
+        console.error('Error loading API keys:', error);
+        apiKeys = {};
+    }
 }
 
-// Load purchase codes
-async function loadPurchaseCodes(): Promise<PurchaseCode[]> {
-  await ensureDirectory();
-  
-  try {
-    const data = await fs.readFile(PURCHASE_CODES_FILE, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    console.error('Error loading purchase codes:', error);
-    return [];
-  }
+// Initialize API keys on module load
+loadApiKeys();
+
+// Save API keys to file
+function saveApiKeys() {
+    try {
+        fs.writeFileSync(API_KEYS_FILE, JSON.stringify(apiKeys, null, 2), 'utf8');
+    } catch (error) {
+        console.error('Error saving API keys:', error);
+    }
 }
 
-// Save purchase codes
-async function savePurchaseCodes(codes: PurchaseCode[]): Promise<void> {
-  await ensureDirectory();
-  
-  try {
-    await fs.writeFile(PURCHASE_CODES_FILE, JSON.stringify(codes, null, 2));
-  } catch (error) {
-    console.error('Error saving purchase codes:', error);
-    throw new Error('Failed to save purchase codes');
-  }
-}
-
-// Load API keys
-async function loadApiKeys(): Promise<ApiKey[]> {
-  await ensureDirectory();
-  
-  try {
-    const data = await fs.readFile(API_KEYS_FILE, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    console.error('Error loading API keys:', error);
-    return [];
-  }
-}
-
-// Save API keys
-async function saveApiKeys(apiKeys: ApiKey[]): Promise<void> {
-  await ensureDirectory();
-  
-  try {
-    await fs.writeFile(API_KEYS_FILE, JSON.stringify(apiKeys, null, 2));
-  } catch (error) {
-    console.error('Error saving API keys:', error);
-    throw new Error('Failed to save API keys');
-  }
-}
-
-// Format validation for purchase code (basic check)
-function isValidFormat(code: string): boolean {
-  // Purchase codes typically have a specific format, but this is just a basic check
-  // Envato purchase codes are usually in format: 8 chars - 4 chars - 4 chars - 4 chars - 12 chars
-  const pattern = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
-  return pattern.test(code);
-}
-
-// Check if purchase code is already registered
-export async function isPurchaseCodeRegistered(code: string): Promise<boolean> {
-  const purchaseCodes = await loadPurchaseCodes();
-  return purchaseCodes.some(p => p.code === code);
-}
-
-// Check if purchase code has already been validated
-export async function isPurchaseCodeValidated(code: string): Promise<boolean> {
-  const purchaseCodes = await loadPurchaseCodes();
-  const purchaseCode = purchaseCodes.find(p => p.code === code);
-  return purchaseCode ? purchaseCode.validated : false;
-}
-
-// Generate a new API key
-export function generateApiKey(): string {
-  // Generate a cryptographically secure random string
-  return `sk_${crypto.randomBytes(24).toString('hex')}`;
-}
-
-// Validate purchase code against Envato API (in a real implementation)
-// Here we simulate a validation with format check only
-export async function validatePurchaseCode(code: string, email: string): Promise<{
-  valid: boolean;
-  message: string;
+/**
+ * Validate a purchase code with the Envato API
+ */
+export async function validatePurchaseCode(
+    purchaseCode: string,
+    email: string
+): Promise<{
+    valid: boolean;
+    message: string;
+    buyer?: string;
+    purchaseDate?: string;
 }> {
-  // Format validation
-  if (!isValidFormat(code)) {
-    return {
-      valid: false,
-      message: 'Invalid purchase code format',
-    };
-  }
-  
-  // In a real implementation, you would validate against Envato API here
-  // For demo purposes, we'll accept any code with valid format
-  
-  // Check if code is already registered
-  const isRegistered = await isPurchaseCodeRegistered(code);
-  if (isRegistered) {
-    const isValidated = await isPurchaseCodeValidated(code);
-    if (isValidated) {
-      return {
-        valid: false,
-        message: 'This purchase code has already been used',
-      };
-    } else {
-      // Code is registered but not validated yet, update email
-      const purchaseCodes = await loadPurchaseCodes();
-      const index = purchaseCodes.findIndex(p => p.code === code);
-      if (index !== -1) {
-        purchaseCodes[index].email = email;
-        await savePurchaseCodes(purchaseCodes);
-      }
+    const personalToken = process.env.ENVATO_PERSONAL_TOKEN;
+    const itemId = process.env.ENVATO_ITEM_ID;
+
+    // In development without Envato API token, accept any purchase code
+    if (process.env.NODE_ENV === 'development' && !personalToken) {
+        console.warn('DEVELOPMENT MODE: Accepting purchase code without validation');
+        return {
+            valid: true,
+            message: 'Development mode: Purchase code accepted',
+            buyer: email,
+            purchaseDate: new Date().toISOString()
+        };
     }
-  } else {
-    // Store the purchase code
-    const purchaseCodes = await loadPurchaseCodes();
-    purchaseCodes.push({
-      code,
-      email,
-      validated: false,
-    });
-    await savePurchaseCodes(purchaseCodes);
-  }
-  
-  // For demo, we'll simulate a "successful" validation
-  return {
-    valid: true,
-    message: 'Purchase code validated successfully',
-  };
+
+    if (!personalToken) {
+        console.error('Envato API token not configured');
+        return {
+            valid: false,
+            message: 'API configuration error. Please contact support.'
+        };
+    }
+
+    try {
+        // Call Envato API to verify the purchase code
+        const response = await axios.get(`https://api.envato.com/v3/market/buyer/purchase:${purchaseCode}`, {
+            headers: {
+                'Authorization': `Bearer ${personalToken}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const purchaseData = response.data;
+
+        // Verify this is for the correct item
+        if (!purchaseData || (itemId && purchaseData.item.id !== parseInt(itemId))) {
+            return {
+                valid: false,
+                message: 'Invalid purchase code or not for this product'
+            };
+        }
+
+        return {
+            valid: true,
+            message: 'Purchase code validated successfully',
+            buyer: purchaseData.buyer,
+            purchaseDate: purchaseData.sold_at
+        };
+    } catch (error) {
+        console.error('Error validating purchase code:', error);
+
+        // Handle Axios errors
+        if (axios.isAxiosError(error)) {
+            if (error.response?.status === 404) {
+                return {
+                    valid: false,
+                    message: 'Purchase code not found'
+                };
+            } else if (error.response?.status === 401) {
+                return {
+                    valid: false,
+                    message: 'API authentication error'
+                };
+            }
+        }
+
+        return {
+            valid: false,
+            message: 'Error validating purchase code. Please try again later.'
+        };
+    }
 }
 
-// Mark a purchase code as validated and generate an API key
-export async function validateAndGenerateApiKey(code: string, email: string): Promise<{
-  success: boolean;
-  apiKey?: ApiKey;
-  message: string;
+/**
+ * Generate a secure API key
+ */
+function generateApiKey(): string {
+    return crypto.randomBytes(32).toString('hex');
+}
+
+/**
+ * Check if a purchase code has already been validated
+ */
+export async function isPurchaseCodeValidated(purchaseCode: string): Promise<boolean> {
+    return !!apiKeys[purchaseCode];
+}
+
+/**
+ * Get the API key for a purchase code
+ */
+export async function getApiKeyForPurchaseCode(purchaseCode: string): Promise<ApiKey | null> {
+    const apiKey = apiKeys[purchaseCode];
+    return apiKey || null;
+}
+
+/**
+ * Validate a purchase code and generate an API key
+ */
+export async function validateAndGenerateApiKey(
+    purchaseCode: string,
+    email: string
+): Promise<{
+    success: boolean;
+    message: string;
+    apiKey?: { key: string; createdAt: Date };
 }> {
-  try {
-    // First, validate the purchase code
-    const validation = await validatePurchaseCode(code, email);
-    if (!validation.valid) {
-      return {
-        success: false,
-        message: validation.message,
-      };
+    try {
+        // Check if this purchase code already has an API key
+        const existingKey = await getApiKeyForPurchaseCode(purchaseCode);
+
+        if (existingKey) {
+            // If email matches, return the existing key
+            if (existingKey.email.toLowerCase() === email.toLowerCase()) {
+                return {
+                    success: true,
+                    message: 'API key retrieved successfully',
+                    apiKey: {
+                        key: existingKey.key,
+                        createdAt: new Date(existingKey.createdAt)
+                    }
+                };
+            } else {
+                return {
+                    success: false,
+                    message: 'This purchase code is registered to a different email address'
+                };
+            }
+        }
+
+        // Validate the purchase code
+        const validation = await validatePurchaseCode(purchaseCode, email);
+
+        if (!validation.valid) {
+            return {
+                success: false,
+                message: validation.message
+            };
+        }
+
+        // Generate a new API key
+        const apiKey = generateApiKey();
+        const createdAt = new Date().toISOString();
+
+        // Store the new API key
+        apiKeys[purchaseCode] = {
+            key: apiKey,
+            email,
+            purchaseCode,
+            createdAt
+        };
+
+        // Save changes to file
+        saveApiKeys();
+
+        return {
+            success: true,
+            message: 'Purchase code validated and API key generated successfully',
+            apiKey: {
+                key: apiKey,
+                createdAt: new Date(createdAt)
+            }
+        };
+    } catch (error) {
+        console.error('Error generating API key:', error);
+        return {
+            success: false,
+            message: 'An error occurred while generating your API key'
+        };
     }
-    
-    // Check if code is already associated with an API key
-    const apiKeys = await loadApiKeys();
-    const existingApiKey = apiKeys.find(key => key.purchaseCode === code);
-    
-    if (existingApiKey) {
-      return {
-        success: false,
-        message: 'An API key has already been generated for this purchase code',
-      };
-    }
-    
-    // Mark purchase code as validated
-    const purchaseCodes = await loadPurchaseCodes();
-    const purchaseCodeIndex = purchaseCodes.findIndex(p => p.code === code);
-    
-    if (purchaseCodeIndex === -1) {
-      return {
-        success: false,
-        message: 'Purchase code not found',
-      };
-    }
-    
-    // Create a new API key
-    const newApiKey: ApiKey = {
-      id: crypto.randomUUID(),
-      key: generateApiKey(),
-      purchaseCode: code,
-      email,
-      createdAt: new Date().toISOString(),
-    };
-    
-    // Update purchase code with API key ID
-    purchaseCodes[purchaseCodeIndex].validated = true;
-    purchaseCodes[purchaseCodeIndex].validatedAt = new Date().toISOString();
-    purchaseCodes[purchaseCodeIndex].apiKeyId = newApiKey.id;
-    
-    // Save both
-    apiKeys.push(newApiKey);
-    await saveApiKeys(apiKeys);
-    await savePurchaseCodes(purchaseCodes);
-    
-    return {
-      success: true,
-      apiKey: newApiKey,
-      message: 'API key generated successfully',
-    };
-  } catch (error) {
-    console.error('Error generating API key:', error);
-    return {
-      success: false,
-      message: 'An error occurred while generating the API key',
-    };
-  }
 }
 
-// Validate an API key
-export async function validateApiKey(key: string): Promise<ApiKey | null> {
-  const apiKeys = await loadApiKeys();
-  const apiKey = apiKeys.find(apiKey => apiKey.key === key);
-  
-  if (!apiKey) {
-    return null;
-  }
-  
-  // Update last used timestamp
-  apiKey.lastUsed = new Date().toISOString();
-  await saveApiKeys(apiKeys);
-  
-  return apiKey;
+/**
+ * Verify if an API key is valid
+ */
+export async function verifyApiKey(apiKey: string): Promise<boolean> {
+    // Check if this API key exists in our records
+    return Object.values(apiKeys).some(key => key.key === apiKey);
 }
 
-// Get API key for purchase code
-export async function getApiKeyForPurchaseCode(code: string): Promise<ApiKey | null> {
-  const apiKeys = await loadApiKeys();
-  return apiKeys.find(key => key.purchaseCode === code) || null;
-}
-
-// List API keys associated with an email
-export async function getApiKeysByEmail(email: string): Promise<ApiKey[]> {
-  const apiKeys = await loadApiKeys();
-  return apiKeys.filter(key => key.email.toLowerCase() === email.toLowerCase());
+/**
+ * Get all API keys (admin function)
+ */
+export async function getAllApiKeys(): Promise<typeof apiKeys> {
+    return { ...apiKeys };
 }

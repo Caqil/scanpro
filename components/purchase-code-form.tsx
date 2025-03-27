@@ -24,10 +24,11 @@ export function PurchaseCodeForm() {
       return false;
     }
 
-    // Basic purchase code format validation
+    // Basic purchase code format validation for Envato
+    // Format is typically like: 5cb8e278-a516-48ee-9d41-95a91c3f5aa3
     const codePattern = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
     if (!codePattern.test(purchaseCode.trim())) {
-      setError("Invalid purchase code format");
+      setError("Invalid purchase code format. It should look like: 5cb8e278-a516-48ee-9d41-95a91c3f5aa3");
       return false;
     }
 
@@ -161,7 +162,7 @@ export function PurchaseCodeForm() {
                 </Button>
               </div>
               <p className="text-xs text-muted-foreground mt-2">
-                Store this API key securely. You'll need it to authenticate your API requests.
+                Store this API key securely and include it in all your API requests.
               </p>
             </div>
           </div>
@@ -210,7 +211,7 @@ export function PurchaseCodeForm() {
       {success && (
         <CardFooter className="flex justify-center border-t pt-4">
           <p className="text-xs text-center text-muted-foreground">
-            Keep your API key secure. Don't share it with others.
+            Keep your API key secure and don't share it with others. Include this key in all your API requests.
           </p>
         </CardFooter>
       )}
