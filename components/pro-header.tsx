@@ -22,7 +22,10 @@ import {
   FileBoxIcon,
   FileCheck2,
   PenTool,
-  KeyRound
+  KeyRound,
+  LogIn,
+  User,
+  LogOut
 } from "lucide-react";
 import { useLanguageStore } from "@/src/store/store";
 import {
@@ -31,11 +34,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
+  DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import { LanguageLink } from "./language-link";
 import { LanguageSwitcher } from "./language-switcher";
 import { SiteLogo } from "./site-logo";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useRouter } from "next/navigation";
 
 type ToolDefinition = {
   name: string;
@@ -67,7 +73,8 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [showAppBanner, setShowAppBanner] = useState(true);
   const [isClient, setIsClient] = useState(false);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     setIsClient(true);
@@ -270,6 +277,22 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
     },
   ];
 
+  // Get user initials for avatar
+  const getUserInitials = () => {
+    if (!session?.user?.name) return "U";
+    return session.user.name
+      .split(" ")
+      .map(n => n[0])
+      .join("")
+      .toUpperCase()
+      .substring(0, 2);
+  };
+
+  const handleSignOut = async () => {
+    await signOut({ redirect: false });
+    router.push(`/${language}`);
+  };
+
   return (
     <>
       {/* App Download Banner */}
@@ -403,6 +426,67 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
             <ModeToggle />
+            
+            {/* Auth Buttons */}
+            {status === "loading" ? (
+              <div className="h-9 w-9 rounded-full bg-muted flex items-center justify-center">
+                <div className="h-4 w-4 rounded-full border-2 border-primary border-t-transparent animate-spin"></div>
+              </div>
+            ) : status === "authenticated" ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="rounded-full p-0 h-9 w-9" aria-label="User menu">
+                    <Avatar className="h-9 w-9">
+                      <AvatarImage src={session?.user?.image || ""} alt={session?.user?.name || "User"} />
+                      <AvatarFallback className="bg-primary text-primary-foreground">
+                        {getUserInitials()}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel>
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">{session?.user?.name}</p>
+                      <p className="text-xs leading-none text-muted-foreground">{session?.user?.email}</p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <LanguageLink href="/dashboard">
+                    <DropdownMenuItem className="cursor-pointer">
+                      <User className="mr-2 h-4 w-4" />
+                      <span>{t('nav.dashboard') || "Dashboard"}</span>
+                    </DropdownMenuItem>
+                  </LanguageLink>
+                  <LanguageLink href="/profile">
+                    <DropdownMenuItem className="cursor-pointer">
+                      <User className="mr-2 h-4 w-4" />
+                      <span>{t('nav.profile') || "Profile"}</span>
+                    </DropdownMenuItem>
+                  </LanguageLink>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="cursor-pointer" onClick={handleSignOut}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>{t('nav.signOut') || "Sign out"}</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <div className="flex items-center gap-2">
+                <LanguageLink href="/login">
+                  <Button variant="ghost" size="sm" className="hidden sm:flex items-center gap-1.5">
+                    <LogIn className="h-4 w-4" />
+                    {t('nav.signIn') || "Sign in"}
+                  </Button>
+                </LanguageLink>
+                <LanguageLink href="/register">
+                  <Button variant="default" size="sm" className="hidden sm:inline-flex">
+                    {t('nav.signUp') || "Sign up"}
+                  </Button>
+                </LanguageLink>
+              </div>
+            )}
+            
             <Button
               variant="outline"
               size="icon"
@@ -456,6 +540,24 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
                   )}
                 </div>
               ))}
+              
+              {/* Mobile Auth Buttons */}
+              {status !== "authenticated" && (
+                <div className="flex flex-col gap-2 pt-2 border-t">
+                  <LanguageLink href="/login">
+                    <Button variant="outline" className="w-full justify-start" onClick={() => setMobileMenuOpen(false)}>
+                      <LogIn className="h-4 w-4 mr-2" />
+                      {t('nav.signIn') || "Sign in"}
+                    </Button>
+                  </LanguageLink>
+                  <LanguageLink href="/register">
+                    <Button variant="default" className="w-full justify-start" onClick={() => setMobileMenuOpen(false)}>
+                      <User className="h-4 w-4 mr-2" />
+                      {t('nav.signUp') || "Sign up"}
+                    </Button>
+                  </LanguageLink>
+                </div>
+              )}
             </div>
           </div>
         )}

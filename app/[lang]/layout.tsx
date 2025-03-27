@@ -9,10 +9,10 @@ import { notFound } from "next/navigation"
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "../globals.css"
-import { Providers } from "./providers" // Import the auth provider wrapper
 
 // Import language configuration
 import { SUPPORTED_LANGUAGES, getTranslation } from "@/src/lib/i18n/config";
+import { AuthProvider } from "./providers"
 
 // Font configuration
 export const fontSans = FontSans({
@@ -76,7 +76,7 @@ export default async function Layout({
   return (
     <html lang={lang} dir={isRTL ? "rtl" : "ltr"} suppressHydrationWarning>
       <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
-        <Providers>
+        <AuthProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="relative flex min-h-screen flex-col">
               <ProHeader urlLanguage={lang} />
@@ -85,7 +85,7 @@ export default async function Layout({
             </div>
             <Toaster />
           </ThemeProvider>
-        </Providers>
+        </AuthProvider>
       </body>
     </html>
   )

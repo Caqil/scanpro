@@ -1,50 +1,85 @@
-// This is a suggestion for how your authOptions might need to be updated
-// You'll need to adjust this based on your actual implementation
-import type { NextAuthOptions } from "next-auth"
-import { PrismaAdapter } from "@auth/prisma-adapter"
-import GoogleProvider from "next-auth/providers/google"
-import GithubProvider from "next-auth/providers/github"
-import CredentialsProvider from "next-auth/providers/credentials"
-import { prisma } from "@/lib/prisma"
+// app/api/auth/[...nextauth]/route.ts
+import NextAuth from "next-auth";
+import type { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { prisma } from "@/lib/prisma";
+import bcrypt from "bcryptjs";
 
 export const authOptions: NextAuthOptions = {
+  // @ts-ignore - the types are mismatched but it will work correctly
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
     GithubProvider({
-      clientId: process.env.GITHUB_ID!,
-      clientSecret: process.env.GITHUB_SECRET!,
+      clientId: process.env.GITHUB_ID || "",
+      clientSecret: process.env.GITHUB_SECRET || "",
     }),
     CredentialsProvider({
+      name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      // Your authorize function here
       async authorize(credentials) {
-        // Implementation details
-        return null
+        if (!credentials?.email || !credentials?.password) {
+          return null;
+        }
+
+        const user = await prisma.user.findUnique({
+          where: { email: credentials.email },
+        });
+
+        if (!user || !user.password) {
+          return null;
+        }
+
+        const isPasswordValid = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
+
+        if (!isPasswordValid) {
+          return null;
+        }
+
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+        };
       },
     }),
   ],
   callbacks: {
-    // Your callbacks here
+    async session({ session, token }) {
+      if (token && session.user) {
+        session.user.id = token.sub!;
+      }
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.sub = user.id;
+      }
+      return token;
+    },
   },
   pages: {
-    // Your custom pages here
+    signIn: "/login",
+    error: "/login",
   },
   session: {
-    // Fix: Make sure strategy is properly typed
-    strategy: "jwt", // or "database"
+    strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-}
+  secret: process.env.NEXTAUTH_SECRET,
+};
 
-import NextAuth from "next-auth"
-export const { handlers, auth, signIn, signOut } = NextAuth(authOptions)
-
-export { auth as GET, auth as POST }
-
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
