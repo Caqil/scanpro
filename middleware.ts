@@ -20,6 +20,10 @@ const EXCLUDED_ROUTES = [
   '/api/auth',
   '/api/webhooks',
   '/api/admin',
+  '/login',  // Exclude login route from middleware
+  '/register', // Exclude register route from middleware
+  '/forgot-password', // Exclude forgot password route
+  '/reset-password',  // Exclude reset password route
 
   // Public file download/status routes
   '/api/convert/status',
@@ -101,9 +105,8 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     '/dashboard/:path*',
-    '/api/auth/:path*',
-    '/login',
-    '/register',
     '/api/:path*',
+    // Exclude authentication-related paths
+    // Don't include /login or /api/auth/:path* here
   ],
 };

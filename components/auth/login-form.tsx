@@ -15,7 +15,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { LanguageLink } from "@/components/language-link";
 
-export function LoginForm() {
+interface LoginFormProps {
+  callbackUrl?: string;
+}
+
+export function LoginForm({ callbackUrl = "/en/dashboard" }: LoginFormProps) {
   const { t } = useLanguageStore();
   const router = useRouter();
   
@@ -83,11 +87,15 @@ export function LoginForm() {
     setLoading(true);
     
     try {
+      console.log("Attempting sign in with callbackUrl:", callbackUrl);
       const result = await signIn("credentials", {
         redirect: false,
         email,
         password,
+        callbackUrl
       });
+      
+      console.log("Sign in result:", result);
       
       if (result?.error) {
         setError(t('auth.invalidCredentials') || "Invalid email or password");
@@ -97,11 +105,14 @@ export function LoginForm() {
       // Show success toast
       toast.success(t('auth.loginSuccess') || "Signed in successfully");
       
-      // Redirect to dashboard or intended destination
-      const redirectUrl = `/en/dashboard`;
-      router.push(redirectUrl);
+      // Use result.url if available, otherwise fallback to callbackUrl
+      const redirectTo = result?.url || callbackUrl;
+      console.log("Redirecting to:", redirectTo);
+      
+      router.push(redirectTo);
       router.refresh();
     } catch (error) {
+      console.error("Login error:", error);
       setError(t('auth.loginError') || "An error occurred. Please try again.");
     } finally {
       setLoading(false);
@@ -109,8 +120,8 @@ export function LoginForm() {
   };
   
   const handleOAuthSignIn = (provider: string) => {
-    const redirectUrl = `/en/dashboard`;
-    signIn(provider, { callbackUrl: redirectUrl });
+    console.log("OAuth sign in with provider:", provider, "callbackUrl:", callbackUrl);
+    signIn(provider, { callbackUrl });
   };
   
   return (

@@ -1,22 +1,21 @@
-
-import type { NextAuthOptions } from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { prisma } from "@/lib/prisma";
-
 import { compare } from "bcryptjs";
+import { prisma } from "@/lib/prisma";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
   },
   pages: {
     signIn: "/en/login",
-    signOut: "/en/login",
     error: "/en/login",
+    // Add other custom pages if needed
   },
   providers: [
     GoogleProvider({
@@ -28,7 +27,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
     }),
     CredentialsProvider({
-      name: "Credentials",
+      name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
@@ -46,16 +45,17 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        const isValidPassword = await compare(credentials.password, user.password);
+        const isPasswordValid = await compare(credentials.password, user.password);
 
-        if (!isValidPassword) {
+        if (!isPasswordValid) {
           return null;
         }
 
         return {
           id: user.id,
-          name: user.name,
           email: user.email,
+          name: user.name,
+          role: user.role,
         };
       },
     }),
@@ -63,15 +63,24 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session, token }) {
       if (token && session.user) {
-        session.user.id = token.sub!;
+        session.user.id = token.id as string;
+        session.user.role = token.role as string;
       }
       return session;
     },
     async jwt({ token, user }) {
       if (user) {
-        token.sub = user.id;
+        token.id = user.id;
+        token.role = user.role;
       }
       return token;
+    },
+    async redirect({ url, baseUrl }) {
+      // Allow relative URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allow callbacks to the same origin
+      else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
     },
   },
 };

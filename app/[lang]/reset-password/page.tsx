@@ -17,13 +17,13 @@ export default async function ResetPasswordPage() {
   const session = await getServerSession(authOptions);
   
   if (session?.user) {
-    redirect("/dashboard");
+    redirect("/en/dashboard");
   }
 
   // Get token from URL
   const headersList = headers();
   const url = (await headersList).get("x-url") || "";
-  const searchParams = new URL(url,process.env.NEXTAUTH_URL).searchParams;
+  const searchParams = new URL('localhost:3001').searchParams;
   const tokenParam = searchParams.get("token");
   const token = tokenParam || undefined;
 
