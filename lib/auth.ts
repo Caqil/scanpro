@@ -3,21 +3,19 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { compare } from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import bcrypt from "bcryptjs";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
-  secret: process.env.NEXTAUTH_SECRET,
+
+  // Configure JWT
   session: {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  pages: {
-    signIn: "/en/login",
-    error: "/en/login",
-  },
-  debug: process.env.NODE_ENV === "development",
+
+  // Configure providers
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
@@ -28,81 +26,114 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
     }),
     CredentialsProvider({
-      name: "credentials",
+      name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
 
+        // Find user in database
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
+          include: {
+            subscription: true
+          }
         });
 
+        // Check if user exists and password is correct
         if (!user || !user.password) {
           return null;
         }
 
-        const isPasswordValid = await compare(credentials.password, user.password);
+        const isPasswordValid = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
 
         if (!isPasswordValid) {
           return null;
         }
 
-        // Return the user with ID and role explicitly
+        // Return user object without sensitive information
         return {
           id: user.id,
-          email: user.email,
           name: user.name,
-          role: user.role || "user",
-        };
-      },
-    }),
-  ],
-  callbacks: {
-    async session({ session, token }) {
-      if (token) {
-        // Set user properties from token to session
-        session.user = {
-          ...session.user,
-          id: token.id as string,
-          role: token.role as string || "user",
+          email: user.email,
+          role: user.role,
+          subscription: user.subscription,
+          image: user.image
         };
       }
-      return session;
-    },
+    })
+  ],
+
+  // Callbacks
+  callbacks: {
     async jwt({ token, user, account }) {
-      // If we have a user (during sign in), add their ID and role to the token
+      // Initial sign in
       if (user) {
         token.id = user.id;
         token.role = user.role || "user";
+
+
       }
 
-      // Keep account info for provider handling
-      if (account) {
-        token.provider = account.provider;
+      // If user data changes, update token
+      if (user && account) {
+        const updatedUser = await prisma.user.findUnique({
+          where: { id: user.id },
+          include: { subscription: true }
+        });
+
+        if (updatedUser) {
+          token.name = updatedUser.name;
+          token.email = updatedUser.email;
+          token.picture = updatedUser.image;
+          token.role = updatedUser.role;
+          token.subscription = updatedUser.subscription;
+        }
       }
 
       return token;
     },
-    async redirect({ url, baseUrl }) {
-      console.log("NextAuth redirect:", { url, baseUrl });
 
-      // If it's a relative URL, keep it relative (don't prepend baseUrl)
-      if (url.startsWith('/')) {
-        return url;
+    async session({ session, token }) {
+      if (token && session.user) {
+        session.user.id = token.id as string;
+        session.user.role = token.role as string;
+
+
       }
 
-      // If it's an absolute URL but matches the current base, use it
-      if (new URL(url).origin === baseUrl) {
-        return url;
-      }
-
-      // Default to base URL
-      return baseUrl;
+      return session;
     },
+
+    async redirect({ url, baseUrl }) {
+      // Handle callback URL correctly
+      // Make sure URL is a relative path or from allowed domain
+      if (url.startsWith("/")) {
+        return `${baseUrl}${url}`;
+      } else if (new URL(url).origin === baseUrl) {
+        return url;
+      }
+      return baseUrl;
+    }
   },
+
+  // Pages
+  pages: {
+    signIn: "/login",
+    signOut: "/logout",
+    error: "/login?error=true",
+  },
+
+  // Debug mode in development
+  debug: process.env.NODE_ENV === "development",
+
+  // Secret for JWT encryption
+  secret: process.env.NEXTAUTH_SECRET,
 };

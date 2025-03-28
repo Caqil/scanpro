@@ -12,30 +12,8 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex flex-col sm:flex-row">
+    <div className="min-h-screen flex flex-col justify-center items-center sm:flex-row">
       {/* Left side - Branding and info (for medium and larger screens) */}
-      <div className="hidden md:flex flex-col w-1/2 bg-gradient-to-br from-primary/80 to-primary text-primary-foreground p-8 justify-between">
-        <div>
-          <div className="flex items-center gap-2 mb-10">
-            <SiteLogo size={36} />
-            <span className="font-bold text-3xl">ScanPro</span>
-          </div>
-          
-          <h1 className="text-4xl font-bold mb-6">Welcome Back</h1>
-          <p className="text-xl mb-4">Log in to your account to access your dashboard and documents.</p>
-          <p className="text-lg opacity-90">Securely manage your PDF operations with our professional tools.</p>
-        </div>
-        
-        <div className="space-y-4">
-          <div className="p-4 bg-white/10 rounded-lg backdrop-blur-sm">
-            <p className="text-lg">Need help? Contact our support team at <strong>support@scanpro.cc</strong></p>
-          </div>
-          
-          <p className="text-sm opacity-80">© 2025 ScanPro. All rights reserved.</p>
-        </div>
-      </div>
-      
-      {/* Right side - Login form */}
       <div className="flex flex-col w-full md:w-1/2 p-6 sm:p-10 justify-center items-center">
         <div className="md:hidden flex items-center gap-2 mb-10">
           <SiteLogo size={30} />

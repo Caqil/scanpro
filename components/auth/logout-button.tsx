@@ -14,7 +14,7 @@ export function LogoutButton({ variant = "ghost" }: { variant?: "ghost" | "defau
     try {
       setIsLoggingOut(true);
       // The key here is to use the redirect: false option and handle the redirection manually
-      await signOut({ redirect: false });
+      await signOut({ redirect: true });
       router.push("/en");
       router.refresh();
     } catch (error) {

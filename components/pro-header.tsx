@@ -320,9 +320,7 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
                 <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
                   ScanPro
                 </span>
-                <span className="text-xs font-semibold bg-primary/10 text-primary px-1.5 py-0.5 rounded-md ml-1">
-                  PRO
-                </span>
+               
               </span>
             </LanguageLink>
           </div>
