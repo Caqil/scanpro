@@ -11,12 +11,13 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
     signIn: "/en/login",
     error: "/en/login",
-    // Add other custom pages if needed
   },
+  debug: process.env.NODE_ENV === "development",
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
@@ -51,35 +52,56 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
+        // Return the user with ID and role explicitly
         return {
           id: user.id,
           email: user.email,
           name: user.name,
-          role: user.role,
+          role: user.role || "user",
         };
       },
     }),
   ],
   callbacks: {
     async session({ session, token }) {
-      if (token && session.user) {
-        session.user.id = token.id as string;
-        session.user.role = token.role as string;
+      if (token) {
+        // Set user properties from token to session
+        session.user = {
+          ...session.user,
+          id: token.id as string,
+          role: token.role as string || "user",
+        };
       }
       return session;
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
+      // If we have a user (during sign in), add their ID and role to the token
       if (user) {
         token.id = user.id;
-        token.role = user.role;
+        token.role = user.role || "user";
       }
+
+      // Keep account info for provider handling
+      if (account) {
+        token.provider = account.provider;
+      }
+
       return token;
     },
     async redirect({ url, baseUrl }) {
-      // Allow relative URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
-      // Allow callbacks to the same origin
-      else if (new URL(url).origin === baseUrl) return url;
+      console.log("NextAuth redirect:", { url, baseUrl });
+
+      // If it's a relative URL, keep it relative (don't prepend baseUrl)
+      if (url.startsWith('/')) {
+        return url;
+      }
+
+      // If it's an absolute URL but matches the current base, use it
+      if (new URL(url).origin === baseUrl) {
+        return url;
+      }
+
+      // Default to base URL
       return baseUrl;
     },
   },

@@ -33,6 +33,7 @@ import { LanguageLink } from "./language-link"
 import { LanguageSwitcher } from "./language-switcher"
 import { SiteLogo } from "./site-logo"
 import { useSession } from "next-auth/react"
+import { LogoutButton } from "./auth/logout-button"
 type ToolDefinition = {
   name: string
   href: string
@@ -94,7 +95,9 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="/api/auth/signout?callbackUrl=/">Sign out</Link>
+        <div className="mt-auto border-t p-4">
+  <LogoutButton />
+</div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
