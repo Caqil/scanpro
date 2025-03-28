@@ -1,18 +1,31 @@
 // app/api/keys/route.ts
 import { NextRequest, NextResponse } from 'next/server';
+import { headers, cookies } from 'next/headers';
 import { getServerSession } from 'next-auth';
 import { randomBytes } from 'crypto';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from "@/lib/auth";
 import { prisma } from '@/lib/prisma';
 
+// Define interface for API key
+interface ApiKey {
+    id: string;
+    name: string;
+    key: string;
+    permissions: string[];
+    lastUsed: Date | null;
+    expiresAt: Date | null;
+    createdAt: Date;
+}
+
 // Generate a secure random API key
-function generateApiKey() {
+function generateApiKey(): string {
     return `sk_${randomBytes(24).toString('hex')}`;
 }
 
 // List API keys
 export async function GET(request: NextRequest) {
     try {
+        // Properly pass the request headers and cookies to getServerSession
         const session = await getServerSession(authOptions);
 
         if (!session?.user) {
@@ -36,7 +49,7 @@ export async function GET(request: NextRequest) {
         });
 
         // Mask API keys for security
-        const maskedKeys = apiKeys.map(key => ({
+        const maskedKeys = apiKeys.map((key: ApiKey) => ({
             ...key,
             key: `${key.key.substring(0, 8)}...${key.key.substring(key.key.length - 4)}`
         }));
@@ -50,8 +63,6 @@ export async function GET(request: NextRequest) {
         );
     }
 }
-
-// Create new API key
 export async function POST(request: NextRequest) {
     try {
         const session = await getServerSession(authOptions);
@@ -71,7 +82,7 @@ export async function POST(request: NextRequest) {
             include: { subscription: true, apiKeys: true }
         });
 
-        const keyLimits = {
+        const keyLimits: Record<string, number> = {
             free: 1,
             basic: 3,
             pro: 10,
@@ -81,7 +92,10 @@ export async function POST(request: NextRequest) {
         const tier = userWithSub?.subscription?.tier || 'free';
         const keyLimit = keyLimits[tier as keyof typeof keyLimits];
 
-        if (userWithSub?.apiKeys.length >= keyLimit) {
+        // Safely check the length of apiKeys
+        const currentKeyCount = userWithSub?.apiKeys?.length ?? 0;
+
+        if (currentKeyCount >= keyLimit) {
             return NextResponse.json(
                 { error: `Your ${tier} plan allows a maximum of ${keyLimit} API keys` },
                 { status: 403 }

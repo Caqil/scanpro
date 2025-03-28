@@ -1,10 +1,7 @@
 // middleware.ts
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import { apiMiddleware } from './middleware/api-middleware';
+import { NextRequest, NextResponse } from 'next/server';
 
-// Define API routes that should go through API middleware
-// These are the direct programmatic API endpoints
+// Define API routes that require API key validation
 const API_ROUTES = [
   '/api/convert',
   '/api/compress',
@@ -28,8 +25,6 @@ const EXCLUDED_ROUTES = [
   '/api/convert/status',
   '/api/convert/download',
   '/api/compress/download',
-
-  // Web UI routes - Add all routes that should bypass API key validation
   '/api/file',  // Important! This enables file downloads from the web UI
 ];
 
@@ -43,23 +38,29 @@ const BROWSER_USER_AGENT_PATTERNS = [
   'Opera/'
 ];
 
+// Function to check if request is from a browser (web UI)
+function isWebUIRequest(request: NextRequest): boolean {
+  const userAgent = request.headers.get('user-agent') || '';
+  const acceptHeader = request.headers.get('accept') || '';
+  const referer = request.headers.get('referer') || '';
+
+  // Check user agent for browser signatures
+  const fromBrowser = BROWSER_USER_AGENT_PATTERNS.some(pattern =>
+    userAgent.includes(pattern)
+  );
+
+  // Check if accepts HTML
+  const acceptsHtml = acceptHeader.includes('text/html');
+
+  // Check if referred from our own website
+  const ownSiteReferer = referer.includes(process.env.NEXT_PUBLIC_APP_URL || '');
+
+  // Consider it a web UI request if it comes from a browser and accepts HTML or is from our site
+  return fromBrowser && (acceptsHtml || ownSiteReferer);
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const userAgent = request.headers.get('user-agent') || '';
-
-  // Function to check if request is from a browser (web UI)
-  const isWebUIRequest = () => {
-    // Check user agent for browser signatures
-    const fromBrowser = BROWSER_USER_AGENT_PATTERNS.some(pattern =>
-      userAgent.includes(pattern)
-    );
-
-    // Check if the request has an 'Accept' header that includes HTML
-    const acceptsHtml = request.headers.get('accept')?.includes('text/html');
-
-    // Consider it a web UI request if it comes from a browser and accepts HTML
-    return fromBrowser && acceptsHtml;
-  };
 
   // Skip middleware for excluded routes
   for (const excludedRoute of EXCLUDED_ROUTES) {
@@ -72,13 +73,24 @@ export async function middleware(request: NextRequest) {
   for (const apiRoute of API_ROUTES) {
     if (pathname.startsWith(apiRoute)) {
       // Skip API key validation for requests from the web UI
-      if (isWebUIRequest()) {
+      if (isWebUIRequest(request)) {
         console.log(`Bypassing API key check for web UI request to ${pathname}`);
         return NextResponse.next();
       }
 
-      // Otherwise, apply API middleware for programmatic API access
-      return apiMiddleware(request);
+      // For programmatic API access, check API key
+      const apiKey = request.headers.get('x-api-key') || request.nextUrl.searchParams.get('api_key');
+
+      if (!apiKey) {
+        return NextResponse.json(
+          { error: 'API key is required' },
+          { status: 401 }
+        );
+      }
+
+      // Simply pass the API key to the endpoint
+      // Let the endpoint handle validation directly with the database
+      return NextResponse.next();
     }
   }
 

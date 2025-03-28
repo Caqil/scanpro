@@ -5,6 +5,7 @@ import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import { trackApiUsage, validateApiKey } from '@/lib/validate-key';
 
 const execPromise = promisify(exec);
 
@@ -127,6 +128,29 @@ async function rotatePdfPages(inputPath: string, outputPath: string, rotationInf
 export async function POST(request: NextRequest) {
     try {
         console.log('Starting PDF rotation process with Ghostscript...');
+        // Get API key either from header or query parameter
+        const headers = request.headers;
+        const url = new URL(request.url);
+        const apiKey = headers.get('x-api-key') || url.searchParams.get('api_key');
+
+        // If this is a programmatic API call (not from web UI), validate the API key
+        if (apiKey) {
+            console.log('Validating API key for compression operation');
+            const validation = await validateApiKey(apiKey, 'rotation');
+
+            if (!validation.valid) {
+                console.error('API key validation failed:', validation.error);
+                return NextResponse.json(
+                    { error: validation.error || 'Invalid API key' },
+                    { status: 401 }
+                );
+            }
+
+            // Track usage (non-blocking)
+            if (validation.userId) {
+                trackApiUsage(validation.userId, 'rotation');
+            }
+        }
         await ensureDirectories();
 
         const formData = await request.formData();

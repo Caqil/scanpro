@@ -40,20 +40,20 @@ export async function GET(req: NextRequest) {
 
   // Ensure folder is one of the allowed values
   const allowedFolders = [
-    "conversions", 
-    "compressions", 
-    "merges", 
-    "splits", 
-    "rotations", 
-    "watermarks", 
-    "protected", 
-    "unlocked", 
-    "signatures", 
-    "ocr", 
-    "edited", 
+    "conversions",
+    "compressions",
+    "merges",
+    "splits",
+    "rotations",
+    "watermarks",
+    "protected",
+    "unlocked",
+    "signatures",
+    "ocr",
+    "edited",
     "processed"
   ];
-  
+
   if (!allowedFolders.includes(folder)) {
     return NextResponse.json({ error: "Invalid folder specified" }, { status: 400 });
   }
@@ -75,14 +75,14 @@ export async function GET(req: NextRequest) {
   try {
     // Get file size
     const stats = fs.statSync(filePath);
-    
+
     // Create a readable stream from the file
     const fileStream = fs.createReadStream(filePath);
     const readableStream = Readable.toWeb(fileStream) as ReadableStream;
 
     // Get file extension for content type
     const extension = path.extname(sanitizedFilename).slice(1).toLowerCase();
-    
+
     // Return the file as a streaming response
     return new Response(readableStream, {
       headers: {

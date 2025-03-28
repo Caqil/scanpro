@@ -6,15 +6,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { AlertCircle, ArrowLeft, CheckCircle, MailIcon } from "lucide-react";
+import { AlertCircle, ArrowLeft, CheckCircle, Mail } from "lucide-react";
 import { useLanguageStore } from "@/src/store/store";
 import { toast } from "sonner";
+import { LanguageLink } from "@/components/language-link";
 
-interface ForgotPasswordFormProps {
+interface EnhancedForgotPasswordFormProps {
   lang?: string;
 }
 
-export function ForgotPasswordForm({ lang }: ForgotPasswordFormProps) {
+export function EnhancedForgotPasswordForm() {
   const { t } = useLanguageStore();
   const router = useRouter();
   
@@ -87,22 +88,34 @@ export function ForgotPasswordForm({ lang }: ForgotPasswordFormProps) {
   
   // Handle going back to login
   const handleBackToLogin = () => {
-    router.push(`/${lang || 'en'}/login`);
+    router.push(`en/login`);
   };
   
   if (emailSent) {
     return (
       <div className="space-y-6 text-center">
-        <div className="flex flex-col items-center gap-2">
-          <div className="h-12 w-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
-            <CheckCircle className="h-6 w-6" />
+        <div className="flex flex-col items-center gap-3">
+          <div className="h-16 w-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
+            <Mail className="h-8 w-8" />
           </div>
           <h2 className="text-xl font-semibold">{t('auth.checkYourEmail') || "Check your email"}</h2>
         </div>
         
-        <p className="text-muted-foreground">
-          {t('auth.resetInstructions') || "If an account exists with that email, we've sent instructions to reset your password."}
-        </p>
+        <div className="bg-muted/30 p-6 rounded-lg border text-left">
+          <p className="mb-4">
+            {t('auth.resetInstructions') || "If an account exists with that email, we've sent instructions to reset your password."}
+          </p>
+          
+          <p className="mb-4 text-sm">
+            The email should arrive within 5 minutes. Be sure to check your spam folder if you don't see it.
+          </p>
+          
+          <div className="text-sm text-muted-foreground">
+            <p>
+              <strong>Email sent to:</strong> {email}
+            </p>
+          </div>
+        </div>
         
         <div className="space-y-4 pt-4">
           <p className="text-sm text-muted-foreground">
@@ -113,7 +126,7 @@ export function ForgotPasswordForm({ lang }: ForgotPasswordFormProps) {
                 setEmailSent(false);
                 setEmail("");
               }}
-              className="text-primary underline hover:text-primary/90"
+              className="text-primary font-medium hover:underline"
             >
               {t('auth.tryAgain') || "Try again"}
             </button>
@@ -135,45 +148,43 @@ export function ForgotPasswordForm({ lang }: ForgotPasswordFormProps) {
   
   return (
     <div className="space-y-6">
-      <div className="text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30">
-          <MailIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+      {error && (
+        <Alert variant="destructive" className="animate-in fade-in-50 slide-in-from-top-5 duration-300">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+      
+      <div className="mb-4 flex justify-center">
+        <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+          <Mail className="h-8 w-8" />
         </div>
-        <h1 className="mt-3 text-xl font-semibold">
-          {t('auth.forgotPassword') || "Forgot your password?"}
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          {t('auth.forgotInstructions') || "Enter your email and we'll send you instructions to reset your password."}
-        </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {error && (
-          <Alert variant="destructive">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
-        )}
-        
         <div className="space-y-2">
-          <Label htmlFor="email" className="flex items-center">
-            {t('auth.email') || "Email"}
+          <Label htmlFor="email" className="text-sm font-medium">
+            Email address
             {emailError && (
-              <span className="ml-2 text-xs text-destructive font-normal">
-                {emailError}
+              <span className="text-destructive ml-1 text-xs">
+                ({emailError})
               </span>
             )}
           </Label>
           <Input
             id="email"
             type="email"
-            placeholder={t('auth.emailPlaceholder') || "name@example.com"}
+            placeholder="name@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className={emailError ? "border-destructive" : ""}
+            className={emailError ? "border-destructive focus-visible:ring-destructive" : ""}
             disabled={loading}
             required
+            autoComplete="email"
           />
+          <p className="text-xs text-muted-foreground">
+            We'll send a password reset link to this email address
+          </p>
         </div>
         
         <Button 
@@ -192,17 +203,14 @@ export function ForgotPasswordForm({ lang }: ForgotPasswordFormProps) {
         </Button>
       </form>
       
-      <div className="text-center">
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={handleBackToLogin}
-          className="text-sm"
+      <div className="text-center pt-2">
+        <LanguageLink 
+          href={`/en/login`}
+          className="text-sm text-primary hover:underline inline-flex items-center font-medium"
         >
           <ArrowLeft className="h-4 w-4 mr-1" />
           {t('auth.backToLogin') || "Back to login"}
-        </Button>
+        </LanguageLink>
       </div>
     </div>
   );

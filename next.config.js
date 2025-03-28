@@ -13,9 +13,7 @@ const nextConfig = {
       },
     ];
   },
-  //experimental: {
-  //serverComponentsExternalPackages: ['libreoffice-convert'],
-  //},
+  
   eslint: {
     ignoreDuringBuilds: true,
   },

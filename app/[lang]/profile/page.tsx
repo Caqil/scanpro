@@ -1,9 +1,9 @@
 // app/[lang]/profile/page.tsx
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { prisma } from "@/lib/prisma";
 import { UserProfile } from "@/components/user-profile";
+import { authOptions } from "@/lib/auth";
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);

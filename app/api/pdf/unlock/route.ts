@@ -6,6 +6,7 @@ import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import { trackApiUsage, validateApiKey } from '@/lib/validate-key';
 
 const execPromise = promisify(exec);
 
@@ -26,6 +27,29 @@ async function ensureDirectories() {
 export async function POST(request: NextRequest) {
     try {
         console.log('Starting PDF unlock process...');
+        // Get API key either from header or query parameter
+        const headers = request.headers;
+        const url = new URL(request.url);
+        const apiKey = headers.get('x-api-key') || url.searchParams.get('api_key');
+
+        // If this is a programmatic API call (not from web UI), validate the API key
+        if (apiKey) {
+            console.log('Validating API key for compression operation');
+            const validation = await validateApiKey(apiKey, 'compress');
+
+            if (!validation.valid) {
+                console.error('API key validation failed:', validation.error);
+                return NextResponse.json(
+                    { error: validation.error || 'Invalid API key' },
+                    { status: 401 }
+                );
+            }
+
+            // Track usage (non-blocking)
+            if (validation.userId) {
+                trackApiUsage(validation.userId, 'compress');
+            }
+        }
         await ensureDirectories();
 
         // Process form data
@@ -138,24 +162,24 @@ export async function POST(request: NextRequest) {
 async function unlockPdfWithQpdf(inputPath: string, outputPath: string, password?: string): Promise<boolean> {
     try {
         // Build the qpdf command based on whether a password was provided
-        let command = password 
+        let command = password
             ? `qpdf --password="${password}" --decrypt "${inputPath}" "${outputPath}"`
             : `qpdf --decrypt "${inputPath}" "${outputPath}"`;
-        
+
         // Hide the password in logs
         console.log(`Executing: ${password ? command.replace(password, '******') : command}`);
-        
+
         // Execute the command
         const { stdout, stderr } = await execPromise(command);
-        
+
         if (stderr && !stderr.includes('WARNING')) {
             console.error('qpdf stderr:', stderr);
         }
-        
+
         if (stdout) {
             console.log('qpdf stdout:', stdout);
         }
-        
+
         // Check if output file exists
         return existsSync(outputPath);
     } catch (error) {
@@ -171,21 +195,21 @@ async function unlockPdfWithPdftk(inputPath: string, outputPath: string, passwor
         let command = password
             ? `pdftk "${inputPath}" input_pw "${password}" output "${outputPath}" allow AllFeatures`
             : `pdftk "${inputPath}" output "${outputPath}" allow AllFeatures`;
-        
+
         // Hide the password in logs
         console.log(`Executing: ${password ? command.replace(password, '******') : command}`);
-        
+
         // Execute the command
         const { stdout, stderr } = await execPromise(command);
-        
+
         if (stderr) {
             console.error('pdftk stderr:', stderr);
         }
-        
+
         if (stdout) {
             console.log('pdftk stdout:', stdout);
         }
-        
+
         // Check if output file exists
         return existsSync(outputPath);
     } catch (error) {
@@ -199,22 +223,22 @@ async function unlockPdfWithGhostScript(inputPath: string, outputPath: string): 
     try {
         // GhostScript approach (works for PDFs with restrictions but no password)
         const gsCommand = process.platform === 'win32' ? 'gswin64c' : 'gs';
-        
+
         const command = `${gsCommand} -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile="${outputPath}" -c .setpdfwrite -f "${inputPath}"`;
-        
+
         console.log(`Executing GhostScript: ${command}`);
-        
+
         // Execute the command
         const { stdout, stderr } = await execPromise(command);
-        
+
         if (stderr) {
             console.error('GhostScript stderr:', stderr);
         }
-        
+
         if (stdout) {
             console.log('GhostScript stdout:', stdout);
         }
-        
+
         // Check if output file exists
         return existsSync(outputPath);
     } catch (error) {

@@ -6,41 +6,33 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Progress } from "@/components/ui/progress";
-import { AlertCircle, Check, Eye, EyeOff, Info } from "lucide-react";
-import { FaGoogle, FaGithub } from "react-icons/fa";
-import { signIn } from "next-auth/react";
+import { AlertCircle, Check, Eye, EyeOff, Info, LockKeyhole, ShieldCheck } from "lucide-react";
 import { useLanguageStore } from "@/src/store/store";
 import { toast } from "sonner";
-import { LanguageLink } from "../language-link";
-import { Separator } from "../ui/separator";
+import { Progress } from "@/components/ui/progress";
 
-interface RegisterFormProps {
-  callbackUrl?: string;
-  lang?: string;
+interface EnhancedResetPasswordFormProps {
+  token?: string;
 }
 
-export function RegisterForm() {
+export function EnhancedResetPasswordForm({ token }: EnhancedResetPasswordFormProps) {
   const { t } = useLanguageStore();
   const router = useRouter();
   
   // Form state
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [agreedToTerms, setAgreedToTerms] = useState(false);
   
   // UI state
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
-  const [emailError, setEmailError] = useState<string | null>(null);
+  const [tokenValid, setTokenValid] = useState<boolean | null>(null);
+  const [tokenValidating, setTokenValidating] = useState(true);
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [confirmPasswordError, setConfirmPasswordError] = useState<string | null>(null);
-  const [nameError, setNameError] = useState<string | null>(null);
   
   // Calculate password strength
   useEffect(() => {
@@ -74,39 +66,39 @@ export function RegisterForm() {
     return { text: t('auth.passwordStrong') || "Strong", color: "bg-green-500" };
   };
   
-  // Validate email format
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isValid = emailRegex.test(email);
+  // Validate token
+  useEffect(() => {
+    const validateToken = async () => {
+      if (!token) {
+        setTokenValid(false);
+        setTokenValidating(false);
+        return;
+      }
+      
+      try {
+        const res = await fetch('/api/auth/validate-reset-token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ token })
+        });
+        
+        const data = await res.json();
+        setTokenValid(data.valid);
+      } catch (error) {
+        setTokenValid(false);
+      } finally {
+        setTokenValidating(false);
+      }
+    };
     
-    if (!isValid) {
-      setEmailError(t('auth.invalidEmail') || "Please enter a valid email address");
-    } else {
-      setEmailError(null);
-    }
-    
-    return isValid;
-  };
+    validateToken();
+  }, [token]);
   
   // Validate form fields
   const validateForm = (): boolean => {
     let isValid = true;
-    
-    // Validate name
-    if (!name.trim()) {
-      setNameError(t('auth.nameRequired') || "Name is required");
-      isValid = false;
-    } else {
-      setNameError(null);
-    }
-    
-    // Validate email
-    if (!email.trim()) {
-      setEmailError(t('auth.emailRequired') || "Email is required");
-      isValid = false;
-    } else if (!validateEmail(email)) {
-      isValid = false;
-    }
     
     // Validate password
     if (!password) {
@@ -127,14 +119,6 @@ export function RegisterForm() {
       setConfirmPasswordError(null);
     }
     
-    // Validate terms
-    if (!agreedToTerms) {
-      setError(t('auth.agreeToTerms') || "Please agree to the terms of service");
-      isValid = false;
-    } else {
-      setError(null);
-    }
-    
     return isValid;
   };
   
@@ -151,42 +135,31 @@ export function RegisterForm() {
     setLoading(true);
     
     try {
-      const res = await fetch('/api/auth/register', {
+      // Call the reset password API
+      const res = await fetch('/api/auth/reset-password/confirm', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          name,
-          email,
+        body: JSON.stringify({ 
+          token,
           password
         })
       });
       
-      const data = await res.json();
-      
       if (!res.ok) {
-        throw new Error(data.error || t('auth.registrationFailed') || 'Registration failed');
+        const data = await res.json();
+        throw new Error(data.error || t('auth.resetPasswordError') || "Failed to reset password");
       }
       
-      // Show success toast
-      toast.success(t('auth.accountCreated') || "Account created successfully");
+      // Show success message
+      setSuccess(true);
+      toast.success(t('auth.passwordResetSuccess') || "Password reset successfully");
       
-      // Sign in the user after successful registration
-      const signInResult = await signIn('credentials', {
-        redirect: false,
-        email,
-        password
-      });
-      
-      if (signInResult?.error) {
-        throw new Error(signInResult.error);
-      }
-      
-      // Redirect to dashboard or callback URL
-      const redirectUrl = `/en/dashboard`;
-      router.push(redirectUrl);
-      router.refresh();
+      // Redirect to login after a short delay
+      setTimeout(() => {
+        router.push(`/en/login`);
+      }, 1500);
     } catch (error) {
       setError(error instanceof Error ? error.message : t('auth.unknownError') || 'An error occurred');
     } finally {
@@ -194,12 +167,73 @@ export function RegisterForm() {
     }
   };
   
-  const handleOAuthSignIn = (provider: string) => {
-    const redirectUrl = `en/dashboard`;
-    signIn(provider, { callbackUrl: redirectUrl });
-  };
+  // Show loading state while validating token
+  if (tokenValidating) {
+    return (
+      <div className="flex flex-col items-center justify-center py-8 space-y-4">
+        <div className="h-6 w-6 rounded-full border-2 border-primary border-t-transparent animate-spin"></div>
+        <p className="text-muted-foreground">{t('auth.validatingToken') || "Validating your reset link..."}</p>
+      </div>
+    );
+  }
+  
+  // Show error if token is invalid
+  if (!tokenValid) {
+    return (
+      <div className="space-y-6">
+        <Alert variant="destructive" className="animate-in fade-in-50 slide-in-from-top-5 duration-300">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>
+            {t('auth.invalidToken') || "This password reset link is invalid or has expired. Please request a new one."}
+          </AlertDescription>
+        </Alert>
+        
+        <div className="flex justify-center">
+          <Button 
+            variant="default" 
+            onClick={() => router.push(`/en/forgot-password`)}
+          >
+            {t('auth.requestNewLink') || "Request a new reset link"}
+          </Button>
+        </div>
+      </div>
+    );
+  }
+  
+  // Show success message
+  if (success) {
+    return (
+      <div className="space-y-6 text-center animate-in fade-in-50 duration-300">
+        <div className="flex flex-col items-center gap-3">
+          <div className="h-16 w-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
+            <Check className="h-8 w-8" />
+          </div>
+          <h2 className="text-xl font-semibold">{t('auth.passwordResetSuccess') || "Password reset successful"}</h2>
+        </div>
+        
+        <div className="bg-muted/30 p-6 rounded-lg border text-left">
+          <p className="mb-4">
+            {t('auth.passwordResetSuccessMessage') || "Your password has been reset successfully. You will be redirected to the login page shortly."}
+          </p>
+          
+          <p className="text-sm text-muted-foreground">
+            {t('auth.passwordResetSuccessSubtext') || "If you're not redirected automatically, click the button below."}
+          </p>
+        </div>
+        
+        <Button 
+          variant="default" 
+          onClick={() => router.push(`/en/login`)}
+          className="mt-4"
+        >
+          {t('auth.backToLogin') || "Back to login"}
+        </Button>
+      </div>
+    );
+  }
   
   const strengthData = getStrengthData();
+  
   return (
     <div className="space-y-6">
       {error && (
@@ -209,89 +243,16 @@ export function RegisterForm() {
         </Alert>
       )}
       
-      <div className="flex flex-col sm:flex-row gap-4">
-        <Button 
-          variant="outline" 
-          onClick={() => handleOAuthSignIn("google")} 
-          className="flex-1 relative overflow-hidden group"
-          disabled={loading}
-        >
-          <FaGoogle className="w-4 h-4 mr-2" />
-          <span>Google</span>
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
-        </Button>
-        
-        <Button 
-          variant="outline" 
-          onClick={() => handleOAuthSignIn("github")} 
-          className="flex-1 relative overflow-hidden group"
-          disabled={loading}
-        >
-          <FaGithub className="w-4 h-4 mr-2" />
-          <span>GitHub</span>
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
-        </Button>
+      <div className="mb-4 flex justify-center">
+        <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+          <ShieldCheck className="h-8 w-8" />
+        </div>
       </div>
 
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <Separator className="w-full" />
-        </div>
-        <div className="relative flex justify-center">
-          <span className="bg-background px-2 text-xs text-muted-foreground uppercase tracking-wider">
-            or register with email
-          </span>
-        </div>
-      </div>
-      
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="name" className="text-sm font-medium">
-            Full Name
-            {nameError && (
-              <span className="text-destructive ml-1 text-xs">
-                ({nameError})
-              </span>
-            )}
-          </Label>
-          <Input
-            id="name"
-            placeholder="Your name"
-            autoComplete="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            disabled={loading}
-            className={nameError ? "border-destructive focus-visible:ring-destructive" : ""}
-          />
-        </div>
-        
-        <div className="space-y-2">
-          <Label htmlFor="email" className="text-sm font-medium">
-            Email
-            {emailError && (
-              <span className="text-destructive ml-1 text-xs">
-                ({emailError})
-              </span>
-            )}
-          </Label>
-          <Input
-            id="email"
-            type="email"
-            placeholder="name@example.com"
-            autoComplete="email"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-              if (e.target.value) validateEmail(e.target.value);
-            }}
-            disabled={loading}
-            className={emailError ? "border-destructive focus-visible:ring-destructive" : ""}
-          />
-        </div>
-        
-        <div className="space-y-2">
           <Label htmlFor="password" className="text-sm font-medium">
-            Password
+            New Password
             {passwordError && (
               <span className="text-destructive ml-1 text-xs">
                 ({passwordError})
@@ -306,7 +267,7 @@ export function RegisterForm() {
               onChange={(e) => setPassword(e.target.value)}
               disabled={loading}
               className={passwordError ? "border-destructive focus-visible:ring-destructive pr-10" : "pr-10"}
-              placeholder="Create a password"
+              placeholder="Enter new password"
               autoComplete="new-password"
             />
             <Button
@@ -353,7 +314,7 @@ export function RegisterForm() {
         
         <div className="space-y-2">
           <Label htmlFor="confirm-password" className="text-sm font-medium">
-            Confirm Password
+            Confirm New Password
             {confirmPasswordError && (
               <span className="text-destructive ml-1 text-xs">
                 ({confirmPasswordError})
@@ -367,65 +328,26 @@ export function RegisterForm() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             disabled={loading}
             className={confirmPasswordError ? "border-destructive focus-visible:ring-destructive" : ""}
-            placeholder="Confirm your password"
+            placeholder="Confirm new password"
             autoComplete="new-password"
           />
         </div>
         
-        <div className="flex items-start space-x-2 pt-2">
-          <Checkbox 
-            id="terms" 
-            checked={agreedToTerms}
-            onCheckedChange={(checked) => setAgreedToTerms(checked as boolean)}
-            className="mt-1"
-          />
-          <label
-            htmlFor="terms"
-            className="text-sm text-muted-foreground cursor-pointer"
-          >
-            {t('auth.agreeTerms') || "I agree to the"}{" "}
-            <a
-              href="/terms"
-              className="text-primary underline hover:text-primary/90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t('auth.termsOfService') || "terms of service"}
-            </a>{" "}
-            {t('auth.and') || "and"}{" "}
-            <a
-              href="/privacy"
-              className="text-primary underline hover:text-primary/90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t('auth.privacyPolicy') || "privacy policy"}
-            </a>
-          </label>
-        </div>
-        
-        <Button
-          type="submit"
-          className="w-full mt-2"
+        <Button 
+          type="submit" 
+          className="w-full mt-4" 
           disabled={loading}
         >
           {loading ? (
             <>
               <span className="h-4 w-4 mr-2 rounded-full border-2 border-current border-t-transparent animate-spin" />
-              {t('auth.creatingAccount') || "Creating account..."}
+              {t('auth.resettingPassword') || "Resetting password..."}
             </>
           ) : (
-            t('auth.createAccount') || "Create Account"
+            t('auth.resetPassword') || "Reset Password"
           )}
         </Button>
       </form>
-      
-      <div className="text-center text-sm">
-        {t('auth.alreadyHaveAccount') || "Already have an account?"}{" "}
-        <LanguageLink href={`/login`} className="text-primary font-medium hover:underline">
-          {t('auth.signIn') || "Sign in"}
-        </LanguageLink>
-      </div>
     </div>
   );
 }

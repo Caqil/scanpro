@@ -1,3 +1,4 @@
+// app/api/compress/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir, readFile } from 'fs/promises';
 import { existsSync } from 'fs';
@@ -5,6 +6,7 @@ import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import { validateApiKey, trackApiUsage } from '@/lib/validate-key';
 
 const execPromise = promisify(exec);
 
@@ -21,7 +23,7 @@ async function ensureDirectories() {
     }
 }
 
-// Process PDF compression with different quality levels using Ghostscript
+// Process PDF compression with different quality levels
 async function processPdfCompression(inputPath: string, outputPath: string, quality: 'low' | 'medium' | 'high') {
     try {
         // Define quality parameters based on the quality level
@@ -89,6 +91,32 @@ async function processPdfCompression(inputPath: string, outputPath: string, qual
 export async function POST(request: NextRequest) {
     try {
         console.log('Starting PDF compression process...');
+
+        // Get API key either from header or query parameter
+        const headers = request.headers;
+        const url = new URL(request.url);
+        const apiKey = headers.get('x-api-key') || url.searchParams.get('api_key');
+
+        // If this is a programmatic API call (not from web UI), validate the API key
+        if (apiKey) {
+            console.log('Validating API key for compression operation');
+            const validation = await validateApiKey(apiKey, 'compress');
+
+            if (!validation.valid) {
+                console.error('API key validation failed:', validation.error);
+                return NextResponse.json(
+                    { error: validation.error || 'Invalid API key' },
+                    { status: 401 }
+                );
+            }
+
+            // Track usage (non-blocking)
+            if (validation.userId) {
+                trackApiUsage(validation.userId, 'compress');
+            }
+        }
+
+        // Now proceed with the actual compression operation
         await ensureDirectories();
 
         // Process form data

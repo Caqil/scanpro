@@ -1,4 +1,5 @@
-// lib/auth-context.ts
+"use client";
+
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useSession } from 'next-auth/react';
 
@@ -6,9 +7,9 @@ import { useSession } from 'next-auth/react';
 type AuthContextType = {
     isAuthenticated: boolean;
     isLoading: boolean;
-    authToken: string | null; // For session-based authentication
+    authToken: string | null;
     userId: string | null;
-    isWebUI: boolean; // Flag to identify web UI usage
+    isWebUI: boolean;
 };
 
 // Create the context with default values
@@ -17,39 +18,38 @@ const AuthContext = createContext<AuthContextType>({
     isLoading: true,
     authToken: null,
     userId: null,
-    isWebUI: true, // Default to true for web UI
+    isWebUI: true,
 });
 
 // Provider component
 export function AuthProvider({ children }: { children: ReactNode }) {
-    // Use NextAuth session
     const { data: session, status } = useSession();
     const [authToken, setAuthToken] = useState<string | null>(null);
 
-    // Set up the auth state based on the session
     useEffect(() => {
         if (session?.user) {
-            // In a real implementation, you might want to fetch and store a JWT token here
-            // For simplicity, we're just using the session as-is
-            setAuthToken('session-token'); // Placeholder
+            setAuthToken('session-token'); // Replace with real token logic if needed
         } else {
             setAuthToken(null);
         }
     }, [session]);
 
-    // Values to be provided by the context
-    const value = {
+    const value: AuthContextType = {
         isAuthenticated: !!session?.user,
         isLoading: status === 'loading',
         authToken,
         userId: session?.user?.id || null,
-        isWebUI: true, // Always true for the web UI
+        isWebUI: true,
     };
 
     return <AuthContext.Provider value={ value }> { children } </AuthContext.Provider>;
 }
 
 // Custom hook to use the auth context
-export function useAuth() {
-    return useContext(AuthContext);
+export function useAuth(): AuthContextType {
+    const context = useContext(AuthContext);
+    if (context === undefined) {
+        throw new Error('useAuth must be used within an AuthProvider');
+    }
+    return context;
 }

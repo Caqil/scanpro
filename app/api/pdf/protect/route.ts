@@ -6,6 +6,7 @@ import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import { trackApiUsage, validateApiKey } from '@/lib/validate-key';
 
 const execPromise = promisify(exec);
 
@@ -105,7 +106,7 @@ async function protectPdfWithPdftk(inputPath: string, outputPath: string, option
         // This follows pdftk's requirement that owner and user passwords must be different,
         // or the owner password should be omitted
         let command = `pdftk "${inputPath}" output "${outputPath}" user_pw "${options.userPassword}"`;
-        
+
         // Only add owner password if it's different from user password
         if (options.ownerPassword && options.ownerPassword !== options.userPassword) {
             command += ` owner_pw "${options.ownerPassword}"`;
@@ -139,6 +140,29 @@ async function protectPdfWithPdftk(inputPath: string, outputPath: string, option
 export async function POST(request: NextRequest) {
     try {
         console.log('Starting PDF protection process...');
+        // Get API key either from header or query parameter
+        const headers = request.headers;
+        const url = new URL(request.url);
+        const apiKey = headers.get('x-api-key') || url.searchParams.get('api_key');
+
+        // If this is a programmatic API call (not from web UI), validate the API key
+        if (apiKey) {
+            console.log('Validating API key for protect operation');
+            const validation = await validateApiKey(apiKey, 'protect');
+
+            if (!validation.valid) {
+                console.error('API key validation failed:', validation.error);
+                return NextResponse.json(
+                    { error: validation.error || 'Invalid API key' },
+                    { status: 401 }
+                );
+            }
+
+            // Track usage (non-blocking)
+            if (validation.userId) {
+                trackApiUsage(validation.userId, 'protect');
+            }
+        }
         await ensureDirectories();
 
         // Process form data

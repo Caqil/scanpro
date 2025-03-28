@@ -1,14 +1,16 @@
 // app/api/keys/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { prisma } from '@/lib/prisma';
+import { authOptions } from '@/lib/auth';
 
-export async function DELETE(
-    request: NextRequest,
-    { params }: { params: { id: string } }
-) {
+export async function DELETE(request: NextRequest) {
     try {
+        // Extract the ID from the URL path
+        const url = request.url;
+        const pathParts = url.split('/');
+        const id = pathParts[pathParts.length - 1];
+
         const session = await getServerSession(authOptions);
 
         if (!session?.user) {
@@ -19,7 +21,7 @@ export async function DELETE(
         }
 
         const apiKey = await prisma.apiKey.findUnique({
-            where: { id: params.id }
+            where: { id }
         });
 
         if (!apiKey) {
@@ -39,7 +41,7 @@ export async function DELETE(
 
         // Delete the key
         await prisma.apiKey.delete({
-            where: { id: params.id }
+            where: { id }
         });
 
         return NextResponse.json({

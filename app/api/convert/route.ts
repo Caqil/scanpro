@@ -10,6 +10,7 @@ import { PDFDocument } from 'pdf-lib';
 import { createWorker } from 'tesseract.js';
 import { copyFile, rmdir, unlink, readdir } from 'fs/promises';
 import path from 'path';
+import { trackApiUsage, validateApiKey } from '@/lib/validate-key';
 
 // Convert callback-based functions to Promise-based
 const execPromise = promisify(exec);
@@ -613,6 +614,29 @@ async function convertWithLibreOffice(inputPath: string, outputPath: string, for
 export async function POST(request: NextRequest) {
     try {
         console.log('Starting conversion process...');
+        // Get API key either from header or query parameter
+        const headers = request.headers;
+        const url = new URL(request.url);
+        const apiKey = headers.get('x-api-key') || url.searchParams.get('api_key');
+
+        // If this is a programmatic API call (not from web UI), validate the API key
+        if (apiKey) {
+            console.log('Validating API key for compression operation');
+            const validation = await validateApiKey(apiKey, 'convert');
+
+            if (!validation.valid) {
+                console.error('API key validation failed:', validation.error);
+                return NextResponse.json(
+                    { error: validation.error || 'Invalid API key' },
+                    { status: 401 }
+                );
+            }
+
+            // Track usage (non-blocking)
+            if (validation.userId) {
+                trackApiUsage(validation.userId, 'convert');
+            }
+        }
         await ensureDirectories();
 
         const {

@@ -5,6 +5,7 @@ import { existsSync } from 'fs';
 import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { PDFDocument } from 'pdf-lib';
+import { trackApiUsage, validateApiKey } from '@/lib/validate-key';
 
 // Define directories
 const UPLOAD_DIR = join(process.cwd(), 'uploads');
@@ -64,6 +65,29 @@ function parsePageRanges(pagesString: string, totalPages: number): number[][] {
 export async function POST(request: NextRequest) {
     try {
         console.log('Starting PDF splitting process...');
+        // Get API key either from header or query parameter
+        const headers = request.headers;
+        const url = new URL(request.url);
+        const apiKey = headers.get('x-api-key') || url.searchParams.get('api_key');
+
+        // If this is a programmatic API call (not from web UI), validate the API key
+        if (apiKey) {
+            console.log('Validating API key for compression operation');
+            const validation = await validateApiKey(apiKey, 'split');
+
+            if (!validation.valid) {
+                console.error('API key validation failed:', validation.error);
+                return NextResponse.json(
+                    { error: validation.error || 'Invalid API key' },
+                    { status: 401 }
+                );
+            }
+
+            // Track usage (non-blocking)
+            if (validation.userId) {
+                trackApiUsage(validation.userId, 'split');
+            }
+        }
         await ensureDirectories();
 
         // Process form data

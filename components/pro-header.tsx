@@ -11,21 +11,22 @@ import {
 } from "@radix-ui/react-icons";
 import { 
   FileText, 
-  Table, 
   Image, 
+  Table, 
   ArrowRight, 
   ArrowDown, 
   Shield, 
   Lock,
   Download,
   Apple,
+  Phone,
+  File,
   FileBoxIcon,
   FileCheck2,
   PenTool,
-  KeyRound,
-  LogIn,
-  User,
-  LogOut
+  FileImage,
+  Palette,
+  KeyRound
 } from "lucide-react";
 import { useLanguageStore } from "@/src/store/store";
 import {
@@ -34,15 +35,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
-  DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import { LanguageLink } from "./language-link";
 import { LanguageSwitcher } from "./language-switcher";
 import { SiteLogo } from "./site-logo";
-import { useSession, signOut } from "next-auth/react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useRouter } from "next/navigation";
-
+import { useSession } from "next-auth/react"; 
 type ToolDefinition = {
   name: string;
   href: string;
@@ -73,9 +70,7 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [showAppBanner, setShowAppBanner] = useState(true);
   const [isClient, setIsClient] = useState(false);
-  const { data: session, status } = useSession();
-  const router = useRouter();
-
+  const { data: session } = useSession();
   useEffect(() => {
     setIsClient(true);
     if (urlLanguage && urlLanguage !== language) {
@@ -89,7 +84,36 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [urlLanguage, language]);
-
+  const userMenu = session ? (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="sm" className="gap-1">
+          {session.user?.name || "Account"}
+          <ChevronDownIcon className="h-4 w-4 opacity-70" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuItem asChild>
+          <LanguageLink href="/dashboard">Dashboard</LanguageLink>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <LanguageLink href="/dashboard/api-keys">
+            <KeyRound className="h-4 w-4 mr-2" /> API Keys
+          </LanguageLink>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link href="/api/auth/signout">Sign out</Link>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  ) : (
+    <LanguageLink href="/login" legacyBehavior passHref>
+      <Button variant="default" size="sm">
+        Sign in
+      </Button>
+    </LanguageLink>
+  );
   const languages: LanguageOption[] = [
     { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
     { code: 'id', name: 'Indonesian', nativeName: 'Bahasa Indonesia', flag: '🇮🇩' },
@@ -106,12 +130,13 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
     { code: 'it', name: 'Italian', nativeName: 'Italiano', flag: '🇮🇹' },
     { code: 'tr', name: 'Turkish', nativeName: 'Türkçe', flag: '🇹🇷' },
   ];
-
   const PDF_TOOLS: CategoryDefinition[] = [
     {
-      category: "Convert from PDF",
-      description: "Transform PDF files to various formats",
+      
+      category: isClient ? t('pdfTools.categories.convertFromPdf') : "Convert PDF",
+      description: t('pdfTools.categories.convertFromPdfDesc') || "Convert PDF files to various formats and vice versa",
       tools: [
+        
         { 
           name: t('popular.pdfToWord'), 
           href: "/convert/pdf-to-docx",
@@ -125,35 +150,11 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           description: t('popular.pdfToExcelDesc')
         },
         { 
-          name: t('popular.pdfToPowerPoint'), 
-          href: "/convert/pdf-to-pptx",
-          icon: <FileBoxIcon className="h-5 w-5 text-orange-500" />,
-          description: t('popular.pdfToPowerPointDesc')
-        },
-        { 
           name: t('popular.pdfToJpg'), 
           href: "/convert/pdf-to-jpg",
           icon: <Image className="h-5 w-5 text-yellow-500" />,
           description: t('popular.pdfToJpgDesc')
         },
-        { 
-          name: t('popular.pdfToPng'), 
-          href: "/convert/pdf-to-png",
-          icon: <Image className="h-5 w-5 text-green-500" />,
-          description: t('popular.pdfToPngDesc')
-        },
-        { 
-          name: t('popular.pdfToHtml'), 
-          href: "/convert/pdf-to-html",
-          icon: <FileText className="h-5 w-5 text-blue-500" />,
-          description: t('popular.pdfToHtmlDesc')
-        },
-      ]
-    },
-    {
-      category: "Convert to PDF",
-      description: "Transform various files to PDF format",
-      tools: [
         { 
           name: t('popular.wordToPdf'), 
           href: "/convert/docx-to-pdf",
@@ -161,40 +162,16 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           description: t('popular.wordToPdfDesc')
         },
         { 
-          name: t('popular.excelToPdf'), 
-          href: "/convert/xlsx-to-pdf",
-          icon: <Table className="h-5 w-5 text-green-500" />,
-          description: t('popular.excelToPdfDesc')
-        },
-        { 
-          name: t('popular.powerPointToPdf'), 
-          href: "/convert/pptx-to-pdf",
-          icon: <FileBoxIcon className="h-5 w-5 text-orange-500" />,
-          description: t('popular.powerPointToPdfDesc')
-        },
-        { 
           name: t('popular.jpgToPdf'), 
           href: "/convert/jpg-to-pdf",
           icon: <Image className="h-5 w-5 text-yellow-500" />,
           description: t('popular.jpgToPdfDesc')
         },
-        { 
-          name: t('popular.pngToPdf'), 
-          href: "/convert/png-to-pdf",
-          icon: <Image className="h-5 w-5 text-green-500" />,
-          description: t('popular.pngToPdfDesc')
-        },
-        { 
-          name: t('popular.htmlToPdf'), 
-          href: "/convert/html-to-pdf",
-          icon: <FileText className="h-5 w-5 text-blue-500" />,
-          description: t('popular.htmlToPdfDesc')
-        },
       ]
     },
     {
-      category: "Organize PDF",
-      description: "Tools to organize and modify PDF files",
+      category: t('pdfTools.categories.organizePdf') || "PDF Management",
+      description: t('pdfTools.categories.organizePdfDesc') || "Tools to organize and modify PDF files",
       tools: [
         { 
           name: t('popular.mergePdf'), 
@@ -223,7 +200,7 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
       ]
     },
     {
-      category: "PDF Security",
+      category: t('pdfTools.categories.pdfSecurity') || "PDF Security",
       description: "Protect and manage PDF access",
       tools: [
         { 
@@ -256,42 +233,22 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
 
   const navItems = [
     { 
-      label: 'Convert from PDF', 
-      dropdown: PDF_TOOLS.filter(cat => cat.category === "Convert from PDF") 
+      label: t('nav.convertPdf'), 
+      dropdown: PDF_TOOLS.filter(cat => cat.category === (isClient ? t('pdfTools.categories.convertFromPdf') : "Convert PDF")) 
     },
     { 
-      label: 'Convert to PDF', 
-      dropdown: PDF_TOOLS.filter(cat => cat.category === "Convert to PDF") 
+      label: t('pdfTools.categories.organizePdf'), 
+      dropdown: PDF_TOOLS.filter(cat => cat.category === (isClient ? t('pdfTools.categories.organizePdf') : "PDF Management")) 
     },
     { 
-      label: 'Organize PDF', 
-      dropdown: PDF_TOOLS.filter(cat => cat.category === "Organize PDF") 
-    },
-    { 
-      label: 'PDF Security', 
-      dropdown: PDF_TOOLS.filter(cat => cat.category === "PDF Security") 
+      label: t('pdfTools.categories.pdfSecurity'), 
+      dropdown: PDF_TOOLS.filter(cat => cat.category === (isClient ? t('pdfTools.categories.pdfSecurity') : "PDF Security")) 
     },
     { 
       label: t('popular.viewAll'), 
       dropdown: PDF_TOOLS 
     },
   ];
-
-  // Get user initials for avatar
-  const getUserInitials = () => {
-    if (!session?.user?.name) return "U";
-    return session.user.name
-      .split(" ")
-      .map(n => n[0])
-      .join("")
-      .toUpperCase()
-      .substring(0, 2);
-  };
-
-  const handleSignOut = async () => {
-    await signOut({ redirect: false });
-    router.push(`/${language}`);
-  };
 
   return (
     <>
@@ -337,14 +294,23 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
             <LanguageLink href="/" className="flex items-center gap-2">
               <span className="font-bold text-xl flex items-center">
                 <SiteLogo />
-                <span className="text-red-500"></span> ScanPro
+                <span className="text-red-500"></span>  ScanPro
               </span>
             </LanguageLink>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            {navItems.slice(0, -1).map((item) => (
+            {/* Direct link to Image Tools */}
+            <LanguageLink
+              href="/image-tools"
+              className="text-sm font-medium text-foreground transition-colors hover:text-primary"
+            >
+              {isClient ? t('imageTools.title') || "Image Tools" : "Image Tools"}
+            </LanguageLink>
+            
+            {/* PDF Tool Dropdowns */}
+            {navItems.slice(1).map((item) => (
               <div key={item.label} className="relative group">
                 {item.dropdown && (
                   <>
@@ -385,108 +351,13 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
                 )}
               </div>
             ))}
-            <div className="relative group">
-              <LanguageLink
-                href="#"
-                className="text-sm font-medium text-foreground transition-colors hover:text-primary flex items-center gap-1"
-              >
-                {t('popular.viewAll')}
-                <ChevronDownIcon className="h-4 w-4 opacity-70" />
-              </LanguageLink>
-
-              {/* View All Dropdown Menu */}
-              <div className="absolute top-full left-0 mt-2 w-[800px] bg-background border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 p-4">
-                {navItems[navItems.length - 1].dropdown.map((category) => (
-                  <div key={category.category} className="mb-4">
-                    <div className="font-semibold text-sm text-foreground mb-2">{category.category}</div>
-                    <div className="grid grid-cols-4 gap-4">
-                      {category.tools.map((tool) => (
-                        <LanguageLink
-                          key={tool.name}
-                          href={tool.href}
-                          className="flex items-start gap-3 p-2 hover:bg-muted rounded-md transition-colors"
-                        >
-                          <div className="p-1 rounded-md bg-primary/10">
-                            {tool.icon}
-                          </div>
-                          <div>
-                            <div className="text-sm font-medium">{tool.name}</div>
-                            <p className="text-xs text-muted-foreground">{tool.description}</p>
-                          </div>
-                        </LanguageLink>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </nav>
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
             <ModeToggle />
-            
-            {/* Auth Buttons */}
-            {status === "loading" ? (
-              <div className="h-9 w-9 rounded-full bg-muted flex items-center justify-center">
-                <div className="h-4 w-4 rounded-full border-2 border-primary border-t-transparent animate-spin"></div>
-              </div>
-            ) : status === "authenticated" ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="rounded-full p-0 h-9 w-9" aria-label="User menu">
-                    <Avatar className="h-9 w-9">
-                      <AvatarImage src={session?.user?.image || ""} alt={session?.user?.name || "User"} />
-                      <AvatarFallback className="bg-primary text-primary-foreground">
-                        {getUserInitials()}
-                      </AvatarFallback>
-                    </Avatar>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
-                  <DropdownMenuLabel>
-                    <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-medium leading-none">{session?.user?.name}</p>
-                      <p className="text-xs leading-none text-muted-foreground">{session?.user?.email}</p>
-                    </div>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <LanguageLink href="/dashboard">
-                    <DropdownMenuItem className="cursor-pointer">
-                      <User className="mr-2 h-4 w-4" />
-                      <span>{t('nav.dashboard') || "Dashboard"}</span>
-                    </DropdownMenuItem>
-                  </LanguageLink>
-                  <LanguageLink href="/profile">
-                    <DropdownMenuItem className="cursor-pointer">
-                      <User className="mr-2 h-4 w-4" />
-                      <span>{t('nav.profile') || "Profile"}</span>
-                    </DropdownMenuItem>
-                  </LanguageLink>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem className="cursor-pointer" onClick={handleSignOut}>
-                    <LogOut className="mr-2 h-4 w-4" />
-                    <span>{t('nav.signOut') || "Sign out"}</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <div className="flex items-center gap-2">
-                <LanguageLink href="/login">
-                  <Button variant="ghost" size="sm" className="hidden sm:flex items-center gap-1.5">
-                    <LogIn className="h-4 w-4" />
-                    {t('nav.signIn') || "Sign in"}
-                  </Button>
-                </LanguageLink>
-                <LanguageLink href="/register">
-                  <Button variant="default" size="sm" className="hidden sm:inline-flex">
-                    {t('nav.signUp') || "Sign up"}
-                  </Button>
-                </LanguageLink>
-              </div>
-            )}
-            
+            {userMenu}
             <Button
               variant="outline"
               size="icon"
@@ -507,7 +378,15 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
         {mobileMenuOpen && (
           <div className="md:hidden absolute top-16 left-0 w-full bg-background/95 backdrop-blur border-t max-h-[calc(100vh-4rem)] overflow-y-auto shadow-md">
             <div className="container max-w-6xl mx-auto py-4 space-y-4">
-              {navItems.map((item) => (
+              {/* Direct link to Image Tools */}
+              <LanguageLink 
+                href="/image-tools"
+                className="block px-3 py-3 text-lg font-medium hover:bg-primary/5 rounded-md transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {isClient ? t('imageTools.title') || "Image Tools" : "Image Tools"}
+              </LanguageLink>
+              {navItems.slice(1).map((item) => (
                 <div key={item.label} className="space-y-2">
                   <div className="block px-3 py-3 text-lg font-medium hover:bg-primary/5 rounded-md transition-colors">
                     {item.label}
@@ -540,24 +419,6 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
                   )}
                 </div>
               ))}
-              
-              {/* Mobile Auth Buttons */}
-              {status !== "authenticated" && (
-                <div className="flex flex-col gap-2 pt-2 border-t">
-                  <LanguageLink href="/login">
-                    <Button variant="outline" className="w-full justify-start" onClick={() => setMobileMenuOpen(false)}>
-                      <LogIn className="h-4 w-4 mr-2" />
-                      {t('nav.signIn') || "Sign in"}
-                    </Button>
-                  </LanguageLink>
-                  <LanguageLink href="/register">
-                    <Button variant="default" className="w-full justify-start" onClick={() => setMobileMenuOpen(false)}>
-                      <User className="h-4 w-4 mr-2" />
-                      {t('nav.signUp') || "Sign up"}
-                    </Button>
-                  </LanguageLink>
-                </div>
-              )}
             </div>
           </div>
         )}
