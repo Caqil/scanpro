@@ -2,6 +2,7 @@
 import { unlink, readdir, stat } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
+import { prisma } from './prisma';
 
 // Define directories to clean
 const DIRECTORIES = [
@@ -18,6 +19,56 @@ const DIRECTORIES = [
     'temp',
 ];
 
+/**
+ * Cleanup expired password reset tokens
+ * This should be run periodically to keep the database clean
+ */
+export async function cleanupExpiredResetTokens(): Promise<{ count: number }> {
+    try {
+      // Delete all tokens that have expired
+      const result = await prisma.passwordResetToken.deleteMany({
+        where: {
+          expires: {
+            lt: new Date(), // less than current time (expired)
+          },
+        },
+      });
+  
+      console.log(`Deleted ${result.count} expired password reset tokens`);
+      return { count: result.count };
+    } catch (error) {
+      console.error('Error cleaning up expired tokens:', error);
+      throw error;
+    }
+  }
+  
+  // This function can be called from a cron job or API route
+  export async function runCleanupTasks(): Promise<{
+    success: boolean;
+    results: Record<string, any>;
+  }> {
+    try {
+      // Run all cleanup tasks
+      const tokenCleanupResult = await cleanupExpiredResetTokens();
+      
+      // Add more cleanup tasks as needed
+      
+      return {
+        success: true,
+        results: {
+          expiredTokens: tokenCleanupResult,
+        },
+      };
+    } catch (error) {
+      console.error('Error running cleanup tasks:', error);
+      return {
+        success: false,
+        results: {
+          error: error instanceof Error ? error.message : 'Unknown error',
+        },
+      };
+    }
+  }
 /**
  * Clean up old temporary files to free up disk space
  * @param maxAgeMinutes Maximum age of files to keep (in minutes)

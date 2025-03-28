@@ -13,18 +13,12 @@ export const metadata: Metadata = {
   description: "Log in to your ScanPro account to access PDF tools and manage your API keys.",
 };
 
-export default async function LoginPage({
-  params,
-  searchParams,
-}: {
-  params: { lang: string };
-  searchParams?: { callbackUrl?: string };
-}) {
+export default async function LoginPage() {
   // Check if user is already logged in
   const session = await getServerSession(authOptions);
   
   if (session?.user) {
-    const callbackUrl = searchParams?.callbackUrl || `/${params.lang}/dashboard`;
+    const callbackUrl = `/en/dashboard`;
     redirect(callbackUrl);
   }
 

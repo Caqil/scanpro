@@ -16,7 +16,7 @@ export default async function DeveloperPage() {
   const session = await getServerSession(authOptions);
   
   if (!session?.user) {
-    redirect("/login?callbackUrl=/developer");
+    redirect("/en/login?callbackUrl=/developer");
   }
   
   return (

@@ -19,7 +19,7 @@ export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
 
   if (!session?.user) {
-    redirect("/login?callbackUrl=/dashboard");
+    redirect("/en/login?callbackUrl=/dashboard");
   }
 
   // Get user data with subscription info
@@ -32,7 +32,7 @@ export default async function DashboardPage() {
   });
 
   if (!user) {
-    redirect("/login");
+    redirect("/en/login");
   }
 
   // Get usage statistics
