@@ -481,9 +481,8 @@ export function PdfPasswordProtector() {
               </div>
             )}
           </CardContent>
-          <CardFooter className="flex justify-between flex-col sm:flex-row gap-2">
-            
-            {!protectedFileUrl && (
+          <CardFooter className="flex justify-end">
+            {!protectedFileUrl && file && ( 
               <Button 
                 type="submit" 
                 disabled={!file || isProcessing}

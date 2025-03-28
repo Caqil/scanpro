@@ -1,7 +1,7 @@
-// app/[lang]/reset-password/page.tsx
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { SiteLogo } from "@/components/site-logo";
 import Link from "next/link";
 import { authOptions } from "@/lib/auth";
@@ -12,22 +12,20 @@ export const metadata: Metadata = {
   description: "Reset your password and regain access to your ScanPro account.",
 };
 
-export default async function ResetPasswordPage({
-  params,
-  searchParams,
-}: {
-  params: { lang: string };
-  searchParams?: { token?: string };
-}) {
+export default async function ResetPasswordPage() {
   // Check if user is already logged in
   const session = await getServerSession(authOptions);
   
   if (session?.user) {
-    redirect(`/${params.lang}/dashboard`);
+    redirect("/dashboard");
   }
 
-  // Get token from query params
-  const token = searchParams?.token;
+  // Get token from URL
+  const headersList = headers();
+  const url = (await headersList).get("x-url") || "";
+  const searchParams = new URL(url,process.env.NEXTAUTH_URL).searchParams;
+  const tokenParam = searchParams.get("token");
+  const token = tokenParam || undefined;
 
   return (
     <div className="min-h-screen flex flex-col sm:flex-row">
@@ -68,11 +66,11 @@ export default async function ResetPasswordPage({
             </p>
           </div>
           
-          <EnhancedResetPasswordForm />
+          <EnhancedResetPasswordForm token={token} />
           
           <p className="text-center text-sm text-muted-foreground">
             Remember your password?{" "}
-            <Link href={`/${params.lang}/login`} className="text-primary font-medium hover:underline">
+            <Link href="/login" className="text-primary font-medium hover:underline">
               Back to login
             </Link>
           </p>

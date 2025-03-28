@@ -96,11 +96,6 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
         <DropdownMenuItem asChild>
           <LanguageLink href="/dashboard">Dashboard</LanguageLink>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <LanguageLink href="/dashboard/api-keys">
-            <KeyRound className="h-4 w-4 mr-2" /> API Keys
-          </LanguageLink>
-        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/api/auth/signout">Sign out</Link>
