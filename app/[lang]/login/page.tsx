@@ -1,86 +1,265 @@
-// app/[lang]/login/page.tsx
-import { Metadata } from "next";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertCircle, Eye, EyeOff } from "lucide-react";
+import { FaGoogle, FaGithub } from "react-icons/fa";
+import { useLanguageStore } from "@/src/store/store";
+import { toast } from "sonner";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
 import { LanguageLink } from "@/components/language-link";
-import { SiteLogo } from "@/components/site-logo";
-import { authOptions } from "@/lib/auth";
-import { LoginForm } from "@/components/auth/login-form";
 
-export const metadata: Metadata = {
-  title: "Login | ScanPro",
-  description: "Log in to your ScanPro account to access PDF tools and manage your API keys.",
-};
-
-export default async function LoginPage() {
-  // Check if user is already logged in
-  const session = await getServerSession(authOptions);
+export function LoginForm() {
+  const { t } = useLanguageStore();
+  const router = useRouter();
   
-  if (session?.user) {
-    const callbackUrl = `/en/dashboard`;
-    redirect(callbackUrl);
-  }
-
+  // Form state
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+  
+  // UI state
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  
+  // Validate email format
+  const validateEmail = (email: string): boolean => {
+    if (!email) {
+      setEmailError(t('auth.emailRequired') || "Email is required");
+      return false;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValid = emailRegex.test(email);
+    
+    if (!isValid) {
+      setEmailError(t('auth.invalidEmail') || "Please enter a valid email address");
+    } else {
+      setEmailError(null);
+    }
+    
+    return isValid;
+  };
+  
+  // Validate form
+  const validateForm = (): boolean => {
+    let isValid = true;
+    
+    // Validate email
+    if (!validateEmail(email)) {
+      isValid = false;
+    }
+    
+    // Validate password
+    if (!password) {
+      setPasswordError(t('auth.passwordRequired') || "Password is required");
+      isValid = false;
+    } else {
+      setPasswordError(null);
+    }
+    
+    return isValid;
+  };
+  
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    
+    // Validate form
+    if (!validateForm()) {
+      return;
+    }
+    
+    setLoading(true);
+    
+    try {
+      const result = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+      
+      if (result?.error) {
+        setError(t('auth.invalidCredentials') || "Invalid email or password");
+        return;
+      }
+      
+      // Show success toast
+      toast.success(t('auth.loginSuccess') || "Signed in successfully");
+      
+      // Redirect to dashboard or intended destination
+      const redirectUrl = `/en/dashboard`;
+      router.push(redirectUrl);
+      router.refresh();
+    } catch (error) {
+      setError(t('auth.loginError') || "An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  const handleOAuthSignIn = (provider: string) => {
+    const redirectUrl = `/en/dashboard`;
+    signIn(provider, { callbackUrl: redirectUrl });
+  };
+  
   return (
-    <div className="min-h-screen flex flex-col sm:flex-row">
-      {/* Left side - Branding and info */}
-      <div className="hidden md:flex flex-col w-1/2 bg-gradient-to-br from-primary/80 to-primary text-primary-foreground p-8 justify-between">
-        <div>
-          <div className="flex items-center gap-2 mb-10">
-            <SiteLogo size={36} />
-            <span className="font-bold text-3xl">ScanPro</span>
-          </div>
-          
-          <h1 className="text-4xl font-bold mb-6">Welcome back!</h1>
-          <p className="text-xl mb-4">Sign in to access all your PDF tools and documents.</p>
-          <p className="text-lg opacity-90">Manage, convert, and secure your documents with our powerful tools.</p>
-        </div>
+    <div className="space-y-6">
+      {error && (
+        <Alert variant="destructive" className="mb-4 animate-in fade-in-50 slide-in-from-top-5 duration-300">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+      
+      <div className="flex flex-col sm:flex-row gap-4">
+        <Button 
+          variant="outline" 
+          onClick={() => handleOAuthSignIn("google")} 
+          className="flex-1 relative overflow-hidden group h-11 transition-all"
+          disabled={loading}
+        >
+          <FaGoogle className="w-4 h-4 mr-2" />
+          <span>Google</span>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+        </Button>
         
-        <div className="space-y-4">
-          <div className="p-4 bg-white/10 rounded-lg backdrop-blur-sm">
-            <p className="font-medium text-lg">"ScanPro has transformed how I handle document workflows. The interface is intuitive and the tools are powerful."</p>
-            <p className="mt-2 font-medium">— Michael K., Marketing Director</p>
-          </div>
-          
-          <p className="text-sm opacity-80">© 2025 ScanPro. All rights reserved.</p>
+        <Button 
+          variant="outline" 
+          onClick={() => handleOAuthSignIn("github")} 
+          className="flex-1 relative overflow-hidden group h-11 transition-all"
+          disabled={loading}
+        >
+          <FaGithub className="w-4 h-4 mr-2" />
+          <span>GitHub</span>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+        </Button>
+      </div>
+
+      <div className="relative">
+        <div className="absolute inset-0 flex items-center">
+          <Separator className="w-full" />
+        </div>
+        <div className="relative flex justify-center">
+          <span className="bg-background px-2 text-xs text-muted-foreground uppercase tracking-wider">
+            or continue with email
+          </span>
         </div>
       </div>
       
-      {/* Right side - Login form */}
-      <div className="flex flex-col w-full md:w-1/2 p-6 sm:p-10 justify-center items-center">
-        <div className="md:hidden flex items-center gap-2 mb-10">
-          <SiteLogo size={30} />
-          <span className="font-bold text-2xl">ScanPro</span>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="space-y-2">
+          <Label htmlFor="email" className="text-sm font-medium">
+            Email
+            {emailError && (
+              <span className="text-destructive ml-1 text-xs">
+                ({emailError})
+              </span>
+            )}
+          </Label>
+          <Input
+            id="email"
+            type="email"
+            placeholder="name@example.com"
+            autoComplete="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={emailError ? "border-destructive focus-visible:ring-destructive" : ""}
+            disabled={loading}
+            required
+          />
         </div>
         
-        <div className="w-full max-w-md space-y-6">
-          <div>
-            <h2 className="text-2xl font-bold text-center">Sign in to your account</h2>
-            <p className="text-muted-foreground text-center mt-2">
-              Enter your credentials to access your account
-            </p>
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <Label htmlFor="password" className="text-sm font-medium">
+              Password
+              {passwordError && (
+                <span className="text-destructive ml-1 text-xs">
+                  ({passwordError})
+                </span>
+              )}
+            </Label>
+            <LanguageLink href={`/forgot-password`} className="text-xs text-primary hover:underline">
+              {t('auth.forgotPassword') || "Forgot password?"}
+            </LanguageLink>
           </div>
-          
-          <LoginForm />
-          
-          <p className="text-center text-sm text-muted-foreground">
-            By signing in, you agree to our{" "}
-            <Link href="/terms" className="underline underline-offset-4 hover:text-primary">
-              Terms of Service
-            </Link>{" "}
-            and{" "}
-            <Link href="/privacy" className="underline underline-offset-4 hover:text-primary">
-              Privacy Policy
-            </Link>
-            .
-          </p>
+          <div className="relative">
+            <Input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={passwordError ? "border-destructive focus-visible:ring-destructive pr-10" : "pr-10"}
+              disabled={loading}
+              required
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <EyeOff className="h-4 w-4 text-muted-foreground" />
+              ) : (
+                <Eye className="h-4 w-4 text-muted-foreground" />
+              )}
+              <span className="sr-only">
+                {showPassword ? "Hide password" : "Show password"}
+              </span>
+            </Button>
+          </div>
         </div>
         
-        <div className="md:hidden text-center mt-10 text-sm text-muted-foreground">
-          © 2025 ScanPro. All rights reserved.
+        <div className="flex items-center space-x-2">
+          <Checkbox 
+            id="remember-me" 
+            checked={rememberMe}
+            onCheckedChange={(checked) => setRememberMe(checked as boolean)}
+          />
+          <label
+            htmlFor="remember-me"
+            className="text-sm text-muted-foreground cursor-pointer"
+          >
+            {t('auth.rememberMe') || "Remember me"}
+          </label>
         </div>
-      </div>
+        
+        <Button 
+          type="submit" 
+          className="w-full h-11"
+          disabled={loading}
+        >
+          {loading ? (
+            <>
+              <span className="h-4 w-4 mr-2 rounded-full border-2 border-current border-t-transparent animate-spin" />
+              {t('auth.signingIn') || "Signing in..."}
+            </>
+          ) : (
+            t('auth.signIn') || "Sign In"
+          )}
+        </Button>
+        
+        <div className="text-center text-sm">
+          {t('auth.dontHaveAccount') || "Don't have an account?"}{" "}
+          <LanguageLink href={`/register`} className="text-primary font-medium hover:underline">
+            {t('auth.signUp') || "Sign up"}
+          </LanguageLink>
+        </div>
+      </form>
     </div>
   );
 }

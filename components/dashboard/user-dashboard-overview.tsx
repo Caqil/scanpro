@@ -107,7 +107,7 @@ export function UserDashboardOverview({ user, usageStats }: UserDashboardOvervie
             <CardTitle className="text-lg">Manage API Keys</CardTitle>
           </CardHeader>
           <CardContent>
-            <LanguageLink href="/new-dashboard/api-keys">
+            <LanguageLink href="/dashboard/api-keys">
               <Button className="w-full">
                 <Key className="mr-2 h-4 w-4" />
                 Manage Keys

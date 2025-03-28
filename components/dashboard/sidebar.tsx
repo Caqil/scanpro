@@ -55,27 +55,27 @@ export function DashboardSidebar({ role = "user" }: { role?: "admin" | "user" })
     {
       icon: <LayoutDashboard className="h-4 w-4" />,
       label: "Overview",
-      href: "/new-dashboard",
+      href: "/dashboard",
     },
     {
       icon: <Key className="h-4 w-4" />,
       label: "API Keys",
-      href: "/new-dashboard/api-keys",
+      href: "/dashboard/api-keys",
     },
     {
       icon: <BarChart3 className="h-4 w-4" />,
       label: "Usage Stats",
-      href: "/new-dashboard/usage",
+      href: "/dashboard/usage",
     },
     {
       icon: <FileText className="h-4 w-4" />,
       label: "Documents",
-      href: "/new-dashboard/documents",
+      href: "/dashboard/documents",
     },
     {
       icon: <User className="h-4 w-4" />,
       label: "Profile",
-      href: "/new-dashboard/profile",
+      href: "/dashboard/profile",
     },
   ];
 
@@ -85,17 +85,17 @@ export function DashboardSidebar({ role = "user" }: { role?: "admin" | "user" })
     {
       icon: <Users className="h-4 w-4" />,
       label: "User Management",
-      href: "/new-dashboard/users",
+      href: "/dashboard/users",
     },
     {
       icon: <Server className="h-4 w-4" />,
       label: "System Status",
-      href: "/new-dashboard/system",
+      href: "/dashboard/system",
     },
     {
       icon: <Shield className="h-4 w-4" />,
       label: "Security",
-      href: "/new-dashboard/security",
+      href: "/dashboard/security",
     },
   ];
 
