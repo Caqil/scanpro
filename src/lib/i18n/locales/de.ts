@@ -1356,5 +1356,161 @@ export default {
       metaDescription: "Text- oder Bildwasserzeichen hinzufügen, um Ihre Bilder zu schützen und zu markieren",
       metaKeywords: "Wasserzeichen hinzufügen, Bildschutz, Branding, Urheberrecht, Bildsicherheit"
     }
+  },
+  repairPdf: {
+    title: "PDF-Dateien reparieren",
+    description: "Beschädigte PDF-Dateien reparieren, Inhalte wiederherstellen und Dokumentstruktur optimieren",
+    howTo: {
+      title: "Wie Sie Ihre PDF reparieren",
+      step1: {
+        title: "Ihre PDF hochladen",
+        description: "Wählen Sie die PDF-Datei aus, die Sie von Ihrem Gerät reparieren möchten"
+      },
+      step2: {
+        title: "Reparaturmodus wählen",
+        description: "Wählen Sie die passende Reparaturmethode basierend auf den Problemen Ihrer Datei"
+      },
+      step3: {
+        title: "Reparierte PDF herunterladen",
+        description: "Laden Sie Ihre reparierte PDF-Datei mit korrigierter Struktur und Inhalt herunter"
+      }
+    },
+    why: {
+      title: "Warum PDFs reparieren",
+      corruptedFiles: {
+        title: "Beschädigte Dateien reparieren",
+        description: "Inhalte und Struktur von beschädigten PDF-Dateien wiederherstellen, die nicht richtig geöffnet werden können"
+      },
+      missingContent: {
+        title: "Fehlenden Inhalt wiederherstellen",
+        description: "Fehlende Bilder, Texte oder Seiten aus teilweise beschädigten Dokumenten wiederherstellen"
+      },
+      documentStructure: {
+        title: "Dokumentstruktur reparieren",
+        description: "Defekte interne Struktur, Seitenreferenzen und Links reparieren"
+      },
+      fileSize: {
+        title: "Dateigröße optimieren",
+        description: "Unnötige Daten bereinigen und Dateigröße ohne Qualitätsverlust optimieren"
+      }
+    },
+    modes: {
+      title: "Verfügbare Reparaturmodi",
+      standard: {
+        title: "Standardreparatur",
+        description: "Behebt häufige PDF-Probleme, einschließlich defekter Querverweise, fehlerhafter Objekte und Stream-Fehler. Optimal für leicht beschädigte PDFs, die noch geöffnet werden können, aber Fehler anzeigen."
+      },
+      advanced: {
+        title: "Erweiterte Wiederherstellung",
+        description: "Tiefgehende Reparatur für stark beschädigte PDFs mit ernsthaften Strukturproblemen. Stellt so viel Inhalt wie möglich aus Dateien wieder her, die gar nicht geöffnet werden können."
+      },
+      optimization: {
+        title: "Optimierung",
+        description: "Restrukturiert und optimiert die PDF-Datei ohne Inhaltsverlust. Entfernt redundante Daten, behebt kleinere Probleme und verbessert die gesamte Dateistruktur."
+      }
+    },
+    faq: {
+      title: "Häufig gestellte Fragen",
+      whatCanRepair: {
+        question: "Welche Arten von PDF-Problemen können behoben werden?",
+        answer: "Unser Reparaturwerkzeug kann eine Vielzahl von Problemen beheben, einschließlich beschädigter Dateistrukturen, defekter Seitenreferenzen, beschädigter Inhaltsströme, fehlender Querverweistabellen und ungültiger Objekte. Es kann oft Inhalte aus PDFs wiederherstellen, die nicht geöffnet werden oder in Standard-PDF-Viewern nicht korrekt angezeigt werden."
+      },
+      completelyDamaged: {
+        question: "Können vollständig beschädigte PDFs repariert werden?",
+        answer: "Während unser erweiterter Reparaturmodus Inhalte aus stark beschädigten PDFs wiederherstellen kann, ist eine 100%ige Wiederherstellung nicht immer möglich, wenn die Datei vollständig beschädigt ist. Selbst in extremen Fällen können wir jedoch oft Teile des Inhalts, insbesondere Texte und grundlegende Elemente, wiederherstellen."
+      },
+      contentQuality: {
+        question: "Beeinflusst die Reparatur die Inhaltsqualität?",
+        answer: "Nein, unser Reparaturprozess erhält die Qualität des wiederherstellbaren Inhalts. Im Gegensatz zu einigen Tools, die PDFs einfach extrahieren und neu erstellen (was Formatierungen verlieren kann), versuchen wir, die ursprüngliche Struktur zu bewahren und nur die beschädigten Teile zu reparieren."
+      },
+      passwordProtected: {
+        question: "Können passwortgeschützte PDFs repariert werden?",
+        answer: "Ja, Sie können passwortgeschützte PDFs reparieren, wenn Sie das Passwort haben. Sie müssen das Passwort während des Reparaturprozesses eingeben. Wir versuchen jedoch nicht, die Verschlüsselung geschützter Dokumente ohne entsprechende Berechtigung zu umgehen oder zu entfernen."
+      },
+      dataSecurity: {
+        question: "Sind meine PDF-Daten während des Reparaturprozesses sicher?",
+        answer: "Ja, wir nehmen Datensicherheit ernst. Ihre Dateien werden sicher auf unseren Servern verarbeitet, nicht mit Dritten geteilt und nach der Verarbeitung automatisch gelöscht. Wir verwenden Verschlüsselung für alle Dateiübertragungen, und der gesamte Reparaturprozess findet in einer sicheren Umgebung statt."
+      }
+    },
+    bestPractices: {
+      title: "Beste Praktiken für die PDF-Wiederherstellung",
+      dos: "Tun Sie",
+      donts: "Tun Sie nicht",
+      dosList: [
+        "Halten Sie Backups der Originaldateien vor Reparaturversuchen bereit",
+        "Versuchen Sie zunächst den Standardreparaturmodus, bevor Sie die erweiterte Wiederherstellung nutzen",
+        "Prüfen Sie die PDF mit mehreren Viewern, wenn möglich",
+        "Notieren Sie sich, welche Seiten oder Elemente vor der Reparatur problematisch sind",
+        "Verwenden Sie den Optimierungsmodus für große, aber funktionale PDFs"
+      ],
+      dontsList: [
+        "Speichern Sie beschädigte PDFs nicht wiederholt, da dies den Schaden verschlimmern kann",
+        "Nutzen Sie die Reparatur nicht als Ersatz für eine ordnungsgemäße PDF-Erstellung",
+        "Erwarten Sie keine 100%ige Wiederherstellung bei stark beschädigten Dateien",
+        "Öffnen Sie reparierte Dateien nicht in älteren PDF-Viewern, die sie erneut beschädigen könnten",
+        "Überspringen Sie nicht die Überprüfung der reparierten Datei auf Inhaltsgenauigkeit"
+      ]
+    },
+    relatedTools: {
+      title: "Verwandte Tools",
+      compress: "PDF komprimieren",
+      unlock: "PDF entsperren",
+      protect: "PDF schützen",
+      edit: "PDF bearbeiten",
+      viewAll: "Alle Tools anzeigen"
+    },
+    form: {
+      title: "PDF-Reparatur-Tool",
+      description: "Beschädigte PDFs reparieren, Inhalte wiederherstellen und Dokumentstruktur optimieren",
+      upload: "PDF zum Reparieren hochladen",
+      dragDrop: "Ziehen Sie Ihre PDF-Datei hierher oder klicken Sie zum Durchsuchen",
+      selectFile: "PDF-Datei auswählen",
+      maxFileSize: "Maximale Dateigröße: 100 MB",
+      change: "Datei ändern",
+      repairModes: "Reparaturmodus",
+      standardRepair: "Standardreparatur",
+      standardDesc: "Behebt häufige Probleme wie defekte Links und Strukturprobleme",
+      advancedRecovery: "Erweiterte Wiederherstellung",
+      advancedDesc: "Tiefgehende Wiederherstellung für stark beschädigte oder korrupte PDF-Dateien",
+      optimization: "Optimierung",
+      optimizationDesc: "Bereinigt und optimiert die PDF-Struktur ohne Inhaltsverlust",
+      advancedOptions: "Erweiterte Optionen",
+      showOptions: "Optionen anzeigen",
+      hideOptions: "Optionen ausblenden",
+      preserveFormFields: "Formularfelder erhalten",
+      preserveFormFieldsDesc: "Interaktive Formularfelder wenn möglich beibehalten",
+      preserveAnnotations: "Anmerkungen erhalten",
+      preserveAnnotationsDesc: "Kommentare, Hervorhebungen und andere Anmerkungen beibehalten",
+      preserveBookmarks: "Lesezeichen erhalten",
+      preserveBookmarksDesc: "Dokumentgliederung und Lesezeichen beibehalten",
+      optimizeImages: "Bilder optimieren",
+      optimizeImagesDesc: "Bilder neu komprimieren, um die Dateigröße zu reduzieren",
+      password: "PDF-Passwort",
+      passwordDesc: "Diese PDF ist passwortgeschützt. Geben Sie das Passwort ein, um sie zu reparieren.",
+      repair: "PDF reparieren",
+      repairing: "PDF wird repariert...",
+      security: "Ihre Dateien werden sicher verarbeitet. Alle Uploads werden nach der Verarbeitung automatisch gelöscht.",
+      analyzing: "PDF-Struktur analysieren",
+      rebuilding: "Dokumentstruktur neu aufbauen",
+      recovering: "Inhalte wiederherstellen",
+      fixing: "Querverweise reparieren",
+      optimizing: "Datei optimieren",
+      finishing: "Abschließen"
+    },
+    results: {
+      success: "PDF erfolgreich repariert",
+      successMessage: "Ihre PDF wurde repariert und ist bereit zum Herunterladen.",
+      issues: "Reparaturprobleme erkannt",
+      issuesMessage: "Wir sind bei der Reparatur Ihrer PDF auf Probleme gestoßen. Einige Inhalte sind möglicherweise nicht wiederherstellbar.",
+      details: "Reparaturdetails",
+      fixed: "Behobene Probleme",
+      warnings: "Warnungen",
+      fileSize: "Dateigröße",
+      original: "Original",
+      new: "Neu",
+      reduction: "Reduktion",
+      download: "Reparierte PDF herunterladen",
+      repairAnother: "Eine weitere PDF reparieren"
+    }
   }
 }

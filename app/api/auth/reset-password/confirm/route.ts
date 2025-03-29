@@ -1,5 +1,3 @@
-
-// app/api/auth/reset-password/confirm/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { prisma } from '@/lib/prisma';
@@ -24,7 +22,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Find the reset token
-        const resetToken = await prisma.passwordResetToken.findUnique({
+        const resetToken = await prisma.passwordResetToken.findFirst({
             where: { token }
         });
 
@@ -64,12 +62,12 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json({
             success: true,
-            message: 'Password reset successful'
+            message: 'Password has been reset successfully'
         });
     } catch (error) {
-        console.error('Password reset confirmation error:', error);
+        console.error('Password update error:', error);
         return NextResponse.json(
-            { error: 'Failed to reset password' },
+            { error: 'An error occurred updating your password' },
             { status: 500 }
         );
     }

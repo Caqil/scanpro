@@ -2,14 +2,16 @@
 // app/api/auth/validate-reset-token/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-
 export async function POST(request: NextRequest) {
     try {
         const { token } = await request.json();
 
+        console.log('Validating token:', token);
+
         if (!token) {
+            console.log('Token is missing in request');
             return NextResponse.json(
-                { error: 'Token is required' },
+                { error: 'Token is required', valid: false },
                 { status: 400 }
             );
         }
@@ -18,8 +20,16 @@ export async function POST(request: NextRequest) {
             where: { token }
         });
 
+        console.log('Token found in database:', !!resetToken);
+        
         // Check if token exists and is valid
         const isValid = resetToken && resetToken.expires > new Date();
+        
+        if (resetToken) {
+            console.log('Token expiration:', resetToken.expires);
+            console.log('Current time:', new Date());
+            console.log('Is token still valid (not expired):', resetToken.expires > new Date());
+        }
 
         return NextResponse.json({
             valid: !!isValid,

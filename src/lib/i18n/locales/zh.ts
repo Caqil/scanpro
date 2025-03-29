@@ -1356,5 +1356,161 @@ export default {
             metaDescription: "为保护和品牌化您的图像添加文本或图像水印",
             metaKeywords: "添加水印，图像保护，品牌化，版权，图像安全"
         }
+    },
+    repairPdf: {
+        title: "修复PDF文件",
+        description: "修复损坏的PDF文件，恢复内容并优化文档结构",
+        howTo: {
+            title: "如何修复您的PDF",
+            step1: {
+                title: "上传您的PDF",
+                description: "从您的设备中选择要修复的PDF文件"
+            },
+            step2: {
+                title: "选择修复模式",
+                description: "根据文件问题选择合适的修复方法"
+            },
+            step3: {
+                title: "下载修复后的PDF",
+                description: "下载修复后的PDF文件，结构和内容已修正"
+            }
+        },
+        why: {
+            title: "为什么要修复PDF",
+            corruptedFiles: {
+                title: "修复损坏文件",
+                description: "从无法正常打开的损坏PDF文件中恢复内容和结构"
+            },
+            missingContent: {
+                title: "恢复缺失内容",
+                description: "从部分损坏的文档中恢复缺失的图片、文本或页面"
+            },
+            documentStructure: {
+                title: "修复文档结构",
+                description: "修复损坏的内部结构、页面引用和链接"
+            },
+            fileSize: {
+                title: "优化文件大小",
+                description: "清理不必要的数据并在不损失质量的情况下优化文件大小"
+            }
+        },
+        modes: {
+            title: "可用修复模式",
+            standard: {
+                title: "标准修复",
+                description: "修复常见的PDF问题，包括损坏的交叉引用、格式错误的物体和流错误。适用于仍可打开但显示错误的轻度损坏PDF。"
+            },
+            advanced: {
+                title: "高级恢复",
+                description: "针对严重损坏且存在重大结构问题的PDF进行深度修复。从完全无法打开的文件中尽可能恢复内容。"
+            },
+            optimization: {
+                title: "优化",
+                description: "在不丢失内容的情况下重新构建和优化PDF文件。删除冗余数据，修复小问题并改善整体文件结构。"
+            }
+        },
+        faq: {
+            title: "常见问题解答",
+            whatCanRepair: {
+                question: "可以修复哪些类型的PDF问题？",
+                answer: "我们的修复工具可以解决多种问题，包括损坏的文件结构、断开的页面引用、损坏的内容流、缺失的交叉引用表和无效物体。它通常可以从无法打开或在标准PDF查看器中无法正确显示的PDF中恢复内容。"
+            },
+            completelyDamaged: {
+                question: "可以修复完全损坏的PDF吗？",
+                answer: "虽然我们的高级修复模式可以从严重损坏的PDF中恢复内容，但如果文件完全损坏，100%恢复并不总是可能的。然而，即使在极端情况下，我们通常也能恢复部分内容，尤其是文本和基本元素。"
+            },
+            contentQuality: {
+                question: "修复会影响内容质量吗？",
+                answer: "不会，我们的修复过程会保持可恢复内容的质量。与一些仅提取并重新创建PDF（可能丢失格式）的工具不同，我们尝试在修复损坏部分的同时保留原始结构。"
+            },
+            passwordProtected: {
+                question: "可以修复受密码保护的PDF吗？",
+                answer: "可以，如果您有密码，您可以修复受密码保护的PDF。您需要在修复过程中输入密码。然而，我们不会尝试在没有适当授权的情况下绕过或移除受保护文档的加密。"
+            },
+            dataSecurity: {
+                question: "修复过程中我的PDF数据安全吗？",
+                answer: "是的，我们非常重视数据安全。您的文件在我们的服务器上安全处理，不会与第三方共享，并在处理后自动删除。我们对所有文件传输使用加密，整个修复过程在安全环境中进行。"
+            }
+        },
+        bestPractices: {
+            title: "PDF恢复的最佳实践",
+            dos: "应做",
+            donts: "不应做",
+            dosList: [
+                "在尝试修复前保留原始文件的备份",
+                "在使用高级恢复之前先尝试标准修复模式",
+                "如果可能，使用多个查看器检查PDF",
+                "在修复前记录哪些页面或元素有问题",
+                "对大型但功能正常的PDF使用优化模式"
+            ],
+            dontsList: [
+                "不要反复保存损坏的PDF，这可能会加剧损坏",
+                "不要将修复作为正确创建PDF的替代品",
+                "不要期望从严重损坏的文件中100%恢复",
+                "不要在可能再次损坏文件的旧PDF查看器中打开修复后的文件",
+                "不要跳过检查修复后文件内容的准确性"
+            ]
+        },
+        relatedTools: {
+            title: "相关工具",
+            compress: "压缩PDF",
+            unlock: "解锁PDF",
+            protect: "保护PDF",
+            edit: "编辑PDF",
+            viewAll: "查看所有工具"
+        },
+        form: {
+            title: "PDF修复工具",
+            description: "修复损坏的PDF，恢复内容并优化文档结构",
+            upload: "上传PDF进行修复",
+            dragDrop: "将您的PDF文件拖放到此处，或点击浏览",
+            selectFile: "选择PDF文件",
+            maxFileSize: "最大文件大小：100MB",
+            change: "更改文件",
+            repairModes: "修复模式",
+            standardRepair: "标准修复",
+            standardDesc: "修复常见问题，如断开链接和结构问题",
+            advancedRecovery: "高级恢复",
+            advancedDesc: "针对严重损坏或腐败的PDF文件进行深度恢复",
+            optimization: "优化",
+            optimizationDesc: "在不丢失内容的情况下清理和优化PDF结构",
+            advancedOptions: "高级选项",
+            showOptions: "显示选项",
+            hideOptions: "隐藏选项",
+            preserveFormFields: "保留表单字段",
+            preserveFormFieldsDesc: "尽可能保留交互式表单字段",
+            preserveAnnotations: "保留注释",
+            preserveAnnotationsDesc: "保留评论、高亮和其他注释",
+            preserveBookmarks: "保留书签",
+            preserveBookmarksDesc: "保留文档大纲和书签",
+            optimizeImages: "优化图片",
+            optimizeImagesDesc: "重新压缩图片以减小文件大小",
+            password: "PDF密码",
+            passwordDesc: "此PDF受密码保护。输入密码以修复它。",
+            repair: "修复PDF",
+            repairing: "正在修复PDF...",
+            security: "您的文件将安全处理。所有上传文件在处理后自动删除。",
+            analyzing: "分析PDF结构",
+            rebuilding: "重建文档结构",
+            recovering: "恢复内容",
+            fixing: "修复交叉引用",
+            optimizing: "优化文件",
+            finishing: "完成"
+        },
+        results: {
+            success: "PDF修复成功",
+            successMessage: "您的PDF已修复并可供下载。",
+            issues: "检测到修复问题",
+            issuesMessage: "我们在修复您的PDF时遇到了问题。某些内容可能无法恢复。",
+            details: "修复详情",
+            fixed: "已修复的问题",
+            warnings: "警告",
+            fileSize: "文件大小",
+            original: "原始",
+            new: "新",
+            reduction: "减少",
+            download: "下载修复后的PDF",
+            repairAnother: "修复另一个PDF"
+        }
     }
 }

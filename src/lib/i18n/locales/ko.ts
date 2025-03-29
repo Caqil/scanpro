@@ -1356,5 +1356,161 @@ export default {
       metaDescription: "이미지를 보호하고 브랜드화하기 위해 텍스트 또는 이미지 워터마크 추가",
       metaKeywords: "워터마크 추가, 이미지 보호, 브랜딩, 저작권, 이미지 보안"
     }
+  },
+  repairPdf: {
+    title: "PDF 파일 복구",
+    description: "손상된 PDF 파일을 복구하고, 콘텐츠를 복원하며, 문서 구조를 최적화합니다",
+    howTo: {
+      title: "PDF를 복구하는 방법",
+      step1: {
+        title: "PDF 업로드",
+        description: "기기에서 복구하려는 PDF 파일을 선택하세요"
+      },
+      step2: {
+        title: "복구 모드 선택",
+        description: "파일 문제에 따라 적절한 복구 방법을 선택하세요"
+      },
+      step3: {
+        title: "복구된 PDF 다운로드",
+        description: "구조와 콘텐츠가 수정된 복구된 PDF 파일을 다운로드하세요"
+      }
+    },
+    why: {
+      title: "왜 PDF를 복구하나요",
+      corruptedFiles: {
+        title: "손상된 파일 복구",
+        description: "정상적으로 열리지 않는 손상된 PDF 파일에서 콘텐츠와 구조를 복원합니다"
+      },
+      missingContent: {
+        title: "누락된 콘텐츠 복원",
+        description: "부분적으로 손상된 문서에서 누락된 이미지, 텍스트 또는 페이지를 복원합니다"
+      },
+      documentStructure: {
+        title: "문서 구조 복구",
+        description: "손상된 내부 구조, 페이지 참조 및 링크를 복구합니다"
+      },
+      fileSize: {
+        title: "파일 크기 최적화",
+        description: "불필요한 데이터를 정리하고 품질 손실 없이 파일 크기를 최적화합니다"
+      }
+    },
+    modes: {
+      title: "사용 가능한 복구 모드",
+      standard: {
+        title: "표준 복구",
+        description: "일반적인 PDF 문제를 수정합니다. 깨진 교차 참조, 잘못된 객체, 스트림 오류를 포함합니다. 여전히 열리지만 오류를 표시하는 약간 손상된 PDF에最適입니다."
+      },
+      advanced: {
+        title: "고급 복원",
+        description: "심각한 구조적 문제가 있는 심하게 손상된 PDF를 위한 심층 복구입니다. 전혀 열리지 않는 파일에서 가능한 한 많은 콘텐츠를 복원합니다."
+      },
+      optimization: {
+        title: "최적화",
+        description: "콘텐츠 손실 없이 PDF 파일을 재구성하고 최적화합니다. 중복 데이터를 제거하고, 사소한 문제를 수정하며, 전체 파일 구조를 개선합니다."
+      }
+    },
+    faq: {
+      title: "자주 묻는 질문",
+      whatCanRepair: {
+        question: "어떤 종류의 PDF 문제를 수정할 수 있나요?",
+        answer: "저희 복구 도구는 손상된 파일 구조, 깨진 페이지 참조, 손상된 콘텐츠 스트림, 누락된 교차 참조 테이블, 유효하지 않은 객체 등 다양한 문제를 해결할 수 있습니다. 표준 PDF 뷰어에서 열리지 않거나 제대로 표시되지 않는 PDF에서 콘텐츠를 복원할 수 있는 경우가 많습니다."
+      },
+      completelyDamaged: {
+        question: "완전히 손상된 PDF를 복구할 수 있나요?",
+        answer: "저희 고급 복구 모드는 심하게 손상된 PDF에서 콘텐츠를 복원할 수 있지만, 파일이 완전히 손상된 경우 100% 복원은 항상 가능한 것은 아닙니다. 그러나 극단적인 경우에도 텍스트나 기본 요소와 같은 부분적인 콘텐츠를 복원할 수 있는 경우가 많습니다."
+      },
+      contentQuality: {
+        question: "복구가 콘텐츠 품질에 영향을 미치나요?",
+        answer: "아니요, 저희 복구 프로세스는 복원 가능한 콘텐츠의 품질을 유지합니다. PDF를 단순히 추출하고 재생성하는 일부 도구(포맷이 손실될 수 있음)와 달리, 손상된 부분만 수정하면서 원래 구조를 보존하려고 노력합니다."
+      },
+      passwordProtected: {
+        question: "비밀번호로 보호된 PDF를 복구할 수 있나요?",
+        answer: "네, 비밀번호가 있으면 비밀번호로 보호된 PDF를 복구할 수 있습니다. 복구 과정에서 비밀번호를 입력해야 합니다. 그러나 적절한 권한 없이 보호된 문서의 암호화를 우회하거나 제거하려는 시도는 하지 않습니다."
+      },
+      dataSecurity: {
+        question: "복구 과정에서 PDF 데이터가 안전한가요?",
+        answer: "네, 저희는 데이터 보안을 매우 중요하게 생각합니다. 귀하의 파일은 저희 서버에서 안전하게 처리되며, 제3자와 공유되지 않고 처리 후 자동으로 삭제됩니다. 모든 파일 전송에 암호화를 사용하며, 전체 복구 프로세스는 안전한 환경에서 진행됩니다."
+      }
+    },
+    bestPractices: {
+      title: "PDF 복원을 위한 최상의 실천 방법",
+      dos: "해야 할 일",
+      donts: "하지 말아야 할 일",
+      dosList: [
+        "복구를 시도하기 전에 원본 파일의 백업을 유지하세요",
+        "고급 복원 모드를 사용하기 전에 먼저 표준 복구 모드를 시도하세요",
+        "가능하면 여러 뷰어로 PDF를 확인하세요",
+        "복구 전에 문제가 있는 페이지나 요소를 기록하세요",
+        "크지만 기능하는 PDF에는 최적화 모드를 사용하세요"
+      ],
+      dontsList: [
+        "손상된 PDF를 반복적으로 저장하지 마세요. 손상이 악화될 수 있습니다",
+        "올바른 PDF 생성 대신 복구를 사용하지 마세요",
+        "심하게 손상된 파일에서 100% 복원을 기대하지 마세요",
+        "복구된 파일을 오래된 PDF 뷰어에서 열지 마세요. 다시 손상될 수 있습니다",
+        "복구된 파일의 콘텐츠 정확성을 확인하는 것을 건너뛰지 마세요"
+      ]
+    },
+    relatedTools: {
+      title: "관련 도구",
+      compress: "PDF 압축",
+      unlock: "PDF 잠금 해제",
+      protect: "PDF 보호",
+      edit: "PDF 편집",
+      viewAll: "모든 도구 보기"
+    },
+    form: {
+      title: "PDF 복구 도구",
+      description: "손상된 PDF를 복구하고, 콘텐츠를 복원하며, 문서 구조를 최적화합니다",
+      upload: "복구를 위해 PDF 업로드",
+      dragDrop: "여기에 PDF 파일을 끌어다 놓거나, 클릭하여 찾아보세요",
+      selectFile: "PDF 파일 선택",
+      maxFileSize: "최대 파일 크기: 100MB",
+      change: "파일 변경",
+      repairModes: "복구 모드",
+      standardRepair: "표준 복구",
+      standardDesc: "깨진 링크나 구조적 문제와 같은 일반적인 문제를 수정합니다",
+      advancedRecovery: "고급 복원",
+      advancedDesc: "심하게 손상되거나 손상된 PDF 파일을 위한 심층 복원",
+      optimization: "최적화",
+      optimizationDesc: "콘텐츠 손실 없이 PDF 구조를 정리하고 최적화합니다",
+      advancedOptions: "고급 옵션",
+      showOptions: "옵션 표시",
+      hideOptions: "옵션 숨기기",
+      preserveFormFields: "양식 필드 보존",
+      preserveFormFieldsDesc: "가능하면 인터랙티브 양식 필드를 유지합니다",
+      preserveAnnotations: "주석 보존",
+      preserveAnnotationsDesc: "댓글, 하이라이트 및 기타 주석을 유지합니다",
+      preserveBookmarks: "북마크 보존",
+      preserveBookmarksDesc: "문서 개요와 북마크를 유지합니다",
+      optimizeImages: "이미지 최적화",
+      optimizeImagesDesc: "파일 크기를 줄이기 위해 이미지를 다시 압축합니다",
+      password: "PDF 비밀번호",
+      passwordDesc: "이 PDF는 비밀번호로 보호되어 있습니다. 복구하려면 비밀번호를 입력하세요.",
+      repair: "PDF 복구",
+      repairing: "PDF 복구 중...",
+      security: "귀하의 파일은 안전하게 처리됩니다. 모든 업로드는 처리 후 자동으로 삭제됩니다.",
+      analyzing: "PDF 구조 분석 중",
+      rebuilding: "문서 구조 재구성 중",
+      recovering: "콘텐츠 복원 중",
+      fixing: "교차 참조 수정 중",
+      optimizing: "파일 최적화 중",
+      finishing: "마무리 중"
+    },
+    results: {
+      success: "PDF가 성공적으로 복구되었습니다",
+      successMessage: "귀하의 PDF가 복구되었으며 다운로드할 준비가 되었습니다.",
+      issues: "복구 문제 감지됨",
+      issuesMessage: "귀하의 PDF를 복구하는 동안 문제가 발생했습니다. 일부 콘텐츠는 복원되지 않을 수 있습니다.",
+      details: "복구 세부 정보",
+      fixed: "수정된 문제",
+      warnings: "경고",
+      fileSize: "파일 크기",
+      original: "원본",
+      new: "새로운",
+      reduction: "감소",
+      download: "복구된 PDF 다운로드",
+      repairAnother: "다른 PDF 복구"
+    }
   }
 }

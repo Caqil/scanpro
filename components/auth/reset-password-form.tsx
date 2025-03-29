@@ -76,17 +76,30 @@ export function EnhancedResetPasswordForm({ token }: EnhancedResetPasswordFormPr
       }
       
       try {
-        const res = await fetch('/api/auth/validate-reset-token', {
+        // Try the new endpoint first
+        let res = await fetch('/api/auth/validate-reset-token', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({ token })
-        });
+        }).catch(() => null);
+        
+        // If that fails, try the backup endpoint
+        if (!res || !res.ok) {
+          res = await fetch('/api/reset-password/validate', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ token })
+          });
+        }
         
         const data = await res.json();
         setTokenValid(data.valid);
       } catch (error) {
+        console.error('Error validating token:', error);
         setTokenValid(false);
       } finally {
         setTokenValidating(false);

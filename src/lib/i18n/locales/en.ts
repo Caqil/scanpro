@@ -1232,5 +1232,169 @@ export default {
       }
     }
   },
+  repairPdf: {
+    title: "Repair PDF Files",
+    description: "Fix corrupted PDF files, recover content, and optimize document structure",
+
+    howTo: {
+      title: "How to Repair Your PDF",
+      step1: {
+        title: "Upload Your PDF",
+        description: "Select the PDF file you want to repair from your device"
+      },
+      step2: {
+        title: "Choose Repair Mode",
+        description: "Select the appropriate repair method based on your file's issues"
+      },
+      step3: {
+        title: "Download Repaired PDF",
+        description: "Download your repaired PDF file with fixed structure and content"
+      }
+    },
+
+    why: {
+      title: "Why Repair PDFs",
+      corruptedFiles: {
+        title: "Fix Corrupted Files",
+        description: "Recover content and structure from damaged PDF files that won't open properly"
+      },
+      missingContent: {
+        title: "Recover Missing Content",
+        description: "Restore missing images, text or pages from partially corrupted documents"
+      },
+      documentStructure: {
+        title: "Fix Document Structure",
+        description: "Repair broken internal structure, page references, and links"
+      },
+      fileSize: {
+        title: "Optimize File Size",
+        description: "Clean up unnecessary data and optimize file size without quality loss"
+      }
+    },
+
+    modes: {
+      title: "Available Repair Modes",
+      standard: {
+        title: "Standard Repair",
+        description: "Fix common PDF issues, including broken cross-references, malformed objects, and stream errors. Best for mildly corrupted PDFs that still open but display errors."
+      },
+      advanced: {
+        title: "Advanced Recovery",
+        description: "Deep repair for severely damaged PDFs with serious structural issues. Recovers as much content as possible from files that won't open at all."
+      },
+      optimization: {
+        title: "Optimization",
+        description: "Restructure and optimize the PDF file without losing content. Removes redundant data, fixes minor issues, and improves overall file structure."
+      }
+    },
+
+    faq: {
+      title: "Frequently Asked Questions",
+      whatCanRepair: {
+        question: "What types of PDF issues can be fixed?",
+        answer: "Our repair tool can fix a wide range of problems including corrupted file structures, broken page references, damaged content streams, missing cross-reference tables, and invalid objects. It can often recover content from PDFs that won't open or display correctly in standard PDF viewers."
+      },
+      completelyDamaged: {
+        question: "Can you repair completely damaged PDFs?",
+        answer: "While our advanced repair mode can recover content from severely damaged PDFs, a 100% recovery isn't always possible if the file is completely corrupted. However, even in extreme cases, we can often recover partial content, especially text and basic elements."
+      },
+      contentQuality: {
+        question: "Will repairing affect content quality?",
+        answer: "No, our repair process maintains the quality of recoverable content. Unlike some tools that simply extract and recreate PDFs (which can lose formatting), we attempt to preserve the original structure while fixing only the corrupted parts."
+      },
+      passwordProtected: {
+        question: "Can you repair password-protected PDFs?",
+        answer: "Yes, you can repair password-protected PDFs if you have the password. You'll need to enter the password during the repair process. We do not, however, attempt to bypass or remove encryption from protected documents without proper authorization."
+      },
+      dataSecurity: {
+        question: "Is my PDF data secure during the repair process?",
+        answer: "Yes, we take data security seriously. Your files are processed securely on our servers, not shared with third parties, and are automatically deleted after processing. We use encryption for all file transfers, and the entire repair process happens in a secure environment."
+      }
+    },
+
+    bestPractices: {
+      title: "Best Practices for PDF Recovery",
+      dos: "Do's",
+      donts: "Don'ts",
+      dosList: [
+        "Keep backups of original files before repair attempts",
+        "Try the Standard repair mode first before using Advanced recovery",
+        "Check the PDF with multiple viewers if possible",
+        "Note which pages or elements are problematic before repair",
+        "Use the Optimization mode for large but functional PDFs"
+      ],
+      dontsList: [
+        "Don't repeatedly save corrupted PDFs as this can worsen the damage",
+        "Don't use repair as a substitute for proper PDF creation",
+        "Don't expect 100% recovery from severely damaged files",
+        "Don't open repaired files in older PDF viewers that might re-corrupt them",
+        "Don't skip checking the repaired file for content accuracy"
+      ]
+    },
+
+    relatedTools: {
+      title: "Related Tools",
+      compress: "Compress PDF",
+      unlock: "Unlock PDF",
+      protect: "Protect PDF",
+      edit: "Edit PDF",
+      viewAll: "View All Tools"
+    },
+
+    form: {
+      title: "PDF Repair Tool",
+      description: "Fix corrupted PDFs, recover content, and optimize document structure",
+      upload: "Upload PDF for Repair",
+      dragDrop: "Drag and drop your PDF file here, or click to browse",
+      selectFile: "Select PDF File",
+      maxFileSize: "Maximum file size: 100MB",
+      change: "Change File",
+      repairModes: "Repair Mode",
+      standardRepair: "Standard Repair",
+      standardDesc: "Fix common issues such as broken links and structural problems",
+      advancedRecovery: "Advanced Recovery",
+      advancedDesc: "Deep recovery for severely damaged or corrupted PDF files",
+      optimization: "Optimization",
+      optimizationDesc: "Clean and optimize PDF structure without losing content",
+      advancedOptions: "Advanced Options",
+      showOptions: "Show Options",
+      hideOptions: "Hide Options",
+      preserveFormFields: "Preserve Form Fields",
+      preserveFormFieldsDesc: "Maintain interactive form fields when possible",
+      preserveAnnotations: "Preserve Annotations",
+      preserveAnnotationsDesc: "Keep comments, highlights and other annotations",
+      preserveBookmarks: "Preserve Bookmarks",
+      preserveBookmarksDesc: "Maintain document outline and bookmarks",
+      optimizeImages: "Optimize Images",
+      optimizeImagesDesc: "Recompress images to reduce file size",
+      password: "PDF Password",
+      passwordDesc: "This PDF is password protected. Enter the password to repair it.",
+      repair: "Repair PDF",
+      repairing: "Repairing PDF...",
+      security: "Your files are processed securely. All uploads are automatically deleted after processing.",
+      analyzing: "Analyzing PDF structure",
+      rebuilding: "Rebuilding document structure",
+      recovering: "Recovering content",
+      fixing: "Fixing cross-references",
+      optimizing: "Optimizing file",
+      finishing: "Finishing up"
+    },
+
+    results: {
+      success: "PDF Repaired Successfully",
+      successMessage: "Your PDF has been repaired and is ready for download.",
+      issues: "Repair Issues Detected",
+      issuesMessage: "We encountered issues while repairing your PDF. Some content may not be recoverable.",
+      details: "Repair Details",
+      fixed: "Fixed Issues",
+      warnings: "Warnings",
+      fileSize: "File Size",
+      original: "Original",
+      new: "New",
+      reduction: "reduction",
+      download: "Download Repaired PDF",
+      repairAnother: "Repair Another PDF"
+    }
+  }
 }
 

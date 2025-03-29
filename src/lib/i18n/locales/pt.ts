@@ -1356,5 +1356,161 @@ export default {
       metaDescription: "Adicionar marcas d'água de texto ou imagem para proteger e marcar suas imagens",
       metaKeywords: "adicionar marca d'água, proteção de imagens, branding, direitos autorais, segurança de imagens"
     }
+  },
+  repairPdf: {
+    title: "Reparar Arquivos PDF",
+    description: "Repare arquivos PDF corrompidos, recupere conteúdo e otimize a estrutura do documento",
+    howTo: {
+      title: "Como Reparar Seu PDF",
+      step1: {
+        title: "Carregar Seu PDF",
+        description: "Selecione o arquivo PDF que você deseja reparar a partir do seu dispositivo"
+      },
+      step2: {
+        title: "Escolher Modo de Reparo",
+        description: "Selecione o método de reparo apropriado com base nos problemas do seu arquivo"
+      },
+      step3: {
+        title: "Baixar PDF Reparado",
+        description: "Baixe seu arquivo PDF reparado com estrutura e conteúdo corrigidos"
+      }
+    },
+    why: {
+      title: "Por Que Reparar PDFs",
+      corruptedFiles: {
+        title: "Reparar Arquivos Corrompidos",
+        description: "Recupere conteúdo e estrutura de arquivos PDF danificados que não abrem corretamente"
+      },
+      missingContent: {
+        title: "Recuperar Conteúdo Faltante",
+        description: "Restaure imagens, textos ou páginas ausentes de documentos parcialmente corrompidos"
+      },
+      documentStructure: {
+        title: "Reparar Estrutura do Documento",
+        description: "Repare a estrutura interna quebrada, referências de páginas e links"
+      },
+      fileSize: {
+        title: "Otimizar Tamanho do Arquivo",
+        description: "Limpe dados desnecessários e otimize o tamanho do arquivo sem perda de qualidade"
+      }
+    },
+    modes: {
+      title: "Modos de Reparo Disponíveis",
+      standard: {
+        title: "Reparo Padrão",
+        description: "Corrige problemas comuns de PDF, incluindo referências cruzadas quebradas, objetos malformados e erros de fluxo. Ideal para PDFs levemente corrompidos que ainda abrem, mas exibem erros."
+      },
+      advanced: {
+        title: "Recuperação Avançada",
+        description: "Reparo profundo para PDFs gravemente danificados com sérios problemas estruturais. Recupera o máximo possível de conteúdo de arquivos que não abrem de forma alguma."
+      },
+      optimization: {
+        title: "Otimização",
+        description: "Reestrutura e otimiza o arquivo PDF sem perda de conteúdo. Remove dados redundantes, corrige problemas menores e melhora a estrutura geral do arquivo."
+      }
+    },
+    faq: {
+      title: "Perguntas Frequentes",
+      whatCanRepair: {
+        question: "Que tipos de problemas de PDF podem ser corrigidos?",
+        answer: "Nossa ferramenta de reparo pode corrigir uma ampla gama de problemas, incluindo estruturas de arquivo corrompidas, referências de páginas quebradas, fluxos de conteúdo danificados, tabelas de referências cruzadas ausentes e objetos inválidos. Frequentemente, ela consegue recuperar conteúdo de PDFs que não abrem ou não são exibidos corretamente em visualizadores de PDF padrão."
+      },
+      completelyDamaged: {
+        question: "É possível reparar PDFs completamente danificados?",
+        answer: "Embora nosso modo de reparo avançado possa recuperar conteúdo de PDFs gravemente danificados, uma recuperação de 100% nem sempre é possível se o arquivo estiver completamente corrompido. No entanto, mesmo em casos extremos, muitas vezes conseguimos recuperar conteúdo parcial, especialmente textos e elementos básicos."
+      },
+      contentQuality: {
+        question: "O reparo afetará a qualidade do conteúdo?",
+        answer: "Não, nosso processo de reparo mantém a qualidade do conteúdo recuperável. Diferente de algumas ferramentas que simplesmente extraem e recriam PDFs (o que pode perder formatação), tentamos preservar a estrutura original enquanto reparamos apenas as partes corrompidas."
+      },
+      passwordProtected: {
+        question: "É possível reparar PDFs protegidos por senha?",
+        answer: "Sim, você pode reparar PDFs protegidos por senha se tiver a senha. Será necessário inserir a senha durante o processo de reparo. No entanto, não tentamos contornar ou remover a criptografia de documentos protegidos sem autorização adequada."
+      },
+      dataSecurity: {
+        question: "Meus dados de PDF estão seguros durante o processo de reparo?",
+        answer: "Sim, levamos a segurança dos dados muito a sério. Seus arquivos são processados de forma segura em nossos servidores, não são compartilhados com terceiros e são automaticamente excluídos após o processamento. Usamos criptografia para todas as transferências de arquivos, e todo o processo de reparo ocorre em um ambiente seguro."
+      }
+    },
+    bestPractices: {
+      title: "Melhores Práticas para Recuperação de PDF",
+      dos: "Faça",
+      donts: "Não Faça",
+      dosList: [
+        "Mantenha backups dos arquivos originais antes de tentar reparos",
+        "Tente o modo de reparo padrão antes de usar a recuperação avançada",
+        "Verifique o PDF com vários visualizadores, se possível",
+        "Anote quais páginas ou elementos estão problemáticos antes do reparo",
+        "Use o modo de otimização para PDFs grandes, mas funcionais"
+      ],
+      dontsList: [
+        "Não salve repetidamente PDFs corrompidos, pois isso pode piorar o dano",
+        "Não use o reparo como substituto para a criação adequada de PDF",
+        "Não espere 100% de recuperação de arquivos gravemente danificados",
+        "Não abra arquivos reparados em visualizadores de PDF antigos que possam corrompê-los novamente",
+        "Não pule a verificação da precisão do conteúdo no arquivo reparado"
+      ]
+    },
+    relatedTools: {
+      title: "Ferramentas Relacionadas",
+      compress: "Comprimir PDF",
+      unlock: "Desbloquear PDF",
+      protect: "Proteger PDF",
+      edit: "Editar PDF",
+      viewAll: "Ver Todas as Ferramentas"
+    },
+    form: {
+      title: "Ferramenta de Reparo de PDF",
+      description: "Repare PDFs corrompidos, recupere conteúdo e otimize a estrutura do documento",
+      upload: "Carregar PDF para Reparo",
+      dragDrop: "Arraste e solte seu arquivo PDF aqui, ou clique para navegar",
+      selectFile: "Selecionar Arquivo PDF",
+      maxFileSize: "Tamanho máximo do arquivo: 100MB",
+      change: "Alterar Arquivo",
+      repairModes: "Modo de Reparo",
+      standardRepair: "Reparo Padrão",
+      standardDesc: "Corrige problemas comuns, como links quebrados e problemas estruturais",
+      advancedRecovery: "Recuperação Avançada",
+      advancedDesc: "Recuperação profunda para arquivos PDF gravemente danificados ou corrompidos",
+      optimization: "Otimização",
+      optimizationDesc: "Limpa e otimiza a estrutura do PDF sem perda de conteúdo",
+      advancedOptions: "Opções Avançadas",
+      showOptions: "Mostrar Opções",
+      hideOptions: "Ocultar Opções",
+      preserveFormFields: "Preservar Campos de Formulário",
+      preserveFormFieldsDesc: "Manter campos de formulário interativos quando possível",
+      preserveAnnotations: "Preservar Anotações",
+      preserveAnnotationsDesc: "Manter comentários, destaques e outras anotações",
+      preserveBookmarks: "Preservar Marcadores",
+      preserveBookmarksDesc: "Manter o esboço do documento e os marcadores",
+      optimizeImages: "Otimizar Imagens",
+      optimizeImagesDesc: "Recomprimir imagens para reduzir o tamanho do arquivo",
+      password: "Senha do PDF",
+      passwordDesc: "Este PDF está protegido por senha. Insira a senha para repará-lo.",
+      repair: "Reparar PDF",
+      repairing: "Reparando PDF...",
+      security: "Seus arquivos são processados com segurança. Todos os uploads são excluídos automaticamente após o processamento.",
+      analyzing: "Analisando a estrutura do PDF",
+      rebuilding: "Reconstruindo a estrutura do documento",
+      recovering: "Recuperando conteúdo",
+      fixing: "Corrigindo referências cruzadas",
+      optimizing: "Otimizando arquivo",
+      finishing: "Finalizando"
+    },
+    results: {
+      success: "PDF Reparado com Sucesso",
+      successMessage: "Seu PDF foi reparado e está pronto para download.",
+      issues: "Problemas de Reparo Detectados",
+      issuesMessage: "Encontramos problemas ao reparar seu PDF. Alguns conteúdos podem não ser recuperáveis.",
+      details: "Detalhes do Reparo",
+      fixed: "Problemas Corrigidos",
+      warnings: "Avisos",
+      fileSize: "Tamanho do Arquivo",
+      original: "Original",
+      new: "Novo",
+      reduction: "redução",
+      download: "Baixar PDF Reparado",
+      repairAnother: "Reparar Outro PDF"
+    }
   }
 }

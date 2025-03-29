@@ -328,7 +328,12 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
             {/* Direct link to Image Tools */}
-
+            <LanguageLink
+    href="/pricing"
+    className="text-sm font-medium text-foreground transition-colors hover:text-primary"
+  >
+    {isClient ? t("nav.pricing") || "Pricing" : "Pricing"}
+  </LanguageLink>
             {/* PDF Tool Dropdowns */}
             {navItems.slice(1).map((item) => (
               <div key={item.label} className="relative group">
@@ -393,7 +398,13 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           <div className="md:hidden absolute top-16 left-0 w-full bg-background/95 backdrop-blur border-t max-h-[calc(100vh-4rem)] overflow-y-auto shadow-md">
             <div className="container max-w-6xl mx-auto py-4 space-y-4">
               {/* Direct link to Image Tools */}
-
+              <LanguageLink
+        href="/pricing"
+        className="block px-3 py-3 text-lg font-medium hover:bg-primary/5 rounded-md transition-colors"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        {isClient ? t("nav.pricing") || "Pricing" : "Pricing"}
+      </LanguageLink>
               {navItems.slice(1).map((item) => (
                 <div key={item.label} className="space-y-2">
                   <div className="block px-3 py-3 text-lg font-medium hover:bg-primary/5 rounded-md transition-colors">

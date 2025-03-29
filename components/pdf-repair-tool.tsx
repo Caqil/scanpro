@@ -89,40 +89,27 @@ export function PdfRepairTool() {
       setFile(selectedFile);
       
       // Check if file is password protected
-    // checkIfPasswordProtected(selectedFile);
+    checkIfPasswordProtected(selectedFile);
     }
   };
-  
-  // Check if PDF is password protected
   const checkIfPasswordProtected = async (file: File) => {
     try {
-      setIsUploading(true);
-      const formData = new FormData();
-      formData.append('file', file);
-      
-      const response = await fetch('/api/pdf/unlock/check', {
-        method: 'POST',
-        body: formData
-      });
-      
-      if (!response.ok) {
-        throw new Error('Failed to check PDF protection status');
-      }
-      
-      const data = await response.json();
-      setIsPasswordProtected(data.isPasswordProtected);
-      
-      if (data.isPasswordProtected) {
-        toast.info("Password protected PDF detected", {
-          description: "Please enter the password to repair this document"
+        setIsUploading(true);
+        const formData = new FormData();
+        formData.append('file', file);
+        const response = await fetch('/api/pdf/unlock/check', {
+            method: 'POST',
+            body: formData
         });
-      }
+        const data = await response.json();
+        console.log('API response:', data); // Add this
+        setIsPasswordProtected(data.isPasswordProtected);
     } catch (error) {
-      console.error('Error checking PDF:', error);
+        console.error('Error checking PDF:', error);
     } finally {
-      setIsUploading(false);
+        setIsUploading(false);
     }
-  };
+};
   
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {

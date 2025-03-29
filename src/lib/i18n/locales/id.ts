@@ -1357,5 +1357,161 @@ export default {
       metaDescription: "Tambahkan watermark teks atau gambar untuk melindungi dan memberi merek pada gambar Anda",
       metaKeywords: "tambahkan watermark, perlindungan gambar, branding, hak cipta, keamanan gambar"
     }
+  },
+  repairPdf: {
+    title: "Perbaiki File PDF",
+    description: "Perbaiki file PDF yang rusak, pulihkan konten, dan optimalkan struktur dokumen",
+    howTo: {
+      title: "Cara Memperbaiki PDF Anda",
+      step1: {
+        title: "Unggah PDF Anda",
+        description: "Pilih file PDF yang ingin Anda perbaiki dari perangkat Anda"
+      },
+      step2: {
+        title: "Pilih Mode Perbaikan",
+        description: "Pilih metode perbaikan yang sesuai berdasarkan masalah file Anda"
+      },
+      step3: {
+        title: "Unduh PDF yang Diperbaiki",
+        description: "Unduh file PDF Anda yang telah diperbaiki dengan struktur dan konten yang diperbarui"
+      }
+    },
+    why: {
+      title: "Mengapa Memperbaiki PDF",
+      corruptedFiles: {
+        title: "Perbaiki File yang Rusak",
+        description: "Pulihkan konten dan struktur dari file PDF yang rusak yang tidak dapat dibuka dengan benar"
+      },
+      missingContent: {
+        title: "Pulihkan Konten yang Hilang",
+        description: "Kembalikan gambar, teks, atau halaman yang hilang dari dokumen yang rusak sebagian"
+      },
+      documentStructure: {
+        title: "Perbaiki Struktur Dokumen",
+        description: "Perbaiki struktur internal yang rusak, referensi halaman, dan tautan"
+      },
+      fileSize: {
+        title: "Optimalkan Ukuran File",
+        description: "Bersihkan data yang tidak perlu dan optimalkan ukuran file tanpa kehilangan kualitas"
+      }
+    },
+    modes: {
+      title: "Mode Perbaikan yang Tersedia",
+      standard: {
+        title: "Perbaikan Standar",
+        description: "Perbaiki masalah PDF umum, termasuk referensi silang yang rusak, objek yang salah bentuk, dan kesalahan aliran. Terbaik untuk PDF yang sedikit rusak yang masih bisa dibuka tetapi menampilkan kesalahan."
+      },
+      advanced: {
+        title: "Pemulihan Lanjutan",
+        description: "Perbaikan mendalam untuk PDF yang sangat rusak dengan masalah struktural serius. Memulihkan sebanyak mungkin konten dari file yang sama sekali tidak bisa dibuka."
+      },
+      optimization: {
+        title: "Optimasi",
+        description: "Restrukturisasi dan optimalkan file PDF tanpa kehilangan konten. Menghapus data berlebihan, memperbaiki masalah kecil, dan meningkatkan struktur file secara keseluruhan."
+      }
+    },
+    faq: {
+      title: "Pertanyaan yang Sering Diajukan",
+      whatCanRepair: {
+        question: "Jenis masalah PDF apa yang bisa diperbaiki?",
+        answer: "Alat perbaikan kami dapat memperbaiki berbagai masalah termasuk struktur file yang rusak, referensi halaman yang rusak, aliran konten yang rusak, tabel referensi silang yang hilang, dan objek yang tidak valid. Sering kali dapat memulihkan konten dari PDF yang tidak bisa dibuka atau ditampilkan dengan benar di penampil PDF standar."
+      },
+      completelyDamaged: {
+        question: "Apakah PDF yang benar-benar rusak bisa diperbaiki?",
+        answer: "Meskipun mode perbaikan lanjutan kami dapat memulihkan konten dari PDF yang sangat rusak, pemulihan 100% tidak selalu mungkin jika file benar-benar rusak. Namun, bahkan dalam kasus ekstrem, kami sering kali dapat memulihkan konten parsial, terutama teks dan elemen dasar."
+      },
+      contentQuality: {
+        question: "Apakah perbaikan akan memengaruhi kualitas konten?",
+        answer: "Tidak, proses perbaikan kami menjaga kualitas konten yang dapat dipulihkan. Berbeda dengan beberapa alat yang hanya mengekstrak dan membuat ulang PDF (yang dapat kehilangan format), kami berusaha mempertahankan struktur asli sambil hanya memperbaiki bagian yang rusak."
+      },
+      passwordProtected: {
+        question: "Apakah PDF yang dilindungi kata sandi bisa diperbaiki?",
+        answer: "Ya, Anda bisa memperbaiki PDF yang dilindungi kata sandi jika Anda memiliki kata sandinya. Anda perlu memasukkan kata sandi selama proses perbaikan. Namun, kami tidak mencoba untuk melewati atau menghapus enkripsi dari dokumen yang dilindungi tanpa otorisasi yang tepat."
+      },
+      dataSecurity: {
+        question: "Apakah data PDF saya aman selama proses perbaikan?",
+        answer: "Ya, kami sangat menjaga keamanan data. File Anda diproses dengan aman di server kami, tidak dibagikan dengan pihak ketiga, dan dihapus secara otomatis setelah pemrosesan. Kami menggunakan enkripsi untuk semua transfer file, dan seluruh proses perbaikan berlangsung di lingkungan yang aman."
+      }
+    },
+    bestPractices: {
+      title: "Praktik Terbaik untuk Pemulihan PDF",
+      dos: "Lakukan",
+      donts: "Jangan Lakukan",
+      dosList: [
+        "Simpan cadangan file asli sebelum mencoba perbaikan",
+        "Coba mode perbaikan standar terlebih dahulu sebelum menggunakan pemulihan lanjutan",
+        "Periksa PDF dengan beberapa penampil jika memungkinkan",
+        "Catat halaman atau elemen mana yang bermasalah sebelum perbaikan",
+        "Gunakan mode optimasi untuk PDF besar tetapi masih berfungsi"
+      ],
+      dontsList: [
+        "Jangan simpan ulang PDF yang rusak berulang kali karena ini dapat memperburuk kerusakan",
+        "Jangan gunakan perbaikan sebagai pengganti pembuatan PDF yang tepat",
+        "Jangan harapkan pemulihan 100% dari file yang sangat rusak",
+        "Jangan buka file yang diperbaiki di penampil PDF lama yang mungkin merusaknya kembali",
+        "Jangan lewati pemeriksaan akurasi konten pada file yang diperbaiki"
+      ]
+    },
+    relatedTools: {
+      title: "Alat Terkait",
+      compress: "Kompres PDF",
+      unlock: "Buka Kunci PDF",
+      protect: "Lindungi PDF",
+      edit: "Edit PDF",
+      viewAll: "Lihat Semua Alat"
+    },
+    form: {
+      title: "Alat Perbaikan PDF",
+      description: "Perbaiki PDF yang rusak, pulihkan konten, dan optimalkan struktur dokumen",
+      upload: "Unggah PDF untuk Perbaikan",
+      dragDrop: "Seret dan jatuhkan file PDF Anda di sini, atau klik untuk menelusuri",
+      selectFile: "Pilih File PDF",
+      maxFileSize: "Ukuran file maksimum: 100MB",
+      change: "Ganti File",
+      repairModes: "Mode Perbaikan",
+      standardRepair: "Perbaikan Standar",
+      standardDesc: "Perbaiki masalah umum seperti tautan yang rusak dan masalah struktural",
+      advancedRecovery: "Pemulihan Lanjutan",
+      advancedDesc: "Pemulihan mendalam untuk file PDF yang sangat rusak atau korup",
+      optimization: "Optimasi",
+      optimizationDesc: "Bersihkan dan optimalkan struktur PDF tanpa kehilangan konten",
+      advancedOptions: "Opsi Lanjutan",
+      showOptions: "Tampilkan Opsi",
+      hideOptions: "Sembunyikan Opsi",
+      preserveFormFields: "Pertahankan Kolom Formulir",
+      preserveFormFieldsDesc: "Pertahankan kolom formulir interaktif jika memungkinkan",
+      preserveAnnotations: "Pertahankan Anotasi",
+      preserveAnnotationsDesc: "Simpan komentar, sorotan, dan anotasi lainnya",
+      preserveBookmarks: "Pertahankan Bookmark",
+      preserveBookmarksDesc: "Pertahankan garis besar dokumen dan bookmark",
+      optimizeImages: "Optimalkan Gambar",
+      optimizeImagesDesc: "Kompres ulang gambar untuk mengurangi ukuran file",
+      password: "Kata Sandi PDF",
+      passwordDesc: "PDF ini dilindungi kata sandi. Masukkan kata sandi untuk memperbaikinya.",
+      repair: "Perbaiki PDF",
+      repairing: "Memperbaiki PDF...",
+      security: "File Anda diproses dengan aman. Semua unggahan dihapus otomatis setelah pemrosesan.",
+      analyzing: "Menganalisis struktur PDF",
+      rebuilding: "Membangun ulang struktur dokumen",
+      recovering: "Memulihkan konten",
+      fixing: "Memperbaiki referensi silang",
+      optimizing: "Mengoptimalkan file",
+      finishing: "Menyelesaikan"
+    },
+    results: {
+      success: "PDF Berhasil Diperbaiki",
+      successMessage: "PDF Anda telah diperbaiki dan siap untuk diunduh.",
+      issues: "Masalah Perbaikan Terdeteksi",
+      issuesMessage: "Kami menemui masalah saat memperbaiki PDF Anda. Beberapa konten mungkin tidak dapat dipulihkan.",
+      details: "Detail Perbaikan",
+      fixed: "Masalah yang Diperbaiki",
+      warnings: "Peringatan",
+      fileSize: "Ukuran File",
+      original: "Asli",
+      new: "Baru",
+      reduction: "pengurangan",
+      download: "Unduh PDF yang Diperbaiki",
+      repairAnother: "Perbaiki PDF Lain"
+    }
   }
 }

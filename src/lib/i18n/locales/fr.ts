@@ -1356,5 +1356,161 @@ export default {
             metaDescription: "Ajouter des filigranes texte ou image pour protéger et marquer vos images",
             metaKeywords: "ajouter filigrane, protection d'image, branding, droits d'auteur, sécurité d'image"
         }
+    },
+    repairPdf: {
+        title: "Réparer des fichiers PDF",
+        description: "Réparer les fichiers PDF corrompus, récupérer le contenu et optimiser la structure du document",
+        howTo: {
+            title: "Comment réparer votre PDF",
+            step1: {
+                title: "Télécharger votre PDF",
+                description: "Sélectionnez le fichier PDF que vous souhaitez réparer depuis votre appareil"
+            },
+            step2: {
+                title: "Choisir le mode de réparation",
+                description: "Sélectionnez la méthode de réparation appropriée en fonction des problèmes de votre fichier"
+            },
+            step3: {
+                title: "Télécharger le PDF réparé",
+                description: "Téléchargez votre fichier PDF réparé avec une structure et un contenu corrigés"
+            }
+        },
+        why: {
+            title: "Pourquoi réparer des PDFs",
+            corruptedFiles: {
+                title: "Réparer les fichiers corrompus",
+                description: "Récupérer le contenu et la structure des fichiers PDF endommagés qui ne s'ouvrent pas correctement"
+            },
+            missingContent: {
+                title: "Récupérer le contenu manquant",
+                description: "Restaurer les images, textes ou pages manquantes des documents partiellement corrompus"
+            },
+            documentStructure: {
+                title: "Réparer la structure du document",
+                description: "Réparer la structure interne défectueuse, les références de pages et les liens"
+            },
+            fileSize: {
+                title: "Optimiser la taille du fichier",
+                description: "Nettoyer les données inutiles et optimiser la taille du fichier sans perte de qualité"
+            }
+        },
+        modes: {
+            title: "Modes de réparation disponibles",
+            standard: {
+                title: "Réparation standard",
+                description: "Corrige les problèmes courants des PDF, y compris les références croisées cassées, les objets mal formés et les erreurs de flux. Idéal pour les PDFs légèrement corrompus qui s'ouvrent encore mais affichent des erreurs."
+            },
+            advanced: {
+                title: "Récupération avancée",
+                description: "Réparation en profondeur pour les PDFs gravement endommagés avec des problèmes structurels sérieux. Récupère autant de contenu que possible des fichiers qui ne s'ouvrent pas du tout."
+            },
+            optimization: {
+                title: "Optimisation",
+                description: "Restructure et optimise le fichier PDF sans perte de contenu. Supprime les données redondantes, corrige les problèmes mineurs et améliore la structure globale du fichier."
+            }
+        },
+        faq: {
+            title: "Questions fréquemment posées",
+            whatCanRepair: {
+                question: "Quels types de problèmes PDF peuvent être corrigés ?",
+                answer: "Notre outil de réparation peut résoudre une large gamme de problèmes, y compris les structures de fichiers corrompues, les références de pages cassées, les flux de contenu endommagés, les tables de références croisées manquantes et les objets invalides. Il peut souvent récupérer le contenu des PDFs qui ne s'ouvrent pas ou ne s'affichent pas correctement dans les visionneuses PDF standard."
+            },
+            completelyDamaged: {
+                question: "Peut-on réparer des PDFs complètement endommagés ?",
+                answer: "Bien que notre mode de réparation avancée puisse récupérer le contenu des PDFs gravement endommagés, une récupération à 100 % n'est pas toujours possible si le fichier est totalement corrompu. Cependant, même dans les cas extrêmes, nous pouvons souvent récupérer un contenu partiel, notamment le texte et les éléments de base."
+            },
+            contentQuality: {
+                question: "La réparation affectera-t-elle la qualité du contenu ?",
+                answer: "Non, notre processus de réparation préserve la qualité du contenu récupérable. Contrairement à certains outils qui extraient et recréent simplement les PDFs (ce qui peut entraîner une perte de formatage), nous essayons de conserver la structure originale tout en réparant uniquement les parties corrompues."
+            },
+            passwordProtected: {
+                question: "Peut-on réparer des PDFs protégés par mot de passe ?",
+                answer: "Oui, vous pouvez réparer des PDFs protégés par mot de passe si vous avez le mot de passe. Vous devrez entrer le mot de passe pendant le processus de réparation. Nous n’essayons pas, cependant, de contourner ou de supprimer le chiffrement des documents protégés sans autorisation appropriée."
+            },
+            dataSecurity: {
+                question: "Mes données PDF sont-elles sécurisées pendant le processus de réparation ?",
+                answer: "Oui, nous prenons la sécurité des données très au sérieux. Vos fichiers sont traités de manière sécurisée sur nos serveurs, ne sont pas partagés avec des tiers et sont automatiquement supprimés après traitement. Nous utilisons le chiffrement pour tous les transferts de fichiers, et l’ensemble du processus de réparation se déroule dans un environnement sécurisé."
+            }
+        },
+        bestPractices: {
+            title: "Meilleures pratiques pour la récupération de PDF",
+            dos: "À faire",
+            donts: "À ne pas faire",
+            dosList: [
+                "Conservez des sauvegardes des fichiers originaux avant toute tentative de réparation",
+                "Essayez d'abord le mode de réparation standard avant d'utiliser la récupération avancée",
+                "Vérifiez le PDF avec plusieurs visionneuses si possible",
+                "Notez quelles pages ou éléments posent problème avant la réparation",
+                "Utilisez le mode d’optimisation pour les PDFs volumineux mais fonctionnels"
+            ],
+            dontsList: [
+                "Ne sauvegardez pas plusieurs fois des PDFs corrompus, car cela peut aggraver les dégâts",
+                "N’utilisez pas la réparation comme substitut à une création correcte de PDF",
+                "N’espérez pas une récupération à 100 % pour des fichiers gravement endommagés",
+                "N’ouvrez pas les fichiers réparés dans des visionneuses PDF anciennes qui pourraient les corrompre à nouveau",
+                "Ne sautez pas la vérification de l’exactitude du contenu dans le fichier réparé"
+            ]
+        },
+        relatedTools: {
+            title: "Outils connexes",
+            compress: "Compresser PDF",
+            unlock: "Déverrouiller PDF",
+            protect: "Protéger PDF",
+            edit: "Modifier PDF",
+            viewAll: "Voir tous les outils"
+        },
+        form: {
+            title: "Outil de réparation de PDF",
+            description: "Réparer les PDFs corrompus, récupérer le contenu et optimiser la structure du document",
+            upload: "Télécharger un PDF pour réparation",
+            dragDrop: "Glissez-déposez votre fichier PDF ici ou cliquez pour parcourir",
+            selectFile: "Sélectionner un fichier PDF",
+            maxFileSize: "Taille maximale du fichier : 100 Mo",
+            change: "Changer de fichier",
+            repairModes: "Mode de réparation",
+            standardRepair: "Réparation standard",
+            standardDesc: "Corrige les problèmes courants tels que les liens brisés et les problèmes structurels",
+            advancedRecovery: "Récupération avancée",
+            advancedDesc: "Récupération en profondeur pour les fichiers PDF gravement endommagés ou corrompus",
+            optimization: "Optimisation",
+            optimizationDesc: "Nettoie et optimise la structure du PDF sans perte de contenu",
+            advancedOptions: "Options avancées",
+            showOptions: "Afficher les options",
+            hideOptions: "Masquer les options",
+            preserveFormFields: "Préserver les champs de formulaire",
+            preserveFormFieldsDesc: "Maintenir les champs de formulaire interactifs lorsque possible",
+            preserveAnnotations: "Préserver les annotations",
+            preserveAnnotationsDesc: "Conserver les commentaires, surlignages et autres annotations",
+            preserveBookmarks: "Préserver les signets",
+            preserveBookmarksDesc: "Maintenir la structure du document et les signets",
+            optimizeImages: "Optimiser les images",
+            optimizeImagesDesc: "Recompresser les images pour réduire la taille du fichier",
+            password: "Mot de passe PDF",
+            passwordDesc: "Ce PDF est protégé par mot de passe. Entrez le mot de passe pour le réparer.",
+            repair: "Réparer le PDF",
+            repairing: "Réparation du PDF en cours...",
+            security: "Vos fichiers sont traités en toute sécurité. Tous les téléchargements sont automatiquement supprimés après traitement.",
+            analyzing: "Analyse de la structure du PDF",
+            rebuilding: "Reconstruction de la structure du document",
+            recovering: "Récupération du contenu",
+            fixing: "Correction des références croisées",
+            optimizing: "Optimisation du fichier",
+            finishing: "Finalisation"
+        },
+        results: {
+            success: "PDF réparé avec succès",
+            successMessage: "Votre PDF a été réparé et est prêt à être téléchargé.",
+            issues: "Problèmes de réparation détectés",
+            issuesMessage: "Nous avons rencontré des problèmes lors de la réparation de votre PDF. Certains contenus peuvent ne pas être récupérables.",
+            details: "Détails de la réparation",
+            fixed: "Problèmes corrigés",
+            warnings: "Avertissements",
+            fileSize: "Taille du fichier",
+            original: "Original",
+            new: "Nouveau",
+            reduction: "réduction",
+            download: "Télécharger le PDF réparé",
+            repairAnother: "Réparer un autre PDF"
+        }
     }
 }

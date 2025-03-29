@@ -228,6 +228,7 @@ export function PdfMerger() {
       <CardHeader>
         <CardTitle>{t('mergePdf.title') || "Merge PDF Files"}</CardTitle>
       </CardHeader>
+      
       <CardContent className="space-y-6">
         {/* File Drop Zone */}
         <div 
@@ -252,7 +253,8 @@ export function PdfMerger() {
             <p className="text-sm text-muted-foreground max-w-sm">
               {t('fileUploader.dropHereDesc') || "Drop your PDF files here or click to browse."} {t('fileUploader.maxSize') || "Maximum size is 100MB per file."}
             </p>
-            <Button type="button" variant="secondary" size="sm" className="mt-2">
+            
+            <Button type="button" variant="yellow" size="sm" className="mt-2">
               {t('fileUploader.browse') || "Browse Files"}
             </Button>
           </div>

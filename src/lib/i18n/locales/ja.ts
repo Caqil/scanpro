@@ -1357,5 +1357,162 @@ export default {
       metaDescription: "画像を保護しブランド化するためにテキストまたは画像のウォーターマークを追加",
       metaKeywords: "ウォーターマーク追加、画像保護、ブランディング、著作権、画像セキュリティ"
     }
+    ,
+    repairPdf: {
+      title: "PDFファイルを修復する",
+      description: "破損したPDFファイルを修復し、コンテンツを回復し、文書構造を最適化する",
+      howTo: {
+        title: "PDFを修復する方法",
+        step1: {
+          title: "PDFをアップロードする",
+          description: "デバイスから修復したいPDFファイルを選択する"
+        },
+        step2: {
+          title: "修復モードを選択する",
+          description: "ファイルの問題に基づいて適切な修復方法を選択する"
+        },
+        step3: {
+          title: "修復されたPDFをダウンロードする",
+          description: "構造とコンテンツが修正された修復済みのPDFファイルをダウンロードする"
+        }
+      },
+      why: {
+        title: "なぜPDFを修復するのか",
+        corruptedFiles: {
+          title: "破損したファイルを修復する",
+          description: "正常に開かない破損したPDFファイルからコンテンツと構造を回復する"
+        },
+        missingContent: {
+          title: "欠落したコンテンツを回復する",
+          description: "部分的に破損した文書から欠落した画像、テキスト、またはページを復元する"
+        },
+        documentStructure: {
+          title: "文書構造を修復する",
+          description: "壊れた内部構造、ページ参照、リンクを修復する"
+        },
+        fileSize: {
+          title: "ファイルサイズを最適化する",
+          description: "不要なデータを削除し、品質を損なわずにファイルサイズを最適化する"
+        }
+      },
+      modes: {
+        title: "利用可能な修復モード",
+        standard: {
+          title: "標準修復",
+          description: "一般的なPDFの問題を修正する。壊れたクロスリファレンス、不正なオブジェクト、ストリームエラーを含む。まだ開けるがエラーを表示する軽度に破損したPDFに最適。"
+        },
+        advanced: {
+          title: "高度な回復",
+          description: "深刻な構造的問題を持つ重度に破損したPDFのための深い修復。全く開かないファイルから可能な限り多くのコンテンツを回復する。"
+        },
+        optimization: {
+          title: "最適化",
+          description: "コンテンツを失うことなくPDFファイルを再構築し最適化する。冗長なデータを削除し、軽微な問題を修正し、全体的なファイル構造を改善する。"
+        }
+      },
+      faq: {
+        title: "よくある質問",
+        whatCanRepair: {
+          question: "どのようなPDFの問題を修正できますか？",
+          answer: "当社の修復ツールは、破損したファイル構造、壊れたページ参照、損傷したコンテンツストリーム、欠落したクロスリファレンスタブル、無効なオブジェクトなど、幅広い問題を修正できます。標準のPDFビューアで開かない、または正しく表示されないPDFからコンテンツを回復することがよくあります。"
+        },
+        completelyDamaged: {
+          question: "完全に破損したPDFを修復できますか？",
+          answer: "高度な修復モードでは重度に破損したPDFからコンテンツを回復できますが、ファイルが完全に破損している場合、100%の回復が常に可能とは限りません。ただし、極端な場合でも、テキストや基本的な要素などの部分的なコンテンツを回復できることが多いです。"
+        },
+        contentQuality: {
+          question: "修復はコンテンツの品質に影響しますか？",
+          answer: "いいえ、当社の修復プロセスは回復可能なコンテンツの品質を維持します。一部のツールがPDFを単に抽出して再作成する（フォーマットを失う可能性がある）のとは異なり、破損した部分のみを修正しながら元の構造を保つよう努めます。"
+        },
+        passwordProtected: {
+          question: "パスワードで保護されたPDFを修復できますか？",
+          answer: "はい、パスワードがあればパスワードで保護されたPDFを修復できます。修復プロセス中にパスワードを入力する必要があります。ただし、適切な許可なく保護された文書の暗号化を回避または解除することは試みません。"
+        },
+        dataSecurity: {
+          question: "修復プロセス中のPDFデータは安全ですか？",
+          answer: "はい、当社はデータのセキュリティを真剣に考えています。あなたのファイルは当社のサーバーで安全に処理され、第三者と共有されず、処理後に自動的に削除されます。すべてのファイル転送には暗号化を使用し、修復プロセス全体が安全な環境で行われます。"
+        }
+      },
+      bestPractices: {
+        title: "PDF回復のためのベストプラクティス",
+        dos: "すべきこと",
+        donts: "すべきでないこと",
+        dosList: [
+          "修復を試みる前に元のファイルのバックアップを保持する",
+          "高度な回復を使用する前にまず標準修復モードを試す",
+          "可能であれば複数のビューアでPDFを確認する",
+          "修復前に問題のあるページや要素をメモする",
+          "大きくて機能的なPDFには最適化モードを使用する"
+        ],
+        dontsList: [
+          "破損したPDFを繰り返し保存しない。損傷が悪化する可能性がある",
+          "適切なPDF作成の代わりに修復を使用しない",
+          "重度に破損したファイルから100%の回復を期待しない",
+          "修復されたファイルを古いPDFビューアで開かない。それらが再び破損する可能性がある",
+          "修復されたファイルのコンテンツの正確性を確認するのを省略しない"
+        ]
+      },
+      relatedTools: {
+        title: "関連ツール",
+        compress: "PDFを圧縮する",
+        unlock: "PDFのロックを解除する",
+        protect: "PDFを保護する",
+        edit: "PDFを編集する",
+        viewAll: "すべてのツールを表示する"
+      },
+      form: {
+        title: "PDF修復ツール",
+        description: "破損したPDFを修復し、コンテンツを回復し、文書構造を最適化する",
+        upload: "修復のためにPDFをアップロードする",
+        dragDrop: "ここにPDFファイルをドラッグ＆ドロップするか、クリックして参照する",
+        selectFile: "PDFファイルを選択する",
+        maxFileSize: "最大ファイルサイズ: 100MB",
+        change: "ファイルを変更する",
+        repairModes: "修復モード",
+        standardRepair: "標準修復",
+        standardDesc: "壊れたリンクや構造的問題などの一般的な問題を修正する",
+        advancedRecovery: "高度な回復",
+        advancedDesc: "重度に破損または腐敗したPDFファイルのための深い回復",
+        optimization: "最適化",
+        optimizationDesc: "コンテンツを失うことなくPDF構造をクリーンアップし最適化する",
+        advancedOptions: "高度なオプション",
+        showOptions: "オプションを表示する",
+        hideOptions: "オプションを非表示にする",
+        preserveFormFields: "フォームフィールドを保持する",
+        preserveFormFieldsDesc: "可能であればインタラクティブなフォームフィールドを維持する",
+        preserveAnnotations: "注釈を保持する",
+        preserveAnnotationsDesc: "コメント、ハイライト、その他の注釈を保持する",
+        preserveBookmarks: "ブックマークを保持する",
+        preserveBookmarksDesc: "文書のアウトラインとブックマークを維持する",
+        optimizeImages: "画像を最適化する",
+        optimizeImagesDesc: "ファイルサイズを小さくするために画像を再圧縮する",
+        password: "PDFパスワード",
+        passwordDesc: "このPDFはパスワードで保護されています。修復するためにパスワードを入力してください。",
+        repair: "PDFを修復する",
+        repairing: "PDFを修復中...",
+        security: "あなたのファイルは安全に処理されます。すべてのアップロードは処理後に自動的に削除されます。",
+        analyzing: "PDF構造を分析中",
+        rebuilding: "文書構造を再構築中",
+        recovering: "コンテンツを回復中",
+        fixing: "クロスリファレンスを修正中",
+        optimizing: "ファイルを最適化中",
+        finishing: "仕上げ中"
+      },
+      results: {
+        success: "PDFが正常に修復されました",
+        successMessage: "あなたのPDFが修復され、ダウンロードの準備が整いました。",
+        issues: "修復の問題が検出されました",
+        issuesMessage: "あなたのPDFを修復する際に問題が発生しました。一部のコンテンツは回復できない可能性があります。",
+        details: "修復の詳細",
+        fixed: "修正された問題",
+        warnings: "警告",
+        fileSize: "ファイルサイズ",
+        original: "オリジナル",
+        new: "新しい",
+        reduction: "削減",
+        download: "修復されたPDFをダウンロードする",
+        repairAnother: "別のPDFを修復する"
+      }
+    },
   }
 }

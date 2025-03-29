@@ -1356,5 +1356,161 @@ export default {
             metaDescription: "Görüntülerinizi korumak ve markalamak için metin veya görüntü filigranı ekleme",
             metaKeywords: "filigran ekleme, görüntü koruma, markalama, telif hakkı, görüntü güvenliği"
         }
+    },
+    repairPdf: {
+        title: "PDF Dosyalarını Onar",
+        description: "Bozuk PDF dosyalarını onar, içeriği kurtar ve belge yapısını optimize et",
+        howTo: {
+            title: "PDF'nizi Nasıl Onarırsınız",
+            step1: {
+                title: "PDF'nizi Yükleyin",
+                description: "Cihazınızdan onarmak istediğiniz PDF dosyasını seçin"
+            },
+            step2: {
+                title: "Onarım Modunu Seçin",
+                description: "Dosyanızın sorunlarına göre uygun onarım yöntemini seçin"
+            },
+            step3: {
+                title: "Onarılmış PDF'yi İndirin",
+                description: "Yapısı ve içeriği düzeltilmiş onarılmış PDF dosyanızı indirin"
+            }
+        },
+        why: {
+            title: "Neden PDF'leri Onarırız",
+            corruptedFiles: {
+                title: "Bozuk Dosyaları Onar",
+                description: "Düzgün açılmayan bozuk PDF dosyalarından içerik ve yapıyı kurtar"
+            },
+            missingContent: {
+                title: "Eksik İçeriği Kurtar",
+                description: "Kısmen bozuk belgelerden eksik resimleri, metinleri veya sayfaları geri yükle"
+            },
+            documentStructure: {
+                title: "Belge Yapısını Düzelt",
+                description: "Kırık iç yapıyı, sayfa referanslarını ve bağlantıları onar"
+            },
+            fileSize: {
+                title: "Dosya Boyutunu Optimize Et",
+                description: "Gereksiz verileri temizle ve kalite kaybı olmadan dosya boyutunu optimize et"
+            }
+        },
+        modes: {
+            title: "Kullanılabilir Onarım Modları",
+            standard: {
+                title: "Standart Onarım",
+                description: "Yaygın PDF sorunlarını düzeltir; kırık çapraz referanslar, bozuk nesneler ve akış hataları dahil. Hala açılabilen ancak hata gösteren hafif bozuk PDF'ler için en iyisidir."
+            },
+            advanced: {
+                title: "Gelişmiş Kurtarma",
+                description: "Ciddi yapısal sorunları olan严重bozuk PDF'ler için derin onarım. Hiç açılmayan dosyalardan mümkün olduğunca fazla içeriği kurtarır."
+            },
+            optimization: {
+                title: "Optimizasyon",
+                description: "İçerik kaybı olmadan PDF dosyasını yeniden yapılandırır ve optimize eder. Gereksiz verileri kaldırır, küçük sorunları düzeltir ve genel dosya yapısını iyileştirir."
+            }
+        },
+        faq: {
+            title: "Sıkça Sorulan Sorular",
+            whatCanRepair: {
+                question: "Hangi tür PDF sorunları düzeltilebilir?",
+                answer: "Onarım aracımız, bozuk dosya yapıları, kırık sayfa referansları, hasarlı içerik akışları, eksik çapraz referans tabloları ve geçersiz nesneler dahil olmak üzere geniş bir yelpazede sorunları düzeltebilir. Genellikle standart PDF görüntüleyicilerde açılmayan veya doğru görüntülenmeyen PDF'lerden içeriği kurtarabilir."
+            },
+            completelyDamaged: {
+                question: "Tamamen bozuk PDF'ler onarılabilir mi?",
+                answer: "Gelişmiş onarım modumuz ciddi şekilde bozuk PDF'lerden içeriği kurtarabilse de, dosya tamamen bozuksa %100 kurtarma her zaman mümkün değildir. Ancak, aşırı durumlarda bile genellikle metin ve temel öğeler gibi kısmi içeriği kurtarabiliriz."
+            },
+            contentQuality: {
+                question: "Onarım içerik kalitesini etkiler mi?",
+                answer: "Hayır, onarım sürecimiz kurtarılabilir içeriğin kalitesini korur. PDF'leri yalnızca çıkararak ve yeniden oluşturarak (biçimlendirmeyi kaybedebilen) bazı araçlardan farklı olarak, sadece bozuk kısımları düzeltirken orijinal yapıyı korumaya çalışırız."
+            },
+            passwordProtected: {
+                question: "Şifre korumalı PDF'ler onarılabilir mi?",
+                answer: "Evet, şifreniz varsa şifre korumalı PDF'leri onarabilirsiniz. Onarım işlemi sırasında şifreyi girmeniz gerekecek. Ancak, uygun yetkilendirme olmadan korumalı belgelerin şifrelemesini atlamaya veya kaldırmaya çalışmayız."
+            },
+            dataSecurity: {
+                question: "Onarım sürecinde PDF verilerim güvende mi?",
+                answer: "Evet, veri güvenliğini ciddiye alıyoruz. Dosyalarınız sunucularımızda güvenli bir şekilde işlenir, üçüncü taraflarla paylaşılmaz ve işlemden sonra otomatik olarak silinir. Tüm dosya aktarımları için şifreleme kullanırız ve onarım süreci tamamen güvenli bir ortamda gerçekleşir."
+            }
+        },
+        bestPractices: {
+            title: "PDF Kurtarma için En İyi Uygulamalar",
+            dos: "Yapılması Gerekenler",
+            donts: "Yapılmaması Gerekenler",
+            dosList: [
+                "Onarım denemelerinden önce orijinal dosyaların yedeklerini saklayın",
+                "Gelişmiş kurtarmayı kullanmadan önce standart onarım modunu deneyin",
+                "Mümkünse PDF'yi birden fazla görüntüleyici ile kontrol edin",
+                "Onarımdan önce hangi sayfaların veya öğelerin sorunlu olduğunu not edin",
+                "Büyük ama işlevsel PDF'ler için optimizasyon modunu kullanın"
+            ],
+            dontsList: [
+                "Bozuk PDF'leri tekrar tekrar kaydetmeyin, bu hasarı artırabilir",
+                "Doğru PDF oluşturmanın yerine onarımı kullanmayın",
+                "Ciddi şekilde bozuk dosyalardan %100 kurtarma beklemeyin",
+                "Onarılmış dosyaları eski PDF görüntüleyicilerde açmayın, bu onları tekrar bozabilir",
+                "Onarılmış dosyanın içerik doğruluğunu kontrol etmeyi atlamayın"
+            ]
+        },
+        relatedTools: {
+            title: "İlgili Araçlar",
+            compress: "PDF Sıkıştır",
+            unlock: "PDF Kilidini Aç",
+            protect: "PDF Koru",
+            edit: "PDF Düzenle",
+            viewAll: "Tüm Araçları Görüntüle"
+        },
+        form: {
+            title: "PDF Onarım Aracı",
+            description: "Bozuk PDF'leri onar, içeriği kurtar ve belge yapısını optimize et",
+            upload: "Onarım için PDF Yükle",
+            dragDrop: "PDF dosyanızı buraya sürükleyip bırakın veya göz atmak için tıklayın",
+            selectFile: "PDF Dosyası Seç",
+            maxFileSize: "Maksimum dosya boyutu: 100MB",
+            change: "Dosyayı Değiştir",
+            repairModes: "Onarım Modu",
+            standardRepair: "Standart Onarım",
+            standardDesc: "Kırık bağlantılar ve yapısal sorunlar gibi yaygın sorunları düzeltir",
+            advancedRecovery: "Gelişmiş Kurtarma",
+            advancedDesc: "Ciddi şekilde hasarlı veya bozuk PDF dosyaları için derin kurtarma",
+            optimization: "Optimizasyon",
+            optimizationDesc: "İçerik kaybı olmadan PDF yapısını temizler ve optimize eder",
+            advancedOptions: "Gelişmiş Seçenekler",
+            showOptions: "Seçenekleri Göster",
+            hideOptions: "Seçenekleri Gizle",
+            preserveFormFields: "Form Alanlarını Koru",
+            preserveFormFieldsDesc: "Mümkün olduğunda etkileşimli form alanlarını koru",
+            preserveAnnotations: "Açıklamaları Koru",
+            preserveAnnotationsDesc: "Yorumları, vurguları ve diğer açıklamaları koru",
+            preserveBookmarks: "Yer İmlerini Koru",
+            preserveBookmarksDesc: "Belge taslağını ve yer imlerini koru",
+            optimizeImages: "Resimleri Optimize Et",
+            optimizeImagesDesc: "Dosya boyutunu küçültmek için resimleri yeniden sıkıştır",
+            password: "PDF Şifresi",
+            passwordDesc: "Bu PDF şifre korumalıdır. Onarmak için şifreyi girin.",
+            repair: "PDF'yi Onar",
+            repairing: "PDF onarılıyor...",
+            security: "Dosyalarınız güvenli bir şekilde işlenir. Tüm yüklemeler işlemden sonra otomatik olarak silinir.",
+            analyzing: "PDF yapısını analiz ediyor",
+            rebuilding: "Belge yapısını yeniden oluşturuyor",
+            recovering: "İçeriği kurtarıyor",
+            fixing: "Çapraz referansları düzeltiyor",
+            optimizing: "Dosyayı optimize ediyor",
+            finishing: "Tamamlıyor"
+        },
+        results: {
+            success: "PDF Başarıyla Onarıldı",
+            successMessage: "PDF'niz onarıldı ve indirmeye hazır.",
+            issues: "Onarım Sorunları Tespit Edildi",
+            issuesMessage: "PDF'nizi onarırken sorunlarla karşılaştık. Bazı içerikler kurtarılamayabilir.",
+            details: "Onarım Detayları",
+            fixed: "Düzeltlien Sorunlar",
+            warnings: "Uyarılar",
+            fileSize: "Dosya Boyutu",
+            original: "Orijinal",
+            new: "Yeni",
+            reduction: "azaltma",
+            download: "Onarılmış PDF'yi İndir",
+            repairAnother: "Başka Bir PDF Onar"
+        }
     }
 }

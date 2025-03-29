@@ -24,6 +24,8 @@ const EXCLUDED_ROUTES = [
   '/register', // Exclude register route from middleware
   '/forgot-password', // Exclude forgot password route
   '/reset-password',  // Exclude reset password route
+  '/en/forgot-password', // Ensure language-specific routes work
+  '/en/reset-password',  // Ensure language-specific routes work
 
   // Public file download/status routes
   '/api/convert/status',

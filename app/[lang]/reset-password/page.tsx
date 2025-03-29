@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import { SiteLogo } from "@/components/site-logo";
 import Link from "next/link";
 import { authOptions } from "@/lib/auth";
+import { LanguageLink } from "@/components/language-link";
 import { EnhancedResetPasswordForm } from "@/components/auth/reset-password-form";
 
 export const metadata: Metadata = {
@@ -22,10 +23,18 @@ export default async function ResetPasswordPage() {
 
   const headersList = headers();
   const fullUrl = (await headersList).get("x-url") || "";
-  const searchParams = new URL('localhost:3001').searchParams;
+  
+  console.log('Reset password page - Full URL:', fullUrl);
+  
+  // Extract token from URL using safer string manipulation
+  const urlParts = fullUrl.split("?");
+  console.log('URL parts:', urlParts);
+  
+  const searchParams = new URLSearchParams(urlParts.length > 1 ? urlParts[1] : "");
   const tokenParam = searchParams.get("token");
+  console.log('Extracted token:', tokenParam);
+  
   const token = tokenParam || undefined;
-
   return (
     <div className="min-h-screen flex flex-col justify-center items-center sm:flex-row">
       {/* Left side - Branding and info (for medium and larger screens) */}
@@ -47,9 +56,9 @@ export default async function ResetPasswordPage() {
           
           <p className="text-center text-sm text-muted-foreground">
             Remember your password?{" "}
-            <Link href="/login" className="text-primary font-medium hover:underline">
+            <LanguageLink href="/login" className="text-primary font-medium hover:underline">
               Back to login
-            </Link>
+            </LanguageLink>
           </p>
         </div>
         
