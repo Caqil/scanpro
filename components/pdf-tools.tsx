@@ -16,6 +16,7 @@ import {
   LockIcon,
   FileCheck2,
   FileBadge2Icon,
+  ReplaceAllIcon,
 } from "lucide-react";
 
 export function PdfTools() {
@@ -150,6 +151,15 @@ export function PdfTools() {
           icon: <ArrowDownIcon className="h-6 w-6 text-green-500" />,
           iconBg: "bg-green-100 dark:bg-green-900/30",
           href: "/compress"
+        },
+         {
+          id: "repair",
+          name: t("pdfTools.tools.repairPdf.name") || "Repair PDF",
+          description: t("pdfTools.tools.repairPdf.description") || "Fix corrupted PDF files and recover content",
+          href: "/repair",
+          icon: <ReplaceAllIcon className="h-8 w-8" />,
+          iconBg: "bg-blue-100 dark:bg-blue-900/30",
+          isNew: true
         },
         {
           id: "compress-file",

@@ -20,9 +20,7 @@ export default async function handler(req, res) {
             { url: '/merge', changefreq: 'monthly', priority: 0.8 },
             { url: '/split', changefreq: 'monthly', priority: 0.8 },
             { url: '/compress', changefreq: 'monthly', priority: 0.8 },
-            { url: '/rotate', changefreq: 'monthly', priority: 0.7 },
             { url: '/watermark', changefreq: 'monthly', priority: 0.7 },
-            { url: '/edit', changefreq: 'monthly', priority: 0.8 },
             { url: '/ocr', changefreq: 'monthly', priority: 0.8 },
             // Conversion tools - PDF to other formats
             { url: '/convert/pdf-to-docx', changefreq: 'monthly', priority: 0.8 },
