@@ -139,7 +139,22 @@ const keywords = extractKeywords(`${title} ${description}`, lang);
       description: t("compressPdf.description"),
       url: `/${lang}/compress`,
       siteName: "ScanPro",
-      locale: lang === "id" ? "id_ID" : lang === "es" ? "es_ES" : "en_US",
+      locale: {
+        'en': 'en_US',
+        'id': 'id_ID',
+        'es': 'es_ES',
+        'fr': 'fr_FR',
+        'zh': 'zh_CN',
+        'ar': 'ar_SA',
+        'hi': 'hi_IN',
+        'ru': 'ru_RU',
+        'pt': 'pt_BR',
+        'de': 'de_DE',
+        'ja': 'ja_JP',
+        'ko': 'ko_KR',
+        'it': 'it_IT',
+        'tr': 'tr_TR'
+    }[lang] || 'en_US',
     },
     alternates: {
       canonical: `/${lang}/compress`,

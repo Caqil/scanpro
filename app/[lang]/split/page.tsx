@@ -63,20 +63,35 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       .slice(0, 5);
   };
   // Get translated title and description
-  const title = t("splitPdf.title");
-  const description = t("splitPdf.description");
+  const title = t('splitPdf.title');
+  const description = t('splitPdf.description');
   // Combine title and description for keyword extraction
   const keywords = extractKeywords(`${title} ${description}`, lang);
   return {
-    title: title,
-    description:description,
-    keywords:keywords,
+    title: t('splitPdf.title'),
+    description:  t('splitPdf.description'),
+    keywords: keywords,
     openGraph: {
       title:title,
       description: description,
       url: `/${lang}/split`,
       siteName: "ScanPro",
-      locale: lang === "id" ? "id_ID" : lang === "es" ? "es_ES" : "en_US",
+      locale: {
+        'en': 'en_US',
+        'id': 'id_ID',
+        'es': 'es_ES',
+        'fr': 'fr_FR',
+        'zh': 'zh_CN',
+        'ar': 'ar_SA',
+        'hi': 'hi_IN',
+        'ru': 'ru_RU',
+        'pt': 'pt_BR',
+        'de': 'de_DE',
+        'ja': 'ja_JP',
+        'ko': 'ko_KR',
+        'it': 'it_IT',
+        'tr': 'tr_TR'
+    }[lang] || 'en_US',
     },
     alternates: {
       canonical: `/${lang}/split`,
