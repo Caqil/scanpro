@@ -1512,5 +1512,60 @@ export default {
       download: "Baixar PDF Reparado",
       repairAnother: "Reparar Outro PDF"
     }
+  },
+  faq: {
+    categories: {
+      general: "Geral",
+      conversion: "Conversão",
+      security: "Segurança",
+      account: "Conta",
+      api: "API"
+    },
+    general: {
+      question1: "O que é o ScanPro?",
+      answer1: "O ScanPro é uma plataforma online abrangente para gerenciamento e conversão de PDFs. Nossas ferramentas ajudam você a converter, editar, mesclar, dividir, compactar e proteger seus documentos PDF por meio de uma interface web intuitiva ou API.",
+      question2: "Preciso criar uma conta para usar o ScanPro?",
+      answer2: "Não, você pode usar nossas ferramentas básicas de PDF sem se registrar. No entanto, criar uma conta gratuita oferece benefícios como histórico salvo, limites maiores de tamanho de arquivo e acesso a recursos adicionais.",
+      question3: "Meus dados estão seguros no ScanPro?",
+      answer3: "Sim, todos os arquivos são processados com segurança em nossos servidores com criptografia. Não compartilhamos seus arquivos com terceiros, e eles são automaticamente excluídos de nossos servidores após o processamento (dentro de 24 horas). Para mais detalhes, consulte nossa Política de Privacidade.",
+      question4: "Quais dispositivos e navegadores o ScanPro suporta?",
+      answer4: "O ScanPro funciona em todos os navegadores modernos, incluindo Chrome, Firefox, Safari e Edge. Nossa plataforma é totalmente responsiva e funciona em desktops, tablets e dispositivos móveis."
+    },
+    conversion: {
+      question1: "Quais tipos de arquivos posso converter de e para?",
+      answer1: "O ScanPro suporta a conversão de PDFs para vários formatos, incluindo Word (DOCX), Excel (XLSX), PowerPoint (PPTX), imagens (JPG, PNG), HTML e texto simples. Você também pode converter esses formatos de volta para PDF.",
+      question2: "Quão precisas são suas conversões de PDF?",
+      answer2: "Nosso mecanismo de conversão usa algoritmos avançados para manter a formatação, incluindo fontes, imagens, tabelas e layout. No entanto, documentos muito complexos podem apresentar pequenas diferenças de formatação. Para melhores resultados, recomendamos usar nossas ferramentas 'PDF para Word' ou 'PDF para Excel' para documentos com formatação complexa.",
+      question3: "Existe um limite de tamanho de arquivo para conversões?",
+      answer3: "Usuários gratuitos podem converter arquivos de até 10 MB. Assinantes Básicos até 50 MB, Pro até 100 MB, e usuários Enterprise até 500 MB. Se precisar processar arquivos maiores, entre em contato conosco para soluções personalizadas.",
+      question4: "Por que minha conversão de PDF falhou?",
+      answer4: "As conversões podem falhar se o arquivo estiver corrompido, protegido por senha ou contiver elementos complexos que nosso sistema não consegue processar. Tente usar nossa ferramenta 'Reparar PDF' primeiro e repita a conversão. Se o problema persistir, experimente o modo de conversão 'Avançado' ou contate o suporte."
+    },
+    security: {
+      question1: "Como protejo meu PDF com uma senha?",
+      answer1: "Use nossa ferramenta 'Proteger PDF'. Faça upload do seu PDF, defina uma senha, escolha restrições de permissão (se desejar) e clique em 'Proteger PDF'. Você pode controlar se os usuários podem imprimir, editar ou copiar o conteúdo do seu PDF.",
+      question2: "Posso remover uma senha do meu PDF?",
+      answer2: "Sim, use nossa ferramenta 'Desbloquear PDF'. Você precisará fornecer a senha atual para remover a proteção. Observe que só ajudamos a remover a proteção de senha de documentos que você possui ou tem autorização para modificar.",
+      question3: "Qual nível de criptografia vocês usam para proteção de PDF?",
+      answer3: "Usamos criptografia AES de 256 bits, padrão da indústria, para proteção de PDF, oferecendo forte segurança para seus documentos. Também suportamos criptografia de 128 bits se você precisar de compatibilidade com leitores de PDF mais antigos."
+    },
+    account: {
+      question1: "Como faço para atualizar minha assinatura?",
+      answer1: "Faça login na sua conta, vá para o Painel e selecione a aba 'Assinatura'. Escolha o plano que atenda às suas necessidades e siga as instruções de pagamento. Seus novos recursos serão ativados imediatamente após o pagamento.",
+      question2: "Posso cancelar minha assinatura?",
+      answer2: "Sim, você pode cancelar sua assinatura a qualquer momento no Painel, na aba 'Assinatura'. Você continuará tendo acesso aos recursos premium até o final do período de faturamento atual.",
+      question3: "Como redefino minha senha?",
+      answer3: "Na página de login, clique em 'Esqueceu a senha?' e insira seu endereço de e-mail. Enviaremos um link de redefinição de senha válido por 1 hora. Se não receber o e-mail, verifique sua pasta de spam ou contate o suporte."
+    },
+    api: {
+      question1: "Como consigo uma chave API?",
+      answer1: "Registre-se para uma conta e vá para Painel > Chaves API para criar sua primeira chave API. Contas gratuitas recebem 1 chave, assinantes Básicos 3, Pro 10, e usuários Enterprise mais de 50 chaves.",
+      question2: "Quais são os limites de taxa da API?",
+      answer2: "Os limites de taxa dependem do seu nível de assinatura: Gratuito (10 solicitações/hora), Básico (100 solicitações/hora), Pro (1.000 solicitações/hora), Enterprise (5.000+ solicitações/hora). Limites mensais de operações também se aplicam a cada nível.",
+      question3: "Como integro a API ao meu aplicativo?",
+      answer3: "Nossa API usa endpoints REST padrão com respostas JSON. Você pode encontrar documentação abrangente, exemplos de código e SDKs na nossa seção de Desenvolvedores. Oferecemos exemplos para várias linguagens de programação, incluindo JavaScript, Python, PHP e Java."
+    },
+    title: "Perguntas Frequentes"
   }
+
 }

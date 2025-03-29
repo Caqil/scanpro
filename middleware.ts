@@ -26,6 +26,32 @@ const EXCLUDED_ROUTES = [
   '/reset-password',  // Exclude reset password route
   '/en/forgot-password', // Ensure language-specific routes work
   '/en/reset-password',  // Ensure language-specific routes work
+  '/id/forgot-password', // Support other languages
+  '/id/reset-password',
+  '/es/forgot-password',
+  '/es/reset-password',
+  '/fr/forgot-password',
+  '/fr/reset-password',
+  '/zh/forgot-password',
+  '/zh/reset-password',
+  '/ar/forgot-password', 
+  '/ar/reset-password',
+  '/hi/forgot-password',
+  '/hi/reset-password',
+  '/ru/forgot-password',
+  '/ru/reset-password',
+  '/pt/forgot-password',
+  '/pt/reset-password',
+  '/de/forgot-password',
+  '/de/reset-password',
+  '/ja/forgot-password',
+  '/ja/reset-password',
+  '/ko/forgot-password',
+  '/ko/reset-password',
+  '/it/forgot-password',
+  '/it/reset-password',
+  '/tr/forgot-password',
+  '/tr/reset-password',
 
   // Public file download/status routes
   '/api/convert/status',

@@ -1513,5 +1513,59 @@ export default {
       download: "Scarica PDF riparato",
       repairAnother: "Ripara un altro PDF"
     }
+  },
+  faq: {
+    categories: {
+      general: "Generale",
+      conversion: "Conversione",
+      security: "Sicurezza",
+      account: "Account",
+      api: "API"
+    },
+    general: {
+      question1: "Cos'è ScanPro?",
+      answer1: "ScanPro è una piattaforma online completa per la gestione e la conversione di PDF. I nostri strumenti ti aiutano a convertire, modificare, unire, dividere, comprimere e proteggere i tuoi documenti PDF attraverso un'interfaccia web intuitiva o un'API.",
+      question2: "Devo creare un account per usare ScanPro?",
+      answer2: "No, puoi utilizzare i nostri strumenti PDF di base senza registrarti. Tuttavia, creare un account gratuito ti offre vantaggi come la cronologia salvata, limiti di dimensione dei file più alti e accesso a funzionalità aggiuntive.",
+      question3: "I miei dati sono al sicuro su ScanPro?",
+      answer3: "Sì, tutti i file vengono elaborati in modo sicuro sui nostri server con crittografia. Non condividiamo i tuoi file con terze parti e i file vengono automaticamente eliminati dai nostri server dopo l'elaborazione (entro 24 ore). Per maggiori dettagli, consulta la nostra Politica sulla Privacy.",
+      question4: "Quali dispositivi e browser supporta ScanPro?",
+      answer4: "ScanPro funziona su tutti i browser moderni, inclusi Chrome, Firefox, Safari ed Edge. La nostra piattaforma è completamente responsive e funziona su desktop, tablet e dispositivi mobili."
+    },
+    conversion: {
+      question1: "Quali tipi di file posso convertire e da quali?",
+      answer1: "ScanPro supporta la conversione di PDF in molti formati, inclusi Word (DOCX), Excel (XLSX), PowerPoint (PPTX), immagini (JPG, PNG), HTML e testo semplice. Puoi anche convertire questi formati di nuovo in PDF.",
+      question2: "Quanto sono precise le vostre conversioni PDF?",
+      answer2: "Il nostro motore di conversione utilizza algoritmi avanzati per mantenere la formattazione, inclusi font, immagini, tabelle e layout. Tuttavia, documenti molto complessi potrebbero presentare lievi differenze di formattazione. Per i migliori risultati, consigliamo di usare i nostri strumenti 'PDF a Word' o 'PDF a Excel' per documenti con formattazione complessa.",
+      question3: "C'è un limite di dimensione per i file da convertire?",
+      answer3: "Gli utenti gratuiti possono convertire file fino a 10 MB. Gli abbonati Basic fino a 50 MB, i Pro fino a 100 MB e gli utenti Enterprise fino a 500 MB. Se hai bisogno di elaborare file più grandi, contattaci per soluzioni personalizzate.",
+      question4: "Perché la mia conversione PDF è fallita?",
+      answer4: "Le conversioni possono fallire se il file è corrotto, protetto da password o contiene elementi complessi che il nostro sistema non può elaborare. Prova prima a usare il nostro strumento 'Ripara PDF' e ripeti la conversione. Se il problema persiste, prova la modalità di conversione 'Avanzata' o contatta il supporto."
+    },
+    security: {
+      question1: "Come posso proteggere il mio PDF con una password?",
+      answer1: "Usa il nostro strumento 'Proteggi PDF'. Carica il tuo PDF, imposta una password, scegli le restrizioni di permesso (se desiderato) e clicca su 'Proteggi PDF'. Puoi controllare se gli utenti possono stampare, modificare o copiare il contenuto del tuo PDF.",
+      question2: "Posso rimuovere una password dal mio PDF?",
+      answer2: "Sì, usa il nostro strumento 'Sblocca PDF'. Dovrai fornire la password attuale per rimuovere la protezione. Nota che aiutiamo a rimuovere la protezione solo dai documenti che possiedi o che sei autorizzato a modificare.",
+      question3: "Che livello di crittografia usate per la protezione dei PDF?",
+      answer3: "Utilizziamo la crittografia AES a 256 bit, standard del settore, per la protezione dei PDF, offrendo una sicurezza robusta per i tuoi documenti. Supportiamo anche la crittografia a 128 bit se hai bisogno di compatibilità con lettori PDF più vecchi."
+    },
+    account: {
+      question1: "Come posso aggiornare il mio abbonamento?",
+      answer1: "Accedi al tuo account, vai al Pannello di controllo e seleziona la scheda 'Abbonamento'. Scegli il piano che soddisfa le tue esigenze e segui le istruzioni di pagamento. Le nuove funzionalità verranno attivate immediatamente dopo il pagamento.",
+      question2: "Posso cancellare il mio abbonamento?",
+      answer2: "Sì, puoi cancellare il tuo abbonamento in qualsiasi momento dal Pannello di controllo nella scheda 'Abbonamento'. Continuerai ad avere accesso alle funzionalità premium fino alla fine del periodo di fatturazione corrente.",
+      question3: "Come posso reimpostare la mia password?",
+      answer3: "Nella pagina di login, clicca su 'Password dimenticata?' e inserisci il tuo indirizzo email. Ti invieremo un link per reimpostare la password, valido per 1 ora. Se non ricevi l'email, controlla la cartella spam o contatta il supporto."
+    },
+    api: {
+      question1: "Come ottengo una chiave API?",
+      answer1: "Registrati per un account, poi vai su Pannello di controllo > Chiavi API per creare la tua prima chiave API. Gli account gratuiti ottengono 1 chiave, gli abbonati Basic 3, i Pro 10 e gli utenti Enterprise più di 50 chiavi.",
+      question2: "Quali sono i limiti di velocità dell'API?",
+      answer2: "I limiti di velocità dipendono dal tuo livello di abbonamento: Gratuito (10 richieste/ora), Basic (100 richieste/ora), Pro (1.000 richieste/ora), Enterprise (5.000+ richieste/ora). Si applicano anche limiti mensili di operazioni per ogni livello.",
+      question3: "Come integro l'API nella mia applicazione?",
+      answer3: "La nostra API utilizza endpoint REST standard con risposte JSON. Puoi trovare documentazione completa, esempi di codice e SDK nella nostra sezione per sviluppatori. Forniamo esempi per vari linguaggi di programmazione, inclusi JavaScript, Python, PHP e Java."
+    },
+    title: "Domande Frequenti"
   }
 };

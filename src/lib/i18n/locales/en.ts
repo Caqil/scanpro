@@ -1395,6 +1395,61 @@ export default {
       download: "Download Repaired PDF",
       repairAnother: "Repair Another PDF"
     }
+  },
+  faq: {
+    categories: {
+      general: "General",
+      conversion: "Conversion",
+      security: "Security",
+      account: "Account",
+      api: "Api",
+    },
+    general: {
+      question1: "What is ScanPro?",
+      answer1: "ScanPro is a comprehensive online platform for PDF management and conversion. Our tools help you convert, edit, merge, split, compress, and secure your PDF documents through an intuitive web interface or API.",
+      question2: "Do I need to create an account to use ScanPro?",
+      answer2: "No, you can use our basic PDF tools without registering. However, creating a free account gives you benefits like saved history, higher file size limits, and access to additional features.",
+      question3: "Is my data secure on ScanPro?",
+      answer3: "Yes, all files are processed securely on our servers with encryption. We don't share your files with third parties, and files are automatically deleted from our servers after processing (within 24 hours). For more details, please see our Privacy Policy.",
+      question4: "What devices and browsers does ScanPro support?",
+      answer4: "ScanPro works on all modern browsers including Chrome, Firefox, Safari, and Edge. Our platform is fully responsive and works on desktop, tablet, and mobile devices."
+    },
+    conversion: {
+      question1: "What file types can I convert to and from?",
+      answer1: "ScanPro supports converting PDFs to many formats including Word (DOCX), Excel (XLSX), PowerPoint (PPTX), images (JPG, PNG), HTML, and plain text. You can also convert these formats back to PDF.",
+      question2: "How accurate are your PDF conversions?",
+      answer2: "Our conversion engine uses advanced algorithms to maintain formatting, including fonts, images, tables, and layout. However, very complex documents may have minor formatting differences. For best results, we recommend using our 'PDF to Word' or 'PDF to Excel' tools for documents with complex formatting.",
+      question3: "Is there a file size limit for conversions?",
+      answer3: "Free users can convert files up to 10MB. Basic subscribers can convert files up to 50MB, Pro subscribers up to 100MB, and Enterprise users up to 500MB. If you need to process larger files, please contact us for custom solutions.",
+      question4: "Why did my PDF conversion fail?",
+      answer4: "Conversions may fail if the file is corrupted, password-protected, or contains complex elements our system can't process. Try using our 'Repair PDF' tool first, then retry the conversion. If you're still having issues, try our 'Advanced' conversion mode or contact support."
+    },
+    security: {
+      question1: "How do I password protect my PDF?",
+      answer1: "Use our 'Protect PDF' tool. Upload your PDF, set a password, choose permission restrictions (if desired), and click 'Protect PDF'. You can control whether users can print, edit, or copy content from your PDF.",
+      question2: "Can I remove a password from my PDF?",
+      answer2: "Yes, use our 'Unlock PDF' tool. You'll need to provide the current password to remove protection. Note that we only help remove password protection from documents you own or have authorization to modify.",
+      question3: "What encryption level do you use for PDF protection?",
+      answer3: "We use industry-standard 256-bit AES encryption for PDF protection, which offers strong security for your documents. We also support 128-bit encryption if you need compatibility with older PDF readers."
+    },
+    account: {
+      question1: "How do I upgrade my subscription?",
+      answer1: "Log in to your account, go to Dashboard, and select the 'Subscription' tab. Choose the plan that meets your needs and follow the payment instructions. Your new features will be activated immediately after payment.",
+      question2: "Can I cancel my subscription?",
+      answer2: "Yes, you can cancel your subscription at any time from your Dashboard under the 'Subscription' tab. You'll continue to have access to premium features until the end of your current billing period.",
+      question3: "How do I reset my password?",
+      answer3: "On the login page, click 'Forgot password?' and enter your email address. We'll send you a password reset link that will be valid for 1 hour. If you don't receive the email, check your spam folder or contact support."
+    },
+    api: {
+      question1: "How do I get an API key?",
+      answer1: "Register for an account, then go to Dashboard > API Keys to create your first API key. Free accounts get 1 API key, Basic subscribers get 3, Pro subscribers get 10, and Enterprise users get 50+ keys.",
+      question2: "What are the API rate limits?",
+      answer2: "Rate limits depend on your subscription tier: Free (10 requests/hour), Basic (100 requests/hour), Pro (1,000 requests/hour), Enterprise (5,000+ requests/hour). Monthly operation limits also apply to each tier.",
+      question3: "How do I integrate the API with my application?",
+      answer3: "Our API uses standard REST endpoints with JSON responses. You can find comprehensive documentation, code samples, and SDKs in our Developer section. We provide examples for various programming languages including JavaScript, Python, PHP, and Java."
+    },
+    title: "Frequently Asked Questions"
   }
+
 }
 

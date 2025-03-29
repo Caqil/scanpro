@@ -1513,5 +1513,59 @@ export default {
       download: "Unduh PDF yang Diperbaiki",
       repairAnother: "Perbaiki PDF Lain"
     }
+  },
+  faq: {
+    categories: {
+      general: "Umum",
+      conversion: "Konversi",
+      security: "Keamanan",
+      account: "Akun",
+      api: "API"
+    },
+    general: {
+      question1: "Apa itu ScanPro?",
+      answer1: "ScanPro adalah platform online komprehensif untuk manajemen dan konversi PDF. Alat kami membantu Anda mengonversi, mengedit, menggabungkan, memisahkan, mengompresi, dan mengamankan dokumen PDF Anda melalui antarmuka web yang intuitif atau API.",
+      question2: "Apakah saya perlu membuat akun untuk menggunakan ScanPro?",
+      answer2: "Tidak, Anda dapat menggunakan alat PDF dasar kami tanpa mendaftar. Namun, membuat akun gratis memberi Anda manfaat seperti riwayat tersimpan, batas ukuran file yang lebih tinggi, dan akses ke fitur tambahan.",
+      question3: "Apakah data saya aman di ScanPro?",
+      answer3: "Ya, semua file diproses dengan aman di server kami dengan enkripsi. Kami tidak membagikan file Anda dengan pihak ketiga, dan file akan otomatis dihapus dari server kami setelah diproses (dalam waktu 24 jam). Untuk detail lebih lanjut, silakan lihat Kebijakan Privasi kami.",
+      question4: "Perangkat dan browser apa yang didukung ScanPro?",
+      answer4: "ScanPro bekerja di semua browser modern termasuk Chrome, Firefox, Safari, dan Edge. Platform kami sepenuhnya responsif dan berfungsi di desktop, tablet, dan perangkat seluler."
+    },
+    conversion: {
+      question1: "Jenis file apa yang bisa saya konversi ke dan dari?",
+      answer1: "ScanPro mendukung konversi PDF ke berbagai format termasuk Word (DOCX), Excel (XLSX), PowerPoint (PPTX), gambar (JPG, PNG), HTML, dan teks biasa. Anda juga bisa mengonversi format ini kembali ke PDF.",
+      question2: "Seberapa akurat konversi PDF Anda?",
+      answer2: "Mesin konversi kami menggunakan algoritma canggih untuk mempertahankan format, termasuk font, gambar, tabel, dan tata letak. Namun, dokumen yang sangat kompleks mungkin memiliki perbedaan format kecil. Untuk hasil terbaik, kami sarankan menggunakan alat 'PDF ke Word' atau 'PDF ke Excel' untuk dokumen dengan format rumit.",
+      question3: "Apakah ada batas ukuran file untuk konversi?",
+      answer3: "Pengguna gratis dapat mengonversi file hingga 10 MB. Pelanggan Basic hingga 50 MB, Pro hingga 100 MB, dan pengguna Enterprise hingga 500 MB. Jika Anda perlu memproses file yang lebih besar, silakan hubungi kami untuk solusi khusus.",
+      question4: "Mengapa konversi PDF saya gagal?",
+      answer4: "Konversi bisa gagal jika file rusak, dilindungi kata sandi, atau mengandung elemen kompleks yang tidak dapat diproses oleh sistem kami. Coba gunakan alat 'Perbaiki PDF' terlebih dahulu, lalu ulangi konversi. Jika masih bermasalah, coba mode konversi 'Lanjutan' atau hubungi dukungan."
+    },
+    security: {
+      question1: "Bagaimana cara melindungi PDF saya dengan kata sandi?",
+      answer1: "Gunakan alat 'Lindungi PDF' kami. Unggah PDF Anda, atur kata sandi, pilih pembatasan izin (jika diinginkan), dan klik 'Lindungi PDF'. Anda dapat mengontrol apakah pengguna bisa mencetak, mengedit, atau menyalin konten dari PDF Anda.",
+      question2: "Apakah saya bisa menghapus kata sandi dari PDF saya?",
+      answer2: "Ya, gunakan alat 'Buka Kunci PDF' kami. Anda perlu memberikan kata sandi saat ini untuk menghapus perlindungan. Perhatikan bahwa kami hanya membantu menghapus perlindungan kata sandi dari dokumen yang Anda miliki atau memiliki izin untuk mengubahnya.",
+      question3: "Tingkat enkripsi apa yang Anda gunakan untuk perlindungan PDF?",
+      answer3: "Kami menggunakan enkripsi AES 256-bit standar industri untuk perlindungan PDF, yang menawarkan keamanan kuat untuk dokumen Anda. Kami juga mendukung enkripsi 128-bit jika Anda memerlukan kompatibilitas dengan pembaca PDF lama."
+    },
+    account: {
+      question1: "Bagaimana cara meningkatkan langganan saya?",
+      answer1: "Masuk ke akun Anda, pergi ke Dashboard, dan pilih tab 'Langganan'. Pilih paket yang sesuai dengan kebutuhan Anda dan ikuti petunjuk pembayaran. Fitur baru Anda akan diaktifkan segera setelah pembayaran.",
+      question2: "Apakah saya bisa membatalkan langganan saya?",
+      answer2: "Ya, Anda bisa membatalkan langganan kapan saja dari Dashboard di tab 'Langganan'. Anda akan tetap memiliki akses ke fitur premium hingga akhir periode penagihan saat ini.",
+      question3: "Bagaimana cara mereset kata sandi saya?",
+      answer3: "Di halaman login, klik 'Lupa kata sandi?' dan masukkan alamat email Anda. Kami akan mengirimkan tautan reset kata sandi yang berlaku selama 1 jam. Jika Anda tidak menerima email, periksa folder spam atau hubungi dukungan."
+    },
+    api: {
+      question1: "Bagaimana cara mendapatkan kunci API?",
+      answer1: "Daftar untuk akun, lalu pergi ke Dashboard > Kunci API untuk membuat kunci API pertama Anda. Akun gratis mendapatkan 1 kunci, pelanggan Basic 3, Pro 10, dan pengguna Enterprise 50+ kunci.",
+      question2: "Apa batas tingkat API?",
+      answer2: "Batas tingkat tergantung pada tingkat langganan Anda: Gratis (10 permintaan/jam), Basic (100 permintaan/jam), Pro (1.000 permintaan/jam), Enterprise (5.000+ permintaan/jam). Batas operasi bulanan juga berlaku untuk setiap tingkat.",
+      question3: "Bagaimana cara mengintegrasikan API dengan aplikasi saya?",
+      answer3: "API kami menggunakan titik akhir REST standar dengan respons JSON. Anda dapat menemukan dokumentasi lengkap, contoh kode, dan SDK di bagian Pengembang kami. Kami menyediakan contoh untuk berbagai bahasa pemrograman termasuk JavaScript, Python, PHP, dan Java."
+    },
+    title: "Pertanyaan yang Sering Diajukan"
   }
 }

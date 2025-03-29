@@ -65,38 +65,60 @@ export function EnhancedResetPasswordForm({ token }: EnhancedResetPasswordFormPr
     if (passwordStrength <= 75) return { text: t('auth.passwordGood') || "Good", color: "bg-yellow-500" };
     return { text: t('auth.passwordStrong') || "Strong", color: "bg-green-500" };
   };
-  
   // Validate token
   useEffect(() => {
     const validateToken = async () => {
       if (!token) {
+        console.log('No token provided');
         setTokenValid(false);
         setTokenValidating(false);
         return;
       }
       
       try {
-        // Try the new endpoint first
-        let res = await fetch('/api/auth/validate-reset-token', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ token })
-        }).catch(() => null);
+        console.log('Validating token:', token);
         
-        // If that fails, try the backup endpoint
+        // First try using GET query param approach
+        let res = await fetch(`/api/auth/reset-password?token=${encodeURIComponent(token)}`)
+          .catch(error => {
+            console.log('GET validation failed:', error);
+            return null;
+          });
+            
+        // If that fails, try the POST endpoint
         if (!res || !res.ok) {
+          console.log('Falling back to POST validation');
+          res = await fetch('/api/auth/validate-reset-token', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ token })
+          }).catch(error => {
+            console.log('POST validation failed:', error);
+            return null;
+          });
+        }
+        
+        // Last resort
+        if (!res || !res.ok) {
+          console.log('All validation attempts failed, trying one more fallback');
           res = await fetch('/api/reset-password/validate', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({ token })
-          });
+          }).catch(() => null);
+        }
+        
+        if (!res || !res.ok) {
+          console.log('All validation methods failed');
+          throw new Error('Token validation failed');
         }
         
         const data = await res.json();
+        console.log('Validation response:', data);
         setTokenValid(data.valid);
       } catch (error) {
         console.error('Error validating token:', error);

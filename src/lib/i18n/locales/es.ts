@@ -1513,6 +1513,60 @@ export default {
       download: "Descargar PDF reparado",
       repairAnother: "Reparar otro PDF"
     }
+  },
+  faq: {
+    categories: {
+      general: "General",
+      conversion: "Conversión",
+      security: "Seguridad",
+      account: "Cuenta",
+      api: "API"
+    },
+    general: {
+      question1: "¿Qué es ScanPro?",
+      answer1: "ScanPro es una plataforma en línea integral para la gestión y conversión de PDFs. Nuestras herramientas te ayudan a convertir, editar, fusionar, dividir, comprimir y asegurar tus documentos PDF a través de una interfaz web intuitiva o API.",
+      question2: "¿Necesito crear una cuenta para usar ScanPro?",
+      answer2: "No, puedes usar nuestras herramientas básicas de PDF sin registrarte. Sin embargo, crear una cuenta gratuita te brinda beneficios como historial guardado, límites de tamaño de archivo más altos y acceso a funciones adicionales.",
+      question3: "¿Están mis datos seguros en ScanPro?",
+      answer3: "Sí, todos los archivos se procesan de forma segura en nuestros servidores con cifrado. No compartimos tus archivos con terceros, y los archivos se eliminan automáticamente de nuestros servidores después del procesamiento (dentro de las 24 horas). Para más detalles, consulta nuestra Política de Privacidad.",
+      question4: "¿Qué dispositivos y navegadores soporta ScanPro?",
+      answer4: "ScanPro funciona en todos los navegadores modernos, incluidos Chrome, Firefox, Safari y Edge. Nuestra plataforma es totalmente responsiva y funciona en computadoras de escritorio, tabletas y dispositivos móviles."
+    },
+    conversion: {
+      question1: "¿Qué tipos de archivos puedo convertir hacia y desde?",
+      answer1: "ScanPro permite convertir PDFs a muchos formatos, incluidos Word (DOCX), Excel (XLSX), PowerPoint (PPTX), imágenes (JPG, PNG), HTML y texto plano. También puedes convertir estos formatos de vuelta a PDF.",
+      question2: "¿Qué tan precisas son sus conversiones de PDF?",
+      answer2: "Nuestro motor de conversión usa algoritmos avanzados para mantener el formato, incluidos fuentes, imágenes, tablas y diseño. Sin embargo, documentos muy complejos pueden tener pequeñas diferencias de formato. Para mejores resultados, recomendamos usar nuestras herramientas 'PDF a Word' o 'PDF a Excel' para documentos con formato complejo.",
+      question3: "¿Hay un límite de tamaño de archivo para las conversiones?",
+      answer3: "Los usuarios gratuitos pueden convertir archivos de hasta 10 MB. Los suscriptores básicos hasta 50 MB, los Pro hasta 100 MB y los usuarios Enterprise hasta 500 MB. Si necesitas procesar archivos más grandes, contáctanos para soluciones personalizadas.",
+      question4: "¿Por qué falló mi conversión de PDF?",
+      answer4: "Las conversiones pueden fallar si el archivo está corrupto, protegido con contraseña o contiene elementos complejos que nuestro sistema no puede procesar. Intenta usar primero nuestra herramienta 'Reparar PDF' y vuelve a intentar la conversión. Si sigues teniendo problemas, prueba el modo de conversión 'Avanzado' o contacta al soporte."
+    },
+    security: {
+      question1: "¿Cómo protejo mi PDF con una contraseña?",
+      answer1: "Usa nuestra herramienta 'Proteger PDF'. Sube tu PDF, establece una contraseña, elige restricciones de permisos (si lo deseas) y haz clic en 'Proteger PDF'. Puedes controlar si los usuarios pueden imprimir, editar o copiar contenido de tu PDF.",
+      question2: "¿Puedo eliminar una contraseña de mi PDF?",
+      answer2: "Sí, usa nuestra herramienta 'Desbloquear PDF'. Deberás proporcionar la contraseña actual para eliminar la protección. Ten en cuenta que solo ayudamos a eliminar la protección de documentos que posees o tienes autorización para modificar.",
+      question3: "¿Qué nivel de cifrado usan para la protección de PDF?",
+      answer3: "Usamos cifrado AES de 256 bits, estándar de la industria, para la protección de PDF, lo que ofrece una seguridad sólida para tus documentos. También soportamos cifrado de 128 bits si necesitas compatibilidad con lectores de PDF más antiguos."
+    },
+    account: {
+      question1: "¿Cómo actualizo mi suscripción?",
+      answer1: "Inicia sesión en tu cuenta, ve al Panel de Control y selecciona la pestaña 'Suscripción'. Elige el plan que se adapte a tus necesidades y sigue las instrucciones de pago. Tus nuevas funciones se activarán inmediatamente después del pago.",
+      question2: "¿Puedo cancelar mi suscripción?",
+      answer2: "Sí, puedes cancelar tu suscripción en cualquier momento desde el Panel de Control en la pestaña 'Suscripción'. Seguirás teniendo acceso a las funciones premium hasta el final de tu período de facturación actual.",
+      question3: "¿Cómo restablezco mi contraseña?",
+      answer3: "En la página de inicio de sesión, haz clic en '¿Olvidaste tu contraseña?' e ingresa tu dirección de correo electrónico. Te enviaremos un enlace para restablecer la contraseña, válido por 1 hora. Si no recibes el correo, revisa tu carpeta de spam o contacta al soporte."
+    },
+    api: {
+      question1: "¿Cómo obtengo una clave API?",
+      answer1: "Regístrate para obtener una cuenta, luego ve a Panel de Control > Claves API para crear tu primera clave API. Las cuentas gratuitas obtienen 1 clave, los suscriptores básicos 3, los Pro 10 y los usuarios Enterprise más de 50 claves.",
+      question2: "¿Cuáles son los límites de tasa de la API?",
+      answer2: "Los límites de tasa dependen de tu nivel de suscripción: Gratuito (10 solicitudes/hora), Básico (100 solicitudes/hora), Pro (1,000 solicitudes/hora), Enterprise (5,000+ solicitudes/hora). También se aplican límites mensuales de operaciones por nivel.",
+      question3: "¿Cómo integro la API con mi aplicación?",
+      answer3: "Nuestra API usa puntos finales REST estándar con respuestas JSON. Puedes encontrar documentación completa, ejemplos de código y SDKs en nuestra sección de Desarrolladores. Ofrecemos ejemplos para varios lenguajes de programación, incluidos JavaScript, Python, PHP y Java."
+    },
+    title: "Preguntas frecuentes"
   }
 
 }

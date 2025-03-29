@@ -1512,5 +1512,59 @@ export default {
             download: "Télécharger le PDF réparé",
             repairAnother: "Réparer un autre PDF"
         }
+    },
+    faq: {
+        categories: {
+            general: "Général",
+            conversion: "Conversion",
+            security: "Sécurité",
+            account: "Compte",
+            api: "API"
+        },
+        general: {
+            question1: "Qu'est-ce que ScanPro ?",
+            answer1: "ScanPro est une plateforme en ligne complète pour la gestion et la conversion de PDF. Nos outils vous aident à convertir, modifier, fusionner, diviser, compresser et sécuriser vos documents PDF via une interface web intuitive ou une API.",
+            question2: "Dois-je créer un compte pour utiliser ScanPro ?",
+            answer2: "Non, vous pouvez utiliser nos outils PDF de base sans vous inscrire. Cependant, créer un compte gratuit vous offre des avantages tels que l'historique sauvegardé, des limites de taille de fichier plus élevées et l'accès à des fonctionnalités supplémentaires.",
+            question3: "Mes données sont-elles sécurisées sur ScanPro ?",
+            answer3: "Oui, tous les fichiers sont traités de manière sécurisée sur nos serveurs avec cryptage. Nous ne partageons pas vos fichiers avec des tiers, et ils sont automatiquement supprimés de nos serveurs après traitement (dans les 24 heures). Pour plus de détails, consultez notre Politique de Confidentialité.",
+            question4: "Quels appareils et navigateurs ScanPro prend-il en charge ?",
+            answer4: "ScanPro fonctionne sur tous les navigateurs modernes, y compris Chrome, Firefox, Safari et Edge. Notre plateforme est entièrement responsive et fonctionne sur les ordinateurs de bureau, les tablettes et les appareils mobiles."
+        },
+        conversion: {
+            question1: "Quels types de fichiers puis-je convertir vers et depuis ?",
+            answer1: "ScanPro permet de convertir des PDF vers de nombreux formats, y compris Word (DOCX), Excel (XLSX), PowerPoint (PPTX), images (JPG, PNG), HTML et texte brut. Vous pouvez également reconvertir ces formats en PDF.",
+            question2: "Quelle est la précision de vos conversions PDF ?",
+            answer2: "Notre moteur de conversion utilise des algorithmes avancés pour préserver la mise en forme, y compris les polices, images, tableaux et mise en page. Cependant, des documents très complexes peuvent présenter de légères différences de formatage. Pour de meilleurs résultats, nous recommandons nos outils 'PDF vers Word' ou 'PDF vers Excel' pour les documents à mise en forme complexe.",
+            question3: "Y a-t-il une limite de taille de fichier pour les conversions ?",
+            answer3: "Les utilisateurs gratuits peuvent convertir des fichiers jusqu'à 10 Mo. Les abonnés Basic jusqu'à 50 Mo, les Pro jusqu'à 100 Mo, et les utilisateurs Enterprise jusqu'à 500 Mo. Si vous devez traiter des fichiers plus volumineux, contactez-nous pour des solutions personnalisées.",
+            question4: "Pourquoi ma conversion PDF a-t-elle échoué ?",
+            answer4: "Les conversions peuvent échouer si le fichier est corrompu, protégé par mot de passe ou contient des éléments complexes que notre système ne peut pas traiter. Essayez d'abord notre outil 'Réparer PDF', puis relancez la conversion. Si le problème persiste, utilisez le mode de conversion 'Avancé' ou contactez le support."
+        },
+        security: {
+            question1: "Comment protéger mon PDF par un mot de passe ?",
+            answer1: "Utilisez notre outil 'Protéger PDF'. Téléchargez votre PDF, définissez un mot de passe, choisissez des restrictions de permissions (si souhaité), et cliquez sur 'Protéger PDF'. Vous pouvez contrôler si les utilisateurs peuvent imprimer, modifier ou copier le contenu de votre PDF.",
+            question2: "Puis-je supprimer un mot de passe de mon PDF ?",
+            answer2: "Oui, utilisez notre outil 'Déverrouiller PDF'. Vous devrez fournir le mot de passe actuel pour supprimer la protection. Notez que nous aidons uniquement à supprimer la protection des documents que vous possédez ou que vous êtes autorisé à modifier.",
+            question3: "Quel niveau de cryptage utilisez-vous pour la protection des PDF ?",
+            answer3: "Nous utilisons le cryptage AES 256 bits, standard de l'industrie, pour la protection des PDF, offrant une sécurité robuste pour vos documents. Nous prenons également en charge le cryptage 128 bits pour la compatibilité avec les anciens lecteurs PDF."
+        },
+        account: {
+            question1: "Comment puis-je mettre à niveau mon abonnement ?",
+            answer1: "Connectez-vous à votre compte, allez au Tableau de bord et sélectionnez l'onglet 'Abonnement'. Choisissez le plan qui répond à vos besoins et suivez les instructions de paiement. Vos nouvelles fonctionnalités seront activées immédiatement après le paiement.",
+            question2: "Puis-je annuler mon abonnement ?",
+            answer2: "Oui, vous pouvez annuler votre abonnement à tout moment depuis le Tableau de bord sous l'onglet 'Abonnement'. Vous continuerez à avoir accès aux fonctionnalités premium jusqu'à la fin de votre période de facturation en cours.",
+            question3: "Comment réinitialiser mon mot de passe ?",
+            answer3: "Sur la page de connexion, cliquez sur 'Mot de passe oublié ?' et entrez votre adresse e-mail. Nous vous enverrons un lien de réinitialisation du mot de passe valable 1 heure. Si vous ne recevez pas l'e-mail, vérifiez votre dossier spam ou contactez le support."
+        },
+        api: {
+            question1: "Comment obtenir une clé API ?",
+            answer1: "Inscrivez-vous pour un compte, puis allez à Tableau de bord > Clés API pour créer votre première clé API. Les comptes gratuits obtiennent 1 clé, les abonnés Basic 3, les Pro 10, et les utilisateurs Enterprise plus de 50 clés.",
+            question2: "Quelles sont les limites de taux de l'API ?",
+            answer2: "Les limites de taux dépendent de votre niveau d'abonnement : Gratuit (10 requêtes/heure), Basic (100 requêtes/heure), Pro (1 000 requêtes/heure), Enterprise (5 000+ requêtes/heure). Des limites mensuelles d'opérations s'appliquent également à chaque niveau.",
+            question3: "Comment intégrer l'API à mon application ?",
+            answer3: "Notre API utilise des points de terminaison REST standards avec des réponses JSON. Vous trouverez une documentation complète, des exemples de code et des SDK dans notre section Développeurs. Nous fournissons des exemples pour divers langages de programmation, y compris JavaScript, Python, PHP et Java."
+        },
+        title: "Foire aux questions"
     }
 }

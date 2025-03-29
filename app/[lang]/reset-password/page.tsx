@@ -26,15 +26,31 @@ export default async function ResetPasswordPage() {
   
   console.log('Reset password page - Full URL:', fullUrl);
   
-  // Extract token from URL using safer string manipulation
-  const urlParts = fullUrl.split("?");
-  console.log('URL parts:', urlParts);
+  // First try to get token from URL path segments (if format is /reset-password/<token>)
+  let token: string | undefined;
+  const pathSegments = fullUrl.split('/');
   
-  const searchParams = new URLSearchParams(urlParts.length > 1 ? urlParts[1] : "");
-  const tokenParam = searchParams.get("token");
-  console.log('Extracted token:', tokenParam);
+  // If the last segment doesn't contain "?", it might be the token
+  const lastSegment = pathSegments[pathSegments.length - 1];
+  if (lastSegment && !lastSegment.includes('?')) {
+    token = lastSegment;
+    console.log('Extracted token from path:', token);
+  }
   
-  const token = tokenParam || undefined;
+  // If not found in path, check query parameters
+  if (!token) {
+    // Extract token from URL using query parameters
+    const urlParts = fullUrl.split("?");
+    console.log('URL parts:', urlParts);
+    
+    const searchParams = new URLSearchParams(urlParts.length > 1 ? urlParts[1] : "");
+    const tokenParam = searchParams.get("token");
+    console.log('Extracted token from query:', tokenParam);
+    
+    token = tokenParam || undefined;
+  }
+  
+  console.log('Final token value:', token);
   return (
     <div className="min-h-screen flex flex-col justify-center items-center sm:flex-row">
       {/* Left side - Branding and info (for medium and larger screens) */}

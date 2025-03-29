@@ -1512,5 +1512,59 @@ export default {
             download: "Onarılmış PDF'yi İndir",
             repairAnother: "Başka Bir PDF Onar"
         }
+    },
+    faq: {
+        categories: {
+            general: "Genel",
+            conversion: "Dönüşüm",
+            security: "Güvenlik",
+            account: "Hesap",
+            api: "API"
+          },
+        general: {
+            question1: "ScanPro nedir?",
+            answer1: "ScanPro, PDF yönetimi ve dönüştürme için kapsamlı bir çevrimiçi platformdur. Araçlarımız, sezgisel bir web arayüzü veya API aracılığıyla PDF belgelerinizi dönüştürmenize, düzenlemenize, birleştirmenize, bölmenize, sıkıştırmanıza ve korumanıza yardımcı olur.",
+            question2: "ScanPro'yu kullanmak için hesap oluşturmam gerekiyor mu?",
+            answer2: "Hayır, temel PDF araçlarımızı kaydolmadan kullanabilirsiniz. Ancak, ücretsiz bir hesap oluşturmak size geçmişin kaydedilmesi, daha yüksek dosya boyutu limitleri ve ek özelliklere erişim gibi avantajlar sağlar.",
+            question3: "Verilerim ScanPro'da güvende mi?",
+            answer3: "Evet, tüm dosyalar şifreleme ile sunucularımızda güvenli bir şekilde işlenir. Dosyalarınızı üçüncü taraflarla paylaşmıyoruz ve işleme tamamlandıktan sonra (24 saat içinde) sunucularımızdan otomatik olarak siliniyor. Daha fazla ayrıntı için lütfen Gizlilik Politikamıza bakın.",
+            question4: "ScanPro hangi cihazları ve tarayıcıları destekler?",
+            answer4: "ScanPro, Chrome, Firefox, Safari ve Edge dahil tüm modern tarayıcılarda çalışır. Platformumuz tamamen duyarlıdır ve masaüstü, tablet ve mobil cihazlarda kullanılabilir."
+        },
+        conversion: {
+            question1: "Hangi dosya türlerini dönüştürebilirim ve hangilerinden dönüştürebilirim?",
+            answer1: "ScanPro, PDF'leri Word (DOCX), Excel (XLSX), PowerPoint (PPTX), görüntüler (JPG, PNG), HTML ve düz metin gibi birçok formata dönüştürmeyi destekler. Bu formatları tekrar PDF'ye de dönüştürebilirsiniz.",
+            question2: "PDF dönüşümleriniz ne kadar doğru?",
+            answer2: "Dönüşüm motorumuz, yazı tipleri, görüntüler, tablolar ve düzeni içeren biçimlendirmeyi korumak için gelişmiş algoritmalar kullanır. Ancak çok karmaşık belgelerde küçük biçimlendirme farklılıkları olabilir. En iyi sonuçlar için karmaşık biçimlendirmeye sahip belgeler için 'PDF'den Word'e' veya 'PDF'den Excel'e' araçlarımızı kullanmanızı öneririz.",
+            question3: "Dönüşümler için dosya boyutu sınırı var mı?",
+            answer3: "Ücretsiz kullanıcılar 10 MB'a kadar dosyaları dönüştürebilir. Temel abone olanlar 50 MB'a, Pro abone olanlar 100 MB'a, Kurumsal kullanıcılar ise 500 MB'a kadar dönüştürebilir. Daha büyük dosyaları işlemek istiyorsanız, özel çözümler için bizimle iletişime geçin.",
+            question4: "PDF dönüşümüm neden başarısız oldu?",
+            answer4: "Dönüşüm, dosya bozuksa, parola ile korunuyorsa veya sistemimizin işleyemediği karmaşık öğeler içeriyorsa başarısız olabilir. Önce 'PDF Onar' aracını kullanmayı deneyin ve dönüşümü tekrar yapın. Sorun devam ederse, 'Gelişmiş' dönüşüm modunu deneyin veya desteğe başvurun."
+        },
+        security: {
+            question1: "PDF'imi parolayla nasıl korurum?",
+            answer1: "'PDF Koru' aracımızı kullanın. PDF'nizi yükleyin, bir parola belirleyin, gerekirse izin kısıtlamaları seçin ve 'PDF Koru'ya tıklayın. Kullanıcıların PDF'nizden yazdırma, düzenleme veya içerik kopyalama yapıp yapamayacağını kontrol edebilirsiniz.",
+            question2: "PDF'imden parolayı kaldırabilir miyim?",
+            answer2: "Evet, 'PDF Kilidini Aç' aracımızı kullanın. Korumayı kaldırmak için mevcut parolayı girmeniz gerekecek. Yalnızca sahip olduğunuz veya değiştirmeye yetkiniz olan belgelerden parola korumasını kaldırmanıza yardımcı olduğumuzu unutmayın.",
+            question3: "PDF koruması için hangi şifreleme seviyesini kullanıyorsunuz?",
+            answer3: "PDF koruması için endüstri standardı 256-bit AES şifrelemeyi kullanıyoruz, bu da belgeleriniz için güçlü bir güvenlik sağlar. Eski PDF okuyucularla uyumluluk gerekiyorsa 128-bit şifrelemeyi de destekliyoruz."
+        },
+        account: {
+            question1: "Aboneliğimi nasıl yükseltirim?",
+            answer1: "Hesabınıza giriş yapın, Kontrol Paneli'ne gidin ve 'Abonelik' sekmesini seçin. İhtiyaçlarınıza uygun planı seçin ve ödeme talimatlarını takip edin. Ödeme sonrasında yeni özellikleriniz hemen etkinleşir.",
+            question2: "Aboneliğimi iptal edebilir miyim?",
+            answer2: "Evet, Kontrol Paneli'ndeki 'Abonelik' sekmesinden aboneliğinizi istediğiniz zaman iptal edebilirsiniz. Mevcut faturalandırma döneminizin sonuna kadar premium özelliklere erişmeye devam edersiniz.",
+            question3: "Parolamı nasıl sıfırlarım?",
+            answer3: "Giriş sayfasında 'Parolamı Unuttum?' seçeneğine tıklayın ve e-posta adresinizi girin. Size 1 saat geçerli bir parola sıfırlama bağlantısı göndereceğiz. E-postayı almazsanız, spam klasörünüzü kontrol edin veya destek ekibiyle iletişime geçin."
+        },
+        api: {
+            question1: "API anahtarını nasıl alırım?",
+            answer1: "Bir hesap kaydedin, ardından Kontrol Paneli > API Anahtarları'na gidin ve ilk API anahtarınızı oluşturun. Ücretsiz hesaplar 1 anahtar, Temel abone olanlar 3, Pro abone olanlar 10, Kurumsal kullanıcılar 50'den fazla anahtar alır.",
+            question2: "API hız limitleri nelerdir?",
+            answer2: "Hız limitleri abonelik seviyenize bağlıdır: Ücretsiz (10 istek/saat), Temel (100 istek/saat), Pro (1.000 istek/saat), Kurumsal (5.000+ istek/saat). Her seviye için aylık işlem limitleri de geçerlidir.",
+            question3: "API'yi uygulamama nasıl entegre ederim?",
+            answer3: "API'miz, JSON yanıtlarıyla standart REST uç noktalarını kullanır. Geliştirici bölümümüzde kapsamlı dokümantasyon, kod örnekleri ve SDK'lar bulabilirsiniz. JavaScript, Python, PHP ve Java gibi çeşitli programlama dilleri için örnekler sunuyoruz."
+        },
+        title: "Sıkça Sorulan Sorular"
     }
 }

@@ -1512,5 +1512,59 @@ export default {
       download: "Reparierte PDF herunterladen",
       repairAnother: "Eine weitere PDF reparieren"
     }
+  },
+  faq: {
+    categories: {
+      general: "Allgemein",
+      conversion: "Konvertierung",
+      security: "Sicherheit",
+      account: "Konto",
+      api: "API"
+    },
+    general: {
+      question1: "Was ist ScanPro?",
+      answer1: "ScanPro ist eine umfassende Online-Plattform für die Verwaltung und Konvertierung von PDFs. Unsere Tools helfen Ihnen, Ihre PDF-Dokumente zu konvertieren, zu bearbeiten, zusammenzuführen, zu teilen, zu komprimieren und zu sichern – über eine intuitive Weboberfläche oder API.",
+      question2: "Muss ich ein Konto erstellen, um ScanPro zu nutzen?",
+      answer2: "Nein, Sie können unsere grundlegenden PDF-Tools ohne Registrierung nutzen. Ein kostenloses Konto bietet jedoch Vorteile wie gespeicherten Verlauf, höhere Dateigrößenlimits und Zugriff auf zusätzliche Funktionen.",
+      question3: "Sind meine Daten auf ScanPro sicher?",
+      answer3: "Ja, alle Dateien werden auf unseren Servern mit Verschlüsselung sicher verarbeitet. Wir geben Ihre Dateien nicht an Dritte weiter, und sie werden nach der Verarbeitung automatisch von unseren Servern gelöscht (innerhalb von 24 Stunden). Weitere Details finden Sie in unserer Datenschutzrichtlinie.",
+      question4: "Welche Geräte und Browser unterstützt ScanPro?",
+      answer4: "ScanPro funktioniert auf allen modernen Browsern wie Chrome, Firefox, Safari und Edge. Unsere Plattform ist vollständig responsiv und läuft auf Desktops, Tablets und Mobilgeräten."
+    },
+    conversion: {
+      question1: "Welche Dateitypen kann ich konvertieren?",
+      answer1: "ScanPro unterstützt die Konvertierung von PDFs in viele Formate, einschließlich Word (DOCX), Excel (XLSX), PowerPoint (PPTX), Bilder (JPG, PNG), HTML und reiner Text. Sie können diese Formate auch wieder in PDF umwandeln.",
+      question2: "Wie genau sind Ihre PDF-Konvertierungen?",
+      answer2: "Unser Konvertierungsmodul verwendet fortschrittliche Algorithmen, um die Formatierung inklusive Schriftarten, Bilder, Tabellen und Layout beizubehalten. Bei sehr komplexen Dokumenten können jedoch kleinere Formatierungsunterschiede auftreten. Für beste Ergebnisse empfehlen wir unsere Tools 'PDF zu Word' oder 'PDF zu Excel' für komplex formatierte Dokumente.",
+      question3: "Gibt es eine Dateigrößenbeschränkung für Konvertierungen?",
+      answer3: "Kostenlose Nutzer können Dateien bis 10 MB konvertieren. Basis-Abonnenten bis 50 MB, Pro-Abonnenten bis 100 MB und Enterprise-Nutzer bis 500 MB. Wenn Sie größere Dateien verarbeiten müssen, kontaktieren Sie uns für maßgeschneiderte Lösungen.",
+      question4: "Warum ist meine PDF-Konvertierung fehlgeschlagen?",
+      answer4: "Konvertierungen können fehlschlagen, wenn die Datei beschädigt, passwortgeschützt oder mit komplexen Elementen ausgestattet ist, die unser System nicht verarbeiten kann. Versuchen Sie zunächst unser 'PDF reparieren'-Tool und wiederholen Sie die Konvertierung. Bei anhaltenden Problemen nutzen Sie den 'Erweiterten' Konvertierungsmodus oder wenden sich an den Support."
+    },
+    security: {
+      question1: "Wie schütze ich mein PDF mit einem Passwort?",
+      answer1: "Nutzen Sie unser 'PDF schützen'-Tool. Laden Sie Ihr PDF hoch, legen Sie ein Passwort fest, wählen Sie Berechtigungsbeschränkungen (falls gewünscht) und klicken Sie auf 'PDF schützen'. Sie können steuern, ob Nutzer drucken, bearbeiten oder Inhalte kopieren dürfen.",
+      question2: "Kann ich ein Passwort aus meinem PDF entfernen?",
+      answer2: "Ja, verwenden Sie unser 'PDF entsperren'-Tool. Sie müssen das aktuelle Passwort angeben, um den Schutz zu entfernen. Beachten Sie, dass wir nur bei Dokumenten helfen, die Sie besitzen oder für die Sie eine Bearbeitungsgenehmigung haben.",
+      question3: "Welche Verschlüsselungsstufe verwenden Sie für den PDF-Schutz?",
+      answer3: "Wir verwenden die branchenübliche 256-Bit-AES-Verschlüsselung für den PDF-Schutz, die starke Sicherheit für Ihre Dokumente bietet. Wir unterstützen auch 128-Bit-Verschlüsselung für Kompatibilität mit älteren PDF-Readern."
+    },
+    account: {
+      question1: "Wie kann ich mein Abonnement upgraden?",
+      answer1: "Melden Sie sich bei Ihrem Konto an, gehen Sie zum Dashboard und wählen Sie den Reiter 'Abonnement'. Wählen Sie den Plan, der Ihren Bedürfnissen entspricht, und folgen Sie den Zahlungsanweisungen. Ihre neuen Funktionen werden sofort nach der Zahlung aktiviert.",
+      question2: "Kann ich mein Abonnement kündigen?",
+      answer2: "Ja, Sie können Ihr Abonnement jederzeit über das Dashboard unter dem Reiter 'Abonnement' kündigen. Sie haben bis zum Ende des aktuellen Abrechnungszeitraums weiterhin Zugriff auf Premium-Funktionen.",
+      question3: "Wie setze ich mein Passwort zurück?",
+      answer3: "Klicken Sie auf der Anmeldeseite auf 'Passwort vergessen?' und geben Sie Ihre E-Mail-Adresse ein. Wir senden Ihnen einen Link zum Zurücksetzen des Passworts, der 1 Stunde gültig ist. Wenn Sie die E-Mail nicht erhalten, überprüfen Sie Ihren Spam-Ordner oder kontaktieren Sie den Support."
+    },
+    api: {
+      question1: "Wie bekomme ich einen API-Schlüssel?",
+      answer1: "Registrieren Sie sich für ein Konto und gehen Sie dann zu Dashboard > API-Schlüssel, um Ihren ersten API-Schlüssel zu erstellen. Kostenlose Konten erhalten 1 Schlüssel, Basis-Abonnenten 3, Pro-Abonnenten 10 und Enterprise-Nutzer 50+ Schlüssel.",
+      question2: "Was sind die API-Ratenlimits?",
+      answer2: "Die Ratenlimits hängen von Ihrem Abonnement ab: Kostenlos (10 Anfragen/Stunde), Basis (100 Anfragen/Stunde), Pro (1.000 Anfragen/Stunde), Enterprise (5.000+ Anfragen/Stunde). Monatliche Betriebslimits gelten ebenfalls für jedes Level.",
+      question3: "Wie integriere ich die API in meine Anwendung?",
+      answer3: "Unsere API verwendet standardmäßige REST-Endpunkte mit JSON-Antworten. Sie finden umfassende Dokumentation, Codebeispiele und SDKs in unserem Entwicklerbereich. Wir bieten Beispiele für verschiedene Programmiersprachen wie JavaScript, Python, PHP und Java."
+    },
+    title: "Häufig gestellte Fragen"
   }
 }
