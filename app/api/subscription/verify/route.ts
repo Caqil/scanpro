@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from "@/lib/auth";
 import { prisma } from '@/lib/prisma';
-import { getPayPalSubscriptionDetails } from '@/lib/paypal';
+import { getMidtransTransactionStatus } from '@/lib/midtrans';
 
 export async function GET(request: NextRequest) {
     try {
@@ -42,21 +42,28 @@ export async function GET(request: NextRequest) {
             );
         }
 
-        // If subscription is 'pending', check with PayPal for the current status
-        if (subscription.status === 'pending' && subscription.paypalId) {
+        // If subscription is 'pending', check with Midtrans for the current status
+        if (subscription.status === 'pending' && subscription.midtransOrderId) {
             try {
-                const paypalSubscriptionDetails = await getPayPalSubscriptionDetails(subscription.paypalId);
+                const midtransStatus = await getMidtransTransactionStatus(subscription.midtransOrderId);
 
-                // Update subscription based on PayPal status
-                if (paypalSubscriptionDetails.status === 'ACTIVE') {
-                    // Determine tier from plan ID
-                    let tier = 'free';
-                    if (paypalSubscriptionDetails.plan_id === process.env.PAYPAL_BASIC_PLAN_ID) {
-                        tier = 'basic';
-                    } else if (paypalSubscriptionDetails.plan_id === process.env.PAYPAL_PRO_PLAN_ID) {
-                        tier = 'pro';
-                    } else if (paypalSubscriptionDetails.plan_id === process.env.PAYPAL_ENTERPRISE_PLAN_ID) {
-                        tier = 'enterprise';
+                // Update subscription based on Midtrans status
+                if (midtransStatus.status === 'settlement' || midtransStatus.status === 'capture') {
+                    // Extract tier from order ID (SUB-TIER-TIMESTAMP-USERID)
+                    const orderParts = subscription.midtransOrderId.split('-');
+                    const tier = orderParts[1].toLowerCase();
+
+                    // Determine billing cycle based on amount (simple heuristic)
+                    const isYearly = midtransStatus.grossAmount > 1000000;
+
+                    // Calculate period end
+                    const periodStart = new Date();
+                    const periodEnd = new Date(periodStart);
+
+                    if (isYearly) {
+                        periodEnd.setFullYear(periodEnd.getFullYear() + 1);
+                    } else {
+                        periodEnd.setMonth(periodEnd.getMonth() + 1);
                     }
 
                     // Update subscription in database
@@ -65,8 +72,9 @@ export async function GET(request: NextRequest) {
                         data: {
                             status: 'active',
                             tier: tier,
-                            currentPeriodStart: new Date(paypalSubscriptionDetails.start_time),
-                            currentPeriodEnd: new Date(paypalSubscriptionDetails.billing_info.next_billing_time)
+                            currentPeriodStart: periodStart,
+                            currentPeriodEnd: periodEnd,
+                            midtransResponse: midtransStatus.rawResponse || {}
                         }
                     });
 
@@ -76,18 +84,36 @@ export async function GET(request: NextRequest) {
                         subscription: {
                             ...subscription,
                             status: 'active',
-                            tier: tier
+                            tier: tier,
+                            currentPeriodStart: periodStart,
+                            currentPeriodEnd: periodEnd
                         }
                     });
-                } else {
-                    // Subscription is not active yet
+                } else if (midtransStatus.status === 'pending') {
+                    // Subscription is still pending
                     return NextResponse.json({
                         success: false,
-                        message: 'Subscription is not active yet',
+                        message: 'Payment is still being processed',
+                        status: midtransStatus.status
+                    });
+                } else {
+                    // Payment failed or expired
+                    await prisma.subscription.update({
+                        where: { id: subscription.id },
+                        data: {
+                            status: 'failed',
+                            midtransResponse: midtransStatus.rawResponse || {}
+                        }
+                    });
+
+                    return NextResponse.json({
+                        success: false,
+                        message: 'Payment failed or expired',
+                        status: midtransStatus.status
                     });
                 }
             } catch (error) {
-                console.error('Error fetching PayPal subscription details:', error);
+                console.error('Error fetching Midtrans status:', error);
                 return NextResponse.json(
                     { error: 'Failed to verify subscription status' },
                     { status: 500 }
@@ -95,7 +121,7 @@ export async function GET(request: NextRequest) {
             }
         }
 
-        // Return subscription data
+        // Return subscription data as is
         return NextResponse.json({
             success: true,
             subscription

@@ -7,16 +7,17 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { CreditCardIcon, CheckIcon, XIcon } from "lucide-react";
+import { useLanguageStore } from "@/src/store/store";
 
 interface SubscriptionInfoProps {
   user: any;
 }
 
-// Pricing tiers
+// Pricing tiers in IDR
 const pricingTiers = [
   {
     name: "Free",
-    price: "$0",
+    price: "Rp 0",
     features: [
       "100 operations per month",
       "10 requests per hour",
@@ -31,7 +32,7 @@ const pricingTiers = [
   },
   {
     name: "Basic",
-    price: "$9.99",
+    price: "Rp 150.000",
     features: [
       "1,000 operations per month",
       "100 requests per hour",
@@ -45,7 +46,7 @@ const pricingTiers = [
   },
   {
     name: "Pro",
-    price: "$29.99",
+    price: "Rp 450.000",
     features: [
       "10,000 operations per month",
       "1,000 requests per hour",
@@ -58,7 +59,7 @@ const pricingTiers = [
   },
   {
     name: "Enterprise",
-    price: "$99.99",
+    price: "Rp 1.500.000",
     features: [
       "100,000 operations per month",
       "5,000 requests per hour",
@@ -73,12 +74,16 @@ const pricingTiers = [
 
 export function SubscriptionInfo({ user }: SubscriptionInfoProps) {
   const [loading, setLoading] = useState(false);
+  const { t } = useLanguageStore();
   
   // Format date for display
   const formatDate = (dateString: string | null) => {
     if (!dateString) return "N/A";
     return new Date(dateString).toLocaleDateString();
   };
+  
+  // Detect if this is a migrated subscription
+  const isMigrated = user?.subscription?.midtransResponse?.migrated_from_paypal === true;
   
   // Handle subscription upgrade
   const handleUpgrade = async (tier: string) => {
@@ -95,7 +100,7 @@ export function SubscriptionInfo({ user }: SubscriptionInfoProps) {
       const data = await res.json();
       
       if (data.success && data.checkoutUrl) {
-        // Redirect to PayPal checkout
+        // Redirect to Midtrans checkout
         window.location.href = data.checkoutUrl;
       } else {
         throw new Error(data.error || "Failed to initiate upgrade");
@@ -138,12 +143,28 @@ export function SubscriptionInfo({ user }: SubscriptionInfoProps) {
     }
   };
   
+  // Show notification for migrated users
+  const showMigrationBanner = isMigrated && user?.subscription?.status === 'active';
+  
   const currentTier = user?.subscription?.tier || "free";
-  const isActive = user?.subscription?.status === "active";
   
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold">Subscription</h2>
+      
+      {/* Migration banner for PayPal users */}
+      {showMigrationBanner && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-blue-800 dark:bg-blue-900/30 dark:border-blue-800 dark:text-blue-400">
+          <h3 className="font-medium mb-2">We've updated our payment system</h3>
+          <p className="text-sm mb-2">
+            We've migrated from PayPal to Midtrans for better local payment support. 
+            Your subscription will continue normally until the end of your current billing period.
+          </p>
+          <p className="text-sm font-medium">
+            Next billing date: {formatDate(user?.subscription?.currentPeriodEnd)}
+          </p>
+        </div>
+      )}
       
       {/* Current subscription info */}
       <Card>
@@ -158,7 +179,7 @@ export function SubscriptionInfo({ user }: SubscriptionInfoProps) {
             <div>
               <h3 className="text-xl font-bold capitalize">{currentTier} Plan</h3>
               <p className="text-muted-foreground">
-                {isActive ? "Active" : (user?.subscription?.status === "canceled" ? "Canceling at period end" : "Inactive")}
+                {user?.subscription?.status === "active" ? "Active" : "Inactive"}
               </p>
             </div>
             <Badge variant={
@@ -174,14 +195,17 @@ export function SubscriptionInfo({ user }: SubscriptionInfoProps) {
           {currentTier !== "free" && user?.subscription?.currentPeriodEnd && (
             <div className="mt-4 text-sm">
               <p className="text-muted-foreground">
-                {user?.subscription?.status === "canceled" 
-                  ? `Access until: ${formatDate(user.subscription.currentPeriodEnd)}`
-                  : `Renews on: ${formatDate(user.subscription.currentPeriodEnd)}`}
+                Your subscription renews on {formatDate(user.subscription.currentPeriodEnd)}
               </p>
+              {user?.subscription?.midtransOrderId && (
+                <p className="text-xs text-muted-foreground mt-1">
+                  Payment method: Midtrans
+                </p>
+              )}
             </div>
           )}
         </CardContent>
-        {currentTier !== "free" && isActive && (
+        {currentTier !== "free" && (
           <CardFooter>
             <Button 
               variant="outline" 

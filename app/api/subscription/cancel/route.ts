@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from "@/lib/auth";
 import { prisma } from '@/lib/prisma';
-import { cancelPayPalSubscription } from '@/lib/paypal';
+import { cancelMidtransSubscription } from '@/lib/midtrans';
 
 export async function POST(request: NextRequest) {
     try {
@@ -36,15 +36,15 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // If there's a PayPal subscription ID, cancel it
-        if (user.subscription.paypalId) {
+        // If there's a Midtrans order ID, cancel it
+        if (user.subscription.midtransOrderId) {
             try {
-                await cancelPayPalSubscription(
-                    user.subscription.paypalId,
+                await cancelMidtransSubscription(
+                    user.subscription.midtransOrderId,
                     'Customer requested cancellation'
                 );
-            } catch (paypalError) {
-                console.error('PayPal cancel error:', paypalError);
+            } catch (midtransError) {
+                console.error('Midtrans cancel error:', midtransError);
                 // Continue anyway to update our database
             }
         }

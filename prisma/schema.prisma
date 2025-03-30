@@ -52,19 +52,22 @@ model Session {
 }
 
 model Subscription {
-  id              String    @id @default(cuid())
-  userId          String    @unique
-  tier            String    @default("free") // free, basic, pro, enterprise
-  status          String    @default("active") // active, canceled, past_due
-  paypalId        String?   // PayPal subscription ID
-  paypalOrderId   String?   // PayPal order ID for one-time payments
-  planId          String?   // PayPal plan ID
+  id                String    @id @default(cuid())
+  userId            String    @unique
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tier              String    @default("free") // free, basic, pro, enterprise
+  status            String    @default("active") // active, pending, canceled, failed
+  planId            String?   // Midtrans product ID
+  midtransId        String?   // Midtrans subscription ID (replacing paypalId)
+  midtransToken     String?   // Midtrans token for verification
+  midtransOrderId   String?   // Midtrans order ID
+  midtransResponse  Json?     // Store Midtrans response data
+  cancelAtPeriodEnd Boolean   @default(false)
   currentPeriodStart DateTime?
   currentPeriodEnd   DateTime?
-  cancelAtPeriodEnd  Boolean   @default(false)
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  expiresAt         DateTime?
 }
 
 model VerificationToken {
