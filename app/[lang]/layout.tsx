@@ -13,6 +13,8 @@ import "../globals.css"
 // Import language configuration
 import { SUPPORTED_LANGUAGES, getTranslation } from "@/src/lib/i18n/config";
 import { AuthProvider } from "./providers"
+import { AnalyticsProvider } from "./analytics-provider"
+import { CookieConsentBanner } from "@/components/cookie-banner-component"
 
 // Font configuration
 export const fontSans = FontSans({
@@ -78,12 +80,13 @@ export default async function Layout({
       <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
         <AuthProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
-              <ProHeader urlLanguage={lang} />
-              <div className="flex-1 mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">{children}</div>
-              <Footer />
-            </div>
-            <Toaster />
+          <div className="relative flex min-h-screen flex-col">
+                <ProHeader urlLanguage={lang} />
+                <div className="flex-1 mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">{children}</div>
+                <Footer />
+              </div>
+              <Toaster />
+              <CookieConsentBanner />
           </ThemeProvider>
         </AuthProvider>
       </body>
