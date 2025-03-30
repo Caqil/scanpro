@@ -100,11 +100,7 @@ export function WatermarkTool({ type }: WatermarkToolProps) {
     if (selectedFile) {
       const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'];
       if (!validTypes.includes(selectedFile.type)) {
-<<<<<<< HEAD
         toast.error(t('watermarkPdf.invalidImageType') || "Invalid image type", {
-=======
-        toast.error(t('watermark.invalidImageType') || "Invalid image type", {
->>>>>>> main
           description: t('watermarkPdf.supportedFormats') || "Supported formats: PNG, JPG, SVG"
         });
         return;
