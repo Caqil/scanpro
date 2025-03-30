@@ -345,35 +345,254 @@ export default {
             ]
         }
     },
-
-    // Section Fonctionnalités
     features: {
-        title: "Fonctionnalités",
-        description: "Tout ce dont vous avez besoin pour convertir et gérer vos fichiers PDF",
-        documentFormats: {
-            title: "Formats de Documents",
-            description: "Convertissez en DOCX, DOC, RTF, ODT et plus encore avec une préservation parfaite du formatage et de la mise en page"
+        title: "Outils et Fonctions PDF Avancés | ScanPro",
+        description: "Explorez la suite complète d'outils et de fonctions PDF de ScanPro pour la gestion, la conversion, l'édition de documents et plus encore.",
+
+        hero: {
+            title: "Outils et Fonctions PDF Avancés",
+            description: "Découvrez la suite complète d'outils et de fonctions qui font de ScanPro la solution ultime pour tous vos besoins en gestion documentaire."
         },
-        spreadsheets: {
-            title: "Feuilles de Calcul",
-            description: "Transformez les PDF en XLSX, CSV et autres formats de feuilles de calcul avec des structures de cellules appropriées"
+
+        overview: {
+            power: {
+                title: "Traitement Puissant",
+                description: "Des algorithmes avancés garantissent un traitement et une conversion de documents de haute qualité avec une précision exceptionnelle."
+            },
+            security: {
+                title: "Sécurité de Niveau Bancaire",
+                description: "Vos documents sont protégés par un cryptage SSL 256 bits et supprimés automatiquement après traitement."
+            },
+            accessibility: {
+                title: "Accessibilité Universelle",
+                description: "Accédez à vos documents et à nos outils depuis n'importe quel appareil avec une compatibilité complète entre plateformes."
+            }
         },
-        images: {
-            title: "Images",
-            description: "Extrayez des images JPG et PNG de haute qualité de vos fichiers PDF avec contrôle de la résolution"
+
+        allFeatures: {
+            title: "Toutes les Fonctions"
         },
-        webFormats: {
-            title: "Formats Web",
-            description: "Convertissez en HTML et autres formats adaptés au web pour une publication en ligne"
+
+        learnMore: "En Savoir Plus",
+
+        categories: {
+            conversion: {
+                title: "Conversion PDF",
+                description: "Convertissez des PDF vers et depuis divers formats avec une haute précision et une conservation du formatage.",
+                features: {
+                    pdfToWord: {
+                        title: "Conversion PDF en Word",
+                        description: "Convertissez des fichiers PDF en documents Word éditables avec formatage, tableaux et images préservés."
+                    },
+                    pdfToExcel: {
+                        title: "Conversion PDF en Excel",
+                        description: "Extrayez des tableaux de PDFs vers des feuilles de calcul Excel éditables avec un formatage précis des données."
+                    },
+                    pdfToImage: {
+                        title: "Conversion PDF en Image",
+                        description: "Convertissez des pages PDF en images JPG, PNG ou TIFF de haute qualité avec une résolution personnalisable."
+                    },
+                    officeToPdf: {
+                        title: "Conversion Office en PDF",
+                        description: "Convertissez des fichiers Word, Excel et PowerPoint en format PDF avec mise en page et formatage préservés."
+                    }
+                }
+            },
+
+            editing: {
+                title: "Édition et Gestion PDF",
+                description: "Éditez, organisez et optimisez vos documents PDF avec notre ensemble complet d'outils.",
+                features: {
+                    merge: {
+                        title: "Fusionner des PDFs",
+                        description: "Combinez plusieurs fichiers PDF en un seul document avec un ordre de pages personnalisable."
+                    },
+                    split: {
+                        title: "Diviser des PDFs",
+                        description: "Divisez de grands PDFs en documents plus petits par plages de pages ou extrayez des pages spécifiques."
+                    },
+                    compress: {
+                        title: "Compresser des PDFs",
+                        description: "Réduisez la taille des fichiers PDF tout en maintenant la qualité pour un partage et un stockage plus faciles."
+                    },
+                    watermark: {
+                        title: "Ajouter des Filigranes",
+                        description: "Ajoutez des filigranes textuels ou d'image à vos PDFs avec transparence, position et rotation personnalisables."
+                    }
+                }
+            },
+
+            security: {
+                title: "Sécurité et Protection PDF",
+                description: "Sécurisez vos documents PDF avec cryptage, protection par mot de passe et signatures numériques.",
+                features: {
+                    protect: {
+                        title: "Protection par Mot de Passe",
+                        description: "Cryptez les PDFs avec une protection par mot de passe pour contrôler l'accès et empêcher les vues non autorisées."
+                    },
+                    unlock: {
+                        title: "Déverrouillage PDF",
+                        description: "Supprimez la protection par mot de passe des PDFs dont vous avez un accès autorisé."
+                    },
+                    signature: {
+                        title: "Signatures Numériques",
+                        description: "Ajoutez des signatures numériques aux PDFs pour l'authentification et la vérification des documents."
+                    },
+                    redaction: {
+                        title: "Rédaction PDF",
+                        description: "Supprimez définitivement les informations sensibles des documents PDF."
+                    }
+                }
+            },
+
+            ocr: {
+                title: "Technologie OCR",
+                description: "Extrayez du texte à partir de documents scannés et d'images grâce à notre technologie OCR avancée.",
+                features: {
+                    textExtraction: {
+                        title: "Extraction de Texte",
+                        description: "Extrayez du texte des PDFs scannés et des images avec une haute précision et un support linguistique."
+                    },
+                    searchable: {
+                        title: "PDFs Rechercheables",
+                        description: "Convertissez des documents scannés en PDFs rechercheables avec reconnaissance de texte."
+                    },
+                    multilingual: {
+                        title: "Support Multilingue",
+                        description: "Support OCR pour plus de 100 langues, y compris les écritures non latines et les caractères spéciaux."
+                    },
+                    batchProcessing: {
+                        title: "Traitement par Lots",
+                        description: "Traitez plusieurs documents à la fois avec nos capacités OCR par lots efficaces."
+                    }
+                }
+            },
+
+            api: {
+                title: "API et Intégration",
+                description: "Intégrez nos capacités de traitement PDF dans vos applications avec notre API robuste.",
+                features: {
+                    restful: {
+                        title: "API RESTful",
+                        description: "API RESTful simple et puissante pour le traitement PDF et la gestion documentaire."
+                    },
+                    sdks: {
+                        title: "SDKs et Bibliothèques",
+                        description: "SDKs conviviaux pour les développeurs dans divers langages de programmation, y compris JavaScript, Python et PHP."
+                    },
+                    webhooks: {
+                        title: "Webhooks",
+                        description: "Notifications d'événements en temps réel pour des flux de travail de traitement PDF asynchrones."
+                    },
+                    customization: {
+                        title: "Personnalisation API",
+                        description: "Adaptez l'API à vos besoins spécifiques avec des points de terminaison et des paramètres personnalisables."
+                    }
+                }
+            },
+
+            cloud: {
+                title: "Plateforme Cloud",
+                description: "Accédez à vos documents de n'importe où avec notre plateforme sécurisée de stockage et de traitement cloud.",
+                features: {
+                    storage: {
+                        title: "Stockage Cloud",
+                        description: "Stockez et accédez en toute sécurité à vos documents de n'importe où avec notre stockage cloud crypté."
+                    },
+                    sync: {
+                        title: "Synchronisation Multi-Appareils",
+                        description: "Synchronisez vos documents de manière fluide sur tous vos appareils pour un accès en déplacement."
+                    },
+                    sharing: {
+                        title: "Partage de Documents",
+                        description: "Partagez facilement des documents avec des liens sécurisés et des contrôles d'autorisation."
+                    },
+                    history: {
+                        title: "Historique des Versions",
+                        description: "Suivez les modifications des documents avec l'historique des versions et restaurez les versions précédentes si nécessaire."
+                    }
+                }
+            },
+
+            enterprise: {
+                title: "Fonctions pour Entreprises",
+                description: "Fonctions avancées conçues pour les besoins des entreprises et des organisations.",
+                features: {
+                    batch: {
+                        title: "Traitement par Lots",
+                        description: "Traitez des centaines de documents simultanément avec notre système de traitement par lots efficace."
+                    },
+                    workflow: {
+                        title: "Flux de Travail Personnalisés",
+                        description: "Créez des flux de travail automatisés de traitement de documents adaptés à vos besoins professionnels."
+                    },
+                    compliance: {
+                        title: "Conformité et Audit",
+                        description: "Fonctions de sécurité renforcées pour la conformité GDPR, HIPAA et autres réglementations."
+                    },
+                    analytics: {
+                        title: "Analyses d'Utilisation",
+                        description: "Perspectives détaillées sur les activités de traitement de documents et les opérations des utilisateurs."
+                    }
+                }
+            }
         },
-        ocrTech: {
-            title: "Technologie OCR",
-            description: "Extrayez le texte des documents numérisés avec une reconnaissance optique de caractères avancée"
+
+        mobile: {
+            title: "Application Mobile ScanPro",
+            description: "Emportez les puissants outils PDF de ScanPro avec vous en déplacement. Notre application mobile offre la même fonctionnalité robuste dans une interface conviviale pour mobile.",
+            feature1: {
+                title: "Scanner et Numériser des Documents",
+                description: "Utilisez votre caméra pour scanner des documents physiques et les convertir instantanément en PDFs de haute qualité."
+            },
+            feature2: {
+                title: "Éditer des PDFs en Déplacement",
+                description: "Éditez, annotez et signez des documents PDF depuis votre smartphone ou tablette avec facilité."
+            },
+            feature3: {
+                title: "Synchronisation Cloud",
+                description: "Synchronisez vos documents de manière fluide sur tous vos appareils avec un stockage cloud sécurisé."
+            }
         },
-        batchProcessing: {
-            title: "Traitement par Lots",
-            description: "Convertissez plusieurs PDF à la fois pour gagner du temps avec notre traitement par lots efficace"
+
+        comparison: {
+            title: "Comparaison des Fonctions",
+            description: "Comparez nos différents plans pour trouver celui qui correspond le mieux à vos besoins.",
+            feature: "Fonction",
+            free: "Gratuit",
+            basic: "Basique",
+            pro: "Pro",
+            enterprise: "Entreprise",
+            features: {
+                convert: "Conversion PDF",
+                merge: "Fusionner et Diviser",
+                compress: "Compression",
+                ocr: "OCR Basique",
+                advancedOcr: "OCR Avancé",
+                watermark: "Filigranes",
+                protect: "Protection par Mot de Passe",
+                api: "Accès API",
+                batch: "Traitement par Lots",
+                priority: "Support Prioritaire",
+                customWorkflow: "Flux de Travail Personnalisés",
+                whiteLabel: "Marque Blanche",
+                dedicated: "Support Dédié"
+            }
+        },
+
+        testimonials: {
+            title: "Ce que Disent Nos Utilisateurs",
+            quote1: "ScanPro a révolutionné la manière dont notre équipe gère les documents. La fonctionnalité OCR est incroyablement précise, et le traitement par lots nous fait gagner des heures chaque semaine.",
+            name1: "Sarah Johnson",
+            title1: "Responsable des Opérations",
+            quote2: "L'intégration de l'API a été fluide. Nous avons intégré ScanPro dans notre flux de travail et la différence en efficacité est spectaculaire. Leur équipe de support est également de premier ordre.",
+            name2: "David Chen",
+            title2: "Responsable Technique",
+            quote3: "En tant que petite entrepreneuse, les prix abordables et l'ensemble complet d'outils font de ScanPro une valeur incroyable. J'adore particulièrement l'application mobile qui me permet de gérer des documents en déplacement.",
+            name3: "Maria Garcia",
+            title3: "Propriétaire d'Entreprise"
         }
+
     },
 
     // Section Appel à l’Action
@@ -792,76 +1011,153 @@ export default {
         protected: "PDF protégé avec succès !",
         protectedDesc: "Votre fichier PDF a été chiffré et protégé par mot de passe."
     },
-
-    // Page Filigrane
-    watermark: {
-        title: "Ajouter un Filigrane au PDF",
-        description: "Protégez vos documents en ajoutant des filigranes textuels personnalisés",
-        howTo: {
-            title: "Comment Ajouter un Filigrane",
-            step1: {
-                title: "Télécharger",
-                description: "Téléchargez le fichier PDF auquel vous souhaitez ajouter un filigrane. Vous pouvez prévisualiser son apparence avant de l’appliquer."
-            },
-            step2: {
-                title: "Personnaliser",
-                description: "Définissez le texte, la position, la taille, la couleur et l’opacité de votre filigrane selon vos besoins."
-            },
-            step3: {
-                title: "Télécharger",
-                description: "Traitez et téléchargez votre fichier PDF avec filigrane prêt pour la distribution."
-            }
-        },
-        form: {
-            text: "Texte du Filigrane",
-            textColor: "Couleur du Texte",
+    watermarkPdf: {
+        title: "Ajouter un filigrane à un PDF",
+        description: "Ajoutez des filigranes de texte ou d'image personnalisés à vos documents PDF pour protection, branding ou identification.",
+        textWatermark: "Filigrane texte",
+        imageWatermark: "Filigrane image",
+        privacyNote: "Vos fichiers sont traités en toute sécurité. Tous les téléchargements sont automatiquement supprimés après traitement.",
+        headerTitle: "Ajouter un filigrane à un PDF",
+        headerDescription: "Ajoutez des filigranes de texte ou d'image personnalisés à vos documents PDF pour le branding, la protection des droits d'auteur et la classification des documents.",
+        invalidFileType: "Type de fichier invalide",
+        selectPdfFile: "Veuillez sélectionner un fichier PDF",
+        fileTooLarge: "Fichier trop volumineux",
+        maxFileSize: "La taille maximale du fichier est de 50 Mo",
+        invalidImageType: "Type d'image invalide",
+        supportedFormats: "Formats pris en charge : PNG, JPG, SVG",
+        imageTooLarge: "Image trop grande",
+        maxImageSize: "La taille maximale de l'image est de 5 Mo",
+        noFileSelected: "Aucun fichier sélectionné",
+        noImageSelected: "Aucune image de filigrane sélectionnée",
+        selectWatermarkImage: "Veuillez sélectionner une image à utiliser comme filigrane",
+        noTextEntered: "Aucun texte de filigrane saisi",
+        enterWatermarkText: "Veuillez entrer du texte à utiliser comme filigrane",
+        success: "Filigrane ajouté avec succès",
+        successDesc: "Votre PDF a été marqué d'un filigrane et est prêt à être téléchargé",
+        failed: "Échec de l'ajout du filigrane",
+        unknownError: "Une erreur inconnue s'est produite",
+        unknownErrorDesc: "Une erreur inconnue s'est produite. Veuillez réessayer",
+        uploadTitle: "Télécharger un PDF pour ajouter un filigrane",
+        uploadDesc: "Glissez-déposez votre fichier PDF ici, ou cliquez pour parcourir",
+        uploading: "Téléchargement en cours...",
+        selectPdf: "Sélectionner un fichier PDF",
+        maxSize: "Taille maximale du fichier : 50 Mo",
+        change: "Changer de fichier",
+        commonOptions: "Paramètres de filigrane",
+        position: "Position",
+        center: "Centré",
+        tile: "Mosaïque",
+        custom: "Personnalisé",
+        applyToPages: "Appliquer aux pages",
+        all: "Toutes les pages",
+        even: "Pages paires",
+        odd: "Pages impaires",
+        customPages: "Pages personnalisées",
+        pagesFormat: "Entrez les numéros de page séparés par des virgules ou des plages avec des tirets (par ex. 1,3,5-10)",
+        processing: "Traitement en cours...",
+        addWatermark: "Ajouter un filigrane",
+        adding: "Ajout du filigrane",
+        pleaseWait: "Veuillez patienter pendant que nous traitons votre document",
+        download: "Télécharger le PDF",
+        newWatermark: "Ajouter un autre filigrane",
+        text: {
+            text: "Texte du filigrane",
+            placeholder: "par ex. CONFIDENTIEL, BROUILLON, etc.",
+            color: "Couleur du texte",
+            font: "Police",
+            selectFont: "Sélectionner une police",
+            size: "Taille de la police",
             opacity: "Opacité",
-            size: "Taille",
             rotation: "Rotation",
-            position: "Position",
-            pages: "Pages à Marquer",
-            allPages: "Toutes les pages",
-            specificPages: "Pages spécifiques",
-            pageNumbers: "Numéros de Pages",
-            pageNumbersHint: "Entrez les numéros de pages séparés par des virgules (ex. : 1,3,5,8)"
+            preview: "Aperçu"
         },
-        positions: {
-            topLeft: "Haut Gauche",
-            topCenter: "Haut Centre",
-            topRight: "Haut Droite",
-            centerLeft: "Centre Gauche",
-            center: "Centre",
-            centerRight: "Centre Droite",
-            bottomLeft: "Bas Gauche",
-            bottomCenter: "Bas Centre",
-            bottomRight: "Bas Droite"
+        image: {
+            title: "Image de filigrane",
+            upload: "Téléchargez une image à utiliser comme filigrane",
+            select: "Sélectionner une image",
+            formats: "Formats pris en charge : PNG, JPEG, SVG",
+            change: "Changer d'image",
+            scale: "Échelle",
+            opacity: "Opacité",
+            rotation: "Rotation"
         },
-        preview: {
-            title: "Aperçu du Filigrane",
-            note: "Ceci est un aperçu simplifié. Le résultat final peut varier."
+        howTo: {
+            title: "Comment ajouter un filigrane",
+            step1: { title: "Téléchargez votre PDF", description: "Sélectionnez et téléchargez le fichier PDF auquel vous souhaitez ajouter un filigrane" },
+            step2: { title: "Personnalisez le filigrane", description: "Choisissez entre un filigrane texte ou image et personnalisez son apparence" },
+            step3: { title: "Téléchargez le PDF avec filigrane", description: "Traitez votre fichier et téléchargez le document PDF avec filigrane" }
+        },
+        why: {
+            title: "Pourquoi ajouter des filigranes",
+            copyright: { title: "Protection des droits d'auteur", description: "Protégez votre propriété intellectuelle en ajoutant des mentions de droits d'auteur et des informations de propriété" },
+            branding: { title: "Branding & Identité", description: "Renforcez votre identité de marque en ajoutant des logos ou du texte de marque aux documents distribués" },
+            classification: { title: "Classification des documents", description: "Marquez les documents comme Brouillon, Confidentiel ou Final pour indiquer leur statut" },
+            tracking: { title: "Suivi des documents", description: "Ajoutez des identifiants uniques pour suivre la distribution des documents et identifier les fuites" }
+        },
+        types: {
+            title: "Types et options de filigranes",
+            text: {
+                title: "Filigrane texte",
+                description: "Personnalisez les filigranes texte avec diverses options :",
+                options: {
+                    text: "Contenu texte personnalisé (multiligne pris en charge)",
+                    font: "Famille de police, taille et couleur",
+                    rotation: "Angle de rotation (0-360 degrés)",
+                    opacity: "Niveau d'opacité (transparent à totalement visible)",
+                    position: "Position (centré, en mosaïque, placement personnalisé)"
+                }
+            },
+            image: {
+                title: "Filigrane image",
+                description: "Ajoutez des filigranes image avec ces personnalisations :",
+                options: {
+                    upload: "Téléchargez votre propre logo ou image",
+                    scale: "Mettre à l'échelle et redimensionner",
+                    rotation: "Options de rotation",
+                    opacity: "Contrôle de la transparence",
+                    position: "Personnalisation de la position"
+                }
+            }
         },
         faq: {
-            title: "Questions Fréquemment Posées",
-            q1: {
-                question: "Quel type de filigranes puis-je ajouter ?",
-                answer: "Notre outil prend en charge les filigranes textuels avec un contenu, une position, une taille, une couleur, une opacité et une rotation personnalisables. Vous pouvez ajouter des filigranes comme « CONFIDENTIEL », « BROUILLON » ou le nom de votre entreprise."
-            },
-            q2: {
-                question: "Puis-je mettre un filigrane uniquement sur certaines pages de mon PDF ?",
-                answer: "Oui, vous pouvez choisir de mettre un filigrane sur toutes les pages ou spécifier quelles pages doivent avoir le filigrane en entrant leurs numéros de page."
-            },
-            q3: {
-                question: "Les filigranes sont-ils permanents ?",
-                answer: "Oui, les filigranes sont intégrés de manière permanente dans le document PDF. Cependant, ils peuvent être placés avec une opacité variable pour équilibrer visibilité et lisibilité du contenu."
-            },
-            q4: {
-                question: "L’ajout d’un filigrane affectera-t-il la qualité du fichier ?",
-                answer: "Non, notre outil d’ajout de filigrane n’ajoute que le texte spécifié sans affecter significativement la qualité ou la taille du document original."
-            }
+            title: "Questions fréquemment posées",
+            removable: { question: "Les filigranes peuvent-ils être supprimés d'un PDF ?", answer: "Nos filigranes standards sont semi-permanents et difficiles à supprimer sans logiciel spécialisé. Cependant, ils ne sont pas totalement inviolables. Pour des filigranes plus sécurisés, envisagez notre plan Pro." },
+            printing: { question: "Les filigranes apparaîtront-ils à l'impression ?", answer: "Oui, les filigranes apparaîtront à l'impression. Vous pouvez ajuster l'opacité pour les rendre plus subtils." },
+            pages: { question: "Puis-je ajouter un filigrane à des pages spécifiques seulement ?", answer: "Oui, notre plan Pro permet d'appliquer des filigranes à des pages spécifiques." },
+            formats: { question: "Quels formats d'image sont pris en charge pour les filigranes ?", answer: "Nous prenons en charge PNG, JPG/JPEG et SVG. PNG est recommandé pour les logos avec transparence." },
+            multiple: { question: "Puis-je ajouter plusieurs filigranes à un document ?", answer: "Les utilisateurs Pro peuvent ajouter plusieurs filigranes ; les utilisateurs gratuits sont limités à un seul." },
+            q1: { question: "Mon fichier PDF est-il sécurisé ?", answer: "Oui, tous les téléchargements sont traités en toute sécurité et supprimés après traitement." },
+            q2: { question: "Quels types de filigranes puis-je ajouter ?", answer: "Filigranes texte ou image avec PNG, JPG ou SVG." },
+            q3: { question: "Puis-je supprimer un filigrane après l'avoir ajouté ?", answer: "Une fois ajouté et téléchargé, le filigrane devient permanent." },
+            q4: { question: "Y a-t-il une limite de taille de fichier ?", answer: "Oui, la taille maximale est de 50 Mo pour les PDF et 5 Mo pour les images." }
         },
-        addingWatermark: "Ajout du filigrane à votre PDF...",
-        watermarkSuccess: "Filigrane ajouté avec succès !",
-        watermarkSuccessDesc: "Votre fichier PDF a été marqué et est prêt à être téléchargé."
+        bestPractices: {
+            title: "Meilleures pratiques pour les filigranes",
+            dos: "À faire",
+            donts: "À ne pas faire",
+            dosList: [
+                "Utilisez des filigranes semi-transparents pour ne pas masquer le contenu",
+                "Envisagez des filigranes diagonaux pour une meilleure couverture",
+                "Testez votre filigrane sur une page d'essai",
+                "Utilisez des couleurs contrastées pour une meilleure visibilité",
+                "Incluez le symbole de copyright © pour une protection légale"
+            ],
+            dontsList: [
+                "N'utilisez pas de filigranes trop sombres ou opaques",
+                "Ne placez pas de filigranes sur du texte important",
+                "N'utilisez pas de texte trop petit qui devient illisible",
+                "Ne comptez pas uniquement sur les filigranes pour la sécurité",
+                "N'utilisez pas d'images en basse résolution qui semblent pixélisées"
+            ]
+        },
+        relatedTools: {
+            title: "Outils associés",
+            protect: "Protéger PDF",
+            sign: "Signer PDF",
+            edit: "Modifier PDF",
+            ocr: "OCR PDF",
+            viewAll: "Voir tous les outils"
+        }
     },
     compressPdf: {
         title: "Compresser des fichiers PDF",

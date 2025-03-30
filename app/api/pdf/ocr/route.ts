@@ -162,7 +162,7 @@ async function findPageImages(sessionId: string): Promise<string[]> {
 export async function GET(request: NextRequest) {
     try {
         await ensureOcrDir();
-        
+
         // Get session ID from query parameters
         const { searchParams } = new URL(request.url);
         const sessionId = searchParams.get('sessionId');
@@ -179,7 +179,7 @@ export async function GET(request: NextRequest) {
 
         // Find page images for the session
         const pageImagePaths = await findPageImages(sessionId);
-        
+
         if (pageImagePaths.length === 0) {
             return NextResponse.json(
                 { error: 'No page images found for this session' },

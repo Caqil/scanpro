@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, ChangeEvent } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,6 +10,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Loader2, 
   Upload, 
@@ -18,11 +19,17 @@ import {
   RefreshCw, 
   Image as ImageIcon, 
   AlertCircle, 
-  FileText,
-  StampIcon
+  StampIcon,
+  Eye,
+  ChevronLeft,
+  ChevronRight,
+  ZoomIn,
+  ZoomOut
 } from "lucide-react";
 import { useLanguageStore } from "@/src/store/store";
 import { toast } from "sonner";
+import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface WatermarkToolProps {
   type: "text" | "image";
@@ -60,6 +67,16 @@ export function WatermarkTool({ type }: WatermarkToolProps) {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   
+  // View mode (edit or preview)
+  const [activeTab, setActiveTab] = useState<string>("edit");
+  
+  // PDF preview state
+  const [pdfPreviewUrl, setPdfPreviewUrl] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [zoom, setZoom] = useState(1);
+  const [previewLoading, setPreviewLoading] = useState(false);
+  
   // Result state
   const [result, setResult] = useState<{
     success: boolean;
@@ -69,9 +86,10 @@ export function WatermarkTool({ type }: WatermarkToolProps) {
   
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   
   // Handle PDF file selection
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
       if (!selectedFile.name.toLowerCase().endsWith('.pdf')) {
@@ -91,20 +109,23 @@ export function WatermarkTool({ type }: WatermarkToolProps) {
       setFile(selectedFile);
       setError(null);
       setResult(null);
+      
+      // Create PDF preview URL
+      const fileUrl = URL.createObjectURL(selectedFile);
+      setPdfPreviewUrl(fileUrl);
+      
+      // Reset to first page
+      setCurrentPage(1);
     }
   };
   
   // Handle image watermark selection
-  const handleImageWatermarkChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleImageWatermarkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
       const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'];
       if (!validTypes.includes(selectedFile.type)) {
-<<<<<<< HEAD
         toast.error(t('watermarkPdf.invalidImageType') || "Invalid image type", {
-=======
-        toast.error(t('watermark.invalidImageType') || "Invalid image type", {
->>>>>>> main
           description: t('watermarkPdf.supportedFormats') || "Supported formats: PNG, JPG, SVG"
         });
         return;
@@ -137,6 +158,275 @@ export function WatermarkTool({ type }: WatermarkToolProps) {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  };
+  
+  // Update PDF preview with watermark
+  useEffect(() => {
+    if (!pdfPreviewUrl || !canvasRef.current || !file) return;
+    
+    const renderPreview = async () => {
+        try {
+          setPreviewLoading(true);
+          
+          // Dynamically import PDF.js only when needed
+          const pdfjs = await import('pdfjs-dist');
+          
+          // Set worker path (note: this needs adjustment, see below)
+          pdfjs.GlobalWorkerOptions.workerSrc = '/node_modules/pdfjs-dist/build/pdf.worker.min.js';
+          
+          // Load PDF document
+          const loadingTask = pdfjs.getDocument(pdfPreviewUrl);
+          const pdf = await loadingTask.promise;
+          
+          // Update total pages
+          setTotalPages(pdf.numPages);
+          
+          // Get page
+          const page = await pdf.getPage(currentPage);
+          
+          // Prepare canvas
+          const canvas = canvasRef.current;
+          if (!canvas) {
+            throw new Error("Canvas element not available");
+          }
+          
+          const context = canvas.getContext('2d');
+          if (!context) {
+            throw new Error("Canvas context not available");
+          }
+          
+          // Calculate scale based on viewport
+          const viewport = page.getViewport({ scale: zoom });
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          
+          // Render PDF page
+          await page.render({
+            canvasContext: context,
+            viewport: viewport
+          }).promise;
+          
+          // Add watermark
+          renderWatermark(context, viewport);
+          
+        } catch (error) {
+          console.error("Error rendering PDF preview:", error);
+        } finally {
+          setPreviewLoading(false);
+        }
+      };
+    
+    renderPreview();
+  }, [
+    pdfPreviewUrl, 
+    currentPage, 
+    zoom, 
+    watermarkText, 
+    textColor, 
+    fontSize, 
+    fontFamily, 
+    textOpacity, 
+    rotation,
+    imagePreviewUrl,
+    imageOpacity,
+    imageScale,
+    imageRotation,
+    position,
+    pages,
+    customPages,
+    type
+  ]);
+  
+  // Render watermark on canvas
+  const renderWatermark = (context: CanvasRenderingContext2D, viewport: any) => {
+    // First check if this page should have watermark based on pages option
+    if (!shouldRenderWatermarkOnPage(currentPage)) {
+      return;
+    }
+    
+    // Get canvas dimensions
+    const width = viewport.width;
+    const height = viewport.height;
+    
+    // Calculate positions based on selection
+    let x = width / 2;
+    let y = height / 2;
+    
+    switch (position) {
+      case 'top-left':
+        x = width * 0.1;
+        y = height * 0.1;
+        break;
+      case 'top-center':
+        x = width / 2;
+        y = height * 0.1;
+        break;
+      case 'top-right':
+        x = width * 0.9;
+        y = height * 0.1;
+        break;
+      case 'center-left':
+        x = width * 0.1;
+        y = height / 2;
+        break;
+      case 'center':
+        // default values already set
+        break;
+      case 'center-right':
+        x = width * 0.9;
+        y = height / 2;
+        break;
+      case 'bottom-left':
+        x = width * 0.1;
+        y = height * 0.9;
+        break;
+      case 'bottom-center':
+        x = width / 2;
+        y = height * 0.9;
+        break;
+      case 'bottom-right':
+        x = width * 0.9;
+        y = height * 0.9;
+        break;
+      case 'tile':
+        renderTiledWatermark(context, width, height);
+        return;
+    }
+    
+    // Save context state
+    context.save();
+    
+    // Apply transparency
+    const opacity = type === 'text' ? textOpacity / 100 : imageOpacity / 100;
+    context.globalAlpha = opacity;
+    
+    // Apply watermark based on type
+    if (type === 'text') {
+      renderTextWatermark(context, x, y);
+    } else if (type === 'image' && imagePreviewUrl) {
+      renderImageWatermark(context, x, y);
+    }
+    
+    // Restore context state
+    context.restore();
+  };
+  
+  // Render text watermark
+  const renderTextWatermark = (context: CanvasRenderingContext2D, x: number, y: number) => {
+    // Set text properties
+    context.font = `${fontSize}px ${fontFamily}`;
+    context.fillStyle = textColor;
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    
+    // Apply rotation
+    context.translate(x, y);
+    context.rotate(rotation * Math.PI / 180);
+    
+    // Draw text
+    context.fillText(watermarkText, 0, 0);
+  };
+  
+  // Render image watermark
+  const renderImageWatermark = (context: CanvasRenderingContext2D, x: number, y: number) => {
+    if (!imagePreviewUrl) return;
+    
+    // Create image element
+    const img = new Image();
+    img.src = imagePreviewUrl;
+    
+    // Only draw when image is loaded
+    img.onload = () => {
+      // Apply rotation
+      context.translate(x, y);
+      context.rotate(imageRotation * Math.PI / 180);
+      
+      // Calculate dimensions based on scale
+      const width = img.width * (imageScale / 100);
+      const height = img.height * (imageScale / 100);
+      
+      // Draw centered image
+      context.drawImage(img, -width / 2, -height / 2, width, height);
+    };
+  };
+  
+  // Render tiled watermark
+  const renderTiledWatermark = (context: CanvasRenderingContext2D, canvasWidth: number, canvasHeight: number) => {
+    // Calculate grid size
+    const gridSizeX = canvasWidth / 3;
+    const gridSizeY = canvasHeight / 3;
+    
+    // Draw watermark in grid pattern
+    for (let x = gridSizeX / 2; x < canvasWidth; x += gridSizeX) {
+      for (let y = gridSizeY / 2; y < canvasHeight; y += gridSizeY) {
+        context.save();
+        
+        if (type === 'text') {
+          renderTextWatermark(context, x, y);
+        } else if (type === 'image' && imagePreviewUrl) {
+          renderImageWatermark(context, x, y);
+        }
+        
+        context.restore();
+      }
+    }
+  };
+  
+  // Check if watermark should be rendered on current page
+  const shouldRenderWatermarkOnPage = (pageNum: number): boolean => {
+    switch (pages) {
+      case 'all':
+        return true;
+      case 'even':
+        return pageNum % 2 === 0;
+      case 'odd':
+        return pageNum % 2 === 1;
+      case 'custom':
+        if (!customPages) return false;
+        
+        const pageRanges = customPages.split(',').map(range => range.trim());
+        
+        for (const range of pageRanges) {
+          if (range.includes('-')) {
+            // Handle page range (e.g., "1-5")
+            const [start, end] = range.split('-').map(Number);
+            if (pageNum >= start && pageNum <= end) {
+              return true;
+            }
+          } else {
+            // Handle single page
+            if (Number(range) === pageNum) {
+              return true;
+            }
+          }
+        }
+        
+        return false;
+      default:
+        return true;
+    }
+  };
+  
+  // Page navigation handlers
+  const goToPreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  
+  const goToNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+  
+  // Zoom handlers
+  const zoomIn = () => {
+    setZoom(Math.min(zoom + 0.2, 3.0));
+  };
+  
+  const zoomOut = () => {
+    setZoom(Math.max(zoom - 0.2, 0.5));
   };
   
   // Handle watermarking submission
@@ -259,6 +549,13 @@ export function WatermarkTool({ type }: WatermarkToolProps) {
         setFile(droppedFile);
         setError(null);
         setResult(null);
+        
+        // Create PDF preview URL
+        const fileUrl = URL.createObjectURL(droppedFile);
+        setPdfPreviewUrl(fileUrl);
+        
+        // Reset to first page
+        setCurrentPage(1);
       } else {
         toast.error(t('watermarkPdf.invalidFileType') || "Invalid file type", {
           description: t('watermarkPdf.selectPdfFile') || "Please select a PDF file"
@@ -310,6 +607,77 @@ export function WatermarkTool({ type }: WatermarkToolProps) {
     </div>
   );
   
+  // Render PDF preview
+  const renderPdfPreview = () => (
+    <div className="space-y-4">
+      {previewLoading ? (
+        <div className="border rounded-lg p-4">
+          <Skeleton className="h-[400px] w-full rounded-lg" />
+        </div>
+      ) : (
+        <div className="border rounded-lg p-4">
+          <div className="flex justify-center overflow-auto bg-muted/20 rounded-lg h-[400px]">
+            <canvas ref={canvasRef} className="block" />
+          </div>
+        </div>
+      )}
+      
+      <div className="flex justify-between items-center">
+        {/* Page navigation */}
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={goToPreviousPage}
+            disabled={currentPage <= 1}
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+          
+          <div className="flex items-center border rounded-md px-3 py-1 text-sm">
+            <span>
+              Page {currentPage} of {totalPages}
+            </span>
+          </div>
+          
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={goToNextPage}
+            disabled={currentPage >= totalPages}
+          >
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+        
+        {/* Zoom controls */}
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={zoomOut}
+            disabled={zoom <= 0.5}
+          >
+            <ZoomOut className="h-4 w-4" />
+          </Button>
+          
+          <div className="flex items-center border rounded-md px-3 py-1 text-sm">
+            <span>{Math.round(zoom * 100)}%</span>
+          </div>
+          
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={zoomIn}
+            disabled={zoom >= 3.0}
+          >
+            <ZoomIn className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+  
   // Render watermark options section
   const renderWatermarkOptions = () => (
     <div className="space-y-6">
@@ -326,6 +694,7 @@ export function WatermarkTool({ type }: WatermarkToolProps) {
           onClick={() => {
             setFile(null);
             setResult(null);
+            setPdfPreviewUrl(null);
             if (fileInputRef.current) {
               fileInputRef.current.value = "";
             }
@@ -335,92 +704,136 @@ export function WatermarkTool({ type }: WatermarkToolProps) {
         </Button>
       </div>
       
-      {type === "text" ? renderTextWatermarkOptions() : renderImageWatermarkOptions()}
-      
-      {/* Common options for both watermark types */}
-      <div className="space-y-3 pt-3 border-t">
-        <h3 className="font-medium text-sm">{t('watermarkPdf.commonOptions') || "Watermark Settings"}</h3>
-        
-        <div className="space-y-2">
-          <Label className="text-sm">{t('watermarkPdf.position') || "Position"}</Label>
-          <RadioGroup 
-            value={position} 
-            onValueChange={setPosition}
-            className="flex flex-wrap gap-4"
-          >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="center" id="center" />
-              <Label htmlFor="center">{t('watermarkPdf.center') || "Center"}</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="tile" id="tile" />
-              <Label htmlFor="tile">{t('watermarkPdf.tile') || "Tile"}</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="custom" id="custom" />
-              <Label htmlFor="custom">{t('watermarkPdf.custom') || "Custom"}</Label>
-            </div>
-          </RadioGroup>
-        </div>
-        
-        <div className="space-y-2">
-          <Label className="text-sm">{t('watermarkPdf.applyToPages') || "Apply to Pages"}</Label>
-          <RadioGroup 
-            value={pages} 
-            onValueChange={setPages}
-            className="flex flex-wrap gap-4"
-          >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="all" id="all-pages" />
-              <Label htmlFor="all-pages">{t('watermarkPdf.all') || "All Pages"}</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="even" id="even-pages" />
-              <Label htmlFor="even-pages">{t('watermarkPdf.even') || "Even Pages"}</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="odd" id="odd-pages" />
-              <Label htmlFor="odd-pages">{t('watermarkPdf.odd') || "Odd Pages"}</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="custom" id="custom-pages" />
-              <Label htmlFor="custom-pages">{t('watermarkPdf.customPages') || "Custom Pages"}</Label>
-            </div>
-          </RadioGroup>
-          
-          {pages === "custom" && (
-            <div className="pt-2">
-              <Input 
-                placeholder="e.g., 1,3,5-10" 
-                value={customPages}
-                onChange={(e) => setCustomPages(e.target.value)}
-              />
-              <p className="text-xs text-muted-foreground mt-1">
-                {t('watermarkPdf.pagesFormat') || "Enter page numbers separated by commas or ranges with hyphens (e.g., 1,3,5-10)"}
-              </p>
-            </div>
-          )}
-        </div>
-      </div>
-      
-      <Button 
-        onClick={handleSubmit} 
-        className="w-full"
-        disabled={isProcessing}
-      >
-        {isProcessing ? (
-          <>
-            <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-            {t('watermarkPdf.processing') || "Processing..."}
-          </>
-        ) : (
-          <>
+      {/* Tabs for edit/preview */}
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList className="grid grid-cols-2 mb-4">
+          <TabsTrigger value="edit">
             <StampIcon className="h-4 w-4 mr-2" />
-            {t('watermarkPdf.addWatermark') || "Add Watermark"}
-          </>
+            {t('watermarkPdf.editTab') || "Edit Watermark"}
+          </TabsTrigger>
+          <TabsTrigger value="preview">
+            <Eye className="h-4 w-4 mr-2" />
+            {t('watermarkPdf.previewTab') || "Live Preview"}
+          </TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="edit" className="space-y-6">
+          {type === "text" ? renderTextWatermarkOptions() : renderImageWatermarkOptions()}
+          
+          {/* Common options for both watermark types */}
+          <div className="space-y-3 pt-3 border-t">
+            <h3 className="font-medium text-sm">{t('watermarkPdf.commonOptions') || "Watermark Settings"}</h3>
+            
+            <div className="space-y-2">
+              <Label className="text-sm">{t('watermarkPdf.position') || "Position"}</Label>
+              <RadioGroup 
+                value={position} 
+                onValueChange={setPosition}
+                className="flex flex-wrap gap-4"
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="center" id="center" />
+                  <Label htmlFor="center">{t('watermarkPdf.center') || "Center"}</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="tile" id="tile" />
+                  <Label htmlFor="tile">{t('watermarkPdf.tile') || "Tile"}</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="top-left" id="top-left" />
+                  <Label htmlFor="top-left">{t('watermarkPdf.topLeft') || "Top Left"}</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="top-center" id="top-center" />
+                  <Label htmlFor="top-center">{t('watermarkPdf.topCenter') || "Top Center"}</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="top-right" id="top-right" />
+                  <Label htmlFor="top-right">{t('watermarkPdf.topRight') || "Top Right"}</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="bottom-left" id="bottom-left" />
+                  <Label htmlFor="bottom-left">{t('watermarkPdf.bottomLeft') || "Bottom Left"}</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="bottom-center" id="bottom-center" />
+                  <Label htmlFor="bottom-center">{t('watermarkPdf.bottomCenter') || "Bottom Center"}</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="bottom-right" id="bottom-right" />
+                  <Label htmlFor="bottom-right">{t('watermarkPdf.bottomRight') || "Bottom Right"}</Label>
+                </div>
+              </RadioGroup>
+            </div>
+            
+            <div className="space-y-2">
+              <Label className="text-sm">{t('watermarkPdf.applyToPages') || "Apply to Pages"}</Label>
+              <RadioGroup 
+                value={pages} 
+                onValueChange={setPages}
+                className="flex flex-wrap gap-4"
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="all" id="all-pages" />
+                  <Label htmlFor="all-pages">{t('watermarkPdf.all') || "All Pages"}</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="even" id="even-pages" />
+                  <Label htmlFor="even-pages">{t('watermarkPdf.even') || "Even Pages"}</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="odd" id="odd-pages" />
+                  <Label htmlFor="odd-pages">{t('watermarkPdf.odd') || "Odd Pages"}</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="custom" id="custom-pages" />
+                  <Label htmlFor="custom-pages">{t('watermarkPdf.customPages') || "Custom Pages"}</Label>
+                </div>
+              </RadioGroup>
+              
+              {pages === "custom" && (
+  <div className="pt-2">
+    <Input 
+      placeholder="e.g., 1,3,5-10" 
+      value={customPages}
+      onChange={(e) => setCustomPages(e.target.value)}
+    />
+    <p className="text-xs text-muted-foreground mt-1">
+      {t('watermarkPdf.pagesFormat') || "Enter page numbers separated by commas or ranges with hyphens (e.g., 1,3,5-10)"}
+    </p>
+  </div>
+)}
+          </div>
+        </div>
+      </TabsContent>
+      
+      <TabsContent value="preview" className="space-y-6">
+        {pdfPreviewUrl ? renderPdfPreview() : (
+          <div className="flex items-center justify-center p-6 border rounded-lg bg-muted/20">
+            <p className="text-muted-foreground">{t('watermarkPdf.previewNotAvailable') || "Preview not available"}</p>
+          </div>
         )}
-      </Button>
-    </div>
+      </TabsContent>
+    </Tabs>
+    
+    <Button 
+      onClick={handleSubmit} 
+      className="w-full"
+      disabled={isProcessing}
+    >
+      {isProcessing ? (
+        <>
+          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+          {t('watermarkPdf.processing') || "Processing..."}
+        </>
+      ) : (
+        <>
+          <StampIcon className="h-4 w-4 mr-2" />
+          {t('watermarkPdf.addWatermark') || "Add Watermark"}
+        </>
+      )}
+    </Button>
+  </div>
   );
   
   // Render text watermark options
@@ -720,6 +1133,7 @@ export function WatermarkTool({ type }: WatermarkToolProps) {
             onClick={() => {
               setFile(null);
               setResult(null);
+              setPdfPreviewUrl(null);
               if (fileInputRef.current) {
                 fileInputRef.current.value = "";
               }

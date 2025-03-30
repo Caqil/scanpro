@@ -348,31 +348,251 @@ export default {
 
   // Bagian Fitur
   features: {
-    title: "Fitur",
-    description: "Semua yang Anda butuhkan untuk mengonversi dan mengelola file PDF Anda",
-    documentFormats: {
-      title: "Format Dokumen",
-      description: "Konversi ke DOCX, DOC, RTF, ODT, dan lainnya dengan pemformatan dan tata letak yang terjaga sempurna"
+    title: "Alat dan Fitur PDF Tingkat Lanjut | ScanPro",
+    description: "Jelajahi rangkaian lengkap alat dan fitur PDF dari ScanPro untuk manajemen dokumen, konversi, pengeditan, dan lebih banyak lagi.",
+
+    hero: {
+      title: "Alat dan Fitur PDF Tingkat Lanjut",
+      description: "Temukan rangkaian lengkap alat dan fitur yang menjadikan ScanPro solusi utama untuk semua kebutuhan manajemen dokumen Anda."
     },
-    spreadsheets: {
-      title: "Spreadsheet",
-      description: "Ubah PDF ke XLSX, CSV, dan format spreadsheet lainnya dengan struktur sel yang tepat"
+
+    overview: {
+      power: {
+        title: "Pemrosesan Kuat",
+        description: "Algoritma canggih memastikan pemrosesan dan konversi dokumen berkualitas tinggi dengan akurasi luar biasa."
+      },
+      security: {
+        title: "Keamanan Tingkat Bank",
+        description: "Dokumen Anda dilindungi dengan enkripsi SSL 256-bit dan dihapus secara otomatis setelah pemrosesan."
+      },
+      accessibility: {
+        title: "Aksesibilitas Universal",
+        description: "Akses dokumen Anda dan alat kami dari perangkat apa pun dengan kompatibilitas lintas platform penuh."
+      }
     },
-    images: {
-      title: "Gambar",
-      description: "Ekstrak gambar JPG dan PNG berkualitas tinggi dari file PDF Anda dengan kontrol resolusi"
+
+    allFeatures: {
+      title: "Semua Fitur"
     },
-    webFormats: {
-      title: "Format Web",
-      description: "Konversi ke HTML dan format ramah web lainnya untuk publikasi online"
+
+    learnMore: "Pelajari Lebih Lanjut",
+
+    categories: {
+      conversion: {
+        title: "Konversi PDF",
+        description: "Konversi PDF ke berbagai format dan sebaliknya dengan akurasi tinggi dan mempertahankan format.",
+        features: {
+          pdfToWord: {
+            title: "Konversi PDF ke Word",
+            description: "Konversi file PDF menjadi dokumen Word yang dapat diedit dengan format, tabel, dan gambar yang dipertahankan."
+          },
+          pdfToExcel: {
+            title: "Konversi PDF ke Excel",
+            description: "Ekstrak tabel dari PDF ke spreadsheet Excel yang dapat diedit dengan format data yang akurat."
+          },
+          pdfToImage: {
+            title: "Konversi PDF ke Gambar",
+            description: "Konversi halaman PDF menjadi gambar JPG, PNG, atau TIFF berkualitas tinggi dengan resolusi yang dapat disesuaikan."
+          },
+          officeToPdf: {
+            title: "Konversi Office ke PDF",
+            description: "Konversi file Word, Excel, dan PowerPoint ke format PDF dengan tata letak dan format yang dipertahankan."
+          }
+        }
+      },
+
+      editing: {
+        title: "Pengeditan dan Manajemen PDF",
+        description: "Edit, atur, dan optimalkan dokumen PDF Anda dengan rangkaian alat kami yang lengkap.",
+        features: {
+          merge: {
+            title: "Gabungkan PDF",
+            description: "Gabungkan beberapa file PDF menjadi satu dokumen dengan urutan halaman yang dapat disesuaikan."
+          },
+          split: {
+            title: "Pisahkan PDF",
+            description: "Pisahkan PDF besar menjadi dokumen yang lebih kecil berdasarkan rentang halaman atau ekstrak halaman tertentu."
+          },
+          compress: {
+            title: "Kompresi PDF",
+            description: "Kurangi ukuran file PDF sambil mempertahankan kualitas untuk memudahkan berbagi dan penyimpanan."
+          },
+          watermark: {
+            title: "Tambahkan Watermark",
+            description: "Tambahkan watermark teks atau gambar ke PDF Anda dengan transparansi, posisi, dan rotasi yang dapat disesuaikan."
+          }
+        }
+      },
+
+      security: {
+        title: "Keamanan dan Perlindungan PDF",
+        description: "Amankan dokumen PDF Anda dengan enkripsi, perlindungan kata sandi, dan tanda tangan digital.",
+        features: {
+          protect: {
+            title: "Perlindungan Kata Sandi",
+            description: "Enkripsi PDF dengan perlindungan kata sandi untuk mengontrol akses dan mencegah penayangan tanpa izin."
+          },
+          unlock: {
+            title: "Buka Kunci PDF",
+            description: "Hapus perlindungan kata sandi dari PDF yang Anda miliki aksesnya secara sah."
+          },
+          signature: {
+            title: "Tanda Tangan Digital",
+            description: "Tambahkan tanda tangan digital ke PDF untuk autentikasi dan verifikasi dokumen."
+          },
+          redaction: {
+            title: "Redaksi PDF",
+            description: "Hapus informasi sensitif dari dokumen PDF secara permanen."
+          }
+        }
+      },
+
+      ocr: {
+        title: "Teknologi OCR",
+        description: "Ekstrak teks dari dokumen yang dipindai dan gambar menggunakan teknologi OCR canggih kami.",
+        features: {
+          textExtraction: {
+            title: "Ekstraksi Teks",
+            description: "Ekstrak teks dari PDF yang dipindai dan gambar dengan akurasi tinggi dan dukungan bahasa."
+          },
+          searchable: {
+            title: "PDF yang Dapat Dicari",
+            description: "Konversi dokumen yang dipindai menjadi PDF yang dapat dicari dengan pengenalan teks."
+          },
+          multilingual: {
+            title: "Dukungan Multibahasa",
+            description: "Dukungan OCR untuk lebih dari 100 bahasa, termasuk skrip non-Latin dan karakter khusus."
+          },
+          batchProcessing: {
+            title: "Pemrosesan Batch",
+            description: "Proses beberapa dokumen sekaligus dengan kemampuan OCR batch yang efisien."
+          }
+        }
+      },
+
+      api: {
+        title: "API dan Integrasi",
+        description: "Integrasikan kemampuan pemrosesan PDF kami ke dalam aplikasi Anda dengan API kami yang kuat.",
+        features: {
+          restful: {
+            title: "API RESTful",
+            description: "API RESTful sederhana dan kuat untuk pemrosesan PDF dan manajemen dokumen."
+          },
+          sdks: {
+            title: "SDK dan Pustaka",
+            description: "SDK ramah pengembang untuk berbagai bahasa pemrograman, termasuk JavaScript, Python, dan PHP."
+          },
+          webhooks: {
+            title: "Webhook",
+            description: "Pemberitahuan acara real-time untuk alur kerja pemrosesan PDF asinkron."
+          },
+          customization: {
+            title: "Kustomisasi API",
+            description: "Sesuaikan API dengan kebutuhan spesifik Anda dengan titik akhir dan parameter yang dapat disesuaikan."
+          }
+        }
+      },
+
+      cloud: {
+        title: "Platform Cloud",
+        description: "Akses dokumen Anda dari mana saja dengan platform penyimpanan dan pemrosesan cloud kami yang aman.",
+        features: {
+          storage: {
+            title: "Penyimpanan Cloud",
+            description: "Simpan dan akses dokumen Anda dengan aman dari mana saja dengan penyimpanan cloud terenkripsi kami."
+          },
+          sync: {
+            title: "Sinkronisasi Antar Perangkat",
+            description: "Sinkronkan dokumen Anda dengan mulus di semua perangkat Anda untuk akses saat bepergian."
+          },
+          sharing: {
+            title: "Berbagi Dokumen",
+            description: "Bagikan dokumen dengan mudah menggunakan tautan aman dan kontrol izin."
+          },
+          history: {
+            title: "Riwayat Versi",
+            description: "Lacak perubahan dokumen dengan riwayat versi dan pulihkan versi sebelumnya jika diperlukan."
+          }
+        }
+      },
+
+      enterprise: {
+        title: "Fitur Enterprise",
+        description: "Fitur canggih yang dirancang untuk kebutuhan bisnis dan perusahaan.",
+        features: {
+          batch: {
+            title: "Pemrosesan Batch",
+            description: "Proses ratusan dokumen sekaligus dengan sistem pemrosesan batch kami yang efisien."
+          },
+          workflow: {
+            title: "Alur Kerja Kustom",
+            description: "Buat alur kerja pemrosesan dokumen otomatis yang disesuaikan dengan kebutuhan bisnis Anda."
+          },
+          compliance: {
+            title: "Kepatuhan dan Audit",
+            description: "Fitur keamanan yang ditingkatkan untuk kepatuhan terhadap GDPR, HIPAA, dan peraturan lainnya."
+          },
+          analytics: {
+            title: "Analitik Penggunaan",
+            description: "Wawasan mendetail tentang aktivitas pemrosesan dokumen dan operasi pengguna."
+          }
+        }
+      }
     },
-    ocrTech: {
-      title: "Teknologi OCR",
-      description: "Ekstrak teks dari dokumen yang dipindai dengan Pengenalan Karakter Optik canggih"
+
+    mobile: {
+      title: "Aplikasi Mobile ScanPro",
+      description: "Bawa alat PDF canggih dari ScanPro ke mana saja. Aplikasi mobile kami menawarkan fungsi yang sama dalam antarmuka yang ramah mobile.",
+      feature1: {
+        title: "Pindai dan Digitalisasi Dokumen",
+        description: "Gunakan kamera Anda untuk memindai dokumen fisik dan mengonversinya menjadi PDF berkualitas tinggi secara instan."
+      },
+      feature2: {
+        title: "Edit PDF Saat Bepergian",
+        description: "Edit, beri anotasi, dan tanda tangani dokumen PDF dari ponsel pintar atau tablet Anda dengan mudah."
+      },
+      feature3: {
+        title: "Sinkronisasi Cloud",
+        description: "Sinkronkan dokumen Anda dengan mulus di semua perangkat Anda dengan penyimpanan cloud yang aman."
+      }
     },
-    batchProcessing: {
-      title: "Pemrosesan Batch",
-      description: "Konversi beberapa PDF sekaligus untuk menghemat waktu dengan pemrosesan batch yang efisien"
+
+    comparison: {
+      title: "Perbandingan Fitur",
+      description: "Bandingkan berbagai paket kami untuk menemukan yang paling sesuai dengan kebutuhan Anda.",
+      feature: "Fitur",
+      free: "Gratis",
+      basic: "Dasar",
+      pro: "Pro",
+      enterprise: "Perusahaan",
+      features: {
+        convert: "Konversi PDF",
+        merge: "Gabung dan Pisah",
+        compress: "Kompresi",
+        ocr: "OCR Dasar",
+        advancedOcr: "OCR Lanjutan",
+        watermark: "Watermark",
+        protect: "Perlindungan Kata Sandi",
+        api: "Akses API",
+        batch: "Pemrosesan Batch",
+        priority: "Dukungan Prioritas",
+        customWorkflow: "Alur Kerja Kustom",
+        whiteLabel: "Label Putih",
+        dedicated: "Dukungan Khusus"
+      }
+    },
+
+    testimonials: {
+      title: "Apa Kata Pengguna Kami",
+      quote1: "ScanPro telah merevolusi cara tim kami menangani dokumen. Fitur OCR sangat akurat, dan pemrosesan batch menghemat waktu kami berjam-jam setiap minggu.",
+      name1: "Sarah Johnson",
+      title1: "Manajer Operasional",
+      quote2: "Integrasi API berjalan mulus. Kami mengintegrasikan ScanPro ke dalam alur kerja kami, dan perbedaan efisiensinya sangat besar. Tim dukungan mereka juga luar biasa.",
+      name2: "David Chen",
+      title2: "Pemimpin Teknologi",
+      quote3: "Sebagai pemilik usaha kecil, harga yang terjangkau dan rangkaian alat yang lengkap menjadikan ScanPro sangat bernilai. Saya sangat menyukai aplikasi mobile yang memungkinkan saya mengelola dokumen saat bepergian.",
+      name3: "Maria Garcia",
+      title3: "Pemilik Usaha"
     }
   },
 
@@ -792,76 +1012,153 @@ export default {
     protected: "PDF berhasil dilindungi!",
     protectedDesc: "File PDF Anda telah dienkripsi dan dilindungi kata sandi."
   },
-
-  // Halaman Tanda Air
-  watermark: {
-    title: "Tambahkan Tanda Air ke PDF",
-    description: "Lindungi dokumen Anda dengan menambahkan tanda air teks khusus",
-    howTo: {
-      title: "Cara Menambahkan Tanda Air",
-      step1: {
-        title: "Unggah",
-        description: "Unggah file PDF yang ingin Anda tambahkan tanda air. Anda dapat melihat pratinjau sebelum menerapkannya."
-      },
-      step2: {
-        title: "Sesuaikan",
-        description: "Atur teks, posisi, ukuran, warna, dan opacity tanda air sesuai kebutuhan Anda."
-      },
-      step3: {
-        title: "Unduh",
-        description: "Proses dan unduh file PDF Anda yang telah diberi tanda air, siap untuk didistribusikan."
-      }
-    },
-    form: {
-      text: "Teks Tanda Air",
-      textColor: "Warna Teks",
-      opacity: "Opacity",
-      size: "Ukuran",
+  watermarkPdf: {
+    title: "Tambahkan Watermark ke PDF",
+    description: "Tambahkan watermark teks atau gambar kustom ke dokumen PDF Anda untuk perlindungan, branding, atau identifikasi.",
+    textWatermark: "Watermark Teks",
+    imageWatermark: "Watermark Gambar",
+    privacyNote: "File Anda diproses dengan aman. Semua unggahan akan dihapus otomatis setelah pemrosesan.",
+    headerTitle: "Tambahkan Watermark ke PDF",
+    headerDescription: "Tambahkan watermark teks atau gambar kustom ke dokumen PDF Anda untuk branding, perlindungan hak cipta, dan klasifikasi dokumen.",
+    invalidFileType: "Jenis file tidak valid",
+    selectPdfFile: "Silakan pilih file PDF",
+    fileTooLarge: "File terlalu besar",
+    maxFileSize: "Ukuran file maksimum adalah 50 MB",
+    invalidImageType: "Jenis gambar tidak valid",
+    supportedFormats: "Format yang didukung: PNG, JPG, SVG",
+    imageTooLarge: "Gambar terlalu besar",
+    maxImageSize: "Ukuran gambar maksimum adalah 5 MB",
+    noFileSelected: "Tidak ada file yang dipilih",
+    noImageSelected: "Tidak ada gambar watermark yang dipilih",
+    selectWatermarkImage: "Silakan pilih gambar untuk digunakan sebagai watermark",
+    noTextEntered: "Tidak ada teks watermark yang dimasukkan",
+    enterWatermarkText: "Silakan masukkan teks untuk digunakan sebagai watermark",
+    success: "Watermark berhasil ditambahkan",
+    successDesc: "PDF Anda telah diberi watermark dan siap untuk diunduh",
+    failed: "Gagal menambahkan watermark",
+    unknownError: "Terjadi kesalahan yang tidak diketahui",
+    unknownErrorDesc: "Terjadi kesalahan yang tidak diketahui. Silakan coba lagi",
+    uploadTitle: "Unggah PDF untuk Ditambahkan Watermark",
+    uploadDesc: "Seret dan lepas file PDF Anda di sini, atau klik untuk menelusuri",
+    uploading: "Mengunggah...",
+    selectPdf: "Pilih File PDF",
+    maxSize: "Ukuran file maksimum: 50 MB",
+    change: "Ganti File",
+    commonOptions: "Pengaturan Watermark",
+    position: "Posisi",
+    center: "Tengah",
+    tile: "Ubin",
+    custom: "Kustom",
+    applyToPages: "Terapkan ke Halaman",
+    all: "Semua Halaman",
+    even: "Halaman Genap",
+    odd: "Halaman Ganjil",
+    customPages: "Halaman Kustom",
+    pagesFormat: "Masukkan nomor halaman yang dipisahkan dengan koma atau rentang dengan tanda hubung (misalnya, 1,3,5-10)",
+    processing: "Memproses...",
+    addWatermark: "Tambahkan Watermark",
+    adding: "Menambahkan Watermark",
+    pleaseWait: "Harap tunggu saat kami memproses dokumen Anda",
+    download: "Unduh PDF",
+    newWatermark: "Tambahkan Watermark Lain",
+    text: {
+      text: "Teks Watermark",
+      placeholder: "misalnya, RAHASIA, DRAF, dll.",
+      color: "Warna Teks",
+      font: "Font",
+      selectFont: "Pilih Font",
+      size: "Ukuran Font",
+      opacity: "Opasitas",
       rotation: "Rotasi",
-      position: "Posisi",
-      pages: "Halaman untuk Diberi Tanda Air",
-      allPages: "Semua halaman",
-      specificPages: "Halaman tertentu",
-      pageNumbers: "Nomor Halaman",
-      pageNumbersHint: "Masukkan nomor halaman yang dipisahkan dengan koma (misalnya: 1,3,5,8)"
+      preview: "Pratinjau"
     },
-    positions: {
-      topLeft: "Kiri Atas",
-      topCenter: "Tengah Atas",
-      topRight: "Kanan Atas",
-      centerLeft: "Kiri Tengah",
-      center: "Tengah",
-      centerRight: "Kanan Tengah",
-      bottomLeft: "Kiri Bawah",
-      bottomCenter: "Tengah Bawah",
-      bottomRight: "Kanan Bawah"
+    image: {
+      title: "Gambar Watermark",
+      upload: "Unggah gambar untuk digunakan sebagai watermark",
+      select: "Pilih Gambar",
+      formats: "Format yang didukung: PNG, JPEG, SVG",
+      change: "Ganti Gambar",
+      scale: "Skala",
+      opacity: "Opasitas",
+      rotation: "Rotasi"
     },
-    preview: {
-      title: "Pratinjau Tanda Air",
-      note: "Ini adalah pratinjau sederhana. Hasil sebenarnya mungkin berbeda."
+    howTo: {
+      title: "Cara Menambahkan Watermark",
+      step1: { title: "Unggah PDF Anda", description: "Pilih dan unggah file PDF yang ingin Anda beri watermark" },
+      step2: { title: "Kustomisasi Watermark", description: "Pilih antara watermark teks atau gambar dan sesuaikan tampilannya" },
+      step3: { title: "Unduh PDF dengan Watermark", description: "Proses file Anda dan unduh dokumen PDF yang telah diberi watermark" }
+    },
+    why: {
+      title: "Mengapa Menambahkan Watermark",
+      copyright: { title: "Perlindungan Hak Cipta", description: "Lindungi kekayaan intelektual Anda dengan menambahkan pemberitahuan hak cipta dan informasi kepemilikan" },
+      branding: { title: "Branding & Identitas", description: "Perkuat identitas merek Anda dengan menambahkan logo atau teks merek ke dokumen yang didistribusikan" },
+      classification: { title: "Klasifikasi Dokumen", description: "Tandai dokumen sebagai Draf, Rahasia, atau Final untuk menunjukkan statusnya" },
+      tracking: { title: "Pelacakan Dokumen", description: "Tambahkan pengenal unik untuk melacak distribusi dokumen dan mengidentifikasi kebocoran" }
+    },
+    types: {
+      title: "Jenis & Opsi Watermark",
+      text: {
+        title: "Watermark Teks",
+        description: "Kustomisasi watermark teks dengan berbagai opsi:",
+        options: {
+          text: "Konten teks kustom (mendukung multi-baris)",
+          font: "Keluarga font, ukuran, dan warna",
+          rotation: "Sudut rotasi (0-360 derajat)",
+          opacity: "Tingkat opasitas (transparan hingga sepenuhnya terlihat)",
+          position: "Posisi (tengah, ubin, penempatan kustom)"
+        }
+      },
+      image: {
+        title: "Watermark Gambar",
+        description: "Tambahkan watermark gambar dengan kustomisasi ini:",
+        options: {
+          upload: "Unggah logo atau gambar Anda sendiri",
+          scale: "Skala dan ubah ukuran",
+          rotation: "Opsi rotasi",
+          opacity: "Kontrol transparansi",
+          position: "Kustomisasi posisi"
+        }
+      }
     },
     faq: {
       title: "Pertanyaan yang Sering Diajukan",
-      q1: {
-        question: "Jenis tanda air apa yang bisa saya tambahkan?",
-        answer: "Alat kami mendukung tanda air teks dengan konten, posisi, ukuran, warna, opacity, dan rotasi yang dapat disesuaikan. Anda dapat menambahkan tanda air seperti \"RAHASIA,\" \"DRAFT,\" atau nama perusahaan Anda."
-      },
-      q2: {
-        question: "Bisakah saya memberi tanda air hanya pada halaman tertentu di PDF saya?",
-        answer: "Ya, Anda dapat memilih untuk memberi tanda air pada semua halaman atau menentukan halaman mana yang harus memiliki tanda air dengan memasukkan nomor halaman mereka."
-      },
-      q3: {
-        question: "Apakah tanda air bersifat permanen?",
-        answer: "Ya, tanda air tertanam secara permanen di dokumen PDF. Namun, mereka dapat ditempatkan dengan opacity yang bervariasi untuk menyeimbangkan visibilitas dan keterbacaan konten."
-      },
-      q4: {
-        question: "Apakah penandaan air akan memengaruhi kualitas file?",
-        answer: "Tidak, alat penandaan air kami hanya menambahkan teks yang ditentukan tanpa memengaruhi kualitas dokumen asli atau ukuran file secara signifikan."
-      }
+      removable: { question: "Apakah watermark dapat dihapus dari PDF?", answer: "Watermark standar kami bersifat semi-permanen dan sulit dihapus tanpa perangkat lunak khusus. Namun, mereka tidak sepenuhnya tahan manipulasi. Pertimbangkan rencana Pro kami untuk fitur keamanan lanjutan." },
+      printing: { question: "Apakah watermark akan muncul saat dokumen dicetak?", answer: "Ya, watermark akan muncul saat dicetak. Anda dapat mengontrol opasitas untuk membuatnya lebih halus." },
+      pages: { question: "Apakah saya bisa memberi watermark hanya pada halaman tertentu?", answer: "Ya, rencana Pro kami memungkinkan Anda menerapkan watermark pada halaman tertentu." },
+      formats: { question: "Format gambar apa yang didukung untuk watermark gambar?", answer: "Kami mendukung PNG, JPG/JPEG, dan SVG. PNG disarankan untuk logo dengan transparansi." },
+      multiple: { question: "Apakah saya bisa menambahkan beberapa watermark ke satu dokumen?", answer: "Pengguna Pro dapat menambahkan beberapa watermark; pengguna gratis terbatas pada satu watermark." },
+      q1: { question: "Apakah file PDF saya aman?", answer: "Ya, semua unggahan diproses dengan aman dan dihapus otomatis setelah pemrosesan." },
+      q2: { question: "Jenis watermark apa yang bisa saya tambahkan?", answer: "Watermark teks dengan font yang dapat disesuaikan atau watermark gambar menggunakan PNG, JPG, atau SVG." },
+      q3: { question: "Apakah saya bisa menghapus watermark setelah menambahkannya?", answer: "Setelah ditambahkan dan diunduh, watermark menjadi bagian permanen dari PDF." },
+      q4: { question: "Apakah ada batasan ukuran file?", answer: "Ya, ukuran maksimum untuk unggahan PDF adalah 50 MB, dan untuk watermark gambar adalah 5 MB." }
     },
-    addingWatermark: "Menambahkan tanda air ke PDF Anda...",
-    watermarkSuccess: "Tanda air berhasil ditambahkan!",
-    watermarkSuccessDesc: "File PDF Anda telah diberi tanda air dan siap untuk diunduh."
+    bestPractices: {
+      title: "Praktik Terbaik Watermarking",
+      dos: "Lakukan",
+      donts: "Jangan",
+      dosList: [
+        "Gunakan watermark semi-transparan untuk menghindari menutupi konten",
+        "Pertimbangkan watermark diagonal untuk cakupan yang lebih baik",
+        "Uji watermark Anda pada halaman sampel sebelum memproses dokumen besar",
+        "Gunakan warna kontras untuk visibilitas yang lebih baik",
+        "Sertakan simbol hak cipta © untuk perlindungan hukum"
+      ],
+      dontsList: [
+        "Jangan gunakan watermark yang terlalu gelap atau buram",
+        "Jangan tempatkan watermark di atas teks atau elemen penting",
+        "Jangan gunakan teks yang terlalu kecil hingga tidak terbaca",
+        "Jangan hanya mengandalkan watermark untuk keamanan dokumen",
+        "Jangan gunakan gambar beresolusi rendah yang terlihat piksel"
+      ]
+    },
+    relatedTools: {
+      title: "Alat Terkait",
+      protect: "Lindungi PDF",
+      sign: "Tanda Tangan PDF",
+      edit: "Edit PDF",
+      ocr: "OCR PDF",
+      viewAll: "Lihat Semua Alat"
+    }
   },
 
   compressPdf: {

@@ -345,34 +345,252 @@ export default {
       ]
     }
   },
-
-  // Seção de Recursos
   features: {
-    title: "Recursos",
-    description: "Tudo o que você precisa para converter e gerenciar seus arquivos PDF",
-    documentFormats: {
-      title: "Formatos de Documento",
-      description: "Converta para DOCX, DOC, RTF, ODT e mais com preservação perfeita de formatação e layout"
+    title: "Ferramentas e Recursos Avançados de PDF | ScanPro",
+    description: "Explore a suíte abrangente de ferramentas e recursos de PDF da ScanPro para gerenciamento, conversão, edição de documentos e mais.",
+
+    hero: {
+      title: "Ferramentas e Recursos Avançados de PDF",
+      description: "Descubra a suíte abrangente de ferramentas e recursos que fazem da ScanPro a solução definitiva para todas as suas necessidades de gerenciamento de documentos."
     },
-    spreadsheets: {
-      title: "Planilhas",
-      description: "Transforme PDFs em XLSX, CSV e outros formatos de planilha com estruturas de células adequadas"
+
+    overview: {
+      power: {
+        title: "Processamento Poderoso",
+        description: "Algoritmos avançados garantem processamento e conversão de documentos de alta qualidade com precisão excepcional."
+      },
+      security: {
+        title: "Segurança de Nível Bancário",
+        description: "Seus documentos são protegidos com criptografia SSL de 256 bits e excluídos automaticamente após o processamento."
+      },
+      accessibility: {
+        title: "Acessibilidade Universal",
+        description: "Acesse seus documentos e nossas ferramentas de qualquer dispositivo com total compatibilidade entre plataformas."
+      }
     },
-    images: {
-      title: "Imagens",
-      description: "Extraia imagens JPG e PNG de alta qualidade de seus arquivos PDF com controle de resolução"
+
+    allFeatures: {
+      title: "Todos os Recursos"
     },
-    webFormats: {
-      title: "Formatos Web",
-      description: "Converta para HTML e outros formatos amigáveis para a web para publicação online"
+
+    learnMore: "Saiba Mais",
+
+    categories: {
+      conversion: {
+        title: "Conversão de PDF",
+        description: "Converta PDFs de e para vários formatos com alta precisão e retenção de formatação.",
+        features: {
+          pdfToWord: {
+            title: "Conversão de PDF para Word",
+            description: "Converta arquivos PDF em documentos Word editáveis com formatação, tabelas e imagens preservadas."
+          },
+          pdfToExcel: {
+            title: "Conversão de PDF para Excel",
+            description: "Extraia tabelas de PDFs para planilhas Excel editáveis com formatação de dados precisa."
+          },
+          pdfToImage: {
+            title: "Conversão de PDF para Imagem",
+            description: "Converta páginas PDF em imagens JPG, PNG ou TIFF de alta qualidade com resolução personalizável."
+          },
+          officeToPdf: {
+            title: "Conversão de Office para PDF",
+            description: "Converta arquivos Word, Excel e PowerPoint para o formato PDF com layout e formatação preservados."
+          }
+        }
+      },
+
+      editing: {
+        title: "Edição e Gerenciamento de PDF",
+        description: "Edite, organize e otimize seus documentos PDF com nosso conjunto abrangente de ferramentas.",
+        features: {
+          merge: {
+            title: "Mesclar PDFs",
+            description: "Combine vários arquivos PDF em um único documento com ordem de páginas personalizável."
+          },
+          split: {
+            title: "Dividir PDFs",
+            description: "Divida PDFs grandes em documentos menores por intervalos de páginas ou extraia páginas específicas."
+          },
+          compress: {
+            title: "Comprimir PDFs",
+            description: "Reduza o tamanho do arquivo PDF mantendo a qualidade para facilitar o compartilhamento e armazenamento."
+          },
+          watermark: {
+            title: "Adicionar Marcas d'Água",
+            description: "Adicione marcas d'água de texto ou imagem aos seus PDFs com transparência, posição e rotação personalizáveis."
+          }
+        }
+      },
+
+      security: {
+        title: "Segurança e Proteção de PDF",
+        description: "Proteja seus documentos PDF com criptografia, proteção por senha e assinaturas digitais.",
+        features: {
+          protect: {
+            title: "Proteção por Senha",
+            description: "Criptografe PDFs com proteção por senha para controlar o acesso e impedir a visualização não autorizada."
+          },
+          unlock: {
+            title: "Desbloqueio de PDF",
+            description: "Remova a proteção por senha de PDFs onde você tenha acesso autorizado."
+          },
+          signature: {
+            title: "Assinaturas Digitais",
+            description: "Adicione assinaturas digitais a PDFs para autenticação e verificação de documentos."
+          },
+          redaction: {
+            title: "Redação de PDF",
+            description: "Remova permanentemente informações sensíveis de documentos PDF."
+          }
+        }
+      },
+
+      ocr: {
+        title: "Tecnologia OCR",
+        description: "Extraia texto de documentos digitalizados e imagens usando nossa tecnologia OCR avançada.",
+        features: {
+          textExtraction: {
+            title: "Extração de Texto",
+            description: "Extraia texto de PDFs e imagens digitalizadas com alta precisão e suporte a idiomas."
+          },
+          searchable: {
+            title: "PDFs Pesquisáveis",
+            description: "Converta documentos digitalizados em PDFs pesquisáveis com reconhecimento de texto."
+          },
+          multilingual: {
+            title: "Suporte Multilíngue",
+            description: "Suporte OCR para mais de 100 idiomas, incluindo scripts não latinos e caracteres especiais."
+          },
+          batchProcessing: {
+            title: "Processamento em Lote",
+            description: "Processe vários documentos de uma vez com nossas eficientes capacidades de OCR em lote."
+          }
+        }
+      },
+
+      api: {
+        title: "API e Integração",
+        description: "Integre nossas capacidades de processamento de PDF em seus aplicativos com nossa robusta API.",
+        features: {
+          restful: {
+            title: "API RESTful",
+            description: "API RESTful simples e poderosa para processamento de PDF e gerenciamento de documentos."
+          },
+          sdks: {
+            title: "SDKs e Bibliotecas",
+            description: "SDKs amigáveis para desenvolvedores para várias linguagens de programação, incluindo JavaScript, Python e PHP."
+          },
+          webhooks: {
+            title: "Webhooks",
+            description: "Notificações de eventos em tempo real para fluxos de trabalho de processamento de PDF assíncronos."
+          },
+          customization: {
+            title: "Personalização de API",
+            description: "Adapte a API às suas necessidades específicas com pontos de extremidade e parâmetros personalizáveis."
+          }
+        }
+      },
+
+      cloud: {
+        title: "Plataforma na Nuvem",
+        description: "Acesse seus documentos de qualquer lugar com nossa plataforma segura de armazenamento e processamento na nuvem.",
+        features: {
+          storage: {
+            title: "Armazenamento na Nuvem",
+            description: "Armazene e acesse seus documentos com segurança de qualquer lugar com nosso armazenamento na nuvem criptografado."
+          },
+          sync: {
+            title: "Sincronização entre Dispositivos",
+            description: "Sincronize seus documentos perfeitamente em todos os seus dispositivos para acesso em movimento."
+          },
+          sharing: {
+            title: "Compartilhamento de Documentos",
+            description: "Compartilhe documentos facilmente com links seguros e controles de permissão."
+          },
+          history: {
+            title: "Histórico de Versões",
+            description: "Rastreie alterações de documentos com histórico de versões e restaure versões anteriores quando necessário."
+          }
+        }
+      },
+
+      enterprise: {
+        title: "Recursos para Empresas",
+        description: "Recursos avançados projetados para requisitos de negócios e empresas.",
+        features: {
+          batch: {
+            title: "Processamento em Lote",
+            description: "Processe centenas de documentos simultaneamente com nosso eficiente sistema de processamento em lote."
+          },
+          workflow: {
+            title: "Fluxos de Trabalho Personalizados",
+            description: "Crie fluxos de trabalho automatizados de processamento de documentos adaptados às suas necessidades de negócios."
+          },
+          compliance: {
+            title: "Conformidade e Auditoria",
+            description: "Recursos de segurança aprimorados para conformidade com GDPR, HIPAA e outras regulamentações."
+          },
+          analytics: {
+            title: "Análise de Uso",
+            description: "Insights detalhados sobre atividades de processamento de documentos e operações do usuário."
+          }
+        }
+      }
     },
-    ocrTech: {
-      title: "Tecnologia OCR",
-      description: "Extraia texto de documentos digitalizados com Reconhecimento Óptico de Caracteres avançado"
+
+    mobile: {
+      title: "Aplicativo Móvel ScanPro",
+      description: "Leve as poderosas ferramentas de PDF da ScanPro com você em movimento. Nosso aplicativo móvel oferece a mesma funcionalidade robusta em uma interface amigável para dispositivos móveis.",
+      feature1: {
+        title: "Digitalizar e Digitalizar Documentos",
+        description: "Use sua câmera para digitalizar documentos físicos e convertê-los instantaneamente em PDFs de alta qualidade."
+      },
+      feature2: {
+        title: "Editar PDFs em Movimento",
+        description: "Edite, anote e assine documentos PDF a partir do seu smartphone ou tablet com facilidade."
+      },
+      feature3: {
+        title: "Sincronização na Nuvem",
+        description: "Sincronize seus documentos perfeitamente em todos os seus dispositivos com armazenamento seguro na nuvem."
+      }
     },
-    batchProcessing: {
-      title: "Processamento em Lote",
-      description: "Converta vários PDFs de uma vez para economizar tempo com nosso processamento em lote eficiente"
+
+    comparison: {
+      title: "Comparação de Recursos",
+      description: "Compare nossos diferentes planos para encontrar o que melhor atende às suas necessidades.",
+      feature: "Recurso",
+      free: "Grátis",
+      basic: "Básico",
+      pro: "Pro",
+      enterprise: "Empresarial",
+      features: {
+        convert: "Conversão de PDF",
+        merge: "Mesclar e Dividir",
+        compress: "Compressão",
+        ocr: "OCR Básico",
+        advancedOcr: "OCR Avançado",
+        watermark: "Marca d'Água",
+        protect: "Proteção por Senha",
+        api: "Acesso à API",
+        batch: "Processamento em Lote",
+        priority: "Suporte Prioritário",
+        customWorkflow: "Fluxos de Trabalho Personalizados",
+        whiteLabel: "Marca Branca",
+        dedicated: "Suporte Dedicado"
+      }
+    },
+
+    testimonials: {
+      title: "O Que Nossos Usuários Dizem",
+      quote1: "A ScanPro revolucionou a forma como nossa equipe lida com documentos. A funcionalidade OCR é incrivelmente precisa, e o processamento em lote nos economiza horas toda semana.",
+      name1: "Sarah Johnson",
+      title1: "Gerente de Operações",
+      quote2: "A integração da API foi perfeita. Integramos a ScanPro ao nosso fluxo de trabalho e a diferença em eficiência é gritante. A equipe de suporte também é de primeira linha.",
+      name2: "David Chen",
+      title2: "Líder Técnico",
+      quote3: "Como proprietária de uma pequena empresa, o preço acessível e o conjunto abrangente de ferramentas tornam a ScanPro um valor incrível. Adoro especialmente o aplicativo móvel que me permite gerenciar documentos em movimento.",
+      name3: "Maria Garcia",
+      title3: "Proprietária de Negócio"
     }
   },
 
@@ -793,75 +1011,153 @@ export default {
     protectedDesc: "Seu arquivo PDF foi criptografado e protegido por senha."
   },
 
-  // Página de Marca d'Água
-  watermark: {
-    title: "Adicionar Marca d'Água ao PDF",
-    description: "Proteja seus documentos adicionando marcas d'água de texto personalizadas",
-    howTo: {
-      title: "Como Adicionar uma Marca d'Água",
-      step1: {
-        title: "Carregar",
-        description: "Carregue o arquivo PDF ao qual deseja adicionar uma marca d'água. Você pode visualizar como ficará antes de aplicar."
-      },
-      step2: {
-        title: "Personalizar",
-        description: "Defina o texto, posição, tamanho, cor e opacidade da sua marca d'água para atender às suas necessidades."
-      },
-      step3: {
-        title: "Baixar",
-        description: "Processe e baixe seu arquivo PDF com marca d'água pronto para distribuição."
-      }
-    },
-    form: {
-      text: "Texto da Marca d'Água",
-      textColor: "Cor do Texto",
+  watermarkPdf: {
+    title: "Adicionar marca d'água ao PDF",
+    description: "Adicione marcas d'água de texto ou imagem personalizadas aos seus documentos PDF para proteção, branding ou identificação.",
+    textWatermark: "Marca d'água de texto",
+    imageWatermark: "Marca d'água de imagem",
+    privacyNote: "Seus arquivos são processados com segurança. Todos os uploads são automaticamente excluídos após o processamento.",
+    headerTitle: "Adicionar marca d'água ao PDF",
+    headerDescription: "Adicione marcas d'água de texto ou imagem personalizadas aos seus documentos PDF para branding, proteção de direitos autorais e classificação de documentos.",
+    invalidFileType: "Tipo de arquivo inválido",
+    selectPdfFile: "Por favor, selecione um arquivo PDF",
+    fileTooLarge: "Arquivo muito grande",
+    maxFileSize: "O tamanho máximo do arquivo é 50 MB",
+    invalidImageType: "Tipo de imagem inválido",
+    supportedFormats: "Formatos suportados: PNG, JPG, SVG",
+    imageTooLarge: "Imagem muito grande",
+    maxImageSize: "O tamanho máximo da imagem é 5 MB",
+    noFileSelected: "Nenhum arquivo selecionado",
+    noImageSelected: "Nenhuma imagem de marca d'água selecionada",
+    selectWatermarkImage: "Por favor, selecione uma imagem para usar como marca d'água",
+    noTextEntered: "Nenhum texto de marca d'água inserido",
+    enterWatermarkText: "Por favor, insira texto para usar como marca d'água",
+    success: "Marca d'água adicionada com sucesso",
+    successDesc: "Seu PDF foi marcado com marca d'água e está pronto para download",
+    failed: "Falha ao adicionar marca d'água",
+    unknownError: "Ocorreu um erro desconhecido",
+    unknownErrorDesc: "Ocorreu um erro desconhecido. Por favor, tente novamente",
+    uploadTitle: "Carregar PDF para adicionar marca d'água",
+    uploadDesc: "Arraste e solte seu arquivo PDF aqui, ou clique para navegar",
+    uploading: "Carregando...",
+    selectPdf: "Selecionar arquivo PDF",
+    maxSize: "Tamanho máximo do arquivo: 50 MB",
+    change: "Alterar arquivo",
+    commonOptions: "Configurações de marca d'água",
+    position: "Posição",
+    center: "Centro",
+    tile: "Mosaico",
+    custom: "Personalizado",
+    applyToPages: "Aplicar às páginas",
+    all: "Todas as páginas",
+    even: "Páginas pares",
+    odd: "Páginas ímpares",
+    customPages: "Páginas personalizadas",
+    pagesFormat: "Insira números de página separados por vírgulas ou intervalos com hífen (ex.: 1,3,5-10)",
+    processing: "Processando...",
+    addWatermark: "Adicionar marca d'água",
+    adding: "Adicionando marca d'água",
+    pleaseWait: "Por favor, aguarde enquanto processamos seu documento",
+    download: "Baixar PDF",
+    newWatermark: "Adicionar outra marca d'água",
+    text: {
+      text: "Texto da marca d'água",
+      placeholder: "ex.: CONFIDENCIAL, RASCUNHO, etc.",
+      color: "Cor do texto",
+      font: "Fonte",
+      selectFont: "Selecionar fonte",
+      size: "Tamanho da fonte",
       opacity: "Opacidade",
-      size: "Tamanho",
       rotation: "Rotação",
-      position: "Posição",
-      pages: "Páginas para Adicionar Marca d'Água",
-      allPages: "Todas as páginas",
-      specificPages: "Páginas específicas",
-      pageNumbers: "Números de Página",
-      pageNumbersHint: "Insira números de página separados por vírgulas (ex.: 1,3,5,8)"
+      preview: "Visualização"
     },
-    positions: {
-      topLeft: "Superior Esquerdo",
-      topCenter: "Superior Central",
-      topRight: "Superior Direito",
-      centerLeft: "Central Esquerdo",
-      center: "Central",
-      centerRight: "Central Direito",
-      bottomLeft: "Inferior Esquerdo",
-      bottomCenter: "Inferior Central",
-      bottomRight: "Inferior Direito"
+    image: {
+      title: "Imagem da marca d'água",
+      upload: "Carregar uma imagem para usar como marca d'água",
+      select: "Selecionar imagem",
+      formats: "Formatos suportados: PNG, JPEG, SVG",
+      change: "Alterar imagem",
+      scale: "Escala",
+      opacity: "Opacidade",
+      rotation: "Rotação"
     },
-    preview: {
-      title: "Pré-visualização da Marca d'Água",
-      note: "Esta é uma pré-visualização simplificada. O resultado real pode variar."
+    howTo: {
+      title: "Como adicionar uma marca d'água",
+      step1: { title: "Carregar seu PDF", description: "Selecione e carregue o arquivo PDF ao qual deseja adicionar uma marca d'água" },
+      step2: { title: "Personalizar marca d'água", description: "Escolha entre marca d'água de texto ou imagem e personalize sua aparência" },
+      step3: { title: "Baixar PDF com marca d'água", description: "Processe seu arquivo e baixe o documento PDF com marca d'água" }
+    },
+    why: {
+      title: "Por que adicionar marcas d'água",
+      copyright: { title: "Proteção de direitos autorais", description: "Proteja sua propriedade intelectual adicionando avisos de direitos autorais e informações de propriedade" },
+      branding: { title: "Branding e identidade", description: "Reforce sua identidade de marca adicionando logotipos ou texto de marca a documentos distribuídos" },
+      classification: { title: "Classificação de documentos", description: "Marque documentos como Rascunho, Confidencial ou Final para indicar seu status" },
+      tracking: { title: "Rastreamento de documentos", description: "Adicione identificadores únicos para rastrear a distribuição de documentos e identificar vazamentos" }
+    },
+    types: {
+      title: "Tipos e opções de marcas d'água",
+      text: {
+        title: "Marca d'água de texto",
+        description: "Personalize marcas d'água de texto com várias opções:",
+        options: {
+          text: "Conteúdo de texto personalizado (suporte a várias linhas)",
+          font: "Família da fonte, tamanho e cor",
+          rotation: "Ângulo de rotação (0-360 graus)",
+          opacity: "Nível de opacidade (transparente a totalmente visível)",
+          position: "Posição (centro, mosaico, posicionamento personalizado)"
+        }
+      },
+      image: {
+        title: "Marca d'água de imagem",
+        description: "Adicione marcas d'água de imagem com estas personalizações:",
+        options: {
+          upload: "Carregue seu próprio logotipo ou imagem",
+          scale: "Escala e redimensionamento",
+          rotation: "Opções de rotação",
+          opacity: "Controle de transparência",
+          position: "Personalização de posição"
+        }
+      }
     },
     faq: {
-      title: "Perguntas Frequentes",
-      q1: {
-        question: "Que tipo de marcas d'água posso adicionar?",
-        answer: "Nossa ferramenta suporta marcas d'água de texto com conteúdo, posição, tamanho, cor, opacidade e rotação personalizáveis. Você pode adicionar marcas d'água como \"CONFIDENCIAL\", \"RASCUNHO\" ou o nome da sua empresa."
-      },
-      q2: {
-        question: "Posso adicionar marca d'água apenas em páginas específicas do meu PDF?",
-        answer: "Sim, você pode escolher adicionar marca d'água em todas as páginas ou especificar quais páginas devem ter a marca d'água inserindo seus números de página."
-      },
-      q3: {
-        question: "As marcas d'água são permanentes?",
-        answer: "Sim, as marcas d'água são permanentemente incorporadas ao documento PDF. No entanto, elas podem ser colocadas com opacidade variável para equilibrar visibilidade e legibilidade do conteúdo."
-      },
-      q4: {
-        question: "A adição de marca d'água afetará a qualidade do arquivo?",
-        answer: "Não, nossa ferramenta de marca d'água apenas adiciona o texto especificado sem afetar significativamente a qualidade ou o tamanho do documento original."
-      }
+      title: "Perguntas frequentes",
+      removable: { question: "As marcas d'água podem ser removidas de um PDF?", answer: "Nossas marcas d'água padrão são semipermanentes e difíceis de remover sem software especializado. No entanto, não são completamente à prova de adulteração. Considere nosso plano Pro para marcas d'água mais seguras." },
+      printing: { question: "As marcas d'água aparecerão ao imprimir o documento?", answer: "Sim, as marcas d'água aparecerão ao imprimir. Você pode controlar a opacidade para torná-las mais sutis." },
+      pages: { question: "Posso adicionar marcas d'água apenas em páginas específicas?", answer: "Sim, nosso plano Pro permite aplicar marcas d'água em páginas específicas." },
+      formats: { question: "Quais formatos de imagem são suportados para marcas d'água?", answer: "Suportamos PNG, JPG/JPEG e SVG. PNG é recomendado para logotipos com transparência." },
+      multiple: { question: "Posso adicionar várias marcas d'água a um único documento?", answer: "Usuários Pro podem adicionar várias marcas d'água; usuários gratuitos estão limitados a uma." },
+      q1: { question: "Meu arquivo PDF está seguro?", answer: "Sim, todos os uploads são processados com segurança e excluídos automaticamente após o processamento." },
+      q2: { question: "Que tipos de marcas d'água posso adicionar?", answer: "Marcas d'água de texto com fontes personalizáveis ou marcas d'água de imagem usando PNG, JPG ou SVG." },
+      q3: { question: "Posso remover uma marca d'água depois de adicioná-la?", answer: "Uma vez adicionada e baixada, a marca d'água torna-se parte permanente do PDF." },
+      q4: { question: "Há limite de tamanho de arquivo?", answer: "Sim, o tamanho máximo para uploads de PDF é 50 MB e para imagens de marca d'água é 5 MB." }
     },
-    addingWatermark: "Adicionando marca d'água ao seu PDF...",
-    watermarkSuccess: "Marca d'água adicionada com sucesso!",
-    watermarkSuccessDesc: "Seu arquivo PDF foi marcado com marca d'água e está pronto para download."
+    bestPractices: {
+      title: "Melhores práticas para marcas d'água",
+      dos: "Faça",
+      donts: "Não faça",
+      dosList: [
+        "Use marcas d'água semitransparentes para evitar obscurecer o conteúdo",
+        "Considere marcas d'água diagonais para melhor cobertura",
+        "Teste sua marca d'água em uma página de amostra antes de processar documentos grandes",
+        "Use cores contrastantes para melhor visibilidade",
+        "Inclua o símbolo de direitos autorais © para proteção legal"
+      ],
+      dontsList: [
+        "Não use marcas d'água muito escuras ou opacas",
+        "Não coloque marcas d'água sobre texto ou elementos importantes",
+        "Não use texto muito pequeno que se torne ilegível",
+        "Não confie apenas em marcas d'água para a segurança do documento",
+        "Não use imagens de baixa resolução que pareçam pixeladas"
+      ]
+    },
+    relatedTools: {
+      title: "Ferramentas relacionadas",
+      protect: "Proteger PDF",
+      sign: "Assinar PDF",
+      edit: "Editar PDF",
+      ocr: "OCR PDF",
+      viewAll: "Ver todas as ferramentas"
+    }
   },
   compressPdf: {
     title: "Comprimir arquivos PDF",
