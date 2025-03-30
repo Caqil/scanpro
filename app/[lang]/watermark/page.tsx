@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { PdfWatermarker } from "@/components/pdf-watermarker";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   WatermarkHeaderSection,
   HowToWatermarkSection,
@@ -21,6 +21,7 @@ import koTranslations from '@/src/lib/i18n/locales/ko';
 import itTranslations from '@/src/lib/i18n/locales/it';
 import trTranslations from '@/src/lib/i18n/locales/tr';
 import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
+import { WatermarkTool } from "@/components/watermark-tool";
 
 type Language = typeof SUPPORTED_LANGUAGES[number];
 
@@ -141,15 +142,27 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   };
 }
 
+
 export default function WatermarkPDFPage() {
   return (
     <div className="container max-w-5xl py-12 mx-auto">
       <WatermarkHeaderSection />
-
-      {/* Main Tool Card */}
-      <div className="mb-8">
-        <PdfWatermarker />
+   {/* Main Tool Section with Tabs */}
+      <div className="mb-12">
+        <Tabs defaultValue="text" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 mb-8">
+            <TabsTrigger value="text">Text Watermark</TabsTrigger>
+            <TabsTrigger value="image">Image Watermark</TabsTrigger>
+          </TabsList>
+          <TabsContent value="text">
+            <WatermarkTool type="text" />
+          </TabsContent>
+          <TabsContent value="image">
+            <WatermarkTool type="image" />
+          </TabsContent>
+        </Tabs>
       </div>
+     
 
       {/* How It Works */}
       <HowToWatermarkSection />
