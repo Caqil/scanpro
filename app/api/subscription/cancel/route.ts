@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from "@/lib/auth";
 import { prisma } from '@/lib/prisma';
-import axios from 'axios';
+import { cancelPayPalSubscription } from '@/lib/paypal';
 
 export async function POST(request: NextRequest) {
     try {
@@ -36,30 +36,26 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // In a real implementation, you would call RevenueCat API to cancel the subscription
-        // For example:
-        if (user.subscription.revenueCatId) {
+        // If there's a PayPal subscription ID, cancel it
+        if (user.subscription.paypalId) {
             try {
-                await axios.post(
-                    `https://api.revenuecat.com/v1/subscribers/${user.subscription.revenueCatId}/subscriptions/cancel`,
-                    {},
-                    {
-                        headers: {
-                            'Authorization': `Bearer ${process.env.REVENUECAT_API_KEY}`
-                        }
-                    }
+                await cancelPayPalSubscription(
+                    user.subscription.paypalId,
+                    'Customer requested cancellation'
                 );
-            } catch (revenueCatError) {
-                console.error('RevenueCat cancel error:', revenueCatError);
+            } catch (paypalError) {
+                console.error('PayPal cancel error:', paypalError);
                 // Continue anyway to update our database
             }
         }
 
         // Update subscription status in our database
+        // Most payment providers will keep the subscription active until the end of the billing period
         await prisma.subscription.update({
             where: { userId: user.id },
             data: {
-                status: 'canceled'
+                status: 'canceled',
+                cancelAtPeriodEnd: true
                 // Note: We don't change the tier immediately, as users typically
                 // maintain access until the end of their billing period
             }
