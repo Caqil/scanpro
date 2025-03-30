@@ -356,34 +356,259 @@ export default {
       ]
     }
   },
-
-  // Features section
   features: {
-    title: "Features",
-    description: "Everything you need to convert and manage your PDF files",
-    documentFormats: {
-      title: "Document Formats",
-      description: "Convert to DOCX, DOC, RTF, ODT and more with perfect formatting and layout preservation"
+    title: "Advanced PDF Tools & Features | ScanPro",
+    description: "Explore ScanPro's comprehensive suite of PDF tools and features for document management, conversion, editing, and more.",
+
+    hero: {
+      title: "Advanced PDF Tools & Features",
+      description: "Discover the comprehensive suite of tools and features that make ScanPro the ultimate solution for all your document management needs."
     },
-    spreadsheets: {
-      title: "Spreadsheets",
-      description: "Transform PDFs to XLSX, CSV and other spreadsheet formats with proper cell structures"
+
+    overview: {
+      power: {
+        title: "Powerful Processing",
+        description: "Advanced algorithms ensure high-quality document processing and conversion with exceptional accuracy."
+      },
+      security: {
+        title: "Bank-Level Security",
+        description: "Your documents are protected with 256-bit SSL encryption and automatically deleted after processing."
+      },
+      accessibility: {
+        title: "Universal Accessibility",
+        description: "Access your documents and our tools from any device with full cross-platform compatibility."
+      }
     },
-    images: {
-      title: "Images",
-      description: "Extract high-quality JPG and PNG images from your PDF files with resolution control"
+
+    allFeatures: {
+      title: "All Features"
     },
-    webFormats: {
-      title: "Web Formats",
-      description: "Convert to HTML and other web-friendly formats for online publishing"
+
+    learnMore: "Learn More",
+
+    categories: {
+      conversion: {
+        title: "PDF Conversion",
+        description: "Convert PDFs to and from various formats with high accuracy and formatting retention.",
+        features: {
+          pdfToWord: {
+            title: "PDF to Word Conversion",
+            description: "Convert PDF files to editable Word documents with preserved formatting, tables, and images."
+          },
+          pdfToExcel: {
+            title: "PDF to Excel Conversion",
+            description: "Extract tables from PDFs into editable Excel spreadsheets with accurate data formatting."
+          },
+          pdfToImage: {
+            title: "PDF to Image Conversion",
+            description: "Convert PDF pages to high-quality JPG, PNG, or TIFF images with customizable resolution."
+          },
+          officeToPdf: {
+            title: "Office to PDF Conversion",
+            description: "Convert Word, Excel, PowerPoint files to PDF format with preserved layout and formatting."
+          }
+        }
+      },
+
+      editing: {
+        title: "PDF Editing & Management",
+        description: "Edit, organize, and optimize your PDF documents with our comprehensive toolset.",
+        features: {
+          merge: {
+            title: "Merge PDFs",
+            description: "Combine multiple PDF files into a single document with customizable page ordering."
+          },
+          split: {
+            title: "Split PDFs",
+            description: "Divide large PDFs into smaller documents by page ranges or extract specific pages."
+          },
+          compress: {
+            title: "Compress PDFs",
+            description: "Reduce PDF file size while maintaining quality for easier sharing and storage."
+          },
+          watermark: {
+            title: "Add Watermarks",
+            description: "Add text or image watermarks to your PDFs with customizable transparency, position, and rotation."
+          }
+        }
+      },
+
+      security: {
+        title: "PDF Security & Protection",
+        description: "Secure your PDF documents with encryption, password protection, and digital signatures.",
+        features: {
+          protect: {
+            title: "Password Protection",
+            description: "Encrypt PDFs with password protection to control access and prevent unauthorized viewing."
+          },
+          unlock: {
+            title: "PDF Unlocking",
+            description: "Remove password protection from PDFs where you have authorized access."
+          },
+          signature: {
+            title: "Digital Signatures",
+            description: "Add digital signatures to PDFs for document authentication and verification."
+          },
+          redaction: {
+            title: "PDF Redaction",
+            description: "Permanently remove sensitive information from PDF documents."
+          }
+        }
+      },
+
+      ocr: {
+        title: "OCR Technology",
+        description: "Extract text from scanned documents and images using our advanced OCR technology.",
+        features: {
+          textExtraction: {
+            title: "Text Extraction",
+            description: "Extract text from scanned PDFs and images with high accuracy and language support."
+          },
+          searchable: {
+            title: "Searchable PDFs",
+            description: "Convert scanned documents into searchable PDFs with text recognition."
+          },
+          multilingual: {
+            title: "Multilingual Support",
+            description: "OCR support for over 100 languages including non-Latin scripts and special characters."
+          },
+          batchProcessing: {
+            title: "Batch Processing",
+            description: "Process multiple documents at once with our efficient batch OCR capabilities."
+          }
+        }
+      },
+
+      api: {
+        title: "API & Integration",
+        description: "Integrate our PDF processing capabilities into your applications with our robust API.",
+        features: {
+          restful: {
+            title: "RESTful API",
+            description: "Simple and powerful RESTful API for PDF processing and document management."
+          },
+          sdks: {
+            title: "SDKs & Libraries",
+            description: "Developer-friendly SDKs for various programming languages including JavaScript, Python, and PHP."
+          },
+          webhooks: {
+            title: "Webhooks",
+            description: "Real-time event notifications for asynchronous PDF processing workflows."
+          },
+          customization: {
+            title: "API Customization",
+            description: "Tailor the API to your specific needs with customizable endpoints and parameters."
+          }
+        }
+      },
+
+      cloud: {
+        title: "Cloud Platform",
+        description: "Access your documents from anywhere with our secure cloud storage and processing platform.",
+        features: {
+          storage: {
+            title: "Cloud Storage",
+            description: "Securely store and access your documents from anywhere with our encrypted cloud storage."
+          },
+          sync: {
+            title: "Cross-Device Sync",
+            description: "Seamlessly sync your documents across all your devices for access on the go."
+          },
+          sharing: {
+            title: "Document Sharing",
+            description: "Easily share documents with secure links and permission controls."
+          },
+          history: {
+            title: "Version History",
+            description: "Track document changes with version history and restore previous versions when needed."
+          }
+        }
+      },
+
+      enterprise: {
+        title: "Enterprise Features",
+        description: "Advanced features designed for business and enterprise requirements.",
+        features: {
+          batch: {
+            title: "Batch Processing",
+            description: "Process hundreds of documents simultaneously with our efficient batch processing system."
+          },
+          workflow: {
+            title: "Custom Workflows",
+            description: "Create automated document processing workflows tailored to your business needs."
+          },
+          compliance: {
+            title: "Compliance & Audit",
+            description: "Enhanced security features for GDPR, HIPAA, and other regulatory compliance."
+          },
+          analytics: {
+            title: "Usage Analytics",
+            description: "Detailed insights into document processing activities and user operations."
+          }
+        }
+      }
     },
-    ocrTech: {
-      title: "OCR Technology",
-      description: "Extract text from scanned documents with advanced Optical Character Recognition"
+
+    mobile: {
+      title: "ScanPro Mobile App",
+      description: "Take ScanPro's powerful PDF tools with you on the go. Our mobile app offers the same robust functionality in a convenient, mobile-friendly interface.",
+      feature1: {
+        title: "Scan & Digitize Documents",
+        description: "Use your camera to scan physical documents and convert them to high-quality PDFs instantly."
+      },
+      feature2: {
+        title: "Edit PDFs On the Go",
+        description: "Edit, annotate, and sign PDF documents from your smartphone or tablet with ease."
+      },
+      feature3: {
+        title: "Cloud Synchronization",
+        description: "Seamlessly sync your documents across all your devices with secure cloud storage."
+      }
     },
-    batchProcessing: {
-      title: "Batch Processing",
-      description: "Convert multiple PDFs at once to save time with our efficient batch processing"
+
+    comparison: {
+      title: "Feature Comparison",
+      description: "Compare our different plans to find the one that best suits your needs.",
+      feature: "Feature",
+      free: "Free",
+      basic: "Basic",
+      pro: "Pro",
+      enterprise: "Enterprise",
+      features: {
+        convert: "PDF Conversion",
+        merge: "Merge & Split",
+        compress: "Compression",
+        ocr: "OCR Basic",
+        advancedOcr: "Advanced OCR",
+        watermark: "Watermarking",
+        protect: "Password Protection",
+        api: "API Access",
+        batch: "Batch Processing",
+        priority: "Priority Support",
+        customWorkflow: "Custom Workflows",
+        whiteLabel: "White Labeling",
+        dedicated: "Dedicated Support"
+      }
+    },
+
+    testimonials: {
+      title: "What Our Users Say",
+      quote1: "ScanPro has revolutionized the way our team handles documents. The OCR functionality is incredibly accurate, and the batch processing saves us hours every week.",
+      name1: "Sarah Johnson",
+      title1: "Operations Manager",
+      quote2: "The API integration was seamless. We've integrated ScanPro into our workflow and the difference in efficiency is night and day. Their support team is also top-notch.",
+      name2: "David Chen",
+      title2: "Tech Lead",
+      quote3: "As a small business owner, the affordable pricing and comprehensive toolset make ScanPro an incredible value. I especially love the mobile app which lets me handle documents on the go.",
+      name3: "Maria Garcia",
+      title3: "Business Owner"
+    },
+
+    cta: {
+      title: "Ready to Transform Your Document Workflow?",
+      description: "Join thousands of satisfied users who have streamlined their document management with ScanPro.",
+      pricing: "View Pricing",
+      explore: "Explore Tools"
     }
   },
 
@@ -804,76 +1029,226 @@ export default {
     protected: "PDF successfully protected!",
     protectedDesc: "Your PDF file has been encrypted and password-protected."
   },
-
-  // Watermark Page
-  watermark: {
+  watermarkPdf: {
+    // Main titles and basic UI elements
     title: "Add Watermark to PDF",
-    description: "Protect your documents by adding custom text watermarks",
+    description: "Add custom text or image watermarks to your PDF documents for protection, branding, or identification.",
+    textWatermark: "Text Watermark",
+    imageWatermark: "Image Watermark",
+    privacyNote: "Your files are processed securely. All uploads are automatically deleted after processing.",
+
+    // Header section
+    headerTitle: "Add Watermark to PDF",
+    headerDescription: "Add custom text or image watermarks to your PDF documents for branding, copyright protection, and document classification",
+
+    // Error messages
+    invalidFileType: "Invalid file type",
+    selectPdfFile: "Please select a PDF file",
+    fileTooLarge: "File too large",
+    maxFileSize: "Maximum file size is 50MB",
+    invalidImageType: "Invalid image type",
+    supportedFormats: "Supported formats: PNG, JPG, SVG",
+    imageTooLarge: "Image too large",
+    maxImageSize: "Maximum image size is 5MB",
+    noFileSelected: "No file selected",
+    noImageSelected: "No watermark image selected",
+    selectWatermarkImage: "Please select an image to use as watermark",
+    noTextEntered: "No watermark text entered",
+    enterWatermarkText: "Please enter text to use as watermark",
+
+    // Success/failure messages
+    success: "Watermark added successfully",
+    successDesc: "Your PDF has been watermarked and is ready for download",
+    failed: "Failed to add watermark",
+    unknownError: "An unknown error occurred",
+    unknownErrorDesc: "An unknown error occurred. Please try again",
+
+    // Upload and processing UI
+    uploadTitle: "Upload PDF to Watermark",
+    uploadDesc: "Drag and drop your PDF file here, or click to browse",
+    uploading: "Uploading...",
+    selectPdf: "Select PDF File",
+    maxSize: "Maximum file size: 50MB",
+    change: "Change File",
+    commonOptions: "Watermark Settings",
+    position: "Position",
+    center: "Center",
+    tile: "Tile",
+    custom: "Custom",
+    applyToPages: "Apply to Pages",
+    all: "All Pages",
+    even: "Even Pages",
+    odd: "Odd Pages",
+    customPages: "Custom Pages",
+    pagesFormat: "Enter page numbers separated by commas or ranges with hyphens (e.g., 1,3,5-10)",
+    processing: "Processing...",
+    addWatermark: "Add Watermark",
+    adding: "Adding Watermark",
+    pleaseWait: "Please wait while we process your document",
+    download: "Download PDF",
+    newWatermark: "Add Another Watermark",
+
+    // Text watermark options
+    text: {
+      text: "Watermark Text",
+      placeholder: "e.g., CONFIDENTIAL, DRAFT, etc.",
+      color: "Text Color",
+      font: "Font",
+      selectFont: "Select Font",
+      size: "Font Size",
+      opacity: "Opacity",
+      rotation: "Rotation",
+      preview: "Preview"
+    },
+
+    // Image watermark options
+    image: {
+      title: "Watermark Image",
+      upload: "Upload an image to use as watermark",
+      select: "Select Image",
+      formats: "Supported formats: PNG, JPEG, SVG",
+      change: "Change Image",
+      scale: "Scale",
+      opacity: "Opacity",
+      rotation: "Rotation"
+    },
+
+    // How to section
     howTo: {
       title: "How to Add a Watermark",
       step1: {
-        title: "Upload",
-        description: "Upload the PDF file you want to add a watermark to. You can preview how it will look before applying."
+        title: "Upload Your PDF",
+        description: "Select and upload the PDF file you want to add a watermark to"
       },
       step2: {
-        title: "Customize",
-        description: "Set the text, position, size, color, and opacity of your watermark to match your needs."
+        title: "Customize Watermark",
+        description: "Choose between text or image watermark and customize its appearance"
       },
       step3: {
-        title: "Download",
-        description: "Process and download your watermarked PDF file ready for distribution."
+        title: "Download Watermarked PDF",
+        description: "Process your file and download the watermarked PDF document"
       }
     },
-    form: {
-      text: "Watermark Text",
-      textColor: "Text Color",
-      opacity: "Opacity",
-      size: "Size",
-      rotation: "Rotation",
-      position: "Position",
-      pages: "Pages to Watermark",
-      allPages: "All pages",
-      specificPages: "Specific pages",
-      pageNumbers: "Page Numbers",
-      pageNumbersHint: "Enter page numbers separated by commas (e.g. 1,3,5,8)"
+
+    // Why watermark section
+    why: {
+      title: "Why Add Watermarks",
+      copyright: {
+        title: "Copyright Protection",
+        description: "Protect your intellectual property by adding copyright notices and ownership information"
+      },
+      branding: {
+        title: "Branding & Identity",
+        description: "Reinforce your brand identity by adding logos or brand text to distributed documents"
+      },
+      classification: {
+        title: "Document Classification",
+        description: "Mark documents as Draft, Confidential, or Final to indicate their status"
+      },
+      tracking: {
+        title: "Document Tracking",
+        description: "Add unique identifiers to track document distribution and identify leaks"
+      }
     },
-    positions: {
-      topLeft: "Top Left",
-      topCenter: "Top Center",
-      topRight: "Top Right",
-      centerLeft: "Center Left",
-      center: "Center",
-      centerRight: "Center Right",
-      bottomLeft: "Bottom Left",
-      bottomCenter: "Bottom Center",
-      bottomRight: "Bottom Right"
+
+    // Watermark types section
+    types: {
+      title: "Watermark Types & Options",
+      text: {
+        title: "Text Watermark",
+        description: "Customize text watermarks with various options:",
+        options: {
+          text: "Custom text content (multi-line supported)",
+          font: "Font family, size, and color",
+          rotation: "Rotation angle (0-360 degrees)",
+          opacity: "Opacity level (transparent to fully visible)",
+          position: "Position (center, tiled, custom placement)"
+        }
+      },
+      image: {
+        title: "Image Watermark",
+        description: "Add image watermarks with these customizations:",
+        options: {
+          upload: "Upload your own logo or image",
+          scale: "Scale and resize",
+          rotation: "Rotation options",
+          opacity: "Transparency control",
+          position: "Position customization"
+        }
+      }
     },
-    preview: {
-      title: "Watermark Preview",
-      note: "This is a simplified preview. The actual result may vary."
-    },
+
+    // FAQ section
     faq: {
       title: "Frequently Asked Questions",
+      removable: {
+        question: "Can watermarks be removed from a PDF?",
+        answer: "Our standard watermarks are semi-permanent and difficult to remove without specialized software. However, they are not completely tamper-proof. For more secure, tamper-resistant watermarking, consider our Pro plan which offers advanced security features that embed watermarks more deeply into the document structure."
+      },
+      printing: {
+        question: "Will watermarks appear when the document is printed?",
+        answer: "Yes, watermarks will appear when the document is printed. You can control the opacity to make them more subtle for printed documents while still being visible. The text watermarks will always print, while image watermarks will print based on your opacity settings."
+      },
+      pages: {
+        question: "Can I watermark specific pages only?",
+        answer: "Yes, our Pro plan allows you to apply watermarks to specific pages rather than the entire document. You can select individual pages, ranges, or even apply different watermarks to different sections of your document."
+      },
+      formats: {
+        question: "What image formats are supported for image watermarks?",
+        answer: "We support PNG, JPG/JPEG, and SVG formats for image watermarks. PNG is recommended for logos and images that require transparency. For best results, use high-resolution images with transparent backgrounds."
+      },
+      multiple: {
+        question: "Can I add multiple watermarks to a single document?",
+        answer: "Pro users can add multiple watermarks to a single document, such as combining a logo in the corner with a 'Confidential' text watermark diagonally across the page. Free users are limited to one watermark per document."
+      },
       q1: {
-        question: "What kind of watermarks can I add?",
-        answer: "Our tool supports text watermarks with customizable content, position, size, color, opacity, and rotation. You can add watermarks like \"CONFIDENTIAL,\" \"DRAFT,\" or your company name."
+        question: "Is my PDF file secure?",
+        answer: "Yes, all uploads are processed securely on our servers and automatically deleted after processing. We don't store or share your files."
       },
       q2: {
-        question: "Can I watermark only specific pages in my PDF?",
-        answer: "Yes, you can choose to watermark all pages or specify which pages should have the watermark by entering their page numbers."
+        question: "What types of watermarks can I add?",
+        answer: "You can add text watermarks with customizable fonts, colors, and opacity, or image watermarks using PNG, JPG, or SVG files."
       },
       q3: {
-        question: "Are the watermarks permanent?",
-        answer: "Yes, the watermarks are permanently embedded in the PDF document. However, they can be placed with varying opacity to balance visibility and legibility of the content."
+        question: "Can I remove a watermark after adding it?",
+        answer: "Once a watermark is added and the file is downloaded, it becomes a permanent part of the PDF. There's no automatic way to remove it."
       },
       q4: {
-        question: "Will watermarking affect the file quality?",
-        answer: "No, our watermarking tool only adds the specified text without affecting the original document quality or file size significantly."
+        question: "Is there a file size limit?",
+        answer: "Yes, the maximum file size for PDF uploads is 50MB. For image watermarks, the maximum size is 5MB."
       }
     },
-    addingWatermark: "Adding watermark to your PDF...",
-    watermarkSuccess: "Watermark successfully added!",
-    watermarkSuccessDesc: "Your PDF file has been watermarked and is ready for download."
+
+    // Best practices section
+    bestPractices: {
+      title: "Watermarking Best Practices",
+      dos: "Do's",
+      donts: "Don'ts",
+      dosList: [
+        "Use semi-transparent watermarks to avoid obscuring content",
+        "Consider diagonal watermarks for better coverage",
+        "Test your watermark on a sample page before processing large documents",
+        "Use contrasting colors for better visibility",
+        "Include copyright symbol © for legal protection"
+      ],
+      dontsList: [
+        "Don't use watermarks that are too dark or opaque",
+        "Don't place watermarks over important text or elements",
+        "Don't use extremely small text that becomes illegible",
+        "Don't rely solely on watermarks for document security",
+        "Don't use low-resolution images that appear pixelated"
+      ]
+    },
+
+    // Related tools section
+    relatedTools: {
+      title: "Related Tools",
+      protect: "Protect PDF",
+      sign: "Sign PDF",
+      edit: "Edit PDF",
+      ocr: "OCR PDF",
+      viewAll: "View All Tools"
+    }
   },
 
   // Compress PDF

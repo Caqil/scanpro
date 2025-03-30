@@ -348,31 +348,251 @@ export default {
 
   // Features section
   features: {
-    title: "Características",
-    description: "Todo lo que necesitas para convertir y gestionar tus archivos PDF",
-    documentFormats: {
-      title: "Formatos de Documentos",
-      description: "Convierte a DOCX, DOC, RTF, ODT y más con preservación perfecta de formato y diseño"
+    title: "Strumenti e Funzionalità Avanzate per PDF | ScanPro",
+    description: "Esplora la suite completa di strumenti e funzionalità PDF di ScanPro per la gestione, conversione, modifica dei documenti e altro ancora.",
+
+    hero: {
+      title: "Strumenti e Funzionalità Avanzate per PDF",
+      description: "Scopri la suite completa di strumenti e funzionalità che rendono ScanPro la soluzione definitiva per tutte le tue esigenze di gestione dei documenti."
     },
-    spreadsheets: {
-      title: "Hojas de Cálculo",
-      description: "Transforma PDFs a XLSX, CSV y otros formatos de hojas de cálculo con estructuras de celdas adecuadas"
+
+    overview: {
+      power: {
+        title: "Elaborazione Potente",
+        description: "Algoritmi avanzati garantiscono un'elaborazione e una conversione dei documenti di alta qualità con una precisione eccezionale."
+      },
+      security: {
+        title: "Sicurezza di Livello Bancario",
+        description: "I tuoi documenti sono protetti con crittografia SSL a 256 bit ed eliminati automaticamente dopo l'elaborazione."
+      },
+      accessibility: {
+        title: "Accessibilità Universale",
+        description: "Accedi ai tuoi documenti e ai nostri strumenti da qualsiasi dispositivo con piena compatibilità multipiattaforma."
+      }
     },
-    images: {
-      title: "Imágenes",
-      description: "Extrae imágenes JPG y PNG de alta calidad de tus archivos PDF con control de resolución"
+
+    allFeatures: {
+      title: "Tutte le Funzionalità"
     },
-    webFormats: {
-      title: "Formatos Web",
-      description: "Convierte a HTML y otros formatos compatibles con la web para publicación en línea"
+
+    learnMore: "Scopri di Più",
+
+    categories: {
+      conversion: {
+        title: "Conversione PDF",
+        description: "Converti PDF da e verso vari formati con alta precisione e mantenimento della formattazione.",
+        features: {
+          pdfToWord: {
+            title: "Conversione da PDF a Word",
+            description: "Converti file PDF in documenti Word modificabili mantenendo formattazione, tabelle e immagini."
+          },
+          pdfToExcel: {
+            title: "Conversione da PDF a Excel",
+            description: "Estrai tabelle da PDF in fogli Excel modificabili con una formattazione dei dati accurata."
+          },
+          pdfToImage: {
+            title: "Conversione da PDF a Immagine",
+            description: "Converti pagine PDF in immagini JPG, PNG o TIFF di alta qualità con risoluzione personalizzabile."
+          },
+          officeToPdf: {
+            title: "Conversione da Office a PDF",
+            description: "Converti file Word, Excel e PowerPoint in formato PDF mantenendo layout e formattazione."
+          }
+        }
+      },
+
+      editing: {
+        title: "Modifica e Gestione PDF",
+        description: "Modifica, organizza e ottimizza i tuoi documenti PDF con il nostro set completo di strumenti.",
+        features: {
+          merge: {
+            title: "Unione PDF",
+            description: "Combina più file PDF in un unico documento con un ordine di pagine personalizzabile."
+          },
+          split: {
+            title: "Divisione PDF",
+            description: "Dividi PDF di grandi dimensioni in documenti più piccoli per intervalli di pagine o estrai pagine specifiche."
+          },
+          compress: {
+            title: "Compressione PDF",
+            description: "Riduci la dimensione dei file PDF mantenendo la qualità per facilitare condivisione e archiviazione."
+          },
+          watermark: {
+            title: "Aggiunta Filigrana",
+            description: "Aggiungi filigrane di testo o immagini ai tuoi PDF con trasparenza, posizione e rotazione personalizzabili."
+          }
+        }
+      },
+
+      security: {
+        title: "Sicurezza e Protezione PDF",
+        description: "Proteggi i tuoi documenti PDF con crittografia, protezione tramite password e firme digitali.",
+        features: {
+          protect: {
+            title: "Protezione con Password",
+            description: "Crittografa i PDF con protezione tramite password per controllare l'accesso e prevenire visualizzazioni non autorizzate."
+          },
+          unlock: {
+            title: "Sblocco PDF",
+            description: "Rimuovi la protezione tramite password dai PDF a cui hai accesso autorizzato."
+          },
+          signature: {
+            title: "Firme Digitali",
+            description: "Aggiungi firme digitali ai PDF per l'autenticazione e la verifica dei documenti."
+          },
+          redaction: {
+            title: "Redazione PDF",
+            description: "Rimuovi permanentemente informazioni sensibili dai documenti PDF."
+          }
+        }
+      },
+
+      ocr: {
+        title: "Tecnologia OCR",
+        description: "Estrai testo da documenti scansionati e immagini utilizzando la nostra tecnologia OCR avanzata.",
+        features: {
+          textExtraction: {
+            title: "Estrazione Testo",
+            description: "Estrai testo da PDF scansionati e immagini con alta precisione e supporto linguistico."
+          },
+          searchable: {
+            title: "PDF Ricercabili",
+            description: "Converti documenti scansionati in PDF ricercabili con riconoscimento del testo."
+          },
+          multilingual: {
+            title: "Supporto Multilingue",
+            description: "Supporto OCR per oltre 100 lingue, inclusi script non latini e caratteri speciali."
+          },
+          batchProcessing: {
+            title: "Elaborazione in Batch",
+            description: "Elabora più documenti contemporaneamente con le nostre efficienti capacità di OCR in batch."
+          }
+        }
+      },
+
+      api: {
+        title: "API e Integrazione",
+        description: "Integra le nostre capacità di elaborazione PDF nelle tue applicazioni con la nostra robusta API.",
+        features: {
+          restful: {
+            title: "API RESTful",
+            description: "API RESTful semplice e potente per l'elaborazione PDF e la gestione dei documenti."
+          },
+          sdks: {
+            title: "SDK e Librerie",
+            description: "SDK amichevoli per sviluppatori per vari linguaggi di programmazione, inclusi JavaScript, Python e PHP."
+          },
+          webhooks: {
+            title: "Webhook",
+            description: "Notifiche di eventi in tempo reale per flussi di lavoro di elaborazione PDF asincroni."
+          },
+          customization: {
+            title: "Personalizzazione API",
+            description: "Personalizza l'API in base alle tue esigenze specifiche con endpoint e parametri configurabili."
+          }
+        }
+      },
+
+      cloud: {
+        title: "Piattaforma Cloud",
+        description: "Accedi ai tuoi documenti ovunque con la nostra piattaforma di archiviazione e elaborazione cloud sicura.",
+        features: {
+          storage: {
+            title: "Archiviazione Cloud",
+            description: "Archivia e accedi ai tuoi documenti in modo sicuro ovunque con il nostro archivio cloud crittografato."
+          },
+          sync: {
+            title: "Sincronizzazione tra Dispositivi",
+            description: "Sincronizza i tuoi documenti senza problemi su tutti i tuoi dispositivi per un accesso in movimento."
+          },
+          sharing: {
+            title: "Condivisione Documenti",
+            description: "Condividi facilmente i documenti con link sicuri e controlli di autorizzazione."
+          },
+          history: {
+            title: "Cronologia Versioni",
+            description: "Traccia le modifiche ai documenti con la cronologia delle versioni e ripristina versioni precedenti quando necessario."
+          }
+        }
+      },
+
+      enterprise: {
+        title: "Funzionalità Enterprise",
+        description: "Funzionalità avanzate progettate per le esigenze aziendali e delle imprese.",
+        features: {
+          batch: {
+            title: "Elaborazione in Batch",
+            description: "Elabora centinaia di documenti contemporaneamente con il nostro efficiente sistema di elaborazione in batch."
+          },
+          workflow: {
+            title: "Flussi di Lavoro Personalizzati",
+            description: "Crea flussi di lavoro automatizzati per l'elaborazione dei documenti su misura per le tue esigenze aziendali."
+          },
+          compliance: {
+            title: "Conformità e Audit",
+            description: "Funzionalità di sicurezza avanzate per la conformità a GDPR, HIPAA e altre normative."
+          },
+          analytics: {
+            title: "Analisi Utilizzo",
+            description: "Approfondimenti dettagliati sulle attività di elaborazione dei documenti e sulle operazioni degli utenti."
+          }
+        }
+      }
     },
-    ocrTech: {
-      title: "Tecnología OCR",
-      description: "Extrae texto de documentos escaneados con Reconocimiento Óptico de Caracteres avanzado"
+
+    mobile: {
+      title: "App Mobile ScanPro",
+      description: "Porta con te gli strumenti PDF avanzati di ScanPro ovunque vai. La nostra app mobile offre le stesse robuste funzionalità in un'interfaccia ottimizzata per dispositivi mobili.",
+      feature1: {
+        title: "Scansiona e Digitalizza Documenti",
+        description: "Usa la tua fotocamera per scansionare documenti fisici e convertirli istantaneamente in PDF di alta qualità."
+      },
+      feature2: {
+        title: "Modifica PDF in Movimento",
+        description: "Modifica, annota e firma documenti PDF dal tuo smartphone o tablet con facilità."
+      },
+      feature3: {
+        title: "Sincronizzazione Cloud",
+        description: "Sincronizza i tuoi documenti senza problemi su tutti i tuoi dispositivi con un'archiviazione cloud sicura."
+      }
     },
-    batchProcessing: {
-      title: "Procesamiento por Lotes",
-      description: "Convierte múltiples PDFs a la vez para ahorrar tiempo con nuestro eficiente procesamiento por lotes"
+
+    comparison: {
+      title: "Confronto Funzionalità",
+      description: "Confronta i nostri diversi piani per trovare quello più adatto alle tue esigenze.",
+      feature: "Funzionalità",
+      free: "Gratuito",
+      basic: "Base",
+      pro: "Pro",
+      enterprise: "Impresa",
+      features: {
+        convert: "Conversione PDF",
+        merge: "Unione e Divisione",
+        compress: "Compressione",
+        ocr: "OCR Base",
+        advancedOcr: "OCR Avanzato",
+        watermark: "Filigrana",
+        protect: "Protezione con Password",
+        api: "Accesso API",
+        batch: "Elaborazione in Batch",
+        priority: "Supporto Prioritario",
+        customWorkflow: "Flussi di Lavoro Personalizzati",
+        whiteLabel: "Etichetta Bianca",
+        dedicated: "Supporto Dedicato"
+      }
+    },
+
+    testimonials: {
+      title: "Cosa Dicono i Nostri Utenti",
+      quote1: "ScanPro ha rivoluzionato il modo in cui il nostro team gestisce i documenti. La funzionalità OCR è incredibilmente precisa e l'elaborazione in batch ci fa risparmiare ore ogni settimana.",
+      name1: "Sarah Johnson",
+      title1: "Responsabile Operazioni",
+      quote2: "L'integrazione dell'API è stata impeccabile. Abbiamo integrato ScanPro nel nostro flusso di lavoro e la differenza in termini di efficienza è enorme. Anche il team di supporto è eccellente.",
+      name2: "David Chen",
+      title2: "Capo Tecnico",
+      quote3: "Come proprietaria di una piccola impresa, il prezzo accessibile e il set completo di strumenti rendono ScanPro un valore incredibile. Adoro soprattutto l'app mobile che mi permette di gestire i documenti ovunque mi trovi.",
+      name3: "Maria Garcia",
+      title3: "Proprietaria di Impresa"
     }
   },
 

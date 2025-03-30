@@ -345,34 +345,252 @@ export default {
       ]
     }
   },
-
-  // 機能セクション
   features: {
-    title: "機能",
-    description: "PDFファイルの変換と管理に必要なすべて",
-    documentFormats: {
-      title: "ドキュメント形式",
-      description: "DOCX、DOC、RTF、ODTなどに完璧な書式とレイアウトを保持して変換"
+    title: "高度なPDFツールと機能 | ScanPro",
+    description: "ScanProの包括的なPDFツールと機能のスイートを探索し、ドキュメント管理、変換、編集などを行います。think",
+
+    hero: {
+      title: "高度なPDFツールと機能",
+      description: "ScanProをすべてのドキュメント管理ニーズに対する究極のソリューションにする包括的なツールと機能のスイートをご覧ください。"
     },
-    spreadsheets: {
-      title: "スプレッドシート",
-      description: "PDFをXLSX、CSV、その他のスプレッドシート形式に適切なセル構造で変換"
+
+    overview: {
+      power: {
+        title: "強力な処理",
+        description: "高度なアルゴリズムにより、高品質のドキュメント処理と変換が驚異的な精度で行われます。"
+      },
+      security: {
+        title: "銀行レベルのセキュリティ",
+        description: "あなたのドキュメントは256ビットSSL暗号化で保護され、処理後に自動的に削除されます。"
+      },
+      accessibility: {
+        title: "ユニバーサルアクセシビリティ",
+        description: "完全なクロスプラットフォーム互換性で、あらゆるデバイスからドキュメントとツールにアクセスできます。"
+      }
     },
-    images: {
-      title: "画像",
-      description: "PDFファイルから高品質のJPGおよびPNG画像を解像度制御付きで抽出"
+
+    allFeatures: {
+      title: "すべての機能"
     },
-    webFormats: {
-      title: "ウェブ形式",
-      description: "オンライン公開用にHTMLやその他のウェブ対応形式に変換"
+
+    learnMore: "もっと知る",
+
+    categories: {
+      conversion: {
+        title: "PDF変換",
+        description: "高い精度とフォーマットの保持で、PDFをさまざまな形式に変換します。",
+        features: {
+          pdfToWord: {
+            title: "PDFからWordへの変換",
+            description: "PDFファイルをフォーマット、表、画像を保持した編集可能なWordドキュメントに変換します。"
+          },
+          pdfToExcel: {
+            title: "PDFからExcelへの変換",
+            description: "PDFからテーブルを正確なデータフォーマットの編集可能なExcelスプレッドシートに抽出します。"
+          },
+          pdfToImage: {
+            title: "PDFから画像への変換",
+            description: "PDFページをカスタマイズ可能な解像度で高品質のJPG、PNG、またはTIFF画像に変換します。"
+          },
+          officeToPdf: {
+            title: "OfficeからPDFへの変換",
+            description: "Word、Excel、PowerPointファイルをレイアウトとフォーマットを保持したPDF形式に変換します。"
+          }
+        }
+      },
+
+      editing: {
+        title: "PDF編集と管理",
+        description: "包括的なツールセットを使用してPDFドキュメントを編集、整理、最適化します。",
+        features: {
+          merge: {
+            title: "PDFの結合",
+            description: "複数のPDFファイルをカスタマイズ可能なページ順序で1つのドキュメントに結合します。"
+          },
+          split: {
+            title: "PDFの分割",
+            description: "大きなPDFをページ範囲で小さなドキュメントに分割するか、特定のページを抽出します。"
+          },
+          compress: {
+            title: "PDFの圧縮",
+            description: "品質を維持しながらPDFファイルサイズを縮小し、共有と保存を容易にします。"
+          },
+          watermark: {
+            title: "ウォーターマークの追加",
+            description: "透明度、位置、回転をカスタマイズ可能なテキストまたは画像のウォーターマークをPDFに追加します。"
+          }
+        }
+      },
+
+      security: {
+        title: "PDFセキュリティと保護",
+        description: "暗号化、パスワード保護、デジタル署名でPDFドキュメントを保護します。",
+        features: {
+          protect: {
+            title: "パスワード保護",
+            description: "アクセスを制御し、不正な閲覧を防ぐためにPDFをパスワード保護で暗号化します。"
+          },
+          unlock: {
+            title: "PDFのロック解除",
+            description: "許可されたアクセス権を持つPDFからパスワード保護を解除します。"
+          },
+          signature: {
+            title: "デジタル署名",
+            description: "ドキュメント認証と検証のためにPDFにデジタル署名を追加します。"
+          },
+          redaction: {
+            title: "PDFの編集",
+            description: "PDFドキュメントから機密情報を永久に削除します。"
+          }
+        }
+      },
+
+      ocr: {
+        title: "OCR技術",
+        description: "当社の高度なOCR技術を使用して、スキャンされたドキュメントや画像からテキストを抽出します。",
+        features: {
+          textExtraction: {
+            title: "テキスト抽出",
+            description: "スキャンされたPDFや画像から高い精度と言語サポートでテキストを抽出します。"
+          },
+          searchable: {
+            title: "検索可能なPDF",
+            description: "スキャンされたドキュメントをテキスト認識付きの検索可能なPDFに変換します。"
+          },
+          multilingual: {
+            title: "多言語サポート",
+            description: "非ラテン文字や特殊文字を含む100以上の言語に対するOCRサポート。"
+          },
+          batchProcessing: {
+            title: "バッチ処理",
+            description: "効率的なバッチOCR機能を使用して複数のドキュメントを一度に処理します。"
+          }
+        }
+      },
+
+      api: {
+        title: "APIと統合",
+        description: "当社の堅牢なAPIを使用して、PDF処理機能をアプリケーションに統合します。",
+        features: {
+          restful: {
+            title: "RESTful API",
+            description: "PDF処理とドキュメント管理のためのシンプルで強力なRESTful API。"
+          },
+          sdks: {
+            title: "SDKとライブラリ",
+            description: "JavaScript、Python、PHPを含むさまざまなプログラミング言語向けの開発者フレンドリーなSDK。"
+          },
+          webhooks: {
+            title: "ウェブフック",
+            description: "非同期PDF処理ワークフローのリアルタイムイベント通知。"
+          },
+          customization: {
+            title: "APIカスタマイズ",
+            description: "カスタマイズ可能なエンドポイントとパラメータでAPIを特定のニーズに合わせて調整します。"
+          }
+        }
+      },
+
+      cloud: {
+        title: "クラウドプラットフォーム",
+        description: "当社の安全なクラウドストレージと処理プラットフォームで、どこからでもドキュメントにアクセスできます。",
+        features: {
+          storage: {
+            title: "クラウドストレージ",
+            description: "暗号化されたクラウドストレージでどこからでも安全にドキュメントを保存およびアクセスできます。"
+          },
+          sync: {
+            title: "デバイス間同期",
+            description: "すべてのデバイス間でドキュメントをシームレスに同期し、外出先でもアクセス可能です。"
+          },
+          sharing: {
+            title: "ドキュメント共有",
+            description: "安全なリンクと権限制御でドキュメントを簡単に共有します。"
+          },
+          history: {
+            title: "バージョン履歴",
+            description: "バージョン履歴でドキュメントの変更を追跡し、必要に応じて以前のバージョンを復元します。"
+          }
+        }
+      },
+
+      enterprise: {
+        title: "エンタープライズ機能",
+        description: "ビジネスおよびエンタープライズ要件向けに設計された高度な機能。",
+        features: {
+          batch: {
+            title: "バッチ処理",
+            description: "効率的なバッチ処理システムで数百のドキュメントを同時に処理します。"
+          },
+          workflow: {
+            title: "カスタムワークフロー",
+            description: "ビジネスニーズに合わせた自動ドキュメント処理ワークフローを作成します。"
+          },
+          compliance: {
+            title: "コンプライアンスと監査",
+            description: "GDPR、HIPAA、その他の規制コンプライアンス向けの強化されたセキュリティ機能。"
+          },
+          analytics: {
+            title: "使用分析",
+            description: "ドキュメント処理活動とユーザー操作に関する詳細な洞察。"
+          }
+        }
+      }
     },
-    ocrTech: {
-      title: "OCR技術",
-      description: "高度な光学文字認識でスキャンされたドキュメントからテキストを抽出"
+
+    mobile: {
+      title: "ScanProモバイルアプリ",
+      description: "ScanProの強力なPDFツールを外出先で利用できます。当社のモバイルアプリは、便利でモバイルフレンドリーなインターフェースで同じ堅牢な機能を提供します。",
+      feature1: {
+        title: "ドキュメントのスキャンとデジタル化",
+        description: "カメラを使用して物理的なドキュメントをスキャンし、即座に高品質のPDFに変換します。"
+      },
+      feature2: {
+        title: "移動中のPDF編集",
+        description: "スマートフォンやタブレットからPDFドキュメントを簡単に編集、注釈付け、署名できます。"
+      },
+      feature3: {
+        title: "クラウド同期",
+        description: "安全なクラウドストレージですべてのデバイス間でドキュメントをシームレスに同期します。"
+      }
     },
-    batchProcessing: {
-      title: "バッチ処理",
-      description: "効率的なバッチ処理で複数のPDFを一度に変換し時間を節約"
+
+    comparison: {
+      title: "機能比較",
+      description: "さまざまなプランを比較して、ニーズに最適なものを見つけてください。",
+      feature: "機能",
+      free: "無料",
+      basic: "ベーシック",
+      pro: "プロ",
+      enterprise: "エンタープライズ",
+      features: {
+        convert: "PDF変換",
+        merge: "結合と分割",
+        compress: "圧縮",
+        ocr: "OCRベーシック",
+        advancedOcr: "高度なOCR",
+        watermark: "ウォーターマーク",
+        protect: "パスワード保護",
+        api: "APIアクセス",
+        batch: "バッチ処理",
+        priority: "優先サポート",
+        customWorkflow: "カスタムワークフロー",
+        whiteLabel: "ホワイトラベル",
+        dedicated: "専用サポート"
+      }
+    },
+
+    testimonials: {
+      title: "ユーザーの声",
+      quote1: "ScanProは私たちのチームがドキュメントを扱う方法に革命をもたらしました。OCR機能は驚くほど正確で、バッチ処理は毎週何時間も節約してくれます。",
+      name1: "サラ・ジョンソン",
+      title1: "オペレーションマネージャー",
+      quote2: "APIの統合はシームレスでした。ScanProをワークフローに統合し、効率の違いは歴然です。サポートチームも一流です。",
+      name2: "デビッド・チェン",
+      title2: "テックリード",
+      quote3: "中小企業の経営者として、手頃な価格と包括的なツールセットはScanProを驚くべき価値にしています。特に、外出先でドキュメントを扱えるモバイルアプリが大好きです。",
+      name3: "マリア・ガルシア",
+      title3: "ビジネスオーナー"
     }
   },
 
@@ -793,75 +1011,153 @@ export default {
     protectedDesc: "PDFファイルが暗号化され、パスワード保護されました。"
   },
 
-  // 透かしページ
-  watermark: {
+  watermarkPdf: {
     title: "PDFに透かしを追加",
-    description: "カスタムテキスト透かしを追加してドキュメントを保護",
+    description: "保護、ブランディング、または識別のために、PDFドキュメントにカスタムテキストまたは画像の透かしを追加します。",
+    textWatermark: "テキスト透かし",
+    imageWatermark: "画像透かし",
+    privacyNote: "あなたのファイルは安全に処理されます。すべてのアップロードは処理後に自動的に削除されます。",
+    headerTitle: "PDFに透かしを追加",
+    headerDescription: "ブランディング、著作権保護、ドキュメント分類のために、PDFドキュメントにカスタムテキストまたは画像の透かしを追加します。",
+    invalidFileType: "無効なファイル形式",
+    selectPdfFile: "PDFファイルを選択してください",
+    fileTooLarge: "ファイルが大きすぎます",
+    maxFileSize: "最大ファイルサイズは50MBです",
+    invalidImageType: "無効な画像形式",
+    supportedFormats: "対応形式：PNG、JPG、SVG",
+    imageTooLarge: "画像が大きすぎます",
+    maxImageSize: "最大画像サイズは5MBです",
+    noFileSelected: "ファイルが選択されていません",
+    noImageSelected: "透かし画像が選択されていません",
+    selectWatermarkImage: "透かしとして使用する画像を選択してください",
+    noTextEntered: "透かしテキストが入力されていません",
+    enterWatermarkText: "透かしとして使用するテキストを入力してください",
+    success: "透かしが正常に追加されました",
+    successDesc: "あなたのPDFに透かしが追加され、ダウンロードの準備が整いました",
+    failed: "透かしの追加に失敗しました",
+    unknownError: "不明なエラーが発生しました",
+    unknownErrorDesc: "不明なエラーが発生しました。もう一度お試しください",
+    uploadTitle: "透かしを追加するPDFをアップロード",
+    uploadDesc: "PDFファイルをここにドラッグ＆ドロップするか、クリックして参照してください",
+    uploading: "アップロード中...",
+    selectPdf: "PDFファイルを選択",
+    maxSize: "最大ファイルサイズ：50MB",
+    change: "ファイルを変更",
+    commonOptions: "透かし設定",
+    position: "位置",
+    center: "中央",
+    tile: "タイル",
+    custom: "カスタム",
+    applyToPages: "ページに適用",
+    all: "すべてのページ",
+    even: "偶数ページ",
+    odd: "奇数ページ",
+    customPages: "カスタムページ",
+    pagesFormat: "ページ番号をカンマで区切るか、ハイフンで範囲を指定してください（例：1,3,5-10）",
+    processing: "処理中...",
+    addWatermark: "透かしを追加",
+    adding: "透かしを追加中",
+    pleaseWait: "ドキュメントを処理している間お待ちください",
+    download: "PDFをダウンロード",
+    newWatermark: "別の透かしを追加",
+    text: {
+      text: "透かしテキスト",
+      placeholder: "例：機密、ドラフトなど",
+      color: "テキストカラー",
+      font: "フォント",
+      selectFont: "フォントを選択",
+      size: "フォントサイズ",
+      opacity: "透明度",
+      rotation: "回転",
+      preview: "プレビュー"
+    },
+    image: {
+      title: "透かし画像",
+      upload: "透かしとして使用する画像をアップロード",
+      select: "画像を選択",
+      formats: "対応形式：PNG、JPEG、SVG",
+      change: "画像を変更",
+      scale: "スケール",
+      opacity: "透明度",
+      rotation: "回転"
+    },
     howTo: {
       title: "透かしの追加方法",
-      step1: {
-        title: "アップロード",
-        description: "透かしを追加したいPDFファイルをアップロード。適用前にプレビューで確認可能。"
+      step1: { title: "PDFをアップロード", description: "透かしを追加したいPDFファイルを選択してアップロードします" },
+      step2: { title: "透かしをカスタマイズ", description: "テキストまたは画像透かしを選択し、その外観をカスタマイズします" },
+      step3: { title: "透かし付きPDFをダウンロード", description: "ファイルを処理し、透かし付きPDFドキュメントをダウンロードします" }
+    },
+    why: {
+      title: "なぜ透かしを追加するのか",
+      copyright: { title: "著作権保護", description: "著作権通知や所有者情報を追加して知的財産を保護します" },
+      branding: { title: "ブランディングとアイデンティティ", description: "配布ドキュメントにロゴやブランドテキストを追加してブランドアイデンティティを強化します" },
+      classification: { title: "ドキュメント分類", description: "ドキュメントをドラフト、機密、最終版としてマークしてステータスを示します" },
+      tracking: { title: "ドキュメント追跡", description: "配布を追跡し、漏洩を特定するために一意の識別子を追加します" }
+    },
+    types: {
+      title: "透かしの種類とオプション",
+      text: {
+        title: "テキスト透かし",
+        description: "さまざまなオプションでテキスト透かしをカスタマイズ：",
+        options: {
+          text: "カスタムテキストコンテンツ（複数行対応）",
+          font: "フォントファミリー、サイズ、カラー",
+          rotation: "回転角度（0-360度）",
+          opacity: "透明度レベル（透明から完全に見えるまで）",
+          position: "位置（中央、タイル、カスタム配置）"
+        }
       },
-      step2: {
-        title: "カスタマイズ",
-        description: "テキスト、位置、サイズ、色、透明度をニーズに合わせて設定。"
-      },
-      step3: {
-        title: "ダウンロード",
-        description: "処理して透かし付きPDFファイルをダウンロードし、配布の準備。"
+      image: {
+        title: "画像透かし",
+        description: "これらのカスタマイズで画像透かしを追加：",
+        options: {
+          upload: "独自のロゴまたは画像をアップロード",
+          scale: "スケールとサイズ変更",
+          rotation: "回転オプション",
+          opacity: "透明度コントロール",
+          position: "位置のカスタマイズ"
+        }
       }
-    },
-    form: {
-      text: "透かしテキスト",
-      textColor: "テキストの色",
-      opacity: "透明度",
-      size: "サイズ",
-      rotation: "回転",
-      position: "位置",
-      pages: "透かしを追加するページ",
-      allPages: "全ページ",
-      specificPages: "特定のページ",
-      pageNumbers: "ページ番号",
-      pageNumbersHint: "ページ番号をカンマで区切って入力（例：1,3,5,8）"
-    },
-    positions: {
-      topLeft: "左上",
-      topCenter: "中央上",
-      topRight: "右上",
-      centerLeft: "左中央",
-      center: "中央",
-      centerRight: "右中央",
-      bottomLeft: "左下",
-      bottomCenter: "中央下",
-      bottomRight: "右下"
-    },
-    preview: {
-      title: "透かしプレビュー",
-      note: "これは簡略化されたプレビューです。実際の結果は異なる場合があります。"
     },
     faq: {
       title: "よくある質問",
-      q1: {
-        question: "どのような透かしを追加できますか？",
-        answer: "当社のツールは、カスタマイズ可能な内容、位置、サイズ、色、透明度、回転を持つテキスト透かしをサポート。「機密」、「ドラフト」、会社名などの透かしを追加可能。"
-      },
-      q2: {
-        question: "PDFの特定のページにのみ透かしを追加できますか？",
-        answer: "はい、全ページに透かしを追加するか、ページ番号を指定して透かしを追加するページを選択可能。"
-      },
-      q3: {
-        question: "透かしは永久ですか？",
-        answer: "はい、透かしはPDFドキュメントに永久に埋め込まれます。ただし、コンテンツの視認性と可読性のバランスを取るために透明度を調整可能。"
-      },
-      q4: {
-        question: "透かしはファイル品質に影響しますか？",
-        answer: "いいえ、透かしツールは指定されたテキストを追加するだけで、元のドキュメント品質やファイルサイズに大きな影響を与えません。"
-      }
+      removable: { question: "PDFから透かしを削除できますか？", answer: "標準の透かしは半永久的で、専門ソフトウェアなしでは削除が困難です。ただし、完全に改ざん防止ではありません。より安全な透かしにはProプランをご検討ください。" },
+      printing: { question: "ドキュメントを印刷すると透かしは表示されますか？", answer: "はい、印刷時にも透かしが表示されます。透明度を調整して印刷物で目立たなくできます。" },
+      pages: { question: "特定のページにのみ透かしを追加できますか？", answer: "はい、Proプランでは特定のページに透かしを適用できます。" },
+      formats: { question: "画像透かしにサポートされている形式は？", answer: "PNG、JPG/JPEG、SVGをサポートしています。透明性が必要な場合はPNGが推奨されます。" },
+      multiple: { question: "1つのドキュメントに複数の透かしを追加できますか？", answer: "Proユーザーは複数の透かしを追加可能、無料ユーザーは1つに制限されます。" },
+      q1: { question: "私のPDFファイルは安全ですか？", answer: "はい、すべてのアップロードは安全に処理され、処理後に自動削除されます。" },
+      q2: { question: "どのような透かしを追加できますか？", answer: "カスタマイズ可能なフォントのテキスト透かしや、PNG、JPG、SVGを使用した画像透かしです。" },
+      q3: { question: "透かしを追加した後に削除できますか？", answer: "追加してダウンロードした後、透かしはPDFの恒久的な一部となります。" },
+      q4: { question: "ファイルサイズに制限はありますか？", answer: "はい、PDFの最大サイズは50MB、画像透かしは5MBです。" }
     },
-    addingWatermark: "PDFに透かしを追加中...",
-    watermarkSuccess: "透かしが正常に追加されました！",
-    watermarkSuccessDesc: "PDFファイルに透かしが追加され、ダウンロードの準備が整いました。"
+    bestPractices: {
+      title: "透かしのベストプラクティス",
+      dos: "すべきこと",
+      donts: "すべきでないこと",
+      dosList: [
+        "コンテンツを隠さないよう半透明の透かしを使用",
+        "カバー範囲を広げるために斜めの透かしを検討",
+        "大きなドキュメントを処理する前にサンプルページでテスト",
+        "視認性を高めるためにコントラストのある色を使用",
+        "法的保護のために著作権記号©を含める"
+      ],
+      dontsList: [
+        "暗すぎるまたは不透明な透かしを使用しない",
+        "重要なテキストや要素の上に透かしを配置しない",
+        "読みにくくなる小さなテキストを使用しない",
+        "ドキュメントのセキュリティを透かしだけに頼らない",
+        "ピクセル化する低解像度の画像を使用しない"
+      ]
+    },
+    relatedTools: {
+      title: "関連ツール",
+      protect: "PDFを保護",
+      sign: "PDFに署名",
+      edit: "PDFを編集",
+      ocr: "PDFのOCR",
+      viewAll: "すべてのツールを表示"
+    }
   },
   compressPdf: {
     title: "PDFファイルを圧縮",

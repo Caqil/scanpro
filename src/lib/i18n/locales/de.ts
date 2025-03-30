@@ -345,34 +345,252 @@ export default {
       ]
     }
   },
-
-  // Funktionen-Bereich
   features: {
-    title: "Funktionen",
-    description: "Alles, was Sie zum Konvertieren und Verwalten Ihrer PDF-Dateien benötigen",
-    documentFormats: {
-      title: "Dokumentformate",
-      description: "Konvertieren Sie in DOCX, DOC, RTF, ODT und mehr mit perfekter Formatierung und Layouterhaltung"
+    title: "Erweiterte PDF-Tools & Funktionen | ScanPro",
+    description: "Entdecken Sie die umfassende Suite von ScanPro an PDF-Tools und Funktionen für Dokumentenverwaltung, Konvertierung, Bearbeitung und mehr.",
+
+    hero: {
+      title: "Erweiterte PDF-Tools & Funktionen",
+      description: "Lernen Sie die umfassende Suite von Tools und Funktionen kennen, die ScanPro zur ultimativen Lösung für all Ihre Dokumentenverwaltungsbedürfnisse macht."
     },
-    spreadsheets: {
-      title: "Tabellen",
-      description: "Verwandeln Sie PDFs in XLSX, CSV und andere Tabellenformate mit korrekten Zellstrukturen"
+
+    overview: {
+      power: {
+        title: "Leistungsstarke Verarbeitung",
+        description: "Fortschrittliche Algorithmen gewährleisten eine hochwertige Dokumentenverarbeitung und -konvertierung mit außergewöhnlicher Genauigkeit."
+      },
+      security: {
+        title: "Bankniveau-Sicherheit",
+        description: "Ihre Dokumente sind mit 256-Bit-SSL-Verschlüsselung geschützt und werden nach der Verarbeitung automatisch gelöscht."
+      },
+      accessibility: {
+        title: "Universelle Zugänglichkeit",
+        description: "Greifen Sie von jedem Gerät auf Ihre Dokumente und unsere Tools zu mit vollständiger plattformübergreifender Kompatibilität."
+      }
     },
-    images: {
-      title: "Bilder",
-      description: "Extrahieren Sie hochwertige JPG- und PNG-Bilder aus Ihren PDF-Dateien mit Auflösungskontrolle"
+
+    allFeatures: {
+      title: "Alle Funktionen"
     },
-    webFormats: {
-      title: "Webformate",
-      description: "Konvertieren Sie in HTML und andere webfreundliche Formate für die Online-Veröffentlichung"
+
+    learnMore: "Erfahren Sie mehr",
+
+    categories: {
+      conversion: {
+        title: "PDF-Konvertierung",
+        description: "Konvertieren Sie PDFs in verschiedene Formate und umgekehrt mit hoher Genauigkeit und Beibehaltung der Formatierung.",
+        features: {
+          pdfToWord: {
+            title: "PDF zu Word Konvertierung",
+            description: "Konvertieren Sie PDF-Dateien in bearbeitbare Word-Dokumente mit erhaltenem Format, Tabellen und Bildern."
+          },
+          pdfToExcel: {
+            title: "PDF zu Excel Konvertierung",
+            description: "Extrahieren Sie Tabellen aus PDFs in bearbeitbare Excel-Tabellen mit genauer Datenformatierung."
+          },
+          pdfToImage: {
+            title: "PDF zu Bild Konvertierung",
+            description: "Konvertieren Sie PDF-Seiten in hochwertige JPG-, PNG- oder TIFF-Bilder mit anpassbarer Auflösung."
+          },
+          officeToPdf: {
+            title: "Office zu PDF Konvertierung",
+            description: "Konvertieren Sie Word-, Excel- und PowerPoint-Dateien in das PDF-Format mit erhaltenem Layout und Formatierung."
+          }
+        }
+      },
+
+      editing: {
+        title: "PDF-Bearbeitung & Verwaltung",
+        description: "Bearbeiten, organisieren und optimieren Sie Ihre PDF-Dokumente mit unserem umfassenden Toolset.",
+        features: {
+          merge: {
+            title: "PDFs zusammenführen",
+            description: "Kombinieren Sie mehrere PDF-Dateien in ein einziges Dokument mit anpassbarer Seitenreihenfolge."
+          },
+          split: {
+            title: "PDFs teilen",
+            description: "Teilen Sie große PDFs in kleinere Dokumente nach Seitenbereichen oder extrahieren Sie bestimmte Seiten."
+          },
+          compress: {
+            title: "PDFs komprimieren",
+            description: "Reduzieren Sie die Dateigröße von PDFs bei gleichbleibender Qualität für einfacheres Teilen und Speichern."
+          },
+          watermark: {
+            title: "Wasserzeichen hinzufügen",
+            description: "Fügen Sie Text- oder Bild-Wasserzeichen zu Ihren PDFs mit anpassbarer Transparenz, Position und Rotation hinzu."
+          }
+        }
+      },
+
+      security: {
+        title: "PDF-Sicherheit & Schutz",
+        description: "Sichern Sie Ihre PDF-Dokumente mit Verschlüsselung, Passwortschutz und digitalen Signaturen.",
+        features: {
+          protect: {
+            title: "Passwortschutz",
+            description: "Verschlüsseln Sie PDFs mit Passwortschutz, um den Zugriff zu kontrollieren und unbefugtes Anzeigen zu verhindern."
+          },
+          unlock: {
+            title: "PDF-Entsperrung",
+            description: "Entfernen Sie den Passwortschutz von PDFs, bei denen Sie autorisierten Zugriff haben."
+          },
+          signature: {
+            title: "Digitale Signaturen",
+            description: "Fügen Sie digitale Signaturen zu PDFs hinzu für Dokumentenauthentifizierung und -verifizierung."
+          },
+          redaction: {
+            title: "PDF-Schließung",
+            description: "Entfernen Sie sensible Informationen dauerhaft aus PDF-Dokumenten."
+          }
+        }
+      },
+
+      ocr: {
+        title: "OCR-Technologie",
+        description: "Extrahieren Sie Text aus gescannten Dokumenten und Bildern mit unserer fortschrittlichen OCR-Technologie.",
+        features: {
+          textExtraction: {
+            title: "Textextraktion",
+            description: "Extrahieren Sie Text aus gescannten PDFs und Bildern mit hoher Genauigkeit und Sprachunterstützung."
+          },
+          searchable: {
+            title: "Durchsuchbare PDFs",
+            description: "Konvertieren Sie gescannte Dokumente in durchsuchbare PDFs mit Texterkennung."
+          },
+          multilingual: {
+            title: "Mehrsprachige Unterstützung",
+            description: "OCR-Unterstützung für über 100 Sprachen, einschließlich nicht-lateinischer Schriften und Sonderzeichen."
+          },
+          batchProcessing: {
+            title: "Stapelverarbeitung",
+            description: "Verarbeiten Sie mehrere Dokumente gleichzeitig mit unseren effizienten Stapel-OCR-Fähigkeiten."
+          }
+        }
+      },
+
+      api: {
+        title: "API & Integration",
+        description: "Integrieren Sie unsere PDF-Verarbeitungsfunktionen in Ihre Anwendungen mit unserem robusten API.",
+        features: {
+          restful: {
+            title: "RESTful API",
+            description: "Einfache und leistungsstarke RESTful API für PDF-Verarbeitung und Dokumentenverwaltung."
+          },
+          sdks: {
+            title: "SDKs & Bibliotheken",
+            description: "Entwicklerfreundliche SDKs für verschiedene Programmiersprachen, einschließlich JavaScript, Python und PHP."
+          },
+          webhooks: {
+            title: "Webhooks",
+            description: "Echtzeit-Ereignisbenachrichtigungen für asynchrone PDF-Verarbeitungsworkflows."
+          },
+          customization: {
+            title: "API-Anpassung",
+            description: "Passen Sie die API an Ihre spezifischen Bedürfnisse mit anpassbaren Endpunkten und Parametern an."
+          }
+        }
+      },
+
+      cloud: {
+        title: "Cloud-Plattform",
+        description: "Greifen Sie von überall auf Ihre Dokumente mit unserer sicheren Cloud-Speicher- und Verarbeitungsplattform zu.",
+        features: {
+          storage: {
+            title: "Cloud-Speicher",
+            description: "Speichern und greifen Sie sicher von überall auf Ihre Dokumente mit unserem verschlüsselten Cloud-Speicher zu."
+          },
+          sync: {
+            title: "Geräteübergreifende Synchronisation",
+            description: "Synchronisieren Sie Ihre Dokumente nahtlos über alle Ihre Geräte für den Zugriff unterwegs."
+          },
+          sharing: {
+            title: "Dokumentenfreigabe",
+            description: "Teilen Sie Dokumente einfach mit sicheren Links und Berechtigungssteuerungen."
+          },
+          history: {
+            title: "Versionsverlauf",
+            description: "Verfolgen Sie Dokumentänderungen mit dem Versionsverlauf und stellen Sie bei Bedarf frühere Versionen wieder her."
+          }
+        }
+      },
+
+      enterprise: {
+        title: "Unternehmensfunktionen",
+        description: "Erweiterte Funktionen, die für geschäftliche und unternehmerische Anforderungen entwickelt wurden.",
+        features: {
+          batch: {
+            title: "Stapelverarbeitung",
+            description: "Verarbeiten Sie Hunderte von Dokumenten gleichzeitig mit unserem effizienten Stapelverarbeitungssystem."
+          },
+          workflow: {
+            title: "Benutzerdefinierte Workflows",
+            description: "Erstellen Sie automatisierte Dokumentenverarbeitungs-Workflows, die auf Ihre Geschäftsbedürfnisse zugeschnitten sind."
+          },
+          compliance: {
+            title: "Compliance & Audit",
+            description: "Verbesserte Sicherheitsfunktionen für GDPR, HIPAA und andere regulatorische Compliance."
+          },
+          analytics: {
+            title: "Nutzungsanalysen",
+            description: "Detaillierte Einblicke in Dokumentenverarbeitungsaktivitäten und Benutzeroperationen."
+          }
+        }
+      }
     },
-    ocrTech: {
-      title: "OCR-Technologie",
-      description: "Extrahieren Sie Text aus gescannten Dokumenten mit fortschrittlicher Optical Character Recognition"
+
+    mobile: {
+      title: "ScanPro Mobile App",
+      description: "Nehmen Sie die leistungsstarken PDF-Tools von ScanPro unterwegs mit. Unsere mobile App bietet dieselbe robuste Funktionalität in einer praktischen, mobilfreundlichen Benutzeroberfläche.",
+      feature1: {
+        title: "Dokumente scannen & digitalisieren",
+        description: "Verwenden Sie Ihre Kamera, um physische Dokumente zu scannen und sie sofort in hochwertige PDFs umzuwandeln."
+      },
+      feature2: {
+        title: "PDFs unterwegs bearbeiten",
+        description: "Bearbeiten, kommentieren und unterschreiben Sie PDF-Dokumente von Ihrem Smartphone oder Tablet mit Leichtigkeit."
+      },
+      feature3: {
+        title: "Cloud-Synchronisation",
+        description: "Synchronisieren Sie Ihre Dokumente nahtlos über alle Ihre Geräte mit sicherem Cloud-Speicher."
+      }
     },
-    batchProcessing: {
-      title: "Stapelverarbeitung",
-      description: "Konvertieren Sie mehrere PDFs gleichzeitig, um Zeit zu sparen, mit unserer effizienten Stapelverarbeitung"
+
+    comparison: {
+      title: "Funktionsvergleich",
+      description: "Vergleichen Sie unsere verschiedenen Pläne, um denjenigen zu finden, der am besten zu Ihren Bedürfnissen passt.",
+      feature: "Funktion",
+      free: "Kostenlos",
+      basic: "Basic",
+      pro: "Pro",
+      enterprise: "Unternehmen",
+      features: {
+        convert: "PDF-Konvertierung",
+        merge: "Zusammenführen & Teilen",
+        compress: "Kompression",
+        ocr: "OCR Basic",
+        advancedOcr: "Erweitertes OCR",
+        watermark: "Wasserzeichen",
+        protect: "Passwortschutz",
+        api: "API-Zugriff",
+        batch: "Stapelverarbeitung",
+        priority: "Prioritätssupport",
+        customWorkflow: "Benutzerdefinierte Workflows",
+        whiteLabel: "White Labeling",
+        dedicated: "Dedizierter Support"
+      }
+    },
+
+    testimonials: {
+      title: "Was unsere Nutzer sagen",
+      quote1: "ScanPro hat die Art und Weise, wie unser Team mit Dokumenten umgeht, revolutioniert. Die OCR-Funktionalität ist unglaublich genau, und die Stapelverarbeitung spart uns jede Woche Stunden.",
+      name1: "Sarah Johnson",
+      title1: "Operations Manager",
+      quote2: "Die API-Integration war nahtlos. Wir haben ScanPro in unseren Workflow integriert, und der Unterschied in der Effizienz ist enorm. Ihr Support-Team ist auch erstklassig.",
+      name2: "David Chen",
+      title2: "Tech Lead",
+      quote3: "Als Kleinunternehmerin machen die erschwinglichen Preise und das umfassende Toolset ScanPro zu einem unglaublichen Wert. Ich liebe besonders die mobile App, die es mir ermöglicht, Dokumente unterwegs zu bearbeiten.",
+      name3: "Maria Garcia",
+      title3: "Geschäftsinhaberin"
     }
   },
 
@@ -792,76 +1010,153 @@ export default {
     protected: "PDF erfolgreich geschützt!",
     protectedDesc: "Ihre PDF-Datei wurde verschlüsselt und passwortgeschützt."
   },
-
-  // Wasserzeichen-Seite
-  watermark: {
+  watermarkPdf: {
     title: "Wasserzeichen zu PDF hinzufügen",
-    description: "Schützen Sie Ihre Dokumente, indem Sie benutzerdefinierte Textwasserzeichen hinzufügen",
-    howTo: {
-      title: "So fügen Sie ein Wasserzeichen hinzu",
-      step1: {
-        title: "Hochladen",
-        description: "Laden Sie die PDF-Datei hoch, der Sie ein Wasserzeichen hinzufügen möchten. Sie können eine Vorschau anzeigen, bevor Sie es anwenden."
-      },
-      step2: {
-        title: "Anpassen",
-        description: "Legen Sie den Text, die Position, Größe, Farbe und Deckkraft Ihres Wasserzeichens entsprechend Ihren Anforderungen fest."
-      },
-      step3: {
-        title: "Herunterladen",
-        description: "Verarbeiten und laden Sie Ihre PDF-Datei mit Wasserzeichen zum Verteilen herunter."
-      }
-    },
-    form: {
+    description: "Fügen Sie benutzerdefinierte Text- oder Bildwasserzeichen zu Ihren PDF-Dokumenten hinzu, um Schutz, Branding oder Identifikation zu gewährleisten.",
+    textWatermark: "Text-Wasserzeichen",
+    imageWatermark: "Bild-Wasserzeichen",
+    privacyNote: "Ihre Dateien werden sicher verarbeitet. Alle Uploads werden nach der Bearbeitung automatisch gelöscht.",
+    headerTitle: "Wasserzeichen zu PDF hinzufügen",
+    headerDescription: "Fügen Sie benutzerdefinierte Text- oder Bildwasserzeichen zu Ihren PDF-Dokumenten für Branding, Urheberschutz und Dokumentklassifizierung hinzu.",
+    invalidFileType: "Ungültiger Dateityp",
+    selectPdfFile: "Bitte wählen Sie eine PDF-Datei aus",
+    fileTooLarge: "Datei zu groß",
+    maxFileSize: "Maximale Dateigröße beträgt 50 MB",
+    invalidImageType: "Ungültiger Bildtyp",
+    supportedFormats: "Unterstützte Formate: PNG, JPG, SVG",
+    imageTooLarge: "Bild zu groß",
+    maxImageSize: "Maximale Bildgröße beträgt 5 MB",
+    noFileSelected: "Keine Datei ausgewählt",
+    noImageSelected: "Kein Wasserzeichenbild ausgewählt",
+    selectWatermarkImage: "Bitte wählen Sie ein Bild als Wasserzeichen aus",
+    noTextEntered: "Kein Wasserzeichentext eingegeben",
+    enterWatermarkText: "Bitte geben Sie Text als Wasserzeichen ein",
+    success: "Wasserzeichen erfolgreich hinzugefügt",
+    successDesc: "Ihr PDF wurde mit einem Wasserzeichen versehen und ist zum Download bereit",
+    failed: "Wasserzeichen konnte nicht hinzugefügt werden",
+    unknownError: "Ein unbekannter Fehler ist aufgetreten",
+    unknownErrorDesc: "Ein unbekannter Fehler ist aufgetreten. Bitte versuchen Sie es erneut",
+    uploadTitle: "PDF zum Wasserzeichen hinzufügen hochladen",
+    uploadDesc: "Ziehen Sie Ihre PDF-Datei hierher oder klicken Sie zum Durchsuchen",
+    uploading: "Hochladen...",
+    selectPdf: "PDF-Datei auswählen",
+    maxSize: "Maximale Dateigröße: 50 MB",
+    change: "Datei ändern",
+    commonOptions: "Wasserzeichen-Einstellungen",
+    position: "Position",
+    center: "Zentriert",
+    tile: "Kacheln",
+    custom: "Benutzerdefiniert",
+    applyToPages: "Auf Seiten anwenden",
+    all: "Alle Seiten",
+    even: "Gerade Seiten",
+    odd: "Ungerade Seiten",
+    customPages: "Benutzerdefinierte Seiten",
+    pagesFormat: "Geben Sie Seitenzahlen durch Kommas getrennt oder Bereiche mit Bindestrichen ein (z. B. 1,3,5-10)",
+    processing: "Verarbeitung...",
+    addWatermark: "Wasserzeichen hinzufügen",
+    adding: "Wasserzeichen wird hinzugefügt",
+    pleaseWait: "Bitte warten Sie, während wir Ihr Dokument verarbeiten",
+    download: "PDF herunterladen",
+    newWatermark: "Ein weiteres Wasserzeichen hinzufügen",
+    text: {
       text: "Wasserzeichentext",
-      textColor: "Textfarbe",
+      placeholder: "z. B. VERTRAULICH, ENTWURF usw.",
+      color: "Textfarbe",
+      font: "Schriftart",
+      selectFont: "Schriftart auswählen",
+      size: "Schriftgröße",
       opacity: "Deckkraft",
-      size: "Größe",
       rotation: "Rotation",
-      position: "Position",
-      pages: "Zu watermarkende Seiten",
-      allPages: "Alle Seiten",
-      specificPages: "Bestimmte Seiten",
-      pageNumbers: "Seitenzahlen",
-      pageNumbersHint: "Geben Sie Seitenzahlen durch Kommas getrennt ein (z.B. 1,3,5,8)"
+      preview: "Vorschau"
     },
-    positions: {
-      topLeft: "Oben links",
-      topCenter: "Oben mittig",
-      topRight: "Oben rechts",
-      centerLeft: "Mitte links",
-      center: "Mitte",
-      centerRight: "Mitte rechts",
-      bottomLeft: "Unten links",
-      bottomCenter: "Unten mittig",
-      bottomRight: "Unten rechts"
+    image: {
+      title: "Wasserzeichenbild",
+      upload: "Laden Sie ein Bild als Wasserzeichen hoch",
+      select: "Bild auswählen",
+      formats: "Unterstützte Formate: PNG, JPEG, SVG",
+      change: "Bild ändern",
+      scale: "Skalierung",
+      opacity: "Deckkraft",
+      rotation: "Rotation"
     },
-    preview: {
-      title: "Wasserzeichen-Vorschau",
-      note: "Dies ist eine vereinfachte Vorschau. Das tatsächliche Ergebnis kann abweichen."
+    howTo: {
+      title: "Wie man ein Wasserzeichen hinzufügt",
+      step1: { title: "Ihr PDF hochladen", description: "Wählen und laden Sie die PDF-Datei hoch, die Sie mit einem Wasserzeichen versehen möchten" },
+      step2: { title: "Wasserzeichen anpassen", description: "Wählen Sie zwischen Text- oder Bildwasserzeichen und passen Sie das Erscheinungsbild an" },
+      step3: { title: "PDF mit Wasserzeichen herunterladen", description: "Verarbeiten Sie Ihre Datei und laden Sie das PDF mit Wasserzeichen herunter" }
+    },
+    why: {
+      title: "Warum Wasserzeichen hinzufügen",
+      copyright: { title: "Urheberschutz", description: "Schützen Sie Ihr geistiges Eigentum durch Hinzufügen von Urheberrechtsvermerken und Eigentumsinformationen" },
+      branding: { title: "Branding & Identität", description: "Verstärken Sie Ihre Markenidentität durch Hinzufügen von Logos oder Markentext zu verteilten Dokumenten" },
+      classification: { title: "Dokumentklassifizierung", description: "Markieren Sie Dokumente als Entwurf, Vertraulich oder Final, um ihren Status anzuzeigen" },
+      tracking: { title: "Dokumentverfolgung", description: "Fügen Sie eindeutige Kennzeichen hinzu, um die Dokumentverteilung zu verfolgen und Lecks zu identifizieren" }
+    },
+    types: {
+      title: "Wasserzeichentypen & Optionen",
+      text: {
+        title: "Text-Wasserzeichen",
+        description: "Passen Sie Text-Wasserzeichen mit verschiedenen Optionen an:",
+        options: {
+          text: "Benutzerdefinierter Textinhalt (mehrzeilig unterstützt)",
+          font: "Schriftfamilie, Größe und Farbe",
+          rotation: "Rotationswinkel (0-360 Grad)",
+          opacity: "Deckkraftniveau (transparent bis vollständig sichtbar)",
+          position: "Position (zentriert, gekachelt, benutzerdefinierte Platzierung)"
+        }
+      },
+      image: {
+        title: "Bild-Wasserzeichen",
+        description: "Fügen Sie Bild-Wasserzeichen mit diesen Anpassungen hinzu:",
+        options: {
+          upload: "Laden Sie Ihr eigenes Logo oder Bild hoch",
+          scale: "Skalieren und Größe anpassen",
+          rotation: "Rotationsoptionen",
+          opacity: "Transparenzsteuerung",
+          position: "Positionsanpassung"
+        }
+      }
     },
     faq: {
       title: "Häufig gestellte Fragen",
-      q1: {
-        question: "Welche Art von Wasserzeichen kann ich hinzufügen?",
-        answer: "Unser Tool unterstützt Textwasserzeichen mit anpassbarem Inhalt, Position, Größe, Farbe, Deckkraft und Rotation. Sie können Wasserzeichen wie „VERTRAULICH“, „ENTWURF“ oder Ihren Firmennamen hinzufügen."
-      },
-      q2: {
-        question: "Kann ich nur bestimmte Seiten in meinem PDF mit einem Wasserzeichen versehen?",
-        answer: "Ja, Sie können wählen, ob Sie alle Seiten oder nur bestimmte Seiten mit einem Wasserzeichen versehen möchten, indem Sie deren Seitenzahlen eingeben."
-      },
-      q3: {
-        question: "Sind die Wasserzeichen dauerhaft?",
-        answer: "Ja, die Wasserzeichen werden dauerhaft in das PDF-Dokument eingebettet. Sie können jedoch mit unterschiedlicher Deckkraft platziert werden, um die Sichtbarkeit und Lesbarkeit des Inhalts auszugleichen."
-      },
-      q4: {
-        question: "Beeinflusst das Wasserzeichen die Dateiqualität?",
-        answer: "Nein, unser Wasserzeichen-Tool fügt nur den angegebenen Text hinzu, ohne die ursprüngliche Dokumentqualität oder Dateigröße wesentlich zu beeinflussen."
-      }
+      removable: { question: "Können Wasserzeichen aus einem PDF entfernt werden?", answer: "Unsere Standard-Wasserzeichen sind halbpermanent und schwer ohne spezialisierte Software zu entfernen. Sie sind jedoch nicht vollständig manipulationssicher. Für sicherere, manipulationsresistente Wasserzeichen sollten Sie unseren Pro-Plan in Betracht ziehen, der erweiterte Sicherheitsfunktionen bietet." },
+      printing: { question: "Erscheinen Wasserzeichen beim Drucken des Dokuments?", answer: "Ja, Wasserzeichen erscheinen beim Drucken. Sie können die Deckkraft steuern, um sie für gedruckte Dokumente subtiler zu gestalten." },
+      pages: { question: "Kann ich nur bestimmte Seiten mit einem Wasserzeichen versehen?", answer: "Ja, unser Pro-Plan erlaubt es, Wasserzeichen auf bestimmte Seiten anzuwenden. Sie können einzelne Seiten oder Bereiche auswählen." },
+      formats: { question: "Welche Bildformate werden für Bild-Wasserzeichen unterstützt?", answer: "Wir unterstützen PNG, JPG/JPEG und SVG. PNG wird für Logos mit Transparenz empfohlen." },
+      multiple: { question: "Kann ich mehrere Wasserzeichen zu einem Dokument hinzufügen?", answer: "Pro-Nutzer können mehrere Wasserzeichen hinzufügen, z. B. ein Logo und einen Text. Kostenlose Nutzer sind auf ein Wasserzeichen beschränkt." },
+      q1: { question: "Ist meine PDF-Datei sicher?", answer: "Ja, alle Uploads werden sicher verarbeitet und nach der Bearbeitung automatisch gelöscht." },
+      q2: { question: "Welche Arten von Wasserzeichen kann ich hinzufügen?", answer: "Text-Wasserzeichen mit anpassbaren Schriftarten oder Bild-Wasserzeichen mit PNG, JPG oder SVG." },
+      q3: { question: "Kann ich ein Wasserzeichen nach dem Hinzufügen entfernen?", answer: "Nach dem Hinzufügen und Herunterladen wird es dauerhaft Teil des PDFs." },
+      q4: { question: "Gibt es eine Dateigrößenbeschränkung?", answer: "Ja, die maximale Größe für PDFs beträgt 50 MB, für Bilder 5 MB." }
     },
-    addingWatermark: "Wasserzeichen wird zu Ihrem PDF hinzugefügt...",
-    watermarkSuccess: "Wasserzeichen erfolgreich hinzugefügt!",
-    watermarkSuccessDesc: "Ihre PDF-Datei wurde mit einem Wasserzeichen versehen und ist zum Download bereit."
+    bestPractices: {
+      title: "Best Practices für Wasserzeichen",
+      dos: "Do's",
+      donts: "Don'ts",
+      dosList: [
+        "Verwenden Sie halbtransparente Wasserzeichen, um Inhalte nicht zu verdecken",
+        "Erwägen Sie diagonale Wasserzeichen für bessere Abdeckung",
+        "Testen Sie Ihr Wasserzeichen auf einer Probeseite",
+        "Verwenden Sie kontrastierende Farben für bessere Sichtbarkeit",
+        "Fügen Sie das Copyright-Symbol © für rechtlichen Schutz hinzu"
+      ],
+      dontsList: [
+        "Verwenden Sie keine zu dunklen oder undurchsichtigen Wasserzeichen",
+        "Platzieren Sie Wasserzeichen nicht über wichtigen Text",
+        "Verwenden Sie keinen zu kleinen Text, der unleserlich wird",
+        "Verlassen Sie sich nicht allein auf Wasserzeichen für Sicherheit",
+        "Verwenden Sie keine pixeligen, niedrigauflösenden Bilder"
+      ]
+    },
+    relatedTools: {
+      title: "Verwandte Tools",
+      protect: "PDF schützen",
+      sign: "PDF signieren",
+      edit: "PDF bearbeiten",
+      ocr: "PDF OCR",
+      viewAll: "Alle Tools anzeigen"
+    }
   },
   compressPdf: {
     title: "PDF-Dateien komprimieren",

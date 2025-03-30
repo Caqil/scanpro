@@ -348,31 +348,251 @@ export default {
 
     // Özellikler Bölümü
     features: {
-        title: "Özellikler",
-        description: "PDF dosyalarınızı dönüştürmek ve yönetmek için ihtiyacınız olan her şey",
-        documentFormats: {
-            title: "Belge Formatları",
-            description: "DOCX, DOC, RTF, ODT ve daha fazlasına mükemmel biçimlendirme ve düzen ile dönüştürün"
+        title: "Gelişmiş PDF Araçları ve Özellikleri | ScanPro",
+        description: "ScanPro'nun belge yönetimi, dönüştürme, düzenleme ve daha fazlası için kapsamlı PDF araçları ve özellikler paketini keşfedin.",
+
+        hero: {
+            title: "Gelişmiş PDF Araçları ve Özellikleri",
+            description: "ScanPro'yu tüm belge yönetimi ihtiyaçlarınız için nihai çözüm haline getiren kapsamlı araçlar ve özellikler paketini keşfedin."
         },
-        spreadsheets: {
-            title: "Tablolar",
-            description: "PDF'leri XLSX, CSV ve diğer tablo formatlarına doğru hücre yapısıyla dönüştürün"
+
+        overview: {
+            power: {
+                title: "Güçlü İşleme",
+                description: "Gelişmiş algoritmalar, yüksek kaliteli belge işleme ve olağanüstü doğrulukla dönüştürme sağlar."
+            },
+            security: {
+                title: "Banka Düzeyi Güvenlik",
+                description: "Belgeleriniz 256-bit SSL şifreleme ile korunur ve işlendikten sonra otomatik olarak silinir."
+            },
+            accessibility: {
+                title: "Evrensel Erişim",
+                description: "Tam çapraz platform uyumluluğu ile belgelerinize ve araçlarımıza herhangi bir cihazdan erişin."
+            }
         },
-        images: {
-            title: "Resimler",
-            description: "PDF dosyalarınızdan yüksek kaliteli JPG ve PNG resimleri çözünürlük kontrolü ile çıkarın"
+
+        allFeatures: {
+            title: "Tüm Özellikler"
         },
-        webFormats: {
-            title: "Web Formatları",
-            description: "Çevrimiçi yayın için HTML ve diğer web dostu formatlara dönüştürün"
+
+        learnMore: "Daha Fazla Bilgi Edinin",
+
+        categories: {
+            conversion: {
+                title: "PDF Dönüştürme",
+                description: "PDF'leri yüksek doğruluk ve biçimlendirme korunarak çeşitli formatlara dönüştürün.",
+                features: {
+                    pdfToWord: {
+                        title: "PDF'den Word'e Dönüştürme",
+                        description: "PDF dosyalarını biçimlendirme, tablolar ve resimler korunarak düzenlenebilir Word belgelerine dönüştürün."
+                    },
+                    pdfToExcel: {
+                        title: "PDF'den Excel'e Dönüştürme",
+                        description: "PDF'lerden tabloları doğru veri biçimlendirmesi ile düzenlenebilir Excel elektronik tablolarına çıkarın."
+                    },
+                    pdfToImage: {
+                        title: "PDF'den Görüntüye Dönüştürme",
+                        description: "PDF sayfalarını özelleştirilebilir çözünürlükle yüksek kaliteli JPG, PNG veya TIFF görüntülerine dönüştürün."
+                    },
+                    officeToPdf: {
+                        title: "Office'den PDF'ye Dönüştürme",
+                        description: "Word, Excel, PowerPoint dosyalarını düzen ve biçimlendirme korunarak PDF formatına dönüştürün."
+                    }
+                }
+            },
+
+            editing: {
+                title: "PDF Düzenleme ve Yönetim",
+                description: "Kapsamlı araç setimizle PDF belgelerinizi düzenleyin, organize edin ve optimize edin.",
+                features: {
+                    merge: {
+                        title: "PDF'leri Birleştirme",
+                        description: "Birden fazla PDF dosyasını özelleştirilebilir sayfa sıralamasıyla tek bir belgede birleştirin."
+                    },
+                    split: {
+                        title: "PDF'leri Bölme",
+                        description: "Büyük PDF'leri sayfa aralıklarına göre daha küçük belgelere ayırın veya belirli sayfaları çıkarın."
+                    },
+                    compress: {
+                        title: "PDF'leri Sıkıştırma",
+                        description: "Kaliteyi korurken PDF dosya boyutunu küçültün, paylaşımı ve depolamayı kolaylaştırın."
+                    },
+                    watermark: {
+                        title: "Filigran Ekleme",
+                        description: "PDF'lerinize özelleştirilebilir şeffaflık, konum ve döndürme ile metin veya görüntü filigranları ekleyin."
+                    }
+                }
+            },
+
+            security: {
+                title: "PDF Güvenliği ve Koruması",
+                description: "PDF belgelerinizi şifreleme, parola koruması ve dijital imzalarla güvence altına alın.",
+                features: {
+                    protect: {
+                        title: "Parola Koruması",
+                        description: "Erişimi kontrol etmek ve yetkisiz görüntülemeyi önlemek için PDF'leri parola korumasıyla şifreleyin."
+                    },
+                    unlock: {
+                        title: "PDF Kilidini Açma",
+                        description: "Yetkili erişiminiz olan PDF'lerden parola korumasını kaldırın."
+                    },
+                    signature: {
+                        title: "Dijital İmzalar",
+                        description: "Belge doğrulama ve doğrulama için PDF'lere dijital imzalar ekleyin."
+                    },
+                    redaction: {
+                        title: "PDF Düzenleme",
+                        description: "PDF belgelerinden hassas bilgileri kalıcı olarak kaldırın."
+                    }
+                }
+            },
+
+            ocr: {
+                title: "OCR Teknolojisi",
+                description: "Gelişmiş OCR teknolojimizle taranmış belgelerden ve görüntülerden metin çıkarın.",
+                features: {
+                    textExtraction: {
+                        title: "Metin Çıkarma",
+                        description: "Taranmış PDF'lerden ve görüntülerlerden yüksek doğruluk ve dil desteğiyle metin çıkarın."
+                    },
+                    searchable: {
+                        title: "Aranabilir PDF'ler",
+                        description: "Taranmış belgeleri metin tanıma ile aranabilir PDF'lere dönüştürün."
+                    },
+                    multilingual: {
+                        title: "Çok Dilli Destek",
+                        description: "Latin olmayan alfabeler ve özel karakterler dahil 100'den fazla dil için OCR desteği."
+                    },
+                    batchProcessing: {
+                        title: "Toplu İşleme",
+                        description: "Verimli toplu OCR yeteneklerimizle birden fazla belgeyi aynı anda işleyin."
+                    }
+                }
+            },
+
+            api: {
+                title: "API ve Entegrasyon",
+                description: "Sağlam API'mizle PDF işleme yeteneklerimizi uygulamalarınıza entegre edin.",
+                features: {
+                    restful: {
+                        title: "RESTful API",
+                        description: "PDF işleme ve belge yönetimi için basit ve güçlü bir RESTful API."
+                    },
+                    sdks: {
+                        title: "SDK'lar ve Kütüphaneler",
+                        description: "JavaScript, Python ve PHP dahil çeşitli programlama dilleri için geliştirici dostu SDK'lar."
+                    },
+                    webhooks: {
+                        title: "Webhook'lar",
+                        description: "Asenkron PDF işleme iş akışları için gerçek zamanlı olay bildirimleri."
+                    },
+                    customization: {
+                        title: "API Özelleştirme",
+                        description: "Özelleştirilebilir uç noktalar ve parametrelerle API'yi özel ihtiyaçlarınıza göre uyarlayın."
+                    }
+                }
+            },
+
+            cloud: {
+                title: "Bulut Platformu",
+                description: "Güvenli bulut depolama ve işleme platformumuzla belgelerinize her yerden erişin.",
+                features: {
+                    storage: {
+                        title: "Bulut Depolama",
+                        description: "Şifrelenmiş bulut depolamamızla belgelerinizi her yerden güvenli bir şekilde depolayın ve erişin."
+                    },
+                    sync: {
+                        title: "Cihazlar Arası Senkronizasyon",
+                        description: "Tüm cihazlarınızda belgelerinizi sorunsuz bir şekilde senkronize edin, hareket halindeyken erişim sağlayın."
+                    },
+                    sharing: {
+                        title: "Belge Paylaşımı",
+                        description: "Güvenli bağlantılar ve izin kontrolleriyle belgeleri kolayca paylaşın."
+                    },
+                    history: {
+                        title: "Sürüm Geçmişi",
+                        description: "Sürüm geçmişi ile belge değişikliklerini takip edin ve gerektiğinde önceki sürümleri geri yükleyin."
+                    }
+                }
+            },
+
+            enterprise: {
+                title: "Kurumsal Özellikler",
+                description: "İş ve kurumsal gereksinimler için tasarlanmış gelişmiş özellikler.",
+                features: {
+                    batch: {
+                        title: "Toplu İşleme",
+                        description: "Verimli toplu işleme sistemimizle yüzlerce belgeyi aynı anda işleyin."
+                    },
+                    workflow: {
+                        title: "Özel İş Akışları",
+                        description: "İş ihtiyaçlarınıza özel otomatik belge işleme iş akışları oluşturun."
+                    },
+                    compliance: {
+                        title: "Uyumluluk ve Denetim",
+                        description: "GDPR, HIPAA ve diğer düzenleyici uyumluluklar için gelişmiş güvenlik özellikleri."
+                    },
+                    analytics: {
+                        title: "Kullanım Analitiği",
+                        description: "Belge işleme faaliyetleri ve kullanıcı işlemleri hakkında ayrıntılı bilgiler."
+                    }
+                }
+            }
         },
-        ocrTech: {
-            title: "OCR Teknolojisi",
-            description: "Gelişmiş optik karakter tanıma ile tarama belgelerinden metin çıkarın"
+
+        mobile: {
+            title: "ScanPro Mobil Uygulaması",
+            description: "ScanPro'nun güçlü PDF araçlarını yanınızda taşıyın. Mobil uygulamamız, kullanışlı ve mobil dostu bir arayüzde aynı sağlam işlevselliği sunar.",
+            feature1: {
+                title: "Belgeleri Tarama ve Dijitalleştirme",
+                description: "Kameranızı kullanarak fiziksel belgeleri tarayın ve anında yüksek kaliteli PDF'lere dönüştürün."
+            },
+            feature2: {
+                title: "Hareket Halinde PDF Düzenleme",
+                description: "Akıllı telefonunuzdan veya tabletinizden PDF belgelerini kolayca düzenleyin, not ekleyin ve imzalayın."
+            },
+            feature3: {
+                title: "Bulut Senkronizasyonu",
+                description: "Güvenli bulut depolama ile tüm cihazlarınızda belgelerinizi sorunsuz bir şekilde senkronize edin."
+            }
         },
-        batchProcessing: {
-            title: "Toplu İşleme",
-            description: "Verimli toplu işlememizle birden fazla PDF'yi aynı anda dönüştürerek zaman kazanın"
+
+        comparison: {
+            title: "Özellik Karşılaştırması",
+            description: "İhtiyaçlarınıza en uygun olanı bulmak için farklı planlarımızı karşılaştırın.",
+            feature: "Özellik",
+            free: "Ücretsiz",
+            basic: "Temel",
+            pro: "Pro",
+            enterprise: "Kurumsal",
+            features: {
+                convert: "PDF Dönüştürme",
+                merge: "Birleştirme ve Bölme",
+                compress: "Sıkıştırma",
+                ocr: "OCR Temel",
+                advancedOcr: "Gelişmiş OCR",
+                watermark: "Filigran",
+                protect: "Parola Koruması",
+                api: "API Erişimi",
+                batch: "Toplu İşleme",
+                priority: "Öncelikli Destek",
+                customWorkflow: "Özel İş Akışları",
+                whiteLabel: "Beyaz Etiketleme",
+                dedicated: "Özel Destek"
+            }
+        },
+
+        testimonials: {
+            title: "Kullanıcılarımız Ne Diyor",
+            quote1: "ScanPro, ekibimizin belgelerle başa çıkma şeklini değiştirdi. OCR işlevselliği inanılmaz derecede doğru ve toplu işleme her hafta bize saatler kazandırıyor.",
+            name1: "Sarah Johnson",
+            title1: "Operasyon Müdürü",
+            quote2: "API entegrasyonu kusursuzdu. ScanPro'yu iş akışımıza entegre ettik ve verimlilikteki fark gece ile gündüz gibi. Destek ekibi de birinci sınıf.",
+            name2: "David Chen",
+            title2: "Teknoloji Lideri",
+            quote3: "Küçük bir işletme sahibi olarak, uygun fiyat ve kapsamlı araç seti ScanPro'yu inanılmaz bir değer haline getiriyor. Özellikle hareket halindeyken belgeleri yönetmemi sağlayan mobil uygulamayı çok seviyorum.",
+            name3: "Maria Garcia",
+            title3: "İşletme Sahibi"
         }
     },
 
@@ -793,75 +1013,153 @@ export default {
         protectedDesc: "PDF dosyanız şifrelendi ve parola ile korundu."
     },
 
-    // Filigran Sayfası
-    watermark: {
+    watermarkPdf: {
         title: "PDF'ye Filigran Ekle",
-        description: "Belgelerinizi özelleştirilebilir metin filigranlarıyla koruyun",
+        description: "Koruma, markalaşma veya tanımlama için PDF belgelerinize özel metin veya resim filigranları ekleyin.",
+        textWatermark: "Metin Filigranı",
+        imageWatermark: "Resim Filigranı",
+        privacyNote: "Dosyalarınız güvenli bir şekilde işlenir. Tüm yüklemeler işlemden sonra otomatik olarak silinir.",
+        headerTitle: "PDF'ye Filigran Ekle",
+        headerDescription: "Markalaşma, telif hakkı koruması ve belge sınıflandırması için PDF belgelerinize özel metin veya resim filigranları ekleyin.",
+        invalidFileType: "Geçersiz dosya türü",
+        selectPdfFile: "Lütfen bir PDF dosyası seçin",
+        fileTooLarge: "Dosya çok büyük",
+        maxFileSize: "Maksimum dosya boyutu 50 MB'dir",
+        invalidImageType: "Geçersiz resim türü",
+        supportedFormats: "Desteklenen formatlar: PNG, JPG, SVG",
+        imageTooLarge: "Resim çok büyük",
+        maxImageSize: "Maksimum resim boyutu 5 MB'dir",
+        noFileSelected: "Dosya seçilmedi",
+        noImageSelected: "Filigran resmi seçilmedi",
+        selectWatermarkImage: "Lütfen filigran olarak kullanılacak bir resim seçin",
+        noTextEntered: "Filigran metni girilmedi",
+        enterWatermarkText: "Lütfen filigran olarak kullanılacak metni girin",
+        success: "Filigran başarıyla eklendi",
+        successDesc: "PDF'nize filigran eklendi ve indirmeye hazır",
+        failed: "Filigran eklenemedi",
+        unknownError: "Bilinmeyen bir hata oluştu",
+        unknownErrorDesc: "Bilinmeyen bir hata oluştu. Lütfen tekrar deneyin",
+        uploadTitle: "Filigran Eklemek İçin PDF Yükle",
+        uploadDesc: "PDF dosyanızı buraya sürükleyip bırakın veya göz atmak için tıklayın",
+        uploading: "Yükleniyor...",
+        selectPdf: "PDF Dosyası Seç",
+        maxSize: "Maksimum dosya boyutu: 50 MB",
+        change: "Dosyayı Değiştir",
+        commonOptions: "Filigran Ayarları",
+        position: "Konum",
+        center: "Merkez",
+        tile: "Döşeme",
+        custom: "Özel",
+        applyToPages: "Sayfalara Uygula",
+        all: "Tüm Sayfalar",
+        even: "Çift Sayfalar",
+        odd: "Tek Sayfalar",
+        customPages: "Özel Sayfalar",
+        pagesFormat: "Sayfa numaralarını virgülle ayırın veya tire ile aralık belirtin (ör. 1,3,5-10)",
+        processing: "İşleniyor...",
+        addWatermark: "Filigran Ekle",
+        adding: "Filigran Ekleniyor",
+        pleaseWait: "Belgenizi işlerken lütfen bekleyin",
+        download: "PDF'yi İndir",
+        newWatermark: "Başka Bir Filigran Ekle",
+        text: {
+            text: "Filigran Metni",
+            placeholder: "ör. GİZLİ, TASLAK vb.",
+            color: "Metin Rengi",
+            font: "Yazı Tipi",
+            selectFont: "Yazı Tipi Seç",
+            size: "Yazı Tipi Boyutu",
+            opacity: "Opaklık",
+            rotation: "Döndürme",
+            preview: "Önizleme"
+        },
+        image: {
+            title: "Filigran Resmi",
+            upload: "Filigran olarak kullanılacak bir resim yükleyin",
+            select: "Resim Seç",
+            formats: "Desteklenen formatlar: PNG, JPEG, SVG",
+            change: "Resmi Değiştir",
+            scale: "Ölçek",
+            opacity: "Opaklık",
+            rotation: "Döndürme"
+        },
         howTo: {
             title: "Filigran Nasıl Eklenir",
-            step1: {
-                title: "Yükle",
-                description: "Filigran eklemek istediğiniz PDF dosyasını yükleyin. Nasıl görüneceğini önizleyebilirsiniz."
+            step1: { title: "PDF'nizi Yükleyin", description: "Filigran eklemek istediğiniz PDF dosyasını seçin ve yükleyin" },
+            step2: { title: "Filigranı Özelleştirin", description: "Metin veya resim filigranı arasında seçim yapın ve görünümünü özelleştirin" },
+            step3: { title: "Filigranlı PDF'yi İndirin", description: "Dosyanızı işleyin ve filigranlı PDF belgesini indirin" }
+        },
+        why: {
+            title: "Neden Filigran Eklenir",
+            copyright: { title: "Telif Hakkı Koruması", description: "Telif hakkı bildirimleri ve sahiplik bilgileri ekleyerek fikri mülkiyetinizi koruyun" },
+            branding: { title: "Markalaşma ve Kimlik", description: "Dağıtılan belgelere logo veya marka metni ekleyerek marka kimliğinizi güçlendirin" },
+            classification: { title: "Belge Sınıflandırması", description: "Belgeleri Taslak, Gizli veya Nihai olarak işaretleyerek durumlarını belirtin" },
+            tracking: { title: "Belge Takibi", description: "Belge dağıtımını izlemek ve sızıntıları tespit etmek için benzersiz tanımlayıcılar ekleyin" }
+        },
+        types: {
+            title: "Filigran Türleri ve Seçenekleri",
+            text: {
+                title: "Metin Filigranı",
+                description: "Çeşitli seçeneklerle metin filigranlarını özelleştirin:",
+                options: {
+                    text: "Özel metin içeriği (çok satırlı desteklenir)",
+                    font: "Yazı tipi ailesi, boyut ve renk",
+                    rotation: "Döndürme açısı (0-360 derece)",
+                    opacity: "Opaklık seviyesi (şeffaftan tamamen görünür hale)",
+                    position: "Konum (merkez, döşeme, özel yerleştirme)"
+                }
             },
-            step2: {
-                title: "Yapılandır",
-                description: "Filigran metnini, konumunu, boyutunu, rengini ve şeffaflığını ihtiyaçlarınıza göre ayarlayın."
-            },
-            step3: {
-                title: "İndir",
-                description: "Filigran eklenmiş PDF dosyanızı işleyin ve dağıtıma hazır olarak indirin."
+            image: {
+                title: "Resim Filigranı",
+                description: "Bu özelleştirmelerle resim filigranları ekleyin:",
+                options: {
+                    upload: "Kendi logonuzu veya resminizi yükleyin",
+                    scale: "Ölçeklendirme ve yeniden boyutlandırma",
+                    rotation: "Döndürme seçenekleri",
+                    opacity: "Şeffaflık kontrolü",
+                    position: "Konum özelleştirme"
+                }
             }
-        },
-        form: {
-            text: "Filigran Metni",
-            textColor: "Metin Rengi",
-            opacity: "Şeffaflık",
-            size: "Boyut",
-            rotation: "Döndürme",
-            position: "Konum",
-            pages: "Filigran Eklenecek Sayfalar",
-            allPages: "Tüm Sayfalar",
-            specificPages: "Belirli Sayfalar",
-            pageNumbers: "Sayfa Numaraları",
-            pageNumbersHint: "Sayfa numaralarını virgülle ayırarak girin (örneğin: 1,3,5,8)"
-        },
-        positions: {
-            topLeft: "Sol Üst",
-            topCenter: "Üst Orta",
-            topRight: "Sağ Üst",
-            centerLeft: "Sol Orta",
-            center: "Orta",
-            centerRight: "Sağ Orta",
-            bottomLeft: "Sol Alt",
-            bottomCenter: "Alt Orta",
-            bottomRight: "Sağ Alt"
-        },
-        preview: {
-            title: "Filigran Önizlemesi",
-            note: "Bu basitleştirilmiş bir önizlemedir. Gerçek sonuç farklı olabilir."
         },
         faq: {
             title: "Sıkça Sorulan Sorular",
-            q1: {
-                question: "Hangi filigranları ekleyebilirim?",
-                answer: "Aracımız, özelleştirilebilir içerik, konum, boyut, renk, şeffaflık ve döndürme ile metin filigranlarını destekler. 'GİZLİ', 'TASLAK' veya şirket adınız gibi işaretler ekleyebilirsiniz."
-            },
-            q2: {
-                question: "Filigranı yalnızca belirli PDF sayfalarına ekleyebilir miyim?",
-                answer: "Evet, filigranı tüm sayfalara eklemeyi seçebilir veya sayfa numaralarını girerek belirli sayfaları belirtebilirsiniz."
-            },
-            q3: {
-                question: "Filigranlar kalıcı mı?",
-                answer: "Evet, filigranlar PDF belgesine kalıcı olarak gömülür. Ancak, görünürlük ve içerik okunabilirliği arasında denge sağlamak için şeffaflık ayarlanabilir."
-            },
-            q4: {
-                question: "Filigran ekleme dosya kalitesini etkiler mi?",
-                answer: "Hayır, aracımız yalnızca belirtilen metni ekler ve orijinal belgenin kalitesini veya boyutunu önemli ölçüde etkilemez."
-            }
+            removable: { question: "PDF'den filigranlar kaldırılabilir mi?", answer: "Standart filigranlarımız yarı kalıcıdır ve özel bir yazılım olmadan kaldırılması zordur. Ancak tamamen kurcalamaya dayanıklı değildir. Daha güvenli filigranlar için Pro planımızı düşünün." },
+            printing: { question: "Belge yazdırıldığında filigranlar görünecek mi?", answer: "Evet, belge yazdırıldığında filigranlar görünecektir. Opaklığı kontrol ederek daha az belirgin hale getirebilirsiniz." },
+            pages: { question: "Sadece belirli sayfalara filigran ekleyebilir miyim?", answer: "Evet, Pro planımız belirli sayfalara filigran uygulamanıza olanak tanır." },
+            formats: { question: "Resim filigranları için hangi formatlar desteklenir?", answer: "PNG, JPG/JPEG ve SVG formatlarını destekliyoruz. Şeffaflık gerektiren logolar için PNG önerilir." },
+            multiple: { question: "Tek bir belgeye birden fazla filigran ekleyebilir miyim?", answer: "Pro kullanıcıları birden fazla filigran ekleyebilir; ücretsiz kullanıcılar bir filigranla sınırlıdır." },
+            q1: { question: "PDF dosyam güvende mi?", answer: "Evet, tüm yüklemeler güvenli bir şekilde işlenir ve işlemden sonra otomatik olarak silinir." },
+            q2: { question: "Hangi tür filigranları ekleyebilirim?", answer: "Özelleştirilebilir yazı tipleriyle metin filigranları veya PNG, JPG, SVG ile resim filigranları." },
+            q3: { question: "Filigranı ekledikten sonra kaldırabilir miyim?", answer: "Eklenip indirildikten sonra filigran PDF'nin kalıcı bir parçası haline gelir." },
+            q4: { question: "Dosya boyutu sınırı var mı?", answer: "Evet, PDF yüklemeleri için maksimum boyut 50 MB, resim filigranları için 5 MB'dir." }
         },
-        addingWatermark: "PDF'nize filigran ekleniyor...",
-        watermarkSuccess: "Filigran Başarıyla Eklendi!",
-        watermarkSuccessDesc: "PDF dosyanız filigranla işaretlendi ve indirmeye hazır."
+        bestPractices: {
+            title: "Filigran Uygulama En İyi Yöntemleri",
+            dos: "Yapılması Gerekenler",
+            donts: "Yapılmaması Gerekenler",
+            dosList: [
+                "İçeriği gizlememek için yarı şeffaf filigranlar kullanın",
+                "Daha iyi kapsama için çapraz filigranları düşünün",
+                "Büyük belgeleri işlemeden önce bir örnek sayfada filigranı test edin",
+                "Daha iyi görünürlük için kontrast renkler kullanın",
+                "Yasal koruma için telif hakkı sembolü © ekleyin"
+            ],
+            dontsList: [
+                "Çok koyu veya opak filigranlar kullanmayın",
+                "Önemli metin veya öğelerin üzerine filigran yerleştirmeyin",
+                "Okunmaz hale gelen çok küçük metinler kullanmayın",
+                "Belge güvenliği için yalnızca filigranlara güvenmeyin",
+                "Pikselli görünen düşük çözünürlüklü resimler kullanmayın"
+            ]
+        },
+        relatedTools: {
+            title: "İlgili Araçlar",
+            protect: "PDF'yi Koru",
+            sign: "PDF'yi İmzala",
+            edit: "PDF'yi Düzenle",
+            ocr: "PDF OCR",
+            viewAll: "Tüm Araçları Görüntüle"
+        }
     },
     compressPdf: {
         title: "PDF Dosyalarını Sıkıştır",

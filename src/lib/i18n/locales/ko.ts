@@ -346,34 +346,255 @@ export default {
     }
   },
 
-  // Features section
+
   features: {
-    title: "기능",
-    description: "PDF 파일을 변환하고 관리하는 데 필요한 모든 것",
-    documentFormats: {
-      title: "문서 형식",
-      description: "DOCX, DOC, RTF, ODT 등으로 완벽한 형식과 레이아웃 보존과 함께 변환"
+    title: "고급 PDF 도구 및 기능 | ScanPro",
+    description: "문서 관리, 변환, 편집 등을 위한 ScanPro의 포괄적인 PDF 도구 및 기능 제품군을 살펴보세요.",
+
+    hero: {
+      title: "고급 PDF 도구 및 기능",
+      description: "모든 문서 관리 요구를 충족하는 궁극의 솔루션인 ScanPro를 만드는 포괄적인 도구 및 기능 제품군을 발견하세요."
     },
-    spreadsheets: {
-      title: "스프레드시트",
-      description: "PDF를 XLSX, CSV 및 기타 스프레드시트 형식으로 적절한 셀 구조와 함께 변환"
+
+    overview: {
+      power: {
+        title: "강력한 처리",
+        description: "고급 알고리즘은 뛰어난 정확도로 고품질 문서 처리 및 변환을 보장합니다."
+      },
+      security: {
+        title: "은행 수준 보안",
+        description: "귀하의 문서는 256비트 SSL 암호화로 보호되며 처리 후 자동으로 삭제됩니다."
+      },
+      accessibility: {
+        title: "범용 접근성",
+        description: "모든 장치에서 완벽한 크로스 플랫폼 호환성으로 문서와 도구에 액세스하세요."
+      }
     },
-    images: {
-      title: "이미지",
-      description: "PDF 파일에서 고품질 JPG 및 PNG 이미지를 해상도 조절과 함께 추출"
+
+    allFeatures: {
+      title: "모든 기능"
     },
-    webFormats: {
-      title: "웹 형식",
-      description: "온라인 게시를 위해 HTML 및 기타 웹 친화적인 형식으로 변환"
+
+    learnMore: "더 알아보기",
+
+    categories: {
+      conversion: {
+        title: "PDF 변환",
+        description: "높은 정확도와 형식 유지로 PDF를 다양한 형식으로 변환합니다.",
+        features: {
+          pdfToWord: {
+            title: "PDF에서 Word로 변환",
+            description: "PDF 파일을 형식, 표, 이미지가 유지된 편집 가능한 Word 문서로 변환합니다."
+          },
+          pdfToExcel: {
+            title: "PDF에서 Excel로 변환",
+            description: "PDF에서 표를 정확한 데이터 형식의 편집 가능한 Excel 스프레드시트로 추출합니다."
+          },
+          pdfToImage: {
+            title: "PDF에서 이미지로 변환",
+            description: "PDF 페이지를 사용자 정의 가능한 해상도로 고품질 JPG, PNG 또는 TIFF 이미지로 변환합니다."
+          },
+          officeToPdf: {
+            title: "Office에서 PDF로 변환",
+            description: "Word, Excel, PowerPoint 파일을 레이아웃과 형식이 유지된 PDF 형식으로 변환합니다."
+          }
+        }
+      },
+
+      editing: {
+        title: "PDF 편집 및 관리",
+        description: "포괄적인 도구 세트를 사용하여 PDF 문서를 편집, 정리, 최적화합니다.",
+        features: {
+          merge: {
+            title: "PDF 병합",
+            description: "여러 PDF 파일을 사용자 정의 가능한 페이지 순서로 단일 문서로 결합합니다."
+          },
+          split: {
+            title: "PDF 분할",
+            description: "큰 PDF를 페이지 범위별로 작은 문서로 나누거나 특정 페이지를 추출합니다."
+          },
+          compress: {
+            title: "PDF 압축",
+            description: "품질을 유지하면서 PDF 파일 크기를 줄여 공유와 저장을 용이하게 합니다."
+          },
+          watermark: {
+            title: "워터마크 추가",
+            description: "투명도, 위치, 회전을 사용자 정의할 수 있는 텍스트 또는 이미지 워터마크를 PDF에 추가합니다."
+          }
+        }
+      },
+
+      security: {
+        title: "PDF 보안 및 보호",
+        description: "암호화, 비밀번호 보호, 디지털 서명으로 PDF 문서를 보호합니다.",
+        features: {
+          protect: {
+            title: "비밀번호 보호",
+            description: "액세스를 제어하고 무단 보기를 방지하기 위해 PDF를 비밀번호 보호로 암호화합니다."
+          },
+          unlock: {
+            title: "PDF 잠금 해제",
+            description: "권한 있는 액세스가 있는 PDF에서 비밀번호 보호를 제거합니다."
+          },
+          signature: {
+            title: "디지털 서명",
+            description: "문서 인증 및 검증을 위해 PDF에 디지털 서명을 추가합니다."
+          },
+          redaction: {
+            title: "PDF 편집",
+            description: "PDF 문서에서 민감한 정보를 영구적으로 제거합니다."
+          }
+        }
+      },
+
+      ocr: {
+        title: "OCR 기술",
+        description: "당사의 고급 OCR 기술을 사용하여 스캔된 문서와 이미지에서 텍스트를 추출합니다.",
+        features: {
+          textExtraction: {
+            title: "텍스트 추출",
+            description: "스캔된 PDF 및 이미지에서 높은 정확도와 언어 지원으로 텍스트를 추출합니다."
+          },
+          searchable: {
+            title: "검색 가능한 PDF",
+            description: "스캔된 문서를 텍스트 인식 기능이 있는 검색 가능한 PDF로 변환합니다."
+          },
+          multilingual: {
+            title: "다국어 지원",
+            description: "비라틴 문자와 특수 문자를 포함한 100개 이상의 언어에 대한 OCR 지원."
+          },
+          batchProcessing: {
+            title: "일괄 처리",
+            description: "효율적인 일괄 OCR 기능을 사용하여 여러 문서를 한 번에 처리합니다."
+          }
+        }
+      },
+
+      api: {
+        title: "API 및 통합",
+        description: "당사의 강력한 API를 사용하여 PDF 처리 기능을 애플리케이션에 통합합니다.",
+        features: {
+          restful: {
+            title: "RESTful API",
+            description: "PDF 처리 및 문서 관리를 위한 간단하고 강력한 RESTful API."
+          },
+          sdks: {
+            title: "SDK 및 라이브러리",
+            description: "JavaScript, Python, PHP를 포함한 다양한 프로그래밍 언어에 대한 개발자 친화적인 SDK."
+          },
+          webhooks: {
+            title: "웹훅",
+            description: "비동기 PDF 처리 워크플로우에 대한 실시간 이벤트 알림."
+          },
+          customization: {
+            title: "API 사용자 정의",
+            description: "사용자 정의 가능한 엔드포인트와 매개변수로 API를 특정 요구에 맞게 조정합니다."
+          }
+        }
+      },
+
+      cloud: {
+        title: "클라우드 플랫폼",
+        description: "당사의 안전한 클라우드 스토리지 및 처리 플랫폼으로 어디서나 문서에 액세스하세요.",
+        features: {
+          storage: {
+            title: "클라우드 스토리지",
+            description: "암호화된 클라우드 스토리지로 어디서나 문서를 안전하게 저장하고 액세스할 수 있습니다."
+          },
+          sync: {
+            title: "장치 간 동기화",
+            description: "모든 장치에서 문서를 원활하게 동기화하여 이동 중에도 액세스할 수 있습니다."
+          },
+          sharing: {
+            title: "문서 공유",
+            description: "보안 링크와 권한 제어로 문서를 쉽게 공유합니다."
+          },
+          history: {
+            title: "버전 기록",
+            description: "버전 기록으로 문서 변경 사항을 추적하고 필요할 때 이전 버전을 복원합니다."
+          }
+        }
+      },
+
+      enterprise: {
+        title: "엔터프라이즈 기능",
+        description: "비즈니스 및 엔터프라이즈 요구 사항을 위해 설계된-wise로 제공되는 고급 기능.",
+        features: {
+          batch: {
+            title: "일괄 처리",
+            description: "효율적인 일괄 처리 시스템으로 수백 개의 문서를 동시에 처리합니다."
+          },
+          workflow: {
+            title: "사용자 정의 워크플로우",
+            description: "비즈니스 요구에 맞춘 자동 문서 처리 워크플로우를 생성합니다."
+          },
+          compliance: {
+            title: "규정 준수 및 감사",
+            description: "GDPR, HIPAA 및 기타 규제 준수를 위한 강화된 보안 기능."
+          },
+          analytics: {
+            title: "사용 분석",
+            description: "문서 처리 활동 및 사용자 작업에 대한 상세한 통찰력."
+          }
+        }
+      }
     },
-    ocrTech: {
-      title: "OCR 기술",
-      description: "고급 광학 문자 인식으로 스캔된 문서에서 텍스트 추출"
+
+    mobile: {
+      title: "ScanPro 모바일 앱",
+      description: "ScanPro의 강력한 PDF 도구를 이동 중에도 사용하세요. 당사의 모바일 앱은 편리하고 모바일 친화적인 인터페이스에서 동일한 견고한 기능을 제공합니다.",
+      feature1: {
+        title: "문서 스캔 및 디지털화",
+        description: "카메라를 사용하여 물리적 문서를 스캔하고 즉시 고품질 PDF로 변환합니다."
+      },
+      feature2: {
+        title: "이동 중 PDF 편집",
+        description: "스마트폰이나 태블릿에서 PDF 문서를 쉽게 편집, 주석 달기, 서명할 수 있습니다."
+      },
+      feature3: {
+        title: "클라우드 동기화",
+        description: "안전한 클라우드 스토리지로 모든 장치에서 문서를 원활하게 동기화합니다."
+      }
     },
-    batchProcessing: {
-      title: "일괄 처리",
-      description: "효율적인 일괄 처리를 통해 한 번에 여러 PDF를 변환하여 시간 절약"
+
+    comparison: {
+      title: "기능 비교",
+      description: "다양한 계획을 비교하여 귀하의 필요에 가장 적합한 것을 찾아보세요.",
+      feature: "기능",
+      free: "무료",
+      basic: "기본",
+      pro: "프로",
+      enterprise: "엔터프라이즈",
+      features: {
+        convert: "PDF 변환",
+        merge: "병합 및 분할",
+        compress: "압축",
+        ocr: "OCR 기본",
+        advancedOcr: "고급 OCR",
+        watermark: "워터마킹",
+        protect: "비밀번호 보호",
+        api: "API 액세스",
+        batch: "일괄 처리",
+        priority: "우선 지원",
+        customWorkflow: "사용자 정의 워크플로우",
+        whiteLabel: "화이트 라벨링",
+        dedicated: "전용 지원"
+      }
+    },
+
+    testimonials: {
+      title: "사용자들의 말",
+      quote1: "ScanPro는 우리 팀이 문서를 다루는 방식을 혁신했습니다. OCR 기능은 믿을 수 없을 정도로 정확하며, 일괄 처리는 매주 몇 시간을 절약해줍니다.",
+      name1: "사라 존슨",
+      title1: "운영 관리자",
+      quote2: "API 통합은 매끄러웠습니다. ScanPro를 워크플로우에 통합했으며 효율성의 차이는 엄청납니다. 지원 팀도 최고 수준입니다.",
+      name2: "데이비드 첸",
+      title2: "기술 리드",
+      quote3: "소규모 사업주로서 합리적인 가격과 포괄적인 도구 세트는 ScanPro를 놀라운 가치로 만듭니다. 특히 이동 중에 문서를 처리할 수 있는 모바일 앱이 정말 마음에 듭니다.",
+      name3: "마리아 가르시아",
+      title3: "사업주"
     }
+
   },
 
   // CTA section
@@ -793,75 +1014,153 @@ export default {
     protectedDesc: "귀하의 PDF 파일이 암호화되고 비밀번호로 보호되었습니다."
   },
 
-  // Watermark Page
-  watermark: {
+  watermarkPdf: {
     title: "PDF에 워터마크 추가",
-    description: "사용자 지정 텍스트 워터마크를 추가하여 문서를 보호하세요",
+    description: "보호, 브랜딩 또는 식별을 위해 PDF 문서에 사용자 정의 텍스트 또는 이미지 워터마크를 추가하세요.",
+    textWatermark: "텍스트 워터마크",
+    imageWatermark: "이미지 워터마크",
+    privacyNote: "귀하의 파일은 안전하게 처리됩니다. 모든 업로드는 처리 후 자동으로 삭제됩니다.",
+    headerTitle: "PDF에 워터마크 추가",
+    headerDescription: "브랜딩, 저작권 보호 및 문서 분류를 위해 PDF 문서에 사용자 정의 텍스트 또는 이미지 워터마크를 추가하세요.",
+    invalidFileType: "잘못된 파일 형식",
+    selectPdfFile: "PDF 파일을 선택하세요",
+    fileTooLarge: "파일이 너무 큽니다",
+    maxFileSize: "최대 파일 크기는 50MB입니다",
+    invalidImageType: "잘못된 이미지 형식",
+    supportedFormats: "지원 형식: PNG, JPG, SVG",
+    imageTooLarge: "이미지가 너무 큽니다",
+    maxImageSize: "최대 이미지 크기는 5MB입니다",
+    noFileSelected: "파일이 선택되지 않았습니다",
+    noImageSelected: "워터마크 이미지가 선택되지 않았습니다",
+    selectWatermarkImage: "워터마크로 사용할 이미지를 선택하세요",
+    noTextEntered: "워터마크 텍스트가 입력되지 않았습니다",
+    enterWatermarkText: "워터마크로 사용할 텍스트를 입력하세요",
+    success: "워터마크가 성공적으로 추가되었습니다",
+    successDesc: "귀하의 PDF에 워터마크가 추가되었으며 다운로드할 준비가 되었습니다",
+    failed: "워터마크 추가에 실패했습니다",
+    unknownError: "알 수 없는 오류가 발생했습니다",
+    unknownErrorDesc: "알 수 없는 오류가 발생했습니다. 다시 시도하세요",
+    uploadTitle: "워터마크를 추가할 PDF 업로드",
+    uploadDesc: "PDF 파일을 여기로 드래그 앤 드롭하거나 클릭하여 찾아보세요",
+    uploading: "업로드 중...",
+    selectPdf: "PDF 파일 선택",
+    maxSize: "최대 파일 크기: 50MB",
+    change: "파일 변경",
+    commonOptions: "워터마크 설정",
+    position: "위치",
+    center: "중앙",
+    tile: "타일",
+    custom: "사용자 정의",
+    applyToPages: "페이지에 적용",
+    all: "모든 페이지",
+    even: "짝수 페이지",
+    odd: "홀수 페이지",
+    customPages: "사용자 정의 페이지",
+    pagesFormat: "페이지 번호를 쉼표로 구분하거나 하이픈으로 범위를 입력하세요 (예: 1,3,5-10)",
+    processing: "처리 중...",
+    addWatermark: "워터마크 추가",
+    adding: "워터마크 추가 중",
+    pleaseWait: "문서를 처리하는 동안 기다려 주세요",
+    download: "PDF 다운로드",
+    newWatermark: "다른 워터마크 추가",
+    text: {
+      text: "워터마크 텍스트",
+      placeholder: "예: 기밀, 초안 등",
+      color: "텍스트 색상",
+      font: "글꼴",
+      selectFont: "글꼴 선택",
+      size: "글꼴 크기",
+      opacity: "불투명도",
+      rotation: "회전",
+      preview: "미리보기"
+    },
+    image: {
+      title: "워터마크 이미지",
+      upload: "워터마크로 사용할 이미지를 업로드하세요",
+      select: "이미지 선택",
+      formats: "지원 형식: PNG, JPEG, SVG",
+      change: "이미지 변경",
+      scale: "크기 조정",
+      opacity: "불투명도",
+      rotation: "회전"
+    },
     howTo: {
       title: "워터마크 추가 방법",
-      step1: {
-        title: "업로드",
-        description: "워터마크를 추가하려는 PDF 파일을 업로드하세요. 적용하기 전에 어떻게 보일지 미리 볼 수 있습니다."
+      step1: { title: "PDF 업로드", description: "워터마크를 추가하려는 PDF 파일을 선택하고 업로드하세요" },
+      step2: { title: "워터마크 사용자 정의", description: "텍스트 또는 이미지 워터마크를 선택하고 모양을 사용자 정의하세요" },
+      step3: { title: "워터마크가 추가된 PDF 다운로드", description: "파일을 처리하고 워터마크가 추가된 PDF 문서를 다운로드하세요" }
+    },
+    why: {
+      title: "왜 워터마크를 추가하나요",
+      copyright: { title: "저작권 보호", description: "저작권 공지와 소유 정보를 추가하여 지적 재산을 보호하세요" },
+      branding: { title: "브랜딩 및 아이덴티티", description: "배포된 문서에 로고나 브랜드 텍스트를 추가하여 브랜드 아이덴티티를 강화하세요" },
+      classification: { title: "문서 분류", description: "문서를 초안, 기밀 또는 최종으로 표시하여 상태를 나타내세요" },
+      tracking: { title: "문서 추적", description: "문서 배포를 추적하고 유출을 식별하기 위해 고유 식별자를 추가하세요" }
+    },
+    types: {
+      title: "워터마크 유형 및 옵션",
+      text: {
+        title: "텍스트 워터마크",
+        description: "다양한 옵션으로 텍스트 워터마크를 사용자 정의하세요:",
+        options: {
+          text: "사용자 정의 텍스트 콘텐츠 (다중 행 지원)",
+          font: "글꼴 패밀리, 크기, 색상",
+          rotation: "회전 각도 (0-360도)",
+          opacity: "불투명도 수준 (투명에서 완전히 보임까지)",
+          position: "위치 (중앙, 타일, 사용자 정의 배치)"
+        }
       },
-      step2: {
-        title: "사용자 지정",
-        description: "텍스트, 위치, 크기, 색상, 투명도를 필요에 맞게 설정하세요."
-      },
-      step3: {
-        title: "다운로드",
-        description: "워터마크가 적용된 PDF 파일을 처리하고 다운로드하여 배포 준비를 하세요."
+      image: {
+        title: "이미지 워터마크",
+        description: "이러한 사용자 정의로 이미지 워터마크를 추가하세요:",
+        options: {
+          upload: "자신의 로고 또는 이미지를 업로드",
+          scale: "크기 조정 및 변경",
+          rotation: "회전 옵션",
+          opacity: "투명도 제어",
+          position: "위치 사용자 정의"
+        }
       }
-    },
-    form: {
-      text: "워터마크 텍스트",
-      textColor: "텍스트 색상",
-      opacity: "투명도",
-      size: "크기",
-      rotation: "회전",
-      position: "위치",
-      pages: "워터마크를 추가할 페이지",
-      allPages: "모든 페이지",
-      specificPages: "특정 페이지",
-      pageNumbers: "페이지 번호",
-      pageNumbersHint: "페이지 번호를 쉼표로 구분하여 입력하세요 (예: 1,3,5,8)"
-    },
-    positions: {
-      topLeft: "왼쪽 상단",
-      topCenter: "중앙 상단",
-      topRight: "오른쪽 상단",
-      centerLeft: "왼쪽 중앙",
-      center: "중앙",
-      centerRight: "오른쪽 중앙",
-      bottomLeft: "왼쪽 하단",
-      bottomCenter: "중앙 하단",
-      bottomRight: "오른쪽 하단"
-    },
-    preview: {
-      title: "워터마크 미리보기",
-      note: "이것은 단순화된 미리보기입니다. 실제 결과는 다를 수 있습니다."
     },
     faq: {
       title: "자주 묻는 질문",
-      q1: {
-        question: "어떤 종류의 워터마크를 추가할 수 있나요?",
-        answer: "저희 도구는 내용, 위치, 크기, 색상, 투명도, 회전을 사용자 지정할 수 있는 텍스트 워터마크를 지원합니다. \"기밀\", \"초안\" 또는 회사 이름과 같은 워터마크를 추가할 수 있습니다."
-      },
-      q2: {
-        question: "PDF의 특정 페이지만 워터마크를 추가할 수 있나요?",
-        answer: "네, 모든 페이지에 워터마크를 추가하거나 페이지 번호를 입력하여 워터마크를 추가할 페이지를 지정할 수 있습니다."
-      },
-      q3: {
-        question: "워터마크는 영구적인가요?",
-        answer: "네, 워터마크는 PDF 문서에 영구적으로 삽입됩니다. 그러나 콘텐츠의 가시성과 가독성을 조화롭게 유지하기 위해 투명도를 다양하게 설정할 수 있습니다."
-      },
-      q4: {
-        question: "워터마킹이 파일 품질에 영향을 미치나요?",
-        answer: "아니요, 저희 워터마킹 도구는 지정된 텍스트만 추가하며 원본 문서 품질이나 파일 크기에 큰 영향을 미치지 않습니다."
-      }
+      removable: { question: "PDF에서 워터마크를 제거할 수 있나요?", answer: "표준 워터마크는 반영구적이며 특수 소프트웨어 없이는 제거하기 어렵습니다. 그러나 완전히 변조 방지가 되지는 않습니다. 더 안전한 워터마킹을 위해 Pro 플랜을 고려하세요." },
+      printing: { question: "문서를 인쇄할 때 워터마크가 나타나나요?", answer: "네, 인쇄 시 워터마크가 나타납니다. 불투명도를 조정하여 더 은연하게 만들 수 있습니다." },
+      pages: { question: "특정 페이지에만 워터마크를 추가할 수 있나요?", answer: "네, Pro 플랜에서는 특정 페이지에 워터마크를 적용할 수 있습니다." },
+      formats: { question: "이미지 워터마크에 지원되는 형식은 무엇인가요?", answer: "PNG, JPG/JPEG, SVG를 지원합니다. 투명도가 필요한 경우 PNG를 권장합니다." },
+      multiple: { question: "한 문서에 여러 워터마크를 추가할 수 있나요?", answer: "Pro 사용자는 여러 워터마크를 추가할 수 있으며, 무료 사용자는 하나로 제한됩니다." },
+      q1: { question: "내 PDF 파일은 안전한가요?", answer: "네, 모든 업로드는 안전하게 처리되며 처리 후 자동 삭제됩니다." },
+      q2: { question: "어떤 종류의 워터마크를 추가할 수 있나요?", answer: "사용자 정의 가능한 글꼴의 텍스트 워터마크 또는 PNG, JPG, SVG를 사용한 이미지 워터마크입니다." },
+      q3: { question: "워터마크를 추가한 후 제거할 수 있나요?", answer: "추가되고 다운로드된 후에는 워터마크가 PDF의 영구적인 부분이 됩니다." },
+      q4: { question: "파일 크기 제한이 있나요?", answer: "네, PDF 업로드의 최대 크기는 50MB이고, 이미지 워터마크는 5MB입니다." }
     },
-    addingWatermark: "PDF에 워터마크 추가 중...",
-    watermarkSuccess: "워터마크가 성공적으로 추가되었습니다!",
-    watermarkSuccessDesc: "귀하의 PDF 파일에 워터마크가 적용되었으며 다운로드할 준비가 되었습니다."
+    bestPractices: {
+      title: "워터마킹 모범 사례",
+      dos: "해야 할 일",
+      donts: "하지 말아야 할 일",
+      dosList: [
+        "콘텐츠를 가리지 않도록 반투명 워터마크 사용",
+        "더 나은 커버리지를 위해 대각선 워터마크 고려",
+        "큰 문서를 처리하기 전에 샘플 페이지에서 워터마크 테스트",
+        "시인성을 높이기 위해 대비되는 색상 사용",
+        "법적 보호를 위해 저작권 기호 © 포함"
+      ],
+      dontsList: [
+        "너무 어둡거나 불투명한 워터마크 사용 금지",
+        "중요한 텍스트나 요소 위에 워터마크 배치 금지",
+        "읽기 어려운 작은 텍스트 사용 금지",
+        "문서 보안을 워터마크에만 의존하지 않기",
+        "픽셀이 보이는 저해상도 이미지 사용 금지"
+      ]
+    },
+    relatedTools: {
+      title: "관련 도구",
+      protect: "PDF 보호",
+      sign: "PDF 서명",
+      edit: "PDF 편집",
+      ocr: "PDF OCR",
+      viewAll: "모든 도구 보기"
+    }
   },
   compressPdf: {
     title: "PDF 파일 압축",

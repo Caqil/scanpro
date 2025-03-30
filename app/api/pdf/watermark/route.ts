@@ -14,7 +14,7 @@ const execPromise = promisify(exec);
 
 // Define directories
 const UPLOAD_DIR = join(process.cwd(), 'uploads');
-const WATERMARKED_DIR = join(process.cwd(), 'public', 'watermarked');
+const WATERMARKED_DIR = join(process.cwd(), 'public', 'watermarks');
 const TEMP_DIR = join(process.cwd(), 'temp');
 
 // Ensure directories exist
@@ -461,7 +461,7 @@ export async function POST(request: NextRequest) {
         await writeFile(outputPath, watermarkedPdfBytes);
 
         // Create relative URL for download
-        const fileUrl = `/watermarked/${uniqueId}-watermarked.pdf`;
+        const fileUrl = `/api/file?folder=watermarks&filename=${uniqueId}-watermarked.pdf`;
 
         return NextResponse.json({
             success: true,

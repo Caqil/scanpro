@@ -1,12 +1,8 @@
 import { Metadata } from "next";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  WatermarkHeaderSection,
-  HowToWatermarkSection,
-  WatermarkFaqSection,
-  RelatedToolsSection
-} from "./watermark-content";
-
+import { PdfEditor } from "@/components/pdf-editor";
+import { Suspense } from "react";
+import { EditHeaderSection, HowToEditSection, EditFAQSection, RelatedToolsSection } from "./edit-content";
+import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
 import enTranslations from '@/src/lib/i18n/locales/en';
 import idTranslations from '@/src/lib/i18n/locales/id';
 import esTranslations from '@/src/lib/i18n/locales/es';
@@ -21,8 +17,6 @@ import jaTranslations from '@/src/lib/i18n/locales/ja';
 import koTranslations from '@/src/lib/i18n/locales/ko';
 import itTranslations from '@/src/lib/i18n/locales/it';
 import trTranslations from '@/src/lib/i18n/locales/tr';
-import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
-import { WatermarkTool } from "@/components/watermark-tool";
 
 type Language = typeof SUPPORTED_LANGUAGES[number];
 
@@ -89,14 +83,62 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang: paramLang } = await params;
   const lang = SUPPORTED_LANGUAGES.includes(paramLang as Language) ? paramLang as Language : "en";
   const t = (key: string) => getTranslation(lang, key);
-
+  
+  // Define stop words for supported languages
+  const stopWordsByLanguage: Record<string, string[]> = {
+    en: ["the", "a", "an", "and", "or", "to", "in", "with", "for", "is", "on", "at"],
+    id: ["dan", "di", "ke", "dari", "untuk", "yang", "dengan", "atau", "pada"],
+    es: ["el", "la", "los", "las", "y", "o", "en", "con", "para", "de", "a"],
+    fr: ["le", "la", "les", "et", "ou", "à", "en", "avec", "pour", "de"],
+    zh: ["的", "了", "在", "是", "我", "他", "这", "那", "和", "你"], // Simplified Chinese
+    ar: ["في", "من", "إلى", "على", "و", "هذا", "تلك", "مع", "أو"], // Arabic
+    hi: ["और", "के", "में", "से", "है", "को", "का", "कि", "पर"], // Hindi
+    ru: ["и", "в", "на", "с", "к", "от", "для", "по", "или"], // Russian
+    pt: ["e", "ou", "em", "com", "para", "de", "a", "o", "as"], // Portuguese
+    de: ["und", "in", "mit", "für", "zu", "auf", "an", "oder"], // German
+    ja: ["の", "に", "を", "は", "が", "と", "で", "です"], // Japanese (hiragana)
+    ko: ["은", "는", "이", "가", "을", "를", "에", "와"], // Korean
+    it: ["e", "o", "in", "con", "per", "di", "a", "il", "la"], // Italian
+    tr: ["ve", "ile", "de", "da", "için", "bu", "şu", "veya"] // Turkish
+  };
+  
+  // Keyword extraction function with language-specific stop words
+  const extractKeywords = (text: string, language: string): string[] => {
+    // Select stop words based on language, default to English if not found
+    const stopWords = stopWordsByLanguage[language] || stopWordsByLanguage["en"];
+    
+    // Convert to lowercase (for Latin-based languages) and remove punctuation
+    const words = text.toLowerCase().replace(/[^\w\s]/g, "").split(/\s+/);
+    
+    // Filter out stop words and short words, then count frequency
+    const filteredWords = words
+      .filter(word => !stopWords.includes(word) && word.length > 2)
+      .reduce((acc, word) => {
+        acc[word] = (acc[word] || 0) + 1;
+        return acc;
+      }, {} as Record<string, number>);
+  
+    // Sort by frequency and take top 5
+    return Object.keys(filteredWords)
+      .sort((a, b) => filteredWords[b] - filteredWords[a])
+      .slice(0, 5);
+  };
+  
+  // Get translated title and description
+  const title = t("editPdf.title") || "Edit PDF Online | Free PDF Editor";
+  const description = t("editPdf.description") || "Edit and modify PDF documents online. Add text, images, shapes and drawings to your PDF files with this free online PDF editor.";
+  
+  // Combine title and description for keyword extraction
+  const keywords = extractKeywords(`${title} ${description}`, lang);
+  
   return {
-    title: t("watermarkPdf.title"),
-    description: t("watermarkPdf.description"),
+    title,
+    description,
+    keywords,
     openGraph: {
-      title: t("watermarkPdf.title"),
-      description: t("watermarkPdf.description"),
-      url: `/${lang}/watermark`,
+      title,
+      description,
+      url: `/${lang}/edit-pdf`,
       siteName: "ScanPro",
       locale: {
         'en': 'en_US',
@@ -113,10 +155,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         'ko': 'ko_KR',
         'it': 'it_IT',
         'tr': 'tr_TR'
-    }[lang] || 'en_US',
+      }[lang] || 'en_US',
     },
     alternates: {
-      canonical: `/${lang}/watermark`,
+      canonical: `/${lang}/edit-pdf`,
       languages: Object.fromEntries(
         SUPPORTED_LANGUAGES.map(code => {
           const langCode = {
@@ -136,40 +178,30 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             'tr': 'tr-TR'
           }[code] || `${code}`;
           
-          return [langCode, `/${code}/watermark`];
+          return [langCode, `/${code}/edit-pdf`];
         })
       ),
     },
   };
 }
 
-
-export default function WatermarkPDFPage() {
+export default function EditPDFPage() {
   return (
     <div className="container max-w-5xl py-12 mx-auto">
-      <WatermarkHeaderSection />
-   {/* Main Tool Section with Tabs */}
+      <EditHeaderSection />
+
+      {/* Main Tool Card */}
       <div className="mb-12">
-        <Tabs defaultValue="text" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-8">
-            <TabsTrigger value="text">Text Watermark</TabsTrigger>
-            <TabsTrigger value="image">Image Watermark</TabsTrigger>
-          </TabsList>
-          <TabsContent value="text">
-            <WatermarkTool type="text" />
-          </TabsContent>
-          <TabsContent value="image">
-            <WatermarkTool type="image" />
-          </TabsContent>
-        </Tabs>
+        <Suspense fallback={<div>Loading...</div>}>
+          <PdfEditor />
+        </Suspense>
       </div>
-     
 
       {/* How It Works */}
-      <HowToWatermarkSection />
+      <HowToEditSection />
 
       {/* FAQ Section */}
-      <WatermarkFaqSection />
+      <EditFAQSection />
 
       {/* Related Tools Section */}
       <RelatedToolsSection />

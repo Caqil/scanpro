@@ -348,31 +348,251 @@ export default {
 
     // 功能部分
     features: {
-        title: "功能",
-        description: "转换和管理PDF文件所需的一切",
-        documentFormats: {
-            title: "文档格式",
-            description: "转换为DOCX、DOC、RTF、ODT等，完美保留格式和布局"
+        title: "高级PDF工具与功能 | ScanPro",
+        description: "探索ScanPro为文档管理、转换、编辑等提供的全面PDF工具和功能套件。",
+
+        hero: {
+            title: "高级PDF工具与功能",
+            description: "发现使ScanPro成为您所有文档管理需求的终极解决方案的全面工具和功能套件。"
         },
-        spreadsheets: {
-            title: "电子表格",
-            description: "将PDF转换为XLSX、CSV等电子表格格式，保持正确的单元格结构"
+
+        overview: {
+            power: {
+                title: "强大处理能力",
+                description: "高级算法确保高质量文档处理和转换，精度卓越。"
+            },
+            security: {
+                title: "银行级安全",
+                description: "您的文档受256位SSL加密保护，并在处理后自动删除。"
+            },
+            accessibility: {
+                title: "通用访问性",
+                description: "通过完全跨平台兼容性，从任何设备访问您的文档和我们的工具。"
+            }
         },
-        images: {
-            title: "图片",
-            description: "从PDF文件中提取高质量JPG和PNG图片，支持分辨率控制"
+
+        allFeatures: {
+            title: "所有功能"
         },
-        webFormats: {
-            title: "网页格式",
-            description: "转换为HTML和其他适合在线发布的网页友好格式"
+
+        learnMore: "了解更多",
+
+        categories: {
+            conversion: {
+                title: "PDF转换",
+                description: "以高精度和格式保留将PDF转换为各种格式。",
+                features: {
+                    pdfToWord: {
+                        title: "PDF转Word",
+                        description: "将PDF文件转换为可编辑的Word文档，保留格式、表格和图像。"
+                    },
+                    pdfToExcel: {
+                        title: "PDF转Excel",
+                        description: "从PDF中提取表格到可编辑的Excel电子表格，数据格式精确。"
+                    },
+                    pdfToImage: {
+                        title: "PDF转图像",
+                        description: "将PDF页面转换为高质量JPG、PNG或TIFF图像，可自定义分辨率。"
+                    },
+                    officeToPdf: {
+                        title: "Office转PDF",
+                        description: "将Word、Excel、PowerPoint文件转换为PDF格式，保留布局和格式。"
+                    }
+                }
+            },
+
+            editing: {
+                title: "PDF编辑与管理",
+                description: "使用我们全面的工具集编辑、组织和优化您的PDF文档。",
+                features: {
+                    merge: {
+                        title: "合并PDF",
+                        description: "将多个PDF文件合并为一个文档，可自定义页面顺序。"
+                    },
+                    split: {
+                        title: "拆分PDF",
+                        description: "将大型PDF按页面范围拆分为较小的文档，或提取特定页面。"
+                    },
+                    compress: {
+                        title: "压缩PDF",
+                        description: "在保持质量的同时减小PDF文件大小，便于分享和存储。"
+                    },
+                    watermark: {
+                        title: "添加水印",
+                        description: "为您的PDF添加文本或图像水印，可自定义透明度、位置和旋转。"
+                    }
+                }
+            },
+
+            security: {
+                title: "PDF安全与保护",
+                description: "使用加密、密码保护和数字签名保护您的PDF文档。",
+                features: {
+                    protect: {
+                        title: "密码保护",
+                        description: "使用密码保护加密PDF以控制访问并防止未经授权的查看。"
+                    },
+                    unlock: {
+                        title: "解锁PDF",
+                        description: "从您有授权访问的PDF中移除密码保护。"
+                    },
+                    signature: {
+                        title: "数字签名",
+                        description: "为文档认证和验证向PDF添加数字签名。"
+                    },
+                    redaction: {
+                        title: "PDF编辑",
+                        description: "从PDF文档中永久删除敏感信息。"
+                    }
+                }
+            },
+
+            ocr: {
+                title: "OCR技术",
+                description: "使用我们先进的OCR技术从扫描文档和图像中提取文本。",
+                features: {
+                    textExtraction: {
+                        title: "文本提取",
+                        description: "从扫描的PDF和图像中以高精度和语言支持提取文本。"
+                    },
+                    searchable: {
+                        title: "可搜索PDF",
+                        description: "将扫描文档转换为带有文本识别的可搜索PDF。"
+                    },
+                    multilingual: {
+                        title: "多语言支持",
+                        description: "支持超过100种语言的OCR，包括非拉丁文脚本和特殊字符。"
+                    },
+                    batchProcessing: {
+                        title: "批量处理",
+                        description: "使用我们高效的批量OCR功能一次处理多个文档。"
+                    }
+                }
+            },
+
+            api: {
+                title: "API与集成",
+                description: "使用我们强大的API将PDF处理功能集成到您的应用程序中。",
+                features: {
+                    restful: {
+                        title: "RESTful API",
+                        description: "用于PDF处理和文档管理的简单而强大的RESTful API。"
+                    },
+                    sdks: {
+                        title: "SDK与库",
+                        description: "为多种编程语言（包括JavaScript、Python和PHP）提供的开发者友好SDK。"
+                    },
+                    webhooks: {
+                        title: "Webhooks",
+                        description: "异步PDF处理工作流程的实时事件通知。"
+                    },
+                    customization: {
+                        title: "API定制",
+                        description: "通过可定制的端点和参数调整API以满足您的特定需求。"
+                    }
+                }
+            },
+
+            cloud: {
+                title: "云平台",
+                description: "通过我们安全的云存储和处理平台随时随地访问您的文档。",
+                features: {
+                    storage: {
+                        title: "云存储",
+                        description: "通过我们加密的云存储随时随地安全存储和访问您的文档。"
+                    },
+                    sync: {
+                        title: "跨设备同步",
+                        description: "在您的所有设备上无缝同步您的文档，以便随时随地访问。"
+                    },
+                    sharing: {
+                        title: "文档共享",
+                        description: "通过安全链接和权限控制轻松共享文档。"
+                    },
+                    history: {
+                        title: "版本历史",
+                        description: "通过版本历史跟踪文档更改，并在需要时恢复到以前的版本。"
+                    }
+                }
+            },
+
+            enterprise: {
+                title: "企业功能",
+                description: "为商业和企业需求设计的高级功能。",
+                features: {
+                    batch: {
+                        title: "批量处理",
+                        description: "通过我们高效的批量处理系统同时处理数百个文档。"
+                    },
+                    workflow: {
+                        title: "自定义工作流程",
+                        description: "创建适合您业务需求的自动化文档处理工作流程。"
+                    },
+                    compliance: {
+                        title: "合规性与审计",
+                        description: "为GDPR、HIPAA和其他法规合规性增强的安全功能。"
+                    },
+                    analytics: {
+                        title: "使用分析",
+                        description: "关于文档处理活动和用户操作的详细洞察。"
+                    }
+                }
+            }
         },
-        ocrTech: {
-            title: "OCR技术",
-            description: "使用高级光学字符识别从扫描文档中提取文本"
+
+        mobile: {
+            title: "ScanPro移动应用",
+            description: "随身携带ScanPro的强大PDF工具。我们的移动应用程序在便捷的移动友好界面中提供相同的强大功能。",
+            feature1: {
+                title: "扫描与数字化文档",
+                description: "使用您的相机扫描物理文档并立即将其转换为高质量PDF。"
+            },
+            feature2: {
+                title: "随时随地编辑PDF",
+                description: "从您的智能手机或平板电脑上轻松编辑、注释和签署PDF文档。"
+            },
+            feature3: {
+                title: "云同步",
+                description: "通过安全的云存储在您的所有设备上无缝同步您的文档。"
+            }
         },
-        batchProcessing: {
-            title: "批量处理",
-            description: "一次性转换多个PDF以节省时间，高效的批量处理"
+
+        comparison: {
+            title: "功能比较",
+            description: "比较我们的不同计划，找到最适合您需求的计划。",
+            feature: "功能",
+            free: "免费",
+            basic: "基础",
+            pro: "专业",
+            enterprise: "企业",
+            features: {
+                convert: "PDF转换",
+                merge: "合并与拆分",
+                compress: "压缩",
+                ocr: "基础OCR",
+                advancedOcr: "高级OCR",
+                watermark: "水印",
+                protect: "密码保护",
+                api: "API访问",
+                batch: "批量处理",
+                priority: "优先支持",
+                customWorkflow: "自定义工作流程",
+                whiteLabel: "白标",
+                dedicated: "专属支持"
+            }
+        },
+
+        testimonials: {
+            title: "我们的用户怎么说",
+            quote1: "ScanPro彻底改变了我们团队处理文档的方式。OCR功能非常精确，批量处理每周为我们节省数小时。",
+            name1: "莎拉·约翰逊",
+            title1: "运营经理",
+            quote2: "API集成非常顺畅。我们将ScanPro集成到我们的工作流程中，效率差异显著。他们的支持团队也是一流的。",
+            name2: "大卫·陈",
+            title2: "技术负责人",
+            quote3: "作为一个小企业主，实惠的价格和全面的工具套件使ScanPro具有惊人的价值。我特别喜欢移动应用程序，它让我可以随时随地处理文档。",
+            name3: "玛丽亚·加西亚",
+            title3: "企业主"
         }
     },
 
@@ -793,75 +1013,153 @@ export default {
         protectedDesc: "您的PDF文件已加密并受密码保护。"
     },
 
-    // 水印页面
-    watermark: {
-        title: "为PDF添加水印",
-        description: "通过添加自定义文本水印保护您的文档",
+    watermarkPdf: {
+        title: "给PDF添加水印",
+        description: "为保护、品牌推广或标识，将自定义文本或图片水印添加到您的PDF文档中。",
+        textWatermark: "文本水印",
+        imageWatermark: "图片水印",
+        privacyNote: "您的文件将安全处理。所有上传文件在处理后会自动删除。",
+        headerTitle: "给PDF添加水印",
+        headerDescription: "为品牌推广、版权保护和文档分类，将自定义文本或图片水印添加到您的PDF文档中。",
+        invalidFileType: "无效文件类型",
+        selectPdfFile: "请选择一个PDF文件",
+        fileTooLarge: "文件太大",
+        maxFileSize: "最大文件大小为50MB",
+        invalidImageType: "无效图片类型",
+        supportedFormats: "支持的格式：PNG、JPG、SVG",
+        imageTooLarge: "图片太大",
+        maxImageSize: "最大图片大小为5MB",
+        noFileSelected: "未选择文件",
+        noImageSelected: "未选择水印图片",
+        selectWatermarkImage: "请选择用作水印的图片",
+        noTextEntered: "未输入水印文本",
+        enterWatermarkText: "请输入用作水印的文本",
+        success: "水印添加成功",
+        successDesc: "您的PDF已添加水印并准备下载",
+        failed: "添加水印失败",
+        unknownError: "发生未知错误",
+        unknownErrorDesc: "发生未知错误。请重试",
+        uploadTitle: "上传PDF以添加水印",
+        uploadDesc: "将您的PDF文件拖放到此处，或点击浏览",
+        uploading: "上传中...",
+        selectPdf: "选择PDF文件",
+        maxSize: "最大文件大小：50MB",
+        change: "更改文件",
+        commonOptions: "水印设置",
+        position: "位置",
+        center: "居中",
+        tile: "平铺",
+        custom: "自定义",
+        applyToPages: "应用于页面",
+        all: "所有页面",
+        even: "偶数页",
+        odd: "奇数页",
+        customPages: "自定义页面",
+        pagesFormat: "输入以逗号分隔的页面编号或以连字符表示的范围（例如：1,3,5-10）",
+        processing: "处理中...",
+        addWatermark: "添加水印",
+        adding: "正在添加水印",
+        pleaseWait: "请等待我们处理您的文档",
+        download: "下载PDF",
+        newWatermark: "添加另一个水印",
+        text: {
+            text: "水印文本",
+            placeholder: "例如：机密、草稿等",
+            color: "文本颜色",
+            font: "字体",
+            selectFont: "选择字体",
+            size: "字体大小",
+            opacity: "透明度",
+            rotation: "旋转",
+            preview: "预览"
+        },
+        image: {
+            title: "水印图片",
+            upload: "上传用作水印的图片",
+            select: "选择图片",
+            formats: "支持的格式：PNG、JPEG、SVG",
+            change: "更改图片",
+            scale: "缩放",
+            opacity: "透明度",
+            rotation: "旋转"
+        },
         howTo: {
             title: "如何添加水印",
-            step1: {
-                title: "上传",
-                description: "上传您想添加水印的PDF文件。您可以在应用前预览其外观。"
+            step1: { title: "上传您的PDF", description: "选择并上传您想添加水印的PDF文件" },
+            step2: { title: "自定义水印", description: "在文本或图片水印之间选择并自定义其外观" },
+            step3: { title: "下载添加水印的PDF", description: "处理您的文件并下载添加水印的PDF文档" }
+        },
+        why: {
+            title: "为什么添加水印",
+            copyright: { title: "版权保护", description: "通过添加版权声明和所有权信息保护您的知识产权" },
+            branding: { title: "品牌推广与身份", description: "通过在分发文档中添加标志或品牌文本来增强您的品牌形象" },
+            classification: { title: "文档分类", description: "将文档标记为草稿、机密或最终版以表明其状态" },
+            tracking: { title: "文档追踪", description: "添加唯一标识符以追踪文档分发并识别泄漏" }
+        },
+        types: {
+            title: "水印类型和选项",
+            text: {
+                title: "文本水印",
+                description: "使用各种选项自定义文本水印：",
+                options: {
+                    text: "自定义文本内容（支持多行）",
+                    font: "字体家族、大小和颜色",
+                    rotation: "旋转角度（0-360度）",
+                    opacity: "透明度级别（从透明到完全可见）",
+                    position: "位置（居中、平铺、自定义放置）"
+                }
             },
-            step2: {
-                title: "自定义",
-                description: "设置水印的文本、位置、大小、颜色和透明度以满足您的需求。"
-            },
-            step3: {
-                title: "下载",
-                description: "处理并下载您添加了水印的PDF文件，准备好分发。"
+            image: {
+                title: "图片水印",
+                description: "使用这些自定义选项添加图片水印：",
+                options: {
+                    upload: "上传您自己的标志或图片",
+                    scale: "缩放和调整大小",
+                    rotation: "旋转选项",
+                    opacity: "透明度控制",
+                    position: "位置自定义"
+                }
             }
-        },
-        form: {
-            text: "水印文本",
-            textColor: "文本颜色",
-            opacity: "透明度",
-            size: "大小",
-            rotation: "旋转",
-            position: "位置",
-            pages: "要添加水印的页面",
-            allPages: "所有页面",
-            specificPages: "特定页面",
-            pageNumbers: "页面编号",
-            pageNumbersHint: "输入页面编号，用逗号分隔（例如：1,3,5,8）"
-        },
-        positions: {
-            topLeft: "左上",
-            topCenter: "顶部中央",
-            topRight: "右上",
-            centerLeft: "中央左",
-            center: "中央",
-            centerRight: "中央右",
-            bottomLeft: "左下",
-            bottomCenter: "底部中央",
-            bottomRight: "右下"
-        },
-        preview: {
-            title: "水印预览",
-            note: "这是一个简化的预览。实际结果可能有所不同。"
         },
         faq: {
             title: "常见问题",
-            q1: {
-                question: "我可以添加哪些类型的水印？",
-                answer: "我们的工具支持文本水印，可自定义内容、位置、大小、颜色、透明度和旋转。您可以添加如“机密”、“草稿”或公司名称等水印。"
-            },
-            q2: {
-                question: "我可以只为PDF中的特定页面添加水印吗？",
-                answer: "是的，您可以选择为所有页面添加水印，或通过输入页面编号指定应添加水印的页面。"
-            },
-            q3: {
-                question: "水印是永久的吗？",
-                answer: "是的，水印会永久嵌入PDF文档中。然而，可以通过调整透明度来平衡可见性和内容的清晰度。"
-            },
-            q4: {
-                question: "添加水印会影响文件质量吗？",
-                answer: "不会，我们的水印工具仅添加指定的文本，不会显著影响原始文档的质量或文件大小。"
-            }
+            removable: { question: "可以从PDF中移除水印吗？", answer: "我们的标准水印是半永久性的，难以在没有专业软件的情况下移除。但它们并非完全防篡改。考虑我们的Pro计划以获得更安全的水印。" },
+            printing: { question: "打印文档时水印会显示吗？", answer: "是的，打印时水印会显示。您可以控制透明度使其更不显眼。" },
+            pages: { question: "我可以只给特定页面添加水印吗？", answer: "是的，我们的Pro计划允许您将水印应用于特定页面。" },
+            formats: { question: "图片水印支持哪些格式？", answer: "我们支持PNG、JPG/JPEG和SVG。建议使用PNG以支持透明背景的标志。" },
+            multiple: { question: "我可以在一个文档中添加多个水印吗？", answer: "Pro用户可以为单个文档添加多个水印；免费用户限制为一个。" },
+            q1: { question: "我的PDF文件安全吗？", answer: "是的，所有上传文件都安全处理，并在处理后自动删除。" },
+            q2: { question: "我可以添加哪些类型的水印？", answer: "可自定义字体的文本水印或使用PNG、JPG或SVG的图片水印。" },
+            q3: { question: "添加水印后可以移除吗？", answer: "一旦添加并下载，水印将成为PDF的永久部分。" },
+            q4: { question: "有文件大小限制吗？", answer: "是的，PDF上传的最大大小为50MB，图片水印为5MB。" }
         },
-        addingWatermark: "正在为您的PDF添加水印...",
-        watermarkSuccess: "水印添加成功！",
-        watermarkSuccessDesc: "您的PDF文件已添加水印并准备好下载。"
+        bestPractices: {
+            title: "水印最佳实践",
+            dos: "应做",
+            donts: "不应做",
+            dosList: [
+                "使用半透明水印以避免遮挡内容",
+                "考虑使用对角水印以获得更好的覆盖",
+                "在处理大文档前测试水印样本页面",
+                "使用对比色以提高可见性",
+                "加入版权符号©以获得法律保护"
+            ],
+            dontsList: [
+                "不要使用太深或不透明的水印",
+                "不要将水印放置在重要文本或元素上",
+                "不要使用太小而难以辨认的文本",
+                "不要仅依靠水印来保护文档安全",
+                "不要使用低分辨率而显得像素化的图片"
+            ]
+        },
+        relatedTools: {
+            title: "相关工具",
+            protect: "保护PDF",
+            sign: "签署PDF",
+            edit: "编辑PDF",
+            ocr: "OCR PDF",
+            viewAll: "查看所有工具"
+        }
     },
     compressPdf: {
         title: "压缩PDF文件",
