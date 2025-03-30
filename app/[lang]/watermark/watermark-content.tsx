@@ -21,7 +21,6 @@ import { useSearchParams } from "next/navigation";
 
 export function WatermarkHeaderSection() {
   const { t } = useLanguageStore();
-   const searchParams = useSearchParams();
   return (
     <div className="mx-auto flex flex-col items-center text-center mb-8">
       <div className="mb-4 p-3 rounded-full bg-blue-100 dark:bg-blue-900/30">
@@ -39,7 +38,6 @@ export function WatermarkHeaderSection() {
 
 export function HowToWatermarkSection() {
   const { t } = useLanguageStore();
-   const searchParams = useSearchParams();
   const steps = [
     {
       title: t('watermarkPdf.howTo.step1.title') || "Upload Your PDF",
@@ -75,7 +73,6 @@ export function HowToWatermarkSection() {
 
 export function WhyWatermarkSection() {
   const { t } = useLanguageStore();
-   const searchParams = useSearchParams();
   const reasons = [
     {
       icon: <Shield className="h-5 w-5 text-blue-500" />,
@@ -123,7 +120,6 @@ export function WhyWatermarkSection() {
 
 export function WatermarkTypesSection() {
   const { t } = useLanguageStore();
-   const searchParams = useSearchParams();
   return (
     <div className="mb-12">
       <h2 className="text-2xl font-bold mb-6 text-center">{t('watermarkPdf.types.title') || "Watermark Types & Options"}</h2>

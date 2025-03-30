@@ -8,7 +8,6 @@ import { useSearchParams } from "next/navigation";
 
 export default function MergePDFClient() {
     const { t } = useLanguageStore()
- const searchParams = useSearchParams();
   return (
     <div className="container max-w-5xl py-12 mx-auto">
       <div className="mx-auto flex flex-col items-center text-center mb-8">

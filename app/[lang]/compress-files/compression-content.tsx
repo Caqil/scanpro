@@ -7,7 +7,6 @@ import { useSearchParams } from "next/navigation";
 
 export function CompressionHeaderSection() {
   const { t } = useLanguageStore();
-  const searchParams = useSearchParams();
   return (
     <div className="mx-auto flex flex-col items-center text-center mb-8">
       <div className="mb-4 p-3 rounded-full bg-green-100 dark:bg-green-900/30">
@@ -39,7 +38,6 @@ export function CompressionHeaderSection() {
 
 export function HowToCompressSection() {
   const { t } = useLanguageStore();
-  const searchParams = useSearchParams();
   const steps = [
     {
       title: t('universalCompressor.howTo.step1.title'),
@@ -77,7 +75,6 @@ export function HowToCompressSection() {
 
 export function CompressionFaqSection() {
   const { t } = useLanguageStore();
-  const searchParams = useSearchParams();
   const faqItems = [
     {
       question: t('universalCompressor.faq.compressionRate.question'),
@@ -123,7 +120,6 @@ export function CompressionFaqSection() {
 
 export function RelatedToolsSection() {
   const { t } = useLanguageStore();
-  const searchParams = useSearchParams();
   const tools = [
     { 
       href: "/compress-pdf", 
@@ -181,7 +177,6 @@ export function RelatedToolsSection() {
 
 export function CompressionBenefitsSection() {
   const { t } = useLanguageStore();
-  const searchParams = useSearchParams();
   const benefits = [
     {
       title: t('compressPdf.benefits.faster.title') || "Faster File Sharing",
@@ -229,7 +224,6 @@ export function CompressionBenefitsSection() {
 
 export function FileTypeInfoSection() {
   const { t } = useLanguageStore();
-  const searchParams = useSearchParams();
   const fileTypes = [
     {
       type: t('universalCompressor.fileTypes.pdf') || "PDF Documents",

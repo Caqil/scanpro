@@ -20,7 +20,6 @@ export function DashboardContent({
   user, 
   usageStats
 }: DashboardContentProps) {
-  const searchParams = useSearchParams();
   return (
     <Tabs 
       defaultValue="overview" 

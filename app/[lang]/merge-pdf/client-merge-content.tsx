@@ -5,7 +5,7 @@ import { Suspense } from "react";
 export default function ClientMergePDFContent() {
   return (
     <div>
-      <Suspense> <PdfMerger /></Suspense>
+     <PdfMerger />
      
     </div>
   );

@@ -29,7 +29,6 @@ import { useLanguageStore } from "@/src/store/store";
 import { LanguageLink } from "@/components/language-link";
 
 export function OcrContent() {
-  const searchParams = useSearchParams();
   const { t } = useLanguageStore();
 
   // File state
