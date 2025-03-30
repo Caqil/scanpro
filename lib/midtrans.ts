@@ -1,5 +1,6 @@
 // lib/midtrans.ts
 import axios from 'axios';
+import { prisma } from './prisma';
 
 // Midtrans API URLs
 const MIDTRANS_SANDBOX_URL = 'https://app.sandbox.midtrans.com/snap/v1';
@@ -125,31 +126,143 @@ export async function createMidtransSubscription(
         throw new Error('Failed to create Midtrans subscription');
     }
 }
-
+export async function cleanupStaleSubscriptions() {
+    try {
+        const oneHourAgo = new Date();
+        oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+        
+        // Find pending subscriptions older than 1 hour
+        const staleSubscriptions = await prisma.subscription.findMany({
+            where: {
+                status: 'pending',
+                createdAt: {
+                    lt: oneHourAgo
+                }
+            }
+        });
+        
+        for (const subscription of staleSubscriptions) {
+            if (subscription.midtransOrderId) {
+                // Check with Midtrans first
+                try {
+                    const midtransStatus = await getMidtransTransactionStatus(subscription.midtransOrderId);
+                    
+                    if (midtransStatus.status === 'not_found' || 
+                        midtransStatus.status === 'expire' || 
+                        midtransStatus.status === 'cancel') {
+                        
+                        // Update subscription to failed status
+                        await prisma.subscription.update({
+                            where: { id: subscription.id },
+                            data: {
+                                status: 'failed',
+                                midtransResponse: midtransStatus.rawResponse || {}
+                            }
+                        });
+                        
+                        console.log(`Marked stale subscription ${subscription.id} as failed`);
+                    }
+                } catch (error) {
+                    // If we can't check with Midtrans, still mark the subscription as failed
+                    await prisma.subscription.update({
+                        where: { id: subscription.id },
+                        data: {
+                            status: 'failed',
+                            midtransResponse: { error: 'Timed out waiting for payment' }
+                        }
+                    });
+                    
+                    console.log(`Marked stale subscription ${subscription.id} as failed (after Midtrans error)`);
+                }
+            } else {
+                // If no midtransOrderId, just mark as failed
+                await prisma.subscription.update({
+                    where: { id: subscription.id },
+                    data: {
+                        status: 'failed',
+                        midtransResponse: { error: 'No payment was initiated' }
+                    }
+                });
+                
+                console.log(`Marked stale subscription ${subscription.id} as failed (no order ID)`);
+            }
+        }
+        
+        return {
+            success: true,
+            cleanedCount: staleSubscriptions.length
+        };
+    } catch (error) {
+        console.error('Error cleaning up stale subscriptions:', error);
+        throw new Error('Failed to clean up stale subscriptions');
+    }
+}
 /**
  * Get subscription status from Midtrans
  */
 export async function getMidtransTransactionStatus(orderId: string) {
     try {
+        // Make the API request to Midtrans
         const response = await axios.get(
             `${BASE_URL}/transactions/${orderId}/status`,
             { auth }
         );
-
+        
+        // Return success response with transaction status
         return {
             status: response.data.transaction_status,
-            grossAmount: response.data.gross_amount,
-            paymentType: response.data.payment_type,
-            transactionTime: response.data.transaction_time,
-            expiryTime: response.data.expiry_time,
-            orderId: response.data.order_id,
+            grossAmount: parseFloat(response.data.gross_amount),
             rawResponse: response.data
         };
-    } catch (error) {
-        console.error('Midtrans status check error:', error);
-        throw new Error('Failed to check Midtrans transaction status');
+    } catch (error: any) {
+        // Log full error details to help with debugging
+        console.error('Midtrans status check error details:', {
+            message: error.message,
+            status: error.response?.status,
+            data: error.response?.data,
+            orderId
+        });
+        
+        // Handle 404 errors (transaction not found)
+        if (error.response && error.response.status === 404) {
+            console.log(`Transaction with order ID ${orderId} not found in Midtrans`);
+            
+            // Return a standardized response for non-existent transactions
+            return {
+                status: 'not_found',
+                grossAmount: 0,
+                rawResponse: { 
+                    error: 'Transaction not found in Midtrans',
+                    orderId
+                }
+            };
+        }
+        
+        // Handle specific types of errors from Midtrans
+        if (error.response && error.response.data) {
+            return {
+                status: 'error',
+                grossAmount: 0,
+                rawResponse: {
+                    error: error.response.data.error_messages || error.response.data,
+                    status: error.response.status,
+                    orderId
+                }
+            };
+        }
+        
+        // For network errors or other non-response errors, return a more generic error
+        return {
+            status: 'error',
+            grossAmount: 0,
+            rawResponse: {
+                error: error.message || 'Unknown Midtrans error',
+                orderId
+            }
+        };
     }
 }
+
 
 /**
  * Cancel a Midtrans subscription

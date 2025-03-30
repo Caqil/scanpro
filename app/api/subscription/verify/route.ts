@@ -96,6 +96,35 @@ export async function GET(request: NextRequest) {
                         message: 'Payment is still being processed',
                         status: midtransStatus.status
                     });
+                } else if (midtransStatus.status === 'not_found') {
+                    // Handle the case where the transaction doesn't exist in Midtrans
+                    // Calculate how old the subscription is
+                    const subscriptionAge = Date.now() - new Date(subscription.createdAt).getTime();
+                    const oneHourInMs = 60 * 60 * 1000;
+                    
+                    if (subscriptionAge > oneHourInMs) {
+                        // If the subscription is older than 1 hour, mark it as failed
+                        await prisma.subscription.update({
+                            where: { id: subscription.id },
+                            data: {
+                                status: 'failed',
+                                midtransResponse: midtransStatus.rawResponse || {}
+                            }
+                        });
+
+                        return NextResponse.json({
+                            success: false,
+                            message: 'Payment has expired or was not completed',
+                            status: 'failed'
+                        });
+                    } else {
+                        // If less than 1 hour old, still treat as pending
+                        return NextResponse.json({
+                            success: false,
+                            message: 'Payment is still being processed or has not been initiated',
+                            status: 'pending'
+                        });
+                    }
                 } else {
                     // Payment failed or expired
                     await prisma.subscription.update({
@@ -114,10 +143,14 @@ export async function GET(request: NextRequest) {
                 }
             } catch (error) {
                 console.error('Error fetching Midtrans status:', error);
-                return NextResponse.json(
-                    { error: 'Failed to verify subscription status' },
-                    { status: 500 }
-                );
+                
+                // Don't fail the entire request just because we couldn't check with Midtrans
+                // Instead, return the subscription data we have with a warning
+                return NextResponse.json({
+                    success: true,
+                    subscription,
+                    warning: 'Could not verify status with payment provider'
+                });
             }
         }
 

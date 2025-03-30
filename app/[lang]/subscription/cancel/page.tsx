@@ -16,7 +16,7 @@ export default function SubscriptionCancelPage() {
   // Redirect to dashboard after a delay
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.push("/dashboard");
+      router.push("/en/dashboard");
     }, 5000);
     
     return () => clearTimeout(timer);
