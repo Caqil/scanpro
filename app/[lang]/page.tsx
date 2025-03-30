@@ -1,5 +1,6 @@
-// app/page.tsx
+// app/[lang]/page.tsx
 'use client'
+import { Suspense } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FileUploader } from "@/components/file-uploader";
@@ -24,7 +25,8 @@ import HeroAnimation from "@/components/hero-animation";
 import { useLanguageStore } from '@/src/store/store'
 import { LanguageLink } from "@/components/language-link";
 
-export default function Home() {
+// Create a client component that uses useSearchParams
+function ClientHomeContent() {
   const { t } = useLanguageStore()
 
   // Popular tools to showcase
@@ -266,5 +268,14 @@ export default function Home() {
         </div>
       </section>
     </div>
+  );
+}
+
+// Main page component with Suspense boundary
+export default function Home() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ClientHomeContent />
+    </Suspense>
   );
 }

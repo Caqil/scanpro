@@ -6,6 +6,7 @@ import { UserProfile } from "@/components/user-profile";
 import { ApiKeyManager } from "@/components/dashboard/api-key-manager";
 import { UsageStats } from "@/components/dashboard/usage-stats";
 import { SubscriptionInfo } from "@/components/dashboard/subscription-info";
+import { useSearchParams } from "next/navigation";
 
 interface DashboardContentProps {
   user: any;
@@ -19,6 +20,7 @@ export function DashboardContent({
   user, 
   usageStats
 }: DashboardContentProps) {
+  const searchParams = useSearchParams();
   return (
     <Tabs 
       defaultValue="overview" 

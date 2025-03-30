@@ -127,19 +127,19 @@ export default function SitemapPage() {
       pages: [
         { 
           title: t('popular.mergePdf'), 
-          url: "/merge", 
+          url: "/merge-pdf", 
           icon: <ArrowRight className="h-4 w-4 text-red-500" />,
           description: t('toolDescriptions.mergePdf')
         },
         { 
           title: t('popular.splitPdf'), 
-          url: "/split", 
+          url: "/split-pdf", 
           icon: <ArrowRight className="h-4 w-4 rotate-90 text-red-500" />,
           description: t('toolDescriptions.splitPdf')
         },
         { 
           title: t('popular.compressPdf'), 
-          url: "/compress", 
+          url: "/compress-pdf", 
           icon: <FileIcon className="h-4 w-4 text-green-500" />,
           description: t('toolDescriptions.compressPdf')
         },
@@ -162,13 +162,13 @@ export default function SitemapPage() {
       pages: [
         { 
           title: t('popular.protectPdf'), 
-          url: "/protect", 
+          url: "/protect-pdf", 
           icon: <ShieldIcon className="h-4 w-4 text-blue-500" />,
           description: t('toolDescriptions.protectPdf')
         },
         { 
           title: t('popular.unlockPdf'), 
-          url: "/unlock", 
+          url: "/unlock-pdf", 
           icon: <LockOpenIcon className="h-4 w-4 text-blue-500" />,
           description: t('toolDescriptions.unlockPdf')
         },

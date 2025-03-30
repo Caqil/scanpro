@@ -547,7 +547,12 @@ export default {
     viewAllTools: "View All PDF Tools",
     of: "of",
     files: "files",
-    filesToMerge: "Files to Merge"
+    filesToMerge: "Files to Merge",
+    dragToReorder: "Drag to Reorder", // Added missing value
+    downloadReady: "Download Ready", // Added missing value
+    downloadMerged: "Download Merged", // Added missing value
+    mergePdfs: "Merge PDFs", // Added missing value
+    successMessage: "PDF merged successfully",
   },
 
   // OCR Page
@@ -873,8 +878,8 @@ export default {
 
   // Compress PDF
   compressPdf: {
-    title: "Compress PDF",
-    description: "Reduce PDF file size while maintaining quality",
+    title: "Compress PDF Files",
+    description: "Reduce PDF file sizes effortlessly while preserving document quality",
     quality: {
       high: "High Quality",
       highDesc: "Minimal compression, best visual quality",
@@ -919,9 +924,108 @@ export default {
       generic: "Failed to compress PDF file",
       unknown: "An unknown error occurred",
       failed: "Failed to compress your file"
+    },
+    // Added sections for the new content components
+    howTo: {
+      title: "How to Compress PDF Files",
+      step1: {
+        title: "Upload PDF",
+        description: "Upload the PDF file you want to compress. Files up to 100MB are supported."
+      },
+      step2: {
+        title: "Choose Quality",
+        description: "Select your preferred compression level based on your needs."
+      },
+      step3: {
+        title: "Download",
+        description: "Download your compressed PDF file, ready to share or store."
+      }
+    },
+    why: {
+      title: "Why Compress PDFs?",
+      uploadSpeed: {
+        title: "Lightning-Fast Uploads",
+        description: "Share compressed PDFs quickly with faster upload speeds"
+      },
+      emailFriendly: {
+        title: "Email Friendly",
+        description: "Fit within email size limits without compromising quality"
+      },
+      storage: {
+        title: "Storage Efficient",
+        description: "Maximize space on your devices and cloud storage"
+      },
+      quality: {
+        title: "Maintained Quality",
+        description: "Choose compression levels that preserve the quality you need"
+      }
+    },
+    faq: {
+      title: "Frequently Asked Questions",
+      howMuch: {
+        question: "How much can PDF files be compressed?",
+        answer: "Most PDF files can be compressed by 20-80%, depending on the content. Documents with many images typically achieve higher compression rates than text-heavy documents. Our compression tool offers different quality levels to balance file size and visual quality based on your needs."
+      },
+      quality: {
+        question: "Will compression affect the quality of my PDF?",
+        answer: "Our compression tool offers different quality settings. High quality compression maintains visual fidelity while still reducing file size. Medium and low quality settings apply more aggressive compression, which may affect image quality but results in smaller files. Text content remains sharp and readable at all compression levels."
+      },
+      secure: {
+        question: "Is my PDF data secure when compressing?",
+        answer: "Yes, we take data security seriously. All file processing happens on our secure servers, and your files are automatically deleted after processing (typically within 24 hours). We don't share your files with third parties, and all data transfers are encrypted using HTTPS."
+      },
+      fileLimits: {
+        question: "What are the file size limits?",
+        answer: "Free users can compress PDF files up to 10MB. Premium subscribers can compress larger files: Basic plan allows up to 50MB, Pro plan up to 100MB, and Enterprise plan up to 500MB per file. If you need to process larger files, please contact us for custom solutions."
+      },
+      batch: {
+        question: "Can I compress multiple PDFs at once?",
+        answer: "Yes, our tool supports batch compression. You can upload and compress multiple PDF files simultaneously, saving you time when processing multiple documents. Premium users get higher limits on batch processing."
+      }
+    },
+    modes: {
+      title: "Compression Modes",
+      moderate: {
+        title: "Moderate Compression",
+        description: "Balanced approach that reduces file size while maintaining good visual quality. Perfect for most documents where quality is important but some size reduction is needed."
+      },
+      high: {
+        title: "High Compression",
+        description: "More aggressive compression that significantly reduces file size. Some image quality loss may be noticeable, but text remains clear and legible."
+      },
+      lossless: {
+        title: "Lossless Compression",
+        description: "Reduces file size without affecting quality by removing redundant data, optimizing structure, and cleaning metadata. No visual differences from the original."
+      }
+    },
+    bestPractices: {
+      title: "Best Practices for PDF Compression",
+      dos: "Do's",
+      donts: "Don'ts",
+      dosList: [
+        "Compress images before creating PDFs for best results",
+        "Choose the appropriate compression level for your needs",
+        "Keep original files as backups before compression",
+        "Use lossless compression for important documents",
+        "Remove unnecessary pages to further reduce file size"
+      ],
+      dontsList: [
+        "Don't overcompress documents needed for printing",
+        "Don't compress legal or archival documents if every detail matters",
+        "Don't compress already heavily compressed PDFs repeatedly",
+        "Don't expect huge reductions for PDFs with mostly text",
+        "Don't compress if file size isn't an issue"
+      ]
+    },
+    relatedTools: {
+      title: "Related Tools",
+      merge: "Merge PDF",
+      split: "Split PDF",
+      pdfToWord: "PDF to Word",
+      pdfToJpg: "PDF to JPG",
+      viewAll: "View All Tools"
     }
   },
-
   // Unlock PDF
   unlockPdf: {
     title: "Unlock PDF Files",
@@ -1449,7 +1553,174 @@ export default {
       answer3: "Our API uses standard REST endpoints with JSON responses. You can find comprehensive documentation, code samples, and SDKs in our Developer section. We provide examples for various programming languages including JavaScript, Python, PHP, and Java."
     },
     title: "Frequently Asked Questions"
+  },
+  footer: {
+    description: "Advanced PDF tools for professionals. Convert, edit, protect and optimize your documents with our powerful web-based platform and API.",
+    contactUs: "Contact Us",
+    address: "123 Document Street, PDF City, 94103, United States",
+    subscribe: "Subscribe to Our Newsletter",
+    subscribeText: "Get the latest news, updates and tips delivered directly to your inbox.",
+    emailPlaceholder: "Your email address",
+    subscribeButton: "Subscribe",
+    pdfTools: "PDF Tools",
+    pdfManagement: "PDF Management",
+    company: "Company",
+    support: "Support",
+    aboutUs: "About Us",
+    careers: "Careers",
+    blog: "Blog",
+    helpCenter: "Help Center",
+    apiDocs: "API Documentation",
+    faqs: "FAQs",
+    tutorials: "Tutorials",
+    systemStatus: "System Status",
+    allRightsReserved: "All rights reserved.",
+    termsOfService: "Terms of Service",
+    privacyPolicy: "Privacy Policy",
+    cookiePolicy: "Cookie Policy",
+    security: "Security",
+    sitemap: "Sitemap",
+    validEmail: "Please enter a valid email address",
+    subscribeSuccess: "Thanks for subscribing to our newsletter!",
+    viewAllTools: "View All PDF Tools",
+    repairPdf: "Repair PDF",
+    socialFacebook: "Facebook",
+    socialTwitter: "Twitter",
+    socialInstagram: "Instagram",
+    socialLinkedin: "LinkedIn",
+    socialGithub: "GitHub",
+    socialYoutube: "YouTube"
+  },
+  security: {
+    hero: {
+      title: "Security & Privacy at ScanPro",
+      subtitle: "We take the security and privacy of your documents seriously. Learn how we protect your data."
+    },
+    measures: {
+      title: "How We Protect Your Data"
+    },
+    sections: {
+      encryption: {
+        title: "End-to-End Encryption",
+        description: "All files are encrypted during transfer with TLS 1.3 and at rest with AES-256 encryption. Your documents never travel unprotected."
+      },
+      temporaryStorage: {
+        title: "Temporary Storage",
+        description: "Files are automatically deleted within 24 hours of processing. We don't keep your documents longer than necessary."
+      },
+      access: {
+        title: "Access Controls",
+        description: "Robust authentication and authorization systems ensure only you can access your documents and account information."
+      },
+      infrastructure: {
+        title: "Secure Infrastructure",
+        description: "Our systems run on enterprise-grade cloud providers with ISO 27001 certification and regular security audits."
+      },
+      compliance: {
+        title: "Compliance",
+        description: "Our operations follow GDPR, CCPA, and other regional privacy regulations to ensure your data rights are protected."
+      },
+      monitoring: {
+        title: "Continuous Monitoring",
+        description: "Automated and manual security reviews, vulnerability scans, and intrusion detection protect against emerging threats."
+      }
+    },
+    tabs: {
+      security: "Security",
+      privacy: "Privacy",
+      compliance: "Compliance"
+    },
+    tabContent: {
+      security: {
+        title: "Our Security Approach",
+        description: "Comprehensive security measures to protect your files and data",
+        encryption: {
+          title: "Strong Encryption",
+          description: "We use TLS 1.3 for data in transit and AES-256 for data at rest. All file transfers are encrypted end-to-end."
+        },
+        auth: {
+          title: "Secure Authentication",
+          description: "Multi-factor authentication, secure password storage using bcrypt, and regular account monitoring for suspicious activities."
+        },
+        hosting: {
+          title: "Secure Hosting",
+          description: "Our infrastructure is hosted on enterprise-grade cloud providers with ISO 27001 certification. We implement network segmentation, firewalls, and intrusion detection systems."
+        },
+        updates: {
+          title: "Regular Updates",
+          description: "We maintain regular security patches and updates, conduct vulnerability assessments, and perform penetration testing to identify and address potential issues."
+        }
+      },
+      privacy: {
+        title: "Privacy Practices",
+        description: "How we handle your personal data and documents",
+        viewPolicy: "View Full Privacy Policy"
+      },
+      compliance: {
+        title: "Compliance & Certifications",
+        description: "Standards and regulations we adhere to",
+        approach: {
+          title: "Our Compliance Approach",
+          description: "ScanPro is designed with privacy and security by design principles. We regularly review and update our practices to comply with evolving regulations."
+        },
+        gdpr: {
+          title: "GDPR Compliance"
+        },
+        hipaa: {
+          title: "HIPAA Considerations"
+        }
+      }
+    },
+    retention: {
+      title: "Data Retention Policy",
+      description: "We follow strict data minimization practices. Here's how long we keep different types of data:",
+      documents: {
+        title: "Uploaded Documents",
+        description: "Files are automatically deleted from our servers within 24 hours of processing. We don't keep copies of your documents unless you explicitly opt into storage features available for paid plans."
+      },
+      account: {
+        title: "Account Information",
+        description: "Basic account information is kept as long as you maintain an active account. You can delete your account at any time, which will remove your personal information from our systems."
+      },
+      usage: {
+        title: "Usage Data",
+        description: "Anonymous usage statistics are retained for up to 36 months to help us improve our services. This data cannot be used to identify you personally."
+      }
+    },
+    contact: {
+      title: "Have Security Questions?",
+      description: "Our security team is ready to answer your questions about how we protect your data and privacy.",
+      button: "Contact Security Team"
+    },
+    policy: {
+      button: "Privacy Policy"
+    },
+    faq: {
+      dataCollection: {
+        question: "What personal data does ScanPro collect?",
+        answer: "We collect minimal information needed to provide our services. For registered users, this includes email, name, and usage statistics. We also collect anonymous usage data to improve our services. We don't analyze, scan, or mine the content of your documents."
+      },
+      documentStorage: {
+        question: "How long do you store my documents?",
+        answer: "Documents are automatically deleted from our servers after processing, typically within 24 hours. For paid subscribers, document storage options are available, but these are opt-in features only."
+      },
+      thirdParty: {
+        question: "Do you share my data with third parties?",
+        answer: "We do not sell or rent your personal data. We only share data with third parties when necessary to provide our services (such as payment processors for subscriptions) or when required by law. All third-party providers are carefully vetted and bound by data protection agreements."
+      },
+      security: {
+        question: "How do you secure my data?",
+        answer: "We use industry-standard security measures including TLS encryption for data transfer, AES-256 encryption for stored data, secure infrastructure providers, access controls, and regular security audits. Our systems are designed with security as a priority."
+      },
+      rights: {
+        question: "What are my rights regarding my data?",
+        answer: "Depending on your region, you have rights including: access to your data, correction of inaccurate data, deletion of your data, restriction of processing, data portability, and objection to processing. To exercise these rights, contact our support team."
+      },
+      breach: {
+        question: "What happens in case of a data breach?",
+        answer: "We have protocols to detect, respond to, and notify affected users of any data breach in accordance with applicable laws. We conduct regular security assessments to minimize the risk of breaches and maintain a detailed incident response plan."
+      }
+    }
   }
-
 }
 

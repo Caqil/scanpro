@@ -535,7 +535,12 @@ export default {
         viewAllTools: "查看所有PDF工具",
         of: "的",
         files: "文件",
-        filesToMerge: "要合并的文件"
+        filesToMerge: "要合并的文件",
+        dragToReorder: "拖动以重新排序",
+        downloadReady: "下载就绪",
+        downloadMerged: "下载合并文件",
+        mergePdfs: "合并PDF",
+        successMessage: "PDF合并成功"
     },
 
     // OCR页面
@@ -858,23 +863,21 @@ export default {
         watermarkSuccess: "水印添加成功！",
         watermarkSuccessDesc: "您的PDF文件已添加水印并准备好下载。"
     },
-
-    // 压缩PDF
     compressPdf: {
-        title: "压缩PDF",
-        description: "减小PDF文件大小，同时保持质量",
+        title: "压缩PDF文件",
+        description: "轻松减小PDF文件大小，同时保持文档质量",
         quality: {
             high: "高质量",
-            highDesc: "最小的压缩，最佳视觉质量",
+            highDesc: "最小压缩，最佳视觉质量",
             balanced: "平衡",
-            balancedDesc: "良好的压缩，视觉损失最小",
+            balancedDesc: "良好压缩，视觉损失最小",
             maximum: "最大压缩",
-            maximumDesc: "最高的压缩比，可能会降低视觉质量"
+            maximumDesc: "更高压缩率，可能降低视觉质量"
         },
         processing: {
             title: "处理选项",
             processAllTogether: "同时处理所有文件",
-            processSequentially: "逐一处理文件"
+            processSequentially: "逐个处理文件"
         },
         status: {
             uploading: "上传中...",
@@ -883,10 +886,10 @@ export default {
             failed: "失败"
         },
         results: {
-            title: "压缩结果概要",
-            totalOriginal: "原始总大小",
-            totalCompressed: "压缩后总大小",
-            spaceSaved: "节省的空间",
+            title: "压缩结果摘要",
+            totalOriginal: "原始总计",
+            totalCompressed: "压缩后总计",
+            spaceSaved: "节省空间",
             averageReduction: "平均减少",
             downloadAll: "下载所有压缩文件为ZIP"
         },
@@ -896,17 +899,116 @@ export default {
         compressAll: "压缩文件",
         qualityPlaceholder: "选择压缩质量",
         reduction: "减少",
-        zipDownloadSuccess: "所有压缩文件下载成功",
-        overallProgress: "总体进度",
+        zipDownloadSuccess: "所有压缩文件已成功下载",
+        overallProgress: "整体进度",
         reducedBy: "减少了",
         success: "压缩成功",
         error: {
             noFiles: "请选择要压缩的PDF文件",
             noCompressed: "没有可下载的压缩文件",
-            downloadZip: "无法下载ZIP归档文件",
-            generic: "无法压缩PDF文件",
+            downloadZip: "下载ZIP文件时出错",
+            generic: "压缩PDF文件时出错",
             unknown: "发生未知错误",
-            failed: "无法压缩您的文件"
+            failed: "压缩文件失败"
+        },
+        howTo: {
+            title: "如何压缩PDF文件",
+            step1: {
+                title: "上传PDF",
+                description: "上传您要压缩的PDF文件。支持最大100MB的文件。"
+            },
+            step2: {
+                title: "选择质量",
+                description: "根据您的需求选择所需的压缩级别。"
+            },
+            step3: {
+                title: "下载",
+                description: "下载压缩后的PDF文件，准备分享或存储。"
+            }
+        },
+        why: {
+            title: "为什么要压缩PDF？",
+            uploadSpeed: {
+                title: "超快上传",
+                description: "以更快的上传速度分享压缩后的PDF"
+            },
+            emailFriendly: {
+                title: "适合电子邮件",
+                description: "在不影响质量的情况下适应电子邮件大小限制"
+            },
+            storage: {
+                title: "高效存储",
+                description: "最大化您的设备和云存储空间"
+            },
+            quality: {
+                title: "保持质量",
+                description: "选择能保持您所需质量的压缩级别"
+            }
+        },
+        faq: {
+            title: "常见问题",
+            howMuch: {
+                question: "PDF文件可以压缩多少？",
+                answer: "大多数PDF文件可以压缩20-80%，具体取决于内容。包含大量图像的文档通常比包含大量文本的文档获得更高的压缩率。我们的压缩工具提供不同的质量级别，以根据您的需求平衡文件大小和视觉质量。"
+            },
+            quality: {
+                question: "压缩会影响我的PDF质量吗？",
+                answer: "我们的压缩工具提供不同的质量设置。高质量压缩在减小文件大小的同时保持视觉保真度。中等和低质量设置应用更积极的压缩，可能会影响图像质量，但会产生更小的文件。文本内容在所有压缩级别下保持清晰可读。"
+            },
+            secure: {
+                question: "压缩时我的PDF数据安全吗？",
+                answer: "是的，我们非常重视数据安全。所有文件处理都在我们的安全服务器上进行，您的文件在处理后会自动删除（通常在24小时内）。我们不会与第三方共享您的文件，所有数据传输都使用HTTPS加密。"
+            },
+            fileLimits: {
+                question: "文件大小限制是多少？",
+                answer: "免费用户可以压缩最大10MB的PDF文件。高级订阅用户可以压缩更大的文件：基础计划允许50MB，专业计划允许100MB，企业计划允许每个文件500MB。如果您需要处理更大的文件，请联系我们获取定制解决方案。"
+            },
+            batch: {
+                question: "我可以一次压缩多个PDF吗？",
+                answer: "是的，我们的工具支持批量压缩。您可以同时上传和压缩多个PDF文件，在处理多个文档时节省时间。高级用户在批量处理中获得更高的限制。"
+            }
+        },
+        modes: {
+            title: "压缩模式",
+            moderate: {
+                title: "中等压缩",
+                description: "平衡的方法，在减小文件大小的同时保持良好的视觉质量。适用于大多数文档，其中质量重要但需要一定的大小减少。"
+            },
+            high: {
+                title: "高压缩",
+                description: "更积极的压缩，显著减小文件大小。可能会看到一些图像质量下降，但文本保持清晰可读。"
+            },
+            lossless: {
+                title: "无损压缩",
+                description: "通过删除冗余数据、优化结构和清理元数据来减小文件大小而不影响质量。与原始文件相比没有视觉差异。"
+            }
+        },
+        bestPractices: {
+            title: "PDF压缩最佳实践",
+            dos: "该做的",
+            donts: "不该做的",
+            dosList: [
+                "为获得最佳效果，在创建PDF前压缩图像",
+                "根据您的需求选择合适的压缩级别",
+                "压缩前保留原始文件作为备份",
+                "对重要文档使用无损压缩",
+                "删除不必要的页面以进一步减小文件大小"
+            ],
+            dontsList: [
+                "不要过度压缩用于打印的文档",
+                "如果每个细节都很重要，不要压缩法律或存档文档",
+                "不要重复压缩已经高度压缩的PDF",
+                "不要对主要是文本的PDF期望大幅减少",
+                "如果文件大小不是问题，不要压缩"
+            ]
+        },
+        relatedTools: {
+            title: "相关工具",
+            merge: "合并PDF",
+            split: "拆分PDF",
+            pdfToWord: "PDF转Word",
+            pdfToJpg: "PDF转JPG",
+            viewAll: "查看所有工具"
         }
     },
 
@@ -1566,5 +1668,173 @@ export default {
             answer3: "我们的API使用带有JSON响应的标准REST端点。您可以在我们的开发者部分找到全面的文档、代码示例和SDK。我们为多种编程语言提供示例，包括JavaScript、Python、PHP和Java。"
         },
         title: "常见问题解答"
+    },
+    footer: {
+        description: "面向专业人士的高级PDF工具。使用我们强大的基于Web的平台和API转换、编辑、保护和优化您的文档。",
+        contactUs: "联系我们",
+        address: "美国PDF市文档街123号，94103",
+        subscribe: "订阅我们的新闻通讯",
+        subscribeText: "直接获取最新新闻、更新和技巧到您的收件箱。",
+        emailPlaceholder: "您的电子邮件地址",
+        subscribeButton: "订阅",
+        pdfTools: "PDF工具",
+        pdfManagement: "PDF管理",
+        company: "公司",
+        support: "支持",
+        aboutUs: "关于我们",
+        careers: "职业",
+        blog: "博客",
+        helpCenter: "帮助中心",
+        apiDocs: "API文档",
+        faqs: "常见问题",
+        tutorials: "教程",
+        systemStatus: "系统状态",
+        allRightsReserved: "保留所有权利。",
+        termsOfService: "服务条款",
+        privacyPolicy: "隐私政策",
+        cookiePolicy: "Cookie政策",
+        security: "安全",
+        sitemap: "网站地图",
+        validEmail: "请输入有效的电子邮件地址",
+        subscribeSuccess: "感谢您订阅我们的新闻通讯！",
+        viewAllTools: "查看所有PDF工具",
+        repairPdf: "修复PDF",
+        socialFacebook: "脸书",
+        socialTwitter: "推特",
+        socialInstagram: "Instagram",
+        socialLinkedin: "领英",
+        socialGithub: "GitHub",
+        socialYoutube: "YouTube"
+    },
+    security: {
+        hero: {
+            title: "ScanPro的安全与隐私",
+            subtitle: "我们高度重视您文档的安全性和隐私性。了解我们如何保护您的数据。"
+        },
+        measures: {
+            title: "我们如何保护您的数据"
+        },
+        sections: {
+            encryption: {
+                title: "端到端加密",
+                description: "所有文件在传输时使用TLS 1.3加密，存储时使用AES-256加密。您的文档永远不会在无保护状态下传输。"
+            },
+            temporaryStorage: {
+                title: "临时存储",
+                description: "文件在处理后24小时内自动删除。我们不会不必要地保留您的文档。"
+            },
+            access: {
+                title: "访问控制",
+                description: "强大的身份验证和授权系统确保只有您能访问您的文档和账户信息。"
+            },
+            infrastructure: {
+                title: "安全基础设施",
+                description: "我们的系统运行在通过ISO 27001认证的企业级云服务上，并定期进行安全审计。"
+            },
+            compliance: {
+                title: "合规性",
+                description: "我们的运营遵循GDPR、CCPA和其他地区隐私法规，确保您的数据权利受到保护。"
+            },
+            monitoring: {
+                title: "持续监控",
+                description: "自动和手动安全审查、漏洞扫描和入侵检测可防范新出现的威胁。"
+            }
+        },
+        tabs: {
+            security: "安全",
+            privacy: "隐私",
+            compliance: "合规"
+        },
+        tabContent: {
+            security: {
+                title: "我们的安全方法",
+                description: "保护您文件和数据的全面安全措施",
+                encryption: {
+                    title: "强加密",
+                    description: "传输中的数据使用TLS 1.3，存储数据使用AES-256。所有文件传输都经过端到端加密。"
+                },
+                auth: {
+                    title: "安全认证",
+                    description: "多因素认证、使用bcrypt的安全密码存储以及定期账户监控可疑活动。"
+                },
+                hosting: {
+                    title: "安全托管",
+                    description: "我们的基础设施托管在通过ISO 27001认证的企业级云服务上。我们实施网络分段、防火墙和入侵检测系统。"
+                },
+                updates: {
+                    title: "定期更新",
+                    description: "我们保持定期安全补丁和更新，进行漏洞评估和渗透测试以识别和解决潜在问题。"
+                }
+            },
+            privacy: {
+                title: "隐私实践",
+                description: "我们如何处理您的个人数据和文档",
+                viewPolicy: "查看完整隐私政策"
+            },
+            compliance: {
+                title: "合规与认证",
+                description: "我们遵循的标准和法规",
+                approach: {
+                    title: "我们的合规方法",
+                    description: "ScanPro采用隐私和安全设计原则开发。我们会定期审查和更新实践以符合不断发展的法规。"
+                },
+                gdpr: {
+                    title: "GDPR合规性"
+                },
+                hipaa: {
+                    title: "HIPAA注意事项"
+                }
+            }
+        },
+        retention: {
+            title: "数据保留政策",
+            description: "我们遵循严格的数据最小化实践。以下是我们保留不同类型数据的时间：",
+            documents: {
+                title: "上传的文档",
+                description: "文件在处理后24小时内从我们的服务器自动删除。除非您明确选择付费计划提供的存储功能，否则我们不会保留您文档的副本。"
+            },
+            account: {
+                title: "账户信息",
+                description: "基本账户信息在您保持活跃账户期间保留。您可以随时删除账户，这将从我们的系统中移除您的个人信息。"
+            },
+            usage: {
+                title: "使用数据",
+                description: "匿名使用统计数据最多保留36个月以帮助我们改进服务。这些数据无法用于个人身份识别。"
+            }
+        },
+        contact: {
+            title: "有安全问题？",
+            description: "我们的安全团队随时准备回答您关于我们如何保护您的数据和隐私的问题。",
+            button: "联系安全团队"
+        },
+        policy: {
+            button: "隐私政策"
+        },
+        faq: {
+            dataCollection: {
+                question: "ScanPro收集哪些个人数据？",
+                answer: "我们仅收集提供服务所需的最少信息。对于注册用户，这包括电子邮件、姓名和使用统计。我们还收集匿名使用数据以改进服务。我们不会分析、扫描或挖掘您文档的内容。"
+            },
+            documentStorage: {
+                question: "你们存储我的文档多久？",
+                answer: "文档通常在处理后24小时内从我们的服务器自动删除。付费订阅用户可使用文档存储选项，但这些仅是可选功能。"
+            },
+            thirdParty: {
+                question: "你们会与第三方共享我的数据吗？",
+                answer: "我们不出售或出租您的个人数据。仅在必要时（如订阅的支付处理器）或法律要求时才会与第三方共享数据。所有第三方提供商都经过严格审查并受数据保护协议约束。"
+            },
+            security: {
+                question: "你们如何保护我的数据？",
+                answer: "我们使用行业标准安全措施，包括数据传输TLS加密、存储数据AES-256加密、安全基础设施提供商、访问控制和定期安全审计。我们的系统以安全为优先设计。"
+            },
+            rights: {
+                question: "我对我的数据有哪些权利？",
+                answer: "根据您所在地区，您拥有包括：数据访问权、更正不准确数据、删除数据、限制处理、数据可携带权和反对处理等权利。要行使这些权利，请联系我们的支持团队。"
+            },
+            breach: {
+                question: "发生数据泄露会怎样？",
+                answer: "我们按照适用法律制定协议来检测、响应和通知受影响的用户任何数据泄露。我们定期进行安全评估以最小化泄露风险，并维护详细的事件响应计划。"
+            }
+        }
     }
 }

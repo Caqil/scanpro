@@ -535,7 +535,12 @@ export default {
     viewAllTools: "Ver Todas las Herramientas PDF",
     of: "de",
     files: "archivos",
-    filesToMerge: "Archivos para Fusionar"
+    filesToMerge: "Archivos para Fusionar",
+    dragToReorder: "Trascina per riordinare",
+    downloadReady: "Download pronto",
+    downloadMerged: "Scarica il file unito",
+    mergePdfs: "Unisci PDF",
+    successMessage: "PDF unito con successo"
   },
 
   // OCR Page
@@ -858,58 +863,154 @@ export default {
     watermarkSuccess: "¡Marca de agua agregada con éxito!",
     watermarkSuccessDesc: "Tu archivo PDF ha sido marcado con agua y está listo para descargar."
   },
-
-  // Compress PDF
   compressPdf: {
-    title: "Comprimir PDF",
-    description: "Reduce el tamaño del archivo PDF mientras mantienes la calidad",
+    title: "Comprimi file PDF",
+    description: "Riduci facilmente le dimensioni dei file PDF mantenendo la qualità del documento",
     quality: {
-      high: "Alta Calidad",
-      highDesc: "Compresión mínima, mejor calidad visual",
-      balanced: "Equilibrada",
-      balancedDesc: "Buena compresión con pérdida visual mínima",
-      maximum: "Compresión Máxima",
-      maximumDesc: "Mayor ratio de compresión, puede reducir la calidad visual"
+      high: "Alta qualità",
+      highDesc: "Compressione minima, migliore qualità visiva",
+      balanced: "Bilanciato",
+      balancedDesc: "Buona compressione con minima perdita visiva",
+      maximum: "Compressione massima",
+      maximumDesc: "Rapporto di compressione più elevato, potrebbe ridurre la qualità visiva"
     },
     processing: {
-      title: "Opciones de Procesamiento",
-      processAllTogether: "Procesar todos los archivos simultáneamente",
-      processSequentially: "Procesar archivos uno por uno"
+      title: "Opzioni di elaborazione",
+      processAllTogether: "Elabora tutti i file contemporaneamente",
+      processSequentially: "Elabora i file uno per uno"
     },
     status: {
-      uploading: "Subiendo...",
-      compressing: "Comprimiendo...",
-      completed: "Completado",
-      failed: "Fallido"
+      uploading: "Caricamento...",
+      compressing: "Compressione...",
+      completed: "Completato",
+      failed: "Fallito"
     },
     results: {
-      title: "Resumen de Resultados de Compresión",
-      totalOriginal: "Total Original",
-      totalCompressed: "Total Comprimido",
-      spaceSaved: "Espacio Ahorrado",
-      averageReduction: "Reducción Promedio",
-      downloadAll: "Descargar Todos los Archivos Comprimidos como ZIP"
+      title: "Riepilogo risultati compressione",
+      totalOriginal: "Totale originale",
+      totalCompressed: "Totale compresso",
+      spaceSaved: "Spazio risparmiato",
+      averageReduction: "Riduzione media",
+      downloadAll: "Scarica tutti i file compressi come ZIP"
     },
-    of: "de",
-    files: "archivos",
-    filesToCompress: "Archivos para Comprimir",
-    compressAll: "Comprimir Archivos",
-    qualityPlaceholder: "Seleccionar calidad de compresión",
-    reduction: "reducción",
-    zipDownloadSuccess: "Todos los archivos comprimidos descargados con éxito",
-    overallProgress: "Progreso General",
-    reducedBy: "fue reducido en",
-    success: "Compresión exitosa",
+    of: "di",
+    files: "file",
+    filesToCompress: "File da comprimere",
+    compressAll: "Comprimi file",
+    qualityPlaceholder: "Seleziona qualità di compressione",
+    reduction: "riduzione",
+    zipDownloadSuccess: "Tutti i file compressi sono stati scaricati con successo",
+    overallProgress: "Progresso complessivo",
+    reducedBy: "ridotto di",
+    success: "Compressione riuscita",
     error: {
-      noFiles: "Por favor, selecciona archivos PDF para comprimir",
-      noCompressed: "No hay archivos comprimidos disponibles para descargar",
-      downloadZip: "No se pudo descargar el archivo ZIP",
-      generic: "No se pudo comprimir el archivo PDF",
-      unknown: "Ocurrió un error desconocido",
-      failed: "No se pudo comprimir tu archivo"
+      noFiles: "Seleziona i file PDF da comprimere",
+      noCompressed: "Nessun file compresso disponibile per il download",
+      downloadZip: "Errore durante il download del file ZIP",
+      generic: "Errore durante la compressione del file PDF",
+      unknown: "Si è verificato un errore sconosciuto",
+      failed: "Errore durante la compressione del tuo file"
+    },
+    howTo: {
+      title: "Come comprimere file PDF",
+      step1: {
+        title: "Carica PDF",
+        description: "Carica il file PDF che desideri comprimere. Sono supportati file fino a 100MB."
+      },
+      step2: {
+        title: "Scegli la qualità",
+        description: "Seleziona il livello di compressione preferito in base alle tue esigenze."
+      },
+      step3: {
+        title: "Scarica",
+        description: "Scarica il tuo file PDF compresso, pronto per la condivisione o l'archiviazione."
+      }
+    },
+    why: {
+      title: "Perché comprimere PDF?",
+      uploadSpeed: {
+        title: "Caricamento ultra veloce",
+        description: "Condividi PDF compressi rapidamente con velocità di upload più elevate"
+      },
+      emailFriendly: {
+        title: "Adatto alle email",
+        description: "Rispetta i limiti di dimensione delle email senza compromettere la qualità"
+      },
+      storage: {
+        title: "Archiviazione efficiente",
+        description: "Massimizza lo spazio sui tuoi dispositivi e sull'archiviazione cloud"
+      },
+      quality: {
+        title: "Qualità preservata",
+        description: "Scegli livelli di compressione che mantengano la qualità di cui hai bisogno"
+      }
+    },
+    faq: {
+      title: "Domande frequenti",
+      howMuch: {
+        question: "Quanto possono essere compressi i file PDF?",
+        answer: "La maggior parte dei file PDF può essere compressa tra il 20-80%, a seconda del contenuto. I documenti con molte immagini generalmente ottengono rapporti di compressione più elevati rispetto ai documenti con molto testo. Il nostro strumento di compressione offre diversi livelli di qualità per bilanciare dimensione del file e qualità visiva in base alle tue esigenze."
+      },
+      quality: {
+        question: "La compressione influirà sulla qualità del mio PDF?",
+        answer: "Il nostro strumento di compressione offre diverse impostazioni di qualità. La compressione ad alta qualità mantiene la fedeltà visiva riducendo le dimensioni del file. Le impostazioni di qualità media e bassa applicano una compressione più aggressiva, che può influire sulla qualità dell'immagine ma risulta in file più piccoli. Il contenuto testuale rimane nitido e leggibile a tutti i livelli di compressione."
+      },
+      secure: {
+        question: "I miei dati PDF sono al sicuro durante la compressione?",
+        answer: "Sì, prendiamo la sicurezza dei dati molto seriamente. Tutta l'elaborazione dei file avviene sui nostri server sicuri, e i tuoi file vengono automaticamente eliminati dopo l'elaborazione (di solito entro 24 ore). Non condividiamo i tuoi file con terze parti e tutti i trasferimenti di dati sono crittografati tramite HTTPS."
+      },
+      fileLimits: {
+        question: "Quali sono i limiti di dimensione dei file?",
+        answer: "Gli utenti gratuiti possono comprimere file PDF fino a 10MB. Gli abbonati premium possono comprimere file più grandi: il piano Base consente fino a 50MB, il piano Pro fino a 100MB e il piano Enterprise fino a 500MB per file. Se hai bisogno di elaborare file più grandi, contattaci per soluzioni personalizzate."
+      },
+      batch: {
+        question: "Posso comprimere più PDF contemporaneamente?",
+        answer: "Sì, il nostro strumento supporta la compressione in batch. Puoi caricare e comprimere più file PDF contemporaneamente, risparmiando tempo quando elabori più documenti. Gli utenti premium ottengono limiti più elevati nell'elaborazione batch."
+      }
+    },
+    modes: {
+      title: "Modalità di compressione",
+      moderate: {
+        title: "Compressione moderata",
+        description: "Approccio bilanciato che riduce le dimensioni del file mantenendo una buona qualità visiva. Ideale per la maggior parte dei documenti dove la qualità è importante ma è necessaria una certa riduzione delle dimensioni."
+      },
+      high: {
+        title: "Alta compressione",
+        description: "Compressione più aggressiva che riduce significativamente le dimensioni del file. Potrebbe verificarsi una leggera perdita di qualità dell'immagine, ma il testo rimane chiaro e leggibile."
+      },
+      lossless: {
+        title: "Compressione senza perdita",
+        description: "Riduce le dimensioni del file senza influire sulla qualità rimuovendo dati ridondanti, ottimizzando la struttura e ripulendo i metadati. Nessuna differenza visiva rispetto all'originale."
+      }
+    },
+    bestPractices: {
+      title: "Migliori pratiche per la compressione PDF",
+      dos: "Cosa fare",
+      donts: "Cosa non fare",
+      dosList: [
+        "Comprimi le immagini prima di creare PDF per risultati migliori",
+        "Scegli il livello di compressione appropriato per le tue esigenze",
+        "Conserva i file originali come backup prima della compressione",
+        "Usa la compressione senza perdita per documenti importanti",
+        "Elimina pagine non necessarie per ridurre ulteriormente le dimensioni del file"
+      ],
+      dontsList: [
+        "Non sovracomprimere documenti destinati alla stampa",
+        "Non comprimere documenti legali o archivistici se ogni dettaglio è importante",
+        "Non comprimere ripetutamente PDF già altamente compressi",
+        "Non aspettarti grandi riduzioni per PDF contenenti principalmente testo",
+        "Non comprimere se la dimensione del file non è un problema"
+      ]
+    },
+    relatedTools: {
+      title: "Strumenti correlati",
+      merge: "Unisci PDF",
+      split: "Dividi PDF",
+      pdfToWord: "PDF a Word",
+      pdfToJpg: "PDF a JPG",
+      viewAll: "Vedi tutti gli strumenti"
     }
   },
-
   // Unlock PDF
   unlockPdf: {
     title: "Desbloquear Archivos PDF",
@@ -1511,7 +1612,7 @@ export default {
       new: "Nuovo",
       reduction: "riduzione",
       download: "Scarica PDF riparato",
-      repairAnother: "Ripara un altro PDF"
+      repairAnother: "Ripara un altro PDF",
     }
   },
   faq: {
@@ -1567,5 +1668,175 @@ export default {
       answer3: "La nostra API utilizza endpoint REST standard con risposte JSON. Puoi trovare documentazione completa, esempi di codice e SDK nella nostra sezione per sviluppatori. Forniamo esempi per vari linguaggi di programmazione, inclusi JavaScript, Python, PHP e Java."
     },
     title: "Domande Frequenti"
+  },
+  footer: {
+    description: "Strumenti PDF avanzati per professionisti. Converti, modifica, proteggi e ottimizza i tuoi documenti con la nostra potente piattaforma web e API.",
+    contactUs: "Contattaci",
+    address: "123 Via Documento, Città PDF, 94103, Stati Uniti",
+    subscribe: "Iscriviti alla nostra newsletter",
+    subscribeText: "Ricevi le ultime notizie, aggiornamenti e suggerimenti direttamente nella tua casella di posta.",
+    emailPlaceholder: "Il tuo indirizzo email",
+    subscribeButton: "Iscriviti",
+    pdfTools: "Strumenti PDF",
+    pdfManagement: "Gestione PDF",
+    company: "Azienda",
+    support: "Supporto",
+    aboutUs: "Chi siamo",
+    careers: "Carriere",
+    blog: "Blog",
+    helpCenter: "Centro assistenza",
+    apiDocs: "Documentazione API",
+    faqs: "FAQ",
+    tutorials: "Tutorial",
+    systemStatus: "Stato del sistema",
+    allRightsReserved: "Tutti i diritti riservati.",
+    termsOfService: "Termini di servizio",
+    privacyPolicy: "Informativa sulla privacy",
+    cookiePolicy: "Policy sui cookie",
+    security: "Sicurezza",
+    sitemap: "Mappa del sito",
+    validEmail: "Inserisci un indirizzo email valido",
+    subscribeSuccess: "Grazie per esserti iscritto alla nostra newsletter!",
+    viewAllTools: "Visualizza tutti gli strumenti PDF",
+    repairPdf: "Ripara PDF",
+    socialFacebook: "Facebook",
+    socialTwitter: "Twitter",
+    socialInstagram: "Instagram",
+    socialLinkedin: "LinkedIn",
+    socialGithub: "GitHub",
+    socialYoutube: "YouTube"
+  },
+
+  security: {
+    hero: {
+      title: "Sicurezza e Privacy in ScanPro",
+      subtitle: "Prendiamo sul serio la sicurezza e la privacy dei tuoi documenti. Scopri come proteggiamo i tuoi dati."
+    },
+    measures: {
+      title: "Come proteggiamo i tuoi dati"
+    },
+    sections: {
+      encryption: {
+        title: "Crittografia end-to-end",
+        description: "Tutti i file vengono crittografati durante il trasferimento con TLS 1.3 e a riposo con crittografia AES-256. I tuoi documenti non viaggiano mai senza protezione."
+      },
+      temporaryStorage: {
+        title: "Archiviazione temporanea",
+        description: "I file vengono eliminati automaticamente entro 24 ore dall'elaborazione. Non conserviamo i tuoi documenti più a lungo del necessario."
+      },
+      access: {
+        title: "Controlli di accesso",
+        description: "Sistemi robusti di autenticazione e autorizzazione garantiscono che solo tu possa accedere ai tuoi documenti e alle informazioni dell'account."
+      },
+      infrastructure: {
+        title: "Infrastruttura sicura",
+        description: "I nostri sistemi funzionano su provider cloud aziendali con certificazione ISO 27001 e audit di sicurezza regolari."
+      },
+      compliance: {
+        title: "Conformità",
+        description: "Le nostre operazioni seguono GDPR, CCPA e altre normative regionali sulla privacy per garantire la protezione dei tuoi diritti sui dati."
+      },
+      monitoring: {
+        title: "Monitoraggio continuo",
+        description: "Revisioni di sicurezza automatiche e manuali, scansioni di vulnerabilità e rilevamento di intrusioni proteggono dalle minacce emergenti."
+      }
+    },
+    tabs: {
+      security: "Sicurezza",
+      privacy: "Privacy",
+      compliance: "Conformità"
+    },
+    tabContent: {
+      security: {
+        title: "Il nostro approccio alla sicurezza",
+        description: "Misure di sicurezza complete per proteggere i tuoi file e dati",
+        encryption: {
+          title: "Crittografia forte",
+          description: "Utilizziamo TLS 1.3 per i dati in transito e AES-256 per i dati a riposo. Tutti i trasferimenti di file sono crittografati end-to-end."
+        },
+        auth: {
+          title: "Autenticazione sicura",
+          description: "Autenticazione multifattore, archiviazione sicura delle password con bcrypt e monitoraggio regolare degli account per attività sospette."
+        },
+        hosting: {
+          title: "Hosting sicuro",
+          description: "La nostra infrastruttura è ospitata su provider cloud aziendali con certificazione ISO 27001. Implementiamo segmentazione di rete, firewall e sistemi di rilevamento delle intrusioni."
+        },
+        updates: {
+          title: "Aggiornamenti regolari",
+          description: "Manteniamo patch e aggiornamenti di sicurezza regolari, conduciamo valutazioni delle vulnerabilità e test di penetrazione per identificare e risolvere potenziali problemi."
+        }
+      },
+      privacy: {
+        title: "Pratiche sulla privacy",
+        description: "Come gestiamo i tuoi dati personali e documenti",
+        viewPolicy: "Visualizza l'intera Privacy Policy"
+      },
+      compliance: {
+        title: "Conformità e certificazioni",
+        description: "Standard e normative che seguiamo",
+        approach: {
+          title: "Il nostro approccio alla conformità",
+          description: "ScanPro è progettato con i principi di privacy e sicurezza by design. Rivediamo e aggiorniamo regolarmente le nostre pratiche per conformarci alle normative in evoluzione."
+        },
+        gdpr: {
+          title: "Conformità GDPR"
+        },
+        hipaa: {
+          title: "Considerazioni HIPAA"
+        }
+      }
+    },
+    retention: {
+      title: "Politica di conservazione dei dati",
+      description: "Seguiamo rigorose pratiche di minimizzazione dei dati. Ecco per quanto tempo conserviamo diversi tipi di dati:",
+      documents: {
+        title: "Documenti caricati",
+        description: "I file vengono eliminati automaticamente dai nostri server entro 24 ore dall'elaborazione. Non conserviamo copie dei tuoi documenti a meno che tu non scelga esplicitamente le funzionalità di archiviazione disponibili per i piani a pagamento."
+      },
+      account: {
+        title: "Informazioni sull'account",
+        description: "Le informazioni di base dell'account vengono conservate finché mantieni un account attivo. Puoi eliminare il tuo account in qualsiasi momento, il che rimuoverà le tue informazioni personali dai nostri sistemi."
+      },
+      usage: {
+        title: "Dati di utilizzo",
+        description: "Le statistiche di utilizzo anonime vengono conservate fino a 36 mesi per aiutarci a migliorare i nostri servizi. Questi dati non possono essere utilizzati per identificarti personalmente."
+      }
+    },
+    contact: {
+      title: "Hai domande sulla sicurezza?",
+      description: "Il nostro team di sicurezza è pronto a rispondere alle tue domande su come proteggiamo i tuoi dati e la tua privacy.",
+      button: "Contatta il team di sicurezza"
+    },
+    policy: {
+      button: "Privacy Policy"
+    },
+    faq: {
+      dataCollection: {
+        question: "Quali dati personali raccoglie ScanPro?",
+        answer: "Raccogliamo le informazioni minime necessarie per fornire i nostri servizi. Per gli utenti registrati, questo include email, nome e statistiche di utilizzo. Raccogliamo anche dati di utilizzo anonimi per migliorare i nostri servizi. Non analizziamo, scansioniamo o estraiamo il contenuto dei tuoi documenti."
+      },
+      documentStorage: {
+        question: "Per quanto tempo conservate i miei documenti?",
+        answer: "I documenti vengono eliminati automaticamente dai nostri server dopo l'elaborazione, generalmente entro 24 ore. Per gli abbonati a pagamento, sono disponibili opzioni di archiviazione documenti, ma queste sono solo funzionalità opt-in."
+      },
+      thirdParty: {
+        question: "Condividete i miei dati con terze parti?",
+        answer: "Non vendiamo né affittiamo i tuoi dati personali. Condividiamo dati con terze parti solo quando necessario per fornire i nostri servizi (come processori di pagamento per gli abbonamenti) o quando richiesto dalla legge. Tutti i provider terzi sono accuratamente controllati e vincolati da accordi di protezione dei dati."
+      },
+      security: {
+        question: "Come proteggete i miei dati?",
+        answer: "Utilizziamo misure di sicurezza standard del settore tra cui crittografia TLS per il trasferimento dei dati, crittografia AES-256 per i dati archiviati, provider di infrastrutture sicure, controlli di accesso e audit di sicurezza regolari. I nostri sistemi sono progettati con la sicurezza come priorità."
+      },
+      rights: {
+        question: "Quali sono i miei diritti riguardo ai miei dati?",
+        answer: "A seconda della tua regione, hai diritti che includono: accesso ai tuoi dati, correzione di dati inaccurati, cancellazione dei tuoi dati, restrizione dell'elaborazione, portabilità dei dati e obiezione all'elaborazione. Per esercitare questi diritti, contatta il nostro team di supporto."
+      },
+      breach: {
+        question: "Cosa succede in caso di violazione dei dati?",
+        answer: "Abbiamo protocolli per rilevare, rispondere e notificare agli utenti interessati qualsiasi violazione dei dati in conformità con le leggi applicabili. Eseguiamo valutazioni di sicurezza regolari per minimizzare il rischio di violazioni e manteniamo un piano dettagliato di risposta agli incidenti."
+      }
+    }
   }
+
 };

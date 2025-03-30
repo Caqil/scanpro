@@ -4,10 +4,11 @@ import { ArrowRightIcon, FileIcon, InfoIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageLink } from "@/components/language-link";
 import ClientMergePDFContent from "./client-merge-content";
+import { useSearchParams } from "next/navigation";
 
 export default function MergePDFClient() {
     const { t } = useLanguageStore()
-
+ const searchParams = useSearchParams();
   return (
     <div className="container max-w-5xl py-12 mx-auto">
       <div className="mx-auto flex flex-col items-center text-center mb-8">
@@ -97,20 +98,20 @@ export default function MergePDFClient() {
       <div>
         <h2 className="text-2xl font-bold mb-6 text-center">{t("mergePdf.relatedTools")}</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <LanguageLink href="/split" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          <LanguageLink href="/split-pdf" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-red-100 dark:bg-red-900/30 mb-2">
                 <ArrowRightIcon className="h-5 w-5 text-red-500" />
               </div>
-              <span className="text-sm font-medium">Split PDF</span>
+              <span className="text-sm font-medium">{t("popular.splitPdf")}</span>
             </div>
           </LanguageLink>
-          <LanguageLink href="/compress" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+          <LanguageLink href="/compress-pdf" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
             <div className="flex flex-col items-center">
               <div className="p-2 rounded-full bg-green-100 dark:bg-green-900/30 mb-2">
                 <ArrowRightIcon className="h-5 w-5 text-green-500" />
               </div>
-              <span className="text-sm font-medium">Compress PDF</span>
+              <span className="text-sm font-medium">{t("popular.compressPdf")}</span>
             </div>
           </LanguageLink>
           <LanguageLink href="/convert/pdf-to-docx" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
@@ -118,7 +119,7 @@ export default function MergePDFClient() {
               <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-blue-500" />
               </div>
-              <span className="text-sm font-medium">PDF to Word</span>
+              <span className="text-sm font-medium">{t("popular.pdfToWord")}</span>
             </div>
           </LanguageLink>
           <LanguageLink href="/ocr" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
@@ -126,7 +127,7 @@ export default function MergePDFClient() {
               <div className="p-2 rounded-full bg-purple-100 dark:bg-purple-900/30 mb-2">
                 <FileIcon className="h-5 w-5 text-purple-500" />
               </div>
-              <span className="text-sm font-medium">Extract PDF</span>
+              <span className="text-sm font-medium">{t("popular.ocr")}</span>
             </div>
           </LanguageLink>
         </div>

@@ -45,7 +45,7 @@ export async function GET(req: NextRequest) {
     "merges",
     "splits",
     "rotations",
-    "watermarks",
+    "watermarked", 
     "protected",
     "unlocked",
     "signatures",

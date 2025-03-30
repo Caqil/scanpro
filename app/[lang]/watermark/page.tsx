@@ -1,117 +1,85 @@
+// app/[lang]/watermark/page.tsx
 import { Metadata } from "next";
-import { PdfWatermarker } from "@/components/pdf-watermarker";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { WatermarkTool } from "@/components/watermark-tool";
 import {
   WatermarkHeaderSection,
   HowToWatermarkSection,
+  WhyWatermarkSection,
   WatermarkFaqSection,
   RelatedToolsSection
 } from "./watermark-content";
-import enTranslations from '@/src/lib/i18n/locales/en';
-import idTranslations from '@/src/lib/i18n/locales/id';
-import esTranslations from '@/src/lib/i18n/locales/es';
-import frTranslations from '@/src/lib/i18n/locales/fr';
-import zhTranslations from '@/src/lib/i18n/locales/zh';
-import arTranslations from '@/src/lib/i18n/locales/ar';
-import hiTranslations from '@/src/lib/i18n/locales/hi';
-import ruTranslations from '@/src/lib/i18n/locales/ru';
-import ptTranslations from '@/src/lib/i18n/locales/pt';
-import deTranslations from '@/src/lib/i18n/locales/de';
-import jaTranslations from '@/src/lib/i18n/locales/ja';
-import koTranslations from '@/src/lib/i18n/locales/ko';
-import itTranslations from '@/src/lib/i18n/locales/it';
-import trTranslations from '@/src/lib/i18n/locales/tr';
-import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
+import { SUPPORTED_LANGUAGES, getTranslation } from '@/src/lib/i18n/config';
+import { Suspense } from "react";
 
 type Language = typeof SUPPORTED_LANGUAGES[number];
 
 // Helper function to get translation based on language
-function getTranslation(lang: string, key: string): string {
-  let translations;
+function getTranslationForMetadata(lang: string, key: string): string {
+  // Fallback for when translations are not available yet
+  const fallbacks: Record<string, string> = {
+    "watermarkPdf.title": "Add Watermark to PDF | ScanPro",
+    "watermarkPdf.description": "Add custom text or image watermarks to your PDF documents. Protect your intellectual property and add branding to your files."
+  };
   
-  // Check which language to use
-  switch (lang) {
-    case "id":
-      translations = idTranslations;
-      break;
-    case "es":
-      translations = esTranslations;
-      break;
-    case "fr":
-      translations = frTranslations;
-      break;
-    case "zh":
-      translations = zhTranslations;
-      break;
-    case "ar":
-      translations = arTranslations;
-      break;
-    case "hi":
-      translations = hiTranslations;
-      break;
-    case "ru":
-      translations = ruTranslations;
-      break;
-    case "pt":
-      translations = ptTranslations;
-      break;
-    case "de":
-      translations = deTranslations;
-      break;
-    case "ja":
-      translations = jaTranslations;
-      break;
-    case "ko":
-      translations = koTranslations;
-      break;
-    case "it":
-      translations = itTranslations;
-      break;
-    case "tr":
-      translations = trTranslations;
-      break;
-    default:
-      translations = enTranslations; // Fallback to English
-  }
-  
-  // Navigate through nested keys
-  const keys = key.split('.');
-  const result = keys.reduce((obj, k) => 
-    (obj && obj[k] !== undefined) ? obj[k] : undefined, 
-    translations as any
-  );
-  
-  return result !== undefined ? result : key;
+  const translated = getTranslation(lang, key);
+  return translated !== key ? translated : fallbacks[key] || key;
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang: paramLang } = await params;
   const lang = SUPPORTED_LANGUAGES.includes(paramLang as Language) ? paramLang as Language : "en";
-  const t = (key: string) => getTranslation(lang, key);
+  const t = (key: string) => getTranslationForMetadata(lang, key);
+  
+  const stopWordsByLanguage: Record<string, string[]> = {
+    en: ["the", "a", "an", "and", "or", "to", "in", "with", "for", "is", "on", "at"],
+    id: ["dan", "di", "ke", "dari", "untuk", "yang", "dengan", "atau", "pada"],
+    es: ["el", "la", "los", "las", "y", "o", "en", "con", "para", "de", "a"],
+    fr: ["le", "la", "les", "et", "ou", "à", "en", "avec", "pour", "de"],
+    zh: ["的", "了", "在", "是", "我", "他", "这", "那", "和", "你"],
+    ar: ["في", "من", "إلى", "على", "و", "هذا", "تلك", "مع", "أو"],
+    hi: ["और", "के", "में", "से", "है", "को", "का", "कि", "पर"],
+    ru: ["и", "в", "на", "с", "к", "от", "для", "по", "или"],
+    pt: ["e", "ou", "em", "com", "para", "de", "a", "o", "as"],
+    de: ["und", "in", "mit", "für", "zu", "auf", "an", "oder"],
+    ja: ["の", "に", "を", "は", "が", "と", "で", "です"],
+    ko: ["은", "는", "이", "가", "을", "를", "에", "와"],
+    it: ["e", "o", "in", "con", "per", "di", "a", "il", "la"],
+    tr: ["ve", "ile", "de", "da", "için", "bu", "şu", "veya"]
+  };
+  
+  // Keyword extraction function with language-specific stop words
+  const extractKeywords = (text: string, language: string): string[] => {
+    const stopWords = stopWordsByLanguage[language] || stopWordsByLanguage["en"];
+    
+    const words = text.toLowerCase().replace(/[^\w\s]/g, "").split(/\s+/);
+    
+    const filteredWords = words
+      .filter(word => !stopWords.includes(word) && word.length > 2)
+      .reduce((acc, word) => {
+        acc[word] = (acc[word] || 0) + 1;
+        return acc;
+      }, {} as Record<string, number>);
+  
+    return Object.keys(filteredWords)
+      .sort((a, b) => filteredWords[b] - filteredWords[a])
+      .slice(0, 5);
+  };
+
+  const title = t("watermarkPdf.title");
+  const description = t("watermarkPdf.description");
+  const keywords = extractKeywords(`${title} ${description}`, lang);
 
   return {
-    title: t("watermark.title"),
-    description: t("watermark.description"),
+    title: title,
+    description: description,
+    keywords: keywords,
     openGraph: {
-      title: t("watermark.title"),
-      description: t("watermark.description"),
+      title: title,
+      description: description,
       url: `/${lang}/watermark`,
       siteName: "ScanPro",
-      locale: {
-        'en': 'en_US',
-        'id': 'id_ID',
-        'es': 'es_ES',
-        'fr': 'fr_FR',
-        'zh': 'zh_CN',
-        'ar': 'ar_SA',
-        'hi': 'hi_IN',
-        'ru': 'ru_RU',
-        'pt': 'pt_BR',
-        'de': 'de_DE',
-        'ja': 'ja_JP',
-        'ko': 'ko_KR',
-        'it': 'it_IT',
-        'tr': 'tr_TR'
-    }[lang] || 'en_US',
+      locale: lang === "id" ? "id_ID" : lang === "es" ? "es_ES" : "en_US",
     },
     alternates: {
       canonical: `/${lang}/watermark`,
@@ -137,7 +105,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
           return [langCode, `/${code}/watermark`];
         })
       ),
-    },
+    }
   };
 }
 
@@ -145,14 +113,29 @@ export default function WatermarkPDFPage() {
   return (
     <div className="container max-w-5xl py-12 mx-auto">
       <WatermarkHeaderSection />
-
-      {/* Main Tool Card */}
-      <div className="mb-8">
-        <PdfWatermarker />
-      </div>
+  <Suspense> 
+     {/* Main Tool Section with Tabs */}
+      <div className="mb-12">
+        <Tabs defaultValue="text" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 mb-8">
+            <TabsTrigger value="text">Text Watermark</TabsTrigger>
+            <TabsTrigger value="image">Image Watermark</TabsTrigger>
+          </TabsList>
+          <TabsContent value="text">
+            <WatermarkTool type="text" />
+          </TabsContent>
+          <TabsContent value="image">
+            <WatermarkTool type="image" />
+          </TabsContent>
+        </Tabs>
+      </div></Suspense>
+     
 
       {/* How It Works */}
       <HowToWatermarkSection />
+
+      {/* Benefits Section */}
+      <WhyWatermarkSection />
 
       {/* FAQ Section */}
       <WatermarkFaqSection />

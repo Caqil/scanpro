@@ -535,7 +535,12 @@ export default {
     viewAllTools: "Lihat Semua Alat PDF",
     of: "dari",
     files: "file",
-    filesToMerge: "File untuk Digabungkan"
+    filesToMerge: "File untuk Digabungkan",
+    dragToReorder: "Seret untuk Menyusun Ulang",
+    downloadReady: "Unduhan Siap",
+    downloadMerged: "Unduh yang Digabung",
+    mergePdfs: "Gabungkan PDF",
+    successMessage: "PDF berhasil digabungkan",
   },
 
   // Halaman OCR
@@ -859,21 +864,20 @@ export default {
     watermarkSuccessDesc: "File PDF Anda telah diberi tanda air dan siap untuk diunduh."
   },
 
-  // Kompres PDF
   compressPdf: {
-    title: "Kompres PDF",
-    description: "Kurangi ukuran file PDF sambil mempertahankan kualitas",
+    title: "Kompres File PDF",
+    description: "Perkecil ukuran file PDF dengan mudah sambil mempertahankan kualitas dokumen",
     quality: {
       high: "Kualitas Tinggi",
       highDesc: "Kompresi minimal, kualitas visual terbaik",
       balanced: "Seimbang",
-      balancedDesc: "Kompresi baik dengan kehilangan visual minimal",
+      balancedDesc: "Kompresi baik dengan sedikit penurunan visual",
       maximum: "Kompresi Maksimum",
-      maximumDesc: "Rasio kompresi tertinggi, dapat mengurangi kualitas visual"
+      maximumDesc: "Rasio kompresi lebih tinggi, mungkin mengurangi kualitas visual"
     },
     processing: {
       title: "Opsi Pemrosesan",
-      processAllTogether: "Proses semua file secara bersamaan",
+      processAllTogether: "Proses semua file sekaligus",
       processSequentially: "Proses file satu per satu"
     },
     status: {
@@ -886,27 +890,126 @@ export default {
       title: "Ringkasan Hasil Kompresi",
       totalOriginal: "Total Asli",
       totalCompressed: "Total Terkompresi",
-      spaceSaved: "Ruang yang Disimpan",
-      averageReduction: "Rata-rata Pengurangan",
-      downloadAll: "Unduh Semua File Terkompresi sebagai ZIP"
+      spaceSaved: "Ruang Tersimpan",
+      averageReduction: "Pengurangan Rata-rata",
+      downloadAll: "Unduh semua file terkompresi sebagai ZIP"
     },
     of: "dari",
     files: "file",
     filesToCompress: "File untuk Dikompresi",
-    compressAll: "Kompres File",
+    compressAll: "Kompresi File",
     qualityPlaceholder: "Pilih kualitas kompresi",
     reduction: "pengurangan",
     zipDownloadSuccess: "Semua file terkompresi berhasil diunduh",
     overallProgress: "Kemajuan Keseluruhan",
-    reducedBy: "dikurangi sebesar",
-    success: "Kompresi berhasil",
+    reducedBy: "dikurangi oleh",
+    success: "Kompresi Berhasil",
     error: {
-      noFiles: "Pilih file PDF untuk dikompresi",
+      noFiles: "Silakan pilih file PDF untuk dikompresi",
       noCompressed: "Tidak ada file terkompresi yang tersedia untuk diunduh",
-      downloadZip: "Gagal mengunduh arsip ZIP",
+      downloadZip: "Gagal mengunduh file ZIP",
       generic: "Gagal mengompresi file PDF",
-      unknown: "Terjadi kesalahan yang tidak diketahui",
+      unknown: "Terjadi kesalahan tidak dikenal",
       failed: "Gagal mengompresi file Anda"
+    },
+    howTo: {
+      title: "Cara Mengompresi File PDF",
+      step1: {
+        title: "Unggah PDF",
+        description: "Unggah file PDF yang ingin Anda kompresi. File hingga 100MB didukung."
+      },
+      step2: {
+        title: "Pilih Kualitas",
+        description: "Pilih tingkat kompresi yang Anda inginkan sesuai kebutuhan."
+      },
+      step3: {
+        title: "Unduh",
+        description: "Unduh file PDF terkompresi Anda, siap untuk dibagikan atau disimpan."
+      }
+    },
+    why: {
+      title: "Mengapa Mengompresi PDF?",
+      uploadSpeed: {
+        title: "Unggahan Super Cepat",
+        description: "Bagikan PDF terkompresi dengan cepat dengan kecepatan unggah lebih tinggi"
+      },
+      emailFriendly: {
+        title: "Ramah Email",
+        description: "Sesuaikan dengan batas ukuran email tanpa mengorbankan kualitas"
+      },
+      storage: {
+        title: "Penyimpanan Efisien",
+        description: "Maksimalkan ruang di perangkat dan penyimpanan cloud Anda"
+      },
+      quality: {
+        title: "Kualitas Terjaga",
+        description: "Pilih tingkat kompresi yang mempertahankan kualitas yang Anda butuhkan"
+      }
+    },
+    faq: {
+      title: "Pertanyaan Umum",
+      howMuch: {
+        question: "Seberapa banyak file PDF dapat dikompresi?",
+        answer: "Sebagian besar file PDF dapat dikompresi antara 20-80%, tergantung pada kontennya. Dokumen dengan banyak gambar umumnya mencapai rasio kompresi lebih tinggi daripada dokumen dengan banyak teks. Alat kompresi kami menawarkan berbagai tingkat kualitas untuk menyeimbangkan ukuran file dan kualitas visual sesuai kebutuhan Anda."
+      },
+      quality: {
+        question: "Apakah kompresi akan memengaruhi kualitas PDF saya?",
+        answer: "Alat kompresi kami menawarkan berbagai pengaturan kualitas. Kompresi kualitas tinggi mempertahankan kesetiaan visual sambil mengurangi ukuran file. Pengaturan kualitas menengah dan rendah menerapkan kompresi yang lebih agresif, yang dapat memengaruhi kualitas gambar tetapi menghasilkan file yang lebih kecil. Konten teks tetap tajam dan terbaca di semua tingkat kompresi."
+      },
+      secure: {
+        question: "Apakah data PDF saya aman saat dikompresi?",
+        answer: "Ya, kami sangat serius dalam hal keamanan data. Semua pemrosesan file terjadi di server aman kami, dan file Anda akan dihapus secara otomatis setelah pemrosesan (biasanya dalam 24 jam). Kami tidak membagikan file Anda kepada pihak ketiga, dan semua transfer data dienkripsi menggunakan HTTPS."
+      },
+      fileLimits: {
+        question: "Apa batasan ukuran file?",
+        answer: "Pengguna gratis dapat mengompresi file PDF hingga 10MB. Pelanggan premium dapat mengompresi file yang lebih besar: Paket Dasar memungkinkan hingga 50MB, Paket Pro hingga 100MB, dan Paket Perusahaan hingga 500MB per file. Jika Anda perlu memproses file yang lebih besar, hubungi kami untuk solusi khusus."
+      },
+      batch: {
+        question: "Dapatkah saya mengompresi beberapa PDF sekaligus?",
+        answer: "Ya, alat kami mendukung kompresi batch. Anda dapat mengunggah dan mengompresi beberapa file PDF sekaligus, menghemat waktu saat memproses banyak dokumen. Pengguna premium mendapatkan batas lebih tinggi dalam pemrosesan batch."
+      }
+    },
+    modes: {
+      title: "Mode Kompresi",
+      moderate: {
+        title: "Kompresi Sedang",
+        description: "Pendekatan seimbang yang mengurangi ukuran file sambil mempertahankan kualitas visual yang baik. Cocok untuk sebagian besar dokumen di mana kualitas penting tetapi pengurangan ukuran tertentu diperlukan."
+      },
+      high: {
+        title: "Kompresi Tinggi",
+        description: "Kompresi lebih agresif yang secara signifikan mengurangi ukuran file. Beberapa penurunan kualitas gambar mungkin terlihat, tetapi teks tetap jelas dan terbaca."
+      },
+      lossless: {
+        title: "Kompresi Tanpa Kehilangan",
+        description: "Mengurangi ukuran file tanpa memengaruhi kualitas dengan menghapus data yang berlebihan, mengoptimalkan struktur, dan membersihkan metadata. Tidak ada perbedaan visual dari aslinya."
+      }
+    },
+    bestPractices: {
+      title: "Praktik Terbaik untuk Kompresi PDF",
+      dos: "Yang Harus Dilakukan",
+      donts: "Yang Tidak Boleh Dilakukan",
+      dosList: [
+        "Kompresi gambar sebelum membuat PDF untuk hasil terbaik",
+        "Pilih tingkat kompresi yang sesuai untuk kebutuhan Anda",
+        "Simpan file asli sebagai cadangan sebelum kompresi",
+        "Gunakan kompresi tanpa kehilangan untuk dokumen penting",
+        "Hapus halaman yang tidak perlu untuk lebih mengurangi ukuran file"
+      ],
+      dontsList: [
+        "Jangan terlalu mengompresi dokumen yang diperlukan untuk pencetakan",
+        "Jangan mengompresi dokumen hukum atau arsip jika setiap detail penting",
+        "Jangan mengompresi berulang kali PDF yang sudah sangat terkompresi",
+        "Jangan berharap pengurangan besar untuk PDF yang sebagian besar berisi teks",
+        "Jangan mengompresi jika ukuran file bukan masalah"
+      ]
+    },
+    relatedTools: {
+      title: "Alat Terkait",
+      merge: "Gabungkan PDF",
+      split: "Pisahkan PDF",
+      pdfToWord: "PDF ke Word",
+      pdfToJpg: "PDF ke JPG",
+      viewAll: "Lihat Semua Alat"
     }
   },
 
@@ -1511,7 +1614,8 @@ export default {
       new: "Baru",
       reduction: "pengurangan",
       download: "Unduh PDF yang Diperbaiki",
-      repairAnother: "Perbaiki PDF Lain"
+      repairAnother: "Perbaiki PDF Lain",
+
     }
   },
   faq: {
@@ -1567,5 +1671,175 @@ export default {
       answer3: "API kami menggunakan titik akhir REST standar dengan respons JSON. Anda dapat menemukan dokumentasi lengkap, contoh kode, dan SDK di bagian Pengembang kami. Kami menyediakan contoh untuk berbagai bahasa pemrograman termasuk JavaScript, Python, PHP, dan Java."
     },
     title: "Pertanyaan yang Sering Diajukan"
+  },
+  footer: {
+    description: "Alat PDF canggih untuk profesional. Konversi, edit, lindungi, dan optimalkan dokumen Anda dengan platform berbasis web dan API kami yang kuat.",
+    contactUs: "Hubungi Kami",
+    address: "123 Jalan Dokumen, Kota PDF, 94103, Amerika Serikat",
+    subscribe: "Berlangganan Newsletter Kami",
+    subscribeText: "Dapatkan berita terbaru, pembaruan, dan tips langsung ke kotak masuk Anda.",
+    emailPlaceholder: "Alamat email Anda",
+    subscribeButton: "Berlangganan",
+    pdfTools: "Alat PDF",
+    pdfManagement: "Manajemen PDF",
+    company: "Perusahaan",
+    support: "Dukungan",
+    aboutUs: "Tentang Kami",
+    careers: "Karir",
+    blog: "Blog",
+    helpCenter: "Pusat Bantuan",
+    apiDocs: "Dokumentasi API",
+    faqs: "FAQ",
+    tutorials: "Tutorial",
+    systemStatus: "Status Sistem",
+    allRightsReserved: "Seluruh hak cipta dilindungi.",
+    termsOfService: "Ketentuan Layanan",
+    privacyPolicy: "Kebijakan Privasi",
+    cookiePolicy: "Kebijakan Cookie",
+    security: "Keamanan",
+    sitemap: "Peta Situs",
+    validEmail: "Harap masukkan alamat email yang valid",
+    subscribeSuccess: "Terima kasih telah berlangganan newsletter kami!",
+    viewAllTools: "Lihat Semua Alat PDF",
+    repairPdf: "Perbaiki PDF",
+    socialFacebook: "Facebook",
+    socialTwitter: "Twitter",
+    socialInstagram: "Instagram",
+    socialLinkedin: "LinkedIn",
+    socialGithub: "GitHub",
+    socialYoutube: "YouTube"
+  },
+
+  security: {
+    hero: {
+      title: "Keamanan & Privasi di ScanPro",
+      subtitle: "Kami menganggap serius keamanan dan privasi dokumen Anda. Pelajari bagaimana kami melindungi data Anda."
+    },
+    measures: {
+      title: "Bagaimana Kami Melindungi Data Anda"
+    },
+    sections: {
+      encryption: {
+        title: "Enkripsi End-to-End",
+        description: "Semua file dienkripsi selama transfer dengan TLS 1.3 dan saat diam dengan enkripsi AES-256. Dokumen Anda tidak pernah bepergian tanpa perlindungan."
+      },
+      temporaryStorage: {
+        title: "Penyimpanan Sementara",
+        description: "File otomatis dihapus dalam 24 jam setelah pemrosesan. Kami tidak menyimpan dokumen Anda lebih lama dari yang diperlukan."
+      },
+      access: {
+        title: "Kontrol Akses",
+        description: "Sistem autentikasi dan otorisasi yang kuat memastikan hanya Anda yang dapat mengakses dokumen dan informasi akun Anda."
+      },
+      infrastructure: {
+        title: "Infrastruktur yang Aman",
+        description: "Sistem kami berjalan pada penyedia cloud tingkat perusahaan dengan sertifikasi ISO 27001 dan audit keamanan rutin."
+      },
+      compliance: {
+        title: "Kepatuhan",
+        description: "Operasi kami mengikuti GDPR, CCPA, dan peraturan privasi regional lainnya untuk memastikan hak data Anda terlindungi."
+      },
+      monitoring: {
+        title: "Pemantauan Berkelanjutan",
+        description: "Tinjauan keamanan otomatis dan manual, pemindaian kerentanan, dan deteksi intrusi melindungi dari ancaman yang muncul."
+      }
+    },
+    tabs: {
+      security: "Keamanan",
+      privacy: "Privasi",
+      compliance: "Kepatuhan"
+    },
+    tabContent: {
+      security: {
+        title: "Pendekatan Keamanan Kami",
+        description: "Langkah-langkah keamanan komprehensif untuk melindungi file dan data Anda",
+        encryption: {
+          title: "Enkripsi Kuat",
+          description: "Kami menggunakan TLS 1.3 untuk data dalam perjalanan dan AES-256 untuk data yang diam. Semua transfer file dienkripsi end-to-end."
+        },
+        auth: {
+          title: "Autentikasi yang Aman",
+          description: "Autentikasi multi-faktor, penyimpanan kata sandi yang aman menggunakan bcrypt, dan pemantauan akun rutin untuk aktivitas mencurigakan."
+        },
+        hosting: {
+          title: "Hosting yang Aman",
+          description: "Infrastruktur kami dihosting pada penyedia cloud tingkat perusahaan dengan sertifikasi ISO 27001. Kami menerapkan segmentasi jaringan, firewall, dan sistem deteksi intrusi."
+        },
+        updates: {
+          title: "Pembaruan Rutin",
+          description: "Kami menjaga patch dan pembaruan keamanan rutin, melakukan penilaian kerentanan, dan melakukan pengujian penetrasi untuk mengidentifikasi dan menangani masalah potensial."
+        }
+      },
+      privacy: {
+        title: "Praktik Privasi",
+        description: "Bagaimana kami menangani data pribadi dan dokumen Anda",
+        viewPolicy: "Lihat Kebijakan Privasi Lengkap"
+      },
+      compliance: {
+        title: "Kepatuhan & Sertifikasi",
+        description: "Standar dan peraturan yang kami patuhi",
+        approach: {
+          title: "Pendekatan Kepatuhan Kami",
+          description: "ScanPro dirancang dengan prinsip privasi dan keamanan sejak awal. Kami secara rutin meninjau dan memperbarui praktik kami untuk mematuhi peraturan yang berkembang."
+        },
+        gdpr: {
+          title: "Kepatuhan GDPR"
+        },
+        hipaa: {
+          title: "Pertimbangan HIPAA"
+        }
+      }
+    },
+    retention: {
+      title: "Kebijakan Retensi Data",
+      description: "Kami mengikuti praktik minimisasi data yang ketat. Berikut berapa lama kami menyimpan berbagai jenis data:",
+      documents: {
+        title: "Dokumen yang Diunggah",
+        description: "File otomatis dihapus dari server kami dalam 24 jam setelah pemrosesan. Kami tidak menyimpan salinan dokumen Anda kecuali Anda secara eksplisit memilih fitur penyimpanan yang tersedia untuk paket berbayar."
+      },
+      account: {
+        title: "Informasi Akun",
+        description: "Informasi akun dasar disimpan selama Anda mempertahankan akun aktif. Anda dapat menghapus akun Anda kapan saja, yang akan menghapus informasi pribadi Anda dari sistem kami."
+      },
+      usage: {
+        title: "Data Penggunaan",
+        description: "Statistik penggunaan anonim disimpan hingga 36 bulan untuk membantu kami meningkatkan layanan kami. Data ini tidak dapat digunakan untuk mengidentifikasi Anda secara pribadi."
+      }
+    },
+    contact: {
+      title: "Punya Pertanyaan Keamanan?",
+      description: "Tim keamanan kami siap menjawab pertanyaan Anda tentang bagaimana kami melindungi data dan privasi Anda.",
+      button: "Hubungi Tim Keamanan"
+    },
+    policy: {
+      button: "Kebijakan Privasi"
+    },
+    faq: {
+      dataCollection: {
+        question: "Data pribadi apa yang dikumpulkan ScanPro?",
+        answer: "Kami mengumpulkan informasi minimal yang diperlukan untuk menyediakan layanan kami. Untuk pengguna terdaftar, ini termasuk email, nama, dan statistik penggunaan. Kami juga mengumpulkan data penggunaan anonim untuk meningkatkan layanan kami. Kami tidak menganalisis, memindai, atau menambang konten dokumen Anda."
+      },
+      documentStorage: {
+        question: "Berapa lama Anda menyimpan dokumen saya?",
+        answer: "Dokumen otomatis dihapus dari server kami setelah pemrosesan, biasanya dalam 24 jam. Untuk pelanggan berbayar, opsi penyimpanan dokumen tersedia, tetapi ini hanya fitur opt-in."
+      },
+      thirdParty: {
+        question: "Apakah Anda membagikan data saya dengan pihak ketiga?",
+        answer: "Kami tidak menjual atau menyewakan data pribadi Anda. Kami hanya membagikan data dengan pihak ketiga ketika diperlukan untuk menyediakan layanan kami (seperti prosesor pembayaran untuk langganan) atau ketika diwajibkan oleh hukum. Semua penyedia pihak ketiga diperiksa dengan cermat dan terikat oleh perjanjian perlindungan data."
+      },
+      security: {
+        question: "Bagaimana Anda mengamankan data saya?",
+        answer: "Kami menggunakan tindakan keamanan standar industri termasuk enkripsi TLS untuk transfer data, enkripsi AES-256 untuk data yang disimpan, penyedia infrastruktur yang aman, kontrol akses, dan audit keamanan rutin. Sistem kami dirancang dengan keamanan sebagai prioritas."
+      },
+      rights: {
+        question: "Apa hak saya terkait data saya?",
+        answer: "Tergantung pada wilayah Anda, Anda memiliki hak termasuk: akses ke data Anda, koreksi data yang tidak akurat, penghapusan data Anda, pembatasan pemrosesan, portabilitas data, dan keberatan terhadap pemrosesan. Untuk melaksanakan hak-hak ini, hubungi tim dukungan kami."
+      },
+      breach: {
+        question: "Apa yang terjadi jika terjadi pelanggaran data?",
+        answer: "Kami memiliki protokol untuk mendeteksi, menanggapi, dan memberi tahu pengguna yang terkena dampak dari setiap pelanggaran data sesuai dengan hukum yang berlaku. Kami melakukan penilaian keamanan rutin untuk meminimalkan risiko pelanggaran dan mempertahankan rencana respons insiden yang terperinci."
+      }
+    }
   }
+
 }

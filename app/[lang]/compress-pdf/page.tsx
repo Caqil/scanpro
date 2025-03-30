@@ -1,9 +1,6 @@
-// app/[lang]/about/page.tsx
 import { Metadata } from "next";
-import { Suspense } from "react";
-import dynamic from "next/dynamic";
-import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
-
+import { CompressHeaderSection, HowToCompressSection, WhyCompressSection, CompressFaqSection, RelatedToolsSection } from "./compress-content";
+import { MultiPdfCompressor } from "@/components/pdf-compressor";
 import enTranslations from '@/src/lib/i18n/locales/en';
 import idTranslations from '@/src/lib/i18n/locales/id';
 import esTranslations from '@/src/lib/i18n/locales/es';
@@ -18,7 +15,8 @@ import jaTranslations from '@/src/lib/i18n/locales/ja';
 import koTranslations from '@/src/lib/i18n/locales/ko';
 import itTranslations from '@/src/lib/i18n/locales/it';
 import trTranslations from '@/src/lib/i18n/locales/tr';
-import AboutPageContent from "./about-content";
+import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
+import { Suspense } from "react";
 
 type Language = typeof SUPPORTED_LANGUAGES[number];
 
@@ -85,6 +83,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang: paramLang } = await params;
   const lang = SUPPORTED_LANGUAGES.includes(paramLang as Language) ? paramLang as Language : "en";
   const t = (key: string) => getTranslation(lang, key);
+  
+  // Define stop words for supported languages
   const stopWordsByLanguage: Record<string, string[]> = {
     en: ["the", "a", "an", "and", "or", "to", "in", "with", "for", "is", "on", "at"],
     id: ["dan", "di", "ke", "dari", "untuk", "yang", "dengan", "atau", "pada"],
@@ -101,9 +101,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     it: ["e", "o", "in", "con", "per", "di", "a", "il", "la"], // Italian
     tr: ["ve", "ile", "de", "da", "için", "bu", "şu", "veya"] // Turkish
   };
-  
-  
-  
+
   // Keyword extraction function with language-specific stop words
   const extractKeywords = (text: string, language: string): string[] => {
     // Select stop words based on language, default to English if not found
@@ -119,25 +117,28 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         acc[word] = (acc[word] || 0) + 1;
         return acc;
       }, {} as Record<string, number>);
-  
+
     // Sort by frequency and take top 5
     return Object.keys(filteredWords)
       .sort((a, b) => filteredWords[b] - filteredWords[a])
       .slice(0, 5);
   };
+  
   // Get translated title and description
-  const title = t("ocr.title");
-  const description = t("ocr.description");
+  const title = t("compressPdf.title") || "Compress PDF Files";
+  const description = t("compressPdf.description") || "Reduce PDF file sizes effortlessly while preserving document quality";
+  
   // Combine title and description for keyword extraction
   const keywords = extractKeywords(`${title} ${description}`, lang);
-
+  
   return {
-    title: t("about.title") || "About ScanPro | Transforming Document Management",
-    description: t("about.description") || "Learn about ScanPro's mission to simplify digital document management with cutting-edge PDF tools.",
+    title: title,
+    description: description,
+    keywords: keywords,
     openGraph: {
-      title: t("about.title") || "About ScanPro | Transforming Document Management",
-      description: t("about.description") || "Learn about ScanPro's mission to simplify digital document management with cutting-edge PDF tools.",
-      url: `/${lang}/about`,
+      title: title,
+      description: description,
+      url: `/${lang}/compress-pdf`,
       siteName: "ScanPro",
       locale: {
         'en': 'en_US',
@@ -157,7 +158,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       }[lang] || 'en_US',
     },
     alternates: {
-      canonical: `/${lang}/about`,
+      canonical: `/${lang}/compress-pdf`,
       languages: Object.fromEntries(
         SUPPORTED_LANGUAGES.map(code => {
           const langCode = {
@@ -177,21 +178,34 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             'tr': 'tr-TR'
           }[code] || `${code}`;
           
-          return [langCode, `/${code}/about`];
+          return [langCode, `/${code}/compress-pdf`];
         })
       ),
     }
   };
 }
 
-export default function AboutPage() {
+export default function CompressPage() {
   return (
-    <Suspense fallback={
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="h-8 w-8 rounded-full border-4 border-primary border-t-transparent animate-spin"></div>
+    <div className="container max-w-5xl py-12 mx-auto">
+      <CompressHeaderSection />
+
+      {/* Main Tool Card */}
+      <div className="mb-12">
+          <Suspense> <MultiPdfCompressor /></Suspense>
       </div>
-    }>
-      <AboutPageContent />
-    </Suspense>
+
+      {/* How It Works */}
+      <HowToCompressSection />
+
+      {/* Benefits Section */}
+      <WhyCompressSection />
+
+      {/* FAQ Section */}
+      <CompressFaqSection />
+
+      {/* Related Tools Section */}
+      <RelatedToolsSection />
+    </div>
   );
 }

@@ -1,9 +1,11 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { LoginForm } from "./login-form";
 
-export function LoginFormWithParams() {
+// Component that uses useSearchParams (must be wrapped in Suspense)
+function LoginFormWithParamsClient() {
   const searchParams = useSearchParams();
   const callbackUrlParam = searchParams.get("callbackUrl");
   
@@ -13,4 +15,13 @@ export function LoginFormWithParams() {
     : "/en/dashboard";
   
   return <LoginForm callbackUrl={callbackUrl} />;
+}
+
+// Wrapper component with Suspense
+export function LoginFormWithParams() {
+  return (
+    <Suspense fallback={<div>Loading login form...</div>}>
+      <LoginFormWithParamsClient />
+    </Suspense>
+  );
 }

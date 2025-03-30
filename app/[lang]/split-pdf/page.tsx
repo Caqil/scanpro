@@ -1,9 +1,12 @@
-// app/[lang]/about/page.tsx
 import { Metadata } from "next";
-import { Suspense } from "react";
-import dynamic from "next/dynamic";
-import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
-
+import { PdfSplitter } from "@/components/pdf-splitter";
+import {
+  SplitHeaderSection,
+  HowToSplitSection,
+  SplitPdfFaqSection,
+  SplitUseCasesSection,
+  RelatedToolsSection
+} from "./split-content";
 import enTranslations from '@/src/lib/i18n/locales/en';
 import idTranslations from '@/src/lib/i18n/locales/id';
 import esTranslations from '@/src/lib/i18n/locales/es';
@@ -18,7 +21,9 @@ import jaTranslations from '@/src/lib/i18n/locales/ja';
 import koTranslations from '@/src/lib/i18n/locales/ko';
 import itTranslations from '@/src/lib/i18n/locales/it';
 import trTranslations from '@/src/lib/i18n/locales/tr';
-import AboutPageContent from "./about-content";
+import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
+import { SplitPdfClient } from "./split-pdf-client";
+import { Suspense } from "react";
 
 type Language = typeof SUPPORTED_LANGUAGES[number];
 
@@ -126,18 +131,18 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       .slice(0, 5);
   };
   // Get translated title and description
-  const title = t("ocr.title");
-  const description = t("ocr.description");
+  const title = t('splitPdf.title');
+  const description = t('splitPdf.description');
   // Combine title and description for keyword extraction
   const keywords = extractKeywords(`${title} ${description}`, lang);
-
   return {
-    title: t("about.title") || "About ScanPro | Transforming Document Management",
-    description: t("about.description") || "Learn about ScanPro's mission to simplify digital document management with cutting-edge PDF tools.",
+    title: t('splitPdf.title'),
+    description:  t('splitPdf.description'),
+    keywords: keywords,
     openGraph: {
-      title: t("about.title") || "About ScanPro | Transforming Document Management",
-      description: t("about.description") || "Learn about ScanPro's mission to simplify digital document management with cutting-edge PDF tools.",
-      url: `/${lang}/about`,
+      title:title,
+      description: description,
+      url: `/${lang}/split-pdf`,
       siteName: "ScanPro",
       locale: {
         'en': 'en_US',
@@ -154,10 +159,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         'ko': 'ko_KR',
         'it': 'it_IT',
         'tr': 'tr_TR'
-      }[lang] || 'en_US',
+    }[lang] || 'en_US',
     },
     alternates: {
-      canonical: `/${lang}/about`,
+      canonical: `/${lang}/split-pdf`,
       languages: Object.fromEntries(
         SUPPORTED_LANGUAGES.map(code => {
           const langCode = {
@@ -171,27 +176,41 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             'ru': 'ru-RU',
             'pt': 'pt-BR',
             'de': 'de-DE',
-            'ja': 'ja-JP',
             'ko': 'ko-KR',
             'it': 'it-IT',
             'tr': 'tr-TR'
           }[code] || `${code}`;
           
-          return [langCode, `/${code}/about`];
+          return [langCode, `/${code}/split-pdf`];
         })
       ),
     }
   };
 }
 
-export default function AboutPage() {
+export default function SplitPDFPage() {
   return (
-    <Suspense fallback={
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="h-8 w-8 rounded-full border-4 border-primary border-t-transparent animate-spin"></div>
+    <div className="container max-w-5xl py-12 mx-auto">
+      <SplitHeaderSection />
+
+      {/* Main Tool Card */}
+      <div className="mb-12">
+      <Suspense fallback={<div>Loading...</div>}>
+        <SplitPdfClient />
+      </Suspense>
       </div>
-    }>
-      <AboutPageContent />
-    </Suspense>
+
+      {/* How It Works */}
+      <HowToSplitSection />
+
+      {/* Use Cases Section */}
+      <SplitUseCasesSection />
+
+      {/* FAQ Section */}
+      <SplitPdfFaqSection />
+
+      {/* Related Tools Section */}
+      <RelatedToolsSection />
+    </div>
   );
 }

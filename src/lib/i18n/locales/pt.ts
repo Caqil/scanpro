@@ -535,7 +535,12 @@ export default {
     viewAllTools: "Ver Todas as Ferramentas de PDF",
     of: "de",
     files: "arquivos",
-    filesToMerge: "Arquivos para Mesclar"
+    filesToMerge: "Arquivos para Mesclar",
+    dragToReorder: "Arrastar para Reorganizar",
+    downloadReady: "Download Pronto",
+    downloadMerged: "Download Mesclado",
+    mergePdfs: "Mesclar PDFs",
+    successMessage: "PDF mesclado com sucesso",
   },
 
   // Página OCR
@@ -858,100 +863,153 @@ export default {
     watermarkSuccess: "Marca d'água adicionada com sucesso!",
     watermarkSuccessDesc: "Seu arquivo PDF foi marcado com marca d'água e está pronto para download."
   },
-
-  // Comprimir PDF
   compressPdf: {
-    title: "Comprimir PDF",
-    description: "Reduza o tamanho do arquivo PDF mantendo a qualidade",
+    title: "Comprimir arquivos PDF",
+    description: "Reduza o tamanho de arquivos PDF com facilidade enquanto mantém a qualidade do documento",
     quality: {
-      high: "Alta Qualidade",
+      high: "Alta qualidade",
       highDesc: "Compressão mínima, melhor qualidade visual",
       balanced: "Equilibrado",
       balancedDesc: "Boa compressão com perda visual mínima",
-      maximum: "Compressão Máxima",
+      maximum: "Compressão máxima",
       maximumDesc: "Maior taxa de compressão, pode reduzir a qualidade visual"
     },
     processing: {
-      title: "Opções de Processamento",
+      title: "Opções de processamento",
       processAllTogether: "Processar todos os arquivos simultaneamente",
       processSequentially: "Processar arquivos um por um"
     },
     status: {
-      uploading: "Carregando...",
+      uploading: "Enviando...",
       compressing: "Comprimindo...",
       completed: "Concluído",
       failed: "Falhou"
     },
     results: {
-      title: "Resumo dos Resultados de Compressão",
-      totalOriginal: "Total Original",
-      totalCompressed: "Total Comprimido",
-      spaceSaved: "Espaço Economizado",
-      averageReduction: "Redução Média",
-      downloadAll: "Baixar Todos os Arquivos Comprimidos como ZIP"
+      title: "Resumo dos resultados de compressão",
+      totalOriginal: "Total original",
+      totalCompressed: "Total comprimido",
+      spaceSaved: "Espaço economizado",
+      averageReduction: "Redução média",
+      downloadAll: "Baixar todos os arquivos comprimidos como ZIP"
     },
     of: "de",
     files: "arquivos",
-    filesToCompress: "Arquivos para Comprimir",
-    compressAll: "Comprimir Arquivos",
+    filesToCompress: "Arquivos para comprimir",
+    compressAll: "Comprimir arquivos",
     qualityPlaceholder: "Selecionar qualidade de compressão",
     reduction: "redução",
-    zipDownloadSuccess: "Todos os arquivos comprimidos baixados com sucesso",
-    overallProgress: "Progresso Geral",
-    reducedBy: "foi reduzido por",
+    zipDownloadSuccess: "Todos os arquivos comprimidos foram baixados com sucesso",
+    overallProgress: "Progresso geral",
+    reducedBy: "reduzido em",
     success: "Compressão bem-sucedida",
     error: {
       noFiles: "Por favor, selecione arquivos PDF para comprimir",
       noCompressed: "Nenhum arquivo comprimido disponível para download",
-      downloadZip: "Falha ao baixar arquivo ZIP",
-      generic: "Falha ao comprimir arquivo PDF",
+      downloadZip: "Erro ao baixar o arquivo ZIP",
+      generic: "Erro ao comprimir o arquivo PDF",
       unknown: "Ocorreu um erro desconhecido",
       failed: "Falha ao comprimir seu arquivo"
-    }
-  },
-
-  // Desbloquear PDF
-  unlockPdf: {
-    title: "Desbloquear Arquivos PDF",
-    description: "Remova a proteção por senha de seus documentos PDF para acesso irrestrito",
+    },
     howTo: {
-      title: "Como Desbloquear Arquivos PDF",
-      upload: {
-        title: "Carregar",
-        description: "Carregue o arquivo PDF protegido por senha que você deseja desbloquear."
+      title: "Como comprimir arquivos PDF",
+      step1: {
+        title: "Enviar PDF",
+        description: "Envie o arquivo PDF que deseja comprimir. Arquivos de até 100MB são suportados."
       },
-      enterPassword: {
-        title: "Inserir Senha",
-        description: "Se necessário, insira a senha atual que protege o PDF."
+      step2: {
+        title: "Escolher qualidade",
+        description: "Selecione seu nível de compressão preferido de acordo com suas necessidades."
       },
-      download: {
+      step3: {
         title: "Baixar",
-        description: "Baixe seu arquivo PDF desbloqueado sem restrições de senha."
+        description: "Baixe seu arquivo PDF comprimido, pronto para compartilhar ou armazenar."
+      }
+    },
+    why: {
+      title: "Por que comprimir PDFs?",
+      uploadSpeed: {
+        title: "Uploads ultrarrápidos",
+        description: "Compartilhe PDFs comprimidos rapidamente com velocidades de upload mais rápidas"
+      },
+      emailFriendly: {
+        title: "Amigável para e-mail",
+        description: "Adeque-se aos limites de tamanho de e-mail sem comprometer a qualidade"
+      },
+      storage: {
+        title: "Armazenamento eficiente",
+        description: "Maximize o espaço em seus dispositivos e armazenamento em nuvem"
+      },
+      quality: {
+        title: "Qualidade mantida",
+        description: "Escolha níveis de compressão que preservem a qualidade que você precisa"
       }
     },
     faq: {
-      passwordRequired: {
-        question: "Preciso saber a senha atual?",
-        answer: "Sim, para desbloquear um PDF, você precisa saber a senha atual. Nossa ferramenta não pode contornar ou quebrar senhas; ela simplesmente remove a proteção após você fornecer a senha correta."
-      },
-      security: {
-        question: "O processo de desbloqueio é seguro?",
-        answer: "Sim, todo o processamento ocorre em nossos servidores seguros. Não armazenamos seus PDFs ou senhas. Os arquivos são automaticamente excluídos após o processamento, e toda a transferência de dados é criptografada."
-      },
-      restrictions: {
-        question: "Posso desbloquear um PDF com restrições de proprietário, mas sem senha de abertura?",
-        answer: "Sim, alguns PDFs não exigem senha para abrir, mas têm restrições de impressão, edição ou cópia. Nossa ferramenta pode remover essas restrições também. Basta carregar o arquivo sem inserir uma senha."
+      title: "Perguntas frequentes",
+      howMuch: {
+        question: "Quanto os arquivos PDF podem ser comprimidos?",
+        answer: "A maioria dos arquivos PDF pode ser comprimida entre 20-80%, dependendo do conteúdo. Documentos com muitas imagens geralmente alcançam taxas de compressão mais altas do que documentos com muito texto. Nossa ferramenta de compressão oferece diferentes níveis de qualidade para equilibrar o tamanho do arquivo e a qualidade visual de acordo com suas necessidades."
       },
       quality: {
-        question: "O desbloqueio afetará a qualidade ou o conteúdo do PDF?",
-        answer: "Não, nosso processo de desbloqueio apenas remove as configurações de segurança. Ele não altera o conteúdo, a formatação ou a qualidade do seu arquivo PDF de forma alguma."
+        question: "A compressão afetará a qualidade do meu PDF?",
+        answer: "Nossa ferramenta de compressão oferece diferentes configurações de qualidade. A compressão de alta qualidade mantém a fidelidade visual enquanto reduz o tamanho do arquivo. As configurações de qualidade média e baixa aplicam uma compressão mais agressiva, que pode afetar a qualidade da imagem, mas resulta em arquivos menores. O conteúdo de texto permanece nítido e legível em todos os níveis de compressão."
+      },
+      secure: {
+        question: "Meus dados PDF estão seguros ao comprimir?",
+        answer: "Sim, levamos a segurança dos dados muito a sério. Todo o processamento de arquivos ocorre em nossos servidores seguros, e seus arquivos são excluídos automaticamente após o processamento (normalmente dentro de 24 horas). Não compartilhamos seus arquivos com terceiros, e todas as transferências de dados são criptografadas usando HTTPS."
+      },
+      fileLimits: {
+        question: "Quais são os limites de tamanho de arquivo?",
+        answer: "Usuários gratuitos podem comprimir arquivos PDF de até 10MB. Assinantes premium podem comprimir arquivos maiores: o plano Básico permite até 50MB, o plano Pro até 100MB e o plano Empresarial até 500MB por arquivo. Se você precisar processar arquivos maiores, entre em contato conosco para soluções personalizadas."
+      },
+      batch: {
+        question: "Posso comprimir vários PDFs de uma vez?",
+        answer: "Sim, nossa ferramenta suporta compressão em lote. Você pode enviar e comprimir vários arquivos PDF simultaneamente, economizando tempo ao processar vários documentos. Usuários premium obtêm limites mais altos no processamento em lote."
       }
     },
-    passwordProtected: "Protegido por Senha",
-    notPasswordProtected: "Não Protegido por Senha",
-    unlocking: "Desbloqueando seu PDF...",
-    unlockSuccess: "PDF desbloqueado com sucesso!",
-    unlockSuccessDesc: "Seu arquivo PDF foi desbloqueado e está pronto para download."
+    modes: {
+      title: "Modos de compressão",
+      moderate: {
+        title: "Compressão moderada",
+        description: "Abordagem equilibrada que reduz o tamanho do arquivo enquanto mantém uma boa qualidade visual. Perfeito para a maioria dos documentos onde a qualidade é importante, mas é necessária alguma redução de tamanho."
+      },
+      high: {
+        title: "Alta compressão",
+        description: "Compressão mais agressiva que reduz significativamente o tamanho do arquivo. Pode haver alguma perda de qualidade de imagem, mas o texto permanece claro e legível."
+      },
+      lossless: {
+        title: "Compressão sem perdas",
+        description: "Reduz o tamanho do arquivo sem afetar a qualidade, removendo dados redundantes, otimizando a estrutura e limpando metadados. Nenhuma diferença visual em relação ao original."
+      }
+    },
+    bestPractices: {
+      title: "Melhores práticas para compressão de PDF",
+      dos: "O que fazer",
+      donts: "O que não fazer",
+      dosList: [
+        "Comprimir imagens antes de criar PDFs para melhores resultados",
+        "Escolher o nível de compressão apropriado para suas necessidades",
+        "Manter arquivos originais como backup antes da compressão",
+        "Usar compressão sem perdas para documentos importantes",
+        "Remover páginas desnecessárias para reduzir ainda mais o tamanho do arquivo"
+      ],
+      dontsList: [
+        "Não supercomprimir documentos necessários para impressão",
+        "Não comprimir documentos legais ou de arquivo se cada detalhe importa",
+        "Não comprimir repetidamente PDFs já altamente comprimidos",
+        "Não esperar grandes reduções para PDFs com principalmente texto",
+        "Não comprimir se o tamanho do arquivo não for um problema"
+      ]
+    },
+    relatedTools: {
+      title: "Ferramentas relacionadas",
+      merge: "Mesclar PDF",
+      split: "Dividir PDF",
+      pdfToWord: "PDF para Word",
+      pdfToJpg: "PDF para JPG",
+      viewAll: "Ver todas as ferramentas"
+    }
   },
 
   // Carregador de Arquivos
@@ -1566,6 +1624,174 @@ export default {
       answer3: "Nossa API usa endpoints REST padrão com respostas JSON. Você pode encontrar documentação abrangente, exemplos de código e SDKs na nossa seção de Desenvolvedores. Oferecemos exemplos para várias linguagens de programação, incluindo JavaScript, Python, PHP e Java."
     },
     title: "Perguntas Frequentes"
+  },
+  footer: {
+    description: "Ferramentas PDF avançadas para profissionais. Converta, edite, proteja e otimize seus documentos com nossa poderosa plataforma baseada na web e API.",
+    contactUs: "Contate-nos",
+    address: "123 Rua Documento, Cidade PDF, 94103, Estados Unidos",
+    subscribe: "Assine nossa newsletter",
+    subscribeText: "Receba as últimas notícias, atualizações e dicas diretamente na sua caixa de entrada.",
+    emailPlaceholder: "Seu endereço de e-mail",
+    subscribeButton: "Assinar",
+    pdfTools: "Ferramentas PDF",
+    pdfManagement: "Gerenciamento de PDF",
+    company: "Empresa",
+    support: "Suporte",
+    aboutUs: "Sobre nós",
+    careers: "Carreiras",
+    blog: "Blog",
+    helpCenter: "Central de Ajuda",
+    apiDocs: "Documentação da API",
+    faqs: "Perguntas frequentes",
+    tutorials: "Tutoriais",
+    systemStatus: "Status do sistema",
+    allRightsReserved: "Todos os direitos reservados.",
+    termsOfService: "Termos de Serviço",
+    privacyPolicy: "Política de Privacidade",
+    cookiePolicy: "Política de Cookies",
+    security: "Segurança",
+    sitemap: "Mapa do site",
+    validEmail: "Por favor, insira um endereço de e-mail válido",
+    subscribeSuccess: "Obrigado por assinar nossa newsletter!",
+    viewAllTools: "Ver todas as ferramentas PDF",
+    repairPdf: "Reparar PDF",
+    socialFacebook: "Facebook",
+    socialTwitter: "Twitter",
+    socialInstagram: "Instagram",
+    socialLinkedin: "LinkedIn",
+    socialGithub: "GitHub",
+    socialYoutube: "YouTube"
+  },
+  security: {
+    hero: {
+      title: "Segurança e Privacidade no ScanPro",
+      subtitle: "Levamos a segurança e privacidade dos seus documentos a sério. Saiba como protegemos seus dados."
+    },
+    measures: {
+      title: "Como protegemos seus dados"
+    },
+    sections: {
+      encryption: {
+        title: "Criptografia de ponta a ponta",
+        description: "Todos os arquivos são criptografados durante a transferência com TLS 1.3 e em repouso com criptografia AES-256. Seus documentos nunca trafegam desprotegidos."
+      },
+      temporaryStorage: {
+        title: "Armazenamento temporário",
+        description: "Arquivos são excluídos automaticamente em 24 horas após o processamento. Não mantemos seus documentos por mais tempo que o necessário."
+      },
+      access: {
+        title: "Controles de acesso",
+        description: "Sistemas robustos de autenticação e autorização garantem que apenas você possa acessar seus documentos e informações da conta."
+      },
+      infrastructure: {
+        title: "Infraestrutura segura",
+        description: "Nossos sistemas operam em provedores de nuvem corporativos com certificação ISO 27001 e auditorias de segurança regulares."
+      },
+      compliance: {
+        title: "Conformidade",
+        description: "Nossas operações seguem GDPR, CCPA e outras regulamentações regionais de privacidade para proteger seus direitos de dados."
+      },
+      monitoring: {
+        title: "Monitoramento contínuo",
+        description: "Revisões de segurança automatizadas e manuais, varreduras de vulnerabilidade e detecção de intrusão protegem contra ameaças emergentes."
+      }
+    },
+    tabs: {
+      security: "Segurança",
+      privacy: "Privacidade",
+      compliance: "Conformidade"
+    },
+    tabContent: {
+      security: {
+        title: "Nossa abordagem de segurança",
+        description: "Medidas abrangentes de segurança para proteger seus arquivos e dados",
+        encryption: {
+          title: "Criptografia forte",
+          description: "Usamos TLS 1.3 para dados em trânsito e AES-256 para dados em repouso. Todas as transferências de arquivos são criptografadas de ponta a ponta."
+        },
+        auth: {
+          title: "Autenticação segura",
+          description: "Autenticação multifator, armazenamento seguro de senhas usando bcrypt e monitoramento regular de contas para atividades suspeitas."
+        },
+        hosting: {
+          title: "Hospedagem segura",
+          description: "Nossa infraestrutura é hospedada em provedores de nuvem corporativos com certificação ISO 27001. Implementamos segmentação de rede, firewalls e sistemas de detecção de intrusão."
+        },
+        updates: {
+          title: "Atualizações regulares",
+          description: "Mantemos patches e atualizações de segurança regulares, realizamos avaliações de vulnerabilidade e testes de penetração para identificar e resolver problemas potenciais."
+        }
+      },
+      privacy: {
+        title: "Práticas de privacidade",
+        description: "Como lidamos com seus dados pessoais e documentos",
+        viewPolicy: "Ver Política de Privacidade completa"
+      },
+      compliance: {
+        title: "Conformidade e certificações",
+        description: "Normas e regulamentos que seguimos",
+        approach: {
+          title: "Nossa abordagem de conformidade",
+          description: "O ScanPro foi projetado com privacidade e segurança desde o início. Revisamos e atualizamos regularmente nossas práticas para cumprir regulamentos em evolução."
+        },
+        gdpr: {
+          title: "Conformidade com GDPR"
+        },
+        hipaa: {
+          title: "Considerações sobre HIPAA"
+        }
+      }
+    },
+    retention: {
+      title: "Política de retenção de dados",
+      description: "Seguimos práticas rigorosas de minimização de dados. Veja por quanto tempo mantemos diferentes tipos de dados:",
+      documents: {
+        title: "Documentos enviados",
+        description: "Arquivos são excluídos automaticamente de nossos servidores em 24 horas após o processamento. Não mantemos cópias de seus documentos, a menos que você opte explicitamente por recursos de armazenamento disponíveis em planos pagos."
+      },
+      account: {
+        title: "Informações da conta",
+        description: "Informações básicas da conta são mantidas enquanto você mantiver uma conta ativa. Você pode excluir sua conta a qualquer momento, o que removerá suas informações pessoais de nossos sistemas."
+      },
+      usage: {
+        title: "Dados de uso",
+        description: "Estatísticas de uso anônimas são retidas por até 36 meses para nos ajudar a melhorar nossos serviços. Esses dados não podem ser usados para identificá-lo pessoalmente."
+      }
+    },
+    contact: {
+      title: "Tem dúvidas sobre segurança?",
+      description: "Nossa equipe de segurança está pronta para responder suas perguntas sobre como protegemos seus dados e privacidade.",
+      button: "Contatar a equipe de segurança"
+    },
+    policy: {
+      button: "Política de Privacidade"
+    },
+    faq: {
+      dataCollection: {
+        question: "Quais dados pessoais o ScanPro coleta?",
+        answer: "Coletamos apenas as informações mínimas necessárias para fornecer nossos serviços. Para usuários registrados, isso inclui e-mail, nome e estatísticas de uso. Também coletamos dados de uso anônimos para melhorar nossos serviços. Não analisamos, escaneamos ou mineramos o conteúdo de seus documentos."
+      },
+      documentStorage: {
+        question: "Por quanto tempo vocês armazenam meus documentos?",
+        answer: "Documentos são excluídos automaticamente de nossos servidores após o processamento, geralmente em 24 horas. Para assinantes pagos, opções de armazenamento de documentos estão disponíveis, mas são apenas recursos opcionais."
+      },
+      thirdParty: {
+        question: "Vocês compartilham meus dados com terceiros?",
+        answer: "Não vendemos nem alugamos seus dados pessoais. Compartilhamos dados com terceiros apenas quando necessário para fornecer nossos serviços (como processadores de pagamento para assinaturas) ou quando exigido por lei. Todos os provedores terceirizados são cuidadosamente avaliados e vinculados por acordos de proteção de dados."
+      },
+      security: {
+        question: "Como vocês protegem meus dados?",
+        answer: "Usamos medidas de segurança padrão do setor, incluindo criptografia TLS para transferência de dados, criptografia AES-256 para dados armazenados, provedores de infraestrutura segura, controles de acesso e auditorias de segurança regulares. Nossos sistemas são projetados com segurança como prioridade."
+      },
+      rights: {
+        question: "Quais são meus direitos em relação aos meus dados?",
+        answer: "Dependendo da sua região, você tem direitos que incluem: acesso aos seus dados, correção de dados imprecisos, exclusão de seus dados, restrição de processamento, portabilidade de dados e objeção ao processamento. Para exercer esses direitos, entre em contato com nossa equipe de suporte."
+      },
+      breach: {
+        question: "O que acontece em caso de violação de dados?",
+        answer: "Temos protocolos para detectar, responder e notificar usuários afetados por qualquer violação de dados de acordo com as leis aplicáveis. Realizamos avaliações de segurança regulares para minimizar o risco de violações e mantemos um plano detalhado de resposta a incidentes."
+      }
+    }
   }
 
 }

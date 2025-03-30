@@ -93,7 +93,7 @@ export function UserDashboardOverview({ user, usageStats }: UserDashboardOvervie
             <CardTitle className="text-lg">Compress Files</CardTitle>
           </CardHeader>
           <CardContent>
-            <LanguageLink href="/compress">
+            <LanguageLink href="/compress-pdf">
               <Button className="w-full">
                 <DownloadCloud className="mr-2 h-4 w-4" />
                 Compress Now

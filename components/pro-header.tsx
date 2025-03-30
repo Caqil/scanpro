@@ -167,19 +167,19 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
       tools: [
         {
           name: t("popular.mergePdf"),
-          href: "/merge",
+          href: "/merge-pdf",
           icon: <ArrowRight className="h-5 w-5 text-red-500" />,
           description: t("popular.mergePdfDesc"),
         },
         {
           name: t("popular.splitPdf"),
-          href: "/split",
+          href: "/split-pdf",
           icon: <ArrowDown className="h-5 w-5 text-green-500" />,
           description: t("popular.splitPdfDesc"),
         },
         {
           name: t("popular.compressPdf"),
-          href: "/compress",
+          href: "/compress-pdf",
           icon: <Download className="h-5 w-5 text-purple-500" />,
           description: t("popular.compressPdfDesc"),
         },
@@ -197,13 +197,13 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
       tools: [
         {
           name: t("popular.unlockPdf"),
-          href: "/unlock",
+          href: "/unlock-pdf",
           icon: <Lock className="h-5 w-5 text-blue-500" />,
           description: t("popular.unlockPdfDesc"),
         },
         {
           name: t("popular.protectPdf"),
-          href: "/protect",
+          href: "/protect-pdf",
           icon: <Shield className="h-5 w-5 text-blue-500" />,
           description: t("popular.protectPdfDesc"),
         },
