@@ -535,7 +535,12 @@ export default {
         viewAllTools: "Tüm PDF Araçlarını Görüntüle",
         of: " / ",
         files: "dosya",
-        filesToMerge: "Birleştirilecek Dosyalar"
+        filesToMerge: "Birleştirilecek Dosyalar",
+        dragToReorder: "Sürükle ve Yeniden Sırala",
+        downloadReady: "İndirme Hazır",
+        downloadMerged: "Birleştirilmiş İndirme",
+        mergePdfs: "PDF'leri Birleştir",
+        successMessage: "PDF başarıyla birleştirildi",
     },
 
     // OCR Sayfası
@@ -858,18 +863,16 @@ export default {
         watermarkSuccess: "Filigran Başarıyla Eklendi!",
         watermarkSuccessDesc: "PDF dosyanız filigranla işaretlendi ve indirmeye hazır."
     },
-
-    // PDF Sıkıştırma
     compressPdf: {
-        title: "PDF Sıkıştır",
-        description: "Kaliteyi koruyarak PDF dosya boyutunu küçültün",
+        title: "PDF Dosyalarını Sıkıştır",
+        description: "Belge kalitesini korurken PDF dosyalarının boyutunu kolayca küçültün",
         quality: {
             high: "Yüksek Kalite",
             highDesc: "Minimum sıkıştırma, en iyi görsel kalite",
             balanced: "Dengeli",
             balancedDesc: "Minimum görsel kayıpla iyi sıkıştırma",
             maximum: "Maksimum Sıkıştırma",
-            maximumDesc: "Maksimum sıkıştırma derecesi, görsel kaliteyi düşürebilir"
+            maximumDesc: "Daha yüksek sıkıştırma oranı, görsel kaliteyi düşürebilir"
         },
         processing: {
             title: "İşleme Seçenekleri",
@@ -883,30 +886,129 @@ export default {
             failed: "Başarısız"
         },
         results: {
-            title: "Sıkıştırma Sonuç Özeti",
-            totalOriginal: "Toplam Orijinal Boyut",
-            totalCompressed: "Toplam Sıkıştırılmış Boyut",
-            spaceSaved: "Kazanılan Alan",
-            averageReduction: "Ortalama Azalma",
-            downloadAll: "Tüm Sıkıştırılmış Dosyaları ZIP Olarak İndir"
+            title: "Sıkıştırma Sonuçları Özeti",
+            totalOriginal: "Toplam Orijinal",
+            totalCompressed: "Toplam Sıkıştırılmış",
+            spaceSaved: "Tasarruf Edilen Alan",
+            averageReduction: "Ortalama Küçültme",
+            downloadAll: "Tüm sıkıştırılmış dosyaları ZIP olarak indir"
         },
-        of: " / ",
+        of: "/",
         files: "dosya",
         filesToCompress: "Sıkıştırılacak Dosyalar",
         compressAll: "Dosyaları Sıkıştır",
-        qualityPlaceholder: "Sıkıştırma Kalitesini Seç",
-        reduction: "azalma",
+        qualityPlaceholder: "Sıkıştırma kalitesi seçin",
+        reduction: "küçültme",
         zipDownloadSuccess: "Tüm sıkıştırılmış dosyalar başarıyla indirildi",
         overallProgress: "Genel İlerleme",
-        reducedBy: "azaltıldı",
-        success: "Sıkıştırma başarıyla tamamlandı",
+        reducedBy: "kadar küçültüldü",
+        success: "Sıkıştırma Başarılı",
         error: {
             noFiles: "Lütfen sıkıştırmak için PDF dosyaları seçin",
             noCompressed: "İndirilecek sıkıştırılmış dosya yok",
-            downloadZip: "ZIP dosyası indirilemedi",
-            generic: "PDF dosyası sıkıştırılamadı",
+            downloadZip: "ZIP dosyası indirilirken hata",
+            generic: "PDF dosyası sıkıştırılırken hata",
             unknown: "Bilinmeyen bir hata oluştu",
-            failed: "Dosyanız sıkıştırılamadı"
+            failed: "Dosyanız sıkıştırılırken hata oluştu"
+        },
+        howTo: {
+            title: "PDF Dosyaları Nasıl Sıkıştırılır?",
+            step1: {
+                title: "PDF Yükle",
+                description: "Sıkıştırmak istediğiniz PDF dosyasını yükleyin. 100MB'a kadar dosyalar desteklenir."
+            },
+            step2: {
+                title: "Kalite Seç",
+                description: "İhtiyaçlarınıza göre tercih ettiğiniz sıkıştırma seviyesini seçin."
+            },
+            step3: {
+                title: "İndir",
+                description: "Sıkıştırılmış PDF dosyanızı paylaşmaya veya saklamaya hazır şekilde indirin."
+            }
+        },
+        why: {
+            title: "PDF'leri Neden Sıkıştırmalı?",
+            uploadSpeed: {
+                title: "Ultra Hızlı Yükleme",
+                description: "Daha hızlı yükleme hızlarıyla sıkıştırılmış PDF'leri paylaşın"
+            },
+            emailFriendly: {
+                title: "E-posta Uyumlu",
+                description: "Kaliteden ödün vermeden e-posta boyut sınırlarına uyun"
+            },
+            storage: {
+                title: "Verimli Depolama",
+                description: "Cihazlarınızda ve bulut depolamada alandan tasarruf edin"
+            },
+            quality: {
+                title: "Kalite Korundu",
+                description: "İhtiyacınız olan kaliteyi koruyan sıkıştırma seviyeleri seçin"
+            }
+        },
+        faq: {
+            title: "SSS",
+            howMuch: {
+                question: "PDF dosyaları ne kadar sıkıştırılabilir?",
+                answer: "Çoğu PDF dosyası içeriğine bağlı olarak %20-80 oranında sıkıştırılabilir. Çok fazla resim içeren belgeler genellikle çok fazla metin içeren belgelerden daha yüksek sıkıştırma oranları elde eder. Sıkıştırma aracımız, dosya boyutu ile görsel kaliteyi ihtiyaçlarınıza göre dengelemek için farklı kalite seviyeleri sunar."
+            },
+            quality: {
+                question: "Sıkıştırma PDF'mimin kalitesini etkiler mi?",
+                answer: "Sıkıştırma aracımız farklı kalite ayarları sunar. Yüksek kalite sıkıştırma, dosya boyutunu küçültürken görsel doğruluğu korur. Orta ve düşük kalite ayarları daha agresif sıkıştırma uygular ve bu görüntü kalitesini etkileyebilir ancak daha küçük dosyalarla sonuçlanır. Metin içeriği tüm sıkıştırma seviyelerinde net ve okunabilir kalır."
+            },
+            secure: {
+                question: "PDF verilerim sıkıştırılırken güvende mi?",
+                answer: "Evet, veri güvenliğini çok ciddiye alıyoruz. Tüm dosya işlemleri güvenli sunucularımızda gerçekleşir ve dosyalarınız işlendikten sonra otomatik olarak silinir (genellikle 24 saat içinde). Dosyalarınızı üçüncü şahıslarla paylaşmayız ve tüm veri transferleri HTTPS kullanılarak şifrelenir."
+            },
+            fileLimits: {
+                question: "Dosya boyutu sınırları nedir?",
+                answer: "Ücretsiz kullanıcılar 10MB'a kadar PDF dosyalarını sıkıştırabilir. Premium aboneler daha büyük dosyaları sıkıştırabilir: Temel plan 50MB'a, Pro plan 100MB'a ve Kurumsal plan dosya başına 500MB'a kadar izin verir. Daha büyük dosyaları işlemeniz gerekiyorsa özel çözümler için bizimle iletişime geçin."
+            },
+            batch: {
+                question: "Aynı anda birden fazla PDF sıkıştırabilir miyim?",
+                answer: "Evet, aracımız toplu sıkıştırmayı destekler. Aynı anda birden fazla PDF dosyası yükleyip sıkıştırabilir, böylece birden fazla belgeyi işlerken zaman kazanırsınız. Premium kullanıcılar toplu işlemde daha yüksek limitler alır."
+            }
+        },
+        modes: {
+            title: "Sıkıştırma Modları",
+            moderate: {
+                title: "Orta Sıkıştırma",
+                description: "Dosya boyutunu küçültürken iyi görsel kaliteyi koruyan dengeli bir yaklaşım. Kalitenin önemli olduğu ancak belirli bir boyut küçültme gerektiren çoğu belge için idealdir."
+            },
+            high: {
+                title: "Yüksek Sıkıştırma",
+                description: "Dosya boyutunu önemli ölçüde küçülten daha agresif bir sıkıştırma. Görüntü kalitesinde biraz kayıp görülebilir ancak metin net ve okunabilir kalır."
+            },
+            lossless: {
+                title: "Kayıpsız Sıkıştırma",
+                description: "Fazlalık verileri kaldırarak, yapıyı optimize ederek ve meta verileri temizleyerek dosya boyutunu kaliteyi etkilemeden küçültür. Orijinal ile görsel olarak hiçbir fark yoktur."
+            }
+        },
+        bestPractices: {
+            title: "PDF Sıkıştırma En İyi Uygulamaları",
+            dos: "Yapılması Gerekenler",
+            donts: "Yapılmaması Gerekenler",
+            dosList: [
+                "Daha iyi sonuçlar için PDF oluşturmadan önce resimleri sıkıştırın",
+                "İhtiyaçlarınıza uygun sıkıştırma seviyesi seçin",
+                "Sıkıştırmadan önce orijinal dosyaları yedek olarak saklayın",
+                "Önemli belgeler için kayıpsız sıkıştırma kullanın",
+                "Dosya boyutunu daha da küçültmek için gereksiz sayfaları silin"
+            ],
+            dontsList: [
+                "Yazdırma için gerekli belgeleri aşırı sıkıştırmayın",
+                "Her detayın önemli olduğu yasal veya arşiv belgelerini sıkıştırmayın",
+                "Zaten yüksek oranda sıkıştırılmış PDF'leri tekrar tekrar sıkıştırmayın",
+                "Çoğunlukla metin içeren PDF'ler için büyük küçültme beklemeyin",
+                "Dosya boyutu sorun değilse sıkıştırmayın"
+            ]
+        },
+        relatedTools: {
+            title: "İlgili Araçlar",
+            merge: "PDF Birleştir",
+            split: "PDF Böl",
+            pdfToWord: "PDF'den Word'e",
+            pdfToJpg: "PDF'den JPG'ye",
+            viewAll: "Tüm Araçları Gör"
         }
     },
 
@@ -1520,7 +1622,7 @@ export default {
             security: "Güvenlik",
             account: "Hesap",
             api: "API"
-          },
+        },
         general: {
             question1: "ScanPro nedir?",
             answer1: "ScanPro, PDF yönetimi ve dönüştürme için kapsamlı bir çevrimiçi platformdur. Araçlarımız, sezgisel bir web arayüzü veya API aracılığıyla PDF belgelerinizi dönüştürmenize, düzenlemenize, birleştirmenize, bölmenize, sıkıştırmanıza ve korumanıza yardımcı olur.",
@@ -1566,5 +1668,173 @@ export default {
             answer3: "API'miz, JSON yanıtlarıyla standart REST uç noktalarını kullanır. Geliştirici bölümümüzde kapsamlı dokümantasyon, kod örnekleri ve SDK'lar bulabilirsiniz. JavaScript, Python, PHP ve Java gibi çeşitli programlama dilleri için örnekler sunuyoruz."
         },
         title: "Sıkça Sorulan Sorular"
+    },
+    footer: {
+        description: "Profesyoneller için gelişmiş PDF araçları. Güçlü web tabanlı platformumuz ve API'miz ile belgelerinizi dönüştürün, düzenleyin, koruyun ve optimize edin.",
+        contactUs: "Bize Ulaşın",
+        address: "123 Belge Sokak, PDF Şehir, 94103, Amerika Birleşik Devletleri",
+        subscribe: "Bültenimize Abone Olun",
+        subscribeText: "En son haberleri, güncellemeleri ve ipuçlarını doğrudan gelen kutunuza alın.",
+        emailPlaceholder: "E-posta adresiniz",
+        subscribeButton: "Abone Ol",
+        pdfTools: "PDF Araçları",
+        pdfManagement: "PDF Yönetimi",
+        company: "Şirket",
+        support: "Destek",
+        aboutUs: "Hakkımızda",
+        careers: "Kariyer",
+        blog: "Blog",
+        helpCenter: "Yardım Merkezi",
+        apiDocs: "API Dokümantasyonu",
+        faqs: "SSS",
+        tutorials: "Eğitimler",
+        systemStatus: "Sistem Durumu",
+        allRightsReserved: "Tüm hakları saklıdır.",
+        termsOfService: "Hizmet Şartları",
+        privacyPolicy: "Gizlilik Politikası",
+        cookiePolicy: "Çerez Politikası",
+        security: "Güvenlik",
+        sitemap: "Site Haritası",
+        validEmail: "Lütfen geçerli bir e-posta adresi girin",
+        subscribeSuccess: "Bültenimize abone olduğunuz için teşekkür ederiz!",
+        viewAllTools: "Tüm PDF Araçlarını Görüntüle",
+        repairPdf: "PDF Onar",
+        socialFacebook: "Facebook",
+        socialTwitter: "Twitter",
+        socialInstagram: "Instagram",
+        socialLinkedin: "LinkedIn",
+        socialGithub: "GitHub",
+        socialYoutube: "YouTube"
+    },
+    security: {
+        hero: {
+            title: "ScanPro'da Güvenlik ve Gizlilik",
+            subtitle: "Belgelerinizin güvenliğini ve gizliliğini ciddiye alıyoruz. Verilerinizi nasıl koruduğumuzu öğrenin."
+        },
+        measures: {
+            title: "Verilerinizi Nasıl Koruyoruz"
+        },
+        sections: {
+            encryption: {
+                title: "Uçtan Uca Şifreleme",
+                description: "Tüm dosyalar aktarım sırasında TLS 1.3 ile ve depolamada AES-256 şifreleme ile korunur. Belgeleriniz asla korumasız iletilmez."
+            },
+            temporaryStorage: {
+                title: "Geçici Depolama",
+                description: "Dosyalar işlendikten sonra 24 saat içinde otomatik olarak silinir. Belgelerinizi gereğinden fazla saklamayız."
+            },
+            access: {
+                title: "Erişim Kontrolleri",
+                description: "Güçlü kimlik doğrulama ve yetkilendirme sistemleri, yalnızca sizin belgelerinize ve hesap bilgilerinize erişebilmenizi sağlar."
+            },
+            infrastructure: {
+                title: "Güvenli Altyapı",
+                description: "Sistemlerimiz ISO 27001 sertifikalı kurumsal bulut sağlayıcılarında çalışır ve düzenli güvenlik denetimlerine tabidir."
+            },
+            compliance: {
+                title: "Uyumluluk",
+                description: "Operasyonlarımız GDPR, CCPA ve diğer bölgesel gizlilik düzenlemelerine uyarak veri haklarınızı korur."
+            },
+            monitoring: {
+                title: "Sürekli İzleme",
+                description: "Otomatik ve manuel güvenlik incelemeleri, güvenlik açığı taramaları ve izinsiz giriş tespiti ile yeni tehditlere karşı koruma sağlanır."
+            }
+        },
+        tabs: {
+            security: "Güvenlik",
+            privacy: "Gizlilik",
+            compliance: "Uyumluluk"
+        },
+        tabContent: {
+            security: {
+                title: "Güvenlik Yaklaşımımız",
+                description: "Dosya ve verilerinizi korumak için kapsamlı güvenlik önlemleri",
+                encryption: {
+                    title: "Güçlü Şifreleme",
+                    description: "Aktarımdaki veriler için TLS 1.3, depolanan veriler için AES-256 kullanıyoruz. Tüm dosya aktarımları uçtan uca şifrelenir."
+                },
+                auth: {
+                    title: "Güvenli Kimlik Doğrulama",
+                    description: "Çok faktörlü kimlik doğrulama, bcrypt ile güvenli şifre saklama ve şüpheli etkinlikler için düzenli hesap izleme."
+                },
+                hosting: {
+                    title: "Güvenli Barındırma",
+                    description: "Altyapımız ISO 27001 sertifikalı kurumsal bulut sağlayıcılarında barındırılıyor. Ağ bölümleme, güvenlik duvarları ve izinsiz giriş tespit sistemleri uyguluyoruz."
+                },
+                updates: {
+                    title: "Düzenli Güncellemeler",
+                    description: "Düzenli güvenlik yamaları ve güncellemeler yapıyor, güvenlik açığı değerlendirmeleri gerçekleştiriyor ve potansiyel sorunları belirlemek ve gidermek için sızma testleri yapıyoruz."
+                }
+            },
+            privacy: {
+                title: "Gizlilik Uygulamaları",
+                description: "Kişisel verilerinizi ve belgelerinizi nasıl işlediğimiz",
+                viewPolicy: "Tam Gizlilik Politikasını Görüntüle"
+            },
+            compliance: {
+                title: "Uyumluluk ve Sertifikalar",
+                description: "Uyduğumuz standartlar ve düzenlemeler",
+                approach: {
+                    title: "Uyumluluk Yaklaşımımız",
+                    description: "ScanPro, gizlilik ve güvenlik odaklı tasarım ilkeleriyle geliştirilmiştir. Gelişen düzenlemelere uymak için uygulamalarımızı düzenli olarak gözden geçirip güncelliyoruz."
+                },
+                gdpr: {
+                    title: "GDPR Uyumluluğu"
+                },
+                hipaa: {
+                    title: "HIPAA Düşünceleri"
+                }
+            }
+        },
+        retention: {
+            title: "Veri Saklama Politikası",
+            description: "Sıkı veri minimizasyonu uygulamaları izliyoruz. Farklı veri türlerini ne kadar süre sakladığımız aşağıda belirtilmiştir:",
+            documents: {
+                title: "Yüklenen Belgeler",
+                description: "Dosyalar işlendikten sonra 24 saat içinde sunucularımızdan otomatik olarak silinir. Ücretli planlarda mevcut depolama özelliklerini açıkça seçmediğiniz sürece belge kopyalarını saklamayız."
+            },
+            account: {
+                title: "Hesap Bilgileri",
+                description: "Temel hesap bilgileri, aktif bir hesabınız olduğu sürece saklanır. Hesabınızı istediğiniz zaman silebilirsiniz, bu kişisel bilgilerinizin sistemlerimizden kaldırılmasını sağlar."
+            },
+            usage: {
+                title: "Kullanım Verileri",
+                description: "Hizmetlerimizi iyileştirmemize yardımcı olmak için anonim kullanım istatistikleri 36 aya kadar saklanır. Bu veriler kişisel olarak sizi tanımlamak için kullanılamaz."
+            }
+        },
+        contact: {
+            title: "Güvenlik Sorularınız mı Var?",
+            description: "Güvenlik ekibimiz, verilerinizi ve gizliliğinizi nasıl koruduğumuz hakkındaki sorularınızı yanıtlamaya hazır.",
+            button: "Güvenlik Ekibiyle İletişime Geçin"
+        },
+        policy: {
+            button: "Gizlilik Politikası"
+        },
+        faq: {
+            dataCollection: {
+                question: "ScanPro hangi kişisel verileri topluyor?",
+                answer: "Hizmetlerimizi sağlamak için gereken minimum bilgiyi topluyoruz. Kayıtlı kullanıcılar için bu e-posta, ad ve kullanım istatistiklerini içerir. Hizmetlerimizi iyileştirmek için anonim kullanım verileri de topluyoruz. Belgelerinizin içeriğini analiz etmiyor, taramıyor veya madencilik yapmıyoruz."
+            },
+            documentStorage: {
+                question: "Belgelerimi ne kadar süre saklıyorsunuz?",
+                answer: "Belgeler işlendikten sonra genellikle 24 saat içinde sunucularımızdan otomatik olarak silinir. Ücretli aboneler için belge depolama seçenekleri mevcuttur, ancak bunlar yalnızca opt-in özelliklerdir."
+            },
+            thirdParty: {
+                question: "Verilerimi üçüncü taraflarla paylaşıyor musunuz?",
+                answer: "Kişisel verilerinizi satmıyor veya kiralamıyoruz. Verileri yalnızca hizmetlerimizi sağlamak için gerekli olduğunda (abonelikler için ödeme işlemcileri gibi) veya yasa gerektirdiğinde üçüncü taraflarla paylaşıyoruz. Tüm üçüncü taraf sağlayıcılar dikkatle incelenir ve veri koruma anlaşmalarıyla bağlıdır."
+            },
+            security: {
+                question: "Verilerimi nasıl güvende tutuyorsunuz?",
+                answer: "Veri aktarımı için TLS şifreleme, saklanan veriler için AES-256 şifreleme, güvenli altyapı sağlayıcıları, erişim kontrolleri ve düzenli güvenlik denetimleri dahil endüstri standardı güvenlik önlemleri kullanıyoruz. Sistemlerimiz güvenlik öncelikli olarak tasarlanmıştır."
+            },
+            rights: {
+                question: "Verilerimle ilgili haklarım nelerdir?",
+                answer: "Bölgenize bağlı olarak şu haklara sahipsiniz: verilerinize erişim, yanlış verilerin düzeltilmesi, verilerinizin silinmesi, işlemenin kısıtlanması, veri taşınabilirliği ve işlemeye itiraz. Bu haklarınızı kullanmak için destek ekibimizle iletişime geçin."
+            },
+            breach: {
+                question: "Bir veri ihlali durumunda ne olur?",
+                answer: "Uygulanabilir yasalara uygun olarak herhangi bir veri ihlalini tespit etmek, yanıt vermek ve etkilenen kullanıcıları bilgilendirmek için protokollerimiz var. İhlal riskini en aza indirmek için düzenli güvenlik değerlendirmeleri yapıyoruz ve ayrıntılı bir olay müdahale planı sürdürüyoruz."
+            }
+        }
     }
 }

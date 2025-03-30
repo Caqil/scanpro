@@ -3,10 +3,10 @@ import { ArrowDown, FileIcon, FileImage, FileText, FolderDown, Info, Table } fro
 import { useLanguageStore } from "@/src/store/store";
 import { LanguageLink } from "@/components/language-link";
 import { Button } from "@/components/ui/button";
+import { useSearchParams } from "next/navigation";
 
 export function CompressionHeaderSection() {
   const { t } = useLanguageStore();
-  
   return (
     <div className="mx-auto flex flex-col items-center text-center mb-8">
       <div className="mb-4 p-3 rounded-full bg-green-100 dark:bg-green-900/30">
@@ -38,7 +38,6 @@ export function CompressionHeaderSection() {
 
 export function HowToCompressSection() {
   const { t } = useLanguageStore();
-  
   const steps = [
     {
       title: t('universalCompressor.howTo.step1.title'),
@@ -76,7 +75,6 @@ export function HowToCompressSection() {
 
 export function CompressionFaqSection() {
   const { t } = useLanguageStore();
-  
   const faqItems = [
     {
       question: t('universalCompressor.faq.compressionRate.question'),
@@ -122,10 +120,9 @@ export function CompressionFaqSection() {
 
 export function RelatedToolsSection() {
   const { t } = useLanguageStore();
-  
   const tools = [
     { 
-      href: "/compress", 
+      href: "/compress-pdf", 
       icon: <ArrowDown className="h-5 w-5 text-green-500" />,
       name: "PDF Compressor",
       bg: "bg-green-100 dark:bg-green-900/30"
@@ -143,7 +140,7 @@ export function RelatedToolsSection() {
       bg: "bg-purple-100 dark:bg-purple-900/30"
     },
     { 
-      href: "/merge", 
+      href: "/merge-pdf", 
       icon: <FolderDown className="h-5 w-5 text-red-500" />,
       name: t('popular.mergePdf'),
       bg: "bg-red-100 dark:bg-red-900/30"
@@ -180,7 +177,6 @@ export function RelatedToolsSection() {
 
 export function CompressionBenefitsSection() {
   const { t } = useLanguageStore();
-  
   const benefits = [
     {
       title: t('compressPdf.benefits.faster.title') || "Faster File Sharing",
@@ -228,7 +224,6 @@ export function CompressionBenefitsSection() {
 
 export function FileTypeInfoSection() {
   const { t } = useLanguageStore();
-  
   const fileTypes = [
     {
       type: t('universalCompressor.fileTypes.pdf') || "PDF Documents",

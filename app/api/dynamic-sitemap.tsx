@@ -37,17 +37,17 @@ export async function GET(req: NextRequest) {
       { url: '/convert/html-to-pdf', changefreq: 'monthly', priority: 0.8 },
       
       // Core tools
-      { url: '/merge', changefreq: 'monthly', priority: 0.8 },
-      { url: '/split', changefreq: 'monthly', priority: 0.8 },
-      { url: '/compress', changefreq: 'monthly', priority: 0.8 },
+      { url: '/merge-pdf', changefreq: 'monthly', priority: 0.8 },
+      { url: '/split-pdf', changefreq: 'monthly', priority: 0.8 },
+      { url: '/compress-pdf', changefreq: 'monthly', priority: 0.8 },
       { url: '/compress-file', changefreq: 'monthly', priority: 0.8 },
       { url: '/rotate', changefreq: 'monthly', priority: 0.7 },
       { url: '/watermark', changefreq: 'monthly', priority: 0.7 },
       { url: '/ocr', changefreq: 'monthly', priority: 0.8 },
       
       // Security tools
-      { url: '/protect', changefreq: 'monthly', priority: 0.7 },
-      { url: '/unlock', changefreq: 'monthly', priority: 0.7 },
+      { url: '/protect-pdf', changefreq: 'monthly', priority: 0.7 },
+      { url: '/unlock-pdf', changefreq: 'monthly', priority: 0.7 },
       
       // Info pages
       { url: '/about', changefreq: 'monthly', priority: 0.6 },

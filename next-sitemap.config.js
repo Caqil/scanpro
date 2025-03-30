@@ -67,7 +67,7 @@ module.exports = {
             defaultConfig.priority = 0.9;
         } else if (path.includes('/convert/')) {
             defaultConfig.priority = 0.8;
-        } else if (path.includes('/merge') || path.includes('/compress') || path.includes('/ocr')) {
+        } else if (path.includes('/merge-pdf') || path.includes('/compress') || path.includes('/ocr')) {
             defaultConfig.priority = 0.8;
         }
 

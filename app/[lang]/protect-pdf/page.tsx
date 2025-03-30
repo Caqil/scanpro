@@ -142,7 +142,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     openGraph: {
       title: title,
       description: description,
-      url: `/${lang}/protect`,
+      url: `/${lang}/protect-pdf`,
       siteName: "ScanPro",
       locale: {
         'en': 'en_US',
@@ -162,7 +162,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     }[lang] || 'en_US',
     },
     alternates: {
-      canonical: `/${lang}/protect`,
+      canonical: `/${lang}/protect-pdf`,
       languages: Object.fromEntries(
         SUPPORTED_LANGUAGES.map(code => {
           const langCode = {
@@ -182,7 +182,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             'tr': 'tr-TR'
           }[code] || `${code}`;
           
-          return [langCode, `/${code}/protect`];
+          return [langCode, `/${code}/protect-pdf`];
         })
       ),
     }

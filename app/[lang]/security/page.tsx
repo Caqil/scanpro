@@ -1,7 +1,6 @@
+// app/[lang]/security/page.tsx
 import { Metadata } from "next";
-import { PdfUnlocker } from "@/components/pdf-unlocker";
-import { useLanguageStore } from "@/src/store/store";
-import { FAQSection, HowToUnlockSection, RelatedToolsSection, UnlockHeaderSection } from "./unlock-content";
+import { SecurityContent } from "./security-content";
 import enTranslations from '@/src/lib/i18n/locales/en';
 import idTranslations from '@/src/lib/i18n/locales/id';
 import esTranslations from '@/src/lib/i18n/locales/es';
@@ -83,6 +82,13 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang: paramLang } = await params;
   const lang = SUPPORTED_LANGUAGES.includes(paramLang as Language) ? paramLang as Language : "en";
   const t = (key: string) => getTranslation(lang, key);
+  
+  // Key phrases for security page
+  const keyPhrases = ["security", "privacy", "encryption", "data protection", 
+    "document security", "GDPR compliance", "secure PDF", "data privacy",
+    "cloud security", "SSL encryption", "confidentiality", "secure processing"];
+  
+  // Create stopwords list for different languages to filter out when extracting keywords
   const stopWordsByLanguage: Record<string, string[]> = {
     en: ["the", "a", "an", "and", "or", "to", "in", "with", "for", "is", "on", "at"],
     id: ["dan", "di", "ke", "dari", "untuk", "yang", "dengan", "atau", "pada"],
@@ -99,8 +105,6 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     it: ["e", "o", "in", "con", "per", "di", "a", "il", "la"], // Italian
     tr: ["ve", "ile", "de", "da", "için", "bu", "şu", "veya"] // Turkish
   };
-  
-  
   
   // Keyword extraction function with language-specific stop words
   const extractKeywords = (text: string, language: string): string[] => {
@@ -123,19 +127,23 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       .sort((a, b) => filteredWords[b] - filteredWords[a])
       .slice(0, 5);
   };
+  
   // Get translated title and description
-  const title = t("unlockPdf.title");
-  const description = t("unlockPdf.description");
-  // Combine title and description for keyword extraction
-  const keywords = extractKeywords(`${title} ${description}`, lang);
+  const title = t("security.hero.title") || "Security & Privacy | ScanPro";
+  const description = t("security.hero.description") || "Learn how ScanPro protects your documents and personal data with enterprise-grade security and privacy measures.";
+  
+  // Combine title and description with key phrases for keyword extraction
+  const keywordsText = `${title} ${description} ${keyPhrases.join(" ")}`;
+  const keywords = extractKeywords(keywordsText, lang);
+  
   return {
     title: title,
-    description:description,
-    keywords:keywords,
+    description: description,
+    keywords: keywords,
     openGraph: {
-      title: t("unlockPdf.title"),
-      description: t("unlockPdf.description"),
-      url: `/${lang}/unlock`,
+      title: title,
+      description: description,
+      url: `/${lang}/security`,
       siteName: "ScanPro",
       locale: {
         'en': 'en_US',
@@ -152,10 +160,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         'ko': 'ko_KR',
         'it': 'it_IT',
         'tr': 'tr_TR'
-    }[lang] || 'en_US',
+      }[lang] || 'en_US',
     },
     alternates: {
-      canonical: `/${lang}/unlock`,
+      canonical: `/${lang}/security`,
       languages: Object.fromEntries(
         SUPPORTED_LANGUAGES.map(code => {
           const langCode = {
@@ -175,33 +183,13 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             'tr': 'tr-TR'
           }[code] || `${code}`;
           
-          return [langCode, `/${code}/unlock`];
+          return [langCode, `/${code}/security`];
         })
       ),
-    },
+    }
   };
 }
 
-
-export default function UnlockPDFPage() {
-
-  return (
-    <div className="container max-w-5xl py-12 mx-auto">
-     <UnlockHeaderSection/>
-
-      {/* Main Tool Card */}
-      <div className="mb-12">
-        <PdfUnlocker />
-      </div>
-
-      {/* How It Works */}
-      <HowToUnlockSection />
-
-      {/* FAQ Section */}
-      <FAQSection />
-
-      {/* Related Tools Section */}
-      <RelatedToolsSection />
-    </div>
-  );
+export default function SecurityPage() {
+  return <SecurityContent />;
 }

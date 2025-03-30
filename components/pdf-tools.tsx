@@ -142,7 +142,7 @@ export function PdfTools() {
           description: t('toolDescriptions.mergePdf'),
           icon: <ArrowRightIcon className="h-6 w-6 text-red-500" />,
           iconBg: "bg-red-100 dark:bg-red-900/30",
-          href: "/merge"
+          href: "/merge-pdf"
         },
         {
           id: "compress-pdf",
@@ -150,12 +150,12 @@ export function PdfTools() {
           description: t('toolDescriptions.compressPdf'),
           icon: <ArrowDownIcon className="h-6 w-6 text-green-500" />,
           iconBg: "bg-green-100 dark:bg-green-900/30",
-          href: "/compress"
+          href: "/compress-pdf"
         },
          {
           id: "repair",
-          name: t("pdfTools.tools.repairPdf.name") || "Repair PDF",
-          description: t("pdfTools.tools.repairPdf.description") || "Fix corrupted PDF files and recover content",
+          name: t("repairPdf.title") || "Repair PDF",
+          description: t("repairPdf.description") || "Fix corrupted PDF files and recover content",
           href: "/repair",
           icon: <ReplaceAllIcon className="h-8 w-8" />,
           iconBg: "bg-blue-100 dark:bg-blue-900/30",
@@ -176,7 +176,7 @@ export function PdfTools() {
           description: t('toolDescriptions.compressPdf'),
           icon: <ArrowDownIcon className="h-6 w-6 text-green-500" />,
           iconBg: "bg-green-100 dark:bg-green-900/30",
-          href: "/split",
+          href: "/split-pdf",
           isNew: true
         },
         { 
@@ -222,7 +222,7 @@ export function PdfTools() {
           description: t('toolDescriptions.unlockPdf'),
           icon: <LockIcon className="h-6 w-6 text-blue-500" />,
           iconBg: "bg-blue-100 dark:bg-blue-900/30",
-          href: "/unlock"
+          href: "/unlock-pdf"
         },
         {
           id: "protect-pdf",
@@ -230,7 +230,7 @@ export function PdfTools() {
           description: t('toolDescriptions.protectPdf'),
           icon: <ShieldIcon className="h-6 w-6 text-blue-500" />,
           iconBg: "bg-blue-100 dark:bg-blue-900/30",
-          href: "/protect"
+          href: "/protect-pdf"
         },
       ]
     }

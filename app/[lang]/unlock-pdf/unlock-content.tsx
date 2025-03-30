@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 
 export function UnlockHeaderSection() {
   const { t } = useLanguageStore();
-  
 
   return (
     <div className="mx-auto flex flex-col items-center text-center mb-8">
@@ -29,7 +28,6 @@ export function UnlockHeaderSection() {
 
 export function HowToUnlockSection() {
   const { t } = useLanguageStore();
-  
   const steps = [
     {
       number: "1",
@@ -72,7 +70,6 @@ export function HowToUnlockSection() {
 
 export function FAQSection() {
   const { t } = useLanguageStore();
-  
   const faqs = [
     {
       question: t('unlockPdf.faq.passwordRequired.question'),
@@ -120,10 +117,9 @@ export function FAQSection() {
 
 export function RelatedToolsSection() {
   const { t } = useLanguageStore();
-  
   const tools = [
     {
-      href: "/protect",
+      href: "/protect-pdf",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-500">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
@@ -154,7 +150,7 @@ export function RelatedToolsSection() {
       name: t('watermark.title')
     },
     {
-      href: "/compress",
+      href: "/compress-pdf",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-500">
           <path d="M22 12H2m20 0-4 4m4-4-4-4M2 20V4"></path>

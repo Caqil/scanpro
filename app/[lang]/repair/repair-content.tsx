@@ -275,19 +275,19 @@ export function RelatedToolsSection() {
   
   const tools = [
     { 
-      href: "/compress", 
+      href: "/compress-pdf", 
       icon: <File className="h-5 w-5 text-green-500" />,
       name: t('repairPdf.relatedTools.compress') || "Compress PDF",
       bg: "bg-green-100 dark:bg-green-900/30"
     },
     { 
-      href: "/unlock", 
+      href: "/unlock-pdf", 
       icon: <FileCheck2 className="h-5 w-5 text-blue-500" />,
       name: t('repairPdf.relatedTools.unlock') || "Unlock PDF",
       bg: "bg-blue-100 dark:bg-blue-900/30"
     },
     { 
-      href: "/protect", 
+      href: "/protect-pdf", 
       icon: <FileCheck2 className="h-5 w-5 text-purple-500" />,
       name: t('repairPdf.relatedTools.protect') || "Protect PDF",
       bg: "bg-purple-100 dark:bg-purple-900/30"

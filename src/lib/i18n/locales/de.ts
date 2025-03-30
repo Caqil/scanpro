@@ -535,7 +535,12 @@ export default {
     viewAllTools: "Alle PDF-Tools anzeigen",
     of: "von",
     files: "Dateien",
-    filesToMerge: "Dateien zum Zusammenführen"
+    filesToMerge: "Dateien zum Zusammenführen",
+    dragToReorder: "Ziehen zum Neuordnen",
+    downloadReady: "Download bereit",
+    downloadMerged: "Zusammengeführter Download",
+    mergePdfs: "PDFs zusammenführen",
+    successMessage: "PDF erfolgreich zusammengeführt",
   },
 
   // OCR-Seite
@@ -858,18 +863,16 @@ export default {
     watermarkSuccess: "Wasserzeichen erfolgreich hinzugefügt!",
     watermarkSuccessDesc: "Ihre PDF-Datei wurde mit einem Wasserzeichen versehen und ist zum Download bereit."
   },
-
-  // PDF komprimieren
   compressPdf: {
-    title: "PDF komprimieren",
-    description: "Reduzieren Sie die PDF-Dateigröße bei Beibehaltung der Qualität",
+    title: "PDF-Dateien komprimieren",
+    description: "Reduzieren Sie mühelos die Größe von PDF-Dateien bei gleichzeitiger Beibehaltung der Dokumentqualität",
     quality: {
       high: "Hohe Qualität",
       highDesc: "Minimale Komprimierung, beste visuelle Qualität",
       balanced: "Ausgewogen",
-      balancedDesc: "Gute Komprimierung mit minimalem visuellem Verlust",
+      balancedDesc: "Gute Komprimierung mit minimalem visuellen Verlust",
       maximum: "Maximale Komprimierung",
-      maximumDesc: "Höchste Komprimierungsrate, kann die visuelle Qualität reduzieren"
+      maximumDesc: "Höchstes Kompressionsverhältnis, kann die visuelle Qualität reduzieren"
     },
     processing: {
       title: "Verarbeitungsoptionen",
@@ -877,16 +880,16 @@ export default {
       processSequentially: "Dateien nacheinander verarbeiten"
     },
     status: {
-      uploading: "Hochladen...",
-      compressing: "Komprimieren...",
+      uploading: "Wird hochgeladen...",
+      compressing: "Wird komprimiert...",
       completed: "Abgeschlossen",
       failed: "Fehlgeschlagen"
     },
     results: {
-      title: "Zusammenfassung der Komprimierungsergebnisse",
-      totalOriginal: "Gesamt original",
-      totalCompressed: "Gesamt komprimiert",
-      spaceSaved: "Platz gespart",
+      title: "Zusammenfassung der Kompressionsergebnisse",
+      totalOriginal: "Gesamtes Original",
+      totalCompressed: "Gesamte Komprimierung",
+      spaceSaved: "Eingesparter Speicherplatz",
       averageReduction: "Durchschnittliche Reduzierung",
       downloadAll: "Alle komprimierten Dateien als ZIP herunterladen"
     },
@@ -896,7 +899,7 @@ export default {
     compressAll: "Dateien komprimieren",
     qualityPlaceholder: "Komprimierungsqualität auswählen",
     reduction: "Reduzierung",
-    zipDownloadSuccess: "Alle komprimierten Dateien erfolgreich heruntergeladen",
+    zipDownloadSuccess: "Alle komprimierten Dateien wurden erfolgreich heruntergeladen",
     overallProgress: "Gesamtfortschritt",
     reducedBy: "wurde reduziert um",
     success: "Komprimierung erfolgreich",
@@ -907,6 +910,105 @@ export default {
       generic: "Fehler beim Komprimieren der PDF-Datei",
       unknown: "Ein unbekannter Fehler ist aufgetreten",
       failed: "Fehler beim Komprimieren Ihrer Datei"
+    },
+    howTo: {
+      title: "So komprimieren Sie PDF-Dateien",
+      step1: {
+        title: "PDF hochladen",
+        description: "Laden Sie die PDF-Datei hoch, die Sie komprimieren möchten. Dateien bis zu 100MB werden unterstützt."
+      },
+      step2: {
+        title: "Qualität wählen",
+        description: "Wählen Sie Ihre bevorzugte Komprimierungsstufe basierend auf Ihren Anforderungen."
+      },
+      step3: {
+        title: "Herunterladen",
+        description: "Laden Sie Ihre komprimierte PDF-Datei herunter, bereit zum Teilen oder Speichern."
+      }
+    },
+    why: {
+      title: "Warum PDFs komprimieren?",
+      uploadSpeed: {
+        title: "Blitzschnelle Uploads",
+        description: "Teilen Sie komprimierte PDFs schnell mit schnelleren Upload-Geschwindigkeiten"
+      },
+      emailFriendly: {
+        title: "E-Mail-freundlich",
+        description: "Passt in E-Mail-Größenbeschränkungen ohne Qualitätseinbußen"
+      },
+      storage: {
+        title: "Speichereffizient",
+        description: "Maximieren Sie den Platz auf Ihren Geräten und in der Cloud-Speicherung"
+      },
+      quality: {
+        title: "Beibehaltene Qualität",
+        description: "Wählen Sie Komprimierungsstufen, die die von Ihnen benötigte Qualität erhalten"
+      }
+    },
+    faq: {
+      title: "Häufig gestellte Fragen",
+      howMuch: {
+        question: "Wie stark können PDF-Dateien komprimiert werden?",
+        answer: "Die meisten PDF-Dateien können je nach Inhalt um 20-80% komprimiert werden. Dokumente mit vielen Bildern erreichen in der Regel höhere Kompressionsraten als textlastige Dokumente. Unser Komprimierungstool bietet verschiedene Qualitätsstufen, um Dateigröße und visuelle Qualität je nach Ihren Bedürfnissen auszubalancieren."
+      },
+      quality: {
+        question: "Wird die Komprimierung die Qualität meiner PDF beeinträchtigen?",
+        answer: "Unser Komprimierungstool bietet verschiedene Qualitätseinstellungen. Hochqualitative Komprimierung behält visuelle Treue bei, während die Dateigröße reduziert wird. Mittlere und niedrige Qualitätseinstellungen wenden aggressivere Komprimierung an, was die Bildqualität beeinträchtigen kann, aber zu kleineren Dateien führt. Textinhalte bleiben bei allen Komprimierungsstufen scharf und lesbar."
+      },
+      secure: {
+        question: "Sind meine PDF-Daten bei der Komprimierung sicher?",
+        answer: "Ja, wir nehmen Datensicherheit ernst. Die gesamte Dateiverarbeitung erfolgt auf unseren sicheren Servern, und Ihre Dateien werden nach der Verarbeitung automatisch gelöscht (in der Regel innerhalb von 24 Stunden). Wir teilen Ihre Dateien nicht mit Dritten, und alle Datenübertragungen sind mit HTTPS verschlüsselt."
+      },
+      fileLimits: {
+        question: "Was sind die Dateigrößenbeschränkungen?",
+        answer: "Kostenlose Nutzer können PDF-Dateien bis zu 10MB komprimieren. Premium-Abonnenten können größere Dateien komprimieren: Der Basic-Plan erlaubt bis zu 50MB, der Pro-Plan bis zu.100MB und der Enterprise-Plan bis zu 500MB pro Datei. Wenn Sie größere Dateien verarbeiten müssen, kontaktieren Sie uns bitte für maßgeschneiderte Lösungen."
+      },
+      batch: {
+        question: "Kann ich mehrere PDFs auf einmal komprimieren?",
+        answer: "Ja, unser Tool unterstützt Batch-Komprimierung. Sie können mehrere PDF-Dateien gleichzeitig hochladen und komprimieren, was Ihnen Zeit spart, wenn Sie mehrere Dokumente verarbeiten. Premium-Benutzer erhalten höhere Limits für die Batch-Verarbeitung."
+      }
+    },
+    modes: {
+      title: "Komprimierungsmodi",
+      moderate: {
+        title: "Moderate Komprimierung",
+        description: "Ausgewogener Ansatz, der die Dateigröße reduziert und gleichzeitig eine gute visuelle Qualität beibehält. Perfekt für die meisten Dokumente, bei denen Qualität wichtig ist, aber eine gewisse Größenreduzierung benötigt wird."
+      },
+      high: {
+        title: "Hohe Komprimierung",
+        description: "Aggressivere Komprimierung, die die Dateigröße erheblich reduziert. Ein gewisser Bildqualitätsverlust kann wahrnehmbar sein, aber Text bleibt klar und lesbar."
+      },
+      lossless: {
+        title: "Verlustfreie Komprimierung",
+        description: "Reduziert die Dateigröße ohne Qualitätsverlust durch Entfernen redundanter Daten, Optimieren der Struktur und Bereinigen von Metadaten. Keine visuellen Unterschiede zum Original."
+      }
+    },
+    bestPractices: {
+      title: "Best Practices für PDF-Komprimierung",
+      dos: "Dos",
+      donts: "Don'ts",
+      dosList: [
+        "Komprimieren Sie Bilder vor dem Erstellen von PDFs für beste Ergebnisse",
+        "Wählen Sie die angemessene Komprimierungsstufe für Ihre Bedürfnisse",
+        "Bewahren Sie Originaldateien als Backups vor der Komprimierung auf",
+        "Verwenden Sie verlustfreie Komprimierung für wichtige Dokumente",
+        "Entfernen Sie unnötige Seiten, um die Dateigröße weiter zu reduzieren"
+      ],
+      dontsList: [
+        "Komprimieren Sie nicht übermäßig Dokumente, die zum Drucken benötigt werden",
+        "Komprimieren Sie keine rechtlichen oder Archivdokumente, wenn jedes Detail wichtig ist",
+        "Komprimieren Sie nicht wiederholt bereits stark komprimierte PDFs",
+        "Erwarten Sie keine große Reduzierung bei PDFs, die hauptsächlich Text enthalten",
+        "Komprimieren Sie nicht, wenn die Dateigröße kein Problem darstellt"
+      ]
+    },
+    relatedTools: {
+      title: "Verwandte Tools",
+      merge: "PDF zusammenführen",
+      split: "PDF teilen",
+      pdfToWord: "PDF zu Word",
+      pdfToJpg: "PDF zu JPG",
+      viewAll: "Alle Tools anzeigen"
     }
   },
 
@@ -1566,5 +1668,43 @@ export default {
       answer3: "Unsere API verwendet standardmäßige REST-Endpunkte mit JSON-Antworten. Sie finden umfassende Dokumentation, Codebeispiele und SDKs in unserem Entwicklerbereich. Wir bieten Beispiele für verschiedene Programmiersprachen wie JavaScript, Python, PHP und Java."
     },
     title: "Häufig gestellte Fragen"
-  }
+  },
+  footer: {
+    description: "Fortgeschrittene PDF-Tools für Profis. Konvertieren, bearbeiten, schützen und optimieren Sie Ihre Dokumente mit unserer leistungsstarken webbasierten Plattform und API.",
+    contactUs: "Kontaktieren Sie uns",
+    address: "123 Dokumentenstraße, PDF-Stadt, 94103, Vereinigte Staaten",
+    subscribe: "Abonnieren Sie unseren Newsletter",
+    subscribeText: "Erhalten Sie die neuesten Nachrichten, Updates und Tipps direkt in Ihren Posteingang.",
+    emailPlaceholder: "Ihre E-Mail-Adresse",
+    subscribeButton: "Abonnieren",
+    pdfTools: "PDF-Tools",
+    pdfManagement: "PDF-Verwaltung",
+    company: "Unternehmen",
+    support: "Support",
+    aboutUs: "Über uns",
+    careers: "Karriere",
+    blog: "Blog",
+    helpCenter: "Hilfezentrum",
+    apiDocs: "API-Dokumentation",
+    faqs: "FAQs",
+    tutorials: "Tutorials",
+    systemStatus: "Systemstatus",
+    allRightsReserved: "Alle Rechte vorbehalten.",
+    termsOfService: "Nutzungsbedingungen",
+    privacyPolicy: "Datenschutzrichtlinie",
+    cookiePolicy: "Cookie-Richtlinie",
+    security: "Sicherheit",
+    sitemap: "Sitemap",
+    validEmail: "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    subscribeSuccess: "Vielen Dank für Ihr Abonnement unseres Newsletters!",
+    viewAllTools: "Alle PDF-Tools anzeigen",
+    repairPdf: "PDF reparieren",
+    socialFacebook: "Facebook",
+    socialTwitter: "Twitter",
+    socialInstagram: "Instagram",
+    socialLinkedin: "LinkedIn",
+    socialGithub: "GitHub",
+    socialYoutube: "YouTube"
+  },
+  
 }

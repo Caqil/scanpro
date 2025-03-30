@@ -6,7 +6,6 @@ import { useLanguageStore } from "@/src/store/store";
 
 export function SplitHeaderSection() {
   const { t } = useLanguageStore();
-  
   return (
     <div className="mx-auto flex flex-col items-center text-center mb-8">
       <div className="mb-4 p-3 rounded-full bg-orange-100 dark:bg-orange-900/30">
@@ -24,7 +23,6 @@ export function SplitHeaderSection() {
 
 export function HowToSplitSection() {
   const { t } = useLanguageStore();
-  
   const steps = [
     {
       title: t('splitPdf.howTo.step1.title'),
@@ -62,7 +60,6 @@ export function HowToSplitSection() {
 
 export function SplitPdfFaqSection() {
   const { t } = useLanguageStore();
-  
   const faqItems = [
     {
       question: t('splitPdf.faq.q1.question'),
@@ -104,7 +101,6 @@ export function SplitPdfFaqSection() {
 
 export function SplitUseCasesSection() {
   const { t } = useLanguageStore();
-  
   const useCases = [
     {
       icon: <FileText className="h-6 w-6 text-blue-500" />,
@@ -152,16 +148,15 @@ export function SplitUseCasesSection() {
 
 export function RelatedToolsSection() {
   const { t } = useLanguageStore();
-  
   const tools = [
     { 
-      href: "/merge", 
+      href: "/merge-pdf", 
       icon: <FileIcon className="h-5 w-5 text-red-500" />,
       name: "Merge PDF",
       bg: "bg-red-100 dark:bg-red-900/30"
     },
     { 
-      href: "/compress", 
+      href: "/compress-pdf", 
       icon: <FileIcon className="h-5 w-5 text-green-500" />,
       name: "Compress PDF",
       bg: "bg-green-100 dark:bg-green-900/30"
@@ -173,7 +168,7 @@ export function RelatedToolsSection() {
       bg: "bg-blue-100 dark:bg-blue-900/30"
     },
     { 
-      href: "/protect", 
+      href: "/protect-pdf", 
       icon: <FileIcon className="h-5 w-5 text-purple-500" />,
       name: "Protect PDF",
       bg: "bg-purple-100 dark:bg-purple-900/30"
@@ -182,7 +177,7 @@ export function RelatedToolsSection() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-6 text-center">{t('splitPdf.relatedTools')}</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center">{t('mergePdf.relatedTools')}</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {tools.map((tool) => (
           <LanguageLink 

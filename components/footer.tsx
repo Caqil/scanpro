@@ -17,11 +17,11 @@ export function Footer() {
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes("@")) {
-      toast.error("Please enter a valid email address");
+      toast.error(t('footer.validEmail') || "Please enter a valid email address");
       return;
     }
     
-    toast.success("Thanks for subscribing to our newsletter!");
+    toast.success(t('footer.subscribeSuccess') || "Thanks for subscribing to our newsletter!");
     setEmail("");
   };
   
@@ -38,33 +38,32 @@ export function Footer() {
               <span className="font-bold text-xl">ScanPro</span>
             </Link>
             <p className="text-sm text-muted-foreground max-w-md">
-              Advanced PDF tools for professionals. Convert, edit, protect and optimize your 
-              documents with our powerful web-based platform and API.
+              {t('footer.description') || "Advanced PDF tools for professionals. Convert, edit, protect and optimize your documents with our powerful web-based platform and API."}
             </p>
             <div className="flex space-x-4 pt-2">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialFacebook') || "Facebook"}>
                 <Facebook className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialTwitter') || "Twitter"}>
                 <Twitter className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialInstagram') || "Instagram"}>
                 <Instagram className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialLinkedin') || "LinkedIn"}>
                 <Linkedin className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
               </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialGithub') || "GitHub"}>
                 <Github className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialYoutube') || "YouTube"}>
                 <Youtube className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
               </a>
             </div>
           </div>
           
           <div className="space-y-4">
-            <h3 className="text-lg font-medium">Contact Us</h3>
+            <h3 className="text-lg font-medium">{t('footer.contactUs') || "Contact Us"}</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <Mail className="h-5 w-5 mr-2 text-muted-foreground flex-shrink-0" />
@@ -77,26 +76,26 @@ export function Footer() {
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 mr-2 text-muted-foreground flex-shrink-0" />
                 <span className="text-sm text-muted-foreground">
-                  123 Document Street, PDF City, 94103, United States
+                  {t('footer.address') || "123 Document Street, PDF City, 94103, United States"}
                 </span>
               </li>
             </ul>
           </div>
           
           <div className="space-y-4">
-            <h3 className="text-lg font-medium">Subscribe to Our Newsletter</h3>
+            <h3 className="text-lg font-medium">{t('footer.subscribe') || "Subscribe to Our Newsletter"}</h3>
             <p className="text-sm text-muted-foreground">
-              Get the latest news, updates and tips delivered directly to your inbox.
+              {t('footer.subscribeText') || "Get the latest news, updates and tips delivered directly to your inbox."}
             </p>
             <form onSubmit={handleSubscribe} className="flex gap-2">
               <Input 
                 type="email" 
-                placeholder="Your email address" 
+                placeholder={t('footer.emailPlaceholder') || "Your email address"}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="flex-1"
               />
-              <Button type="submit">Subscribe</Button>
+              <Button type="submit">{t('footer.subscribeButton') || "Subscribe"}</Button>
             </form>
           </div>
         </div>
@@ -104,124 +103,124 @@ export function Footer() {
         {/* Navigation menus */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12 border-t border-border pt-8">
           <div>
-            <h3 className="font-medium mb-4">PDF Tools</h3>
+            <h3 className="font-medium mb-4">{t('footer.pdfTools') || "PDF Tools"}</h3>
             <ul className="space-y-2">
               <li>
                 <LanguageLink href="/convert/pdf-to-docx" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  PDF to Word
+                  {t('popular.pdfToWord') || "PDF to Word"}
                 </LanguageLink>
               </li>
               <li>
                 <LanguageLink href="/convert/pdf-to-xlsx" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  PDF to Excel
+                  {t('popular.pdfToExcel') || "PDF to Excel"}
                 </LanguageLink>
               </li>
               <li>
                 <LanguageLink href="/convert/pdf-to-pptx" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  PDF to PowerPoint
+                  {t('popular.pdfToPowerPoint') || "PDF to PowerPoint"}
                 </LanguageLink>
               </li>
               <li>
                 <LanguageLink href="/convert/pdf-to-jpg" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  PDF to JPG
+                  {t('popular.pdfToJpg') || "PDF to JPG"}
                 </LanguageLink>
               </li>
               <li>
                 <LanguageLink href="/tools" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  View All PDF Tools
+                  {t('footer.viewAllTools') || "View All PDF Tools"}
                 </LanguageLink>
               </li>
             </ul>
           </div>
           
           <div>
-            <h3 className="font-medium mb-4">PDF Management</h3>
+            <h3 className="font-medium mb-4">{t('footer.pdfManagement') || "PDF Management"}</h3>
             <ul className="space-y-2">
               <li>
-                <LanguageLink href="/merge" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Merge PDF
+                <LanguageLink href="/merge-pdf" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  {t('popular.mergePdf') || "Merge PDF"}
                 </LanguageLink>
               </li>
               <li>
-                <LanguageLink href="/split" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Split PDF
+                <LanguageLink href="/split-pdf" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  {t('popular.splitPdf') || "Split PDF"}
                 </LanguageLink>
               </li>
               <li>
-                <LanguageLink href="/compress" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Compress PDF
+                <LanguageLink href="/compress-pdf" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  {t('popular.compressPdf') || "Compress PDF"}
                 </LanguageLink>
               </li>
               <li>
-                <LanguageLink href="/protect" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Protect PDF
+                <LanguageLink href="/protect-pdf" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  {t('popular.protectPdf') || "Protect PDF"}
                 </LanguageLink>
               </li>
               <li>
                 <LanguageLink href="/repair" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Repair PDF
+                  {t('footer.repairPdf') || "Repair PDF"}
                 </LanguageLink>
               </li>
             </ul>
           </div>
           
           <div>
-            <h3 className="font-medium mb-4">Company</h3>
+            <h3 className="font-medium mb-4">{t('footer.company') || "Company"}</h3>
             <ul className="space-y-2">
               <li>
                 <LanguageLink href="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  About Us
+                  {t('footer.aboutUs') || "About Us"}
                 </LanguageLink>
               </li>
               <li>
                 <LanguageLink href="/pricing" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Pricing
+                  {t('nav.pricing') || "Pricing"}
                 </LanguageLink>
               </li>
               <li>
                 <LanguageLink href="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Contact Us
+                  {t('footer.contactUs') || "Contact Us"}
                 </LanguageLink>
               </li>
               <li>
                 <LanguageLink href="/careers" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Careers
+                  {t('footer.careers') || "Careers"}
                 </LanguageLink>
               </li>
               <li>
                 <LanguageLink href="/blog" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Blog
+                  {t('footer.blog') || "Blog"}
                 </LanguageLink>
               </li>
             </ul>
           </div>
           
           <div>
-            <h3 className="font-medium mb-4">Support</h3>
+            <h3 className="font-medium mb-4">{t('footer.support') || "Support"}</h3>
             <ul className="space-y-2">
               <li>
                 <LanguageLink href="/help" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Help Center
+                  {t('footer.helpCenter') || "Help Center"}
                 </LanguageLink>
               </li>
               <li>
                 <LanguageLink href="/developer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  API Documentation
+                  {t('footer.apiDocs') || "API Documentation"}
                 </LanguageLink>
               </li>
               <li>
                 <LanguageLink href="/faq" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  FAQs
+                  {t('footer.faqs') || "FAQs"}
                 </LanguageLink>
               </li>
               <li>
                 <LanguageLink href="/tutorials" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Tutorials
+                  {t('footer.tutorials') || "Tutorials"}
                 </LanguageLink>
               </li>
               <li>
                 <LanguageLink href="/status" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  System Status
+                  {t('footer.systemStatus') || "System Status"}
                 </LanguageLink>
               </li>
             </ul>
@@ -231,24 +230,24 @@ export function Footer() {
         {/* Bottom section with legal info */}
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="text-sm text-muted-foreground mb-4 md:mb-0">
-            © {currentYear} ScanPro. All rights reserved.
+            © {currentYear} ScanPro. {t('footer.allRightsReserved') || "All rights reserved."}
           </div>
           
           <div className="flex flex-wrap gap-4 justify-center md:justify-end">
             <LanguageLink href="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Terms of Service
+              {t('footer.termsOfService') || "Terms of Service"}
             </LanguageLink>
             <LanguageLink href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Privacy Policy
+              {t('footer.privacyPolicy') || "Privacy Policy"}
             </LanguageLink>
             <LanguageLink href="/cookies" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Cookie Policy
+              {t('footer.cookiePolicy') || "Cookie Policy"}
             </LanguageLink>
             <LanguageLink href="/security" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Security
+              {t('footer.security') || "Security"}
             </LanguageLink>
             <LanguageLink href="/sitemap" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Sitemap
+              {t('footer.sitemap') || "Sitemap"}
             </LanguageLink>
           </div>
         </div>

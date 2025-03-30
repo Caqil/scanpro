@@ -535,7 +535,12 @@ export default {
     viewAllTools: "모든 PDF 도구 보기",
     of: "중",
     files: "파일",
-    filesToMerge: "병합할 파일"
+    filesToMerge: "병합할 파일",
+    dragToReorder: "드래그하여 재정렬",
+    downloadReady: "다운로드 준비 완료",
+    downloadMerged: "병합 다운로드",
+    mergePdfs: "PDF 병합",
+    successMessage: "PDF가 성공적으로 병합되었습니다",
   },
 
   // OCR Page
@@ -858,18 +863,16 @@ export default {
     watermarkSuccess: "워터마크가 성공적으로 추가되었습니다!",
     watermarkSuccessDesc: "귀하의 PDF 파일에 워터마크가 적용되었으며 다운로드할 준비가 되었습니다."
   },
-
-  // Compress PDF
   compressPdf: {
-    title: "PDF 압축",
-    description: "품질을 유지하면서 PDF 파일 크기를 줄입니다",
+    title: "PDF 파일 압축",
+    description: "문서 품질을 유지하면서 PDF 파일 크기를 쉽게 줄이세요",
     quality: {
       high: "고품질",
-      highDesc: "최소 압축, 최상의 시각 품질",
-      balanced: "균형",
-      balancedDesc: "최소 시각 손실로 좋은 압축",
+      highDesc: "최소 압축, 최상의 시각적 품질",
+      balanced: "균형 잡힘",
+      balancedDesc: "시각적 손실 최소화하면서 좋은 압축",
       maximum: "최대 압축",
-      maximumDesc: "최고 압축 비율, 시각 품질이 저하될 수 있음"
+      maximumDesc: "더 높은 압축률, 시각적 품질 저하 가능성 있음"
     },
     processing: {
       title: "처리 옵션",
@@ -879,18 +882,18 @@ export default {
     status: {
       uploading: "업로드 중...",
       compressing: "압축 중...",
-      completed: "완료",
+      completed: "완료됨",
       failed: "실패"
     },
     results: {
       title: "압축 결과 요약",
-      totalOriginal: "총 원본",
-      totalCompressed: "총 압축",
+      totalOriginal: "원본 총합",
+      totalCompressed: "압축 후 총합",
       spaceSaved: "절약된 공간",
-      averageReduction: "평균 감소",
-      downloadAll: "압축된 모든 파일을 ZIP으로 다운로드"
+      averageReduction: "평균 감소율",
+      downloadAll: "모든 압축 파일을 ZIP으로 다운로드"
     },
-    of: "중",
+    of: "의",
     files: "파일",
     filesToCompress: "압축할 파일",
     compressAll: "파일 압축",
@@ -898,15 +901,114 @@ export default {
     reduction: "감소",
     zipDownloadSuccess: "모든 압축 파일이 성공적으로 다운로드되었습니다",
     overallProgress: "전체 진행률",
-    reducedBy: "감소됨",
+    reducedBy: "감소율",
     success: "압축 성공",
     error: {
-      noFiles: "압축할 PDF 파일을 선택하세요",
-      noCompressed: "다운로드할 압축 파일이 없습니다",
-      downloadZip: "ZIP 아카이브 다운로드 실패",
-      generic: "PDF 파일 압축 실패",
+      noFiles: "압축할 PDF 파일을 선택해 주세요",
+      noCompressed: "다운로드할 수 있는 압축 파일이 없습니다",
+      downloadZip: "ZIP 파일 다운로드 실패",
+      generic: "PDF 파일 압축 중 오류 발생",
       unknown: "알 수 없는 오류가 발생했습니다",
       failed: "파일 압축에 실패했습니다"
+    },
+    howTo: {
+      title: "PDF 파일 압축 방법",
+      step1: {
+        title: "PDF 업로드",
+        description: "압축하려는 PDF 파일을 업로드하세요. 100MB까지의 파일이 지원됩니다."
+      },
+      step2: {
+        title: "품질 선택",
+        description: "필요에 따라 원하는 압축 수준을 선택하세요."
+      },
+      step3: {
+        title: "다운로드",
+        description: "압축된 PDF 파일을 다운로드하여 공유하거나 저장하세요."
+      }
+    },
+    why: {
+      title: "PDF를 압축하는 이유",
+      uploadSpeed: {
+        title: "초고속 업로드",
+        description: "더 빠른 업로드 속도로 압축된 PDF 공유"
+      },
+      emailFriendly: {
+        title: "이메일 친화적",
+        description: "품질을 저하시키지 않고 이메일 크기 제한에 맞춤"
+      },
+      storage: {
+        title: "효율적인 저장",
+        description: "기기 및 클라우드 저장 공간 최대화"
+      },
+      quality: {
+        title: "품질 유지",
+        description: "필요한 품질을 유지하는 압축 수준 선택"
+      }
+    },
+    faq: {
+      title: "자주 묻는 질문",
+      howMuch: {
+        question: "PDF 파일을 얼마나 압축할 수 있나요?",
+        answer: "대부분의 PDF 파일은 내용에 따라 20~80%까지 압축할 수 있습니다. 이미지가 많은 문서는 텍스트가 많은 문서보다 일반적으로 더 높은 압축률을 달성합니다. 당사의 압축 도구는 파일 크기와 시각적 품질을 균형 있게 조정하는 다양한 품질 수준을 제공합니다."
+      },
+      quality: {
+        question: "압축이 PDF의 품질에 영향을 미치나요?",
+        answer: "당사의 압축 도구는 다양한 품질 설정을 제공합니다. 고품질 압축은 시각적 충실도를 유지하면서 파일 크기를 줄입니다. 중간 및 저품질 설정은 더 공격적인 압축을 적용하여 이미지 품질에 영향을 줄 수 있지만 더 작은 파일 크기를 제공합니다. 텍스트 내용은 모든 압축 수준에서 선명하고 읽기 쉽습니다."
+      },
+      secure: {
+        question: "압축 중에 PDF 데이터가 안전한가요?",
+        answer: "예, 당사는 데이터 보안을 매우 중요하게 생각합니다. 모든 파일 처리는 안전한 서버에서 이루어지며, 파일은 처리 후(일반적으로 24시간 이내) 자동으로 삭제됩니다. 귀하의 파일을 제3자와 공유하지 않으며, 모든 데이터 전송은 HTTPS를 사용하여 암호화됩니다."
+      },
+      fileLimits: {
+        question: "파일 크기 제한은 어떻게 되나요?",
+        answer: "무료 사용자는 최대 10MB의 PDF 파일을 압축할 수 있습니다. 프리미엄 구독자는 더 큰 파일을 압축할 수 있습니다: 기본 플랜은 최대 50MB, 프로 플랜은 최대 100MB, 기업 플랜은 파일당 최대 500MB까지 허용됩니다. 더 큰 파일을 처리해야 하는 경우 맞춤형 솔루션을 문의하세요."
+      },
+      batch: {
+        question: "여러 PDF를 한 번에 압축할 수 있나요?",
+        answer: "예, 당사의 도구는 일괄 압축을 지원합니다. 여러 PDF 파일을 동시에 업로드하고 압축할 수 있어 여러 문서를 처리할 때 시간을 절약할 수 있습니다. 프리미엄 사용자는 일괄 처리에서 더 높은 제한을 받습니다."
+      }
+    },
+    modes: {
+      title: "압축 모드",
+      moderate: {
+        title: "중간 압축",
+        description: "파일 크기를 줄이면서 좋은 시각적 품질을 유지하는 균형 잡힌 접근 방식. 품질이 중요하지만 일정한 크기 감소가 필요한 대부분의 문서에 적합합니다."
+      },
+      high: {
+        title: "고압축",
+        description: "파일 크기를 크게 줄이는 더 공격적인 압축. 이미지 품질에 약간의 저하가 있을 수 있지만 텍스트는 선명하고 읽기 쉽습니다."
+      },
+      lossless: {
+        title: "무손실 압축",
+        description: "중복 데이터를 제거하고 구조를 최적화하며 메타데이터를 정리하여 품질에 영향을 주지 않고 파일 크기를 줄입니다. 원본과 시각적 차이가 없습니다."
+      }
+    },
+    bestPractices: {
+      title: "PDF 압축 모범 사례",
+      dos: "해야 할 일",
+      donts: "하지 말아야 할 일",
+      dosList: [
+        "더 나은 결과를 위해 PDF 생성 전에 이미지 압축",
+        "필요에 맞는 적절한 압축 수준 선택",
+        "압축 전 원본 파일을 백업으로 보관",
+        "중요 문서에는 무손실 압축 사용",
+        "파일 크기를 더 줄이기 위해 불필요한 페이지 삭제"
+      ],
+      dontsList: [
+        "인쇄에 필요한 문서를 과도하게 압축하지 마세요",
+        "모든 세부 사항이 중요한 법률 또는 아카이브 문서를 압축하지 마세요",
+        "이미 많이 압축된 PDF를 반복적으로 압축하지 마세요",
+        "대부분 텍스트로 이루어진 PDF에서 큰 감소를 기대하지 마세요",
+        "파일 크기가 문제가 되지 않으면 압축하지 마세요"
+      ]
+    },
+    relatedTools: {
+      title: "관련 도구",
+      merge: "PDF 병합",
+      split: "PDF 분할",
+      pdfToWord: "PDF를 Word로",
+      pdfToJpg: "PDF를 JPG로",
+      viewAll: "모든 도구 보기"
     }
   },
 
@@ -1566,5 +1668,175 @@ export default {
       answer3: "저희 API는 JSON 응답을 사용하는 표준 REST 엔드포인트를 사용합니다. 개발자 섹션에서 포괄적인 문서, 코드 샘플, SDK를 찾을 수 있습니다. JavaScript, Python, PHP, Java 등 다양한 프로그래밍 언어에 대한 예제를 제공합니다."
     },
     title: "자주 묻는 질문"
+  },
+  footer: {
+    description: "전문가를 위한 고급 PDF 도구. 강력한 웹 기반 플랫폼과 API로 문서를 변환, 편집, 보호 및 최적화하세요.",
+    contactUs: "문의하기",
+    address: "123 문서 거리, PDF 시티, 94103, 미국",
+    subscribe: "뉴스레터 구독",
+    subscribeText: "최신 뉴스, 업데이트 및 팁을 직접 받아보세요.",
+    emailPlaceholder: "이메일 주소",
+    subscribeButton: "구독",
+    pdfTools: "PDF 도구",
+    pdfManagement: "PDF 관리",
+    company: "회사",
+    support: "지원",
+    aboutUs: "회사 소개",
+    careers: "채용",
+    blog: "블로그",
+    helpCenter: "도움말 센터",
+    apiDocs: "API 문서",
+    faqs: "자주 묻는 질문",
+    tutorials: "튜토리얼",
+    systemStatus: "시스템 상태",
+    allRightsReserved: "모든 권리 보유.",
+    termsOfService: "서비스 약관",
+    privacyPolicy: "개인정보 보호정책",
+    cookiePolicy: "쿠키 정책",
+    security: "보안",
+    sitemap: "사이트맵",
+    validEmail: "유효한 이메일 주소를 입력해주세요",
+    subscribeSuccess: "뉴스레터 구독해 주셔서 감사합니다!",
+    viewAllTools: "모든 PDF 도구 보기",
+    repairPdf: "PDF 복구",
+    socialFacebook: "페이스북",
+    socialTwitter: "트위터",
+    socialInstagram: "인스타그램",
+    socialLinkedin: "링크드인",
+    socialGithub: "깃허브",
+    socialYoutube: "유튜브"
+  },
+
+  security: {
+    hero: {
+      title: "ScanPro의 보안 및 개인정보 보호",
+      subtitle: "문서의 보안과 개인정보 보호를 중요하게 생각합니다. 데이터 보호 방법을 알아보세요."
+    },
+    measures: {
+      title: "데이터 보호 방법"
+    },
+    sections: {
+      encryption: {
+        title: "엔드투엔드 암호화",
+        description: "모든 파일은 전송 시 TLS 1.3으로, 저장 시 AES-256 암호화로 보호됩니다. 문서는 절대 무방비 상태로 전송되지 않습니다."
+      },
+      temporaryStorage: {
+        title: "임시 저장",
+        description: "파일은 처리 후 24시간 이내에 자동 삭제됩니다. 필요한 기간 이상 문서를 보관하지 않습니다."
+      },
+      access: {
+        title: "접근 제어",
+        description: "강력한 인증 및 권한 시스템으로 문서와 계정 정보는 오직 본인만 접근할 수 있습니다."
+      },
+      infrastructure: {
+        title: "안전한 인프라",
+        description: "ISO 27001 인증을 받은 엔터프라이즈급 클라우드 공급자에서 운영되며 정기적인 보안 감사를 실시합니다."
+      },
+      compliance: {
+        title: "규정 준수",
+        description: "GDPR, CCPA 및 기타 지역 개인정보 보호 규정을 준수하여 데이터 권리를 보호합니다."
+      },
+      monitoring: {
+        title: "지속적인 모니터링",
+        description: "자동 및 수동 보안 검토, 취약점 스캔, 침입 탐지로 새로운 위협으로부터 보호합니다."
+      }
+    },
+    tabs: {
+      security: "보안",
+      privacy: "개인정보 보호",
+      compliance: "규정 준수"
+    },
+    tabContent: {
+      security: {
+        title: "보안 접근 방식",
+        description: "파일과 데이터를 보호하는 포괄적인 보안 조치",
+        encryption: {
+          title: "강력한 암호화",
+          description: "전송 중 데이터는 TLS 1.3, 저장 데이터는 AES-256 암호화를 사용합니다. 모든 파일 전송은 엔드투엔드 암호화됩니다."
+        },
+        auth: {
+          title: "안전한 인증",
+          description: "다중 인증, bcrypt를 이용한 안전한 비밀번호 저장, 의심스러운 활동에 대한 정기적인 계정 모니터링을 시행합니다."
+        },
+        hosting: {
+          title: "안전한 호스팅",
+          description: "ISO 27001 인증 엔터프라이즈급 클라우드 공급자에 인프라를 호스팅합니다. 네트워크 분할, 방화벽, 침입 탐지 시스템을 구현했습니다."
+        },
+        updates: {
+          title: "정기적인 업데이트",
+          description: "정기적인 보안 패치 및 업데이트 유지, 취약점 평가 수행, 잠재적 문제 식별 및 해결을 위한 침투 테스트를 실시합니다."
+        }
+      },
+      privacy: {
+        title: "개인정보 보호 관행",
+        description: "개인 데이터와 문서 처리 방식",
+        viewPolicy: "전체 개인정보 처리방침 보기"
+      },
+      compliance: {
+        title: "규정 준수 및 인증",
+        description: "준수하는 표준과 규정",
+        approach: {
+          title: "규정 준수 접근 방식",
+          description: "ScanPro는 개인정보 보호와 보안을 설계 단계부터 고려해 개발되었습니다. 변화하는 규정을 준수하기 위해 정기적으로 관행을 검토하고 업데이트합니다."
+        },
+        gdpr: {
+          title: "GDPR 준수"
+        },
+        hipaa: {
+          title: "HIPAA 고려 사항"
+        }
+      }
+    },
+    retention: {
+      title: "데이터 보존 정책",
+      description: "데이터 최소화 원칙을 엄격히 따릅니다. 다양한 데이터 유형의 보존 기간은 다음과 같습니다:",
+      documents: {
+        title: "업로드된 문서",
+        description: "파일은 처리 후 24시간 이내에 서버에서 자동 삭제됩니다. 유료 플랜의 저장 기능을 명시적으로 선택하지 않는 한 문서 사본을 보관하지 않습니다."
+      },
+      account: {
+        title: "계정 정보",
+        description: "기본 계정 정보는 계정이 활성 상태인 동안 보관됩니다. 언제든지 계정을 삭제할 수 있으며, 이 경우 개인 정보가 시스템에서 제거됩니다."
+      },
+      usage: {
+        title: "사용 데이터",
+        description: "서비스 개선을 위해 익명화된 사용 통계를 최대 36개월간 보관합니다. 이 데이터로 개인을 식별할 수 없습니다."
+      }
+    },
+    contact: {
+      title: "보안 관련 질문이 있으신가요?",
+      description: "데이터와 개인정보 보호 방법에 대한 질문에 보안 팀이 답변해 드립니다.",
+      button: "보안 팀에 문의"
+    },
+    policy: {
+      button: "개인정보 처리방침"
+    },
+    faq: {
+      dataCollection: {
+        question: "ScanPro는 어떤 개인 데이터를 수집하나요?",
+        answer: "서비스 제공에 필요한 최소한의 정보만 수집합니다. 등록 사용자의 경우 이메일, 이름, 사용 통계가 포함됩니다. 서비스 개선을 위해 익명 사용 데이터도 수집하지만, 문서 내용을 분석·스캔·마이닝하지는 않습니다."
+      },
+      documentStorage: {
+        question: "문서는 얼마 동안 보관되나요?",
+        answer: "문서는 일반적으로 처리 후 24시간 이내에 서버에서 자동 삭제됩니다. 유료 구독자는 문서 저장 옵션을 이용할 수 있지만, 이는 명시적으로 선택해야 하는 기능입니다."
+      },
+      thirdParty: {
+        question: "제3자와 데이터를 공유하나요?",
+        answer: "개인 데이터를 판매하거나 대여하지 않습니다. 서비스 제공에 필요한 경우(예: 구독 결제 처리업체)나 법률상 요구되는 경우에만 제3자와 데이터를 공유합니다. 모든 제3자 공급자는 엄격히 검증되며 데이터 보호 계약을 이행합니다."
+      },
+      security: {
+        question: "데이터는 어떻게 보호되나요?",
+        answer: "TLS 암호화(데이터 전송), AES-256 암호화(저장 데이터), 안전한 인프라 제공업체, 접근 제어, 정기적인 보안 감사 등 업계 표준 보안 조치를 적용합니다. 보안을 최우선으로 설계된 시스템입니다."
+      },
+      rights: {
+        question: "데이터 관련 권리는 무엇인가요?",
+        answer: "거주 지역에 따라 데이터 접근권, 부정확한 데이터 정정권, 데이터 삭제권, 처리 제한권, 데이터 이전권, 처리 거부권 등이 부여됩니다. 권리 행사를 원하시면 지원 팀에 문의해 주세요."
+      },
+      breach: {
+        question: "데이터 유출 시 어떤 조치를 취하나요?",
+        answer: "적용 가능한 법률에 따라 유출 사고를 탐지·대응·통보하는 프로토콜을 마련했습니다. 유출 위험을 최소화하기 위해 정기적인 보안 평가를 실시하고 상세한 사고 대응 계획을 유지합니다."
+      }
+    }
   }
+
 }
