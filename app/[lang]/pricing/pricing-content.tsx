@@ -285,6 +285,7 @@ export function PricingContent() {
 
   // Handle subscription purchase
   const handleSubscribe = async (plan: string) => {
+    // If free plan, no need to go through payment process
     if (plan === 'free') {
       if (!session) {
         setShowLoginDialog(true);
@@ -297,12 +298,14 @@ export function PricingContent() {
     
     setSelectedPlan(plan);
     
+    // Check if user is logged in
     if (!session) {
       setShowLoginDialog(true);
       return;
     }
     
     try {
+      // Call subscription API
       const response = await fetch('/api/subscription', {
         method: 'POST',
         headers: {
@@ -363,9 +366,8 @@ export function PricingContent() {
           )}
         </div>
       </div>
-
-      {/* Pricing Cards Section - Mobile View */}
-      <div className="md:hidden mx-auto max-w-md space-y-6 mb-12">
+{/* Pricing Cards Section - Mobile View */}
+<div className="md:hidden mx-auto max-w-md space-y-6 mb-12">
         <Tabs defaultValue="free" className="w-full">
           <TabsList className="grid grid-cols-4 mb-6">
             <TabsTrigger value="free">Free</TabsTrigger>
@@ -894,6 +896,134 @@ export function PricingContent() {
           </AlertDialogContent>
         </AlertDialog>
       )}
+
+      {/* Features Comparison Table */}
+      <div className="mx-auto max-w-7xl mb-16">
+        <h2 className="text-3xl font-bold text-center mb-12">{t('pricing.featureCompare') || "Feature Comparison"}</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="border-b">
+                <th className="py-4 px-4 text-left font-medium">{t('pricing.feature') || "Feature"}</th>
+                <th className="py-4 px-4 text-center font-medium">Free</th>
+                <th className="py-4 px-4 text-center font-medium">Basic</th>
+                <th className="py-4 px-4 text-center font-medium">Pro</th>
+                <th className="py-4 px-4 text-center font-medium">Enterprise</th>
+              </tr>
+            </thead>
+            <tbody>
+              {planFeatures.map((feature, index) => (
+                <tr key={index} className="border-b">
+                  <td className="py-4 px-4 text-left">
+                    <div className="flex items-center gap-1">
+                      <span>{feature.name}</span>
+                      {feature.tooltip && (
+                        <div className="relative flex items-center group">
+                          <InfoIcon className="h-4 w-4 text-muted-foreground cursor-help" />
+                          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 w-48 p-2 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                            {feature.tooltip}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </td>
+                  <td className="py-4 px-4 text-center">
+                    {feature.free ? (
+                      <CheckIcon className="h-5 w-5 text-green-500 mx-auto" />
+                    ) : (
+                      <XIcon className="h-5 w-5 text-gray-300 dark:text-gray-600 mx-auto" />
+                    )}
+                  </td>
+                  <td className="py-4 px-4 text-center">
+                    {feature.basic ? (
+                      <CheckIcon className="h-5 w-5 text-green-500 mx-auto" />
+                    ) : (
+                      <XIcon className="h-5 w-5 text-gray-300 dark:text-gray-600 mx-auto" />
+                    )}
+                  </td>
+                  <td className="py-4 px-4 text-center">
+                    {feature.pro ? (
+                      <CheckIcon className="h-5 w-5 text-green-500 mx-auto" />
+                    ) : (
+                      <XIcon className="h-5 w-5 text-gray-300 dark:text-gray-600 mx-auto" />
+                    )}
+                  </td>
+                  <td className="py-4 px-4 text-center">
+                    {feature.enterprise ? (
+                      <CheckIcon className="h-5 w-5 text-green-500 mx-auto" />
+                    ) : (
+                      <XIcon className="h-5 w-5 text-gray-300 dark:text-gray-600 mx-auto" />
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* FAQ Section */}
+      <div className="mx-auto max-w-3xl mb-16">
+        <h2 className="text-3xl font-bold text-center mb-12">{t('pricing.faq.title') || "Frequently Asked Questions"}</h2>
+        <div className="space-y-6">
+          <div className="border rounded-lg p-6">
+            <h3 className="text-xl font-medium mb-2">{t('pricing.faq.q1.title') || "What are PDF operations?"}</h3>
+            <p className="text-muted-foreground">{t('pricing.faq.q1.content') || "PDF operations include converting PDFs to other formats (Word, Excel, etc.), compressing PDFs, merging PDFs, splitting PDFs, adding watermarks, extracting text, and any other action performed on a PDF file through our service."}</p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-xl font-medium mb-2">{t('pricing.faq.q2.title') || "Can I upgrade or downgrade my plan?"}</h3>
+            <p className="text-muted-foreground">{t('pricing.faq.q2.content') || "Yes, you can upgrade or downgrade your plan at any time. When upgrading, the new plan takes effect immediately. When downgrading, the new plan will take effect at the end of your current billing cycle."}</p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-xl font-medium mb-2">{t('pricing.faq.q3.title') || "Do you offer refunds?"}</h3>
+            <p className="text-muted-foreground">{t('pricing.faq.q3.content') || "We offer a 7-day money-back guarantee on all paid plans. If you're not satisfied with our service, you can request a refund within 7 days of your initial purchase."}</p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-xl font-medium mb-2">{t('pricing.faq.q4.title') || "What happens if I exceed my monthly operation limit?"}</h3>
+            <p className="text-muted-foreground">{t('pricing.faq.q4.content') || "If you reach your monthly operation limit, you will not be able to perform additional operations until your limit resets at the beginning of your next billing cycle. You can upgrade your plan at any time to increase your limit."}</p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-xl font-medium mb-2">{t('pricing.faq.q5.title') || "Is my data secure?"}</h3>
+            <p className="text-muted-foreground">{t('pricing.faq.q5.content') || "Yes, we take data security seriously. All file uploads and processing are done over secure HTTPS connections. We do not store your files longer than necessary for processing, and all files are automatically deleted after processing is complete."}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="mx-auto max-w-3xl text-center">
+        <h2 className="text-3xl font-bold mb-4">{t('pricing.cta.title') || "Ready to get started?"}</h2>
+        <p className="text-xl text-muted-foreground mb-8">{t('pricing.cta.subtitle') || "Choose the plan that's right for you and start transforming your PDFs today."}</p>
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Button size="lg" onClick={() => handleSubscribe('basic')}>
+            {t('pricing.cta.startBasic') || "Start with Basic"}
+          </Button>
+          <LanguageLink href="/tools">
+            <Button variant="outline" size="lg">
+              {t('pricing.cta.explorePdfTools') || "Explore PDF Tools"}
+            </Button>
+          </LanguageLink>
+        </div>
+      </div>
+
+      {/* Login Dialog */}
+      <AlertDialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t('pricing.loginRequired') || "Sign in required"}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t('pricing.loginRequiredDesc') || "You need to sign in to your account before subscribing. Would you like to sign in now?"}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t('common.cancel') || "Cancel"}</AlertDialogCancel>
+            <AlertDialogAction asChild>
+              <LanguageLink href={`/login?callbackUrl=/pricing`}>
+                <Button>{t('auth.signIn') || "Sign In"}</Button>
+              </LanguageLink>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
-}
+} 
