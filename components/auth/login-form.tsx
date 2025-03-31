@@ -92,29 +92,24 @@ export function LoginForm({ callbackUrl = "/en/dashboard" }: LoginFormProps) {
         redirect: false,
         email,
         password,
-        callbackUrl
       });
       
       console.log("Sign in result:", result);
       
       if (result?.error) {
         setError(t('auth.invalidCredentials') || "Invalid email or password");
+        setLoading(false);
         return;
       }
       
       // Show success toast
       toast.success(t('auth.loginSuccess') || "Signed in successfully");
       
-      // Use result.url if available, otherwise fallback to callbackUrl
-      const redirectTo = result?.url || callbackUrl;
-      console.log("Redirecting to:", redirectTo);
-      
-      router.push(redirectTo);
-      router.refresh();
+      // Fix: Use window.location.href to force a full page reload to the dashboard
+      window.location.href = callbackUrl;
     } catch (error) {
       console.error("Login error:", error);
       setError(t('auth.loginError') || "An error occurred. Please try again.");
-    } finally {
       setLoading(false);
     }
   };

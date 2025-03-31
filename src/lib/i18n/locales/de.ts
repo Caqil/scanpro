@@ -599,7 +599,7 @@ export default {
     title: "Bereit zum Konvertieren?",
     description: "Verwandeln Sie Ihre PDFs in jedes gewünschte Format, komplett kostenlos.",
     startConverting: "Jetzt konvertieren",
-    exploreTools: "Alle Tools erkunden"
+    exploreTools: "Alle Tools erkunden",
   },
 
   // PDF-Tools-Seite
@@ -1487,59 +1487,6 @@ export default {
     }
   },
 
-  // Preise-Seite
-  pricing: {
-    title: "Einfache, transparente Preise",
-    description: "Wählen Sie den Plan, der Ihren Anforderungen entspricht",
-    free: {
-      title: "Kostenlos",
-      description: "Grundlegende PDF-Aufgaben für gelegentliche Benutzer",
-      features: [
-        "Bis zu 3 Dateien/Tag konvertieren",
-        "PDF zu Word, Excel, PowerPoint",
-        "Grundlegende Komprimierung",
-        "Bis zu 5 PDFs zusammenführen",
-        "Einfache Wasserzeichen hinzufügen",
-        "Standard-OCR"
-      ]
-    },
-    pro: {
-      title: "Pro",
-      description: "Mehr Leistung für regelmäßige PDF-Benutzer",
-      features: [
-        "Unbegrenzte Konvertierungen",
-        "Priorisierte Verarbeitung",
-        "Erweiterte Komprimierung",
-        "Unbegrenztes Zusammenführen von PDFs",
-        "Benutzerdefinierte Wasserzeichen",
-        "Erweiterte OCR mit über 100 Sprachen",
-        "Stapelverarbeitung",
-        "Keine Werbung"
-      ]
-    },
-    business: {
-      title: "Business",
-      description: "Komplette Lösung für Teams",
-      features: [
-        "Alles im Pro-Plan enthalten",
-        "Mehrere Teammitglieder",
-        "API-Zugriff",
-        "GDPR-Konformität",
-        "Dedizierter Support",
-        "Nutzungsanalysen",
-        "Benutzerdefinierte Branding-Optionen"
-      ]
-    },
-    monthly: "Monatlich",
-    annually: "Jährlich",
-    savePercent: "Sparen Sie 20%",
-    currentPlan: "Aktueller Plan",
-    upgrade: "Jetzt upgraden",
-    getStarted: "Loslegen",
-    contact: "Verkauf kontaktieren"
-  },
-
-  // Nutzungsbedingungen und Datenschutz-Seiten
   legal: {
     termsTitle: "Nutzungsbedingungen",
     privacyTitle: "Datenschutzrichtlinie",
@@ -2001,5 +1948,5 @@ export default {
     socialGithub: "GitHub",
     socialYoutube: "YouTube"
   },
-  
+
 }

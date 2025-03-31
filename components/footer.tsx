@@ -214,14 +214,14 @@ export function Footer() {
                 </LanguageLink>
               </li>
               <li>
-                <LanguageLink href="/tutorials" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  {t('footer.tutorials') || "Tutorials"}
-                </LanguageLink>
+              <LanguageLink href="/security" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              {t('footer.security') || "Security"}
+            </LanguageLink>
               </li>
               <li>
-                <LanguageLink href="/status" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  {t('footer.systemStatus') || "System Status"}
-                </LanguageLink>
+              <LanguageLink href="/sitemap" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              {t('footer.sitemap') || "Sitemap"}
+            </LanguageLink>
               </li>
             </ul>
           </div>
@@ -243,12 +243,7 @@ export function Footer() {
             <LanguageLink href="/cookies" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               {t('footer.cookiePolicy') || "Cookie Policy"}
             </LanguageLink>
-            <LanguageLink href="/security" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              {t('footer.security') || "Security"}
-            </LanguageLink>
-            <LanguageLink href="/sitemap" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              {t('footer.sitemap') || "Sitemap"}
-            </LanguageLink>
+           
           </div>
         </div>
       </div>

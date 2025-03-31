@@ -608,7 +608,8 @@ export default {
       title: "Ready to Transform Your Document Workflow?",
       description: "Join thousands of satisfied users who have streamlined their document management with ScanPro.",
       pricing: "View Pricing",
-      explore: "Explore Tools"
+      explore: "Explore Tools",
+
     }
   },
 
@@ -617,7 +618,8 @@ export default {
     title: "Ready to Convert?",
     description: "Transform your PDFs into any format you need, completely free.",
     startConverting: "Start Converting",
-    exploreTools: "Explore All Tools"
+    exploreTools: "Explore All Tools",
+    contactSales: "Contact Sales"
   },
 
   // PDF Tools Page
@@ -1581,58 +1583,6 @@ export default {
     }
   },
 
-  // Pricing Page
-  pricing: {
-    title: "Simple, Transparent Pricing",
-    description: "Choose the plan that fits your needs",
-    free: {
-      title: "Free",
-      description: "Basic PDF tasks for occasional users",
-      features: [
-        "Convert up to 3 files/day",
-        "PDF to Word, Excel, PowerPoint",
-        "Basic compression",
-        "Merge up to 5 PDFs",
-        "Add simple watermarks",
-        "Standard OCR"
-      ]
-    },
-    pro: {
-      title: "Pro",
-      description: "More power for regular PDF users",
-      features: [
-        "Unlimited conversions",
-        "Priority processing",
-        "Advanced compression",
-        "Merge unlimited PDFs",
-        "Custom watermarks",
-        "Advanced OCR with 100+ languages",
-        "Batch processing",
-        "No ads"
-      ]
-    },
-    business: {
-      title: "Business",
-      description: "Complete solution for teams",
-      features: [
-        "Everything in Pro plan",
-        "Multiple team members",
-        "API access",
-        "GDPR compliance",
-        "Dedicated support",
-        "Usage analytics",
-        "Custom branding options"
-      ]
-    },
-    monthly: "Monthly",
-    annually: "Annually",
-    savePercent: "Save 20%",
-    currentPlan: "Current Plan",
-    upgrade: "Upgrade Now",
-    getStarted: "Get Started",
-    contact: "Contact Sales"
-  },
-
   // Terms and Privacy Pages
   legal: {
     termsTitle: "Terms of Service",
@@ -2096,6 +2046,157 @@ export default {
         answer: "We have protocols to detect, respond to, and notify affected users of any data breach in accordance with applicable laws. We conduct regular security assessments to minimize the risk of breaches and maintain a detailed incident response plan."
       }
     }
+  },
+
+  // Add these translations to your en.ts locale file
+
+  // Pricing section translations
+  pricing: {
+    pageTitle: "Simple, Transparent Pricing",
+    pageSubtitle: "Choose the plan that's right for you and your workflow",
+    customSolution: "Need a custom solution?",
+    enterpriseDesc: "Our enterprise plan offers custom integrations, dedicated support, and volume discounts. Contact our sales team to discuss your specific requirements.",
+    contactSales: "Contact Sales",
+    featureComparison: "Feature Comparison",
+    feature: "Feature",
+    free: "Free",
+    basic: "Basic",
+    pro: "Pro",
+    enterprise: "Enterprise",
+    limited: "Limited",
+    monthlyOperations: "Monthly operations",
+    hourlyRequests: "Hourly requests",
+    apiKeys: "API keys",
+    pdfConversion: "PDF conversion",
+    pdfCompression: "PDF compression",
+    pdfMergeSplit: "PDF merge & split",
+    advancedOcr: "Advanced OCR",
+    customWatermarking: "Custom watermarking",
+    fileSizeLimit: "File size limit",
+    prioritySupport: "Priority support",
+    dedicatedAccount: "Dedicated account manager",
+    customIntegrations: "Custom integrations",
+    whiteLabel: "White-label options",
+    mostPopular: "Most Popular",
+    whatsIncluded: "What's included:",
+    limitations: "Limitations:",
+    alreadyOnFree: "You're already on the Free plan!",
+    upgrading: "Upgrading to {{plan}} plan...",
+
+    billing: {
+      monthly: "Monthly billing",
+      annual: "Annual billing",
+      save: "Save 20%",
+      forever: "forever",
+      yearShort: "year",
+      monthShort: "month"
+    },
+
+    plans: {
+      free: {
+        name: "Free",
+        description: "Basic PDF tools for occasional use",
+        cta: "Get Started",
+        features: {
+          operations: "100 operations per month",
+          requests: "10 requests per hour",
+          apiKey: "1 API key",
+          basic: "Basic PDF operations",
+          fileSize: "10MB file size limit",
+          support: "Community support"
+        },
+        limitations: {
+          watermarking: "No watermarking",
+          ocr: "Limited OCR",
+          support: "No priority support"
+        }
+      },
+
+      basic: {
+        name: "Basic",
+        description: "Professional tools for regular users",
+        cta: "Upgrade to Basic",
+        features: {
+          operations: "1,000 operations per month",
+          requests: "100 requests per hour",
+          apiKeys: "3 API keys",
+          allOperations: "All PDF operations",
+          ocr: "Basic OCR",
+          fileSize: "50MB file size limit",
+          support: "Email support"
+        },
+        limitations: {
+          support: "No priority support",
+          watermarks: "No custom watermarks"
+        }
+      },
+
+      pro: {
+        name: "Pro",
+        description: "Advanced features for power users",
+        cta: "Upgrade to Pro",
+        features: {
+          operations: "10,000 operations per month",
+          requests: "1,000 requests per hour",
+          apiKeys: "10 API keys",
+          ocr: "Advanced OCR",
+          watermarks: "Custom watermarks",
+          fileSize: "100MB file size limit",
+          support: "Priority support",
+          documentation: "Dedicated API documentation"
+        }
+      },
+
+      enterprise: {
+        name: "Enterprise",
+        description: "Custom solutions for organizations",
+        cta: "Contact Sales",
+        features: {
+          operations: "100,000+ operations per month",
+          requests: "5,000+ requests per hour",
+          apiKeys: "50+ API keys",
+          support: "Dedicated support",
+          integration: "Custom integration help",
+          whiteLabel: "White-label options",
+          fileSize: "500MB file size limit",
+          manager: "Dedicated account manager"
+        }
+      }
+    },
+
+    faq: {
+      title: "Frequently Asked Questions",
+      upgrade: {
+        question: "How do I upgrade my plan?",
+        answer: "You can upgrade at any time from your dashboard. Go to Settings, Subscription to see available options and upgrade with just a few clicks."
+      },
+      changePlan: {
+        question: "Can I change plans later?",
+        answer: "Absolutely! You can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle."
+      },
+      limits: {
+        question: "What happens if I exceed my plan limits?",
+        answer: "If you reach your monthly operation limit, you'll need to upgrade to a higher tier plan to continue processing documents, or wait until your limits reset at the start of the next month."
+      },
+      discounts: {
+        question: "Do you offer discounts for nonprofits or educational institutions?",
+        answer: "Yes, we offer special pricing for educational institutions, nonprofits, and open-source projects. Contact our sales team to learn more about our discount programs."
+      },
+      billing: {
+        question: "How is my subscription billed?",
+        answer: "Subscriptions are billed monthly or annually, depending on your preference. Annual plans include a discount compared to monthly billing."
+      },
+      payment: {
+        question: "What payment methods do you accept?",
+        answer: "We accept all major credit cards including Visa, Mastercard, American Express, and Discover. For Enterprise plans, we can also arrange alternative payment methods."
+      }
+    },
+
+    guarantee: {
+      title: "100% Satisfaction Guarantee",
+      description: "We're confident you'll love ScanPro. If you're not completely satisfied with your paid plan, contact us within 14 days of purchase for a full refund."
+    },
   }
+
 }
 

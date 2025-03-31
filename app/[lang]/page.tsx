@@ -54,7 +54,7 @@ function ClientHomeContent() {
       description: t('popular.mergePdfDesc'),
       icon: <ArrowRightIcon className="h-6 w-6 text-red-500" />,
       iconBg: "bg-red-100 dark:bg-red-900/30",
-      href: "/merge"
+      href: "/merge-pdf"
     },
     {
       id: "compress-pdf",
@@ -62,7 +62,7 @@ function ClientHomeContent() {
       description: t('popular.compressPdfDesc'),
       icon: <ArrowDownIcon className="h-6 w-6 text-green-500" />,
       iconBg: "bg-green-100 dark:bg-green-900/30",
-      href: "/compress"
+      href: "/compress-pdf"
     },
     {
       id: "protect",
@@ -70,7 +70,7 @@ function ClientHomeContent() {
       description: t('popular.protectPdfDesc'),
       icon: <Shield className="h-6 w-6 text-purple-500" />,
       iconBg: "bg-purple-100 dark:bg-purple-900/30",
-      href: "/protect",
+      href: "/protect-pdf",
       isNew: true
     },
     { 

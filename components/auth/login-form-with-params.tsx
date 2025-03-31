@@ -14,6 +14,8 @@ function LoginFormWithParamsClient() {
     ? callbackUrlParam
     : "/en/dashboard";
   
+  console.log("LoginFormWithParamsClient - callbackUrl:", callbackUrl);
+  
   return <LoginForm callbackUrl={callbackUrl} />;
 }
 

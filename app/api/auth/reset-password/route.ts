@@ -1,6 +1,8 @@
+// app/api/auth/reset-password/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { randomBytes } from 'crypto';
 import { prisma } from '@/lib/prisma';
+import { sendPasswordResetEmail } from '@/lib/email';
 
 // Request password reset endpoint
 export async function POST(request: NextRequest) {
@@ -56,18 +58,30 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // For testing purposes, we'll return the token in development mode
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Reset token created:', token);
-      console.log('Reset URL:', `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/en/reset-password/${token}`);
+    // Send email with reset link
+    const emailResult = await sendPasswordResetEmail(user.email, token);
+
+    if (!emailResult.success) {
+      console.error('Failed to send password reset email:', emailResult.error);
+      return NextResponse.json({
+        success: false,
+        message: 'Error sending password reset email. Please try again later.',
+        error: process.env.NODE_ENV === 'development' ? emailResult.error : undefined
+      }, { status: 500 });
     }
 
-    // In a real implementation, send email here
-    // For now, just return success
+    // For development, return the token and preview URL
+    const devDetails = process.env.NODE_ENV === 'development'
+      ? {
+        devToken: token,
+        previewUrl: emailResult.messageUrl
+      }
+      : {};
+
     return NextResponse.json({
       success: true,
       message: 'Password reset link has been sent',
-      devToken: process.env.NODE_ENV === 'development' ? token : undefined
+      ...devDetails
     });
   } catch (error) {
     console.error('Password reset error:', error);
