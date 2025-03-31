@@ -2224,7 +2224,114 @@ export default {
       viewEndpoints: "View Endpoints"
     },
 
+  },
+  pricing: {
+    // Metadata
+    metaTitle: "Pricing Plans - ScanPro",
+    metaDescription: "Choose the right plan for your PDF needs. ScanPro offers flexible pricing options from free to enterprise, with the features you need.",
 
-  }
+    // Page content
+    title: "Simple, transparent pricing",
+    subtitle: "Choose the plan that's right for you. All plans include our core PDF tools.",
+    monthly: "Monthly",
+    yearly: "Yearly",
+    saveUp: "Save up to 20%",
+    subscribe: "Subscribe",
+    feature: "Feature",
+    featureCompare: "Feature Comparison",
+
+    // Features
+    features: {
+      operations: "Monthly operations",
+      amount: {
+        free: "100 operations",
+        basic: "1,000 operations",
+        pro: "10,000 operations",
+        enterprise: "100,000 operations"
+      },
+      apiAccess: "API Access",
+      apiKeys: {
+        free: "1 API key",
+        basic: "3 API keys",
+        pro: "10 API keys",
+        enterprise: "50 API keys"
+      },
+      rateLimits: "Rate limit",
+      rateLimit: {
+        free: "10 requests/hour",
+        basic: "100 requests/hour",
+        pro: "1,000 requests/hour",
+        enterprise: "5,000 requests/hour"
+      },
+      fileSizes: "Max file size",
+      fileSize: {
+        free: "25 MB",
+        basic: "50 MB",
+        pro: "100 MB",
+        enterprise: "200 MB"
+      },
+      ocr: "OCR (Text recognition)",
+      watermarking: "Watermarking",
+      advancedProtection: "Advanced PDF protection",
+      bulkProcessing: "Bulk processing",
+      supports: "Support",
+      support: {
+        free: "Email support",
+        priority: "Priority support",
+        dedicated: "Dedicated support"
+      },
+      whiteLabel: "White-label options",
+      serviceLevel: "Service Level Agreement"
+    },
+
+    // Plan descriptions
+    planDescriptions: {
+      free: "For occasional PDF needs",
+      basic: "For individuals and small teams",
+      pro: "For professionals and businesses",
+      enterprise: "For large organizations"
+    },
+
+    // FAQ section
+    faq: {
+      title: "Frequently Asked Questions",
+      q1: {
+        title: "What are PDF operations?",
+        content: "PDF operations include converting PDFs to other formats (Word, Excel, etc.), compressing PDFs, merging PDFs, splitting PDFs, adding watermarks, extracting text, and any other action performed on a PDF file through our service."
+      },
+      q2: {
+        title: "Can I upgrade or downgrade my plan?",
+        content: "Yes, you can upgrade or downgrade your plan at any time. When upgrading, the new plan takes effect immediately. When downgrading, the new plan will take effect at the end of your current billing cycle."
+      },
+      q3: {
+        title: "Do you offer refunds?",
+        content: "We offer a 7-day money-back guarantee on all paid plans. If you're not satisfied with our service, you can request a refund within 7 days of your initial purchase."
+      },
+      q4: {
+        title: "What happens if I exceed my monthly operation limit?",
+        content: "If you reach your monthly operation limit, you will not be able to perform additional operations until your limit resets at the beginning of your next billing cycle. You can upgrade your plan at any time to increase your limit."
+      },
+      q5: {
+        title: "Is my data secure?",
+        content: "Yes, we take data security seriously. All file uploads and processing are done over secure HTTPS connections. We do not store your files longer than necessary for processing, and all files are automatically deleted after processing is complete."
+      }
+    },
+
+    // CTA section
+    cta: {
+      title: "Ready to get started?",
+      subtitle: "Choose the plan that's right for you and start transforming your PDFs today.",
+      startBasic: "Start with Basic",
+      explorePdfTools: "Explore PDF Tools"
+    },
+
+    // Login dialog
+    loginRequired: "Sign in required",
+    loginRequiredDesc: "You need to sign in to your account before subscribing. Would you like to sign in now?",
+
+    // Plan buttons
+    getStarted: "Get Started",
+    currentPlan: "Current Plan"
+  },
 }
 
