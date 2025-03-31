@@ -40,10 +40,10 @@ export async function POST(request: NextRequest) {
         const paypalSubscriptionId = user.subscription.paypalSubscriptionId;
 
         if (!paypalSubscriptionId) {
-            // If no PayPal subscription ID but has a non-free tier, just update our database
+            // If no PayPal subscription ID but has a non-free tier, update to free immediately
             await updateUserSubscription(user.id, {
                 tier: 'free',
-                status: 'active',
+                status: 'active', // Change to active so they can subscribe again
                 paypalSubscriptionId: null,
                 paypalPlanId: null,
                 canceledAt: new Date(),
@@ -59,39 +59,35 @@ export async function POST(request: NextRequest) {
         try {
             await cancelSubscription(paypalSubscriptionId);
 
-            // Update our database - keep the subscription active until the end of the current period
+            // Update our database
             await updateUserSubscription(user.id, {
-                status: 'canceled',
+                status: 'active', // Change to active instead of 'canceled' so they can subscribe again
+                tier: 'free', // Set to free tier immediately
                 canceledAt: new Date(),
-                tier: user.subscription.tier, // Keep the existing tier until the end of the period
-                paypalSubscriptionId: user.subscription.paypalSubscriptionId,
-                paypalPlanId: user.subscription.paypalPlanId,
-                currentPeriodStart: user.subscription.currentPeriodStart,
-                currentPeriodEnd: user.subscription.currentPeriodEnd,
+                paypalSubscriptionId: null, // Remove PayPal subscription ID
+                paypalPlanId: null, // Remove PayPal plan ID
             });
 
             return NextResponse.json({
                 success: true,
-                message: 'Subscription cancelled successfully. You will continue to have access until the end of your current billing period.',
+                message: 'Subscription cancelled successfully.',
             });
         } catch (paypalError) {
             console.error('Error cancelling subscription with PayPal:', paypalError);
 
             // If PayPal cancellation fails but we have a record, update our database anyway
             await updateUserSubscription(user.id, {
-                status: 'canceled',
+                status: 'active', // Change to active so they can subscribe again
+                tier: 'free', // Set to free tier immediately
                 canceledAt: new Date(),
-                tier: user.subscription.tier,
-                paypalSubscriptionId: user.subscription.paypalSubscriptionId,
-                paypalPlanId: user.subscription.paypalPlanId,
-                currentPeriodStart: user.subscription.currentPeriodStart,
-                currentPeriodEnd: user.subscription.currentPeriodEnd,
+                paypalSubscriptionId: null, // Remove PayPal subscription ID
+                paypalPlanId: null, // Remove PayPal plan ID
             });
 
             return NextResponse.json({
                 success: true,
-                message: 'Subscription marked as cancelled in our system. There may have been an issue with PayPal, but you should not be charged again.',
-                error: process.env.NODE_ENV === 'development' ? paypalError.message : undefined,
+                message: 'Subscription cancelled in our system. There may have been an issue with PayPal, but your account has been updated.',
+                //error: process.env.NODE_ENV === 'development' ? paypalError.message : undefined,
             });
         }
     } catch (error) {

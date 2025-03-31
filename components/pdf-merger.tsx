@@ -254,7 +254,7 @@ export function PdfMerger() {
               {t('fileUploader.dropHereDesc') || "Drop your PDF files here or click to browse."} {t('fileUploader.maxSize') || "Maximum size is 100MB per file."}
             </p>
             
-            <Button type="button" variant="yellow" size="sm" className="mt-2">
+            <Button type="button" variant="default" size="sm" className="mt-2">
               {t('fileUploader.browse') || "Browse Files"}
             </Button>
           </div>

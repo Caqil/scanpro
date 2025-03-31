@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { SiteLogo } from "@/components/site-logo";
 import { authOptions } from "@/lib/auth";
+import { LanguageLink } from "@/components/language-link";
 
 export const metadata: Metadata = {
   title: "Register | ScanPro",
@@ -79,9 +80,9 @@ export default async function RegisterPage() {
             <RegisterForm />
             <p className="text-center text-sm text-muted-foreground mt-4">
               Already part of us?{" "}
-              <Link href="/login" className="underline underline-offset-4 text-primary hover:text-primary/80">
+              <LanguageLink href="/login" className="underline underline-offset-4 text-primary hover:text-primary/80">
                 Sign in
-              </Link>
+              </LanguageLink>
             </p>
           </div>
         </div>
@@ -91,13 +92,13 @@ export default async function RegisterPage() {
       <div className="mt-12 text-center space-y-3">
         <p className="text-sm text-muted-foreground">
           By joining, you agree to our{" "}
-          <Link href="/terms" className="underline underline-offset-4 hover:text-primary">
+          <LanguageLink href="/terms" className="underline underline-offset-4 hover:text-primary">
             Terms of Service
-          </Link>{" "}
+          </LanguageLink>{" "}
           and{" "}
-          <Link href="/privacy" className="underline underline-offset-4 hover:text-primary">
+          <LanguageLink href="/privacy" className="underline underline-offset-4 hover:text-primary">
             Privacy Policy
-          </Link>
+          </LanguageLink>
         </p>
         <p className="text-sm text-muted-foreground">
           © 2025 ScanPro. Together, we make documents work.

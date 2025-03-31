@@ -1,53 +1,9 @@
-// app/api/subscription/route.ts
+// app/api/subscription/upgrade/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { createSubscription, updateUserSubscription } from '@/lib/paypal';
-
-// Get subscription details for the current user
-export async function GET(request: NextRequest) {
-    try {
-        // Get the current session
-        const session = await getServerSession(authOptions);
-
-        if (!session?.user?.id) {
-            return NextResponse.json(
-                { error: 'Authentication required' },
-                { status: 401 }
-            );
-        }
-
-        // Get the user with subscription details
-        const user = await prisma.user.findUnique({
-            where: { id: session.user.id },
-            include: { subscription: true },
-        });
-
-        if (!user) {
-            return NextResponse.json(
-                { error: 'User not found' },
-                { status: 404 }
-            );
-        }
-
-        // Return the subscription details
-        return NextResponse.json({
-            success: true,
-            subscription: user.subscription || {
-                tier: 'free',
-                status: 'active',
-            },
-        });
-    } catch (error) {
-        console.error('Error getting subscription details:', error);
-
-        return NextResponse.json(
-            { error: 'Failed to get subscription details' },
-            { status: 500 }
-        );
-    }
-}
 
 // Initialize subscription upgrade/change
 export async function POST(request: NextRequest) {
