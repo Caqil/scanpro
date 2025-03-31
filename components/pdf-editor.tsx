@@ -27,10 +27,30 @@ import {
   ZoomOut,
   Plus,
   Edit3,
-  Save
+  Save,
+  FileText,
+  Eye,
+  Code
 } from "lucide-react";
 import { useLanguageStore } from "@/src/store/store";
 import { toast } from "sonner";
+
+// Define types for text elements and replacements
+interface TextElement {
+  id?: string;
+  text: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  fontSize?: number;
+  fontFamily?: string;
+}
+
+interface Replacement {
+  oldText: string;
+  newText: string;
+}
 
 export function PdfTextEditor() {
   const { t } = useLanguageStore();
@@ -39,7 +59,8 @@ export function PdfTextEditor() {
   const [file, setFile] = useState<File | null>(null);
   const [extractedText, setExtractedText] = useState<any[]>([]);
   const [sessionId, setSessionId] = useState<string | null>(null);
-  const [replacements, setReplacements] = useState<{oldText: string, newText: string}[]>([]);
+  const [replacements, setReplacements] = useState<Replacement[]>([]);
+  const [previewReplacements, setPreviewReplacements] = useState<boolean>(false);
   
   // UI state
   const [isUploading, setIsUploading] = useState(false);
@@ -49,9 +70,10 @@ export function PdfTextEditor() {
   const [totalPages, setTotalPages] = useState(0);
   const [zoom, setZoom] = useState(1);
   const [activeTab, setActiveTab] = useState("browse");
-  const [showTextFinder, setShowTextFinder] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const [selectedText, setSelectedText] = useState<any | null>(null);
+  const [selectedText, setSelectedText] = useState<TextElement | null>(null);
+  const [showReplaceDialog, setShowReplaceDialog] = useState(false);
+  const [replaceAllMode, setReplaceAllMode] = useState(false);
   
   // Result state
   const [result, setResult] = useState<{
@@ -61,6 +83,7 @@ export function PdfTextEditor() {
   } | null>(null);
   
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   
   // Handle file selection
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -195,7 +218,25 @@ export function PdfTextEditor() {
     if (selectedText && selectedText.text) {
       setReplacements([...replacements, { oldText: selectedText.text, newText: "" }]);
       setSelectedText(null);
+      setShowReplaceDialog(true);
     }
+  };
+  
+  // Open replace dialog for specific text
+  const openReplaceDialog = (text: string, replaceAll: boolean = false) => {
+    const existingReplacement = replacements.find(r => r.oldText === text);
+    
+    if (existingReplacement) {
+      // If replacement already exists, focus on it
+      const index = replacements.findIndex(r => r.oldText === text);
+      // Focus logic would go here in a real implementation
+    } else {
+      // Add new replacement
+      setReplacements([...replacements, { oldText: text, newText: "" }]);
+    }
+    
+    setReplaceAllMode(replaceAll);
+    setShowReplaceDialog(true);
   };
   
   // Apply text replacements
@@ -314,6 +355,50 @@ export function PdfTextEditor() {
     setZoom(Math.max(0.5, zoom - 0.1));
   };
   
+  // Apply text replacements to preview
+  const getPreviewText = (text: string) => {
+    if (!previewReplacements) return text;
+    
+    let previewText = text;
+    replacements.forEach(replacement => {
+      if (replacement.oldText && replacement.newText) {
+        // Use global replace with RegExp to replace all occurrences
+        const regex = new RegExp(escapeRegExp(replacement.oldText), 'g');
+        previewText = previewText.replace(regex, replacement.newText);
+      }
+    });
+    
+    return previewText;
+  };
+  
+  // Helper to escape special regex characters
+  const escapeRegExp = (string: string) => {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  };
+  
+  // Toggle replacement preview
+  const togglePreview = () => {
+    setPreviewReplacements(!previewReplacements);
+  };
+  
+  // Count occurrences of a text in all extracted content
+  const countTextOccurrences = (text: string) => {
+    if (!text || !extractedText || extractedText.length === 0) return 0;
+    
+    let count = 0;
+    extractedText.forEach(page => {
+      if (page.extractedText) {
+        page.extractedText.forEach((element: TextElement) => {
+          if (element.text === text) {
+            count++;
+          }
+        });
+      }
+    });
+    
+    return count;
+  };
+  
   // Format file size
   const formatFileSize = (bytes: number): string => {
     if (bytes === 0) return '0 Bytes';
@@ -390,7 +475,79 @@ export function PdfTextEditor() {
     </div>
   );
   
-  // Render page preview
+  // Render page preview with canvas
+  const renderCanvasPreview = () => {
+    if (!sessionId) return null;
+    
+    useEffect(() => {
+      const canvas = canvasRef.current;
+      if (!canvas || !sessionId) return;
+      
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      
+      // Load and draw the page image
+      const img = new Image();
+      img.onload = () => {
+        // Set canvas dimensions to match image
+        canvas.width = img.width;
+        canvas.height = img.height;
+        
+        // Draw image
+        ctx.drawImage(img, 0, 0);
+        
+        // Draw text elements with replacements if preview is enabled
+        const textElements = getCurrentPageTextElements();
+        textElements.forEach((element: TextElement) => {
+          // Determine if this element is selected
+          const isSelected = selectedText && selectedText.id === `text-${element.id || ''}`;
+          
+          // Draw highlight box for elements
+          ctx.strokeStyle = isSelected ? 'rgba(59, 130, 246, 0.8)' : 'rgba(209, 213, 219, 0.5)';
+          ctx.lineWidth = isSelected ? 2 : 1;
+          ctx.strokeRect(element.x, element.y, element.width, element.height);
+          
+          // If preview is enabled, redraw text with replacements
+          if (previewReplacements) {
+            const replacedText = getPreviewText(element.text);
+            if (replacedText !== element.text) {
+              // Draw a white box to cover original text
+              ctx.fillStyle = 'white';
+              ctx.fillRect(element.x, element.y, element.width, element.height);
+              
+              // Draw replaced text
+              ctx.fillStyle = 'rgba(34, 197, 94, 0.9)';
+              ctx.font = `${element.fontSize || 12}px ${element.fontFamily || 'Arial'}`;
+              ctx.fillText(replacedText, element.x, element.y + element.height * 0.8);
+            }
+          }
+        });
+      };
+      
+      img.src = `/processed/${sessionId}-page-${currentPage}.png`;
+    }, [sessionId, currentPage, selectedText, previewReplacements, replacements]);
+    
+    return (
+      <div className="border rounded-lg overflow-hidden h-[500px] flex items-center justify-center bg-muted/20">
+        {isProcessing ? (
+          <div className="flex flex-col items-center justify-center">
+            <Loader2 className="h-10 w-10 animate-spin text-primary mb-2" />
+            <p className="text-sm text-muted-foreground">Processing page...</p>
+          </div>
+        ) : (
+          <div 
+            className="relative w-full h-full overflow-auto"
+          >
+            <div style={{ transform: `scale(${zoom})`, transformOrigin: 'top left' }}>
+              <canvas ref={canvasRef} className="max-w-full block" />
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+  
+  // Render standard page preview (fallback)
   const renderPagePreview = () => {
     if (!sessionId) return null;
     
@@ -428,7 +585,15 @@ export function PdfTextEditor() {
                   text: element.text,
                   ...element
                 })}
-              ></div>
+              >
+                {previewReplacements && element.text !== getPreviewText(element.text) && (
+                  <div className="absolute top-0 left-0 w-full h-full bg-green-100/80 flex items-center justify-center">
+                    <p className="text-xs text-green-800 font-medium px-1 truncate">
+                      {getPreviewText(element.text)}
+                    </p>
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         )}
@@ -463,7 +628,7 @@ export function PdfTextEditor() {
         </Button>
       </div>
       
-      <div className="flex gap-2">
+      <div className="flex gap-2 items-center">
         <Button
           variant="outline"
           size="icon"
@@ -484,6 +649,16 @@ export function PdfTextEditor() {
           disabled={zoom >= 2}
         >
           <ZoomIn className="h-4 w-4" />
+        </Button>
+        
+        <Button
+          variant={previewReplacements ? "default" : "outline"}
+          size="sm"
+          onClick={togglePreview}
+          className="ml-4"
+        >
+          <Eye className="h-4 w-4 mr-2" />
+          {previewReplacements ? "Hide Preview" : "Show Preview"}
         </Button>
       </div>
     </div>
@@ -513,6 +688,54 @@ export function PdfTextEditor() {
     </div>
   );
   
+  // Render text replacement dialog
+  const renderReplaceDialog = () => (
+    <Dialog open={showReplaceDialog} onOpenChange={setShowReplaceDialog}>
+      <DialogContent className="sm:max-w-[500px]">
+        <DialogHeader>
+          <DialogTitle>{replaceAllMode ? "Replace All Occurrences" : "Replace Text"}</DialogTitle>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid gap-2">
+            <Label htmlFor="replace-text">Text to replace</Label>
+            <div className="bg-muted p-2 rounded-md text-sm max-h-24 overflow-auto">
+              {replacements.length > 0 && replacements[replacements.length - 1].oldText}
+            </div>
+            {replaceAllMode && (
+              <p className="text-xs text-muted-foreground">
+                Found {countTextOccurrences(replacements.length > 0 ? replacements[replacements.length - 1].oldText : "")} occurrences
+              </p>
+            )}
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="new-text">New text</Label>
+            <Textarea
+              id="new-text"
+              placeholder="Enter replacement text..."
+              value={replacements.length > 0 ? replacements[replacements.length - 1].newText : ""}
+              onChange={(e) => {
+                if (replacements.length > 0) {
+                  updateReplacement(replacements.length - 1, 'newText', e.target.value);
+                }
+              }}
+            />
+          </div>
+        </div>
+        <DialogFooter>
+          <Button variant="outline" onClick={() => setShowReplaceDialog(false)}>
+            Cancel
+          </Button>
+          <Button onClick={() => {
+            setShowReplaceDialog(false);
+            setPreviewReplacements(true);
+          }}>
+            Replace
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+  
   // Render text replacement editor
   const renderReplacementEditor = () => (
     <div className="space-y-4">
@@ -537,14 +760,24 @@ export function PdfTextEditor() {
                   {selectedText.text}
                 </p>
               </div>
-              <Button 
-                size="sm" 
-                variant="outline" 
-                onClick={useSelectedTextForReplacement}
-              >
-                <Pencil className="h-4 w-4 mr-2" />
-                Use for Replacement
-              </Button>
+              <div className="flex gap-2">
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  onClick={useSelectedTextForReplacement}
+                >
+                  <Pencil className="h-4 w-4 mr-2" />
+                  Replace
+                </Button>
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  onClick={() => openReplaceDialog(selectedText.text, true)}
+                >
+                  <Code className="h-4 w-4 mr-2" />
+                  Replace All
+                </Button>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -579,6 +812,9 @@ export function PdfTextEditor() {
                     placeholder="Text to find..."
                     rows={3}
                   />
+                  <p className="text-xs text-muted-foreground">
+                    {countTextOccurrences(replacement.oldText)} occurrences
+                  </p>
                 </div>
                 <div className="space-y-1">
                   <Label htmlFor={`new-text-${index}`} className="text-xs">New Text</Label>
@@ -663,7 +899,7 @@ export function PdfTextEditor() {
           
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-4">
-              {renderPagePreview()}
+              {canvasRef ? renderCanvasPreview() : renderPagePreview()}
               {renderPageControls()}
             </div>
             
@@ -687,7 +923,13 @@ export function PdfTextEditor() {
                           ...element
                         })}
                       >
-                        {element.text}
+                        {previewReplacements ? getPreviewText(element.text) : element.text}
+                        
+                        {previewReplacements && element.text !== getPreviewText(element.text) && (
+                          <span className="ml-2 text-xs bg-green-100 text-green-800 px-1 py-0.5 rounded">
+                            Changed
+                          </span>
+                        )}
                       </div>
                     ))
                   ) : (
@@ -706,7 +948,7 @@ export function PdfTextEditor() {
         <TabsContent value="edit" className="space-y-4">
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-4">
-              {renderPagePreview()}
+              {canvasRef ? renderCanvasPreview() : renderPagePreview()}
               {renderPageControls()}
             </div>
             
@@ -716,6 +958,9 @@ export function PdfTextEditor() {
           </div>
         </TabsContent>
       </Tabs>
+      
+      {/* Render replacement dialog */}
+      {renderReplaceDialog()}
     </div>
   );
   
