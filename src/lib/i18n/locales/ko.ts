@@ -2136,6 +2136,184 @@ export default {
         answer: "적용 가능한 법률에 따라 유출 사고를 탐지·대응·통보하는 프로토콜을 마련했습니다. 유출 위험을 최소화하기 위해 정기적인 보안 평가를 실시하고 상세한 사고 대응 계획을 유지합니다."
       }
     }
+  },
+
+  developer: {
+    title: "개발자 API 문서",
+    description: "ScanPro의 강력한 PDF 도구를 RESTful API로 애플리케이션에 통합하세요",
+    tabs: {
+      overview: "개요",
+      authentication: "인증",
+      endpoints: "엔드포인트",
+      examples: "예제",
+      pricing: "가격"
+    },
+    examples: {
+      title: "코드 예제",
+      subtitle: "이 즉시 사용 가능한 예제를 통해 API 통합 방법을 배우세요",
+      pdfToWord: "PDF를 Word로 변환",
+      mergePdfs: "PDF 병합",
+      protectPdf: "PDF 보호"
+    },
+    endpoints: {
+      title: "API 엔드포인트",
+      subtitle: "사용 가능한 모든 API 엔드포인트에 대한 완전한 참조",
+      categories: {
+        all: "모두",
+        conversion: "변환",
+        manipulation: "조작",
+        security: "보안",
+        ocr: "OCR"
+      },
+      parameters: "매개변수",
+      paramName: "이름",
+      type: "유형",
+      required: "필수",
+      description: "설명",
+      responses: "응답"
+    },
+    pricing: {
+      title: "API 가격",
+      subtitle: "API 통합 요구에 맞는 적절한 플랜을 선택하세요",
+      monthly: "월간 청구",
+      yearly: "연간 청구",
+      discount: "20% 절약",
+      forever: "영구",
+      includes: "포함 내용:",
+      getStarted: "시작하기",
+      subscribe: "구독",
+      freePlan: {
+        description: "가끔 사용 및 테스트용",
+        feature1: "월 100회 작업",
+        feature2: "시간당 10회 요청",
+        feature3: "1 API 키",
+        feature4: "기본 PDF 작업"
+      },
+      basicPlan: {
+        description: "스타트업 및 소규모 프로젝트용",
+        feature1: "월 1,000회 작업",
+        feature2: "시간당 100회 요청",
+        feature3: "3 API 키",
+        feature4: "모든 PDF 작업",
+        feature5: "기본 OCR"
+      },
+      proPlan: {
+        description: "기업 및 고급 사용자용",
+        feature1: "월 10,000회 작업",
+        feature2: "시간당 1,000회 요청",
+        feature3: "10 API 키",
+        feature4: "고급 OCR",
+        feature5: "우선 지원",
+        feature6: "사용자 정의 워터마크"
+      },
+      enterprisePlan: {
+        description: "대용량 통합용",
+        feature1: "월 100,000회 이상 작업",
+        feature2: "시간당 5,000회 이상 요청",
+        feature3: "50개 이상 API 키",
+        feature4: "전담 지원",
+        feature5: "사용자 정의 통합 지원",
+        feature6: "화이트 라벨 옵션"
+      },
+      customPricing: {
+        title: "맞춤 솔루션이 필요하신가요?",
+        description: "대용량 API 사용 또는 특수 통합 요구 사항을 위해 전담 지원과 함께 맞춤 가격을 제공합니다.",
+        contactSales: "영업팀에 문의",
+        enterprisePlus: "엔터프라이즈+",
+        dedicated: "전용 인프라",
+        sla: "맞춤 SLA",
+        account: "전담 계정 관리자",
+        custom: "맞춤 가격"
+      }
+    },
+    authentication: {
+      loginRequired: "로그인 필요",
+      loginMessage: "API 키에 액세스하려면 계정에 로그인하세요.",
+      signIn: "로그인",
+      yourApiKey: "당신의 API 키",
+      noApiKeys: "아직 API 키가 없습니다.",
+      managementKeys: "API 키 관리",
+      createApiKey: "API 키 생성",
+      title: "API 인증",
+      subtitle: "API 키로 API 요청을 보호하세요",
+      apiKeys: {
+        title: "API 키",
+        description: "ScanPro API에 대한 모든 요청은 API 키를 사용한 인증이 필요합니다. API 키는 많은 권한을 가지므로 안전하게 보관하세요!"
+      },
+      howTo: {
+        title: "인증 방법",
+        description: "API 요청을 다음 두 가지 방법 중 하나로 인증할 수 있습니다:"
+      },
+      header: {
+        title: "1. HTTP 헤더 사용 (권장)",
+        description: "HTTP 요청의 x-api-key 헤더에 API 키를 포함하세요:"
+      },
+      query: {
+        title: "2. 쿼리 매개변수 사용",
+        description: "또는 API 키를 쿼리 매개변수로 포함할 수 있습니다:"
+      },
+      security: {
+        title: "보안 모범 사례",
+        item1: "API 키를 공개적으로 공유하지 마세요",
+        item2: "클라이언트 측 코드에 API 키를 저장하지 마세요",
+        item3: "API 키에 적절한 권한을 설정하세요",
+        item4: "API 키를 주기적으로 교체하세요"
+      },
+      limits: {
+        title: "속도 제한 및 할당량",
+        description: "API 요청은 구독 등급에 따라 속도 제한이 적용됩니다:",
+        plan: "플랜",
+        operations: "작업",
+        rate: "속도 제한",
+        keys: "API 키"
+      },
+      errors: {
+        title: "속도 제한 오류",
+        description: "속도 제한을 초과하면 API는 다음 헤더와 함께 429 Too Many Requests 응답을 반환합니다:"
+      }
+    },
+    api: {
+      question1: "API 키는 어떻게 얻나요?",
+      answer1: "계정에 등록한 후 대시보드 > API 키로 이동하여 첫 번째 API 키를 생성하세요. 무료 계정은 1개 키, 베이직 구독자는 3개, 프로 구독자는 10개, 엔터프라이즈 사용자는 50개 이상의 키를 받습니다.",
+      question2: "API 속도 제한은 무엇인가요?",
+      answer2: "속도 제한은 구독 등급에 따라 다릅니다: 무료 (10 요청/시간), 베이직 (100 요청/시간), 프로 (1,000 요청/시간), 엔터프라이즈 (5,000+ 요청/시간). 각 등급에 월간 작업 제한도 적용됩니다.",
+      question3: "API를 애플리케이션에 어떻게 통합하나요?",
+      answer3: "저희 API는 JSON 응답과 함께 표준 REST 엔드포인트를 사용합니다. 개발자 섹션에서 포괄적인 문서, 코드 샘플 및 SDK를 찾을 수 있습니다. JavaScript, Python, PHP, Java 등 다양한 프로그래밍 언어에 대한 예제를 제공합니다."
+    },
+    overview: {
+      title: "API 개요",
+      subtitle: "저희 API에 대해 알아야 할 모든 것",
+      intro: "ScanPro API를 사용하면 PDF 처리 기능을 애플리케이션에 직접 통합할 수 있습니다. 간단한 RESTful 인터페이스로 PDF를 프로그래밍 방식으로 변환, 압축, 병합, 분할 및 기타 작업을 수행할 수 있습니다.",
+      features: {
+        title: "주요 기능",
+        restful: "JSON 응답을 포함한 RESTful API",
+        authentication: "API 키를 통한 간단한 인증",
+        operations: "변환, 압축, 병합 등을 포함한 포괄적인 PDF 작업",
+        scalable: "요구에 맞춘 확장 가능한 가격 등급",
+        secure: "암호화된 전송 및 자동 파일 삭제로 안전한 파일 처리"
+      },
+      gettingStarted: "시작하기",
+      startSteps: "ScanPro API를 시작하려면:",
+      step1: "계정에 가입하세요",
+      step2: "대시보드에서 API 키를 생성하세요",
+      step3: "제공된 예제를 사용하여 첫 번째 API 요청을 수행하세요",
+      getStarted: "시작하기"
+    },
+    tools: {
+      conversion: {
+        title: "PDF 변환",
+        description: "PDF를 다양한 형식(DOCX, XLSX, JPG)으로 또는 그 반대로 변환하세요."
+      },
+      manipulation: {
+        title: "PDF 조작",
+        description: "여러 PDF를 병합하거나, PDF를 개별 파일로 분할하거나, 파일 크기를 줄이기 위해 PDF를 압축하세요."
+      },
+      security: {
+        title: "PDF 보안",
+        description: "비밀번호 보호 추가, 보호된 PDF 잠금 해제, 문서 보안을 위한 워터마크 추가."
+      },
+      viewEndpoints: "엔드포인트 보기"
+    }
   }
 
 }

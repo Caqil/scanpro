@@ -2134,5 +2134,184 @@ export default {
                 answer: "Uygulanabilir yasalara uygun olarak herhangi bir veri ihlalini tespit etmek, yanıt vermek ve etkilenen kullanıcıları bilgilendirmek için protokollerimiz var. İhlal riskini en aza indirmek için düzenli güvenlik değerlendirmeleri yapıyoruz ve ayrıntılı bir olay müdahale planı sürdürüyoruz."
             }
         }
+    },
+
+    developer: {
+        title: "Geliştirici API Dokümantasyonu",
+        description: "ScanPro'nun güçlü PDF araçlarını RESTful API'miz ile uygulamalarınıza entegre edin",
+        tabs: {
+            overview: "Genel Bakış",
+            authentication: "Kimlik Doğrulama",
+            endpoints: "Uç Noktalar",
+            examples: "Örnekler",
+            pricing: "Fiyatlandırma"
+        },
+        examples: {
+            title: "Kod Örnekleri",
+            subtitle: "Bu hazır örneklerle API'mizi nasıl entegre edeceğinizi öğrenin",
+            pdfToWord: "PDF'den Word'e Dönüşüm",
+            mergePdfs: "PDF'leri Birleştirme",
+            protectPdf: "PDF Koruma"
+        },
+        endpoints: {
+            title: "API Uç Noktaları",
+            subtitle: "Kullanılabilir tüm API uç noktaları için tam referans",
+            categories: {
+                all: "Tümü",
+                conversion: "Dönüşüm",
+                manipulation: "Manipülasyon",
+                security: "Güvenlik",
+                ocr: "OCR"
+            },
+            parameters: "Parametreler",
+            paramName: "İsim",
+            type: "Tür",
+            required: "Zorunlu",
+            description: "Açıklama",
+            responses: "Yanıtlar"
+        },
+        pricing: {
+            title: "API Fiyatlandırma",
+            subtitle: "API entegrasyon ihtiyaçlarınız için doğru planı seçin",
+            monthly: "Aylık faturalandırma",
+            yearly: "Yıllık faturalandırma",
+            discount: "%20 tasarruf edin",
+            forever: "sonsuza kadar",
+            includes: "Neler dahil:",
+            getStarted: "Başla",
+            subscribe: "Abone Ol",
+            freePlan: {
+                description: "Ara sıra kullanım ve test için",
+                feature1: "Ayda 100 işlem",
+                feature2: "Saatte 10 istek",
+                feature3: "1 API anahtarı",
+                feature4: "Temel PDF işlemleri"
+            },
+            basicPlan: {
+                description: "Başlangıçlar ve küçük projeler için",
+                feature1: "Ayda 1.000 işlem",
+                feature2: "Saatte 100 istek",
+                feature3: "3 API anahtarı",
+                feature4: "Tüm PDF işlemleri",
+                feature5: "Temel OCR"
+            },
+            proPlan: {
+                description: "İşletmeler ve ileri düzey kullanıcılar için",
+                feature1: "Ayda 10.000 işlem",
+                feature2: "Saatte 1.000 istek",
+                feature3: "10 API anahtarı",
+                feature4: "Gelişmiş OCR",
+                feature5: "Öncelikli destek",
+                feature6: "Özel filigranlar"
+            },
+            enterprisePlan: {
+                description: "Yüksek hacimli entegrasyonlar için",
+                feature1: "Ayda 100.000+ işlem",
+                feature2: "Saatte 5.000+ istek",
+                feature3: "50+ API anahtarı",
+                feature4: "Özel destek",
+                feature5: "Özel entegrasyon yardımı",
+                feature6: "Beyaz etiket seçenekleri"
+            },
+            customPricing: {
+                title: "Özel bir çözüme mi ihtiyacınız var?",
+                description: "Yüksek hacimli API kullanımı veya özel entegrasyon gereksinimleri için, özel destekle birlikte özelleştirilmiş fiyatlandırma sunuyoruz.",
+                contactSales: "Satış Ekibiyle İletişime Geçin",
+                enterprisePlus: "Enterprise+",
+                dedicated: "Özel altyapı",
+                sla: "Özel SLA'lar",
+                account: "Özel hesap yöneticisi",
+                custom: "Özel fiyatlandırma"
+            }
+        },
+        authentication: {
+            loginRequired: "Giriş Gerekli",
+            loginMessage: "API anahtarlarınıza erişmek için hesabınıza giriş yapın.",
+            signIn: "Giriş Yap",
+            yourApiKey: "API Anahtarınız",
+            noApiKeys: "Henüz API anahtarınız yok.",
+            managementKeys: "API Anahtarlarını Yönet",
+            createApiKey: "API Anahtarı Oluştur",
+            title: "API Kimlik Doğrulama",
+            subtitle: "API anahtarlarıyla API isteklerinizi güvence altına alın",
+            apiKeys: {
+                title: "API Anahtarları",
+                description: "ScanPro API'ye yapılan tüm istekler, bir API anahtarı kullanılarak kimlik doğrulaması gerektirir. API anahtarınız birçok yetkiye sahiptir, bu yüzden güvenli tutmaya özen gösterin!"
+            },
+            howTo: {
+                title: "Nasıl Kimlik Doğrulanır",
+                description: "API isteklerinizi şu iki yoldan biriyle doğrulayabilirsiniz:"
+            },
+            header: {
+                title: "1. HTTP Başlığını Kullanma (Önerilen)",
+                description: "API anahtarınızı HTTP isteğinizin x-api-key başlığına ekleyin:"
+            },
+            query: {
+                title: "2. Sorgu Parametresi Kullanma",
+                description: "Alternatif olarak, API anahtarınızı bir sorgu parametresi olarak ekleyebilirsiniz:"
+            },
+            security: {
+                title: "Güvenlik En İyi Uygulamaları",
+                item1: "API anahtarınızı asla halka açık şekilde paylaşmayın",
+                item2: "API anahtarlarını istemci tarafı kodunda saklamayın",
+                item3: "API anahtarlarınız için uygun izinleri ayarlayın",
+                item4: "API anahtarlarınızı periyodik olarak yenileyin"
+            },
+            limits: {
+                title: "Hız Sınırları ve Kotalar",
+                description: "API istekleri, abonelik seviyenize göre hız sınırlarına tabidir:",
+                plan: "Plan",
+                operations: "İşlemler",
+                rate: "Hız Sınırı",
+                keys: "API Anahtarları"
+            },
+            errors: {
+                title: "Hız Sınırı Hataları",
+                description: "Hız sınırını aştığınızda, API aşağıdaki başlıklarla birlikte 429 Çok Fazla İstek yanıtını döndürecektir:"
+            }
+        },
+        api: {
+            question1: "API anahtarını nasıl alırım?",
+            answer1: "Bir hesap için kaydolun, ardından Kontrol Paneli > API Anahtarları'na giderek ilk API anahtarınızı oluşturun. Ücretsiz hesaplar 1 anahtar, Temel aboneler 3, Pro aboneler 10, Kurumsal kullanıcılar 50+ anahtar alır.",
+            question2: "API hız sınırları nelerdir?",
+            answer2: "Hız sınırları abonelik seviyenize bağlıdır: Ücretsiz (10 istek/saat), Temel (100 istek/saat), Pro (1.000 istek/saat), Kurumsal (5.000+ istek/saat). Her seviye için aylık işlem limitleri de geçerlidir.",
+            question3: "API'yi uygulamama nasıl entegre ederim?",
+            answer3: "API'miz JSON yanıtlarıyla standart REST uç noktalarını kullanır. Geliştirici bölümümüzde kapsamlı dokümantasyon, kod örnekleri ve SDK'lar bulabilirsiniz. JavaScript, Python, PHP ve Java gibi çeşitli programlama dilleri için örnekler sunuyoruz."
+        },
+        overview: {
+            title: "API Genel Bakış",
+            subtitle: "API'miz hakkında bilmeniz gereken her şey",
+            intro: "ScanPro API, PDF işleme yeteneklerimizi doğrudan uygulamalarınıza entegre etmenizi sağlar. Basit bir RESTful arayüz ile PDF'leri programatik olarak dönüştürebilir, sıkıştırabilir, birleştirebilir, bölebilir ve diğer işlemleri gerçekleştirebilirsiniz.",
+            features: {
+                title: "Ana Özellikler",
+                restful: "JSON yanıtlarıyla RESTful API",
+                authentication: "API anahtarlarıyla basit kimlik doğrulama",
+                operations: "Dönüşüm, sıkıştırma, birleştirme ve daha fazlasını içeren kapsamlı PDF işlemleri",
+                scalable: "İhtiyaçlarınıza uygun ölçeklenebilir fiyatlandırma seviyeleri",
+                secure: "Şifreli aktarımlar ve otomatik dosya silme ile güvenli dosya yönetimi"
+            },
+            gettingStarted: "Başlarken",
+            startSteps: "ScanPro API ile başlamak için:",
+            step1: "Bir hesap için kaydolun",
+            step2: "Kontrol panelinizden bir API anahtarı oluşturun",
+            step3: "Sağlanan örnekleri kullanarak ilk API isteğinizi yapın",
+            getStarted: "Başla"
+        },
+        tools: {
+            conversion: {
+                title: "PDF Dönüşüm",
+                description: "PDF'leri çeşitli formatlara (DOCX, XLSX, JPG) ve tersine dönüştürün."
+            },
+            manipulation: {
+                title: "PDF Manipülasyonu",
+                description: "Birden fazla PDF'yi birleştirin, PDF'leri ayrı dosyalara bölün veya dosya boyutunu küçültmek için PDF'leri sıkıştırın."
+            },
+            security: {
+                title: "PDF Güvenliği",
+                description: "Şifre koruması ekleyin, korumalı PDF'lerin kilidini açın ve belge güvenliği için filigran ekleyin."
+            },
+            viewEndpoints: "Uç Noktaları Görüntüle"
+        }
     }
+
 }

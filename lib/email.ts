@@ -23,18 +23,7 @@ export const createTransporter = () => {
 // Send email function
 export const sendEmail = async ({ to, subject, html, text }: EmailOptions): Promise<{ success: boolean; messageUrl?: string; error?: string }> => {
   try {
-    let testAccount = null;
-
-    // Create test account if in development and no credentials exist
-    if (process.env.NODE_ENV === 'development' && (!process.env.ETHEREAL_EMAIL || !process.env.ETHEREAL_PASSWORD)) {
-      testAccount = await createTestAccount();
-
-      // Store credentials in environment variables (in-memory for this session)
-      if (testAccount) {
-        process.env.ETHEREAL_EMAIL = testAccount.user;
-        process.env.ETHEREAL_PASSWORD = testAccount.pass;
-      }
-    }
+  
 
     const transporter = createTransporter();
 

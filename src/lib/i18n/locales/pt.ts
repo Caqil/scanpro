@@ -2088,6 +2088,184 @@ export default {
         answer: "Temos protocolos para detectar, responder e notificar usuários afetados por qualquer violação de dados de acordo com as leis aplicáveis. Realizamos avaliações de segurança regulares para minimizar o risco de violações e mantemos um plano detalhado de resposta a incidentes."
       }
     }
+  },
+
+  developer: {
+    title: "Documentação da API para Desenvolvedores",
+    description: "Integre as poderosas ferramentas de PDF do ScanPro em suas aplicações com nossa API RESTful",
+    tabs: {
+      overview: "Visão Geral",
+      authentication: "Autenticação",
+      endpoints: "Endpoints",
+      examples: "Exemplos",
+      pricing: "Preços"
+    },
+    examples: {
+      title: "Exemplos de Código",
+      subtitle: "Aprenda a integrar nossa API com estes exemplos prontos para uso",
+      pdfToWord: "Conversão de PDF para Word",
+      mergePdfs: "Mesclar PDFs",
+      protectPdf: "Proteger PDF"
+    },
+    endpoints: {
+      title: "Endpoints da API",
+      subtitle: "Referência completa para todos os endpoints da API disponíveis",
+      categories: {
+        all: "Todos",
+        conversion: "Conversão",
+        manipulation: "Manipulação",
+        security: "Segurança",
+        ocr: "OCR"
+      },
+      parameters: "Parâmetros",
+      paramName: "Nome",
+      type: "Tipo",
+      required: "Obrigatório",
+      description: "Descrição",
+      responses: "Respostas"
+    },
+    pricing: {
+      title: "Preços da API",
+      subtitle: "Escolha o plano certo para suas necessidades de integração de API",
+      monthly: "Faturamento mensal",
+      yearly: "Faturamento anual",
+      discount: "Economize 20%",
+      forever: "para sempre",
+      includes: "O que está incluído:",
+      getStarted: "Começar",
+      subscribe: "Assinar",
+      freePlan: {
+        description: "Para uso ocasional e testes",
+        feature1: "100 operações por mês",
+        feature2: "10 solicitações por hora",
+        feature3: "1 chave API",
+        feature4: "Operações básicas de PDF"
+      },
+      basicPlan: {
+        description: "Para startups e pequenos projetos",
+        feature1: "1.000 operações por mês",
+        feature2: "100 solicitações por hora",
+        feature3: "3 chaves API",
+        feature4: "Todas as operações de PDF",
+        feature5: "OCR básico"
+      },
+      proPlan: {
+        description: "Para empresas e usuários avançados",
+        feature1: "10.000 operações por mês",
+        feature2: "1.000 solicitações por hora",
+        feature3: "10 chaves API",
+        feature4: "OCR avançado",
+        feature5: "Suporte prioritário",
+        feature6: "Marcas d'água personalizadas"
+      },
+      enterprisePlan: {
+        description: "Para integrações de alto volume",
+        feature1: "100.000+ operações por mês",
+        feature2: "5.000+ solicitações por hora",
+        feature3: "50+ chaves API",
+        feature4: "Suporte dedicado",
+        feature5: "Ajuda para integração personalizada",
+        feature6: "Opções de marca branca"
+      },
+      customPricing: {
+        title: "Precisa de uma solução personalizada?",
+        description: "Para uso de API de alto volume ou requisitos de integração especializados, oferecemos preços personalizados com suporte dedicado.",
+        contactSales: "Contate Vendas",
+        enterprisePlus: "Enterprise+",
+        dedicated: "Infraestrutura dedicada",
+        sla: "SLAs personalizados",
+        account: "Gerente de conta dedicado",
+        custom: "Preços personalizados"
+      }
+    },
+    authentication: {
+      loginRequired: "Login Necessário",
+      loginMessage: "Faça login na sua conta para acessar suas chaves API.",
+      signIn: "Entrar",
+      yourApiKey: "Sua Chave API",
+      noApiKeys: "Você ainda não tem chaves API.",
+      managementKeys: "Gerenciar Chaves API",
+      createApiKey: "Criar Chave API",
+      title: "Autenticação da API",
+      subtitle: "Proteja suas solicitações de API com chaves API",
+      apiKeys: {
+        title: "Chaves API",
+        description: "Todas as solicitações à API ScanPro requerem autenticação usando uma chave API. Sua chave API possui muitos privilégios, então mantenha-a segura!"
+      },
+      howTo: {
+        title: "Como Autenticar",
+        description: "Você pode autenticar suas solicitações de API de uma das duas maneiras:"
+      },
+      header: {
+        title: "1. Usando o Cabeçalho HTTP (Recomendado)",
+        description: "Inclua sua chave API no cabeçalho x-api-key da sua solicitação HTTP:"
+      },
+      query: {
+        title: "2. Usando um Parâmetro de Consulta",
+        description: "Alternativamente, você pode incluir sua chave API como um parâmetro de consulta:"
+      },
+      security: {
+        title: "Melhores Práticas de Segurança",
+        item1: "Nunca compartilhe sua chave API publicamente",
+        item2: "Não armazene chaves API em código do lado do cliente",
+        item3: "Defina permissões adequadas para suas chaves API",
+        item4: "Rotacione suas chaves API periodicamente"
+      },
+      limits: {
+        title: "Limites de Taxa e Cotas",
+        description: "As solicitações de API estão sujeitas a limites de taxa com base no seu nível de assinatura:",
+        plan: "Plano",
+        operations: "Operações",
+        rate: "Limite de Taxa",
+        keys: "Chaves API"
+      },
+      errors: {
+        title: "Erros de Limite de Taxa",
+        description: "Quando você exceder o limite de taxa, a API retornará uma resposta 429 Muitas Solicitações com os seguintes cabeçalhos:"
+      }
+    },
+    api: {
+      question1: "Como obtenho uma chave API?",
+      answer1: "Registre-se para uma conta, depois vá para Painel > Chaves API para criar sua primeira chave API. Contas gratuitas recebem 1 chave API, assinantes Basic recebem 3, assinantes Pro recebem 10 e usuários Enterprise recebem 50+ chaves.",
+      question2: "Quais são os limites de taxa da API?",
+      answer2: "Os limites de taxa dependem do seu nível de assinatura: Gratuito (10 solicitações/hora), Basic (100 solicitações/hora), Pro (1.000 solicitações/hora), Enterprise (5.000+ solicitações/hora). Limites mensais de operações também se aplicam a cada nível.",
+      question3: "Como integro a API com minha aplicação?",
+      answer3: "Nossa API usa endpoints REST padrão com respostas JSON. Você pode encontrar documentação abrangente, exemplos de código e SDKs na nossa seção de Desenvolvedores. Fornecemos exemplos para várias linguagens de programação, incluindo JavaScript, Python, PHP e Java."
+    },
+    overview: {
+      title: "Visão Geral da API",
+      subtitle: "Tudo o que você precisa saber sobre nossa API",
+      intro: "A API ScanPro permite que você integre nossas capacidades de processamento de PDF diretamente em suas aplicações. Com uma interface RESTful simples, você pode converter, comprimir, mesclar, dividir e realizar outras operações em PDFs programaticamente.",
+      features: {
+        title: "Recursos Principais",
+        restful: "API RESTful com respostas JSON",
+        authentication: "Autenticação simples com chaves API",
+        operations: "Operações abrangentes de PDF, incluindo conversão, compressão, mesclagem e mais",
+        scalable: "Níveis de preços escaláveis para atender às suas necessidades",
+        secure: "Manipulação segura de arquivos com transferências criptografadas e exclusão automática de arquivos"
+      },
+      gettingStarted: "Começando",
+      startSteps: "Para começar com a API ScanPro:",
+      step1: "Registre-se para uma conta",
+      step2: "Gere uma chave API a partir do seu painel",
+      step3: "Faça sua primeira solicitação de API usando os exemplos fornecidos",
+      getStarted: "Começar"
+    },
+    tools: {
+      conversion: {
+        title: "Conversão de PDF",
+        description: "Converta PDFs em vários formatos (DOCX, XLSX, JPG) e vice-versa."
+      },
+      manipulation: {
+        title: "Manipulação de PDF",
+        description: "Mescle vários PDFs, divida PDFs em arquivos separados ou comprima PDFs para reduzir o tamanho do arquivo."
+      },
+      security: {
+        title: "Segurança de PDF",
+        description: "Adicione proteção por senha, desbloqueie PDFs protegidos e adicione marcas d'água para segurança de documentos."
+      },
+      viewEndpoints: "Ver Endpoints"
+    }
   }
 
 }

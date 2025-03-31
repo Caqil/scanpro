@@ -1949,4 +1949,182 @@ export default {
     socialYoutube: "YouTube"
   },
 
+  developer: {
+    title: "Entwickler-API-Dokumentation",
+    description: "Integrieren Sie die leistungsstarken PDF-Tools von ScanPro in Ihre Anwendungen mit unserer RESTful-API",
+    tabs: {
+      overview: "Übersicht",
+      authentication: "Authentifizierung",
+      endpoints: "Endpunkte",
+      examples: "Beispiele",
+      pricing: "Preise"
+    },
+    examples: {
+      title: "Code-Beispiele",
+      subtitle: "Lernen Sie, wie Sie unsere API mit diesen gebrauchsfertigen Beispielen integrieren können",
+      pdfToWord: "PDF-zu-Word-Konvertierung",
+      mergePdfs: "PDFs zusammenführen",
+      protectPdf: "PDF schützen"
+    },
+    endpoints: {
+      title: "API-Endpunkte",
+      subtitle: "Vollständige Referenz für alle verfügbaren API-Endpunkte",
+      categories: {
+        all: "Alle",
+        conversion: "Konvertierung",
+        manipulation: "Manipulation",
+        security: "Sicherheit",
+        ocr: "OCR"
+      },
+      parameters: "Parameter",
+      paramName: "Name",
+      type: "Typ",
+      required: "Erforderlich",
+      description: "Beschreibung",
+      responses: "Antworten"
+    },
+    pricing: {
+      title: "API-Preise",
+      subtitle: "Wählen Sie den richtigen Plan für Ihre API-Integrationsbedürfnisse",
+      monthly: "Monatliche Abrechnung",
+      yearly: "Jährliche Abrechnung",
+      discount: "Sparen Sie 20%",
+      forever: "für immer",
+      includes: "Was enthalten ist:",
+      getStarted: "Loslegen",
+      subscribe: "Abonnieren",
+      freePlan: {
+        description: "Für gelegentliche Nutzung und Tests",
+        feature1: "100 Operationen pro Monat",
+        feature2: "10 Anfragen pro Stunde",
+        feature3: "1 API-Schlüssel",
+        feature4: "Grundlegende PDF-Operationen"
+      },
+      basicPlan: {
+        description: "Für Startups und kleine Projekte",
+        feature1: "1.000 Operationen pro Monat",
+        feature2: "100 Anfragen pro Stunde",
+        feature3: "3 API-Schlüssel",
+        feature4: "Alle PDF-Operationen",
+        feature5: "Grundlegende OCR"
+      },
+      proPlan: {
+        description: "Für Unternehmen und Power-User",
+        feature1: "10.000 Operationen pro Monat",
+        feature2: "1.000 Anfragen pro Stunde",
+        feature3: "10 API-Schlüssel",
+        feature4: "Erweiterte OCR",
+        feature5: "Priorisierter Support",
+        feature6: "Benutzerdefinierte Wasserzeichen"
+      },
+      enterprisePlan: {
+        description: "Für Integrationen mit hohem Volumen",
+        feature1: "100.000+ Operationen pro Monat",
+        feature2: "5.000+ Anfragen pro Stunde",
+        feature3: "50+ API-Schlüssel",
+        feature4: "Dedizierter Support",
+        feature5: "Hilfe bei benutzerdefinierter Integration",
+        feature6: "White-Label-Optionen"
+      },
+      customPricing: {
+        title: "Brauchen Sie eine maßgeschneiderte Lösung?",
+        description: "Für hohe API-Nutzung oder spezialisierte Integrationsanforderungen bieten wir maßgeschneiderte Preise mit dediziertem Support.",
+        contactSales: "Vertrieb kontaktieren",
+        enterprisePlus: "Enterprise+",
+        dedicated: "Dedizierte Infrastruktur",
+        sla: "Benutzerdefinierte SLAs",
+        account: "Dedizierter Account-Manager",
+        custom: "Maßgeschneiderte Preise"
+      }
+    },
+    authentication: {
+      loginRequired: "Anmeldung erforderlich",
+      loginMessage: "Melden Sie sich bei Ihrem Konto an, um auf Ihre API-Schlüssel zuzugreifen.",
+      signIn: "Anmelden",
+      yourApiKey: "Ihr API-Schlüssel",
+      noApiKeys: "Sie haben noch keine API-Schlüssel.",
+      managementKeys: "API-Schlüssel verwalten",
+      createApiKey: "API-Schlüssel erstellen",
+      title: "API-Authentifizierung",
+      subtitle: "Sichern Sie Ihre API-Anfragen mit API-Schlüsseln",
+      apiKeys: {
+        title: "API-Schlüssel",
+        description: "Alle Anfragen an die ScanPro-API erfordern eine Authentifizierung mit einem API-Schlüssel. Ihr API-Schlüssel hat viele Privilegien, also bewahren Sie ihn sicher auf!"
+      },
+      howTo: {
+        title: "Wie man authentifiziert",
+        description: "Sie können Ihre API-Anfragen auf eine von zwei Arten authentifizieren:"
+      },
+      header: {
+        title: "1. Verwendung des HTTP-Headers (empfohlen)",
+        description: "Fügen Sie Ihren API-Schlüssel in den x-api-key-Header Ihrer HTTP-Anfrage ein:"
+      },
+      query: {
+        title: "2. Verwendung eines Abfrageparameters",
+        description: "Alternativ können Sie Ihren API-Schlüssel als Abfrageparameter einfügen:"
+      },
+      security: {
+        title: "Sicherheits-Best-Practices",
+        item1: "Teilen Sie Ihren API-Schlüssel niemals öffentlich",
+        item2: "Speichern Sie API-Schlüssel nicht im clientseitigen Code",
+        item3: "Legen Sie geeignete Berechtigungen für Ihre API-Schlüssel fest",
+        item4: "Rotieren Sie Ihre API-Schlüssel regelmäßig"
+      },
+      limits: {
+        title: "Ratenbeschränkungen & Quoten",
+        description: "API-Anfragen unterliegen Ratenbeschränkungen basierend auf Ihrem Abonnement-Tier:",
+        plan: "Plan",
+        operations: "Operationen",
+        rate: "Ratenbeschränkung",
+        keys: "API-Schlüssel"
+      },
+      errors: {
+        title: "Fehler bei Ratenbeschränkungen",
+        description: "Wenn Sie Ihre Ratenbeschränkung überschreiten, gibt die API eine 429 Too Many Requests-Antwort mit den folgenden Headern zurück:"
+      }
+    },
+    api: {
+      question1: "Wie bekomme ich einen API-Schlüssel?",
+      answer1: "Registrieren Sie sich für ein Konto, gehen Sie dann zu Dashboard > API-Schlüssel, um Ihren ersten API-Schlüssel zu erstellen. Kostenlose Konten erhalten 1 API-Schlüssel, Basis-Abonnenten erhalten 3, Pro-Abonnenten erhalten 10 und Enterprise-Nutzer erhalten 50+ Schlüssel.",
+      question2: "Was sind die API-Ratenbeschränkungen?",
+      answer2: "Die Ratenbeschränkungen hängen von Ihrem Abonnement-Tier ab: Kostenlos (10 Anfragen/Stunde), Basis (100 Anfragen/Stunde), Pro (1.000 Anfragen/Stunde), Enterprise (5.000+ Anfragen/Stunde). Monatliche Operationslimits gelten ebenfalls für jedes Tier.",
+      question3: "Wie integriere ich die API in meine Anwendung?",
+      answer3: "Unsere API verwendet standardmäßige REST-Endpunkte mit JSON-Antworten. Sie finden umfassende Dokumentation, Codebeispiele und SDKs in unserem Entwicklerbereich. Wir bieten Beispiele für verschiedene Programmiersprachen wie JavaScript, Python, PHP und Java."
+    },
+    overview: {
+      title: "API-Übersicht",
+      subtitle: "Alles, was Sie über unsere API wissen müssen",
+      intro: "Die ScanPro-API ermöglicht es Ihnen, unsere PDF-Verarbeitungsfunktionen direkt in Ihre Anwendungen zu integrieren. Mit einer einfachen RESTful-Schnittstelle können Sie PDFs programmgesteuert konvertieren, komprimieren, zusammenführen, teilen und andere Operationen durchführen.",
+      features: {
+        title: "Hauptmerkmale",
+        restful: "RESTful-API mit JSON-Antworten",
+        authentication: "Einfache Authentifizierung mit API-Schlüsseln",
+        operations: "Umfassende PDF-Operationen einschließlich Konvertierung, Komprimierung, Zusammenführung und mehr",
+        scalable: "Skalierbare Preistiers, die Ihren Bedürfnissen entsprechen",
+        secure: "Sichere Dateiverarbeitung mit verschlüsselten Übertragungen und automatischer Dateilöschung"
+      },
+      gettingStarted: "Erste Schritte",
+      startSteps: "Um mit der ScanPro-API zu beginnen:",
+      step1: "Registrieren Sie sich für ein Konto",
+      step2: "Generieren Sie einen API-Schlüssel aus Ihrem Dashboard",
+      step3: "Stellen Sie Ihre erste API-Anfrage mit den bereitgestellten Beispielen",
+      getStarted: "Loslegen"
+    },
+    tools: {
+      conversion: {
+        title: "PDF-Konvertierung",
+        description: "Konvertieren Sie PDFs in verschiedene Formate (DOCX, XLSX, JPG) und umgekehrt."
+      },
+      manipulation: {
+        title: "PDF-Manipulation",
+        description: "Führen Sie mehrere PDFs zusammen, teilen Sie PDFs in separate Dateien oder komprimieren Sie PDFs, um die Dateigröße zu reduzieren."
+      },
+      security: {
+        title: "PDF-Sicherheit",
+        description: "Fügen Sie Passwortschutz hinzu, entsperren Sie geschützte PDFs und fügen Sie Wasserzeichen für Dokumentsicherheit hinzu."
+      },
+      viewEndpoints: "Endpunkte anzeigen"
+    }
+  }
+
 }

@@ -51,24 +51,29 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+
 model Subscription {
   id                String    @id @default(cuid())
   userId            String    @unique
   user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  tier              String    @default("free") // free, basic, pro, enterprise
-  status            String    @default("active") // active, pending, canceled, failed
-  planId            String?   // Midtrans product ID
-  midtransId        String?   // Midtrans subscription ID (replacing paypalId)
-  midtransToken     String?   // Midtrans token for verification
-  midtransOrderId   String?   // Midtrans order ID
-  midtransResponse  Json?     // Store Midtrans response data
-  cancelAtPeriodEnd Boolean   @default(false)
+  
+  // PayPal specific fields
+  paypalSubscriptionId String?  @unique
+  paypalPlanId        String?
+  
+  // General subscription fields
+  tier               String    @default("free") // "free", "basic", "pro", "enterprise"
+  status             String    @default("active") // "active", "canceled", "past_due", "pending"
+  
+  // Billing dates
   currentPeriodStart DateTime?
   currentPeriodEnd   DateTime?
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-  expiresAt         DateTime?
+  canceledAt         DateTime?
+  
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
 }
+
 
 model VerificationToken {
   identifier String
@@ -107,4 +112,17 @@ model PasswordResetToken {
   token   String   @unique
   expires DateTime
   createdAt DateTime @default(now())
+}
+
+// Add PayPal webhook events tracking
+model PaymentWebhookEvent {
+  id             String   @id @default(cuid())
+  eventId        String   @unique
+  eventType      String
+  resourceType   String
+  resourceId     String
+  status         String   @default("processed") // "processed", "pending", "failed"
+  rawData        String   // JSON string of the raw webhook data
+  processedAt    DateTime @default(now())
+  createdAt      DateTime @default(now())
 }

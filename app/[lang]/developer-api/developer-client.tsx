@@ -39,7 +39,6 @@ export function DeveloperPageClient() {
           {t('developer.description') || "Integrate ScanPro's powerful PDF tools into your applications with our RESTful API"}
         </p>
       </div>
-
       {/* Main Content Tabs */}
       <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="space-y-8">
         <TabsList className="grid grid-cols-5 md:grid-cols-5 mb-4">

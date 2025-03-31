@@ -2134,5 +2134,184 @@ export default {
                 answer: "我们按照适用法律制定协议来检测、响应和通知受影响的用户任何数据泄露。我们定期进行安全评估以最小化泄露风险，并维护详细的事件响应计划。"
             }
         }
+    },
+
+    developer: {
+        title: "开发者 API 文档",
+        description: "使用我们的 RESTful API 将 ScanPro 的强大 PDF 工具集成到您的应用程序中",
+        tabs: {
+            overview: "概览",
+            authentication: "认证",
+            endpoints: "端点",
+            examples: "示例",
+            pricing: "定价"
+        },
+        examples: {
+            title: "代码示例",
+            subtitle: "通过这些即用示例学习如何集成我们的 API",
+            pdfToWord: "PDF 转 Word",
+            mergePdfs: "合并 PDF",
+            protectPdf: "保护 PDF"
+        },
+        endpoints: {
+            title: "API 端点",
+            subtitle: "所有可用 API 端点的完整参考",
+            categories: {
+                all: "全部",
+                conversion: "转换",
+                manipulation: "操作",
+                security: "安全",
+                ocr: "OCR"
+            },
+            parameters: "参数",
+            paramName: "名称",
+            type: "类型",
+            required: "必需",
+            description: "描述",
+            responses: "响应"
+        },
+        pricing: {
+            title: "API 定价",
+            subtitle: "为您的 API 集成需求选择合适的计划",
+            monthly: "按月计费",
+            yearly: "按年计费",
+            discount: "节省 20%",
+            forever: "永久",
+            includes: "包含内容：",
+            getStarted: "开始使用",
+            subscribe: "订阅",
+            freePlan: {
+                description: "适用于偶尔使用和测试",
+                feature1: "每月 100 次操作",
+                feature2: "每小时 10 次请求",
+                feature3: "1 个 API 密钥",
+                feature4: "基本 PDF 操作"
+            },
+            basicPlan: {
+                description: "适用于初创公司和小型项目",
+                feature1: "每月 1,000 次操作",
+                feature2: "每小时 100 次请求",
+                feature3: "3 个 API 密钥",
+                feature4: "所有 PDF 操作",
+                feature5: "基本 OCR"
+            },
+            proPlan: {
+                description: "适用于企业和高级用户",
+                feature1: "每月 10,000 次操作",
+                feature2: "每小时 1,000 次请求",
+                feature3: "10 个 API 密钥",
+                feature4: "高级 OCR",
+                feature5: "优先支持",
+                feature6: "自定义水印"
+            },
+            enterprisePlan: {
+                description: "适用于高容量集成",
+                feature1: "每月 100,000 次以上操作",
+                feature2: "每小时 5,000 次以上请求",
+                feature3: "50 个以上 API 密钥",
+                feature4: "专用支持",
+                feature5: "自定义集成帮助",
+                feature6: "白标选项"
+            },
+            customPricing: {
+                title: "需要自定义解决方案？",
+                description: "对于高容量 API 使用或特殊集成需求，我们提供带有专用支持的自定义定价。",
+                contactSales: "联系销售",
+                enterprisePlus: "企业+",
+                dedicated: "专用基础设施",
+                sla: "自定义 SLA",
+                account: "专用账户经理",
+                custom: "自定义定价"
+            }
+        },
+        authentication: {
+            loginRequired: "需要登录",
+            loginMessage: "登录您的账户以访问您的 API 密钥。",
+            signIn: "登录",
+            yourApiKey: "您的 API 密钥",
+            noApiKeys: "您还没有 API 密钥。",
+            managementKeys: "管理 API 密钥",
+            createApiKey: "创建 API 密钥",
+            title: "API 认证",
+            subtitle: "使用 API 密钥保护您的 API 请求",
+            apiKeys: {
+                title: "API 密钥",
+                description: "对 ScanPro API 的所有请求都需要使用 API 密钥进行认证。您的 API 密钥具有许多权限，请务必妥善保管！"
+            },
+            howTo: {
+                title: "如何认证",
+                description: "您可以通过以下两种方式之一认证您的 API 请求："
+            },
+            header: {
+                title: "1. 使用 HTTP 头（推荐）",
+                description: "将您的 API 密钥包含在 HTTP 请求的 x-api-key 头中："
+            },
+            query: {
+                title: "2. 使用查询参数",
+                description: "或者，您可以将 API 密钥作为查询参数包含："
+            },
+            security: {
+                title: "安全最佳实践",
+                item1: "切勿公开分享您的 API 密钥",
+                item2: "不要将 API 密钥存储在客户端代码中",
+                item3: "为您的 API 密钥设置适当的权限",
+                item4: "定期轮换您的 API 密钥"
+            },
+            limits: {
+                title: "速率限制和配额",
+                description: "API 请求受限于您的订阅等级的速率限制：",
+                plan: "计划",
+                operations: "操作",
+                rate: "速率限制",
+                keys: "API 密钥"
+            },
+            errors: {
+                title: "速率限制错误",
+                description: "当您超过速率限制时，API 将返回带有以下头的 429 过多请求响应："
+            }
+        },
+        api: {
+            question1: "如何获取 API 密钥？",
+            answer1: "注册一个账户，然后前往仪表板 > API 密钥以创建您的第一个 API 密钥。免费账户获得 1 个密钥，基本订阅者获得 3 个，专业订阅者获得 10 个，企业用户获得 50 个以上密钥。",
+            question2: "API 的速率限制是什么？",
+            answer2: "速率限制取决于您的订阅等级：免费（10 请求/小时），基本（100 请求/小时），专业（1,000 请求/小时），企业（5,000+ 请求/小时）。每月操作限制也适用于每个等级。",
+            question3: "如何将 API 集成到我的应用程序中？",
+            answer3: "我们的 API 使用带 JSON 响应的标准 REST 端点。您可以在我们的开发者部分找到全面的文档、代码示例和 SDK。我们为 JavaScript、Python、PHP 和 Java 等多种编程语言提供示例。"
+        },
+        overview: {
+            title: "API 概览",
+            subtitle: "关于我们 API 您需要知道的一切",
+            intro: "ScanPro API 允许您将我们的 PDF 处理功能直接集成到您的应用程序中。通过简单的 RESTful 接口，您可以以编程方式转换、压缩、合并、拆分 PDF 并执行其他操作。",
+            features: {
+                title: "主要功能",
+                restful: "带 JSON 响应的 RESTful API",
+                authentication: "使用 API 密钥的简单认证",
+                operations: "包括转换、压缩、合并等的全面 PDF 操作",
+                scalable: "满足您需求的 scalable 定价等级",
+                secure: "通过加密传输和自动文件删除实现安全文件处理"
+            },
+            gettingStarted: "开始使用",
+            startSteps: "要开始使用 ScanPro API：",
+            step1: "注册一个账户",
+            step2: "从您的仪表板生成 API 密钥",
+            step3: "使用提供的示例进行您的第一次 API 请求",
+            getStarted: "开始使用"
+        },
+        tools: {
+            conversion: {
+                title: "PDF 转换",
+                description: "将 PDF 转换为各种格式（DOCX、XLSX、JPG）或反之。"
+            },
+            manipulation: {
+                title: "PDF 操作",
+                description: "合并多个 PDF，将 PDF 拆分为单独文件，或压缩 PDF 以减小文件大小。"
+            },
+            security: {
+                title: "PDF 安全",
+                description: "添加密码保护，解锁受保护的 PDF，并为文档安全添加水印。"
+            },
+            viewEndpoints: "查看端点"
+        }
     }
+
 }

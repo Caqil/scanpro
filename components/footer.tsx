@@ -204,7 +204,7 @@ export function Footer() {
                 </LanguageLink>
               </li>
               <li>
-                <LanguageLink href="/developer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <LanguageLink href="/en/developer-api" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   {t('footer.apiDocs') || "API Documentation"}
                 </LanguageLink>
               </li>

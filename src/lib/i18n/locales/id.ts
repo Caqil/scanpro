@@ -2137,6 +2137,185 @@ export default {
         answer: "Kami memiliki protokol untuk mendeteksi, menanggapi, dan memberi tahu pengguna yang terkena dampak dari setiap pelanggaran data sesuai dengan hukum yang berlaku. Kami melakukan penilaian keamanan rutin untuk meminimalkan risiko pelanggaran dan mempertahankan rencana respons insiden yang terperinci."
       }
     }
+  },
+
+  developer: {
+    title: "Dokumentasi API Pengembang",
+    description: "Integrasikan alat PDF ScanPro yang kuat ke dalam aplikasi Anda dengan API RESTful kami",
+    tabs: {
+      overview: "Ikhtisar",
+      authentication: "Otentikasi",
+      endpoints: "Titik Akhir",
+      examples: "Contoh",
+      pricing: "Harga"
+    },
+    examples: {
+      title: "Contoh Kode",
+      subtitle: "Pelajari cara mengintegrasikan API kami dengan contoh siap pakai ini",
+      pdfToWord: "Konversi PDF ke Word",
+      mergePdfs: "Gabungkan PDF",
+      protectPdf: "Lindungi PDF"
+    },
+    endpoints: {
+      title: "Titik Akhir API",
+      subtitle: "Referensi lengkap untuk semua titik akhir API yang tersedia",
+      categories: {
+        all: "Semua",
+        conversion: "Konversi",
+        manipulation: "Manipulasi",
+        security: "Keamanan",
+        ocr: "OCR"
+      },
+      parameters: "Parameter",
+      paramName: "Nama",
+      type: "Tipe",
+      required: "Wajib",
+      description: "Deskripsi",
+      responses: "Respons"
+    },
+    pricing: {
+      title: "Harga API",
+      subtitle: "Pilih paket yang tepat untuk kebutuhan integrasi API Anda",
+      monthly: "Tagihan bulanan",
+      yearly: "Tagihan tahunan",
+      discount: "Hemat 20%",
+      forever: "selamanya",
+      includes: "Yang termasuk:",
+      getStarted: "Mulai",
+      subscribe: "Berlangganan",
+      freePlan: {
+        description: "Untuk penggunaan sesekali dan pengujian",
+        feature1: "100 operasi per bulan",
+        feature2: "10 permintaan per jam",
+        feature3: "1 kunci API",
+        feature4: "Operasi PDF dasar"
+      },
+      basicPlan: {
+        description: "Untuk startup dan proyek kecil",
+        feature1: "1.000 operasi per bulan",
+        feature2: "100 permintaan per jam",
+        feature3: "3 kunci API",
+        feature4: "Semua operasi PDF",
+        feature5: "OCR dasar"
+      },
+      proPlan: {
+        description: "Untuk bisnis dan pengguna tingkat lanjut",
+        feature1: "10.000 operasi per bulan",
+        feature2: "1.000 permintaan per jam",
+        feature3: "10 kunci API",
+        feature4: "OCR lanjutan",
+        feature5: "Dukungan prioritas",
+        feature6: "Tanda air kustom"
+      },
+      enterprisePlan: {
+        description: "Untuk integrasi volume tinggi",
+        feature1: "100.000+ operasi per bulan",
+        feature2: "5.000+ permintaan per jam",
+        feature3: "50+ kunci API",
+        feature4: "Dukungan khusus",
+        feature5: "Bantuan integrasi kustom",
+        feature6: "Opsi label putih"
+      },
+      customPricing: {
+        title: "Butuh solusi kustom?",
+        description: "Untuk penggunaan API volume tinggi atau kebutuhan integrasi khusus, kami menawarkan harga kustom dengan dukungan khusus.",
+        contactSales: "Hubungi Penjualan",
+        enterprisePlus: "Enterprise+",
+        dedicated: "Infrastruktur khusus",
+        sla: "SLA kustom",
+        account: "Manajer akun khusus",
+        custom: "Harga kustom"
+      }
+    },
+    authentication: {
+      loginRequired: "Login Diperlukan",
+      loginMessage: "Masuk ke akun Anda untuk mengakses kunci API Anda.",
+      signIn: "Masuk",
+      yourApiKey: "Kunci API Anda",
+      noApiKeys: "Anda belum memiliki kunci API.",
+      managementKeys: "Kelola Kunci API",
+      createApiKey: "Buat Kunci API",
+      title: "Otentikasi API",
+      subtitle: "Amankan permintaan API Anda dengan kunci API",
+      apiKeys: {
+        title: "Kunci API",
+        description: "Semua permintaan ke API ScanPro memerlukan otentikasi menggunakan kunci API. Kunci API Anda memiliki banyak hak istimewa, jadi pastikan untuk menjaganya tetap aman!"
+      },
+      howTo: {
+        title: "Cara Mengotentikasi",
+        description: "Anda dapat mengotentikasi permintaan API Anda dengan salah satu dari dua cara berikut:"
+      },
+      header: {
+        title: "1. Menggunakan Header HTTP (Direkomendasikan)",
+        description: "Sertakan kunci API Anda di header x-api-key dari permintaan HTTP Anda:"
+      },
+      query: {
+        title: "2. Menggunakan Parameter Kueri",
+        description: "Sebagai alternatif, Anda dapat menyertakan kunci API Anda sebagai parameter kueri:"
+      },
+      security: {
+        title: "Praktik Keamanan Terbaik",
+        item1: "Jangan pernah membagikan kunci API Anda secara publik",
+        item2: "Jangan simpan kunci API di kode sisi klien",
+        item3: "Tetapkan izin yang sesuai untuk kunci API Anda",
+        item4: "Rotasi kunci API Anda secara berkala"
+      },
+      limits: {
+        title: "Batas Tarif & Kuota",
+        description: "Permintaan API tunduk pada batas tarif berdasarkan tingkat langganan Anda:",
+        plan: "Paket",
+        operations: "Operasi",
+        rate: "Batas Tarif",
+        keys: "Kunci API"
+      },
+      errors: {
+        title: "Kesalahan Batas Tarif",
+        description: "Ketika Anda melebihi batas tarif Anda, API akan mengembalikan respons 429 Terlalu Banyak Permintaan dengan header berikut:"
+      }
+    },
+    api: {
+      question1: "Bagaimana cara mendapatkan kunci API?",
+      answer1: "Daftar untuk akun, lalu buka Dasbor > Kunci API untuk membuat kunci API pertama Anda. Akun gratis mendapatkan 1 kunci API, pelanggan Dasar mendapatkan 3, pelanggan Pro mendapatkan 10, dan pengguna Enterprise mendapatkan 50+ kunci.",
+      question2: "Apa batas tarif API?",
+      answer2: "Batas tarif tergantung pada tingkat langganan Anda: Gratis (10 permintaan/jam), Dasar (100 permintaan/jam), Pro (1.000 permintaan/jam), Enterprise (5.000+ permintaan/jam). Batas operasi bulanan juga berlaku untuk setiap tingkat.",
+      question3: "Bagaimana cara mengintegrasikan API dengan aplikasi saya?",
+      answer3: "API kami menggunakan titik akhir REST standar dengan respons JSON. Anda dapat menemukan dokumentasi lengkap, sampel kode, dan SDK di bagian Pengembang kami. Kami menyediakan contoh untuk berbagai bahasa pemrograman termasuk JavaScript, Python, PHP, dan Java."
+    },
+    overview: {
+      title: "Ikhtisar API",
+      subtitle: "Semua yang perlu Anda ketahui tentang API kami",
+      intro: "API ScanPro memungkinkan Anda mengintegrasikan kemampuan pemrosesan PDF kami langsung ke dalam aplikasi Anda. Dengan antarmuka RESTful sederhana, Anda dapat mengonversi, mengompresi, menggabungkan, memisahkan, dan melakukan operasi lain pada PDF secara terprogram.",
+      features: {
+        title: "Fitur Utama",
+        restful: "API RESTful dengan respons JSON",
+        authentication: "Otentikasi sederhana dengan kunci API",
+        operations: "Operasi PDF komprehensif termasuk konversi, kompresi, penggabungan, dan lainnya",
+        scalable: "Tingkat harga yang dapat diskalakan sesuai kebutuhan Anda",
+        secure: "Penanganan file aman dengan transfer terenkripsi dan penghapusan file otomatis"
+      },
+      gettingStarted: "Memulai",
+      startSteps: "Untuk memulai dengan API ScanPro:",
+      step1: "Daftar untuk akun",
+      step2: "Hasilkan kunci API dari dasbor Anda",
+      step3: "Lakukan permintaan API pertama Anda menggunakan contoh yang disediakan",
+      getStarted: "Mulai"
+    },
+    tools: {
+      conversion: {
+        title: "Konversi PDF",
+        description: "Konversi PDF ke berbagai format (DOCX, XLSX, JPG) dan sebaliknya."
+      },
+      manipulation: {
+        title: "Manipulasi PDF",
+        description: "Gabungkan beberapa PDF, pisahkan PDF menjadi file terpisah, atau kompres PDF untuk mengurangi ukuran file."
+      },
+      security: {
+        title: "Keamanan PDF",
+        description: "Tambahkan perlindungan kata sandi, buka kunci PDF yang dilindungi, dan tambahkan tanda air untuk keamanan dokumen."
+      },
+      viewEndpoints: "Lihat Titik Akhir"
+    }
   }
+
 
 }

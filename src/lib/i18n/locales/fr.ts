@@ -2133,6 +2133,185 @@ export default {
                 answer: "Nous avons des protocoles pour détecter, répondre et notifier les utilisateurs affectés par toute violation de données conformément aux lois applicables. Nous effectuons des évaluations de sécurité régulières pour minimiser le risque de violations et maintenons un plan détaillé de réponse aux incidents."
             }
         }
+    },
+
+    developer: {
+        title: "Documentation de l'API pour développeurs",
+        description: "Intégrez les puissants outils PDF de ScanPro dans vos applications avec notre API RESTful",
+        tabs: {
+            overview: "Aperçu",
+            authentication: "Authentification",
+            endpoints: "Points de terminaison",
+            examples: "Exemples",
+            pricing: "Tarification"
+        },
+        examples: {
+            title: "Exemples de code",
+            subtitle: "Apprenez à intégrer notre API avec ces exemples prêts à l'emploi",
+            pdfToWord: "Conversion de PDF en Word",
+            mergePdfs: "Fusionner des PDFs",
+            protectPdf: "Protéger un PDF"
+        },
+        endpoints: {
+            title: "Points de terminaison de l'API",
+            subtitle: "Référence complète pour tous les points de terminaison de l'API disponibles",
+            categories: {
+                all: "Tous",
+                conversion: "Conversion",
+                manipulation: "Manipulation",
+                security: "Sécurité",
+                ocr: "OCR"
+            },
+            parameters: "Paramètres",
+            paramName: "Nom",
+            type: "Type",
+            required: "Requis",
+            description: "Description",
+            responses: "Réponses"
+        },
+        pricing: {
+            title: "Tarification de l'API",
+            subtitle: "Choisissez le plan adapté à vos besoins d'intégration d'API",
+            monthly: "Facturation mensuelle",
+            yearly: "Facturation annuelle",
+            discount: "Économisez 20%",
+            forever: "pour toujours",
+            includes: "Ce qui est inclus :",
+            getStarted: "Commencer",
+            subscribe: "S'abonner",
+            freePlan: {
+                description: "Pour une utilisation occasionnelle et des tests",
+                feature1: "100 opérations par mois",
+                feature2: "10 requêtes par heure",
+                feature3: "1 clé API",
+                feature4: "Opérations PDF de base"
+            },
+            basicPlan: {
+                description: "Pour les startups et petits projets",
+                feature1: "1 000 opérations par mois",
+                feature2: "100 requêtes par heure",
+                feature3: "3 clés API",
+                feature4: "Toutes les opérations PDF",
+                feature5: "OCR de base"
+            },
+            proPlan: {
+                description: "Pour les entreprises et utilisateurs avancés",
+                feature1: "10 000 opérations par mois",
+                feature2: "1 000 requêtes par heure",
+                feature3: "10 clés API",
+                feature4: "OCR avancé",
+                feature5: "Support prioritaire",
+                feature6: "Filigranes personnalisés"
+            },
+            enterprisePlan: {
+                description: "Pour les intégrations à haut volume",
+                feature1: "100 000+ opérations par mois",
+                feature2: "5 000+ requêtes par heure",
+                feature3: "50+ clés API",
+                feature4: "Support dédié",
+                feature5: "Aide à l'intégration personnalisée",
+                feature6: "Options de marque blanche"
+            },
+            customPricing: {
+                title: "Besoin d'une solution personnalisée ?",
+                description: "Pour une utilisation intensive de l'API ou des besoins d'intégration spécialisés, nous proposons une tarification personnalisée avec un support dédié.",
+                contactSales: "Contacter les ventes",
+                enterprisePlus: "Enterprise+",
+                dedicated: "Infrastructure dédiée",
+                sla: "SLA personnalisés",
+                account: "Gestionnaire de compte dédié",
+                custom: "Tarification personnalisée"
+            }
+        },
+        authentication: {
+            loginRequired: "Connexion requise",
+            loginMessage: "Connectez-vous à votre compte pour accéder à vos clés API.",
+            signIn: "Se connecter",
+            yourApiKey: "Votre clé API",
+            noApiKeys: "Vous n'avez pas encore de clés API.",
+            managementKeys: "Gérer les clés API",
+            createApiKey: "Créer une clé API",
+            title: "Authentification de l'API",
+            subtitle: "Sécurisez vos requêtes API avec des clés API",
+            apiKeys: {
+                title: "Clés API",
+                description: "Toutes les requêtes à l'API ScanPro nécessitent une authentification à l'aide d'une clé API. Votre clé API offre de nombreux privilèges, alors assurez-vous de la garder en sécurité !"
+            },
+            howTo: {
+                title: "Comment s'authentifier",
+                description: "Vous pouvez authentifier vos requêtes API de l'une des deux manières suivantes :"
+            },
+            header: {
+                title: "1. Utilisation de l'en-tête HTTP (recommandé)",
+                description: "Incluez votre clé API dans l'en-tête x-api-key de votre requête HTTP :"
+            },
+            query: {
+                title: "2. Utilisation d'un paramètre de requête",
+                description: "Alternativement, vous pouvez inclure votre clé API comme paramètre de requête :"
+            },
+            security: {
+                title: "Meilleures pratiques de sécurité",
+                item1: "Ne partagez jamais votre clé API publiquement",
+                item2: "Ne stockez pas les clés API dans le code côté client",
+                item3: "Définissez des autorisations appropriées pour vos clés API",
+                item4: "Faites tourner vos clés API périodiquement"
+            },
+            limits: {
+                title: "Limites de taux et quotas",
+                description: "Les requêtes API sont soumises à des limites de taux en fonction de votre niveau d'abonnement :",
+                plan: "Plan",
+                operations: "Opérations",
+                rate: "Limite de taux",
+                keys: "Clés API"
+            },
+            errors: {
+                title: "Erreurs de limite de taux",
+                description: "Lorsque vous dépassez votre limite de taux, l'API renverra une réponse 429 Too Many Requests avec les en-têtes suivants :"
+            }
+        },
+        api: {
+            question1: "Comment obtenir une clé API ?",
+            answer1: "Inscrivez-vous pour un compte, puis allez à Tableau de bord > Clés API pour créer votre première clé API. Les comptes gratuits obtiennent 1 clé API, les abonnés Basic obtiennent 3, les abonnés Pro obtiennent 10, et les utilisateurs Enterprise obtiennent 50+ clés.",
+            question2: "Quelles sont les limites de taux de l'API ?",
+            answer2: "Les limites de taux dépendent de votre niveau d'abonnement : Gratuit (10 requêtes/heure), Basic (100 requêtes/heure), Pro (1 000 requêtes/heure), Enterprise (5 000+ requêtes/heure). Des limites d'opérations mensuelles s'appliquent également à chaque niveau.",
+            question3: "Comment intégrer l'API à mon application ?",
+            answer3: "Notre API utilise des points de terminaison REST standard avec des réponses JSON. Vous pouvez trouver une documentation complète, des exemples de code et des SDK dans notre section développeurs. Nous fournissons des exemples pour divers langages de programmation, y compris JavaScript, Python, PHP et Java."
+        },
+        overview: {
+            title: "Aperçu de l'API",
+            subtitle: "Tout ce que vous devez savoir sur notre API",
+            intro: "L'API ScanPro vous permet d'intégrer nos capacités de traitement PDF directement dans vos applications. Avec une interface RESTful simple, vous pouvez convertir, compresser, fusionner, diviser et effectuer d'autres opérations sur les PDFs par programmation.",
+            features: {
+                title: "Fonctionnalités clés",
+                restful: "API RESTful avec réponses JSON",
+                authentication: "Authentification simple avec des clés API",
+                operations: "Opérations PDF complètes incluant conversion, compression, fusion et plus",
+                scalable: "Niveaux de tarification évolutifs pour répondre à vos besoins",
+                secure: "Gestion sécurisée des fichiers avec transferts cryptés et suppression automatique des fichiers"
+            },
+            gettingStarted: "Démarrage",
+            startSteps: "Pour commencer avec l'API ScanPro :",
+            step1: "Inscrivez-vous pour un compte",
+            step2: "Générez une clé API depuis votre tableau de bord",
+            step3: "Effectuez votre première requête API en utilisant les exemples fournis",
+            getStarted: "Commencer"
+        },
+        tools: {
+            conversion: {
+                title: "Conversion PDF",
+                description: "Convertissez des PDFs en divers formats (DOCX, XLSX, JPG) et vice versa."
+            },
+            manipulation: {
+                title: "Manipulation PDF",
+                description: "Fusionnez plusieurs PDFs, divisez des PDFs en fichiers séparés ou compressez des PDFs pour réduire la taille des fichiers."
+            },
+            security: {
+                title: "Sécurité PDF",
+                description: "Ajoutez une protection par mot de passe, déverrouillez des PDFs protégés et ajoutez des filigranes pour la sécurité des documents."
+            },
+            viewEndpoints: "Voir les points de terminaison"
+        }
     }
+
 
 }

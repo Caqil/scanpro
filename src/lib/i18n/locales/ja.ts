@@ -2135,6 +2135,184 @@ export default {
         answer: "適用される法律に従い、侵害の検知、対応、影響を受けるユーザーへの通知を行うプロトコルを用意しています。侵害リスクを最小化するため定期的なセキュリティ評価を実施し、詳細なインシデント対応計画を維持しています。"
       }
     }
+  },
+
+  developer: {
+    title: "開発者向けAPIドキュメント",
+    description: "ScanProの強力なPDFツールをRESTful APIでアプリケーションに統合",
+    tabs: {
+      overview: "概要",
+      authentication: "認証",
+      endpoints: "エンドポイント",
+      examples: "例",
+      pricing: "価格"
+    },
+    examples: {
+      title: "コード例",
+      subtitle: "これらのすぐに使える例でAPIの統合方法を学ぶ",
+      pdfToWord: "PDFからWordへの変換",
+      mergePdfs: "PDFの結合",
+      protectPdf: "PDFの保護"
+    },
+    endpoints: {
+      title: "APIエンドポイント",
+      subtitle: "利用可能なすべてのAPIエンドポイントの完全なリファレンス",
+      categories: {
+        all: "すべて",
+        conversion: "変換",
+        manipulation: "操作",
+        security: "セキュリティ",
+        ocr: "OCR"
+      },
+      parameters: "パラメータ",
+      paramName: "名前",
+      type: "タイプ",
+      required: "必須",
+      description: "説明",
+      responses: "応答"
+    },
+    pricing: {
+      title: "API価格",
+      subtitle: "API統合のニーズに合ったプランを選択",
+      monthly: "月額請求",
+      yearly: "年額請求",
+      discount: "20%節約",
+      forever: "永久",
+      includes: "含まれるもの:",
+      getStarted: "始める",
+      subscribe: "購読",
+      freePlan: {
+        description: "時折の使用とテスト用",
+        feature1: "月間100操作",
+        feature2: "1時間あたり10リクエスト",
+        feature3: "1 APIキー",
+        feature4: "基本的なPDF操作"
+      },
+      basicPlan: {
+        description: "スタートアップや小規模プロジェクト向け",
+        feature1: "月間1,000操作",
+        feature2: "1時間あたり100リクエスト",
+        feature3: "3 APIキー",
+        feature4: "すべてのPDF操作",
+        feature5: "基本OCR"
+      },
+      proPlan: {
+        description: "企業やパワーユーザー向け",
+        feature1: "月間10,000操作",
+        feature2: "1時間あたり1,000リクエスト",
+        feature3: "10 APIキー",
+        feature4: "高度なOCR",
+        feature5: "優先サポート",
+        feature6: "カスタム透かし"
+      },
+      enterprisePlan: {
+        description: "高ボリューム統合向け",
+        feature1: "月間100,000以上の操作",
+        feature2: "1時間あたり5,000以上のリクエスト",
+        feature3: "50以上のAPIキー",
+        feature4: "専任サポート",
+        feature5: "カスタム統合支援",
+        feature6: "ホワイトラベルオプション"
+      },
+      customPricing: {
+        title: "カスタムソリューションが必要ですか？",
+        description: "高ボリュームAPI使用や特殊な統合要件に対して、専任サポート付きのカスタム価格を提供します。",
+        contactSales: "営業に連絡",
+        enterprisePlus: "エンタープライズ+",
+        dedicated: "専用インフラストラクチャ",
+        sla: "カスタムSLA",
+        account: "専任アカウントマネージャー",
+        custom: "カスタム価格"
+      }
+    },
+    authentication: {
+      loginRequired: "ログイン必須",
+      loginMessage: "APIキーにアクセスするにはアカウントにサインインしてください。",
+      signIn: "サインイン",
+      yourApiKey: "あなたのAPIキー",
+      noApiKeys: "まだAPIキーがありません。",
+      managementKeys: "APIキーの管理",
+      createApiKey: "APIキーを作成",
+      title: "API認証",
+      subtitle: "APIキーでAPIリクエストを保護",
+      apiKeys: {
+        title: "APIキー",
+        description: "ScanPro APIへのすべてのリクエストはAPIキーを使用した認証が必要です。APIキーには多くの特権があるため、安全に保管してください！"
+      },
+      howTo: {
+        title: "認証方法",
+        description: "APIリクエストを次の2つの方法のいずれかで認証できます："
+      },
+      header: {
+        title: "1. HTTPヘッダーの使用（推奨）",
+        description: "HTTPリクエストのx-api-keyヘッダーにAPIキーを含めてください："
+      },
+      query: {
+        title: "2. クエリパラメータの使用",
+        description: "または、APIキーをクエリパラメータとして含めることもできます："
+      },
+      security: {
+        title: "セキュリティのベストプラクティス",
+        item1: "APIキーを公開しないでください",
+        item2: "APIキーをクライアント側コードに保存しないでください",
+        item3: "APIキーに適切な権限を設定してください",
+        item4: "APIキーを定期的にローテーションしてください"
+      },
+      limits: {
+        title: "レート制限とクォータ",
+        description: "APIリクエストはサブスクリプション層に基づくレート制限の対象です：",
+        plan: "プラン",
+        operations: "操作",
+        rate: "レート制限",
+        keys: "APIキー"
+      },
+      errors: {
+        title: "レート制限エラー",
+        description: "レート制限を超えた場合、APIは以下のヘッダーとともに429 Too Many Requests応答を返します："
+      }
+    },
+    api: {
+      question1: "APIキーはどうやって取得しますか？",
+      answer1: "アカウントに登録し、ダッシュボード > APIキーに移動して最初のAPIキーを作成します。無料アカウントは1キー、ベーシック購読者は3キー、プロ購読者は10キー、エンタープライズユーザーは50以上のキーです。",
+      question2: "APIのレート制限は何ですか？",
+      answer2: "レート制限はサブスクリプション層に依存します：無料（10リクエスト/時）、ベーシック（100リクエスト/時）、プロ（1,000リクエスト/時）、エンタープライズ（5,000+リクエスト/時）。各層に月間操作制限も適用されます。",
+      question3: "APIをアプリケーションにどうやって統合しますか？",
+      answer3: "当社のAPIはJSON応答を伴う標準RESTエンドポイントを使用します。開発者セクションで包括的なドキュメント、コードサンプル、SDKを見つけることができます。JavaScript、Python、PHP、Javaなどのプログラミング言語向けの例を提供しています。"
+    },
+    overview: {
+      title: "API概要",
+      subtitle: "当社のAPIについて知っておくべきすべて",
+      intro: "ScanPro APIを使用すると、当社のPDF処理機能をアプリケーションに直接統合できます。シンプルなRESTfulインターフェースで、PDFをプログラムで変換、圧縮、結合、分割、その他の操作が可能です。",
+      features: {
+        title: "主な機能",
+        restful: "JSON応答を伴うRESTful API",
+        authentication: "APIキーによるシンプルな認証",
+        operations: "変換、圧縮、結合などを含む包括的なPDF操作",
+        scalable: "ニーズに合わせたスケーラブルな価格層",
+        secure: "暗号化された転送と自動ファイル削除による安全なファイル処理"
+      },
+      gettingStarted: "開始方法",
+      startSteps: "ScanPro APIを始めるには：",
+      step1: "アカウントにサインアップ",
+      step2: "ダッシュボードからAPIキーを生成",
+      step3: "提供された例を使用して最初のAPIリクエストを実行",
+      getStarted: "始める"
+    },
+    tools: {
+      conversion: {
+        title: "PDF変換",
+        description: "PDFをさまざまな形式（DOCX、XLSX、JPG）に変換、またはその逆。"
+      },
+      manipulation: {
+        title: "PDF操作",
+        description: "複数のPDFを結合、PDFを別々のファイルに分割、またはファイルサイズを減らすためにPDFを圧縮。"
+      },
+      security: {
+        title: "PDFセキュリティ",
+        description: "パスワード保護を追加、保護されたPDFのロック解除、ドキュメントセキュリティのための透かし追加。"
+      },
+      viewEndpoints: "エンドポイントを表示"
+    }
   }
 
 }

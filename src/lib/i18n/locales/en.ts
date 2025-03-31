@@ -2047,156 +2047,184 @@ export default {
       }
     }
   },
-
-  // Add these translations to your en.ts locale file
-
-  // Pricing section translations
-  pricing: {
-    pageTitle: "Simple, Transparent Pricing",
-    pageSubtitle: "Choose the plan that's right for you and your workflow",
-    customSolution: "Need a custom solution?",
-    enterpriseDesc: "Our enterprise plan offers custom integrations, dedicated support, and volume discounts. Contact our sales team to discuss your specific requirements.",
-    contactSales: "Contact Sales",
-    featureComparison: "Feature Comparison",
-    feature: "Feature",
-    free: "Free",
-    basic: "Basic",
-    pro: "Pro",
-    enterprise: "Enterprise",
-    limited: "Limited",
-    monthlyOperations: "Monthly operations",
-    hourlyRequests: "Hourly requests",
-    apiKeys: "API keys",
-    pdfConversion: "PDF conversion",
-    pdfCompression: "PDF compression",
-    pdfMergeSplit: "PDF merge & split",
-    advancedOcr: "Advanced OCR",
-    customWatermarking: "Custom watermarking",
-    fileSizeLimit: "File size limit",
-    prioritySupport: "Priority support",
-    dedicatedAccount: "Dedicated account manager",
-    customIntegrations: "Custom integrations",
-    whiteLabel: "White-label options",
-    mostPopular: "Most Popular",
-    whatsIncluded: "What's included:",
-    limitations: "Limitations:",
-    alreadyOnFree: "You're already on the Free plan!",
-    upgrading: "Upgrading to {{plan}} plan...",
-
-    billing: {
-      monthly: "Monthly billing",
-      annual: "Annual billing",
-      save: "Save 20%",
-      forever: "forever",
-      yearShort: "year",
-      monthShort: "month"
+  developer: {
+    title: "Developer API Documentation",
+    description: "Integrate ScanPro's powerful PDF tools into your applications with our RESTful API",
+    tabs: {
+      overview: "Overview",
+      authentication: "Authentication",
+      endpoints: "Endpoints",
+      examples: "Examples",
+      pricing: "Pricing"
     },
-
-    plans: {
-      free: {
-        name: "Free",
-        description: "Basic PDF tools for occasional use",
-        cta: "Get Started",
-        features: {
-          operations: "100 operations per month",
-          requests: "10 requests per hour",
-          apiKey: "1 API key",
-          basic: "Basic PDF operations",
-          fileSize: "10MB file size limit",
-          support: "Community support"
-        },
-        limitations: {
-          watermarking: "No watermarking",
-          ocr: "Limited OCR",
-          support: "No priority support"
-        }
+    examples: {
+      title: "Code Examples",
+      subtitle: "Learn how to integrate our API with these ready-to-use examples",
+      pdfToWord: "PDF to Word Conversion",
+      mergePdfs: "Merge PDFs",
+      protectPdf: "Protect PDF"
+    },
+    endpoints: {
+      title: "API Endpoints",
+      subtitle: "Complete reference for all available API endpoints",
+      categories: {
+        all: "All",
+        conversion: "Conversion",
+        manipulation: "Manipulation",
+        security: "Security",
+        ocr: "OCR"
       },
-
-      basic: {
-        name: "Basic",
-        description: "Professional tools for regular users",
-        cta: "Upgrade to Basic",
-        features: {
-          operations: "1,000 operations per month",
-          requests: "100 requests per hour",
-          apiKeys: "3 API keys",
-          allOperations: "All PDF operations",
-          ocr: "Basic OCR",
-          fileSize: "50MB file size limit",
-          support: "Email support"
-        },
-        limitations: {
-          support: "No priority support",
-          watermarks: "No custom watermarks"
-        }
+      parameters: "Parameters",
+      paramName: "Name",
+      type: "Type",
+      required: "Required",
+      description: "Description",
+      responses: "Responses"
+    },
+    pricing: {
+      title: "API Pricing",
+      subtitle: "Choose the right plan for your API integration needs",
+      monthly: "Monthly billing",
+      yearly: "Annual billing",
+      discount: "Save 20%",
+      forever: "forever",
+      includes: "What's included:",
+      getStarted: "Get Started",
+      subscribe: "Subscribe",
+      freePlan: {
+        description: "For occasional use and testing",
+        feature1: "100 operations per month",
+        feature2: "10 requests per hour",
+        feature3: "1 API key",
+        feature4: "Basic PDF operations"
       },
-
-      pro: {
-        name: "Pro",
-        description: "Advanced features for power users",
-        cta: "Upgrade to Pro",
-        features: {
-          operations: "10,000 operations per month",
-          requests: "1,000 requests per hour",
-          apiKeys: "10 API keys",
-          ocr: "Advanced OCR",
-          watermarks: "Custom watermarks",
-          fileSize: "100MB file size limit",
-          support: "Priority support",
-          documentation: "Dedicated API documentation"
-        }
+      basicPlan: {
+        description: "For startups and small projects",
+        feature1: "1,000 operations per month",
+        feature2: "100 requests per hour",
+        feature3: "3 API keys",
+        feature4: "All PDF operations",
+        feature5: "Basic OCR"
       },
-
-      enterprise: {
-        name: "Enterprise",
-        description: "Custom solutions for organizations",
-        cta: "Contact Sales",
-        features: {
-          operations: "100,000+ operations per month",
-          requests: "5,000+ requests per hour",
-          apiKeys: "50+ API keys",
-          support: "Dedicated support",
-          integration: "Custom integration help",
-          whiteLabel: "White-label options",
-          fileSize: "500MB file size limit",
-          manager: "Dedicated account manager"
-        }
+      proPlan: {
+        description: "For businesses and power users",
+        feature1: "10,000 operations per month",
+        feature2: "1,000 requests per hour",
+        feature3: "10 API keys",
+        feature4: "Advanced OCR",
+        feature5: "Priority support",
+        feature6: "Custom watermarks"
+      },
+      enterprisePlan: {
+        description: "For high-volume integrations",
+        feature1: "100,000+ operations per month",
+        feature2: "5,000+ requests per hour",
+        feature3: "50+ API keys",
+        feature4: "Dedicated support",
+        feature5: "Custom integration help",
+        feature6: "White-label options"
+      },
+      customPricing: {
+        title: "Need a custom solution?",
+        description: "For high-volume API usage or specialized integration requirements, we offer custom pricing with dedicated support.",
+        contactSales: "Contact Sales",
+        enterprisePlus: "Enterprise+",
+        dedicated: "Dedicated infrastructure",
+        sla: "Custom SLAs",
+        account: "Dedicated account manager",
+        custom: "Custom pricing"
       }
     },
-
-    faq: {
-      title: "Frequently Asked Questions",
-      upgrade: {
-        question: "How do I upgrade my plan?",
-        answer: "You can upgrade at any time from your dashboard. Go to Settings, Subscription to see available options and upgrade with just a few clicks."
+    authentication: {
+      loginRequired: "Login Required",
+      loginMessage: "Sign in to your account to access your API keys.",
+      signIn: "Sign In",
+      yourApiKey: "Your API Key",
+      noApiKeys: "You don't have any API keys yet.",
+      managementKeys: "Manage API Keys",
+      createApiKey: "Create API Key",
+      title: "API Authentication",
+      subtitle: "Secure your API requests with API keys",
+      apiKeys: {
+        title: "API Keys",
+        description: "All requests to the ScanPro API require authentication using an API key. Your API key carries many privileges, so be sure to keep it secure!"
       },
-      changePlan: {
-        question: "Can I change plans later?",
-        answer: "Absolutely! You can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle."
+      howTo: {
+        title: "How to Authenticate",
+        description: "You can authenticate your API requests in one of two ways:"
+      },
+      header: {
+        title: "1. Using the HTTP Header (Recommended)",
+        description: "Include your API key in the x-api-key header of your HTTP request:"
+      },
+      query: {
+        title: "2. Using a Query Parameter",
+        description: "Alternatively, you can include your API key as a query parameter:"
+      },
+      security: {
+        title: "Security Best Practices",
+        item1: "Never share your API key publicly",
+        item2: "Don't store API keys in client-side code",
+        item3: "Set appropriate permissions for your API keys",
+        item4: "Rotate your API keys periodically"
       },
       limits: {
-        question: "What happens if I exceed my plan limits?",
-        answer: "If you reach your monthly operation limit, you'll need to upgrade to a higher tier plan to continue processing documents, or wait until your limits reset at the start of the next month."
+        title: "Rate Limits & Quotas",
+        description: "API requests are subject to rate limits based on your subscription tier:",
+        plan: "Plan",
+        operations: "Operations",
+        rate: "Rate Limit",
+        keys: "API Keys"
       },
-      discounts: {
-        question: "Do you offer discounts for nonprofits or educational institutions?",
-        answer: "Yes, we offer special pricing for educational institutions, nonprofits, and open-source projects. Contact our sales team to learn more about our discount programs."
-      },
-      billing: {
-        question: "How is my subscription billed?",
-        answer: "Subscriptions are billed monthly or annually, depending on your preference. Annual plans include a discount compared to monthly billing."
-      },
-      payment: {
-        question: "What payment methods do you accept?",
-        answer: "We accept all major credit cards including Visa, Mastercard, American Express, and Discover. For Enterprise plans, we can also arrange alternative payment methods."
+      errors: {
+        title: "Rate Limit Errors",
+        description: "When you exceed your rate limit, the API will return a 429 Too Many Requests response with the following headers:"
       }
     },
-
-    guarantee: {
-      title: "100% Satisfaction Guarantee",
-      description: "We're confident you'll love ScanPro. If you're not completely satisfied with your paid plan, contact us within 14 days of purchase for a full refund."
+    api: {
+      question1: "How do I get an API key?",
+      answer1: "Register for an account, then go to Dashboard > API Keys to create your first API key. Free accounts get 1 API key, Basic subscribers get 3, Pro subscribers get 10, and Enterprise users get 50+ keys.",
+      question2: "What are the API rate limits?",
+      answer2: "Rate limits depend on your subscription tier: Free (10 requests/hour), Basic (100 requests_hour), Pro (1,000 requests/hour), Enterprise (5,000+ requests/hour). Monthly operation limits also apply to each tier.",
+      question3: "How do I integrate the API with my application?",
+      answer3: "Our API uses standard REST endpoints with JSON responses. You can find comprehensive documentation, code samples, and SDKs in our Developer section. We provide examples for various programming languages including JavaScript, Python, PHP, and Java."
     },
-  }
+    overview: {
+      title: "API Overview",
+      subtitle: "Everything you need to know about our API",
+      intro: "The ScanPro API allows you to integrate our PDF processing capabilities directly into your applications. With a simple RESTful interface, you can convert, compress, merge, split, and perform other operations on PDFs programmatically.",
+      features: {
+        title: "Key Features",
+        restful: "RESTful API with JSON responses",
+        authentication: "Simple authentication with API keys",
+        operations: "Comprehensive PDF operations including conversion, compression, merging, and more",
+        scalable: "Scalable pricing tiers to match your needs",
+        secure: "Secure file handling with encrypted transfers and automatic file deletion"
+      },
+      gettingStarted: "Getting Started",
+      startSteps: "To get started with the ScanPro API:",
+      step1: "Sign up for an account",
+      step2: "Generate an API key from your dashboard",
+      step3: "Make your first API request using the examples provided",
+      getStarted: "Get Started"
+    },
+    tools: {
+      conversion: {
+        title: "PDF Conversion",
+        description: "Convert PDFs to various formats (DOCX, XLSX, JPG) and vice versa."
+      },
+      manipulation: {
+        title: "PDF Manipulation",
+        description: "Merge multiple PDFs, split PDFs into separate files, or compress PDFs to reduce file size."
+      },
+      security: {
+        title: "PDF Security",
+        description: "Add password protection, unlock protected PDFs, and add watermarks for document security."
+      },
+      viewEndpoints: "View Endpoints"
+    },
 
+
+  }
 }
 
