@@ -74,7 +74,15 @@ export default {
     resetInstructions: "Jika ada akun dengan email tersebut, kami telah mengirimkan instruksi untuk mengatur ulang kata sandi Anda.",
     didntReceiveEmail: "Tidak menerima email?",
     tryAgain: "Coba lagi",
-    backToLogin: "Kembali ke masuk"
+    backToLogin: "Kembali ke masuk",
+    validatingToken: "Memvalidasi tautan pengaturan ulang Anda...",
+    invalidToken: "Tautan pengaturan ulang kata sandi ini tidak valid atau telah kedaluwarsa. Harap minta yang baru.",
+    requestNewLink: "Minta tautan pengaturan ulang baru",
+    passwordResetSuccess: "Kata sandi berhasil diatur ulang",
+    passwordResetSuccessMessage: "Kata sandi Anda telah berhasil diatur ulang. Anda akan segera diarahkan ke halaman login.",
+    passwordResetSuccessSubtext: "Jika Anda tidak diarahkan secara otomatis, klik tombol di bawah ini.",
+    resettingPassword: "Mengatur ulang kata sandi...",
+    resetPassword: "Atur Ulang Kata Sandi",
   },
   dashboard: {
     title: "Dasbor",
@@ -1490,59 +1498,6 @@ export default {
       description: "Platform kami menggunakan teknologi mutakhir untuk menyediakan konversi PDF berkualitas tinggi, pengeditan, dan keamanan sambil menjaga data Anda tetap aman."
     }
   },
-
-  // Halaman Harga
-  pricing: {
-    title: "Harga Sederhana dan Transparan",
-    description: "Pilih paket yang sesuai dengan kebutuhan Anda",
-    free: {
-      title: "Gratis",
-      description: "Tugas PDF dasar untuk pengguna sesekali",
-      features: [
-        "Konversi hingga 3 file/hari",
-        "PDF ke Word, Excel, PowerPoint",
-        "Kompresi dasar",
-        "Gabungkan hingga 5 PDF",
-        "Tambahkan tanda air sederhana",
-        "OCR standar"
-      ]
-    },
-    pro: {
-      title: "Pro",
-      description: "Lebih banyak kekuatan untuk pengguna PDF reguler",
-      features: [
-        "Konversi tanpa batas",
-        "Pemrosesan prioritas",
-        "Kompresi lanjutan",
-        "Gabungkan PDF tanpa batas",
-        "Tanda air khusus",
-        "OCR lanjutan dengan 100+ bahasa",
-        "Pemrosesan batch",
-        "Tanpa iklan"
-      ]
-    },
-    business: {
-      title: "Bisnis",
-      description: "Solusi lengkap untuk tim",
-      features: [
-        "Semua yang ada di paket Pro",
-        "Beberapa anggota tim",
-        "Akses API",
-        "Kepatuhan GDPR",
-        "Dukungan khusus",
-        "Analitik penggunaan",
-        "Opsi branding khusus"
-      ]
-    },
-    monthly: "Bulanan",
-    annually: "Tahunan",
-    savePercent: "Hemat 20%",
-    currentPlan: "Paket Saat Ini",
-    upgrade: "Tingkatkan Sekarang",
-    getStarted: "Mulai Sekarang",
-    contact: "Hubungi Penjualan"
-  },
-
   // Halaman Syarat dan Privasi
   legal: {
     termsTitle: "Syarat Layanan",
@@ -2315,7 +2270,114 @@ export default {
       },
       viewEndpoints: "Lihat Titik Akhir"
     }
-  }
+  },
+  pricing: {
+    // Metadata
+    metaTitle: "Paket Harga - ScanPro",
+    metaDescription: "Pilih paket yang tepat untuk kebutuhan PDF Anda. ScanPro menawarkan opsi harga fleksibel dari gratis hingga enterprise, dengan fitur yang Anda butuhkan.",
 
+    // Page content
+    title: "Harga sederhana dan transparan",
+    subtitle: "Pilih paket yang tepat untuk Anda. Semua paket mencakup alat PDF inti kami.",
+    monthly: "Bulanan",
+    yearly: "Tahunan",
+    saveUp: "Hemat hingga 20%",
+    subscribe: "Berlangganan",
+    feature: "Fitur",
+    featureCompare: "Perbandingan Fitur",
+
+    // Features
+    features: {
+      operations: "Operasi bulanan",
+      amount: {
+        free: "100 operasi",
+        basic: "1.000 operasi",
+        pro: "10.000 operasi",
+        enterprise: "100.000 operasi"
+      },
+      apiAccess: "Akses API",
+      apiKeys: {
+        free: "1 kunci API",
+        basic: "3 kunci API",
+        pro: "10 kunci API",
+        enterprise: "50 kunci API"
+      },
+      rateLimits: "Batas tarif",
+      rateLimit: {
+        free: "10 permintaan/jam",
+        basic: "100 permintaan/jam",
+        pro: "1.000 permintaan/jam",
+        enterprise: "5.000 permintaan/jam"
+      },
+      fileSizes: "Ukuran file maksimum",
+      fileSize: {
+        free: "25 MB",
+        basic: "50 MB",
+        pro: "100 MB",
+        enterprise: "200 MB"
+      },
+      ocr: "OCR (Pengenalan teks)",
+      watermarking: "Penandaan air",
+      advancedProtection: "Perlindungan PDF lanjutan",
+      bulkProcessing: "Pemrosesan massal",
+      supports: "Dukungan",
+      support: {
+        free: "Dukungan email",
+        priority: "Dukungan prioritas",
+        dedicated: "Dukungan khusus"
+      },
+      whiteLabel: "Opsi label putih",
+      serviceLevel: "Perjanjian Tingkat Layanan"
+    },
+
+    // Plan descriptions
+    planDescriptions: {
+      free: "Untuk kebutuhan PDF sesekali",
+      basic: "Untuk individu dan tim kecil",
+      pro: "Untuk profesional dan bisnis",
+      enterprise: "Untuk organisasi besar"
+    },
+
+    // FAQ section
+    faq: {
+      title: "Pertanyaan yang Sering Diajukan",
+      q1: {
+        title: "Apa itu operasi PDF?",
+        content: "Operasi PDF mencakup mengonversi PDF ke format lain (Word, Excel, dll.), mengompresi PDF, menggabungkan PDF, memisahkan PDF, menambahkan tanda air, mengekstrak teks, dan tindakan lain yang dilakukan pada file PDF melalui layanan kami."
+      },
+      q2: {
+        title: "Apakah saya bisa meningkatkan atau menurunkan paket saya?",
+        content: "Ya, Anda bisa meningkatkan atau menurunkan paket kapan saja. Saat meningkatkan, paket baru akan langsung berlaku. Saat menurunkan, paket baru akan berlaku di akhir siklus penagihan Anda saat ini."
+      },
+      q3: {
+        title: "Apakah Anda menawarkan pengembalian dana?",
+        content: "Kami menawarkan jaminan uang kembali 7 hari untuk semua paket berbayar. Jika Anda tidak puas dengan layanan kami, Anda bisa meminta pengembalian dana dalam waktu 7 hari dari pembelian awal Anda."
+      },
+      q4: {
+        title: "Apa yang terjadi jika saya melebihi batas operasi bulanan saya?",
+        content: "Jika Anda mencapai batas operasi bulanan, Anda tidak akan dapat melakukan operasi tambahan hingga batas Anda diatur ulang pada awal siklus penagihan berikutnya. Anda bisa meningkatkan paket Anda kapan saja untuk menambah batas Anda."
+      },
+      q5: {
+        title: "Apakah data saya aman?",
+        content: "Ya, kami menganggap serius keamanan data. Semua unggahan file dan pemrosesan dilakukan melalui koneksi HTTPS yang aman. Kami tidak menyimpan file Anda lebih lama dari yang diperlukan untuk pemrosesan, dan semua file akan dihapus secara otomatis setelah pemrosesan selesai."
+      }
+    },
+
+    // CTA section
+    cta: {
+      title: "Siap untuk memulai?",
+      subtitle: "Pilih paket yang tepat untuk Anda dan mulai ubah PDF Anda hari ini.",
+      startBasic: "Mulai dengan Dasar",
+      explorePdfTools: "Jelajahi Alat PDF"
+    },
+
+    // Login dialog
+    loginRequired: "Masuk diperlukan",
+    loginRequiredDesc: "Anda perlu masuk ke akun Anda sebelum berlangganan. Apakah Anda ingin masuk sekarang?",
+
+    // Plan buttons
+    getStarted: "Mulai",
+    currentPlan: "Paket Saat Ini"
+  },
 
 }

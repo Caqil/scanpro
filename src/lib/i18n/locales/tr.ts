@@ -74,7 +74,15 @@ export default {
         resetInstructions: "Bu e-posta ile bir hesap varsa, şifrenizi sıfırlama talimatlarını gönderdik.",
         didntReceiveEmail: "E-posta almadınız mı?",
         tryAgain: "Tekrar Dene",
-        backToLogin: "Girişe Geri Dön"
+        backToLogin: "Girişe Geri Dön",
+        validatingToken: "Sıfırlama bağlantınız doğrulanıyor...",
+        invalidToken: "Bu şifre sıfırlama bağlantısı geçersiz veya süresi dolmuş. Lütfen yeni bir tane isteyin.",
+        requestNewLink: "Yeni bir sıfırlama bağlantısı iste",
+        passwordResetSuccess: "Şifre başarıyla sıfırlandı",
+        passwordResetSuccessMessage: "Şifreniz başarıyla sıfırlandı. Kısa süre içinde giriş sayfasına yönlendirileceksiniz.",
+        passwordResetSuccessSubtext: "Otomatik olarak yönlendirilmezseniz, aşağıdaki düğmeye tıklayın.",
+        resettingPassword: "Şifre sıfırlanıyor...",
+        resetPassword: "Şifreyi Sıfırla"
     },
     dashboard: {
         title: "Kontrol Paneli",
@@ -1490,58 +1498,6 @@ export default {
         }
     },
 
-    // Fiyatlandırma Sayfası
-    pricing: {
-        title: "Basit ve Şeffaf Fiyatlandırma",
-        description: "İhtiyaçlarınıza uygun planı seçin",
-        free: {
-            title: "Ücretsiz",
-            description: "Ara sıra kullanıcılar için temel PDF görevleri",
-            features: [
-                "Günde 3 dosyaya kadar dönüşüm",
-                "PDF'den Word, Excel, PowerPoint'e",
-                "Temel sıkıştırma",
-                "5 PDF'ye kadar birleştirme",
-                "Basit filigranlar",
-                "Standart OCR"
-            ]
-        },
-        pro: {
-            title: "Pro",
-            description: "Düzenli PDF kullanıcıları için daha fazla özellik",
-            features: [
-                "Sınırsız dönüşüm",
-                "Öncelikli işleme",
-                "Gelişmiş sıkıştırma",
-                "Sınırsız PDF birleştirme",
-                "Özelleştirilebilir filigranlar",
-                "100'den fazla dil desteğiyle gelişmiş OCR",
-                "Toplu işleme",
-                "Reklamsız"
-            ]
-        },
-        business: {
-            title: "İşletme",
-            description: "Ekipler için tam çözüm",
-            features: [
-                "Pro planındaki her şey",
-                "Birden fazla ekip üyesi",
-                "API erişimi",
-                "GDPR uyumluluğu",
-                "Özel destek",
-                "Kullanım analizi",
-                "Marka özelleştirme seçenekleri"
-            ]
-        },
-        monthly: "Aylık",
-        annually: "Yıllık",
-        savePercent: "%20 Tasarruf Edin",
-        currentPlan: "Mevcut Plan",
-        upgrade: "Şimdi Yükselt",
-        getStarted: "Başla",
-        contact: "Satış Ekibiyle İletişime Geç"
-    },
-
     // Şartlar ve Gizlilik Sayfaları
     legal: {
         termsTitle: "Kullanım Şartları",
@@ -2312,6 +2268,114 @@ export default {
             },
             viewEndpoints: "Uç Noktaları Görüntüle"
         }
-    }
+    },
+    pricing: {
+        // Metadata
+        metaTitle: "Fiyatlandırma Planları - ScanPro",
+        metaDescription: "PDF ihtiyaçlarınız için doğru planı seçin. ScanPro, ücretsizden kurumsal plana kadar esnek fiyatlandırma seçenekleri sunar ve ihtiyacınız olan özelliklere sahiptir.",
+
+        // Page content
+        title: "Basit, şeffaf fiyatlandırma",
+        subtitle: "Size uygun planı seçin. Tüm planlar temel PDF araçlarımızı içerir.",
+        monthly: "Aylık",
+        yearly: "Yıllık",
+        saveUp: "%20’ye kadar tasarruf edin",
+        subscribe: "Abone Ol",
+        feature: "Özellik",
+        featureCompare: "Özellik Karşılaştırması",
+
+        // Features
+        features: {
+            operations: "Aylık işlemler",
+            amount: {
+                free: "100 işlem",
+                basic: "1.000 işlem",
+                pro: "10.000 işlem",
+                enterprise: "100.000 işlem"
+            },
+            apiAccess: "API Erişimi",
+            apiKeys: {
+                free: "1 API anahtarı",
+                basic: "3 API anahtarı",
+                pro: "10 API anahtarı",
+                enterprise: "50 API anahtarı"
+            },
+            rateLimits: "Hız limiti",
+            rateLimit: {
+                free: "10 istek/saat",
+                basic: "100 istek/saat",
+                pro: "1.000 istek/saat",
+                enterprise: "5.000 istek/saat"
+            },
+            fileSizes: "Maksimum dosya boyutu",
+            fileSize: {
+                free: "25 MB",
+                basic: "50 MB",
+                pro: "100 MB",
+                enterprise: "200 MB"
+            },
+            ocr: "OCR (Metin tanıma)",
+            watermarking: "Filigran ekleme",
+            advancedProtection: "Gelişmiş PDF koruması",
+            bulkProcessing: "Toplu işlem",
+            supports: "Destek",
+            support: {
+                free: "E-posta desteği",
+                priority: "Öncelikli destek",
+                dedicated: "Özel destek"
+            },
+            whiteLabel: "Beyaz etiket seçenekleri",
+            serviceLevel: "Hizmet Seviyesi Anlaşması"
+        },
+
+        // Plan descriptions
+        planDescriptions: {
+            free: "Ara sıra PDF ihtiyaçları için",
+            basic: "Bireyler ve küçük ekipler için",
+            pro: "Profesyoneller ve işletmeler için",
+            enterprise: "Büyük organizasyonlar için"
+        },
+
+        // FAQ section
+        faq: {
+            title: "Sıkça Sorulan Sorular",
+            q1: {
+                title: "PDF işlemleri nedir?",
+                content: "PDF işlemleri, PDF’leri diğer formatlara (Word, Excel vb.) dönüştürme, PDF’leri sıkıştırma, PDF’leri birleştirme, PDF’leri bölme, filigran ekleme, metin çıkarma ve hizmetimiz aracılığıyla bir PDF dosyası üzerinde gerçekleştirilen diğer eylemleri içerir."
+            },
+            q2: {
+                title: "Planımı yükseltebilir veya düşürebilir miyim?",
+                content: "Evet, planınızı istediğiniz zaman yükseltebilir veya düşürebilirsiniz. Yükseltme yaptığınızda yeni plan hemen devreye girer. Düşürme yaptığınızda yeni plan, mevcut fatura döngünüzün sonunda devreye girer."
+            },
+            q3: {
+                title: "İade sunuyor musunuz?",
+                content: "Tüm ücretli planlarda 7 günlük para iade garantisi sunuyoruz. Hizmetimizden memnun kalmazsanız, ilk satın alma işleminizden sonraki 7 gün içinde iade talebinde bulunabilirsiniz."
+            },
+            q4: {
+                title: "Aylık işlem limitimi aşarsam ne olur?",
+                content: "Aylık işlem limitinize ulaşırsanız, bir sonraki fatura döngünüzün başında limitiniz sıfırlanana kadar ek işlem yapamazsınız. Limitinizi artırmak için planınızı istediğiniz zaman yükseltebilirsiniz."
+            },
+            q5: {
+                title: "Verilerim güvende mi?",
+                content: "Evet, veri güvenliğini ciddiye alıyoruz. Tüm dosya yüklemeleri ve işlemler güvenli HTTPS bağlantıları üzerinden gerçekleştirilir. Dosyalarınızı işlem için gerekenden daha uzun süre saklamayız ve işlem tamamlandıktan sonra tüm dosyalar otomatik olarak silinir."
+            }
+        },
+
+        // CTA section
+        cta: {
+            title: "Başlamaya hazır mısınız?",
+            subtitle: "Size uygun planı seçin ve bugün PDF’lerinizi dönüştürmeye başlayın.",
+            startBasic: "Temel ile Başla",
+            explorePdfTools: "PDF Araçlarını Keşfet"
+        },
+
+        // Login dialog
+        loginRequired: "Giriş yapmanız gerekiyor",
+        loginRequiredDesc: "Abone olmadan önce hesabınıza giriş yapmanız gerekiyor. Şimdi giriş yapmak ister misiniz?",
+
+        // Plan buttons
+        getStarted: "Başla",
+        currentPlan: "Mevcut Plan"
+    },
 
 }

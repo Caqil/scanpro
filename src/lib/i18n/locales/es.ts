@@ -74,7 +74,15 @@ export default {
     resetInstructions: "Si existe una cuenta con ese correo, hemos enviado instrucciones para restablecer tu contraseña.",
     didntReceiveEmail: "¿No recibiste un correo?",
     tryAgain: "Intentar de nuevo",
-    backToLogin: "Volver al inicio de sesión"
+    backToLogin: "Volver al inicio de sesión",
+    validatingToken: "Validando su enlace de restablecimiento...",
+    invalidToken: "Este enlace de restablecimiento de contraseña no es válido o ha expirado. Por favor, solicite uno nuevo.",
+    requestNewLink: "Solicitar un nuevo enlace de restablecimiento",
+    passwordResetSuccess: "Contraseña restablecida con éxito",
+    passwordResetSuccessMessage: "Su contraseña ha sido restablecida con éxito. Será redirigido a la página de inicio de sesión en breve.",
+    passwordResetSuccessSubtext: "Si no es redirigido automáticamente, haga clic en el botón de abajo.",
+    resettingPassword: "Restableciendo contraseña...",
+    resetPassword: "Restablecer contraseña",
   },
   dashboard: {
     title: "Tablero",
@@ -1486,59 +1494,6 @@ export default {
       description: "Nuestra plataforma utiliza tecnología de punta para proporcionar conversión, edición y seguridad de PDFs de alta calidad mientras mantiene tus datos seguros."
     }
   },
-
-  // Página de Precios
-  pricing: {
-    title: "Precios Simples y Transparentes",
-    description: "Elige el plan que se ajuste a tus necesidades",
-    free: {
-      title: "Gratis",
-      description: "Tareas básicas de PDF para usuarios ocasionales",
-      features: [
-        "Convierte hasta 3 archivos/día",
-        "PDF a Word, Excel, PowerPoint",
-        "Compresión básica",
-        "Combina hasta 5 PDFs",
-        "Agrega marcas de agua simples",
-        "OCR estándar"
-      ]
-    },
-    pro: {
-      title: "Pro",
-      description: "Más potencia para usuarios regulares de PDF",
-      features: [
-        "Conversiones ilimitadas",
-        "Procesamiento prioritario",
-        "Compresión avanzada",
-        "Combina PDFs ilimitados",
-        "Marcas de agua personalizadas",
-        "OCR avanzado con más de 100 idiomas",
-        "Procesamiento por lotes",
-        "Sin anuncios"
-      ]
-    },
-    business: {
-      title: "Negocios",
-      description: "Solución completa para equipos",
-      features: [
-        "Todo en el plan Pro",
-        "Múltiples miembros del equipo",
-        "Acceso a API",
-        "Cumplimiento GDPR",
-        "Soporte dedicado",
-        "Análisis de uso",
-        "Opciones de personalización de marca"
-      ]
-    },
-    monthly: "Mensual",
-    annually: "Anual",
-    savePercent: "Ahorra 20%",
-    currentPlan: "Plan Actual",
-    upgrade: "Actualizar Ahora",
-    getStarted: "Comenzar",
-    contact: "Contactar Ventas"
-  },
-
   // Páginas de Términos y Privacidad
   legal: {
     termsTitle: "Términos de Servicio",
@@ -2134,184 +2089,291 @@ export default {
       }
     }
   },
-  
-    developer: {
-      title: "Documentación de la API para desarrolladores",
-      description: "Integre las potentes herramientas de PDF de ScanPro en sus aplicaciones con nuestra API RESTful",
-      tabs: {
-        overview: "Visión general",
-        authentication: "Autenticación",
-        endpoints: "Endpoints",
-        examples: "Ejemplos",
-        pricing: "Precios"
+
+  developer: {
+    title: "Documentación de la API para desarrolladores",
+    description: "Integre las potentes herramientas de PDF de ScanPro en sus aplicaciones con nuestra API RESTful",
+    tabs: {
+      overview: "Visión general",
+      authentication: "Autenticación",
+      endpoints: "Endpoints",
+      examples: "Ejemplos",
+      pricing: "Precios"
+    },
+    examples: {
+      title: "Ejemplos de código",
+      subtitle: "Aprenda cómo integrar nuestra API con estos ejemplos listos para usar",
+      pdfToWord: "Conversión de PDF a Word",
+      mergePdfs: "Combinar PDFs",
+      protectPdf: "Proteger PDF"
+    },
+    endpoints: {
+      title: "Endpoints de la API",
+      subtitle: "Referencia completa para todos los endpoints de la API disponibles",
+      categories: {
+        all: "Todos",
+        conversion: "Conversión",
+        manipulation: "Manipulación",
+        security: "Seguridad",
+        ocr: "OCR"
       },
-      examples: {
-        title: "Ejemplos de código",
-        subtitle: "Aprenda cómo integrar nuestra API con estos ejemplos listos para usar",
-        pdfToWord: "Conversión de PDF a Word",
-        mergePdfs: "Combinar PDFs",
-        protectPdf: "Proteger PDF"
+      parameters: "Parámetros",
+      paramName: "Nombre",
+      type: "Tipo",
+      required: "Requerido",
+      description: "Descripción",
+      responses: "Respuestas"
+    },
+    pricing: {
+      title: "Precios de la API",
+      subtitle: "Elija el plan adecuado para sus necesidades de integración de API",
+      monthly: "Facturación mensual",
+      yearly: "Facturación anual",
+      discount: "Ahorre 20%",
+      forever: "para siempre",
+      includes: "Qué incluye:",
+      getStarted: "Comenzar",
+      subscribe: "Suscribirse",
+      freePlan: {
+        description: "Para uso ocasional y pruebas",
+        feature1: "100 operaciones por mes",
+        feature2: "10 solicitudes por hora",
+        feature3: "1 clave API",
+        feature4: "Operaciones básicas de PDF"
       },
-      endpoints: {
-        title: "Endpoints de la API",
-        subtitle: "Referencia completa para todos los endpoints de la API disponibles",
-        categories: {
-          all: "Todos",
-          conversion: "Conversión",
-          manipulation: "Manipulación",
-          security: "Seguridad",
-          ocr: "OCR"
-        },
-        parameters: "Parámetros",
-        paramName: "Nombre",
-        type: "Tipo",
-        required: "Requerido",
-        description: "Descripción",
-        responses: "Respuestas"
+      basicPlan: {
+        description: "Para startups y proyectos pequeños",
+        feature1: "1,000 operaciones por mes",
+        feature2: "100 solicitudes por hora",
+        feature3: "3 claves API",
+        feature4: "Todas las operaciones de PDF",
+        feature5: "OCR básico"
       },
-      pricing: {
-        title: "Precios de la API",
-        subtitle: "Elija el plan adecuado para sus necesidades de integración de API",
-        monthly: "Facturación mensual",
-        yearly: "Facturación anual",
-        discount: "Ahorre 20%",
-        forever: "para siempre",
-        includes: "Qué incluye:",
-        getStarted: "Comenzar",
-        subscribe: "Suscribirse",
-        freePlan: {
-          description: "Para uso ocasional y pruebas",
-          feature1: "100 operaciones por mes",
-          feature2: "10 solicitudes por hora",
-          feature3: "1 clave API",
-          feature4: "Operaciones básicas de PDF"
-        },
-        basicPlan: {
-          description: "Para startups y proyectos pequeños",
-          feature1: "1,000 operaciones por mes",
-          feature2: "100 solicitudes por hora",
-          feature3: "3 claves API",
-          feature4: "Todas las operaciones de PDF",
-          feature5: "OCR básico"
-        },
-        proPlan: {
-          description: "Para empresas y usuarios avanzados",
-          feature1: "10,000 operaciones por mes",
-          feature2: "1,000 solicitudes por hora",
-          feature3: "10 claves API",
-          feature4: "OCR avanzado",
-          feature5: "Soporte prioritario",
-          feature6: "Marcas de agua personalizadas"
-        },
-        enterprisePlan: {
-          description: "Para integraciones de alto volumen",
-          feature1: "100,000+ operaciones por mes",
-          feature2: "5,000+ solicitudes por hora",
-          feature3: "50+ claves API",
-          feature4: "Soporte dedicado",
-          feature5: "Ayuda de integración personalizada",
-          feature6: "Opciones de marca blanca"
-        },
-        customPricing: {
-          title: "¿Necesita una solución personalizada?",
-          description: "Para un uso intensivo de la API o requisitos de integración especializados, ofrecemos precios personalizados con soporte dedicado.",
-          contactSales: "Contactar ventas",
-          enterprisePlus: "Enterprise+",
-          dedicated: "Infraestructura dedicada",
-          sla: "SLAs personalizados",
-          account: "Gestor de cuenta dedicado",
-          custom: "Precios personalizados"
-        }
+      proPlan: {
+        description: "Para empresas y usuarios avanzados",
+        feature1: "10,000 operaciones por mes",
+        feature2: "1,000 solicitudes por hora",
+        feature3: "10 claves API",
+        feature4: "OCR avanzado",
+        feature5: "Soporte prioritario",
+        feature6: "Marcas de agua personalizadas"
       },
-      authentication: {
-        loginRequired: "Inicio de sesión requerido",
-        loginMessage: "Inicie sesión en su cuenta para acceder a sus claves API.",
-        signIn: "Iniciar sesión",
-        yourApiKey: "Su clave API",
-        noApiKeys: "Aún no tiene claves API.",
-        managementKeys: "Gestionar claves API",
-        createApiKey: "Crear clave API",
-        title: "Autenticación de la API",
-        subtitle: "Asegure sus solicitudes de API con claves API",
-        apiKeys: {
-          title: "Claves API",
-          description: "Todas las solicitudes a la API de ScanPro requieren autenticación mediante una clave API. ¡Su clave API tiene muchos privilegios, así que asegúrese de mantenerla segura!"
-        },
-        howTo: {
-          title: "Cómo autenticarse",
-          description: "Puede autenticar sus solicitudes de API de una de estas dos maneras:"
-        },
-        header: {
-          title: "1. Usando el encabezado HTTP (recomendado)",
-          description: "Incluya su clave API en el encabezado x-api-key de su solicitud HTTP:"
-        },
-        query: {
-          title: "2. Usando un parámetro de consulta",
-          description: "Alternativamente, puede incluir su clave API como un parámetro de consulta:"
-        },
-        security: {
-          title: "Mejores prácticas de seguridad",
-          item1: "Nunca comparta su clave API públicamente",
-          item2: "No almacene claves API en código del lado del cliente",
-          item3: "Establezca permisos apropiados para sus claves API",
-          item4: "Rote sus claves API periódicamente"
-        },
-        limits: {
-          title: "Límites de tasa y cuotas",
-          description: "Las solicitudes de API están sujetas a límites de tasa según su nivel de suscripción:",
-          plan: "Plan",
-          operations: "Operaciones",
-          rate: "Límite de tasa",
-          keys: "Claves API"
-        },
-        errors: {
-          title: "Errores de límite de tasa",
-          description: "Cuando exceda su límite de tasa, la API devolverá una respuesta 429 Too Many Requests con los siguientes encabezados:"
-        }
+      enterprisePlan: {
+        description: "Para integraciones de alto volumen",
+        feature1: "100,000+ operaciones por mes",
+        feature2: "5,000+ solicitudes por hora",
+        feature3: "50+ claves API",
+        feature4: "Soporte dedicado",
+        feature5: "Ayuda de integración personalizada",
+        feature6: "Opciones de marca blanca"
       },
-      api: {
-        question1: "¿Cómo obtengo una clave API?",
-        answer1: "Regístrese para obtener una cuenta, luego vaya a Panel > Claves API para crear su primera clave API. Las cuentas gratuitas obtienen 1 clave API, los suscriptores básicos obtienen 3, los suscriptores Pro obtienen 10 y los usuarios Enterprise obtienen 50+ claves.",
-        question2: "¿Cuáles son los límites de tasa de la API?",
-        answer2: "Los límites de tasa dependen de su nivel de suscripción: Gratis (10 solicitudes/hora), Básico (100 solicitudes/hora), Pro (1,000 solicitudes/hora), Enterprise (5,000+ solicitudes/hora). También se aplican límites de operaciones mensuales a cada nivel.",
-        question3: "¿Cómo integro la API con mi aplicación?",
-        answer3: "Nuestra API utiliza endpoints REST estándar con respuestas JSON. Puede encontrar documentación completa, ejemplos de código y SDKs en nuestra sección de desarrolladores. Proporcionamos ejemplos para varios lenguajes de programación, incluidos JavaScript, Python, PHP y Java."
-      },
-      overview: {
-        title: "Visión general de la API",
-        subtitle: "Todo lo que necesita saber sobre nuestra API",
-        intro: "La API de ScanPro le permite integrar nuestras capacidades de procesamiento de PDF directamente en sus aplicaciones. Con una interfaz RESTful simple, puede convertir, comprimir, combinar, dividir y realizar otras operaciones en PDFs programáticamente.",
-        features: {
-          title: "Características clave",
-          restful: "API RESTful con respuestas JSON",
-          authentication: "Autenticación simple con claves API",
-          operations: "Operaciones completas de PDF incluyendo conversión, compresión, combinación y más",
-          scalable: "Niveles de precios escalables para satisfacer sus necesidades",
-          secure: "Manejo seguro de archivos con transferencias cifradas y eliminación automática de archivos"
-        },
-        gettingStarted: "Comenzando",
-        startSteps: "Para comenzar con la API de ScanPro:",
-        step1: "Regístrese para obtener una cuenta",
-        step2: "Genere una clave API desde su panel",
-        step3: "Realice su primera solicitud API usando los ejemplos proporcionados",
-        getStarted: "Comenzar"
-      },
-      tools: {
-        conversion: {
-          title: "Conversión de PDF",
-          description: "Convierta PDFs a varios formatos (DOCX, XLSX, JPG) y viceversa."
-        },
-        manipulation: {
-          title: "Manipulación de PDF",
-          description: "Combine varios PDFs, divida PDFs en archivos separados o comprima PDFs para reducir el tamaño del archivo."
-        },
-        security: {
-          title: "Seguridad de PDF",
-          description: "Añada protección con contraseña, desbloquee PDFs protegidos y añada marcas de agua para la seguridad de los documentos."
-        },
-        viewEndpoints: "Ver endpoints"
+      customPricing: {
+        title: "¿Necesita una solución personalizada?",
+        description: "Para un uso intensivo de la API o requisitos de integración especializados, ofrecemos precios personalizados con soporte dedicado.",
+        contactSales: "Contactar ventas",
+        enterprisePlus: "Enterprise+",
+        dedicated: "Infraestructura dedicada",
+        sla: "SLAs personalizados",
+        account: "Gestor de cuenta dedicado",
+        custom: "Precios personalizados"
       }
+    },
+    authentication: {
+      loginRequired: "Inicio de sesión requerido",
+      loginMessage: "Inicie sesión en su cuenta para acceder a sus claves API.",
+      signIn: "Iniciar sesión",
+      yourApiKey: "Su clave API",
+      noApiKeys: "Aún no tiene claves API.",
+      managementKeys: "Gestionar claves API",
+      createApiKey: "Crear clave API",
+      title: "Autenticación de la API",
+      subtitle: "Asegure sus solicitudes de API con claves API",
+      apiKeys: {
+        title: "Claves API",
+        description: "Todas las solicitudes a la API de ScanPro requieren autenticación mediante una clave API. ¡Su clave API tiene muchos privilegios, así que asegúrese de mantenerla segura!"
+      },
+      howTo: {
+        title: "Cómo autenticarse",
+        description: "Puede autenticar sus solicitudes de API de una de estas dos maneras:"
+      },
+      header: {
+        title: "1. Usando el encabezado HTTP (recomendado)",
+        description: "Incluya su clave API en el encabezado x-api-key de su solicitud HTTP:"
+      },
+      query: {
+        title: "2. Usando un parámetro de consulta",
+        description: "Alternativamente, puede incluir su clave API como un parámetro de consulta:"
+      },
+      security: {
+        title: "Mejores prácticas de seguridad",
+        item1: "Nunca comparta su clave API públicamente",
+        item2: "No almacene claves API en código del lado del cliente",
+        item3: "Establezca permisos apropiados para sus claves API",
+        item4: "Rote sus claves API periódicamente"
+      },
+      limits: {
+        title: "Límites de tasa y cuotas",
+        description: "Las solicitudes de API están sujetas a límites de tasa según su nivel de suscripción:",
+        plan: "Plan",
+        operations: "Operaciones",
+        rate: "Límite de tasa",
+        keys: "Claves API"
+      },
+      errors: {
+        title: "Errores de límite de tasa",
+        description: "Cuando exceda su límite de tasa, la API devolverá una respuesta 429 Too Many Requests con los siguientes encabezados:"
+      }
+    },
+    api: {
+      question1: "¿Cómo obtengo una clave API?",
+      answer1: "Regístrese para obtener una cuenta, luego vaya a Panel > Claves API para crear su primera clave API. Las cuentas gratuitas obtienen 1 clave API, los suscriptores básicos obtienen 3, los suscriptores Pro obtienen 10 y los usuarios Enterprise obtienen 50+ claves.",
+      question2: "¿Cuáles son los límites de tasa de la API?",
+      answer2: "Los límites de tasa dependen de su nivel de suscripción: Gratis (10 solicitudes/hora), Básico (100 solicitudes/hora), Pro (1,000 solicitudes/hora), Enterprise (5,000+ solicitudes/hora). También se aplican límites de operaciones mensuales a cada nivel.",
+      question3: "¿Cómo integro la API con mi aplicación?",
+      answer3: "Nuestra API utiliza endpoints REST estándar con respuestas JSON. Puede encontrar documentación completa, ejemplos de código y SDKs en nuestra sección de desarrolladores. Proporcionamos ejemplos para varios lenguajes de programación, incluidos JavaScript, Python, PHP y Java."
+    },
+    overview: {
+      title: "Visión general de la API",
+      subtitle: "Todo lo que necesita saber sobre nuestra API",
+      intro: "La API de ScanPro le permite integrar nuestras capacidades de procesamiento de PDF directamente en sus aplicaciones. Con una interfaz RESTful simple, puede convertir, comprimir, combinar, dividir y realizar otras operaciones en PDFs programáticamente.",
+      features: {
+        title: "Características clave",
+        restful: "API RESTful con respuestas JSON",
+        authentication: "Autenticación simple con claves API",
+        operations: "Operaciones completas de PDF incluyendo conversión, compresión, combinación y más",
+        scalable: "Niveles de precios escalables para satisfacer sus necesidades",
+        secure: "Manejo seguro de archivos con transferencias cifradas y eliminación automática de archivos"
+      },
+      gettingStarted: "Comenzando",
+      startSteps: "Para comenzar con la API de ScanPro:",
+      step1: "Regístrese para obtener una cuenta",
+      step2: "Genere una clave API desde su panel",
+      step3: "Realice su primera solicitud API usando los ejemplos proporcionados",
+      getStarted: "Comenzar"
+    },
+    tools: {
+      conversion: {
+        title: "Conversión de PDF",
+        description: "Convierta PDFs a varios formatos (DOCX, XLSX, JPG) y viceversa."
+      },
+      manipulation: {
+        title: "Manipulación de PDF",
+        description: "Combine varios PDFs, divida PDFs en archivos separados o comprima PDFs para reducir el tamaño del archivo."
+      },
+      security: {
+        title: "Seguridad de PDF",
+        description: "Añada protección con contraseña, desbloquee PDFs protegidos y añada marcas de agua para la seguridad de los documentos."
+      },
+      viewEndpoints: "Ver endpoints"
     }
-  
+  },
+  pricing: {
+    // Metadata
+    metaTitle: "Planes de precios - ScanPro",
+    metaDescription: "Elige el plan adecuado para tus necesidades de PDF. ScanPro ofrece opciones de precios flexibles desde gratuito hasta empresarial, con las funciones que necesitas.",
+
+    // Page content
+    title: "Precios simples y transparentes",
+    subtitle: "Elige el plan adecuado para ti. Todos los planes incluyen nuestras herramientas PDF principales.",
+    monthly: "Mensual",
+    yearly: "Anual",
+    saveUp: "Ahorra hasta un 20%",
+    subscribe: "Suscríbete",
+    feature: "Característica",
+    featureCompare: "Comparación de características",
+
+    // Features
+    features: {
+      operations: "Operaciones mensuales",
+      amount: {
+        free: "100 operaciones",
+        basic: "1,000 operaciones",
+        pro: "10,000 operaciones",
+        enterprise: "100,000 operaciones"
+      },
+      apiAccess: "Acceso a API",
+      apiKeys: {
+        free: "1 clave API",
+        basic: "3 claves API",
+        pro: "10 claves API",
+        enterprise: "50 claves API"
+      },
+      rateLimits: "Límite de tasa",
+      rateLimit: {
+        free: "10 solicitudes/hora",
+        basic: "100 solicitudes/hora",
+        pro: "1,000 solicitudes/hora",
+        enterprise: "5,000 solicitudes/hora"
+      },
+      fileSizes: "Tamaño máximo de archivo",
+      fileSize: {
+        free: "25 MB",
+        basic: "50 MB",
+        pro: "100 MB",
+        enterprise: "200 MB"
+      },
+      ocr: "OCR (Reconocimiento de texto)",
+      watermarking: "Marcas de agua",
+      advancedProtection: "Protección avanzada de PDF",
+      bulkProcessing: "Procesamiento masivo",
+      supports: "Soporte",
+      support: {
+        free: "Soporte por correo electrónico",
+        priority: "Soporte prioritario",
+        dedicated: "Soporte dedicado"
+      },
+      whiteLabel: "Opciones de marca blanca",
+      serviceLevel: "Acuerdo de nivel de servicio"
+    },
+
+    // Plan descriptions
+    planDescriptions: {
+      free: "Para necesidades ocasionales de PDF",
+      basic: "Para individuos y equipos pequeños",
+      pro: "Para profesionales y empresas",
+      enterprise: "Para grandes organizaciones"
+    },
+
+    // FAQ section
+    faq: {
+      title: "Preguntas frecuentes",
+      q1: {
+        title: "¿Qué son las operaciones de PDF?",
+        content: "Las operaciones de PDF incluyen convertir PDFs a otros formatos (Word, Excel, etc.), comprimir PDFs, fusionar PDFs, dividir PDFs, añadir marcas de agua, extraer texto y cualquier otra acción realizada en un archivo PDF a través de nuestro servicio."
+      },
+      q2: {
+        title: "¿Puedo actualizar o degradar mi plan?",
+        content: "Sí, puedes actualizar o degradar tu plan en cualquier momento. Al actualizar, el nuevo plan entra en vigor inmediatamente. Al degradar, el nuevo plan entrará en vigor al final de tu ciclo de facturación actual."
+      },
+      q3: {
+        title: "¿Ofrecen reembolsos?",
+        content: "Ofrecemos una garantía de devolución de dinero de 7 días en todos los planes de pago. Si no estás satisfecho con nuestro servicio, puedes solicitar un reembolso dentro de los 7 días de tu compra inicial."
+      },
+      q4: {
+        title: "¿Qué pasa si excedo mi límite de operaciones mensuales?",
+        content: "Si alcanzas tu límite de operaciones mensuales, no podrás realizar operaciones adicionales hasta que tu límite se reinicie al comienzo de tu próximo ciclo de facturación. Puedes actualizar tu plan en cualquier momento para aumentar tu límite."
+      },
+      q5: {
+        title: "¿Están mis datos seguros?",
+        content: "Sí, tomamos la seguridad de los datos muy en serio. Todas las subidas de archivos y procesamientos se realizan a través de conexiones HTTPS seguras. No almacenamos tus archivos más tiempo del necesario para el procesamiento, y todos los archivos se eliminan automáticamente tras completar el procesamiento."
+      }
+    },
+
+    // CTA section
+    cta: {
+      title: "¿Listo para empezar?",
+      subtitle: "Elige el plan adecuado para ti y comienza a transformar tus PDFs hoy mismo.",
+      startBasic: "Comienza con Básico",
+      explorePdfTools: "Explora herramientas PDF"
+    },
+
+    // Login dialog
+    loginRequired: "Inicio de sesión requerido",
+    loginRequiredDesc: "¿Necesitas iniciar sesión en tu cuenta antes de suscribirte. Te gustaría iniciar sesión ahora?",
+
+    // Plan buttons
+    getStarted: "Comenzar",
+    currentPlan: "Plan actual"
+  },
 
 }

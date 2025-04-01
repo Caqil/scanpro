@@ -74,7 +74,15 @@ export default {
     resetInstructions: "해당 이메일로 계정이 존재한다면, 비밀번호 재설정 지침을 보냈습니다.",
     didntReceiveEmail: "이메일을 받지 못했나요?",
     tryAgain: "다시 시도",
-    backToLogin: "로그인으로 돌아가기"
+    backToLogin: "로그인으로 돌아가기",
+    validatingToken: "재설정 링크를 확인 중입니다...",
+    invalidToken: "이 비밀번호 재설정 링크는 유효하지 않거나 만료되었습니다. 새로 요청해 주세요.",
+    requestNewLink: "새 재설정 링크 요청",
+    passwordResetSuccess: "비밀번호 재설정 성공",
+    passwordResetSuccessMessage: "비밀번호가 성공적으로 재설정되었습니다. 곧 로그인 페이지로 리디렉션됩니다.",
+    passwordResetSuccessSubtext: "자동으로 리디렉션되지 않으면 아래 버튼을 클릭하세요.",
+    resettingPassword: "비밀번호 재설정 중...",
+    resetPassword: "비밀번호 재설정"
   },
   dashboard: {
     title: "대시보드",
@@ -1491,58 +1499,6 @@ export default {
     }
   },
 
-  // Pricing Page
-  pricing: {
-    title: "간단하고 투명한 가격",
-    description: "귀하의 필요에 맞는 플랜을 선택하세요",
-    free: {
-      title: "무료",
-      description: "가끔 사용하는 사용자를 위한 기본 PDF 작업",
-      features: [
-        "하루 최대 3개 파일 변환",
-        "PDF에서 Word, Excel, PowerPoint로",
-        "기본 압축",
-        "최대 5개 PDF 병합",
-        "간단한 워터마크 추가",
-        "표준 OCR"
-      ]
-    },
-    pro: {
-      title: "프로",
-      description: "정기적인 PDF 사용자에게 더 많은 기능",
-      features: [
-        "무제한 변환",
-        "우선 처리",
-        "고급 압축",
-        "무제한 PDF 병합",
-        "사용자 지정 워터마크",
-        "100개 이상의 언어를 지원하는 고급 OCR",
-        "일괄 처리",
-        "광고 없음"
-      ]
-    },
-    business: {
-      title: "비즈니스",
-      description: "팀을 위한 완벽한 솔루션",
-      features: [
-        "프로 플랜의 모든 기능",
-        "여러 팀원",
-        "API 접근",
-        "GDPR 준수",
-        "전담 지원",
-        "사용 분석",
-        "사용자 지정 브랜딩 옵션"
-      ]
-    },
-    monthly: "월간",
-    annually: "연간",
-    savePercent: "20% 절약",
-    currentPlan: "현재 플랜",
-    upgrade: "지금 업그레이드",
-    getStarted: "시작하기",
-    contact: "영업팀에 문의"
-  },
-
   // Terms and Privacy Pages
   legal: {
     termsTitle: "서비스 약관",
@@ -2314,6 +2270,114 @@ export default {
       },
       viewEndpoints: "엔드포인트 보기"
     }
-  }
+  },
+  pricing: {
+    // Metadata
+    metaTitle: "요금제 - ScanPro",
+    metaDescription: "PDF 필요에 맞는 요금제를 선택하세요. ScanPro는 무료부터 엔터프라이즈까지 유연한 가격 옵션을 제공하며, 필요한 기능을 갖추고 있습니다.",
+
+    // Page content
+    title: "간단하고 투명한 요금",
+    subtitle: "당신에게 맞는 요금제를 선택하세요. 모든 요금제에는 핵심 PDF 도구가 포함되어 있습니다.",
+    monthly: "월간",
+    yearly: "연간",
+    saveUp: "최대 20% 절약",
+    subscribe: "구독",
+    feature: "기능",
+    featureCompare: "기능 비교",
+
+    // Features
+    features: {
+      operations: "월간 작업",
+      amount: {
+        free: "100 작업",
+        basic: "1,000 작업",
+        pro: "10,000 작업",
+        enterprise: "100,000 작업"
+      },
+      apiAccess: "API 액세스",
+      apiKeys: {
+        free: "1 API 키",
+        basic: "3 API 키",
+        pro: "10 API 키",
+        enterprise: "50 API 키"
+      },
+      rateLimits: "속도 제한",
+      rateLimit: {
+        free: "10 요청/시간",
+        basic: "100 요청/시간",
+        pro: "1,000 요청/시간",
+        enterprise: "5,000 요청/시간"
+      },
+      fileSizes: "최대 파일 크기",
+      fileSize: {
+        free: "25 MB",
+        basic: "50 MB",
+        pro: "100 MB",
+        enterprise: "200 MB"
+      },
+      ocr: "OCR (텍스트 인식)",
+      watermarking: "워터마킹",
+      advancedProtection: "고급 PDF 보호",
+      bulkProcessing: "일괄 처리",
+      supports: "지원",
+      support: {
+        free: "이메일 지원",
+        priority: "우선 지원",
+        dedicated: "전담 지원"
+      },
+      whiteLabel: "화이트 라벨 옵션",
+      serviceLevel: "서비스 수준 계약"
+    },
+
+    // Plan descriptions
+    planDescriptions: {
+      free: "가끔 PDF가 필요한 경우",
+      basic: "개인 및 소규모 팀용",
+      pro: "전문가 및 기업용",
+      enterprise: "대규모 조직용"
+    },
+
+    // FAQ section
+    faq: {
+      title: "자주 묻는 질문",
+      q1: {
+        title: "PDF 작업이란 무엇인가요?",
+        content: "PDF 작업에는 PDF를 다른 형식(Word, Excel 등)으로 변환, PDF 압축, PDF 병합, PDF 분할, 워터마크 추가, 텍스트 추출 및 당사 서비스를 통해 PDF 파일에서 수행되는 기타 작업이 포함됩니다."
+      },
+      q2: {
+        title: "요금제를 업그레이드하거나 다운그레이드할 수 있나요?",
+        content: "네, 언제든지 요금제를 업그레이드하거나 다운그레이드할 수 있습니다. 업그레이드 시 새 요금제가 즉시 적용됩니다. 다운그레이드 시 새 요금제는 현재 청구 주기가 끝날 때 적용됩니다."
+      },
+      q3: {
+        title: "환불을 제공하나요?",
+        content: "모든 유료 요금제에 대해 7일 환불 보장을 제공합니다. 서비스에 만족하지 않으시면 최초 구매 후 7일 이내에 환불을 요청할 수 있습니다."
+      },
+      q4: {
+        title: "월간 작업 한도를 초과하면 어떻게 되나요?",
+        content: "월간 작업 한도에 도달하면 다음 청구 주기 시작 시 한도가 리셋될 때까지 추가 작업을 수행할 수 없습니다. 한도를 늘리기 위해 언제든지 요금제를 업그레이드할 수 있습니다."
+      },
+      q5: {
+        title: "내 데이터는 안전한가요?",
+        content: "네, 우리는 데이터 보안을 매우 중요하게 생각합니다. 모든 파일 업로드 및 처리는 보안 HTTPS 연결을 통해 이루어집니다. 처리가 끝난 후 파일은 필요 이상으로 저장되지 않으며, 처리가 완료되면 모든 파일이 자동으로 삭제됩니다."
+      }
+    },
+
+    // CTA section
+    cta: {
+      title: "시작할 준비가 되셨나요?",
+      subtitle: "당신에게 맞는 요금제를 선택하고 오늘부터 PDF를 변환해보세요.",
+      startBasic: "베이직으로 시작",
+      explorePdfTools: "PDF 도구 탐색"
+    },
+
+    // Login dialog
+    loginRequired: "로그인 필요",
+    loginRequiredDesc: "구독하기 전에 계정에 로그인해야 합니다. 지금 로그인하시겠습니까?",
+
+    // Plan buttons
+    getStarted: "시작하기",
+    currentPlan: "현재 요금제"
+  },
 
 }

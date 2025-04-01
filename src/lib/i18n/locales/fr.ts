@@ -74,7 +74,15 @@ export default {
         resetInstructions: "S'il existe un compte avec cet email, nous avons envoyé des instructions pour réinitialiser votre mot de passe.",
         didntReceiveEmail: "Vous n'avez pas reçu d'email ?",
         tryAgain: "Réessayer",
-        backToLogin: "Retour à la connexion"
+        backToLogin: "Retour à la connexion",
+        validatingToken: "Validation de votre lien de réinitialisation...",
+        invalidToken: "Ce lien de réinitialisation de mot de passe est invalide ou a expiré. Veuillez en demander un nouveau.",
+        requestNewLink: "Demander un nouveau lien de réinitialisation",
+        passwordResetSuccess: "Mot de passe réinitialisé avec succès",
+        passwordResetSuccessMessage: "Votre mot de passe a été réinitialisé avec succès. Vous serez redirigé vers la page de connexion sous peu.",
+        passwordResetSuccessSubtext: "Si vous n'êtes pas redirigé automatiquement, cliquez sur le bouton ci-dessous.",
+        resettingPassword: "Réinitialisation du mot de passe...",
+        resetPassword: "Réinitialiser le mot de passe",
     },
     dashboard: {
         title: "Tableau de bord",
@@ -1487,59 +1495,6 @@ export default {
             description: "Notre plateforme utilise une technologie de pointe pour fournir une conversion, une édition et une sécurité des PDF de haute qualité tout en gardant vos données en sécurité."
         }
     },
-
-    // Page Tarification
-    pricing: {
-        title: "Tarification Simple et Transparente",
-        description: "Choisissez le plan qui correspond à vos besoins",
-        free: {
-            title: "Gratuit",
-            description: "Tâches PDF de base pour les utilisateurs occasionnels",
-            features: [
-                "Convertir jusqu’à 3 fichiers/jour",
-                "PDF vers Word, Excel, PowerPoint",
-                "Compression de base",
-                "Fusionner jusqu’à 5 PDF",
-                "Ajouter des filigranes simples",
-                "OCR standard"
-            ]
-        },
-        pro: {
-            title: "Pro",
-            description: "Plus de puissance pour les utilisateurs réguliers de PDF",
-            features: [
-                "Conversions illimitées",
-                "Traitement prioritaire",
-                "Compression avancée",
-                "Fusionner des PDF illimités",
-                "Filigranes personnalisés",
-                "OCR avancé avec plus de 100 langues",
-                "Traitement par lots",
-                "Sans publicités"
-            ]
-        },
-        business: {
-            title: "Entreprise",
-            description: "Solution complète pour les équipes",
-            features: [
-                "Tout dans le plan Pro",
-                "Plusieurs membres d’équipe",
-                "Accès API",
-                "Conformité RGPD",
-                "Support dédié",
-                "Analyse d’utilisation",
-                "Options de personnalisation de marque"
-            ]
-        },
-        monthly: "Mensuel",
-        annually: "Annuel",
-        savePercent: "Économisez 20 %",
-        currentPlan: "Plan Actuel",
-        upgrade: "Mettre à Niveau Maintenant",
-        getStarted: "Commencer",
-        contact: "Contacter les Ventes"
-    },
-
     // Pages Termes et Confidentialité
     legal: {
         termsTitle: "Conditions de Service",
@@ -2311,7 +2266,114 @@ export default {
             },
             viewEndpoints: "Voir les points de terminaison"
         }
-    }
+    },
+    pricing: {
+        // Metadata
+        metaTitle: "Plans tarifaires - ScanPro",
+        metaDescription: "Choisissez le plan adapté à vos besoins en PDF. ScanPro propose des options de tarification flexibles, de gratuit à entreprise, avec les fonctionnalités dont vous avez besoin.",
 
+        // Page content
+        title: "Tarification simple et transparente",
+        subtitle: "Choisissez le plan qui vous convient. Tous les plans incluent nos outils PDF de base.",
+        monthly: "Mensuel",
+        yearly: "Annuel",
+        saveUp: "Économisez jusqu'à 20%",
+        subscribe: "S'abonner",
+        feature: "Fonctionnalité",
+        featureCompare: "Comparaison des fonctionnalités",
+
+        // Features
+        features: {
+            operations: "Opérations mensuelles",
+            amount: {
+                free: "100 opérations",
+                basic: "1 000 opérations",
+                pro: "10 000 opérations",
+                enterprise: "100 000 opérations"
+            },
+            apiAccess: "Accès API",
+            apiKeys: {
+                free: "1 clé API",
+                basic: "3 clés API",
+                pro: "10 clés API",
+                enterprise: "50 clés API"
+            },
+            rateLimits: "Limite de taux",
+            rateLimit: {
+                free: "10 requêtes/heure",
+                basic: "100 requêtes/heure",
+                pro: "1 000 requêtes/heure",
+                enterprise: "5 000 requêtes/heure"
+            },
+            fileSizes: "Taille maximale du fichier",
+            fileSize: {
+                free: "25 Mo",
+                basic: "50 Mo",
+                pro: "100 Mo",
+                enterprise: "200 Mo"
+            },
+            ocr: "OCR (Reconnaissance de texte)",
+            watermarking: "Filigrane",
+            advancedProtection: "Protection PDF avancée",
+            bulkProcessing: "Traitement par lots",
+            supports: "Support",
+            support: {
+                free: "Support par email",
+                priority: "Support prioritaire",
+                dedicated: "Support dédié"
+            },
+            whiteLabel: "Options de marque blanche",
+            serviceLevel: "Accord de niveau de service"
+        },
+
+        // Plan descriptions
+        planDescriptions: {
+            free: "Pour des besoins occasionnels en PDF",
+            basic: "Pour les individus et petites équipes",
+            pro: "Pour les professionnels et entreprises",
+            enterprise: "Pour les grandes organisations"
+        },
+
+        // FAQ section
+        faq: {
+            title: "Questions fréquemment posées",
+            q1: {
+                title: "Que sont les opérations PDF ?",
+                content: "Les opérations PDF incluent la conversion de PDFs en d'autres formats (Word, Excel, etc.), la compression de PDFs, la fusion de PDFs, la division de PDFs, l'ajout de filigranes, l'extraction de texte, et toute autre action effectuée sur un fichier PDF via notre service."
+            },
+            q2: {
+                title: "Puis-je mettre à niveau ou rétrograder mon plan ?",
+                content: "Oui, vous pouvez mettre à niveau ou rétrograder votre plan à tout moment. Lors d'une mise à niveau, le nouveau plan prend effet immédiatement. Lors d'une rétrogradation, le nouveau plan prend effet à la fin de votre cycle de facturation actuel."
+            },
+            q3: {
+                title: "Proposez-vous des remboursements ?",
+                content: "Nous offrons une garantie de remboursement de 7 jours sur tous les plans payants. Si vous n'êtes pas satisfait de notre service, vous pouvez demander un remboursement dans les 7 jours suivant votre achat initial."
+            },
+            q4: {
+                title: "Que se passe-t-il si je dépasse ma limite mensuelle d'opérations ?",
+                content: "Si vous atteignez votre limite mensuelle d'opérations, vous ne pourrez pas effectuer d'opérations supplémentaires jusqu'à ce que votre limite soit réinitialisée au début de votre prochain cycle de facturation. Vous pouvez mettre à niveau votre plan à tout moment pour augmenter votre limite."
+            },
+            q5: {
+                title: "Mes données sont-elles sécurisées ?",
+                content: "Oui, nous prenons la sécurité des données très au sérieux. Tous les téléchargements et traitements de fichiers sont effectués via des connexions HTTPS sécurisées. Nous ne conservons pas vos fichiers plus longtemps que nécessaire pour le traitement, et tous les fichiers sont automatiquement supprimés une fois le traitement terminé."
+            }
+        },
+
+        // CTA section
+        cta: {
+            title: "Prêt à commencer ?",
+            subtitle: "Choisissez le plan qui vous convient et commencez à transformer vos PDFs dès aujourd'hui.",
+            startBasic: "Commencer avec Basique",
+            explorePdfTools: "Explorer les outils PDF"
+        },
+
+        // Login dialog
+        loginRequired: "Connexion requise",
+        loginRequiredDesc: "Vous devez vous connecter à votre compte avant de vous abonner. Souhaitez-vous vous connecter maintenant ?",
+
+        // Plan buttons
+        getStarted: "Commencer",
+        currentPlan: "Plan actuel"
+    },
 
 }

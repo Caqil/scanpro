@@ -74,7 +74,15 @@ export default {
     resetInstructions: "Falls ein Konto mit dieser E-Mail existiert, haben wir Anweisungen zum Zurücksetzen Ihres Passworts gesendet.",
     didntReceiveEmail: "Keine E-Mail erhalten?",
     tryAgain: "Erneut versuchen",
-    backToLogin: "Zurück zur Anmeldung"
+    backToLogin: "Zurück zur Anmeldung",
+    validatingToken: "Ihr Zurücksetzungslink wird überprüft...",
+    invalidToken: "Dieser Link zum Zurücksetzen des Passworts ist ungültig oder abgelaufen. Bitte fordern Sie einen neuen an.",
+    requestNewLink: "Einen neuen Zurücksetzungslink anfordern",
+    passwordResetSuccess: "Passwort erfolgreich zurückgesetzt",
+    passwordResetSuccessMessage: "Ihr Passwort wurde erfolgreich zurückgesetzt. Sie werden in Kürze zur Anmeldeseite weitergeleitet.",
+    passwordResetSuccessSubtext: "Wenn Sie nicht automatisch weitergeleitet werden, klicken Sie auf die Schaltfläche unten.",
+    resettingPassword: "Passwort wird zurückgesetzt...",
+    resetPassword: "Passwort zurücksetzen",
   },
   dashboard: {
     title: "Dashboard",
@@ -2125,6 +2133,114 @@ export default {
       },
       viewEndpoints: "Endpunkte anzeigen"
     }
-  }
+  },
+  pricing: {
+    // Metadata
+    metaTitle: "Preispläne - ScanPro",
+    metaDescription: "Wählen Sie den richtigen Plan für Ihre PDF-Bedürfnisse. ScanPro bietet flexible Preisoptionen von kostenlos bis Unternehmen mit den Funktionen, die Sie benötigen.",
+
+    // Page content
+    title: "Einfache, transparente Preise",
+    subtitle: "Wählen Sie den Plan, der zu Ihnen passt. Alle Pläne beinhalten unsere Kern-PDF-Tools.",
+    monthly: "Monatlich",
+    yearly: "Jährlich",
+    saveUp: "Sparen Sie bis zu 20%",
+    subscribe: "Abonnieren",
+    feature: "Funktion",
+    featureCompare: "Funktionsvergleich",
+
+    // Features
+    features: {
+      operations: "Monatliche Operationen",
+      amount: {
+        free: "100 Operationen",
+        basic: "1.000 Operationen",
+        pro: "10.000 Operationen",
+        enterprise: "100.000 Operationen"
+      },
+      apiAccess: "API-Zugang",
+      apiKeys: {
+        free: "1 API-Schlüssel",
+        basic: "3 API-Schlüssel",
+        pro: "10 API-Schlüssel",
+        enterprise: "50 API-Schlüssel"
+      },
+      rateLimits: "Ratenbegrenzung",
+      rateLimit: {
+        free: "10 Anfragen/Stunde",
+        basic: "100 Anfragen/Stunde",
+        pro: "1.000 Anfragen/Stunde",
+        enterprise: "5.000 Anfragen/Stunde"
+      },
+      fileSizes: "Maximale Dateigröße",
+      fileSize: {
+        free: "25 MB",
+        basic: "50 MB",
+        pro: "100 MB",
+        enterprise: "200 MB"
+      },
+      ocr: "OCR (Texterkennung)",
+      watermarking: "Wasserzeichen",
+      advancedProtection: "Erweiterter PDF-Schutz",
+      bulkProcessing: "Massenverarbeitung",
+      supports: "Support",
+      support: {
+        free: "E-Mail-Support",
+        priority: "Priorisierter Support",
+        dedicated: "Dedizierter Support"
+      },
+      whiteLabel: "White-Label-Optionen",
+      serviceLevel: "Service-Level-Vereinbarung"
+    },
+
+    // Plan descriptions
+    planDescriptions: {
+      free: "Für gelegentliche PDF-Bedürfnisse",
+      basic: "Für Einzelpersonen und kleine Teams",
+      pro: "Für Profis und Unternehmen",
+      enterprise: "Für große Organisationen"
+    },
+
+    // FAQ section
+    faq: {
+      title: "Häufig gestellte Fragen",
+      q1: {
+        title: "Was sind PDF-Operationen?",
+        content: "PDF-Operationen umfassen das Konvertieren von PDFs in andere Formate (Word, Excel, etc.), das Komprimieren von PDFs, das Zusammenführen von PDFs, das Teilen von PDFs, das Hinzufügen von Wasserzeichen, das Extrahieren von Text und jede andere Aktion, die an einer PDF-Datei über unseren Dienst durchgeführt wird."
+      },
+      q2: {
+        title: "Kann ich meinen Plan upgraden oder downgraden?",
+        content: "Ja, Sie können Ihren Plan jederzeit upgraden oder downgraden. Beim Upgrade tritt der neue Plan sofort in Kraft. Beim Downgrade tritt der neue Plan am Ende Ihres aktuellen Abrechnungszyklus in Kraft."
+      },
+      q3: {
+        title: "Bieten Sie Rückerstattungen an?",
+        content: "Wir bieten eine 7-tägige Geld-zurück-Garantie auf alle kostenpflichtigen Pläne. Wenn Sie mit unserem Service nicht zufrieden sind, können Sie innerhalb von 7 Tagen nach Ihrem ersten Kauf eine Rückerstattung beantragen."
+      },
+      q4: {
+        title: "Was passiert, wenn ich mein monatliches Operationslimit überschreite?",
+        content: "Wenn Sie Ihr monatliches Operationslimit erreichen, können Sie keine zusätzlichen Operationen durchführen, bis Ihr Limit zu Beginn des nächsten Abrechnungszyklus zurückgesetzt wird. Sie können Ihren Plan jederzeit upgraden, um Ihr Limit zu erhöhen."
+      },
+      q5: {
+        title: "Sind meine Daten sicher?",
+        content: "Ja, wir nehmen Datensicherheit ernst. Alle Datei-Uploads und Verarbeitungen erfolgen über sichere HTTPS-Verbindungen. Wir speichern Ihre Dateien nicht länger als für die Verarbeitung notwendig, und alle Dateien werden nach Abschluss der Verarbeitung automatisch gelöscht."
+      }
+    },
+
+    // CTA section
+    cta: {
+      title: "Bereit zum Starten?",
+      subtitle: "Wählen Sie den Plan, der zu Ihnen passt, und beginnen Sie noch heute mit der Transformation Ihrer PDFs.",
+      startBasic: "Mit Basic starten",
+      explorePdfTools: "PDF-Tools erkunden"
+    },
+
+    // Login dialog
+    loginRequired: "Anmeldung erforderlich",
+    loginRequiredDesc: "Sie müssen sich in Ihr Konto einloggen, bevor Sie abonnieren können. Möchten Sie sich jetzt anmelden?",
+
+    // Plan buttons
+    getStarted: "Loslegen",
+    currentPlan: "Aktueller Plan"
+  },
 
 }

@@ -74,7 +74,15 @@ export default {
     resetInstructions: "そのメールアドレスにアカウントが存在する場合、パスワードをリセットする手順を送信しました。",
     didntReceiveEmail: "メールが届きませんでしたか？",
     tryAgain: "もう一度試す",
-    backToLogin: "ログインに戻る"
+    backToLogin: "ログインに戻る",
+    validatingToken: "リセットリンクを検証中...",
+    invalidToken: "このパスワードリセットリンクは無効または期限切れです。新しくリクエストしてください。",
+    requestNewLink: "新しいリセットリンクをリクエスト",
+    passwordResetSuccess: "パスワードのリセットに成功しました",
+    passwordResetSuccessMessage: "パスワードが正常にリセットされました。まもなくログインページにリダイレクトされます。",
+    passwordResetSuccessSubtext: "自動的にリダイレクトされない場合は、下のボタンをクリックしてください。",
+    resettingPassword: "パスワードをリセット中...",
+    resetPassword: "パスワードをリセット"
   },
   dashboard: {
     title: "ダッシュボード",
@@ -1489,58 +1497,6 @@ export default {
     }
   },
 
-  // 価格ページ
-  pricing: {
-    title: "シンプルで透明な価格",
-    description: "あなたのニーズに合ったプランを選択",
-    free: {
-      title: "無料",
-      description: "時折使用するユーザーのための基本的なPDFタスク",
-      features: [
-        "1日に最大3ファイルの変換",
-        "PDFからWord、Excel、PowerPointへ",
-        "基本的な圧縮",
-        "最大5つのPDFを結合",
-        "シンプルな透かし追加",
-        "標準OCR"
-      ]
-    },
-    pro: {
-      title: "プロ",
-      description: "定期的なPDFユーザー向けのさらなるパワー",
-      features: [
-        "無制限の変換",
-        "優先処理",
-        "高度な圧縮",
-        "無制限のPDF結合",
-        "カスタム透かし",
-        "100以上の言語に対応した高度なOCR",
-        "バッチ処理",
-        "広告なし"
-      ]
-    },
-    business: {
-      title: "ビジネス",
-      description: "チーム向けの完全なソリューション",
-      features: [
-        "プロプランのすべて",
-        "複数のチームメンバー",
-        "APIアクセス",
-        "GDPR準拠",
-        "専用サポート",
-        "利用分析",
-        "カスタムブランディングオプション"
-      ]
-    },
-    monthly: "月額",
-    annually: "年額",
-    savePercent: "20%節約",
-    currentPlan: "現在のプラン",
-    upgrade: "今すぐアップグレード",
-    getStarted: "開始",
-    contact: "営業に連絡"
-  },
-
   // 利用規約およびプライバシーページ
   legal: {
     termsTitle: "利用規約",
@@ -2313,6 +2269,114 @@ export default {
       },
       viewEndpoints: "エンドポイントを表示"
     }
-  }
+  },
+  pricing: {
+    // Metadata
+    metaTitle: "料金プラン - ScanPro",
+    metaDescription: "PDFのニーズに合ったプランを選んでください。ScanProは無料からエンタープライズまで柔軟な料金オプションを提供し、必要な機能が揃っています。",
+
+    // Page content
+    title: "シンプルで透明な料金",
+    subtitle: "あなたに合ったプランを選んでください。すべてのプランに当社の主要なPDFツールが含まれています。",
+    monthly: "月額",
+    yearly: "年額",
+    saveUp: "最大20%お得",
+    subscribe: "購読",
+    feature: "機能",
+    featureCompare: "機能比較",
+
+    // Features
+    features: {
+      operations: "月間操作数",
+      amount: {
+        free: "100操作",
+        basic: "1,000操作",
+        pro: "10,000操作",
+        enterprise: "100,000操作"
+      },
+      apiAccess: "APIアクセス",
+      apiKeys: {
+        free: "1 APIキー",
+        basic: "3 APIキー",
+        pro: "10 APIキー",
+        enterprise: "50 APIキー"
+      },
+      rateLimits: "レート制限",
+      rateLimit: {
+        free: "10リクエスト/時間",
+        basic: "100リクエスト/時間",
+        pro: "1,000リクエスト/時間",
+        enterprise: "5,000リクエスト/時間"
+      },
+      fileSizes: "最大ファイルサイズ",
+      fileSize: {
+        free: "25 MB",
+        basic: "50 MB",
+        pro: "100 MB",
+        enterprise: "200 MB"
+      },
+      ocr: "OCR（文字認識）",
+      watermarking: "ウォーターマーク",
+      advancedProtection: "高度なPDF保護",
+      bulkProcessing: "一括処理",
+      supports: "サポート",
+      support: {
+        free: "メールサポート",
+        priority: "優先サポート",
+        dedicated: "専用サポート"
+      },
+      whiteLabel: "ホワイトラベルオプション",
+      serviceLevel: "サービスレベル契約"
+    },
+
+    // Plan descriptions
+    planDescriptions: {
+      free: "たまに使うPDFニーズ向け",
+      basic: "個人や小規模チーム向け",
+      pro: "プロフェッショナルや企業向け",
+      enterprise: "大規模組織向け"
+    },
+
+    // FAQ section
+    faq: {
+      title: "よくある質問",
+      q1: {
+        title: "PDF操作とは何ですか？",
+        content: "PDF操作には、PDFを他の形式（Word、Excelなど）に変換する、PDFを圧縮する、PDFを結合する、PDFを分割する、ウォーターマークを追加する、テキストを抽出する、当社のサービスを通じてPDFファイルに対して行われるその他の操作が含まれます。"
+      },
+      q2: {
+        title: "プランをアップグレードまたはダウングレードできますか？",
+        content: "はい、いつでもプランをアップグレードまたはダウングレードできます。アップグレードの場合、新しいプランはすぐに有効になります。ダウングレードの場合、新しいプランは現在の請求サイクルの終了時に有効になります。"
+      },
+      q3: {
+        title: "返金はありますか？",
+        content: "すべての有料プランに7日間の返金保証を提供しています。当社のサービスにご満足いただけない場合、初回購入から7日以内に返金をリクエストできます。"
+      },
+      q4: {
+        title: "月間操作制限を超えた場合どうなりますか？",
+        content: "月間操作制限に達した場合、次の請求サイクルの開始時に制限がリセットされるまで追加の操作はできません。制限を増やすためにいつでもプランをアップグレードできます。"
+      },
+      q5: {
+        title: "私のデータは安全ですか？",
+        content: "はい、当社はデータのセキュリティを真剣に考えています。すべてのファイルアップロードと処理はセキュアなHTTPS接続を介して行われます。処理に必要な期間以上ファイルは保存せず、処理が完了するとすべてのファイルが自動的に削除されます。"
+      }
+    },
+
+    // CTA section
+    cta: {
+      title: "始める準備はできていますか？",
+      subtitle: "あなたに合ったプランを選んで、今日からPDFの変換を始めましょう。",
+      startBasic: "ベーシックから始める",
+      explorePdfTools: "PDFツールを探索"
+    },
+
+    // Login dialog
+    loginRequired: "サインインが必要です",
+    loginRequiredDesc: "購読する前にアカウントにサインインする必要があります。今すぐサインインしますか？",
+
+    // Plan buttons
+    getStarted: "始める",
+    currentPlan: "現在のプラン"
+  },
 
 }

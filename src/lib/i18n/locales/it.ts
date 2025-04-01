@@ -74,7 +74,15 @@ export default {
     resetInstructions: "Se esiste un account con quell'email, abbiamo inviato istruzioni per reimpostare la password.",
     didntReceiveEmail: "Non hai ricevuto un'email?",
     tryAgain: "Riprova",
-    backToLogin: "Torna al login"
+    backToLogin: "Torna al login",
+    validatingToken: "Validazione del tuo link di reimpostazione...",
+    invalidToken: "Questo link di reimpostazione della password non è valido o è scaduto. Per favore, richiedine uno nuovo.",
+    requestNewLink: "Richiedi un nuovo link di reimpostazione",
+    passwordResetSuccess: "Password reimpostata con successo",
+    passwordResetSuccessMessage: "La tua password è stata reimpostata con successo. Sarai reindirizzato alla pagina di login a breve.",
+    passwordResetSuccessSubtext: "Se non vieni reindirizzato automaticamente, clicca sul pulsante qui sotto.",
+    resettingPassword: "Reimpostazione della password...",
+    resetPassword: "Reimposta Password",
   },
   dashboard: {
     title: "Dashboard",
@@ -1412,58 +1420,6 @@ export default {
     }
   },
 
-  // Pricing Page
-  pricing: {
-    title: "Precios Simples y Transparentes",
-    description: "Elige el plan que se ajuste a tus necesidades",
-    free: {
-      title: "Gratis",
-      description: "Tareas básicas de PDF para usuarios ocasionales",
-      features: [
-        "Convertir hasta 3 archivos/día",
-        "PDF a Word, Excel, PowerPoint",
-        "Compresión básica",
-        "Fusionar hasta 5 PDFs",
-        "Agregar marcas de agua simples",
-        "OCR estándar"
-      ]
-    },
-    pro: {
-      title: "Pro",
-      description: "Más potencia para usuarios regulares de PDF",
-      features: [
-        "Conversiones ilimitadas",
-        "Procesamiento prioritario",
-        "Compresión avanzada",
-        "Fusionar PDFs ilimitados",
-        "Marcas de agua personalizadas",
-        "OCR avanzado con más de 100 idiomas",
-        "Procesamiento por lotes",
-        "Sin anuncios"
-      ]
-    },
-    business: {
-      title: "Negocios",
-      description: "Solución completa para equipos",
-      features: [
-        "Todo en el plan Pro",
-        "Múltiples miembros del equipo",
-        "Acceso a la API",
-        "Cumplimiento con GDPR",
-        "Soporte dedicado",
-        "Análisis de uso",
-        "Opciones de marca personalizada"
-      ]
-    },
-    monthly: "Mensual",
-    annually: "Anual",
-    savePercent: "Ahorra 20%",
-    currentPlan: "Plan Actual",
-    upgrade: "Actualizar Ahora",
-    getStarted: "Comenzar",
-    contact: "Contactar Ventas"
-  },
-
   // Terms and Privacy Pages
   legal: {
     termsTitle: "Términos de Servicio",
@@ -2235,7 +2191,115 @@ export default {
       },
       viewEndpoints: "Visualizza Endpoint"
     }
-  }
+  },
+  pricing: {
+    // Metadata
+    metaTitle: "Piani di Prezzo - ScanPro",
+    metaDescription: "Scegli il piano giusto per le tue esigenze PDF. ScanPro offre opzioni di prezzo flessibili, da gratuito a aziendale, con le funzionalità di cui hai bisogno.",
+
+    // Page content
+    title: "Prezzi semplici e trasparenti",
+    subtitle: "Scegli il piano più adatto a te. Tutti i piani includono i nostri strumenti PDF principali.",
+    monthly: "Mensile",
+    yearly: "Annuale",
+    saveUp: "Risparmia fino al 20%",
+    subscribe: "Abbonati",
+    feature: "Funzionalità",
+    featureCompare: "Confronto delle funzionalità",
+
+    // Features
+    features: {
+      operations: "Operazioni mensili",
+      amount: {
+        free: "100 operazioni",
+        basic: "1.000 operazioni",
+        pro: "10.000 operazioni",
+        enterprise: "100.000 operazioni"
+      },
+      apiAccess: "Accesso API",
+      apiKeys: {
+        free: "1 chiave API",
+        basic: "3 chiavi API",
+        pro: "10 chiavi API",
+        enterprise: "50 chiavi API"
+      },
+      rateLimits: "Limite di frequenza",
+      rateLimit: {
+        free: "10 richieste/ora",
+        basic: "100 richieste/ora",
+        pro: "1.000 richieste/ora",
+        enterprise: "5.000 richieste/ora"
+      },
+      fileSizes: "Dimensione massima del file",
+      fileSize: {
+        free: "25 MB",
+        basic: "50 MB",
+        pro: "100 MB",
+        enterprise: "200 MB"
+      },
+      ocr: "OCR (Riconoscimento testo)",
+      watermarking: "Filigrana",
+      advancedProtection: "Protezione avanzata dei PDF",
+      bulkProcessing: "Elaborazione in blocco",
+      supports: "Supporto",
+      support: {
+        free: "Supporto via email",
+        priority: "Supporto prioritario",
+        dedicated: "Supporto dedicato"
+      },
+      whiteLabel: "Opzioni white-label",
+      serviceLevel: "Accordo sul livello di servizio"
+    },
+
+    // Plan descriptions
+    planDescriptions: {
+      free: "Per esigenze PDF occasionali",
+      basic: "Per individui e piccoli team",
+      pro: "Per professionisti e aziende",
+      enterprise: "Per grandi organizzazioni"
+    },
+
+    // FAQ section
+    faq: {
+      title: "Domande frequenti",
+      q1: {
+        title: "Cosa sono le operazioni PDF?",
+        content: "Le operazioni PDF includono la conversione di PDF in altri formati (Word, Excel, ecc.), la compressione di PDF, l'unione di PDF, la divisione di PDF, l'aggiunta di filigrane, l'estrazione di testo e qualsiasi altra azione eseguita su un file PDF tramite il nostro servizio."
+      },
+      q2: {
+        title: "Posso aggiornare o downgradare il mio piano?",
+        content: "Sì, puoi aggiornare o downgradare il tuo piano in qualsiasi momento. Con un aggiornamento, il nuovo piano entra in vigore immediatamente. Con un downgrade, il nuovo piano entrerà in vigore alla fine del tuo ciclo di fatturazione corrente."
+      },
+      q3: {
+        title: "Offrite rimborsi?",
+        content: "Offriamo una garanzia di rimborso di 7 giorni su tutti i piani a pagamento. Se non sei soddisfatto del nostro servizio, puoi richiedere un rimborso entro 7 giorni dall'acquisto iniziale."
+      },
+      q4: {
+        title: "Cosa succede se supero il limite mensile di operazioni?",
+        content: "Se raggiungi il limite mensile di operazioni, non potrai eseguire ulteriori operazioni fino al ripristino del limite all'inizio del prossimo ciclo di fatturazione. Puoi aggiornare il tuo piano in qualsiasi momento per aumentare il limite."
+      },
+      q5: {
+        title: "I miei dati sono al sicuro?",
+        content: "Sì, prendiamo molto sul serio la sicurezza dei dati. Tutti i caricamenti e l'elaborazione dei file avvengono tramite connessioni HTTPS sicure. Non conserviamo i tuoi file più a lungo del necessario per l'elaborazione e tutti i file vengono eliminati automaticamente al termine del processo."
+      }
+    },
+
+    // CTA section
+    cta: {
+      title: "Pronto per iniziare?",
+      subtitle: "Scegli il piano giusto per te e inizia a trasformare i tuoi PDF oggi stesso.",
+      startBasic: "Inizia con Basic",
+      explorePdfTools: "Esplora gli strumenti PDF"
+    },
+
+    // Login dialog
+    loginRequired: "Accesso richiesto",
+    loginRequiredDesc: "Devi accedere al tuo account prima di abbonarti. Vuoi accedere ora?",
+
+    // Plan buttons
+    getStarted: "Inizia",
+    currentPlan: "Piano attuale"
+  },
 
 
 };

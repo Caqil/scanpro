@@ -46,8 +46,17 @@ export default {
     emailRequired: "Email is required",
     passwordRequired: "Password is required",
     invalidEmail: "Please enter a valid email address",
-
-    // Registration
+    validatingToken: "Validating your reset link...",
+    invalidToken: "This password reset link is invalid or has expired. Please request a new one.",
+    requestNewLink: "Request a new reset link",
+    resetPasswordError: "Failed to reset password",
+    passwordResetSuccess: "Password reset successful",
+    passwordResetSuccessMessage: "Your password has been reset successfully. You will be redirected to the login page shortly.",
+    passwordResetSuccessSubtext: "If you're not redirected automatically, click the button below.",
+    resettingPassword: "Resetting password...",
+    resetPassword: "Reset Password",
+    backToLogin: "Back to login",
+    unknownError: "An error occurred",
     name: "Name",
     namePlaceholder: "Your name",
     createAccount: "Create Account",
@@ -68,19 +77,15 @@ export default {
     agreeToTerms: "Please agree to the terms of service",
     registrationFailed: "Registration failed",
     accountCreated: "Account created successfully",
-    unknownError: "An error occurred",
 
-    // Password Reset
     forgotInstructions: "Enter your email and we'll send you instructions to reset your password.",
     sendResetLink: "Send Reset Link",
     sending: "Sending...",
     resetEmailSent: "Password reset email sent",
-    resetPasswordError: "Failed to send reset email",
     checkYourEmail: "Check your email",
     resetInstructions: "If an account exists with that email, we've sent instructions to reset your password.",
     didntReceiveEmail: "Didn't receive an email?",
-    tryAgain: "Try again",
-    backToLogin: "Back to login"
+    tryAgain: "Try again"
   },
 
   // Dashboard

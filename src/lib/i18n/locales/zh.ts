@@ -74,7 +74,15 @@ export default {
         resetInstructions: "如果该电子邮件存在账户，我们已发送重置密码的说明。",
         didntReceiveEmail: "没有收到邮件？",
         tryAgain: "重试",
-        backToLogin: "返回登录"
+        backToLogin: "返回登录",
+        validatingToken: "正在验证您的重置链接...",
+        invalidToken: "此密码重置链接无效或已过期。请请求一个新的。",
+        requestNewLink: "请求新的重置链接",
+        passwordResetSuccess: "密码重置成功",
+        passwordResetSuccessMessage: "您的密码已成功重置。您将很快被重定向到登录页面。",
+        passwordResetSuccessSubtext: "如果您没有被自动重定向，请点击下面的按钮。",
+        resettingPassword: "正在重置密码...",
+        resetPassword: "重置密码"
     },
     dashboard: {
         title: "仪表板",
@@ -1489,59 +1497,6 @@ export default {
             description: "我们的平台使用尖端技术，提供高质量的PDF转换、编辑和安全性，同时确保您的数据安全。"
         }
     },
-
-    // 定价页面
-    pricing: {
-        title: "简单透明的定价",
-        description: "选择适合您需求的计划",
-        free: {
-            title: "免费",
-            description: "适合偶尔用户的PDF基本任务",
-            features: [
-                "每天最多转换3个文件",
-                "PDF转Word、Excel、PowerPoint",
-                "基本压缩",
-                "合并最多5个PDF",
-                "添加简单水印",
-                "标准OCR"
-            ]
-        },
-        pro: {
-            title: "专业版",
-            description: "为常规PDF用户提供更多功能",
-            features: [
-                "无限转换",
-                "优先处理",
-                "高级压缩",
-                "合并无限PDF",
-                "自定义水印",
-                "支持100多种语言的高级OCR",
-                "批量处理",
-                "无广告"
-            ]
-        },
-        business: {
-            title: "商业版",
-            description: "团队的完整解决方案",
-            features: [
-                "专业版中的所有功能",
-                "多团队成员",
-                "API访问",
-                "符合GDPR",
-                "专属支持",
-                "使用分析",
-                "自定义品牌选项"
-            ]
-        },
-        monthly: "每月",
-        annually: "每年",
-        savePercent: "节省20%",
-        currentPlan: "当前计划",
-        upgrade: "立即升级",
-        getStarted: "开始使用",
-        contact: "联系销售"
-    },
-
     // 条款和隐私页面
     legal: {
         termsTitle: "服务条款",
@@ -2312,6 +2267,114 @@ export default {
             },
             viewEndpoints: "查看端点"
         }
-    }
+    },
+    pricing: {
+        // Metadata
+        metaTitle: "定价计划 - ScanPro",
+        metaDescription: "选择适合您PDF需求的计划。ScanPro提供从免费到企业的灵活定价选项，包含您所需的功能。",
+
+        // Page content
+        title: "简单透明的定价",
+        subtitle: "选择适合您的计划。所有计划都包含我们的核心PDF工具。",
+        monthly: "月度",
+        yearly: "年度",
+        saveUp: "节省高达20%",
+        subscribe: "订阅",
+        feature: "功能",
+        featureCompare: "功能比较",
+
+        // Features
+        features: {
+            operations: "月度操作",
+            amount: {
+                free: "100次操作",
+                basic: "1,000次操作",
+                pro: "10,000次操作",
+                enterprise: "100,000次操作"
+            },
+            apiAccess: "API访问",
+            apiKeys: {
+                free: "1个API密钥",
+                basic: "3个API密钥",
+                pro: "10个API密钥",
+                enterprise: "50个API密钥"
+            },
+            rateLimits: "速率限制",
+            rateLimit: {
+                free: "10请求/小时",
+                basic: "100请求/小时",
+                pro: "1,000请求/小时",
+                enterprise: "5,000请求/小时"
+            },
+            fileSizes: "最大文件大小",
+            fileSize: {
+                free: "25 MB",
+                basic: "50 MB",
+                pro: "100 MB",
+                enterprise: "200 MB"
+            },
+            ocr: "OCR（文本识别）",
+            watermarking: "水印",
+            advancedProtection: "高级PDF保护",
+            bulkProcessing: "批量处理",
+            supports: "支持",
+            support: {
+                free: "电子邮件支持",
+                priority: "优先支持",
+                dedicated: "专属支持"
+            },
+            whiteLabel: "白标选项",
+            serviceLevel: "服务水平协议"
+        },
+
+        // Plan descriptions
+        planDescriptions: {
+            free: "适用于偶尔需要的PDF",
+            basic: "适用于个人和小团队",
+            pro: "适用于专业人士和企业",
+            enterprise: "适用于大型组织"
+        },
+
+        // FAQ section
+        faq: {
+            title: "常见问题",
+            q1: {
+                title: "什么是PDF操作？",
+                content: "PDF操作包括将PDF转换为其他格式（Word、Excel等）、压缩PDF、合并PDF、拆分PDF、添加水印、提取文本以及通过我们服务对PDF文件执行的任何其他操作。"
+            },
+            q2: {
+                title: "我可以升级或降级我的计划吗？",
+                content: "是的，您可以随时升级或降级您的计划。升级时，新计划立即生效。降级时，新计划将在当前计费周期结束时生效。"
+            },
+            q3: {
+                title: "你们提供退款吗？",
+                content: "我们为所有付费计划提供7天退款保证。如果您对我们的服务不满意，可以在初次购买后的7天内请求退款。"
+            },
+            q4: {
+                title: "如果我超过月度操作限制会怎样？",
+                content: "如果您达到月度操作限制，在下个计费周期开始时限制重置之前，您将无法执行额外的操作。您可以随时升级计划以增加限制。"
+            },
+            q5: {
+                title: "我的数据安全吗？",
+                content: "是的，我们非常重视数据安全。所有文件上传和处理都通过安全的HTTPS连接进行。我们不会将您的文件存储超过处理所需时间，处理完成后所有文件将自动删除。"
+            }
+        },
+
+        // CTA section
+        cta: {
+            title: "准备好开始了吗？",
+            subtitle: "选择适合您的计划，今天开始转换您的PDF。",
+            startBasic: "从基础版开始",
+            explorePdfTools: "探索PDF工具"
+        },
+
+        // Login dialog
+        loginRequired: "需要登录",
+        loginRequiredDesc: "您需要在订阅前登录您的账户。现在要登录吗？",
+
+        // Plan buttons
+        getStarted: "开始",
+        currentPlan: "当前计划"
+    },
 
 }

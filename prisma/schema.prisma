@@ -1,4 +1,3 @@
-// prisma/schema.prisma
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,20 +8,21 @@ datasource db {
 }
 
 model User {
-  id            String        @id @default(cuid())
-  name          String?
-  email         String?       @unique
-  emailVerified DateTime?
-  image         String?
-  password      String?
-  role          String        @default("user")
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  accounts      Account[]
-  sessions      Session[]
-  subscription  Subscription?
-  apiKeys       ApiKey[]
-  usageStats    UsageStats[]
+  id             String           @id @default(cuid())
+  name           String?
+  email          String?          @unique
+  emailVerified  DateTime?
+  image          String?
+  password       String?
+  role           String           @default("user")
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  accounts       Account[]
+  apiKeys        ApiKey[]
+  paymentHistory PaymentHistory[]
+  sessions       Session[]
+  subscription   Subscription?
+  usageStats     UsageStats[]
 }
 
 model Account {
@@ -31,12 +31,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -51,29 +51,39 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-
 model Subscription {
-  id                String    @id @default(cuid())
-  userId            String    @unique
-  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  // PayPal specific fields
-  paypalSubscriptionId String?  @unique
-  paypalPlanId        String?
-  
-  // General subscription fields
-  tier               String    @default("free") // "free", "basic", "pro", "enterprise"
-  status             String    @default("active") // "active", "canceled", "past_due", "pending"
-  
-  // Billing dates
-  currentPeriodStart DateTime?
-  currentPeriodEnd   DateTime?
-  canceledAt         DateTime?
-  
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
+  id                     String    @id @default(cuid())
+  userId                 String    @unique
+  tier                   String    @default("free")
+  status                 String    @default("active")
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @default(now())
+  canceledAt             DateTime?
+  expiresAt              DateTime?
+  lastPaymentAmount      Float?
+  lastPaymentCurrency    String?
+  lastPaymentDate        DateTime?
+  metadata               Json?
+  pendingProvider        String?
+  pendingTier            String?
+  providerSessionId      String?
+  providerSubscriptionId String?
+  user                   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model PaymentHistory {
+  id                    String   @id @default(cuid())
+  userId                String
+  amount                Float
+  currency              String   @default("USD")
+  status                String
+  paymentProvider       String
+  providerTransactionId String?
+  createdAt             DateTime @default(now())
+  errorMessage          String?
+  metadata              Json?
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
 
 model VerificationToken {
   identifier String
@@ -107,22 +117,21 @@ model UsageStats {
 }
 
 model PasswordResetToken {
-  id      String   @id @default(cuid())
-  email   String
-  token   String   @unique
-  expires DateTime
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expires   DateTime
   createdAt DateTime @default(now())
 }
 
-// Add PayPal webhook events tracking
 model PaymentWebhookEvent {
-  id             String   @id @default(cuid())
-  eventId        String   @unique
-  eventType      String
-  resourceType   String
-  resourceId     String
-  status         String   @default("processed") // "processed", "pending", "failed"
-  rawData        String   // JSON string of the raw webhook data
-  processedAt    DateTime @default(now())
-  createdAt      DateTime @default(now())
+  id           String   @id @default(cuid())
+  eventId      String   @unique
+  eventType    String
+  resourceType String
+  resourceId   String
+  status       String   @default("processed")
+  rawData      String
+  processedAt  DateTime @default(now())
+  createdAt    DateTime @default(now())
 }
