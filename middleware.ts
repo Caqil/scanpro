@@ -23,6 +23,10 @@ const EXCLUDED_ROUTES = [
   '/api/admin',
   '/login',  // Exclude login route from middleware
   '/register', // Exclude register route from middleware
+  '/api/auth/signin',
+  '/api/auth/callback',
+  '/api/auth/signin/apple',  // Specifically exclude Apple signin path
+  '/api/auth/callback/apple',
   '/forgot-password', // Exclude forgot password route
   '/reset-password',  // Exclude reset password route
   '/en/forgot-password', // Ensure language-specific routes work
@@ -95,7 +99,10 @@ function isWebUIRequest(request: NextRequest): boolean {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip middleware for excluded routes
+  if (pathname.includes('/api/auth/signin/apple') ||
+    pathname.includes('/api/auth/callback/apple')) {
+    return NextResponse.next();
+  }
   for (const excludedRoute of EXCLUDED_ROUTES) {
     if (pathname.startsWith(excludedRoute)) {
       return NextResponse.next();
@@ -135,6 +142,7 @@ export const config = {
   matcher: [
     '/dashboard/:path*',
     '/api/:path*',
+    '/((?!api/auth).*)',
     // Exclude authentication-related paths
     // Don't include /login or /api/auth/:path* here
   ],

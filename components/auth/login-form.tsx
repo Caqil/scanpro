@@ -140,7 +140,15 @@ export function LoginForm({ callbackUrl = "/en/dashboard" }: LoginFormProps) {
   
   const handleOAuthSignIn = (provider: string) => {
     console.log("OAuth sign in with provider:", provider, "callbackUrl:", callbackUrl);
-    signIn(provider, { callbackUrl });
+    // For Apple specifically, let's use form_post and minimize params to avoid PKCE issues
+    if (provider === "apple") {
+      signIn(provider, { 
+        callbackUrl,
+        redirect: true,
+      });
+    } else {
+      signIn(provider, { callbackUrl });
+    }
   };
   
   return (

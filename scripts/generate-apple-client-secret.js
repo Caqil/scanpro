@@ -15,9 +15,9 @@ const path = require('path');
 
 // Configuration - replace these with your values or use environment variables
 const TEAM_ID = '59T9LR42SG';
-const CLIENT_ID = 'com.scanpro.documentconverter';
+const CLIENT_ID = 'com.scanpro.auth.servicer';
 const KEY_ID = 'J54NNM5VJ6';
-const PRIVATE_KEY_PATH = path.join(__dirname, 'AuthKey.p8');
+const PRIVATE_KEY_PATH = path.join(__dirname, 'AuthKey.formatted.p8');
 
 // Load private key and ensure it's in the correct format
 let privateKey;

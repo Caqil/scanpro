@@ -25,14 +25,11 @@ export const authOptions: NextAuthOptions = {
     AppleProvider({
       clientId: process.env.APPLE_CLIENT_ID || "",
       clientSecret: process.env.APPLE_CLIENT_SECRET || "",
-      allowDangerousEmailAccountLinking: true,
-      profile(profile) {
-        console.log("Apple profile data:", profile);
-        return {
-          id: profile.sub,
-          name: profile.name?.firstName || "Apple User",
-          email: profile.email,
-        };
+      authorization: {
+        params: {
+          scope: "name email",
+          response_mode: "form_post", // Change from form_post to query
+        },
       },
     }),
     CredentialsProvider({
@@ -80,7 +77,6 @@ export const authOptions: NextAuthOptions = {
       }
     })
   ],
-
   // Callbacks
   callbacks: {
     async jwt({ token, user, account }) {
@@ -136,9 +132,9 @@ export const authOptions: NextAuthOptions = {
 
   // Pages
   pages: {
-    signIn: "/login",
-    signOut: "/logout",
-    error: "/login?error=true",
+    signIn: "/en/login",
+    signOut: "/en/logout",
+    error: "/en/login?error=true",
   },
 
   // Debug mode in development
