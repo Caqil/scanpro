@@ -17,6 +17,7 @@ const API_ROUTES = [
 // Routes that should be excluded from API key validation
 const EXCLUDED_ROUTES = [
   // Auth related routes
+  '/api/webhooks/paypal',
   '/api/auth',
   '/api/webhooks',
   '/api/admin',

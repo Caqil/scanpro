@@ -9,7 +9,7 @@ export const PAYPAL_PLAN_IDS: Record<string, string> = {
 };
 
 // Set up PayPal API base URLs
-const PAYPAL_API_BASE = 'https://api-m.paypal.com';
+const PAYPAL_API_BASE = 'https://api-m.sandbox.paypal.com';
 
 // Get PayPal OAuth token
 async function getPayPalAccessToken(): Promise<string> {
