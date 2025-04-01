@@ -8,21 +8,20 @@ datasource db {
 }
 
 model User {
-  id             String           @id @default(cuid())
-  name           String?
-  email          String?          @unique
-  emailVerified  DateTime?
-  image          String?
-  password       String?
-  role           String           @default("user")
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
-  accounts       Account[]
-  apiKeys        ApiKey[]
-  paymentHistory PaymentHistory[]
-  sessions       Session[]
-  subscription   Subscription?
-  usageStats     UsageStats[]
+  id            String        @id @default(cuid())
+  name          String?
+  email         String?       @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  role          String        @default("user")
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  accounts      Account[]
+  apiKeys       ApiKey[]
+  sessions      Session[]
+  subscription  Subscription?
+  usageStats    UsageStats[]
 }
 
 model Account {
@@ -52,37 +51,18 @@ model Session {
 }
 
 model Subscription {
-  id                     String    @id @default(cuid())
-  userId                 String    @unique
-  tier                   String    @default("free")
-  status                 String    @default("active")
-  createdAt              DateTime  @default(now())
-  updatedAt              DateTime  @default(now())
-  canceledAt             DateTime?
-  expiresAt              DateTime?
-  lastPaymentAmount      Float?
-  lastPaymentCurrency    String?
-  lastPaymentDate        DateTime?
-  metadata               Json?
-  pendingProvider        String?
-  pendingTier            String?
-  providerSessionId      String?
-  providerSubscriptionId String?
-  user                   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model PaymentHistory {
-  id                    String   @id @default(cuid())
-  userId                String
-  amount                Float
-  currency              String   @default("USD")
-  status                String
-  paymentProvider       String
-  providerTransactionId String?
-  createdAt             DateTime @default(now())
-  errorMessage          String?
-  metadata              Json?
-  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                   String    @id @default(cuid())
+  userId               String    @unique
+  tier                 String    @default("free")
+  status               String    @default("active")
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  canceledAt           DateTime?
+  currentPeriodEnd     DateTime?
+  currentPeriodStart   DateTime?
+  paypalPlanId         String?
+  paypalSubscriptionId String?   @unique
+  user                 User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {

@@ -3,80 +3,99 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { cancelSubscription } from '@/lib/paypal-api';
+import { cancelSubscription, updateUserSubscription } from '@/lib/paypal';
 
 export async function POST(request: NextRequest) {
-  try {
-    // Get user session
-    const session = await getServerSession(authOptions);
+    try {
+        // Get the current session
+        const session = await getServerSession(authOptions);
 
-    if (!session?.user) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
-
-    // Find user's subscription
-    const subscription = await prisma.subscription.findUnique({
-      where: { userId: session.user.id }
-    });
-
-    if (!subscription) {
-      return NextResponse.json(
-        { error: 'No active subscription found' },
-        { status: 404 }
-      );
-    }
-
-    // Check if there's a pending subscription
-    if (subscription.status === 'pending' && subscription.pendingTier) {
-      // Just cancel the pending upgrade without calling PayPal
-      await prisma.subscription.update({
-        where: { id: subscription.id },
-        data: {
-          status: 'active', // Revert to active if already on a paid plan
-          pendingTier: null,
-          pendingProvider: null,
-          canceledAt: new Date()
+        if (!session?.user?.id) {
+            return NextResponse.json(
+                { error: 'Authentication required' },
+                { status: 401 }
+            );
         }
-      });
 
-      return NextResponse.json({
-        success: true,
-        message: 'Pending subscription upgrade cancelled'
-      });
+        // Get user's subscription
+        const user = await prisma.user.findUnique({
+            where: { id: session.user.id },
+            include: { subscription: true },
+        });
+
+        if (!user) {
+            return NextResponse.json(
+                { error: 'User not found' },
+                { status: 404 }
+            );
+        }
+
+        if (!user.subscription || user.subscription.tier === 'free') {
+            return NextResponse.json(
+                { error: 'No active subscription to cancel' },
+                { status: 400 }
+            );
+        }
+
+        const paypalSubscriptionId = user.subscription.paypalSubscriptionId;
+
+        if (!paypalSubscriptionId) {
+            // If no PayPal subscription ID but has a non-free tier, update to free immediately
+            await updateUserSubscription(user.id, {
+                tier: 'free',
+                status: 'active', // Change to active so they can subscribe again
+                paypalSubscriptionId: null,
+                paypalPlanId: null,
+                canceledAt: new Date(),
+            });
+
+            return NextResponse.json({
+                success: true,
+                message: 'Subscription cancelled successfully',
+            });
+        }
+
+        // Try to cancel with PayPal
+        try {
+            await cancelSubscription(paypalSubscriptionId);
+
+            // Update our database
+            await updateUserSubscription(user.id, {
+                status: 'active', // Change to active instead of 'canceled' so they can subscribe again
+                tier: 'free', // Set to free tier immediately
+                canceledAt: new Date(),
+                paypalSubscriptionId: null, // Remove PayPal subscription ID
+                paypalPlanId: null, // Remove PayPal plan ID
+            });
+
+            return NextResponse.json({
+                success: true,
+                message: 'Subscription cancelled successfully.',
+            });
+        } catch (paypalError) {
+            console.error('Error cancelling subscription with PayPal:', paypalError);
+
+            // If PayPal cancellation fails but we have a record, update our database anyway
+            await updateUserSubscription(user.id, {
+                status: 'active', // Change to active so they can subscribe again
+                tier: 'free', // Set to free tier immediately
+                canceledAt: new Date(),
+                paypalSubscriptionId: null, // Remove PayPal subscription ID
+                paypalPlanId: null, // Remove PayPal plan ID
+            });
+
+            return NextResponse.json({
+                success: true,
+                message: 'Subscription cancelled in our system. There may have been an issue with PayPal, but your account has been updated.',
+                //error: process.env.NODE_ENV === 'development' ? paypalError.message : undefined,
+            });
+        }
+    } catch (error) {
+        console.error('Error cancelling subscription:', error);
+
+        return NextResponse.json(
+            { error: 'Failed to cancel subscription' },
+            { status: 500 }
+        );
     }
-
-    // If there's an active PayPal subscription, cancel it
-    if (subscription.status === 'active' && subscription.providerSubscriptionId) {
-      try {
-        await cancelSubscription(subscription.providerSubscriptionId);
-      } catch (error) {
-        console.error('Error cancelling PayPal subscription:', error);
-        // Continue regardless of errors, as we still want to update our database
-      }
-    }
-
-    // Update subscription in database
-    await prisma.subscription.update({
-      where: { id: subscription.id },
-      data: {
-        status: 'canceled',
-        tier: 'free', // Downgrade immediately to free tier
-        canceledAt: new Date()
-      }
-    });
-
-    return NextResponse.json({
-      success: true,
-      message: 'Subscription cancelled successfully'
-    });
-  } catch (error) {
-    console.error('Subscription cancellation error:', error);
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'An unknown error occurred' },
-      { status: 500 }
-    );
-  }
 }
