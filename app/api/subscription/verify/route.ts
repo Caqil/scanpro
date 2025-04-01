@@ -4,100 +4,91 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { getSubscriptionDetails, updateUserSubscription, PAYPAL_PLAN_IDS } from '@/lib/paypal';
-
 export async function GET(request: NextRequest) {
   try {
-    // Get the current session
     const session = await getServerSession(authOptions);
 
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Authentication required' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
 
-    // Get session_id from query params
     const { searchParams } = new URL(request.url);
-    const subscriptionId = searchParams.get('session_id') || searchParams.get('subscription_id');
+    const subscriptionId = searchParams.get('subscription_id');
 
     if (!subscriptionId) {
-      return NextResponse.json(
-        { error: 'Subscription ID is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Subscription ID is required' }, { status: 400 });
     }
 
-    // Find the subscription in our database
-    const subscription = await prisma.subscription.findFirst({
-      where: {
-        paypalSubscriptionId: subscriptionId,
-        userId: session.user.id,
-      },
-    });
+    // Verify with PayPal
+    const paypalSubscriptionDetails = await getSubscriptionDetails(subscriptionId);
 
-    if (!subscription) {
-      // Check PayPal directly
-      try {
-        const paypalSubscriptionDetails = await getSubscriptionDetails(subscriptionId);
+    if (!paypalSubscriptionDetails || !paypalSubscriptionDetails.id) {
+      // If PayPal doesn’t recognize the subscription, assume it was canceled or abandoned
+      // Check if user has an existing subscription; if not, ensure they’re on free
+      const user = await prisma.user.findUnique({
+        where: { id: session.user.id },
+        include: { subscription: true },
+      });
 
-        // If subscription exists in PayPal but not in our database, create it
-        if (paypalSubscriptionDetails && paypalSubscriptionDetails.id) {
-          const status = paypalSubscriptionDetails.status.toLowerCase();
-          const planId = paypalSubscriptionDetails.plan_id;
-
-          // Determine tier from plan ID
-          let tier = 'basic';
-          Object.entries(PAYPAL_PLAN_IDS).forEach(([key, value]) => {
-            if (value === planId) {
-              tier = key;
-            }
-          });
-
-          // Parse billing cycle dates
-          const currentPeriodStart = paypalSubscriptionDetails.billing_info.last_payment?.time
-            ? new Date(paypalSubscriptionDetails.billing_info.last_payment.time)
-            : new Date();
-
-          const currentPeriodEnd = paypalSubscriptionDetails.billing_info.next_billing_time
-            ? new Date(paypalSubscriptionDetails.billing_info.next_billing_time)
-            : new Date(currentPeriodStart.getTime() + 30 * 24 * 60 * 60 * 1000);
-
-          // Create subscription in our database
-          const newSubscription = await updateUserSubscription(session.user.id, {
-            paypalSubscriptionId: subscriptionId,
-            paypalPlanId: planId,
-            tier,
-            status: status === 'active' ? 'active' : 'pending',
-            currentPeriodStart,
-            currentPeriodEnd,
-          });
-
-          return NextResponse.json({
-            success: true,
-            subscription: newSubscription,
-          });
-        }
-      } catch (paypalError) {
-        console.error('Error verifying with PayPal:', paypalError);
-        return NextResponse.json(
-          { error: 'Subscription not found' },
-          { status: 404 }
-        );
+      if (user && !user.subscription?.paypalSubscriptionId) {
+        await updateUserSubscription(session.user.id, {
+          tier: 'free',
+          status: 'active',
+          paypalSubscriptionId: null,
+          paypalPlanId: null,
+        });
       }
+
+      return NextResponse.json({ error: 'Subscription not found or was canceled' }, { status: 404 });
     }
 
-    // If subscription is already in our database, return it
-    return NextResponse.json({
-      success: true,
-      subscription,
+    const status = paypalSubscriptionDetails.status.toLowerCase();
+
+    if (status === 'active' || status === 'approved') {
+      const planId = paypalSubscriptionDetails.plan_id;
+      let tier = 'basic';
+      Object.entries(PAYPAL_PLAN_IDS).forEach(([key, value]) => {
+        if (value === planId) tier = key;
+      });
+
+      const currentPeriodStart = paypalSubscriptionDetails.billing_info.last_payment?.time
+        ? new Date(paypalSubscriptionDetails.billing_info.last_payment.time)
+        : new Date();
+      const currentPeriodEnd = paypalSubscriptionDetails.billing_info.next_billing_time
+        ? new Date(paypalSubscriptionDetails.billing_info.next_billing_time)
+        : new Date(currentPeriodStart.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+      // Update subscription only when PayPal confirms it’s active
+      const subscription = await updateUserSubscription(session.user.id, {
+        paypalSubscriptionId: subscriptionId,
+        paypalPlanId: planId,
+        tier,
+        status: 'active',
+        currentPeriodStart,
+        currentPeriodEnd,
+      });
+
+      return NextResponse.json({ success: true, subscription });
+    }
+
+    // If not active (e.g., canceled or pending), revert to free if no prior subscription exists
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      include: { subscription: true },
     });
+
+    if (user && !user.subscription?.paypalSubscriptionId) {
+      await updateUserSubscription(session.user.id, {
+        tier: 'free',
+        status: 'active',
+        paypalSubscriptionId: null,
+        paypalPlanId: null,
+      });
+    }
+
+    return NextResponse.json({ success: false, message: 'Subscription not yet active or was canceled' });
   } catch (error) {
     console.error('Error verifying subscription:', error);
-
-    return NextResponse.json(
-      { error: 'Failed to verify subscription' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to verify subscription' }, { status: 500 });
   }
 }

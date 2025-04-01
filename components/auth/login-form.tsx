@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle, Eye, EyeOff } from "lucide-react";
-import { FaGoogle, FaGithub } from "react-icons/fa";
+import { FaGoogle, FaGithub, FaApple } from "react-icons/fa";
 import { useLanguageStore } from "@/src/store/store";
 import { toast } from "sonner";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -22,6 +22,7 @@ interface LoginFormProps {
 export function LoginForm({ callbackUrl = "/en/dashboard" }: LoginFormProps) {
   const { t } = useLanguageStore();
   const router = useRouter();
+  const searchParams = useSearchParams();
   
   // Form state
   const [email, setEmail] = useState("");
@@ -34,6 +35,29 @@ export function LoginForm({ callbackUrl = "/en/dashboard" }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [emailError, setEmailError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
+  
+  // Handle auth errors from URL
+  useEffect(() => {
+    const errorParam = searchParams?.get("error");
+    if (errorParam) {
+      switch (errorParam) {
+        case "OAuthAccountNotLinked":
+          setError(
+            "This email is already associated with a different login method. " +
+            "Please sign in with the method you used originally."
+          );
+          break;
+        case "CredentialsSignin":
+          setError("Invalid email or password. Please try again.");
+          break;
+        case "AccessDenied":
+          setError("Access denied. You do not have permission to access this resource.");
+          break;
+        default:
+          setError(`An error occurred during sign in: ${errorParam}`);
+      }
+    }
+  }, [searchParams]);
   
   // Validate email format
   const validateEmail = (email: string): boolean => {
@@ -139,15 +163,15 @@ export function LoginForm({ callbackUrl = "/en/dashboard" }: LoginFormProps) {
           <span>Google</span>
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
         </Button>
-        
+
         <Button 
           variant="outline" 
-          onClick={() => handleOAuthSignIn("github")} 
+          onClick={() => handleOAuthSignIn("apple")} 
           className="flex-1 relative overflow-hidden group h-11 transition-all"
           disabled={loading}
         >
-          <FaGithub className="w-4 h-4 mr-2" />
-          <span>GitHub</span>
+          <FaApple className="w-4 h-4 mr-2" />
+          <span>Apple</span>
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
         </Button>
       </div>

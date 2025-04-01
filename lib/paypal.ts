@@ -9,7 +9,7 @@ export const PAYPAL_PLAN_IDS: Record<string, string> = {
 };
 
 // Set up PayPal API base URLs
-const PAYPAL_API_BASE = 'https://api-m.sandbox.paypal.com';
+const PAYPAL_API_BASE = 'https://api-m.paypal.com';
 
 // Get PayPal OAuth token
 async function getPayPalAccessToken(): Promise<string> {
@@ -22,7 +22,7 @@ async function getPayPalAccessToken(): Promise<string> {
     }
 
     const auth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
-    
+
     const response = await fetch(`${PAYPAL_API_BASE}/v1/oauth2/token`, {
       method: 'POST',
       headers: {
@@ -50,7 +50,7 @@ export async function createSubscription(userId: string, tier: string): Promise<
   try {
     // Get the appropriate plan ID based on the tier
     const planId = PAYPAL_PLAN_IDS[tier];
-    
+
     if (!planId) {
       throw new Error(`No PayPal plan ID configured for tier: ${tier}. Please set PAYPAL_PLAN_${tier.toUpperCase()} environment variable.`);
     }
@@ -81,7 +81,7 @@ export async function createSubscription(userId: string, tier: string): Promise<
     });
 
     const data = await response.json();
-    
+
     if (!response.ok) {
       console.error('PayPal API error response:', data);
       throw new Error(`PayPal API error: ${data.message || JSON.stringify(data)}`);
@@ -89,7 +89,7 @@ export async function createSubscription(userId: string, tier: string): Promise<
 
     // Find approval URL
     const approvalUrl = data.links.find((link: any) => link.rel === 'approve')?.href;
-    
+
     if (!approvalUrl) {
       throw new Error('No approval URL found in PayPal response');
     }

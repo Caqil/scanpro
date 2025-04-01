@@ -53,6 +53,7 @@
     "firebase": "^11.5.0",
     "framer-motion": "^12.5.0",
     "jsdom": "^26.0.0",
+    "jsonwebtoken": "^9.0.2",
     "jszip": "^3.10.1",
     "libreoffice-convert": "^1.6.1",
     "lucide-react": "^0.479.0",

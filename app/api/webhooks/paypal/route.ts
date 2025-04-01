@@ -12,18 +12,19 @@ function verifyWebhookSignature(
     if (!signatureHeader) return false;
 
     try {
+        // Create a hash using the secret and the raw request body
         const expectedSignature = crypto
             .createHmac('sha256', process.env.PAYPAL_WEBHOOK_SECRET || '')
             .update(rawBody)
             .digest('base64');
 
+        // Compare the computed signature with the one in the header
         return expectedSignature === signatureHeader;
     } catch (error) {
         console.error('Signature verification error:', error);
         return false;
     }
 }
-
 export async function POST(request: NextRequest) {
     try {
         // Get raw body buffer
