@@ -16,7 +16,6 @@ import {
   TableIcon,
   ArrowRightIcon,
   ArrowDownIcon,
-  PencilIcon,
   LightbulbIcon,
   FileCheck2,
   Shield,
@@ -105,7 +104,7 @@ function ClientHomeContent() {
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                
-                <LanguageLink href="/tools" className="inline-flex">
+                <LanguageLink href="/pdf-tools" className="inline-flex">
                   <Button size="lg" variant="outline">{t('hero.btTools')}</Button>
                 </LanguageLink>
               </div>
@@ -141,7 +140,7 @@ function ClientHomeContent() {
             ))}
           </div>
           <div className="flex justify-center">
-          <LanguageLink href="/tools"><Button variant="outline" size="lg">
+          <LanguageLink href="/pdf-tools"><Button variant="outline" size="lg">
                 {t('popular.viewAll')}
               </Button></LanguageLink>
            
@@ -261,7 +260,7 @@ function ClientHomeContent() {
               <LanguageLink href="#converter">
                 <Button size="lg">{t('cta.startConverting')}</Button>
               </LanguageLink>
-              <LanguageLink href="/tools">
+              <LanguageLink href="/pdf-tools">
                 <Button size="lg" variant="outline">{t('cta.exploreTools')}</Button>
               </LanguageLink>
             </div>

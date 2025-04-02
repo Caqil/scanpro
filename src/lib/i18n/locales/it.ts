@@ -894,7 +894,64 @@ export default {
       enhanceScannedHint: "Preprocesa imágenes para mejorar la precisión del OCR (recomendado para documentos escaneados)",
       preserveLayout: "Preservar diseño",
       preserveLayoutHint: "Intenta mantener el diseño original con párrafos y saltos de línea"
-    }
+    },
+    // Upload area
+    uploadPdf: "Carica PDF per l'estrazione del testo",
+    dragDrop: "Trascina e rilascia il tuo file PDF qui, o clicca per sfogliare",
+    selectPdf: "Seleziona file PDF",
+    uploading: "Caricamento in corso...",
+    maxFileSize: "Dimensione massima del file: 50 MB",
+
+    // File handling
+    invalidFile: "Tipo di file non valido",
+    invalidFileDesc: "Seleziona un file PDF",
+    fileTooLarge: "File troppo grande",
+    fileTooLargeDesc: "La dimensione massima del file è 50 MB",
+    noFile: "Nessun file selezionato",
+    noFileDesc: "Seleziona un file PDF da elaborare",
+    changeFile: "Cambia file",
+
+    // Options
+    languageLabel: "Lingua del documento",
+    selectLanguage: "Seleziona lingua",
+    pageRange: "Intervallo di pagine",
+    allPages: "Tutte le pagine",
+    specificPages: "Pagine specifiche",
+    pageRangeExample: "es. 1-3, 5, 7-9",
+    pageRangeInfo: "Inserisci pagine singole o intervalli separati da virgole",
+    preserveLayout: "Preserva layout",
+    preserveLayoutDesc: "Tenta di mantenere la struttura e la formattazione del documento",
+
+    // Processing
+    extractText: "Estrai testo",
+    extractingText: "Estrazione del testo...",
+    processingPdf: "Elaborazione del tuo PDF",
+    processingInfo: "Potrebbe richiedere alcuni minuti a seconda della dimensione e complessità del file",
+    analyzing: "Analisi del documento",
+    preprocessing: "Pre-elaborazione delle pagine",
+    recognizing: "Riconoscimento del testo",
+    extracting: "Estrazione del contenuto",
+    finalizing: "Finalizzazione dei risultati",
+    finishing: "Completamento",
+
+    // Results
+    extractionComplete: "Estrazione del testo completata",
+    extractionCompleteDesc: "Il tuo testo è stato estratto con successo dal PDF",
+    extractionError: "Errore nell'estrazione del testo",
+    extractionFailed: "Impossibile estrarre il testo",
+    unknownError: "Si è verificato un errore sconosciuto",
+    textCopied: "Testo copiato negli appunti",
+    copyFailed: "Impossibile copiare il testo",
+    textPreview: "Anteprima del testo",
+    rawText: "Testo grezzo",
+    extractedText: "Testo estratto",
+    previewDesc: "Anteprima del testo estratto con formattazione",
+    rawTextOutput: "Output del testo grezzo",
+    rawTextDesc: "Testo semplice senza formattazione",
+    noTextFound: "Nessun testo trovato nel documento",
+    copyText: "Copia testo",
+    downloadText: "Scarica testo",
+    processAnother: "Elabora un altro PDF"
   },
 
   // Protect PDF Page
@@ -1405,18 +1462,63 @@ export default {
 
   // About Page
   about: {
-    title: "Acerca de ScanPro",
-    mission: {
-      title: "Nuestra Misión",
-      description: "Creemos en hacer que la gestión de PDFs sea accesible para todos. Nuestras herramientas en línea te ayudan a trabajar con PDFs de manera rápida y sencilla, sin necesidad de instalar software."
+    hero: {
+      title: "Potenziare la gestione dei documenti digitali",
+      description: "ScanPro è nato da un'idea semplice: rendere la gestione dei documenti fluida, efficiente e accessibile a tutti. Crediamo nella trasformazione del modo in cui le persone interagiscono con i documenti digitali."
+    },
+    story: {
+      title: "La nostra storia",
+      paragraph1: "Fondata nel 2022, ScanPro è emersa dalla frustrazione di dover affrontare strumenti PDF complessi e poco intuitivi. I nostri fondatori, appassionati di tecnologia ed esperti di gestione documentale, hanno visto l'opportunità di creare una soluzione potente e user-friendly.",
+      paragraph2: "Quello che è iniziato come un piccolo progetto è rapidamente cresciuto fino a diventare una piattaforma completa che serve migliaia di utenti in tutto il mondo, dagli studenti e professionisti alle grandi imprese."
+    },
+    missionValues: {
+      title: "La nostra missione e i nostri valori",
+      mission: {
+        title: "Missione",
+        description: "Semplificare la gestione dei documenti digitali fornendo strumenti PDF intuitivi, potenti e accessibili che migliorano la produttività e la creatività."
+      },
+      customerFirst: {
+        title: "Il cliente al primo posto",
+        description: "Diamo priorità all'esperienza dell'utente e miglioriamo continuamente i nostri strumenti basandoci sui feedback reali degli utenti. I tuoi bisogni guidano la nostra innovazione."
+      },
+      privacy: {
+        title: "Privacy e sicurezza",
+        description: "Ci impegniamo a proteggere i tuoi dati con misure di sicurezza all'avanguardia e un rispetto assoluto per la tua privacy."
+      }
+    },
+    coreValues: {
+      title: "I nostri valori fondamentali",
+      innovation: {
+        title: "Innovazione",
+        description: "Spingiamo continuamente i confini di ciò che è possibile nella gestione documentale."
+      },
+      collaboration: {
+        title: "Collaborazione",
+        description: "Crediamo nel potere del lavoro di squadra, sia all'interno della nostra azienda che con i nostri utenti."
+      },
+      accessibility: {
+        title: "Accessibilità",
+        description: "I nostri strumenti sono progettati per essere semplici, intuitivi e disponibili per tutti."
+      }
     },
     team: {
-      title: "Nuestro Equipo",
-      description: "Somos un equipo dedicado de desarrolladores y diseñadores apasionados por crear herramientas PDF simples pero potentes."
-    },
-    technology: {
-      title: "Nuestra Tecnología",
-      description: "Nuestra plataforma utiliza tecnología de punta para proporcionar conversión, edición y seguridad de PDFs de alta calidad mientras mantiene tus datos seguros."
+      title: "Incontra il nostro team",
+      description: "ScanPro è alimentato da un piccolo team dedicato focalizzato sulla creazione dei migliori strumenti PDF possibili per i nostri utenti.",
+      member1: {
+        name: "Cakra",
+        role: "Capo dello sviluppo delle applicazioni",
+        bio: "Supervisiona lo sviluppo delle nostre applicazioni, implementando soluzioni backend robuste e assicurando che i nostri strumenti funzionino in modo fluido ed efficiente."
+      },
+      member2: {
+        name: "Abdi",
+        role: "Sviluppatore web frontend",
+        bio: "Crea le interfacce utente che rendono i nostri strumenti intuitivi e accessibili, concentrandosi sulla fornitura di esperienze utente eccezionali su tutte le nostre piattaforme web."
+      },
+      member3: {
+        name: "Anggi",
+        role: "Specialista di marketing",
+        bio: "Guida i nostri sforzi di marketing per collegare i nostri strumenti alle persone che ne hanno bisogno, costruendo consapevolezza e guidando la crescita della nostra piattaforma."
+      }
     }
   },
 
@@ -1496,143 +1598,6 @@ export default {
         question: "C'è un limite di dimensione del file?",
         answer: "Sì, puoi comprimere file fino a 100 MB ciascuno."
       }
-    }
-  },
-  imageTools: {
-    title: "Strumenti per Immagini",
-    description: "Strumenti online gratuiti per convertire, modificare e trasformare le tue immagini",
-    categories: {
-      conversion: "Conversione di Formato",
-      editing: "Modifica delle Immagini",
-      enhancement: "Miglioramento delle Immagini",
-      optimization: "Ottimizzazione",
-      advanced: "Strumenti Avanzati"
-    },
-    compressPng: {
-      title: "Comprimere PNG",
-      description: "Ridurre le dimensioni dei file PNG mantenendo la qualità",
-      metaTitle: "Comprimere Immagini PNG | Strumenti per Immagini",
-      metaDescription: "Ridurre le dimensioni dei file PNG mantenendo la qualità per un caricamento più veloce dei siti web e una memorizzazione efficiente",
-      metaKeywords: "comprimere PNG, ridurre dimensioni immagine, ottimizzare immagini, compressione immagini, compressione senza perdita, riduzione dimensioni file"
-    },
-    makeTransparent: {
-      title: "Rendere un PNG trasparente",
-      description: "Sostituire qualsiasi colore in un file PNG con trasparenza",
-      metaTitle: "Rendere un PNG trasparente | Strumenti per Immagini",
-      metaDescription: "Sostituire rapidamente qualsiasi colore in un file PNG con trasparenza",
-      metaKeywords: "rimuovere sfondo, PNG trasparente, sostituzione colore, modifica immagini, rimozione sfondo, immagini trasparenti"
-    },
-    pngToJpg: {
-      title: "Convertire PNG in JPG",
-      description: "Convertire immagini PNG in formato JPG con impostazioni di qualità personalizzabili",
-      metaTitle: "Convertire PNG in JPG | Strumenti per Immagini",
-      metaDescription: "Convertire immagini PNG in formato JPG con qualità regolabile",
-      metaKeywords: "PNG a JPG, conversione immagini, formato immagine, compressione con perdita, qualità immagine"
-    },
-    jpgToPng: {
-      title: "Convertire JPG in PNG",
-      description: "Convertire immagini JPG in formato PNG con supporto per la trasparenza",
-      metaTitle: "Convertire JPG in PNG | Strumenti per Immagini",
-      metaDescription: "Convertire immagini JPG in formato PNG con qualità senza perdita",
-      metaKeywords: "JPG a PNG, conversione immagini, trasparenza, formato senza perdita, qualità immagine"
-    },
-    pngToWebp: {
-      title: "Convertire PNG in WebP",
-      description: "Convertire immagini PNG in formato WebP per migliori prestazioni web",
-      metaTitle: "Convertire PNG in WebP | Strumenti per Immagini",
-      metaDescription: "Convertire immagini PNG in formato WebP per dimensioni dei file più piccole",
-      metaKeywords: "PNG a WebP, conversione immagini, ottimizzazione web, compressione immagini"
-    },
-    webpToPng: {
-      title: "Convertire WebP in PNG",
-      description: "Convertire immagini WebP in formato PNG per una maggiore compatibilità",
-      metaTitle: "Convertire WebP in PNG | Strumenti per Immagini",
-      metaDescription: "Convertire immagini WebP in formato PNG con piena compatibilità",
-      metaKeywords: "WebP a PNG, conversione immagini, formato immagine, compatibilità"
-    },
-    svgToPng: {
-      title: "Convertire SVG in PNG",
-      description: "Convertire file SVG vettoriali in immagini PNG raster",
-      metaTitle: "Convertire SVG in PNG | Strumenti per Immagini",
-      metaDescription: "Convertire grafiche vettoriali SVG in immagini PNG raster con dimensioni personalizzate",
-      metaKeywords: "SVG a PNG, vettoriale a raster, conversione immagini, design grafico"
-    },
-    pngToBase64: {
-      title: "Convertire PNG in Base64",
-      description: "Convertire immagini PNG in codifica Base64 per l’incorporamento in pagine web",
-      metaTitle: "Convertire PNG in Base64 | Strumenti per Immagini",
-      metaDescription: "Convertire immagini PNG in stringhe Base64 per l’incorporamento web",
-      metaKeywords: "PNG a Base64, codifica immagini, sviluppo web, incorporamento immagini"
-    },
-    base64ToPng: {
-      title: "Convertire Base64 in PNG",
-      description: "Convertire stringhe di immagini codificate in Base64 nuovamente in file PNG",
-      metaTitle: "Convertire Base64 in PNG | Strumenti per Immagini",
-      metaDescription: "Convertire stringhe di immagini Base64 nuovamente in file di immagini PNG",
-      metaKeywords: "Base64 a PNG, decodifica immagini, sviluppo web, conversione immagini"
-    },
-    changeColors: {
-      title: "Cambiare colori in PNG",
-      description: "Sostituire colori specifici in immagini PNG con nuovi colori",
-      metaTitle: "Cambiare colori in PNG | Strumenti per Immagini",
-      metaDescription: "Sostituire facilmente colori specifici in immagini PNG con nuovi colori",
-      metaKeywords: "cambiare colori immagine, sostituzione colore, modifica PNG, cambiacolori immagine, scambio colori"
-    },
-    changeTone: {
-      title: "Cambiare tonalità di colore",
-      description: "Applicare tonalità e tinte di colore alle tue immagini per effetti artistici",
-      metaTitle: "Cambiare tonalità di colore PNG | Strumenti per Immagini",
-      metaDescription: "Applicare tonalità e tinte di colore alle tue immagini PNG per effetti artistici",
-      metaKeywords: "tonalità colore, tintura immagini, effetti artistici, sovrapposizione colore, filtro fotografico"
-    },
-    addNoise: {
-      title: "Aggiungere rumore a PNG",
-      description: "Aggiungere effetti di grana di pellicola o rumore alle tue immagini PNG per uno stile artistico",
-      metaTitle: "Aggiungere rumore a PNG | Strumenti per Immagini",
-      metaDescription: "Aggiungere effetti di grana di pellicola o rumore alle tue immagini PNG per uno stile artistico",
-      metaKeywords: "aggiungere rumore, grana di pellicola, texture immagine, filtro artistico, effetto foto vintage"
-    },
-    resize: {
-      title: "Ridimensionare immagine",
-      description: "Ridimensionare immagini a dimensioni esatte mantenendo la qualità",
-      metaTitle: "Ridimensionare immagini | Strumenti per Immagini",
-      metaDescription: "Ridimensionare facilmente le tue immagini a dimensioni esatte mantenendo la qualità",
-      metaKeywords: "ridimensionare immagine, cambiare dimensioni immagine, scalare immagine, dimensioni immagine, ridimensionamento immagine"
-    },
-    rotate: {
-      title: "Ruotare e capovolgere",
-      description: "Ruotare e capovolgere immagini per ottenere l’orientamento corretto",
-      metaTitle: "Ruotare e capovolgere immagini | Strumenti per Immagini",
-      metaDescription: "Ruotare facilmente le immagini a qualsiasi angolo e capovolgerle orizzontalmente o verticalmente",
-      metaKeywords: "ruotare immagine, capovolgere immagine, orientamento immagine, girare immagine, capovolgimento verticale"
-    },
-    crop: {
-      title: "Ritagliare immagine",
-      description: "Ritagliare immagini per rimuovere aree indesiderate e concentrarsi su contenuti importanti",
-      metaTitle: "Ritagliare immagini | Strumenti per Immagini",
-      metaDescription: "Ritagliare immagini per rimuovere aree indesiderate e migliorare la composizione",
-      metaKeywords: "ritagliare immagine, taglio immagine, rimuovere sfondo, composizione immagine"
-    },
-    addText: {
-      title: "Aggiungere testo a immagine",
-      description: "Aggiungere testo personalizzato, didascalie o filigrane alle tue immagini",
-      metaTitle: "Aggiungere testo a immagini | Strumenti per Immagini",
-      metaDescription: "Aggiungere testo personalizzato, didascalie e filigrane alle tue immagini con opzioni di formattazione facili",
-      metaKeywords: "aggiungere testo a immagine, didascalia immagine, filigrana, sovrapposizione testo, annotazione immagine"
-    },
-    addBorder: {
-      title: "Aggiungere bordo",
-      description: "Aggiungere bordi personalizzati alle tue immagini con vari stili e colori",
-      metaTitle: "Aggiungere bordo a immagini | Strumenti per Immagini",
-      metaDescription: "Migliorare le tue immagini con bordi personalizzati, cornici ed effetti",
-      metaKeywords: "aggiungere bordo immagine, cornice foto, incorniciatura immagine, stile bordo, miglioramento immagine"
-    },
-    addWatermark: {
-      title: "Aggiungere filigrana",
-      description: "Aggiungere filigrane di testo o immagine per proteggere le tue foto",
-      metaTitle: "Aggiungere filigrana a immagini | Strumenti per Immagini",
-      metaDescription: "Aggiungere filigrane di testo o immagine per proteggere e marchiare le tue immagini",
-      metaKeywords: "aggiungere filigrana, protezione immagini, branding, copyright, sicurezza immagini"
     }
   },
   repairPdf: {
@@ -2193,9 +2158,7 @@ export default {
     }
   },
   pricing: {
-    // Metadata
-    metaTitle: "Piani di Prezzo - ScanPro",
-    metaDescription: "Scegli il piano giusto per le tue esigenze PDF. ScanPro offre opzioni di prezzo flessibili, da gratuito a aziendale, con le funzionalità di cui hai bisogno.",
+    description: "Scegli il piano giusto per le tue esigenze PDF. ScanPro offre opzioni di prezzo flessibili, da gratuito a aziendale, con le funzionalità di cui hai bisogno.",
 
     // Page content
     title: "Prezzi semplici e trasparenti",

@@ -156,7 +156,7 @@ export function PdfTools() {
           id: "repair",
           name: t("repairPdf.title") || "Repair PDF",
           description: t("repairPdf.description") || "Fix corrupted PDF files and recover content",
-          href: "/repair",
+          href: "/repair-pdf",
           icon: <ReplaceAllIcon className="h-8 w-8" />,
           iconBg: "bg-blue-100 dark:bg-blue-900/30",
           isNew: true
@@ -208,7 +208,7 @@ export function PdfTools() {
           description: t('toolDescriptions.watermark'),
           icon: <Edit2Icon className="h-6 w-6 text-purple-500" />,
           iconBg: "bg-purple-100 dark:bg-purple-900/30",
-          href: "/watermark"
+          href: "/watermark-pdf"
         },
       ]
     },

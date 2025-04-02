@@ -895,7 +895,64 @@ export default {
       enhanceScannedHint: "OCR 정확도를 높이기 위해 이미지를 전처리 (스캔 문서에 권장)",
       preserveLayout: "레이아웃 유지",
       preserveLayoutHint: "단락과 줄 바꿈으로 원본 레이아웃을 유지하려고 시도"
-    }
+    },
+    // Upload area
+    uploadPdf: "텍스트 추출을 위해 PDF 업로드",
+    dragDrop: "PDF 파일을 여기로 드래그 앤 드롭하거나 클릭하여 탐색",
+    selectPdf: "PDF 파일 선택",
+    uploading: "업로드 중...",
+    maxFileSize: "최대 파일 크기: 50MB",
+
+    // File handling
+    invalidFile: "잘못된 파일 형식",
+    invalidFileDesc: "PDF 파일을 선택해 주세요",
+    fileTooLarge: "파일이 너무 큽니다",
+    fileTooLargeDesc: "최대 파일 크기는 50MB입니다",
+    noFile: "파일이 선택되지 않음",
+    noFileDesc: "처리할 PDF 파일을 선택해 주세요",
+    changeFile: "파일 변경",
+
+    // Options
+    languageLabel: "문서 언어",
+    selectLanguage: "언어 선택",
+    pageRange: "페이지 범위",
+    allPages: "모든 페이지",
+    specificPages: "특정 페이지",
+    pageRangeExample: "예: 1-3, 5, 7-9",
+    pageRangeInfo: "개별 페이지 또는 쉼표로 구분된 범위를 입력",
+    preserveLayout: "레이아웃 유지",
+    preserveLayoutDesc: "문서 구조와 서식을 유지하려고 시도합니다",
+
+    // Processing
+    extractText: "텍스트 추출",
+    extractingText: "텍스트 추출 중...",
+    processingPdf: "PDF 처리 중",
+    processingInfo: "파일 크기와 복잡성에 따라 몇 분이 걸릴 수 있습니다",
+    analyzing: "문서 분석 중",
+    preprocessing: "페이지 전처리 중",
+    recognizing: "텍스트 인식 중",
+    extracting: "콘텐츠 추출 중",
+    finalizing: "결과 마무리 중",
+    finishing: "마무리 중",
+
+    // Results
+    extractionComplete: "텍스트 추출 완료",
+    extractionCompleteDesc: "PDF에서 텍스트가 성공적으로 추출되었습니다",
+    extractionError: "텍스트 추출 실패",
+    extractionFailed: "텍스트를 추출하지 못했습니다",
+    unknownError: "알 수 없는 오류가 발생했습니다",
+    textCopied: "텍스트가 클립보드에 복사되었습니다",
+    copyFailed: "텍스트 복사에 실패했습니다",
+    textPreview: "텍스트 미리보기",
+    rawText: "원시 텍스트",
+    extractedText: "추출된 텍스트",
+    previewDesc: "서식이 포함된 추출 텍스트 미리보기",
+    rawTextOutput: "원시 텍스트 출력",
+    rawTextDesc: "서식 없는 일반 텍스트",
+    noTextFound: "문서에서 텍스트를 찾을 수 없습니다",
+    copyText: "텍스트 복사",
+    downloadText: "텍스트 다운로드",
+    processAnother: "다른 PDF 처리"
   },
 
   // Protect PDF Page
@@ -1484,18 +1541,63 @@ export default {
   },
   // About Page
   about: {
-    title: "ScanPro 소개",
-    mission: {
-      title: "우리의 사명",
-      description: "우리는 PDF 관리를 누구나 쉽게 할 수 있도록 하는 것을 믿습니다. 저희 온라인 도구는 소프트웨어 설치 없이 PDF 작업을 빠르고 쉽게 할 수 있도록 도와줍니다."
+    hero: {
+      title: "디지털 문서 관리 강화",
+      description: "ScanPro는 간단한 아이디어에서 태어났습니다: 문서 관리를 원활하고 효율적이며 모든 사람이 접근할 수 있게 만드는 것. 우리는 사람들이 디지털 문서와 상호작용하는 방식을 변화시킬 수 있다고 믿습니다."
+    },
+    story: {
+      title: "우리의 이야기",
+      paragraph1: "2022년에 설립된 ScanPro는 복잡하고 직관적이지 않은 PDF 도구를 다루는 데서 오는 좌절감에서 비롯되었습니다. 기술 애호가이자 문서 관리 전문가인 우리의 창립자들은 강력하면서도 사용자 친화적인 솔루션을 만들 기회를 보았습니다.",
+      paragraph2: "작은 프로젝트로 시작한 것이 빠르게 학생, 전문가, 대기업에 이르기까지 전 세계 수천 명의 사용자를 위한 포괄적인 플랫폼으로 성장했습니다."
+    },
+    missionValues: {
+      title: "우리의 사명과 가치",
+      mission: {
+        title: "사명",
+        description: "직관적이고 강력하며 접근 가능한 PDF 도구를 제공하여 디지털 문서 관리를 단순화하고 생산성과 창의성을 향상시키는 것."
+      },
+      customerFirst: {
+        title: "고객 우선",
+        description: "우리는 사용자 경험을 최우선으로 하며 실제 사용자 피드백을 기반으로 도구를 지속적으로 개선합니다. 당신의 필요가 우리의 혁신을 이끕니다."
+      },
+      privacy: {
+        title: "프라이버시 및 보안",
+        description: "우리는 최첨단 보안 조치와 당신의 프라이버시에 대한 절대적인 존중으로 데이터를 보호하는 데 전념하고 있습니다."
+      }
+    },
+    coreValues: {
+      title: "우리의 핵심 가치",
+      innovation: {
+        title: "혁신",
+        description: "우리는 문서 관리에서 가능한 것의 경계를 지속적으로 확장합니다."
+      },
+      collaboration: {
+        title: "협업",
+        description: "우리는 회사 내부와 사용자들과의 팀워크의 힘을 믿습니다."
+      },
+      accessibility: {
+        title: "접근성",
+        description: "우리의 도구는 간단하고 직관적이며 모든 사람이 사용할 수 있도록 설계되었습니다."
+      }
     },
     team: {
-      title: "우리의 팀",
-      description: "우리는 간단하면서도 강력한 PDF 도구를 만드는 데 열정을 가진 개발자와 디자이너로 구성된 헌신적인 팀입니다."
-    },
-    technology: {
-      title: "우리의 기술",
-      description: "저희 플랫폼은 데이터를 안전하게 유지하면서 고품질 PDF 변환, 편집, 보안을 제공하기 위해 최첨단 기술을 사용합니다."
+      title: "우리 팀 만나기",
+      description: "ScanPro는 사용자들을 위해 가능한 최고의 PDF 도구를 만드는 데 집중하는 작고 헌신적인 팀에 의해 운영됩니다.",
+      member1: {
+        name: "차크라",
+        role: "앱 개발 리더",
+        bio: "우리 애플리케이션의 개발을 감독하며 견고한 백엔드 솔루션을 구현하고 도구가 원활하고 효율적으로 작동하도록 보장합니다."
+      },
+      member2: {
+        name: "압디",
+        role: "프론트엔드 웹 개발자",
+        bio: "도구를 직관적이고 접근 가능하게 만드는 사용자 인터페이스를 만들며 모든 웹 플랫폼에서 뛰어난 사용자 경험을 제공하는 데 주력합니다."
+      },
+      member3: {
+        name: "앙기",
+        role: "마케팅 전문가",
+        bio: "도구를 필요로 하는 사람들과 연결하기 위한 마케팅 노력을 이끌며 인지도를 높이고 플랫폼의 성장을 촉진합니다."
+      }
     }
   },
 
@@ -1575,143 +1677,6 @@ export default {
         question: "파일 크기 제한이 있나요?",
         answer: "네, 파일당 최대 100MB까지 압축할 수 있습니다."
       }
-    }
-  },
-  imageTools: {
-    title: "이미지 도구",
-    description: "이미지를 변환, 편집, 변형하기 위한 무료 온라인 도구",
-    categories: {
-      conversion: "형식 변환",
-      editing: "이미지 편집",
-      enhancement: "이미지 개선",
-      optimization: "최적화",
-      advanced: "고급 도구"
-    },
-    compressPng: {
-      title: "PNG 압축",
-      description: "품질을 유지하면서 PNG 파일 크기를 줄임",
-      metaTitle: "PNG 이미지 압축 | 이미지 도구",
-      metaDescription: "웹사이트 로딩 속도를 높이고 효율적인 저장을 위해 품질을 유지하면서 PNG 파일 크기를 줄임",
-      metaKeywords: "PNG 압축, 이미지 크기 줄이기, 이미지 최적화, 이미지 압축, 무손실 압축, 파일 크기 감소"
-    },
-    makeTransparent: {
-      title: "PNG 투명화",
-      description: "PNG 파일 내의 임의의 색상을 투명으로 대체",
-      metaTitle: "PNG 투명화 | 이미지 도구",
-      metaDescription: "PNG 파일 내의 임의의 색상을 빠르게 투명으로 대체",
-      metaKeywords: "배경 제거, 투명 PNG, 색상 대체, 이미지 편집, 배경 제거, 투명 이미지"
-    },
-    pngToJpg: {
-      title: "PNG를 JPG로 변환",
-      description: "사용자 정의 가능한 품질 설정으로 PNG 이미지를 JPG 형식으로 변환",
-      metaTitle: "PNG를 JPG로 변환 | 이미지 도구",
-      metaDescription: "조정 가능한 품질로 PNG 이미지를 JPG 형식으로 변환",
-      metaKeywords: "PNG에서 JPG로, 이미지 변환, 이미지 형식, 손실 압축, 이미지 품질"
-    },
-    jpgToPng: {
-      title: "JPG를 PNG로 변환",
-      description: "투명도를 지원하여 JPG 이미지를 PNG 형식으로 변환",
-      metaTitle: "JPG를 PNG로 변환 | 이미지 도구",
-      metaDescription: "무손실 품질로 JPG 이미지를 PNG 형식으로 변환",
-      metaKeywords: "JPG에서 PNG로, 이미지 변환, 투명도, 무손실 형식, 이미지 품질"
-    },
-    pngToWebp: {
-      title: "PNG를 WebP로 변환",
-      description: "웹 성능 향상을 위해 PNG 이미지를 WebP 형식으로 변환",
-      metaTitle: "PNG를 WebP로 변환 | 이미지 도구",
-      metaDescription: "파일 크기를 줄이기 위해 PNG 이미지를 WebP 형식으로 변환",
-      metaKeywords: "PNG에서 WebP로, 이미지 변환, 웹 최적화, 이미지 압축"
-    },
-    webpToPng: {
-      title: "WebP를 PNG로 변환",
-      description: "호환성 향상을 위해 WebP 이미지를 PNG 형식으로 변환",
-      metaTitle: "WebP를 PNG로 변환 | 이미지 도구",
-      metaDescription: "완전한 호환성으로 WebP 이미지를 PNG 형식으로 변환",
-      metaKeywords: "WebP에서 PNG로, 이미지 변환, 이미지 형식, 호환성"
-    },
-    svgToPng: {
-      title: "SVG를 PNG로 변환",
-      description: "벡터 SVG 파일을 래스터 PNG 이미지로 변환",
-      metaTitle: "SVG를 PNG로 변환 | 이미지 도구",
-      metaDescription: "사용자 정의 치수로 벡터 SVG 그래픽을 래스터 PNG 이미지로 변환",
-      metaKeywords: "SVG에서 PNG로, 벡터에서 래스터로, 이미지 변환, 그래픽 디자인"
-    },
-    pngToBase64: {
-      title: "PNG를 Base64로 변환",
-      description: "웹 페이지에 삽입하기 위해 PNG 이미지를 Base64 인코딩으로 변환",
-      metaTitle: "PNG를 Base64로 변환 | 이미지 도구",
-      metaDescription: "웹 삽입용으로 PNG 이미지를 Base64 문자열로 변환",
-      metaKeywords: "PNG에서 Base64로, 이미지 인코딩, 웹 개발, 이미지 삽입"
-    },
-    base64ToPng: {
-      title: "Base64를 PNG로 변환",
-      description: "Base64로 인코딩된 이미지 문자열을 PNG 파일로 재변환",
-      metaTitle: "Base64를 PNG로 변환 | 이미지 도구",
-      metaDescription: "Base64 이미지 문자열을 PNG 이미지 파일로 재변환",
-      metaKeywords: "Base64에서 PNG로, 이미지 디코딩, 웹 개발, 이미지 변환"
-    },
-    changeColors: {
-      title: "PNG 색상 변경",
-      description: "PNG 이미지 내의 특정 색상을 새로운 색상으로 대체",
-      metaTitle: "PNG 색상 변경 | 이미지 도구",
-      metaDescription: "PNG 이미지 내의 특정 색상을 쉽게 새로운 색상으로 대체",
-      metaKeywords: "이미지 색상 변경, 색상 대체, PNG 편집, 이미지 색상 변경기, 색상 교환"
-    },
-    changeTone: {
-      title: "색조 변경",
-      description: "예술적 효과를 위해 이미지에 색조와 톤을 적용",
-      metaTitle: "PNG 색조 변경 | 이미지 도구",
-      metaDescription: "예술적 효과를 위해 PNG 이미지에 색조와 톤을 적용",
-      metaKeywords: "색조, 이미지 톤 조정, 예술적 효과, 색상 오버레이, 사진 필터"
-    },
-    addNoise: {
-      title: "PNG에 노이즈 추가",
-      description: "예술적 스타일을 위해 PNG 이미지에 필름 그레인 또는 노이즈 효과 추가",
-      metaTitle: "PNG에 노이즈 추가 | 이미지 도구",
-      metaDescription: "예술적 스타일을 위해 PNG 이미지에 필름 그레인 또는 노이즈 효과 추가",
-      metaKeywords: "노이즈 추가, 필름 그레인, 이미지 텍스처, 예술적 필터, 빈티지 사진 효과"
-    },
-    resize: {
-      title: "이미지 크기 조정",
-      description: "품질을 유지하면서 이미지를 정확한 치수로 크기 조정",
-      metaTitle: "이미지 크기 조정 | 이미지 도구",
-      metaDescription: "품질을 유지하면서 이미지를 정확한 치수로 쉽게 크기 조정",
-      metaKeywords: "이미지 크기 조정, 이미지 크기 변경, 이미지 스케일, 이미지 치수, 이미지 크기 조정"
-    },
-    rotate: {
-      title: "회전 및 뒤집기",
-      description: "올바른 방향을 위해 이미지를 회전 및 뒤집기",
-      metaTitle: "이미지 회전 및 뒤집기 | 이미지 도구",
-      metaDescription: "이미지를 원하는 각도로 쉽게 회전하고 수평 또는 수직으로 뒤집기",
-      metaKeywords: "이미지 회전, 이미지 뒤집기, 이미지 방향, 이미지 돌리기, 수직 뒤집기"
-    },
-    crop: {
-      title: "이미지 자르기",
-      description: "불필요한 영역을 제거하고 중요한 콘텐츠에 초점을 맞추기 위해 이미지 자르기",
-      metaTitle: "이미지 자르기 | 이미지 도구",
-      metaDescription: "구성을 개선하기 위해 불필요한 영역을 제거하며 이미지 자르기",
-      metaKeywords: "이미지 자르기, 이미지 트리밍, 배경 제거, 이미지 구성"
-    },
-    addText: {
-      title: "이미지에 텍스트 추가",
-      description: "사용자 정의 텍스트, 캡션 또는 워터마크를 이미지에 추가",
-      metaTitle: "이미지에 텍스트 추가 | 이미지 도구",
-      metaDescription: "간단한 서식 옵션으로 사용자 정의 텍스트, 캡션, 워터마크를 이미지에 추가",
-      metaKeywords: "이미지에 텍스트 추가, 이미지 캡션, 워터마크, 텍스트 오버레이, 이미지 주석"
-    },
-    addBorder: {
-      title: "테두리 추가",
-      description: "다양한 스타일과 색상으로 사용자 정의 테두리를 이미지에 추가",
-      metaTitle: "이미지에 테두리 추가 | 이미지 도구",
-      metaDescription: "사용자 정의 테두리, 프레임, 효과로 이미지를 개선",
-      metaKeywords: "이미지 테두리 추가, 포토 프레임, 이미지 프레이밍, 테두리 스타일, 이미지 개선"
-    },
-    addWatermark: {
-      title: "워터마크 추가",
-      description: "사진을 보호하기 위해 텍스트 또는 이미지 워터마크 추가",
-      metaTitle: "이미지에 워터마크 추가 | 이미지 도구",
-      metaDescription: "이미지를 보호하고 브랜드화하기 위해 텍스트 또는 이미지 워터마크 추가",
-      metaKeywords: "워터마크 추가, 이미지 보호, 브랜딩, 저작권, 이미지 보안"
     }
   },
   repairPdf: {
@@ -2272,9 +2237,7 @@ export default {
     }
   },
   pricing: {
-    // Metadata
-    metaTitle: "요금제 - ScanPro",
-    metaDescription: "PDF 필요에 맞는 요금제를 선택하세요. ScanPro는 무료부터 엔터프라이즈까지 유연한 가격 옵션을 제공하며, 필요한 기능을 갖추고 있습니다.",
+    description: "PDF 필요에 맞는 요금제를 선택하세요. ScanPro는 무료부터 엔터프라이즈까지 유연한 가격 옵션을 제공하며, 필요한 기능을 갖추고 있습니다.",
 
     // Page content
     title: "간단하고 투명한 요금",

@@ -151,7 +151,7 @@ export default function SitemapPage() {
         },
         { 
           title: t('popular.watermark'), 
-          url: "/watermark", 
+          url: "/watermark-pdf", 
           icon: <Edit2Icon className="h-4 w-4 text-purple-500" />,
           description: t('toolDescriptions.watermark')
         },

@@ -126,7 +126,7 @@ export function Footer() {
                 </LanguageLink>
               </li>
               <li>
-                <LanguageLink href="/tools" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <LanguageLink href="/pdf-tools" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   {t('footer.viewAllTools') || "View All PDF Tools"}
                 </LanguageLink>
               </li>
@@ -157,7 +157,7 @@ export function Footer() {
                 </LanguageLink>
               </li>
               <li>
-                <LanguageLink href="/repair" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <LanguageLink href="/repair-pdf" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   {t('footer.repairPdf') || "Repair PDF"}
                 </LanguageLink>
               </li>

@@ -317,7 +317,7 @@ export function RelatedToolsSection() {
         ))}
       </div>
       <div className="text-center mt-6">
-        <LanguageLink href="/tools">
+        <LanguageLink href="/pdf-tools">
           <Button variant="outline">{t('compressPdf.relatedTools.viewAll') || "View All Tools"}</Button>
         </LanguageLink>
       </div>

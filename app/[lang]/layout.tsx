@@ -9,13 +9,13 @@ import { notFound } from "next/navigation"
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "../globals.css"
-
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
 // Import language configuration
 import { SUPPORTED_LANGUAGES, getTranslation } from "@/src/lib/i18n/config";
 import { AuthProvider } from "./providers"
 import { AnalyticsProvider } from "./analytics-provider"
 import { CookieConsentBanner } from "@/components/cookie-banner-component"
-
+import { Analytics } from '@/lib/analytics'
 // Font configuration
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -82,13 +82,17 @@ export default async function Layout({
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="relative flex min-h-screen flex-col">
                 <ProHeader urlLanguage={lang} />
-                <div className="flex-1 mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">{children}</div>
+                <div className="flex-1 mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
+                  {children}
+                 
+                  </div>
                 <Footer />
               </div>
               <Toaster />
               <CookieConsentBanner />
           </ThemeProvider>
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   )

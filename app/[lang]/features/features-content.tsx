@@ -110,7 +110,7 @@ export default function FeaturesPageContent() {
           title: t("features.categories.editing.features.watermark.title") || "Add Watermarks",
           description: t("features.categories.editing.features.watermark.description") || "Add text or image watermarks to your PDFs with customizable transparency, position, and rotation.",
           icon: <Stamp className="h-5 w-5 text-blue-500" />,
-          link: "/watermark"
+          link: "/watermark-pdf"
         }
       ]
     },
@@ -689,7 +689,7 @@ export default function FeaturesPageContent() {
               {t("features.cta.pricing") || "View Pricing"}
             </Button>
           </LanguageLink>
-          <LanguageLink href="/tools">
+          <LanguageLink href="/pdf-tools">
             <Button variant="outline" size="lg">
               {t("features.cta.explore") || "Explore Tools"}
             </Button>

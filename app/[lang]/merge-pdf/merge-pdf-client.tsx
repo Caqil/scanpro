@@ -131,7 +131,7 @@ export default function MergePDFClient() {
           </LanguageLink>
         </div>
         <div className="text-center mt-6">
-          <LanguageLink href="/tools">
+          <LanguageLink href="/pdf-tools">
             <Button variant="outline">{t("mergePdf.viewAllTools")}</Button>
           </LanguageLink>
         </div>

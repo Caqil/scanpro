@@ -40,7 +40,7 @@ const TOOL_URL_MAPPING: Record<string, string> = {
   '/sign': 'sign_pdf',
   '/ocr': 'pdf_ocr',
   '/repair': 'repair_pdf',
-  '/watermark': 'watermark_pdf',
+  '/watermark-pdf': 'watermark_pdf',
   '/edit': 'edit_pdf',
 };
 

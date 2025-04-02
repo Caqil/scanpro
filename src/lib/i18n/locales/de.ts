@@ -892,7 +892,64 @@ export default {
       enhanceScannedHint: "Bilder vorverarbeiten, um die OCR-Genauigkeit zu verbessern (empfohlen für gescannte Dokumente)",
       preserveLayout: "Layout beibehalten",
       preserveLayoutHint: "Versuchen Sie, das ursprüngliche Layout mit Absätzen und Zeilenumbrüchen beizubehalten"
-    }
+    },
+    // Upload area
+    uploadPdf: "PDF hochladen zur Textextraktion",
+    dragDrop: "Ziehen Sie Ihre PDF-Datei hierher oder klicken Sie zum Durchsuchen",
+    selectPdf: "PDF-Datei auswählen",
+    uploading: "Hochladen...",
+    maxFileSize: "Maximale Dateigröße: 50 MB",
+
+    // File handling
+    invalidFile: "Ungültiger Dateityp",
+    invalidFileDesc: "Bitte wählen Sie eine PDF-Datei",
+    fileTooLarge: "Datei zu groß",
+    fileTooLargeDesc: "Maximale Dateigröße beträgt 50 MB",
+    noFile: "Keine Datei ausgewählt",
+    noFileDesc: "Bitte wählen Sie eine PDF-Datei zur Verarbeitung",
+    changeFile: "Datei ändern",
+
+    // Options
+    languageLabel: "Dokumentsprache",
+    selectLanguage: "Sprache auswählen",
+    pageRange: "Seitenbereich",
+    allPages: "Alle Seiten",
+    specificPages: "Spezifische Seiten",
+    pageRangeExample: "z. B. 1-3, 5, 7-9",
+    pageRangeInfo: "Geben Sie einzelne Seiten oder Bereiche durch Kommas getrennt ein",
+    preserveLayout: "Layout beibehalten",
+    preserveLayoutDesc: "Versuch, die Dokumentstruktur und Formatierung beizubehalten",
+
+    // Processing
+    extractText: "Text extrahieren",
+    extractingText: "Text wird extrahiert...",
+    processingPdf: "Ihre PDF wird verarbeitet",
+    processingInfo: "Dies kann je nach Dateigröße und Komplexität einige Minuten dauern",
+    analyzing: "Dokument wird analysiert",
+    preprocessing: "Seiten werden vorverarbeitet",
+    recognizing: "Text wird erkannt",
+    extracting: "Inhalt wird extrahiert",
+    finalizing: "Ergebnisse werden finalisiert",
+    finishing: "Abschließen",
+
+    // Results
+    extractionComplete: "Textextraktion abgeschlossen",
+    extractionCompleteDesc: "Ihr Text wurde erfolgreich aus der PDF extrahiert",
+    extractionError: "Textextraktion fehlgeschlagen",
+    extractionFailed: "Text konnte nicht extrahiert werden",
+    unknownError: "Ein unbekannter Fehler ist aufgetreten",
+    textCopied: "Text in die Zwischenablage kopiert",
+    copyFailed: "Text konnte nicht kopiert werden",
+    textPreview: "Textvorschau",
+    rawText: "Rohtext",
+    extractedText: "Extrahierter Text",
+    previewDesc: "Vorschau des extrahierten Textes mit Formatierung",
+    rawTextOutput: "Rohtextausgabe",
+    rawTextDesc: "Einfacher Text ohne Formatierung",
+    noTextFound: "Kein Text im Dokument gefunden",
+    copyText: "Text kopieren",
+    downloadText: "Text herunterladen",
+    processAnother: "Ein weiteres PDF verarbeiten"
   },
 
   // PDF schützen-Seite
@@ -1480,18 +1537,63 @@ export default {
   },
   // Über uns-Seite
   about: {
-    title: "Über ScanPro",
-    mission: {
-      title: "Unsere Mission",
-      description: "Wir glauben daran, die Verwaltung von PDFs für jeden zugänglich zu machen. Unsere Online-Tools helfen Ihnen, schnell und einfach mit PDFs zu arbeiten, ohne Software installieren zu müssen."
+    hero: {
+      title: "Stärkung des digitalen Dokumentenmanagements",
+      description: "ScanPro wurde aus einer einfachen Idee geboren: Dokumentenmanagement nahtlos, effizient und für jeden zugänglich zu machen. Wir glauben daran, wie Menschen mit digitalen Dokumenten interagieren, zu transformieren."
+    },
+    story: {
+      title: "Unsere Geschichte",
+      paragraph1: "Gegründet im Jahr 2022, entstand ScanPro aus der Frustration über den Umgang mit komplexen und unintuitiven PDF-Tools. Unsere Gründer, Technikbegeisterte und Experten für Dokumentenmanagement, sahen die Möglichkeit, eine Lösung zu schaffen, die sowohl leistungsstark als auch benutzerfreundlich ist.",
+      paragraph2: "Was als kleines Projekt begann, wuchs schnell zu einer umfassenden Plattform heran, die Tausende von Nutzern weltweit bedient, von Studenten und Fachleuten bis hin zu großen Unternehmen."
+    },
+    missionValues: {
+      title: "Unsere Mission und Werte",
+      mission: {
+        title: "Mission",
+        description: "Digitales Dokumentenmanagement vereinfachen, indem wir intuitive, leistungsstarke und zugängliche PDF-Tools bereitstellen, die Produktivität und Kreativität steigern."
+      },
+      customerFirst: {
+        title: "Kunde zuerst",
+        description: "Wir legen Wert auf Benutzererfahrung und verbessern unsere Tools kontinuierlich basierend auf echtem Nutzerfeedback. Ihre Bedürfnisse treiben unsere Innovation an."
+      },
+      privacy: {
+        title: "Datenschutz & Sicherheit",
+        description: "Wir verpflichten uns, Ihre Daten mit modernsten Sicherheitsmaßnahmen und absolutem Respekt vor Ihrer Privatsphäre zu schützen."
+      }
+    },
+    coreValues: {
+      title: "Unsere Kernwerte",
+      innovation: {
+        title: "Innovation",
+        description: "Wir verschieben kontinuierlich die Grenzen dessen, was im Dokumentenmanagement möglich ist."
+      },
+      collaboration: {
+        title: "Zusammenarbeit",
+        description: "Wir glauben an die Kraft der Teamarbeit, sowohl innerhalb unseres Unternehmens als auch mit unseren Nutzern."
+      },
+      accessibility: {
+        title: "Zugänglichkeit",
+        description: "Unsere Tools sind so gestaltet, dass sie einfach, intuitiv und für jeden verfügbar sind."
+      }
     },
     team: {
-      title: "Unser Team",
-      description: "Wir sind ein engagiertes Team von Entwicklern und Designern, das leidenschaftlich daran arbeitet, einfache aber leistungsstarke PDF-Tools zu erstellen."
-    },
-    technology: {
-      title: "Unsere Technologie",
-      description: "Unsere Plattform verwendet modernste Technologie, um hochwertige PDF-Konvertierung, -Bearbeitung und -Sicherheit zu bieten, während Ihre Daten sicher bleiben."
+      title: "Treffen Sie unser Team",
+      description: "ScanPro wird von einem kleinen, engagierten Team angetrieben, das sich darauf konzentriert, die bestmöglichen PDF-Tools für unsere Nutzer zu entwickeln.",
+      member1: {
+        name: "Cakra",
+        role: "Leiter der App-Entwicklung",
+        bio: "Überwacht die Entwicklung unserer Anwendungen, implementiert robuste Backend-Lösungen und stellt sicher, dass unsere Tools reibungslos und effizient funktionieren."
+      },
+      member2: {
+        name: "Abdi",
+        role: "Frontend-Webentwickler",
+        bio: "Erstellt die Benutzeroberflächen, die unsere Tools intuitiv und zugänglich machen, mit Fokus auf außergewöhnliche Benutzererfahrungen auf all unseren Webplattformen."
+      },
+      member3: {
+        name: "Anggi",
+        role: "Marketing-Spezialistin",
+        bio: "Leitet unsere Marketing-Bemühungen, um unsere Tools mit den Menschen zu verbinden, die sie brauchen, und fördert Bekanntheit und Wachstum unserer Plattform."
+      }
     }
   },
 
@@ -1570,143 +1672,6 @@ export default {
         question: "Gibt es eine Dateigrößenbeschränkung?",
         answer: "Ja, Sie können Dateien bis zu 100 MB pro Datei komprimieren."
       }
-    }
-  },
-  imageTools: {
-    title: "Bildwerkzeuge",
-    description: "Kostenlose Online-Tools zum Konvertieren, Bearbeiten und Transformieren Ihrer Bilder",
-    categories: {
-      conversion: "Formatkonvertierung",
-      editing: "Bildbearbeitung",
-      enhancement: "Bildverbesserung",
-      optimization: "Optimierung",
-      advanced: "Erweiterte Werkzeuge"
-    },
-    compressPng: {
-      title: "PNG komprimieren",
-      description: "PNG-Dateigrößen reduzieren bei gleichbleibender Qualität",
-      metaTitle: "PNG-Bilder komprimieren | Bildwerkzeuge",
-      metaDescription: "PNG-Dateigrößen reduzieren bei gleichbleibender Qualität für schnellere Website-Ladezeiten und effiziente Speicherung",
-      metaKeywords: "PNG komprimieren, Bildgröße reduzieren, Bilder optimieren, Bildkompression, verlustfreie Kompression, Dateigrößenreduktion"
-    },
-    makeTransparent: {
-      title: "PNG transparent machen",
-      description: "Jede Farbe in einer PNG-Datei durch Transparenz ersetzen",
-      metaTitle: "PNG transparent machen | Bildwerkzeuge",
-      metaDescription: "Schnell jede Farbe in einer PNG-Datei durch Transparenz ersetzen",
-      metaKeywords: "Hintergrund entfernen, transparentes PNG, Farbersetzung, Bildbearbeitung, Hintergrundentfernung, transparente Bilder"
-    },
-    pngToJpg: {
-      title: "PNG in JPG umwandeln",
-      description: "PNG-Bilder in das JPG-Format mit anpassbaren Qualitätseinstellungen umwandeln",
-      metaTitle: "PNG in JPG umwandeln | Bildwerkzeuge",
-      metaDescription: "PNG-Bilder in das JPG-Format mit einstellbarer Qualität umwandeln",
-      metaKeywords: "PNG zu JPG, Bildkonvertierung, Bildformat, verlustbehaftete Kompression, Bildqualität"
-    },
-    jpgToPng: {
-      title: "JPG in PNG umwandeln",
-      description: "JPG-Bilder in das PNG-Format mit Unterstützung für Transparenz umwandeln",
-      metaTitle: "JPG in PNG umwandeln | Bildwerkzeuge",
-      metaDescription: "JPG-Bilder in das PNG-Format mit verlustfreier Qualität umwandeln",
-      metaKeywords: "JPG zu PNG, Bildkonvertierung, Transparenz, verlustfreies Format, Bildqualität"
-    },
-    pngToWebp: {
-      title: "PNG in WebP umwandeln",
-      description: "PNG-Bilder in das WebP-Format für bessere Web-Performance umwandeln",
-      metaTitle: "PNG in WebP umwandeln | Bildwerkzeuge",
-      metaDescription: "PNG-Bilder in das WebP-Format für kleinere Dateigrößen umwandeln",
-      metaKeywords: "PNG zu WebP, Bildkonvertierung, Web-Optimierung, Bildkompression"
-    },
-    webpToPng: {
-      title: "WebP in PNG umwandeln",
-      description: "WebP-Bilder in das PNG-Format für bessere Kompatibilität umwandeln",
-      metaTitle: "WebP in PNG umwandeln | Bildwerkzeuge",
-      metaDescription: "WebP-Bilder in das PNG-Format mit voller Kompatibilität umwandeln",
-      metaKeywords: "WebP zu PNG, Bildkonvertierung, Bildformat, Kompatibilität"
-    },
-    svgToPng: {
-      title: "SVG in PNG umwandeln",
-      description: "Vektor-SVG-Dateien in Raster-PNG-Bilder umwandeln",
-      metaTitle: "SVG in PNG umwandeln | Bildwerkzeuge",
-      metaDescription: "Vektor-SVG-Grafiken in Raster-PNG-Bilder mit benutzerdefinierten Abmessungen umwandeln",
-      metaKeywords: "SVG zu PNG, Vektor zu Raster, Bildkonvertierung, Grafikdesign"
-    },
-    pngToBase64: {
-      title: "PNG in Base64 umwandeln",
-      description: "PNG-Bilder in Base64-Codierung für die Einbettung in Webseiten umwandeln",
-      metaTitle: "PNG in Base64 umwandeln | Bildwerkzeuge",
-      metaDescription: "PNG-Bilder in Base64-Zeichenfolgen für die Web-Einbettung umwandeln",
-      metaKeywords: "PNG zu Base64, Bildcodierung, Webentwicklung, Bildeinbettung"
-    },
-    base64ToPng: {
-      title: "Base64 in PNG umwandeln",
-      description: "Base64-codierte Bildzeichenfolgen wieder in PNG-Dateien umwandeln",
-      metaTitle: "Base64 in PNG umwandeln | Bildwerkzeuge",
-      metaDescription: "Base64-Bildzeichenfolgen wieder in PNG-Bilddateien umwandeln",
-      metaKeywords: "Base64 zu PNG, Bilddecodierung, Webentwicklung, Bildkonvertierung"
-    },
-    changeColors: {
-      title: "Farben in PNG ändern",
-      description: "Bestimmte Farben in PNG-Bildern durch neue Farben ersetzen",
-      metaTitle: "Farben in PNG ändern | Bildwerkzeuge",
-      metaDescription: "Bestimmte Farben in PNG-Bildern einfach durch neue Farben ersetzen",
-      metaKeywords: "Bildfarben ändern, Farbersetzung, PNG-Bearbeitung, Bildfarbwechsler, Farbtausch"
-    },
-    changeTone: {
-      title: "Farbton ändern",
-      description: "Farbnuancen und Tönungen auf Ihre Bilder für künstlerische Effekte anwenden",
-      metaTitle: "PNG-Farbton ändern | Bildwerkzeuge",
-      metaDescription: "Farbnuancen und Tönungen auf Ihre PNG-Bilder für künstlerische Effekte anwenden",
-      metaKeywords: "Farbton, Bildtönung, künstlerische Effekte, Farbüberlagerung, Fotofilter"
-    },
-    addNoise: {
-      title: "Rauschen zu PNG hinzufügen",
-      description: "Filmenrauschen oder Effekte zu Ihren PNG-Bildern für künstlerisches Styling hinzufügen",
-      metaTitle: "Rauschen zu PNG hinzufügen | Bildwerkzeuge",
-      metaDescription: "Filmenrauschen oder Effekte zu Ihren PNG-Bildern für künstlerisches Styling hinzufügen",
-      metaKeywords: "Rauschen hinzufügen, Filmenrauschen, Bildtextur, künstlerischer Filter, Vintage-Fotoeffekt"
-    },
-    resize: {
-      title: "Bildgröße ändern",
-      description: "Bilder auf exakte Abmessungen ändern und dabei die Qualität erhalten",
-      metaTitle: "Bilder skalieren | Bildwerkzeuge",
-      metaDescription: "Ihre Bilder einfach auf exakte Abmessungen skalieren und dabei die Qualität erhalten",
-      metaKeywords: "Bildgröße ändern, Bildgröße anpassen, Bild skalieren, Bildabmessungen, Bildskalierung"
-    },
-    rotate: {
-      title: "Drehen & Spiegeln",
-      description: "Bilder drehen und spiegeln, um die richtige Ausrichtung zu erhalten",
-      metaTitle: "Bilder drehen & spiegeln | Bildwerkzeuge",
-      metaDescription: "Bilder einfach in jeden Winkel drehen und horizontal oder vertikal spiegeln",
-      metaKeywords: "Bild drehen, Bild spiegeln, Bildausrichtung, Bild wenden, vertikales Spiegeln"
-    },
-    crop: {
-      title: "Bild zuschneiden",
-      description: "Bilder zuschneiden, um unerwünschte Bereiche zu entfernen und auf wichtige Inhalte zu fokussieren",
-      metaTitle: "Bilder zuschneiden | Bildwerkzeuge",
-      metaDescription: "Bilder zuschneiden, um unerwünschte Bereiche zu entfernen und die Komposition zu verbessern",
-      metaKeywords: "Bild zuschneiden, Bildbeschneidung, Hintergrund entfernen, Bildkomposition"
-    },
-    addText: {
-      title: "Text zu Bild hinzufügen",
-      description: "Benutzerdefinierten Text, Bildunterschriften oder Wasserzeichen zu Ihren Bildern hinzufügen",
-      metaTitle: "Text zu Bildern hinzufügen | Bildwerkzeuge",
-      metaDescription: "Benutzerdefinierten Text, Bildunterschriften und Wasserzeichen mit einfachen Formatierungsoptionen zu Ihren Bildern hinzufügen",
-      metaKeywords: "Text zu Bild hinzufügen, Bildunterschrift, Wasserzeichen, Texteinblendung, Bildanmerkung"
-    },
-    addBorder: {
-      title: "Rahmen hinzufügen",
-      description: "Benutzerdefinierte Rahmen in verschiedenen Stilen und Farben zu Ihren Bildern hinzufügen",
-      metaTitle: "Rahmen zu Bildern hinzufügen | Bildwerkzeuge",
-      metaDescription: "Ihre Bilder mit benutzerdefinierten Rahmen, Umrandungen und Effekten verbessern",
-      metaKeywords: "Bildrahmen hinzufügen, Fotorahmen, Bildumrandung, Rahmenstil, Bildverbesserung"
-    },
-    addWatermark: {
-      title: "Wasserzeichen hinzufügen",
-      description: "Text- oder Bildwasserzeichen hinzufügen, um Ihre Fotos zu schützen",
-      metaTitle: "Wasserzeichen zu Bildern hinzufügen | Bildwerkzeuge",
-      metaDescription: "Text- oder Bildwasserzeichen hinzufügen, um Ihre Bilder zu schützen und zu markieren",
-      metaKeywords: "Wasserzeichen hinzufügen, Bildschutz, Branding, Urheberrecht, Bildsicherheit"
     }
   },
   repairPdf: {
@@ -2135,9 +2100,7 @@ export default {
     }
   },
   pricing: {
-    // Metadata
-    metaTitle: "Preispläne - ScanPro",
-    metaDescription: "Wählen Sie den richtigen Plan für Ihre PDF-Bedürfnisse. ScanPro bietet flexible Preisoptionen von kostenlos bis Unternehmen mit den Funktionen, die Sie benötigen.",
+    description: "Wählen Sie den richtigen Plan für Ihre PDF-Bedürfnisse. ScanPro bietet flexible Preisoptionen von kostenlos bis Unternehmen mit den Funktionen, die Sie benötigen.",
 
     // Page content
     title: "Einfache, transparente Preise",

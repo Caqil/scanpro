@@ -910,7 +910,70 @@ export default {
       enhanceScannedHint: "Pre-process images to improve OCR accuracy (recommended for scanned documents)",
       preserveLayout: "Preserve layout",
       preserveLayoutHint: "Try to maintain the original layout with paragraphs and line breaks"
-    }
+    },
+    ocrTool: "OCR Text Extraction Tool",
+    ocrToolDesc: "Convert scanned documents and images to editable text",
+
+    // Upload area
+    uploadPdf: "Upload PDF for Text Extraction",
+    dragDrop: "Drag and drop your PDF file here, or click to browse",
+    selectPdf: "Select PDF File",
+    uploading: "Uploading...",
+    maxFileSize: "Maximum file size: 50MB",
+
+    // File handling
+    invalidFile: "Invalid file type",
+    invalidFileDesc: "Please select a PDF file",
+    fileTooLarge: "File too large",
+    fileTooLargeDesc: "Maximum file size is 50MB",
+    noFile: "No file selected",
+    noFileDesc: "Please select a PDF file to process",
+    changeFile: "Change File",
+
+    // Options
+    languageLabel: "Document Language",
+    selectLanguage: "Select language",
+    pageRange: "Page Range",
+    allPages: "All Pages",
+    specificPages: "Specific Pages",
+    pageRangeExample: "e.g., 1-3, 5, 7-9",
+    pageRangeInfo: "Enter individual pages or ranges separated by commas",
+    preserveLayout: "Preserve Layout",
+    preserveLayoutDesc: "Attempt to maintain document structure and formatting",
+
+    // Processing
+    extractText: "Extract Text",
+    extractingText: "Extracting Text...",
+    processingPdf: "Processing your PDF",
+    processingInfo: "This may take a few minutes depending on the file size and complexity",
+    analyzing: "Analyzing document",
+    preprocessing: "Preprocessing pages",
+    recognizing: "Recognizing text",
+    extracting: "Extracting content",
+    finalizing: "Finalizing results",
+    finishing: "Finishing up",
+
+    // Results
+    extractionComplete: "Text extraction complete",
+    extractionCompleteDesc: "Your text has been successfully extracted from the PDF",
+    extractionError: "Text extraction failed",
+    extractionFailed: "Failed to extract text",
+    unknownError: "An unknown error occurred",
+    textCopied: "Text copied to clipboard",
+    copyFailed: "Failed to copy text",
+    textPreview: "Text Preview",
+    rawText: "Raw Text",
+    extractedText: "Extracted Text",
+    previewDesc: "Preview of the extracted text with formatting",
+    rawTextOutput: "Raw Text Output",
+    rawTextDesc: "Plain text without formatting",
+    noTextFound: "No text found in the document",
+    copyText: "Copy Text",
+    downloadText: "Download Text",
+    processAnother: "Process Another PDF",
+
+    // Additional info
+    supportedLanguages: "Supports 15+ languages including English, Spanish, French, German, Chinese, Japanese, and more. Select the appropriate language for better accuracy."
   },
 
   // Protect PDF Page
@@ -1573,18 +1636,63 @@ export default {
   },
   // About Page
   about: {
-    title: "About ScanPro",
-    mission: {
-      title: "Our Mission",
-      description: "We believe in making PDF management accessible to everyone. Our online tools help you work with PDFs quickly and easily, with no software to install."
+    hero: {
+      title: "Empowering Digital Document Management",
+      description: "ScanPro was born from a simple idea: making document management seamless, efficient, and accessible to everyone. We believe in transforming how people interact with digital documents."
+    },
+    story: {
+      title: "Our Story",
+      paragraph1: "Founded in 2022, ScanPro emerged from the frustration of dealing with complex and unintuitive PDF tools. Our founders, tech enthusiasts and document management experts, saw an opportunity to create a solution that was both powerful and user-friendly.",
+      paragraph2: "What started as a small project quickly grew into a comprehensive platform serving thousands of users worldwide, from students and professionals to large enterprises."
+    },
+    missionValues: {
+      title: "Our Mission and Values",
+      mission: {
+        title: "Mission",
+        description: "To simplify digital document management by providing intuitive, powerful, and accessible PDF tools that enhance productivity and creativity."
+      },
+      customerFirst: {
+        title: "Customer First",
+        description: "We prioritize user experience and continuously improve our tools based on real user feedback. Your needs drive our innovation."
+      },
+      privacy: {
+        title: "Privacy & Security",
+        description: "We are committed to protecting your data with state-of-the-art security measures and absolute respect for your privacy."
+      }
+    },
+    coreValues: {
+      title: "Our Core Values",
+      innovation: {
+        title: "Innovation",
+        description: "We continuously push the boundaries of what's possible in document management."
+      },
+      collaboration: {
+        title: "Collaboration",
+        description: "We believe in the power of teamwork, both within our company and with our users."
+      },
+      accessibility: {
+        title: "Accessibility",
+        description: "Our tools are designed to be simple, intuitive, and available to everyone."
+      }
     },
     team: {
-      title: "Our Team",
-      description: "We're a dedicated team of developers and designers passionate about creating simple yet powerful PDF tools."
-    },
-    technology: {
-      title: "Our Technology",
-      description: "Our platform uses cutting-edge technology to provide high-quality PDF conversion, editing, and security while keeping your data safe."
+      title: "Meet Our Team",
+      description: "ScanPro is powered by a small, dedicated team focused on creating the best possible PDF tools for our users.",
+      member1: {
+        name: "Cakra",
+        role: "App Development Lead",
+        bio: "Oversees the development of our applications, implementing robust backend solutions and ensuring our tools work smoothly and efficiently."
+      },
+      member2: {
+        name: "Abdi",
+        role: "Frontend Web Developer",
+        bio: "Creates the user interfaces that make our tools intuitive and accessible, focusing on delivering exceptional user experiences across all our web platforms."
+      },
+      member3: {
+        name: "Anggi",
+        role: "Marketing Specialist",
+        bio: "Leads our marketing efforts to connect our tools with the people who need them, building awareness and driving the growth of our platform."
+      }
     }
   },
 
@@ -2232,8 +2340,7 @@ export default {
   },
   pricing: {
     // Metadata
-    metaTitle: "Pricing Plans - ScanPro",
-    metaDescription: "Choose the right plan for your PDF needs. ScanPro offers flexible pricing options from free to enterprise, with the features you need.",
+    description: "Choose the right plan for your PDF needs. ScanPro offers flexible pricing options from free to enterprise, with the features you need.",
 
     // Page content
     title: "Simple, transparent pricing",

@@ -23,8 +23,18 @@ import {
   Copy, 
   Eye,
   Languages,
-  FileCode
+  FileCode,
+  Layout,
+  Image,
+  Settings,
+  CheckCircle,
+  X,
+  XCircle,
+  Info,
+  MergeIcon,
+  LightbulbIcon,
 } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useLanguageStore } from "@/src/store/store";
 import { LanguageLink } from "@/components/language-link";
 
@@ -531,8 +541,310 @@ export function OcrContent() {
         )}
       </Card>
 
-      {/* How-to Section, FAQ, etc. */}
-      {/* These sections would be included here */}
+{/* How-to Section */}
+<section className="mt-12">
+  <h2 className="text-2xl font-bold mb-6 text-center">{t('ocr.howTo.title')}</h2>
+  <div className="grid md:grid-cols-3 gap-8">
+    <div className="flex flex-col items-center text-center">
+      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-4">
+        <span className="font-bold">1</span>
+      </div>
+      <h3 className="text-lg font-medium mb-2">{t('ocr.howTo.step1.title')}</h3>
+      <p className="text-sm text-muted-foreground">
+        {t('ocr.howTo.step1.description')}
+      </p>
+    </div>
+    
+    <div className="flex flex-col items-center text-center">
+      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-4">
+        <span className="font-bold">2</span>
+      </div>
+      <h3 className="text-lg font-medium mb-2">{t('ocr.howTo.step2.title')}</h3>
+      <p className="text-sm text-muted-foreground">
+        {t('ocr.howTo.step2.description')}
+      </p>
+    </div>
+    
+    <div className="flex flex-col items-center text-center">
+      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-4">
+        <span className="font-bold">3</span>
+      </div>
+      <h3 className="text-lg font-medium mb-2">{t('ocr.howTo.step3.title')}</h3>
+      <p className="text-sm text-muted-foreground">
+        {t('ocr.howTo.step3.description')}
+      </p>
+    </div>
+  </div>
+</section>
+
+{/* What is OCR Section */}
+<section className="mt-12 bg-muted/30 p-6 rounded-lg">
+  <h2 className="text-2xl font-bold mb-6 text-center">{t('ocr.whatIsOcr.title')}</h2>
+  <p className="mb-4 text-center max-w-3xl mx-auto">
+    {t('ocr.whatIsOcr.description')}
+  </p>
+  <p className="mb-6 text-center max-w-3xl mx-auto">
+    {t('ocr.whatIsOcr.explanation')}
+  </p>
+  
+  <div className="bg-background p-4 rounded-md">
+    <h3 className="font-medium mb-3">OCR can extract text from:</h3>
+    <ul className="space-y-2">
+      <li className="flex gap-2 items-center">
+        <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+        <span>{t('ocr.whatIsOcr.extractionList.scannedPdfs')}</span>
+      </li>
+      <li className="flex gap-2 items-center">
+        <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+        <span>{t('ocr.whatIsOcr.extractionList.imageOnlyPdfs')}</span>
+      </li>
+      <li className="flex gap-2 items-center">
+        <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+        <span>{t('ocr.whatIsOcr.extractionList.embeddedImages')}</span>
+      </li>
+      <li className="flex gap-2 items-center">
+        <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+        <span>{t('ocr.whatIsOcr.extractionList.textCopyingIssues')}</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+{/* When to Use Section */}
+<section className="mt-12">
+  <h2 className="text-2xl font-bold mb-6 text-center">{t('ocr.whenToUse.title')}</h2>
+  
+  <div className="grid md:grid-cols-2 gap-6">
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-lg flex items-center gap-2">
+          <Check className="h-5 w-5 text-green-500" />
+          {t('ocr.whenToUse.idealFor')}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ul className="space-y-2">
+          <li className="flex gap-2 items-center">
+            <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+            <span>{t('ocr.whenToUse.idealForList.scannedDocuments')}</span>
+          </li>
+          <li className="flex gap-2 items-center">
+            <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+            <span>{t('ocr.whenToUse.idealForList.oldDocuments')}</span>
+          </li>
+          <li className="flex gap-2 items-center">
+            <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+            <span>{t('ocr.whenToUse.idealForList.textSelectionIssues')}</span>
+          </li>
+          <li className="flex gap-2 items-center">
+            <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+            <span>{t('ocr.whenToUse.idealForList.textInImages')}</span>
+          </li>
+          <li className="flex gap-2 items-center">
+            <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+            <span>{t('ocr.whenToUse.idealForList.searchableArchives')}</span>
+          </li>
+        </ul>
+      </CardContent>
+    </Card>
+    
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-lg flex items-center gap-2">
+          <X className="h-5 w-5 text-red-500" />
+          {t('ocr.whenToUse.notNecessaryFor')}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ul className="space-y-2">
+          <li className="flex gap-2 items-center">
+            <XCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
+            <span>{t('ocr.whenToUse.notNecessaryForList.digitalPdfs')}</span>
+          </li>
+          <li className="flex gap-2 items-center">
+            <XCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
+            <span>{t('ocr.whenToUse.notNecessaryForList.createdDigitally')}</span>
+          </li>
+          <li className="flex gap-2 items-center">
+            <XCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
+            <span>{t('ocr.whenToUse.notNecessaryForList.copyPasteAvailable')}</span>
+          </li>
+          <li className="flex gap-2 items-center">
+            <XCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
+            <span>{t('ocr.whenToUse.notNecessaryForList.formatPreservation')}</span>
+          </li>
+        </ul>
+      </CardContent>
+    </Card>
+  </div>
+</section>
+
+{/* Limitations & Tips Section */}
+<section className="mt-12 bg-muted/30 p-6 rounded-lg">
+  <h2 className="text-2xl font-bold mb-6 text-center">{t('ocr.limitations.title')}</h2>
+  <p className="mb-6 text-center">
+    {t('ocr.limitations.description')}
+  </p>
+  
+  <div className="grid md:grid-cols-2 gap-6">
+    <div>
+      <h3 className="font-medium mb-3 text-lg">{t('ocr.limitations.factorsAffecting')}</h3>
+      <ul className="space-y-2">
+        <li className="flex gap-2 items-center">
+          <Info className="h-4 w-4 text-amber-500 flex-shrink-0" />
+          <span>{t('ocr.limitations.factorsList.documentQuality')}</span>
+        </li>
+        <li className="flex gap-2 items-center">
+          <Info className="h-4 w-4 text-amber-500 flex-shrink-0" />
+          <span>{t('ocr.limitations.factorsList.complexLayouts')}</span>
+        </li>
+        <li className="flex gap-2 items-center">
+          <Info className="h-4 w-4 text-amber-500 flex-shrink-0" />
+          <span>{t('ocr.limitations.factorsList.handwrittenText')}</span>
+        </li>
+        <li className="flex gap-2 items-center">
+          <Info className="h-4 w-4 text-amber-500 flex-shrink-0" />
+          <span>{t('ocr.limitations.factorsList.specialCharacters')}</span>
+        </li>
+        <li className="flex gap-2 items-center">
+          <Info className="h-4 w-4 text-amber-500 flex-shrink-0" />
+          <span>{t('ocr.limitations.factorsList.multipleLanguages')}</span>
+        </li>
+      </ul>
+    </div>
+    
+    <div>
+      <h3 className="font-medium mb-3 text-lg">{t('ocr.limitations.tipsForBest')}</h3>
+      <ul className="space-y-2">
+        <li className="flex gap-2 items-center">
+          <LightbulbIcon className="h-4 w-4 text-yellow-500 flex-shrink-0" />
+          <span>{t('ocr.limitations.tipsList.highQualityScans')}</span>
+        </li>
+        <li className="flex gap-2 items-center">
+          <LightbulbIcon className="h-4 w-4 text-yellow-500 flex-shrink-0" />
+          <span>{t('ocr.limitations.tipsList.correctLanguage')}</span>
+        </li>
+        <li className="flex gap-2 items-center">
+          <LightbulbIcon className="h-4 w-4 text-yellow-500 flex-shrink-0" />
+          <span>{t('ocr.limitations.tipsList.enhanceScannedImages')}</span>
+        </li>
+        <li className="flex gap-2 items-center">
+          <LightbulbIcon className="h-4 w-4 text-yellow-500 flex-shrink-0" />
+          <span>{t('ocr.limitations.tipsList.smallerPageRanges')}</span>
+        </li>
+        <li className="flex gap-2 items-center">
+          <LightbulbIcon className="h-4 w-4 text-yellow-500 flex-shrink-0" />
+          <span>{t('ocr.limitations.tipsList.reviewText')}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+{/* FAQ Section */}
+<section className="mt-12">
+  <h2 className="text-2xl font-bold mb-6 text-center">{t('ocr.faq.title')}</h2>
+  <div className="space-y-4">
+    <Accordion type="single" collapsible className="w-full">
+      <AccordionItem value="accuracy">
+        <AccordionTrigger>
+          {t('ocr.faq.questions.accuracy.question')}
+        </AccordionTrigger>
+        <AccordionContent>
+          <p className="text-muted-foreground">
+            {t('ocr.faq.questions.accuracy.answer')}
+          </p>
+        </AccordionContent>
+      </AccordionItem>
+      
+      <AccordionItem value="languages">
+        <AccordionTrigger>
+          {t('ocr.faq.questions.languages.question')}
+        </AccordionTrigger>
+        <AccordionContent>
+          <p className="text-muted-foreground">
+            {t('ocr.faq.questions.languages.answer')}
+          </p>
+        </AccordionContent>
+      </AccordionItem>
+      
+      <AccordionItem value="recognition">
+        <AccordionTrigger>
+          {t('ocr.faq.questions.recognition.question')}
+        </AccordionTrigger>
+        <AccordionContent>
+          <p className="text-muted-foreground">
+            {t('ocr.faq.questions.recognition.answer')}
+          </p>
+        </AccordionContent>
+      </AccordionItem>
+      
+      <AccordionItem value="pageLimit">
+        <AccordionTrigger>
+          {t('ocr.faq.questions.pageLimit.question')}
+        </AccordionTrigger>
+        <AccordionContent>
+          <p className="text-muted-foreground">
+            {t('ocr.faq.questions.pageLimit.answer')}
+          </p>
+        </AccordionContent>
+      </AccordionItem>
+      
+      <AccordionItem value="security">
+        <AccordionTrigger>
+          {t('ocr.faq.questions.security.question')}
+        </AccordionTrigger>
+        <AccordionContent>
+          <p className="text-muted-foreground">
+            {t('ocr.faq.questions.security.answer')}
+          </p>
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  </div>
+</section>
+
+{/* Related Tools Section */}
+<section className="mt-12">
+  <h2 className="text-2xl font-bold mb-6 text-center">{t('ocr.relatedTools')}</h2>
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <LanguageLink href="/convert/pdf-to-docx" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+      <div className="flex flex-col items-center">
+        <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 mb-2">
+          <FileText className="h-5 w-5 text-blue-500" />
+        </div>
+        <span className="text-sm font-medium">PDF to Word</span>
+      </div>
+    </LanguageLink>
+    
+    <LanguageLink href="/compress-pdf" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+      <div className="flex flex-col items-center">
+        <div className="p-2 rounded-full bg-green-100 dark:bg-green-900/30 mb-2">
+          <Download className="h-5 w-5 text-green-500" />
+        </div>
+        <span className="text-sm font-medium">Compress PDF</span>
+      </div>
+    </LanguageLink>
+    
+    <LanguageLink href="/merge-pdf" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+      <div className="flex flex-col items-center">
+        <div className="p-2 rounded-full bg-red-100 dark:bg-red-900/30 mb-2">
+          <MergeIcon className="h-5 w-5 text-red-500" />
+        </div>
+        <span className="text-sm font-medium">Merge PDFs</span>
+      </div>
+    </LanguageLink>
+    
+    <LanguageLink href="/pdf-tools" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+      <div className="flex flex-col items-center">
+        <div className="p-2 rounded-full bg-purple-100 dark:bg-purple-900/30 mb-2">
+          <Settings className="h-5 w-5 text-purple-500" />
+        </div>
+        <span className="text-sm font-medium">All Tools</span>
+      </div>
+    </LanguageLink>
+  </div>
+</section>
     </div>
   );
 }

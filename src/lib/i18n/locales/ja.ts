@@ -892,7 +892,64 @@ export default {
       enhanceScannedHint: "OCR精度を向上させるために画像を前処理（スキャンされたドキュメントに推奨）",
       preserveLayout: "レイアウトを保持",
       preserveLayoutHint: "段落や改行を含む元のレイアウトを維持しようとする"
-    }
+    },
+    // Upload area
+    uploadPdf: "テキスト抽出のためにPDFをアップロード",
+    dragDrop: "PDFファイルをここにドラッグ＆ドロップするか、クリックして参照",
+    selectPdf: "PDFファイルを選択",
+    uploading: "アップロード中...",
+    maxFileSize: "最大ファイルサイズ：50MB",
+
+    // File handling
+    invalidFile: "無効なファイル形式",
+    invalidFileDesc: "PDFファイルを選択してください",
+    fileTooLarge: "ファイルが大きすぎます",
+    fileTooLargeDesc: "最大ファイルサイズは50MBです",
+    noFile: "ファイルが選択されていません",
+    noFileDesc: "処理するPDFファイルを選択してください",
+    changeFile: "ファイルを変更",
+
+    // Options
+    languageLabel: "ドキュメントの言語",
+    selectLanguage: "言語を選択",
+    pageRange: "ページ範囲",
+    allPages: "全ページ",
+    specificPages: "特定のページ",
+    pageRangeExample: "例：1-3、5、7-9",
+    pageRangeInfo: "個別のページまたはカンマで区切られた範囲を入力",
+    preserveLayout: "レイアウトを保持",
+    preserveLayoutDesc: "ドキュメントの構造と書式を維持しようとします",
+
+    // Processing
+    extractText: "テキストを抽出",
+    extractingText: "テキストを抽出中...",
+    processingPdf: "PDFを処理中",
+    processingInfo: "ファイルサイズや複雑さによっては数分かかる場合があります",
+    analyzing: "ドキュメントを分析中",
+    preprocessing: "ページを前処理中",
+    recognizing: "テキストを認識中",
+    extracting: "コンテンツを抽出中",
+    finalizing: "結果を確定中",
+    finishing: "仕上げ中",
+
+    // Results
+    extractionComplete: "テキスト抽出が完了",
+    extractionCompleteDesc: "PDFからテキストが正常に抽出されました",
+    extractionError: "テキスト抽出に失敗",
+    extractionFailed: "テキストを抽出できませんでした",
+    unknownError: "不明なエラーが発生しました",
+    textCopied: "テキストがクリップボードにコピーされました",
+    copyFailed: "テキストのコピーに失敗しました",
+    textPreview: "テキストプレビュー",
+    rawText: "生テキスト",
+    extractedText: "抽出したテキスト",
+    previewDesc: "書式付きで抽出したテキストのプレビュー",
+    rawTextOutput: "生テキスト出力",
+    rawTextDesc: "書式なしのプレーンテキスト",
+    noTextFound: "ドキュメントにテキストが見つかりませんでした",
+    copyText: "テキストをコピー",
+    downloadText: "テキストをダウンロード",
+    processAnother: "別のPDFを処理"
   },
 
   // PDF保護ページ
@@ -1482,18 +1539,63 @@ export default {
 
   // 会社概要ページ
   about: {
-    title: "ScanProについて",
-    mission: {
-      title: "私たちの使命",
-      description: "私たちはPDF管理を誰にでもアクセス可能にすることを信じています。オンラインツールを使えば、ソフトウェアをインストールせずにPDFを迅速かつ簡単に操作できます。"
+    hero: {
+      title: "デジタルドキュメント管理の強化",
+      description: "ScanProはシンプルなアイデアから生まれました：ドキュメント管理をシームレスで効率的、そして誰にとってもアクセスしやすくすること。私たちは人々がデジタルドキュメントと対話する方法を変革することを信じています。"
+    },
+    story: {
+      title: "私たちのストーリー",
+      paragraph1: "2022年に設立されたScanProは、複雑で直感的でないPDFツールに取り組むことへのフラストレーションから生まれました。私たちの創設者である技術愛好家とドキュメント管理の専門家は、強力かつユーザーフレンドリーなソリューションを生み出す機会を見出しました。",
+      paragraph2: "小さなプロジェクトとして始まったものは、すぐに学生や専門家から大企業まで、世界中の何千人ものユーザーにサービスを提供する包括的なプラットフォームへと成長しました。"
+    },
+    missionValues: {
+      title: "私たちの使命と価値観",
+      mission: {
+        title: "使命",
+        description: "直感的で強力かつアクセスしやすいPDFツールを提供することでデジタルドキュメント管理を簡素化し、生産性と創造性を高めること。"
+      },
+      customerFirst: {
+        title: "顧客第一",
+        description: "私たちはユーザー体験を優先し、実際のユーザーからのフィードバックに基づいてツールを継続的に改善します。あなたのニーズが私たちの革新を推進します。"
+      },
+      privacy: {
+        title: "プライバシーとセキュリティ",
+        description: "私たちは最先端のセキュリティ対策とあなたのプライバシーへの絶対的な尊重をもって、あなたのデータを保護することに取り組んでいます。"
+      }
+    },
+    coreValues: {
+      title: "私たちのコアバリュー",
+      innovation: {
+        title: "革新",
+        description: "私たちはドキュメント管理において可能なことの限界を継続的に押し広げます。"
+      },
+      collaboration: {
+        title: "協力",
+        description: "私たちは社内およびユーザーとのチームワークの力を信じています。"
+      },
+      accessibility: {
+        title: "アクセシビリティ",
+        description: "私たちのツールはシンプルで直感的、そして誰にとっても利用可能であるように設計されています。"
+      }
     },
     team: {
-      title: "私たちのチーム",
-      description: "私たちはシンプルかつ強力なPDFツールを作り上げることに情熱を持つ開発者とデザイナーの献身的なチームです。"
-    },
-    technology: {
-      title: "私たちの技術",
-      description: "当社のプラットフォームは最先端の技術を使用して、高品質のPDF変換、編集、セキュリティを提供しつつ、あなたのデータを安全に保ちます。"
+      title: "私たちのチームに会う",
+      description: "ScanProは、ユーザー向けに可能な限り最高のPDFツールを作成することに注力する小さな献身的なチームによって支えられています。",
+      member1: {
+        name: "チャクラ",
+        role: "アプリ開発リーダー",
+        bio: "私たちのアプリケーションの開発を監督し、堅牢なバックエンドソリューションを実装し、ツールがスムーズかつ効率的に動作することを保証します。"
+      },
+      member2: {
+        name: "アブディ",
+        role: "フロントエンドウェブ開発者",
+        bio: "私たちのツールを直感的でアクセスしやすくするユーザーインターフェースを作成し、すべてのウェブプラットフォームで優れたユーザー体験を提供することに注力します。"
+      },
+      member3: {
+        name: "アンジ",
+        role: "マーケティングスペシャリスト",
+        bio: "私たちのツールを必要とする人々とつなぐマーケティング活動をリードし、認知度を高め、プラットフォームの成長を推進します。"
+      }
     }
   },
 
@@ -1574,300 +1676,6 @@ export default {
         answer: "はい、各ファイル100MBまで圧縮可能です。"
       }
     }
-  },
-  imageTools: {
-    title: "画像ツール",
-    description: "画像を変換、編集、変形するための無料オンラインツguruール",
-    categories: {
-      conversion: "フォーマット変換",
-      editing: "画像編集",
-      enhancement: "画像強化",
-      optimization: "最適化",
-      advanced: "高度なツール"
-    },
-    compressPng: {
-      title: "PNGを圧縮",
-      description: "品質を維持しながらPNGファイルサイズを縮小",
-      metaTitle: "PNG画像を圧縮 | 画像ツール",
-      metaDescription: "ウェブサイトの読み込みを高速化し、効率的な保存のために品質を維持しながらPNGファイルサイズを縮小",
-      metaKeywords: "PNG圧縮、画像サイズ縮小、画像最適化、画像圧縮、ロスレス圧縮、ファイルサイズ削減"
-    },
-    makeTransparent: {
-      title: "PNGを透明化",
-      description: "PNGファイル内の任意の色を透明に置き換え",
-      metaTitle: "PNGを透明化 | 画像ツール",
-      metaDescription: "PNGファイル内の任意の色を素早く透明に置き換え",
-      metaKeywords: "背景削除、透明PNG、色置換、画像編集、背景除去、透明画像"
-    },
-    pngToJpg: {
-      title: "PNGをJPGに変換",
-      description: "カスタマイズ可能な品質設定でPNG画像をJPG形式に変換",
-      metaTitle: "PNGをJPGに変換 | 画像ツール",
-      metaDescription: "調整可能な品質でPNG画像をJPG形式に変換",
-      metaKeywords: "PNGからJPG、画像変換、画像形式、損失圧縮、画像品質"
-    },
-    jpgToPng: {
-      title: "JPGをPNGに変換",
-      description: "透明度をサポートしてJPG画像をPNG形式に変換",
-      metaTitle: "JPGをPNGに変換 | 画像ツール",
-      metaDescription: "ロスレス品質でJPG画像をPNG形式に変換",
-      metaKeywords: "JPGからPNG、画像変換、透明度、ロスレス形式、画像品質"
-    },
-    pngToWebp: {
-      title: "PNGをWebPに変換",
-      description: "ウェブパフォーマンス向上のためにPNG画像をWebP形式に変換",
-      metaTitle: "PNGをWebPに変換 | 画像ツール",
-      metaDescription: "ファイルサイズを小さくするためにPNG画像をWebP形式に変換",
-      metaKeywords: "PNGからWebP、画像変換、ウェブ最適化、画像圧縮"
-    },
-    webpToPng: {
-      title: "WebPをPNGに変換",
-      description: "互換性向上のためにWebP画像をPNG形式に変換",
-      metaTitle: "WebPをPNGに変換 | 画像ツール",
-      metaDescription: "完全な互換性でWebP画像をPNG形式に変換",
-      metaKeywords: "WebPからPNG、画像変換、画像形式、互換性"
-    },
-    svgToPng: {
-      title: "SVGをPNGに変換",
-      description: "ベクターSVGファイルをラスターPNG画像に変換",
-      metaTitle: "SVGをPNGに変換 | 画像ツール",
-      metaDescription: "カスタム寸法でベクターSVGグラフィックをラスターPNG画像に変換",
-      metaKeywords: "SVGからPNG、ベクターからラスター、画像変換、グラフィックデザイン"
-    },
-    pngToBase64: {
-      title: "PNGをBase64に変換",
-      description: "ウェブページに埋め込むためにPNG画像をBase64エンコーディングに変換",
-      metaTitle: "PNGをBase64に変換 | 画像ツール",
-      metaDescription: "ウェブ埋め込み用にPNG画像をBase64文字列に変換",
-      metaKeywords: "PNGからBase64、画像エンコーディング、ウェブ開発、画像埋め込み"
-    },
-    base64ToPng: {
-      title: "Base64をPNGに変換",
-      description: "Base64エンコードされた画像文字列をPNGファイルに再変換",
-      metaTitle: "Base64をPNGに変換 | 画像ツール",
-      metaDescription: "Base64画像文字列をPNG画像ファイルに再変換",
-      metaKeywords: "Base64からPNG、画像デコーディング、ウェブ開発、画像変換"
-    },
-    changeColors: {
-      title: "PNGの色を変更",
-      description: "PNG画像内の特定の色を新しい色に置き換え",
-      metaTitle: "PNGの色を変更 | 画像ツール",
-      metaDescription: "PNG画像内の特定の色を簡単に新しい色に置き換え",
-      metaKeywords: "画像の色変更、色置換、PNG編集、画像カラー変更、色交換"
-    },
-    changeTone: {
-      title: "カラートーンを変更",
-      description: "芸術的効果のために画像にカラートーンと色合いを適用",
-      metaTitle: "PNGのカラートーンを変更 | 画像ツール",
-      metaDescription: "芸術的効果のためにPNG画像にカラートーンと色合いを適用",
-      metaKeywords: "カラートーン、画像着色、芸術的効果、カラーオーバーレイ、フォトフィルター"
-    },
-    addNoise: {
-      title: "PNGにノイズを追加",
-      description: "芸術的スタイルのためにPNG画像にフィルムグレインまたはノイズ効果を追加",
-      metaTitle: "PNGにノイズを追加 | 画像ツール",
-      metaDescription: "芸術的スタイルのためにPNG画像にフィルムグレインまたはノイズ効果を追加",
-      metaKeywords: "ノイズ追加、フィルムグレイン、画像テクスチャ、芸術的フィルター、ヴィンテージ写真効果"
-    },
-    resize: {
-      title: "画像のリサイズ",
-      description: "品質を維持しながら画像を正確な寸法にリサイズ",
-      metaTitle: "画像のリサイズ | 画像ツール",
-      metaDescription: "品質を維持しながら画像を正確な寸法に簡単にリサイズ",
-      metaKeywords: "画像リサイズ、画像サイズ変更、画像スケール、画像寸法、画像サイズ調整"
-    },
-    rotate: {
-      title: "回転と反転",
-      description: "正しい向きにするために画像を回転および反転",
-      metaTitle: "画像の回転と反転 | 画像ツール",
-      metaDescription: "画像を任意の角度に簡単に回転し、水平または垂直に反転",
-      metaKeywords: "画像回転、画像反転、画像向き、画像回転、垂直反転"
-    },
-    crop: {
-      title: "画像のトリミング",
-      description: "不要な領域を削除し、重要なコンテンツに焦点を当てるために画像をトリミング",
-      metaTitle: "画像のトリミング | 画像ツール",
-      metaDescription: "不要な領域を削除し、構図を改善するために画像をトリミング",
-      metaKeywords: "画像トリミング、画像切り取り、背景削除、画像構図"
-    },
-    addText: {
-      title: "画像にテキストを追加",
-      description: "カスタムテキスト、キャプション、またはウォーターマークを画像に追加",
-      metaTitle: "画像にテキストを追加 | 画像ツール",
-      metaDescription: "簡単な書式設定オプションでカスタムテキスト、キャプション、ウォーターマークを画像に追加",
-      metaKeywords: "画像にテキスト追加、画像キャプション、ウォーターマーク、テキストオーバーレイ、画像注釈"
-    },
-    addBorder: {
-      title: "枠を追加",
-      description: "さまざまなスタイルと色でカスタム枠を画像に追加",
-      metaTitle: "画像に枠を追加 | 画像ツール",
-      metaDescription: "カスタム枠、フレーム、エフェクトで画像を強化",
-      metaKeywords: "画像枠追加、フォトフレーム、画像枠付け、枠スタイル、画像強化"
-    },
-    addWatermark: {
-      title: "ウォーターマークを追加",
-      description: "写真を保護するためにテキストまたは画像のウォーターマークを追加",
-      metaTitle: "画像にウォーターマークを追加 | 画像ツール",
-      metaDescription: "画像を保護しブランド化するためにテキストまたは画像のウォーターマークを追加",
-      metaKeywords: "ウォーターマーク追加、画像保護、ブランディング、著作権、画像セキュリティ"
-    }
-    ,
-    repairPdf: {
-      title: "PDFファイルを修復する",
-      description: "破損したPDFファイルを修復し、コンテンツを回復し、文書構造を最適化する",
-      howTo: {
-        title: "PDFを修復する方法",
-        step1: {
-          title: "PDFをアップロードする",
-          description: "デバイスから修復したいPDFファイルを選択する"
-        },
-        step2: {
-          title: "修復モードを選択する",
-          description: "ファイルの問題に基づいて適切な修復方法を選択する"
-        },
-        step3: {
-          title: "修復されたPDFをダウンロードする",
-          description: "構造とコンテンツが修正された修復済みのPDFファイルをダウンロードする"
-        }
-      },
-      why: {
-        title: "なぜPDFを修復するのか",
-        corruptedFiles: {
-          title: "破損したファイルを修復する",
-          description: "正常に開かない破損したPDFファイルからコンテンツと構造を回復する"
-        },
-        missingContent: {
-          title: "欠落したコンテンツを回復する",
-          description: "部分的に破損した文書から欠落した画像、テキスト、またはページを復元する"
-        },
-        documentStructure: {
-          title: "文書構造を修復する",
-          description: "壊れた内部構造、ページ参照、リンクを修復する"
-        },
-        fileSize: {
-          title: "ファイルサイズを最適化する",
-          description: "不要なデータを削除し、品質を損なわずにファイルサイズを最適化する"
-        }
-      },
-      modes: {
-        title: "利用可能な修復モード",
-        standard: {
-          title: "標準修復",
-          description: "一般的なPDFの問題を修正する。壊れたクロスリファレンス、不正なオブジェクト、ストリームエラーを含む。まだ開けるがエラーを表示する軽度に破損したPDFに最適。"
-        },
-        advanced: {
-          title: "高度な回復",
-          description: "深刻な構造的問題を持つ重度に破損したPDFのための深い修復。全く開かないファイルから可能な限り多くのコンテンツを回復する。"
-        },
-        optimization: {
-          title: "最適化",
-          description: "コンテンツを失うことなくPDFファイルを再構築し最適化する。冗長なデータを削除し、軽微な問題を修正し、全体的なファイル構造を改善する。"
-        }
-      },
-      faq: {
-        title: "よくある質問",
-        whatCanRepair: {
-          question: "どのようなPDFの問題を修正できますか？",
-          answer: "当社の修復ツールは、破損したファイル構造、壊れたページ参照、損傷したコンテンツストリーム、欠落したクロスリファレンスタブル、無効なオブジェクトなど、幅広い問題を修正できます。標準のPDFビューアで開かない、または正しく表示されないPDFからコンテンツを回復することがよくあります。"
-        },
-        completelyDamaged: {
-          question: "完全に破損したPDFを修復できますか？",
-          answer: "高度な修復モードでは重度に破損したPDFからコンテンツを回復できますが、ファイルが完全に破損している場合、100%の回復が常に可能とは限りません。ただし、極端な場合でも、テキストや基本的な要素などの部分的なコンテンツを回復できることが多いです。"
-        },
-        contentQuality: {
-          question: "修復はコンテンツの品質に影響しますか？",
-          answer: "いいえ、当社の修復プロセスは回復可能なコンテンツの品質を維持します。一部のツールがPDFを単に抽出して再作成する（フォーマットを失う可能性がある）のとは異なり、破損した部分のみを修正しながら元の構造を保つよう努めます。"
-        },
-        passwordProtected: {
-          question: "パスワードで保護されたPDFを修復できますか？",
-          answer: "はい、パスワードがあればパスワードで保護されたPDFを修復できます。修復プロセス中にパスワードを入力する必要があります。ただし、適切な許可なく保護された文書の暗号化を回避または解除することは試みません。"
-        },
-        dataSecurity: {
-          question: "修復プロセス中のPDFデータは安全ですか？",
-          answer: "はい、当社はデータのセキュリティを真剣に考えています。あなたのファイルは当社のサーバーで安全に処理され、第三者と共有されず、処理後に自動的に削除されます。すべてのファイル転送には暗号化を使用し、修復プロセス全体が安全な環境で行われます。"
-        }
-      },
-      bestPractices: {
-        title: "PDF回復のためのベストプラクティス",
-        dos: "すべきこと",
-        donts: "すべきでないこと",
-        dosList: [
-          "修復を試みる前に元のファイルのバックアップを保持する",
-          "高度な回復を使用する前にまず標準修復モードを試す",
-          "可能であれば複数のビューアでPDFを確認する",
-          "修復前に問題のあるページや要素をメモする",
-          "大きくて機能的なPDFには最適化モードを使用する"
-        ],
-        dontsList: [
-          "破損したPDFを繰り返し保存しない。損傷が悪化する可能性がある",
-          "適切なPDF作成の代わりに修復を使用しない",
-          "重度に破損したファイルから100%の回復を期待しない",
-          "修復されたファイルを古いPDFビューアで開かない。それらが再び破損する可能性がある",
-          "修復されたファイルのコンテンツの正確性を確認するのを省略しない"
-        ]
-      },
-      relatedTools: {
-        title: "関連ツール",
-        compress: "PDFを圧縮する",
-        unlock: "PDFのロックを解除する",
-        protect: "PDFを保護する",
-        edit: "PDFを編集する",
-        viewAll: "すべてのツールを表示する"
-      },
-      form: {
-        title: "PDF修復ツール",
-        description: "破損したPDFを修復し、コンテンツを回復し、文書構造を最適化する",
-        upload: "修復のためにPDFをアップロードする",
-        dragDrop: "ここにPDFファイルをドラッグ＆ドロップするか、クリックして参照する",
-        selectFile: "PDFファイルを選択する",
-        maxFileSize: "最大ファイルサイズ: 100MB",
-        change: "ファイルを変更する",
-        repairModes: "修復モード",
-        standardRepair: "標準修復",
-        standardDesc: "壊れたリンクや構造的問題などの一般的な問題を修正する",
-        advancedRecovery: "高度な回復",
-        advancedDesc: "重度に破損または腐敗したPDFファイルのための深い回復",
-        optimization: "最適化",
-        optimizationDesc: "コンテンツを失うことなくPDF構造をクリーンアップし最適化する",
-        advancedOptions: "高度なオプション",
-        showOptions: "オプションを表示する",
-        hideOptions: "オプションを非表示にする",
-        preserveFormFields: "フォームフィールドを保持する",
-        preserveFormFieldsDesc: "可能であればインタラクティブなフォームフィールドを維持する",
-        preserveAnnotations: "注釈を保持する",
-        preserveAnnotationsDesc: "コメント、ハイライト、その他の注釈を保持する",
-        preserveBookmarks: "ブックマークを保持する",
-        preserveBookmarksDesc: "文書のアウトラインとブックマークを維持する",
-        optimizeImages: "画像を最適化する",
-        optimizeImagesDesc: "ファイルサイズを小さくするために画像を再圧縮する",
-        password: "PDFパスワード",
-        passwordDesc: "このPDFはパスワードで保護されています。修復するためにパスワードを入力してください。",
-        repair: "PDFを修復する",
-        repairing: "PDFを修復中...",
-        security: "あなたのファイルは安全に処理されます。すべてのアップロードは処理後に自動的に削除されます。",
-        analyzing: "PDF構造を分析中",
-        rebuilding: "文書構造を再構築中",
-        recovering: "コンテンツを回復中",
-        fixing: "クロスリファレンスを修正中",
-        optimizing: "ファイルを最適化中",
-        finishing: "仕上げ中"
-      },
-      results: {
-        success: "PDFが正常に修復されました",
-        successMessage: "あなたのPDFが修復され、ダウンロードの準備が整いました。",
-        issues: "修復の問題が検出されました",
-        issuesMessage: "あなたのPDFを修復する際に問題が発生しました。一部のコンテンツは回復できない可能性があります。",
-        details: "修復の詳細",
-        fixed: "修正された問題",
-        warnings: "警告",
-        fileSize: "ファイルサイズ",
-        original: "オリジナル",
-        new: "新しい",
-        reduction: "削減",
-        download: "修復されたPDFをダウンロードする",
-        repairAnother: "別のPDFを修復する"
-      }
-    },
   },
   faq: {
     categories: {
@@ -2271,9 +2079,7 @@ export default {
     }
   },
   pricing: {
-    // Metadata
-    metaTitle: "料金プラン - ScanPro",
-    metaDescription: "PDFのニーズに合ったプランを選んでください。ScanProは無料からエンタープライズまで柔軟な料金オプションを提供し、必要な機能が揃っています。",
+    description: "PDFのニーズに合ったプランを選んでください。ScanProは無料からエンタープライズまで柔軟な料金オプションを提供し、必要な機能が揃っています。",
 
     // Page content
     title: "シンプルで透明な料金",

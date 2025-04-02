@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { SEO } from "@/components/SEO";
 import { ClientConversionContent } from "./client-conversion-content";
 import { SUPPORTED_LANGUAGES, getTranslation } from '@/src/lib/i18n/config';
 
@@ -37,34 +38,31 @@ export async function generateMetadata({
     titleKey: "convert.title.generic", 
     descKey: "convert.description.generic" 
   };
+
+  // Stop words logic remains the same as in your original implementation
   const stopWordsByLanguage: Record<string, string[]> = {
     en: ["the", "a", "an", "and", "or", "to", "in", "with", "for", "is", "on", "at"],
     id: ["dan", "di", "ke", "dari", "untuk", "yang", "dengan", "atau", "pada"],
     es: ["el", "la", "los", "las", "y", "o", "en", "con", "para", "de", "a"],
     fr: ["le", "la", "les", "et", "ou", "à", "en", "avec", "pour", "de"],
-    zh: ["的", "了", "在", "是", "我", "他", "这", "那", "和", "你"], // Simplified Chinese
-    ar: ["في", "من", "إلى", "على", "و", "هذا", "تلك", "مع", "أو"], // Arabic
-    hi: ["और", "के", "में", "से", "है", "को", "का", "कि", "पर"], // Hindi
-    ru: ["и", "в", "на", "с", "к", "от", "для", "по", "или"], // Russian
-    pt: ["e", "ou", "em", "com", "para", "de", "a", "o", "as"], // Portuguese
-    de: ["und", "in", "mit", "für", "zu", "auf", "an", "oder"], // German
-    ja: ["の", "に", "を", "は", "が", "と", "で", "です"], // Japanese (hiragana)
-    ko: ["은", "는", "이", "가", "을", "를", "에", "와"], // Korean
-    it: ["e", "o", "in", "con", "per", "di", "a", "il", "la"], // Italian
-    tr: ["ve", "ile", "de", "da", "için", "bu", "şu", "veya"] // Turkish
+    zh: ["的", "了", "在", "是", "我", "他", "这", "那", "和", "你"],
+    ar: ["في", "من", "إلى", "على", "و", "هذا", "تلك", "مع", "أو"],
+    hi: ["और", "के", "में", "से", "है", "को", "का", "कि", "पर"],
+    ru: ["и", "в", "на", "с", "к", "от", "для", "по", "или"],
+    pt: ["e", "ou", "em", "com", "para", "de", "a", "o", "as"],
+    de: ["und", "in", "mit", "für", "zu", "auf", "an", "oder"],
+    ja: ["の", "に", "を", "は", "が", "と", "で", "です"],
+    ko: ["은", "는", "이", "가", "을", "를", "에", "와"],
+    it: ["e", "o", "in", "con", "per", "di", "a", "il", "la"],
+    tr: ["ve", "ile", "de", "da", "için", "bu", "şu", "veya"]
   };
   
-  
-  
-  // Keyword extraction function with language-specific stop words
+  // Keyword extraction function remains the same
   const extractKeywords = (text: string, language: string): string[] => {
-    // Select stop words based on language, default to English if not found
     const stopWords = stopWordsByLanguage[language] || stopWordsByLanguage["en"];
     
-    // Convert to lowercase (for Latin-based languages) and remove punctuation
     const words = text.toLowerCase().replace(/[^\w\s]/g, "").split(/\s+/);
     
-    // Filter out stop words and short words, then count frequency
     const filteredWords = words
       .filter(word => !stopWords.includes(word) && word.length > 2)
       .reduce((acc, word) => {
@@ -72,18 +70,37 @@ export async function generateMetadata({
         return acc;
       }, {} as Record<string, number>);
   
-    // Sort by frequency and take top 5
     return Object.keys(filteredWords)
       .sort((a, b) => filteredWords[b] - filteredWords[a])
       .slice(0, 5);
   };
-  const keywords = extractKeywords(`${ t(conversionInfo.titleKey) + " | " + t("metadata.template").replace("%s", "")} ${conversionInfo.descKey}`, lang);
-  return {
-    title: t(conversionInfo.titleKey) + " | " + t("metadata.template").replace("%s", ""),
+
+  // Generate keywords
+  const keywords = extractKeywords(
+    `${t(conversionInfo.titleKey)} ${t(conversionInfo.descKey)}`, 
+    lang
+  );
+
+  // Generate conversion-specific JSON-LD schema
+  const conversionSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: t(conversionInfo.titleKey),
     description: t(conversionInfo.descKey),
-    keywords:keywords,
+    applicationCategory: 'Productivity',
+    operatingSystem: 'Web Browser',
+    offers: {
+      '@type': 'Offer',
+      price: '0'
+    }
+  };
+
+  return {
+    title: t(conversionInfo.titleKey),
+    description: t(conversionInfo.descKey),
+    keywords: keywords,
     openGraph: {
-      title:  t(conversionInfo.titleKey) + " | " + t("metadata.template").replace("%s", ""),
+      title: t(conversionInfo.titleKey),
       description: t(conversionInfo.descKey),
       url: `/${lang}/convert/${conversion}`,
       siteName: "ScanPro",
@@ -102,7 +119,7 @@ export async function generateMetadata({
         'ko': 'ko_KR',
         'it': 'it_IT',
         'tr': 'tr_TR'
-    }[lang] || 'en_US',
+      }[lang] || 'en_US',
     },
     alternates: {
       canonical: `/${lang}/convert/${conversion}`,
@@ -126,6 +143,10 @@ export async function generateMetadata({
         })
       ),
     },
+    // Include custom JSON-LD schema
+    other: {
+      'script[type="application/ld+json"]': JSON.stringify(conversionSchema)
+    }
   };
 }
 
@@ -134,11 +155,18 @@ export default async function ConversionPage({
 }: { 
   params: Promise<{ lang: string, conversion: string }> 
 }) {
-  const { lang: paramLang } = await params;
+  const { lang: paramLang, conversion } = await params;
   
   if (!SUPPORTED_LANGUAGES.includes(paramLang)) {
     notFound();
   }
   
-  return <ClientConversionContent />;
+  return (
+    <>
+      {/* Add SEO with conversion-specific schema */}
+      <SEO />
+      
+      <ClientConversionContent />
+    </>
+  );
 }

@@ -63,7 +63,7 @@ module.exports = {
         // Adjust priority based on the type of page
         if (path === '/' || path === '/en' || path === '/es' || path === '/fr') {
             defaultConfig.priority = 1.0;
-        } else if (path.includes('/tools')) {
+        } else if (path.includes('/pdf-tools')) {
             defaultConfig.priority = 0.9;
         } else if (path.includes('/convert/')) {
             defaultConfig.priority = 0.8;

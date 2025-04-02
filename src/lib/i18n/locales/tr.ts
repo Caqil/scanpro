@@ -894,7 +894,64 @@ export default {
             enhanceScannedHint: "OCR doğruluğunu artırmak için görüntülerin ön işlenmesi (tarama belgeler için önerilir)",
             preserveLayout: "Düzeni Koru",
             preserveLayoutHint: "Paragraflar ve satır sonlarıyla orijinal düzeni korumaya çalışın"
-        }
+        },
+        // Upload area
+        uploadPdf: "Metin çıkarma için PDF yükle",
+        dragDrop: "PDF dosyanızı buraya sürükleyip bırakın veya göz atmak için tıklayın",
+        selectPdf: "PDF dosyası seç",
+        uploading: "Yükleniyor...",
+        maxFileSize: "Maksimum dosya boyutu: 50MB",
+
+        // File handling
+        invalidFile: "Geçersiz dosya türü",
+        invalidFileDesc: "Lütfen bir PDF dosyası seçin",
+        fileTooLarge: "Dosya çok büyük",
+        fileTooLargeDesc: "Maksimum dosya boyutu 50MB’dir",
+        noFile: "Dosya seçilmedi",
+        noFileDesc: "Lütfen işlenecek bir PDF dosyası seçin",
+        changeFile: "Dosyayı değiştir",
+
+        // Options
+        languageLabel: "Belge dili",
+        selectLanguage: "Dil seç",
+        pageRange: "Sayfa aralığı",
+        allPages: "Tüm sayfalar",
+        specificPages: "Belirli sayfalar",
+        pageRangeExample: "örneğin, 1-3, 5, 7-9",
+        pageRangeInfo: "Bireysel sayfaları veya virgülle ayrılmış aralıkları girin",
+        preserveLayout: "Düzeni koru",
+        preserveLayoutDesc: "Belge yapısını ve biçimlendirmesini korumaya çalışır",
+
+        // Processing
+        extractText: "Metni çıkar",
+        extractingText: "Metin çıkarılıyor...",
+        processingPdf: "PDF’niz işleniyor",
+        processingInfo: "Dosya boyutuna ve karmaşıklığına bağlı olarak bu birkaç dakika sürebilir",
+        analyzing: "Belge analiz ediliyor",
+        preprocessing: "Sayfalar ön işleme alınıyor",
+        recognizing: "Metin tanınıyor",
+        extracting: "İçerik çıkarılıyor",
+        finalizing: "Sonuçlar tamamlanıyor",
+        finishing: "Tamamlanıyor",
+
+        // Results
+        extractionComplete: "Metin çıkarma tamamlandı",
+        extractionCompleteDesc: "Metniniz PDF’den başarıyla çıkarıldı",
+        extractionError: "Metin çıkarma başarısız",
+        extractionFailed: "Metin çıkarılamadı",
+        unknownError: "Bilinmeyen bir hata oluştu",
+        textCopied: "Metin panoya kopyalandı",
+        copyFailed: "Metin kopyalanamadı",
+        textPreview: "Metin önizlemesi",
+        rawText: "Ham metin",
+        extractedText: "Çıkarılmış metin",
+        previewDesc: "Biçimlendirmeli çıkarılan metnin önizlemesi",
+        rawTextOutput: "Ham metin çıkışı",
+        rawTextDesc: "Biçimlendirme olmadan düz metin",
+        noTextFound: "Belgede metin bulunamadı",
+        copyText: "Metni kopyala",
+        downloadText: "Metni indir",
+        processAnother: "Başka bir PDF işle"
     },
 
     // PDF Koruma Sayfası
@@ -1483,18 +1540,63 @@ export default {
     },
     // Hakkımızda Sayfası
     about: {
-        title: "ScanPro Hakkında",
-        mission: {
-            title: "Misyonumuz",
-            description: "PDF yönetiminin herkes için erişilebilir olması gerektiğine inanıyoruz. Çevrimiçi araçlarımız, yazılım kurulumuna gerek kalmadan PDF'lerle hızlı ve kolay bir şekilde çalışmanıza yardımcı olur."
+        hero: {
+            title: "Dijital Belge Yönetiminde Güçlendirme",
+            description: "ScanPro, basit bir fikirden doğdu: belge yönetimini sorunsuz, verimli ve herkes için erişilebilir hale getirmek. İnsanların dijital belgelerle etkileşim şeklini dönüştürmeye inanıyoruz."
+        },
+        story: {
+            title: "Hikayemiz",
+            paragraph1: "2022 yılında kurulan ScanPro, karmaşık ve sezgisel olmayan PDF araçlarıyla başa çıkmanın yarattığı hayal kırıklığından ortaya çıktı. Teknoloji meraklıları ve belge yönetimi uzmanları olan kurucularımız, hem güçlü hem de kullanıcı dostu bir çözüm yaratma fırsatı gördü.",
+            paragraph2: "Küçük bir proje olarak başlayan şey, kısa sürede öğrencilerden profesyonellere ve büyük işletmelere kadar dünya çapında binlerce kullanıcıya hizmet veren kapsamlı bir platforma dönüştü."
+        },
+        missionValues: {
+            title: "Misyonumuz ve Değerlerimiz",
+            mission: {
+                title: "Misyon",
+                description: "Sezgisel, güçlü ve erişilebilir PDF araçları sağlayarak dijital belge yönetimini basitleştirmek, üretkenliği ve yaratıcılığı artırmak."
+            },
+            customerFirst: {
+                title: "Önce Müşteri",
+                description: "Kullanıcı deneyimine öncelik veriyoruz ve gerçek kullanıcı geri bildirimlerine dayanarak araçlarımızı sürekli geliştiriyoruz. İhtiyaçlarınız yeniliklerimizi yönlendiriyor."
+            },
+            privacy: {
+                title: "Gizlilik ve Güvenlik",
+                description: "Son teknoloji güvenlik önlemleri ve gizliliğinize mutlak saygı ile verilerinizi korumaya kararlıyız."
+            }
+        },
+        coreValues: {
+            title: "Temel Değerlerimiz",
+            innovation: {
+                title: "Yenilik",
+                description: "Belge yönetiminde mümkün olanın sınırlarını sürekli zorluyoruz."
+            },
+            collaboration: {
+                title: "İşbirliği",
+                description: "Şirketimiz içinde ve kullanıcılarımızla ekip çalışmasının gücüne inanıyoruz."
+            },
+            accessibility: {
+                title: "Erişilebilirlik",
+                description: "Araçlarımız basit, sezgisel ve herkes için kullanılabilir olacak şekilde tasarlanmıştır."
+            }
         },
         team: {
-            title: "Ekibimiz",
-            description: "Biz, basit ama güçlü PDF araçları oluşturmaya tutkulu, özverili bir geliştirici ve tasarımcı ekibiyiz."
-        },
-        technology: {
-            title: "Teknolojimiz",
-            description: "Platformumuz, verilerinizi güvende tutarak yüksek kaliteli PDF dönüşümü, düzenleme ve güvenlik sağlamak için gelişmiş teknolojiler kullanır."
+            title: "Ekibimizle Tanışın",
+            description: "ScanPro, kullanıcılarımız için mümkün olan en iyi PDF araçlarını yaratmaya odaklanmış küçük ve özverili bir ekip tarafından destekleniyor.",
+            member1: {
+                name: "Cakra",
+                role: "Uygulama Geliştirme Lideri",
+                bio: "Uygulamalarımızın geliştirilmesini denetler, sağlam arka uç çözümleri uygular ve araçlarımızın sorunsuz ve verimli çalışmasını sağlar."
+            },
+            member2: {
+                name: "Abdi",
+                role: "Ön Uç Web Geliştiricisi",
+                bio: "Araçlarımızı sezgisel ve erişilebilir kılan kullanıcı arayüzleri oluşturur, tüm web platformlarımızda olağanüstü kullanıcı deneyimleri sunmaya odaklanır."
+            },
+            member3: {
+                name: "Anggi",
+                role: "Pazarlama Uzmanı",
+                bio: "Araçlarımızı ihtiyaç duyan insanlarla buluşturmak için pazarlama çabalarımıza liderlik eder, farkındalık oluşturur ve platformumuzun büyümesini sağlar."
+            }
         }
     },
 
@@ -1574,143 +1676,6 @@ export default {
                 question: "Dosya boyutu sınırı var mı?",
                 answer: "Evet, her biri 100 MB’a kadar olan dosyaları sıkıştırabilirsiniz."
             }
-        }
-    },
-    imageTools: {
-        title: "Görüntü Araçları",
-        description: "Görüntülerinizi dönüştürmek, düzenlemek ve değiştirmek için ücretsiz çevrimiçi araçlar",
-        categories: {
-            conversion: "Format Dönüştürme",
-            editing: "Görüntü Düzenleme",
-            enhancement: "Görüntü İyileştirme",
-            optimization: "Optimizasyon",
-            advanced: "Gelişmiş Araçlar"
-        },
-        compressPng: {
-            title: "PNG Sıkıştırma",
-            description: "Kaliteyi korurken PNG dosya boyutlarını küçültme",
-            metaTitle: "PNG Görüntüleri Sıkıştırma | Görüntü Araçları",
-            metaDescription: "Web sitelerinin daha hızlı yüklenmesi ve verimli depolama için kaliteyi korurken PNG dosya boyutlarını küçültme",
-            metaKeywords: "PNG sıkıştırma, görüntü boyutunu küçültme, görüntü optimizasyonu, görüntü sıkıştırma, kayıpsız sıkıştırma, dosya boyutu azaltma"
-        },
-        makeTransparent: {
-            title: "PNG'yi Şeffaf Yapma",
-            description: "Bir PNG dosyasındaki herhangi bir rengi şeffaflıkla değiştirme",
-            metaTitle: "PNG'yi Şeffaf Yapma | Görüntü Araçları",
-            metaDescription: "Bir PNG dosyasındaki herhangi bir rengi hızlıca şeffaflıkla değiştirme",
-            metaKeywords: "arkaplan kaldırma, şeffaf PNG, renk değiştirme, görüntü düzenleme, arkaplan temizleme, şeffaf görüntüler"
-        },
-        pngToJpg: {
-            title: "PNG'yi JPG'ye Dönüştürme",
-            description: "Özelleştirilebilir kalite ayarlarıyla PNG görüntülerini JPG formatına dönüştürme",
-            metaTitle: "PNG'yi JPG'ye Dönüştürme | Görüntü Araçları",
-            metaDescription: "Ayarlanabilir kalite ile PNG görüntülerini JPG formatına dönüştürme",
-            metaKeywords: "PNG'den JPG'ye, görüntü dönüştürme, görüntü formatı, kayıplı sıkıştırma, görüntü kalitesi"
-        },
-        jpgToPng: {
-            title: "JPG'yi PNG'ye Dönüştürme",
-            description: "Şeffaflık desteğiyle JPG görüntülerini PNG formatına dönüştürme",
-            metaTitle: "JPG'yi PNG'ye Dönüştürme | Görüntü Araçları",
-            metaDescription: "Kayıpsız kalite ile JPG görüntülerini PNG formatına dönüştürme",
-            metaKeywords: "JPG'den PNG'ye, görüntü dönüştürme, şeffaflık, kayıpsız format, görüntü kalitesi"
-        },
-        pngToWebp: {
-            title: "PNG'yi WebP'ye Dönüştürme",
-            description: "Web performansı için PNG görüntülerini WebP formatına dönüştürme",
-            metaTitle: "PNG'yi WebP'ye Dönüştürme | Görüntü Araçları",
-            metaDescription: "Dosya boyutlarını küçültmek için PNG görüntülerini WebP formatına dönüştürme",
-            metaKeywords: "PNG'den WebP'ye, görüntü dönüştürme, web optimizasyonu, görüntü sıkıştırma"
-        },
-        webpToPng: {
-            title: "WebP'yi PNG'ye Dönüştürme",
-            description: "Daha iyi uyumluluk için WebP görüntülerini PNG formatına dönüştürme",
-            metaTitle: "WebP'yi PNG'ye Dönüştürme | Görüntü Araçları",
-            metaDescription: "Tam uyumluluk ile WebP görüntülerini PNG formatına dönüştürme",
-            metaKeywords: "WebP'den PNG'ye, görüntü dönüştürme, görüntü formatı, uyumluluk"
-        },
-        svgToPng: {
-            title: "SVG'yi PNG'ye Dönüştürme",
-            description: "Vektör SVG dosyalarını raster PNG görüntülerine dönüştürme",
-            metaTitle: "SVG'yi PNG'ye Dönüştürme | Görüntü Araçları",
-            metaDescription: "Özel boyutlarla vektör SVG grafiklerini raster PNG görüntülerine dönüştürme",
-            metaKeywords: "SVG'den PNG'ye, vektörden rastere, görüntü dönüştürme, grafik tasarım"
-        },
-        pngToBase64: {
-            title: "PNG'yi Base64'e Dönüştürme",
-            description: "Web sayfalarına gömmek için PNG görüntülerini Base64 kodlamasına dönüştürme",
-            metaTitle: "PNG'yi Base64'e Dönüştürme | Görüntü Araçları",
-            metaDescription: "Web gömme için PNG görüntülerini Base64 dizelerine dönüştürme",
-            metaKeywords: "PNG'den Base64'e, görüntü kodlama, web geliştirme, görüntü gömme"
-        },
-        base64ToPng: {
-            title: "Base64'ü PNG'ye Dönüştürme",
-            description: "Base64 ile kodlanmış görüntü dizelerini tekrar PNG dosyalarına dönüştürme",
-            metaTitle: "Base64'ü PNG'ye Dönüştürme | Görüntü Araçları",
-            metaDescription: "Base64 görüntü dizelerini tekrar PNG görüntü dosyalarına dönüştürme",
-            metaKeywords: "Base64'ten PNG'ye, görüntü kod çözme, web geliştirme, görüntü dönüştürme"
-        },
-        changeColors: {
-            title: "PNG'de Renkleri Değiştirme",
-            description: "PNG görüntülerindeki belirli renkleri yeni renklerle değiştirme",
-            metaTitle: "PNG'de Renkleri Değiştirme | Görüntü Araçları",
-            metaDescription: "PNG görüntülerindeki belirli renkleri kolayca yeni renklerle değiştirme",
-            metaKeywords: "görüntü renklerini değiştirme, renk değiştirme, PNG düzenleme, görüntü renk değiştirici, renk takası"
-        },
-        changeTone: {
-            title: "Renk Tonunu Değiştirme",
-            description: "Sanatsal efektler için görüntülerinize renk tonları ve gölgeler uygulama",
-            metaTitle: "PNG Renk Tonunu Değiştirme | Görüntü Araçları",
-            metaDescription: "Sanatsal efektler için PNG görüntülerinize renk tonları ve gölgeler uygulama",
-            metaKeywords: "renk tonu, görüntü tonlama, sanatsal efektler, renk kaplama, fotoğraf filtresi"
-        },
-        addNoise: {
-            title: "PNG'ye Gürültü Ekleme",
-            description: "Sanatsal stil için PNG görüntülerinize film tanecikleri veya gürültü efektleri ekleme",
-            metaTitle: "PNG'ye Gürültü Ekleme | Görüntü Araçları",
-            metaDescription: "Sanatsal stil için PNG görüntülerinize film tanecikleri veya gürültü efektleri ekleme",
-            metaKeywords: "gürültü ekleme, film tanecikleri, görüntü dokusu, sanatsal filtre, vintage fotoğraf efekti"
-        },
-        resize: {
-            title: "Görüntü Boyutunu Değiştirme",
-            description: "Kaliteyi korurken görüntüleri tam boyutlara yeniden boyutlandırma",
-            metaTitle: "Görüntüleri Yeniden Boyutlandırma | Görüntü Araçları",
-            metaDescription: "Kaliteyi korurken görüntülerinizi tam boyutlara kolayca yeniden boyutlandırma",
-            metaKeywords: "görüntü boyutunu değiştirme, görüntü boyutunu ayarlama, görüntü ölçeklendirme, görüntü boyutları, görüntü yeniden boyutlandırma"
-        },
-        rotate: {
-            title: "Döndürme ve Çevirme",
-            description: "Doğru yönlendirme için görüntüleri döndürme ve çevirme",
-            metaTitle: "Görüntüleri Döndürme ve Çevirme | Görüntü Araçları",
-            metaDescription: "Görüntüleri herhangi bir açıda kolayca döndürme ve yatay veya dikey olarak çevirme",
-            metaKeywords: "görüntü döndürme, görüntü çevirme, görüntü yönlendirme, görüntü döndürme, dikey çevirme"
-        },
-        crop: {
-            title: "Görüntü Kırpma",
-            description: "İstenmeyen alanları kaldırmak ve önemli içeriğe odaklanmak için görüntüleri kırpma",
-            metaTitle: "Görüntüleri Kırpma | Görüntü Araçları",
-            metaDescription: "Kompozisyonu iyileştirmek için istenmeyen alanları kaldırmak üzere görüntüleri kırpma",
-            metaKeywords: "görüntü kırpma, görüntü kesme, arkaplan kaldırma, görüntü kompozisyonu"
-        },
-        addText: {
-            title: "Görüntüye Metin Ekleme",
-            description: "Görüntülerinize özel metin, altyazı veya filigran ekleme",
-            metaTitle: "Görüntülere Metin Ekleme | Görüntü Araçları",
-            metaDescription: "Kolay biçimlendirme seçenekleriyle görüntülerinize özel metin, altyazı ve filigran ekleme",
-            metaKeywords: "görüntüye metin ekleme, görüntü altyazısı, filigran, metin kaplama, görüntü notu"
-        },
-        addBorder: {
-            title: "Kenarlık Ekleme",
-            description: "Çeşitli stiller ve renklerle görüntülerinize özel kenarlıklar ekleme",
-            metaTitle: "Görüntülere Kenarlık Ekleme | Görüntü Araçları",
-            metaDescription: "Özel kenarlıklar, çerçeveler ve efektlerle görüntülerinizi geliştirme",
-            metaKeywords: "görüntü kenarlığı ekleme, fotoğraf çerçevesi, görüntü çerçeveleme, kenarlık stili, görüntü iyileştirme"
-        },
-        addWatermark: {
-            title: "Filigran Ekleme",
-            description: "Fotoğraflarınızı korumak için metin veya görüntü filigranı ekleme",
-            metaTitle: "Görüntülere Filigran Ekleme | Görüntü Araçları",
-            metaDescription: "Görüntülerinizi korumak ve markalamak için metin veya görüntü filigranı ekleme",
-            metaKeywords: "filigran ekleme, görüntü koruma, markalama, telif hakkı, görüntü güvenliği"
         }
     },
     repairPdf: {
@@ -2271,8 +2236,7 @@ export default {
     },
     pricing: {
         // Metadata
-        metaTitle: "Fiyatlandırma Planları - ScanPro",
-        metaDescription: "PDF ihtiyaçlarınız için doğru planı seçin. ScanPro, ücretsizden kurumsal plana kadar esnek fiyatlandırma seçenekleri sunar ve ihtiyacınız olan özelliklere sahiptir.",
+        description: "PDF ihtiyaçlarınız için doğru planı seçin. ScanPro, ücretsizden kurumsal plana kadar esnek fiyatlandırma seçenekleri sunar ve ihtiyacınız olan özelliklere sahiptir.",
 
         // Page content
         title: "Basit, şeffaf fiyatlandırma",

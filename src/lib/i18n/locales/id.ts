@@ -894,7 +894,64 @@ export default {
       enhanceScannedHint: "Proses awal gambar untuk meningkatkan akurasi OCR (disarankan untuk dokumen yang dipindai)",
       preserveLayout: "Pertahankan tata letak",
       preserveLayoutHint: "Coba pertahankan tata letak asli dengan paragraf dan jeda baris"
-    }
+    },
+    // Upload area
+    uploadPdf: "Unggah PDF untuk Ekstraksi Teks",
+    dragDrop: "Seret dan lepaskan file PDF Anda di sini, atau klik untuk menelusuri",
+    selectPdf: "Pilih File PDF",
+    uploading: "Mengunggah...",
+    maxFileSize: "Ukuran file maksimum: 50 MB",
+
+    // File handling
+    invalidFile: "Jenis file tidak valid",
+    invalidFileDesc: "Harap pilih file PDF",
+    fileTooLarge: "File terlalu besar",
+    fileTooLargeDesc: "Ukuran file maksimum adalah 50 MB",
+    noFile: "Tidak ada file yang dipilih",
+    noFileDesc: "Harap pilih file PDF untuk diproses",
+    changeFile: "Ganti File",
+
+    // Options
+    languageLabel: "Bahasa Dokumen",
+    selectLanguage: "Pilih bahasa",
+    pageRange: "Rentang Halaman",
+    allPages: "Semua Halaman",
+    specificPages: "Halaman Tertentu",
+    pageRangeExample: "misalnya, 1-3, 5, 7-9",
+    pageRangeInfo: "Masukkan halaman individu atau rentang yang dipisahkan oleh koma",
+    preserveLayout: "Pertahankan Tata Letak",
+    preserveLayoutDesc: "Coba pertahankan struktur dan pemformatan dokumen",
+
+    // Processing
+    extractText: "Ekstrak Teks",
+    extractingText: "Mengekstrak Teks...",
+    processingPdf: "Memproses PDF Anda",
+    processingInfo: "Ini mungkin memakan waktu beberapa menit tergantung pada ukuran dan kompleksitas file",
+    analyzing: "Menganalisis dokumen",
+    preprocessing: "Prapemrosesan halaman",
+    recognizing: "Mengenali teks",
+    extracting: "Mengekstrak konten",
+    finalizing: "Menyelesaikan hasil",
+    finishing: "Menyelesaikan",
+
+    // Results
+    extractionComplete: "Ekstraksi teks selesai",
+    extractionCompleteDesc: "Teks Anda telah berhasil diekstrak dari PDF",
+    extractionError: "Ekstraksi teks gagal",
+    extractionFailed: "Gagal mengekstrak teks",
+    unknownError: "Terjadi kesalahan yang tidak diketahui",
+    textCopied: "Teks disalin ke clipboard",
+    copyFailed: "Gagal menyalin teks",
+    textPreview: "Pratinjau Teks",
+    rawText: "Teks Mentah",
+    extractedText: "Teks yang Diekstrak",
+    previewDesc: "Pratinjau teks yang diekstrak dengan pemformatan",
+    rawTextOutput: "Keluaran Teks Mentah",
+    rawTextDesc: "Teks polos tanpa pemformatan",
+    noTextFound: "Tidak ada teks ditemukan dalam dokumen",
+    copyText: "Salin Teks",
+    downloadText: "Unduh Teks",
+    processAnother: "Proses PDF Lain"
   },
 
   // Halaman Lindungi PDF
@@ -1484,18 +1541,63 @@ export default {
 
   // Halaman Tentang
   about: {
-    title: "Tentang ScanPro",
-    mission: {
-      title: "Misi Kami",
-      description: "Kami percaya dalam membuat pengelolaan PDF dapat diakses oleh semua orang. Alat online kami membantu Anda bekerja dengan PDF dengan cepat dan mudah, tanpa perlu menginstal perangkat lunak."
+    hero: {
+      title: "Memberdayakan Pengelolaan Dokumen Digital",
+      description: "ScanPro lahir dari ide sederhana: membuat pengelolaan dokumen menjadi mulus, efisien, dan dapat diakses oleh semua orang. Kami percaya dalam mengubah cara orang berinteraksi dengan dokumen digital."
+    },
+    story: {
+      title: "Kisah Kami",
+      paragraph1: "Didirikan pada tahun 2022, ScanPro muncul dari rasa frustrasi menghadapi alat PDF yang rumit dan tidak intuitif. Pendiri kami, penggemar teknologi dan ahli pengelolaan dokumen, melihat peluang untuk menciptakan solusi yang kuat sekaligus ramah pengguna.",
+      paragraph2: "Apa yang dimulai sebagai proyek kecil dengan cepat berkembang menjadi platform komprehensif yang melayani ribuan pengguna di seluruh dunia, dari pelajar dan profesional hingga perusahaan besar."
+    },
+    missionValues: {
+      title: "Misi dan Nilai Kami",
+      mission: {
+        title: "Misi",
+        description: "Menyederhanakan pengelolaan dokumen digital dengan menyediakan alat PDF yang intuitif, kuat, dan dapat diakses yang meningkatkan produktivitas dan kreativitas."
+      },
+      customerFirst: {
+        title: "Pelanggan Pertama",
+        description: "Kami mengutamakan pengalaman pengguna dan terus meningkatkan alat kami berdasarkan umpan balik pengguna yang nyata. Kebutuhan Anda mendorong inovasi kami."
+      },
+      privacy: {
+        title: "Privasi & Keamanan",
+        description: "Kami berkomitmen untuk melindungi data Anda dengan langkah-langkah keamanan mutakhir dan penghormatan mutlak terhadap privasi Anda."
+      }
+    },
+    coreValues: {
+      title: "Nilai Inti Kami",
+      innovation: {
+        title: "Inovasi",
+        description: "Kami terus mendorong batas-batas dari apa yang mungkin dalam pengelolaan dokumen."
+      },
+      collaboration: {
+        title: "Kolaborasi",
+        description: "Kami percaya pada kekuatan kerja sama tim, baik di dalam perusahaan kami maupun dengan pengguna kami."
+      },
+      accessibility: {
+        title: "Aksesibilitas",
+        description: "Alat kami dirancang agar sederhana, intuitif, dan tersedia untuk semua orang."
+      }
     },
     team: {
-      title: "Tim Kami",
-      description: "Kami adalah tim pengembang dan desainer yang berdedikasi, bersemangat menciptakan alat PDF yang sederhana namun kuat."
-    },
-    technology: {
-      title: "Teknologi Kami",
-      description: "Platform kami menggunakan teknologi mutakhir untuk menyediakan konversi PDF berkualitas tinggi, pengeditan, dan keamanan sambil menjaga data Anda tetap aman."
+      title: "Temui Tim Kami",
+      description: "ScanPro didukung oleh tim kecil yang berdedikasi yang fokus menciptakan alat PDF terbaik untuk pengguna kami.",
+      member1: {
+        name: "Cakra",
+        role: "Pemimpin Pengembangan Aplikasi",
+        bio: "Mengawasi pengembangan aplikasi kami, menerapkan solusi backend yang kuat dan memastikan alat kami berfungsi dengan lancar dan efisien."
+      },
+      member2: {
+        name: "Abdi",
+        role: "Pengembang Web Frontend",
+        bio: "Menciptakan antarmuka pengguna yang membuat alat kami intuitif dan dapat diakses, dengan fokus memberikan pengalaman pengguna luar biasa di semua platform web kami."
+      },
+      member3: {
+        name: "Anggi",
+        role: "Spesialis Pemasaran",
+        bio: "Memimpin upaya pemasaran kami untuk menghubungkan alat kami dengan orang-orang yang membutuhkannya, membangun kesadaran dan mendorong pertumbuhan platform kami."
+      }
     }
   },
   // Halaman Syarat dan Privasi
@@ -1574,143 +1676,6 @@ export default {
         question: "Apakah ada batas ukuran file?",
         answer: "Ya, Anda dapat mengompresi file hingga 100 MB per file."
       }
-    }
-  },
-  imageTools: {
-    title: "Alat Gambar",
-    description: "Alat online gratis untuk mengonversi, mengedit, dan mentransformasi gambar Anda",
-    categories: {
-      conversion: "Konversi Format",
-      editing: "Pengeditan Gambar",
-      enhancement: "Peningkatan Gambar",
-      optimization: "Optimasi",
-      advanced: "Alat Lanjutan"
-    },
-    compressPng: {
-      title: "Kompres PNG",
-      description: "Kurangi ukuran file PNG sambil mempertahankan kualitas",
-      metaTitle: "Kompres Gambar PNG | Alat Gambar",
-      metaDescription: "Kurangi ukuran file PNG sambil mempertahankan kualitas untuk pemuatan situs web yang lebih cepat dan penyimpanan yang efisien",
-      metaKeywords: "kompres PNG, kurangi ukuran gambar, optimasi gambar, kompresi gambar, kompresi tanpa kehilangan, pengurangan ukuran file"
-    },
-    makeTransparent: {
-      title: "Jadikan PNG Transparan",
-      description: "Ganti warna apa pun dalam file PNG dengan transparansi",
-      metaTitle: "Jadikan PNG Transparan | Alat Gambar",
-      metaDescription: "Ganti warna apa pun dalam file PNG dengan transparansi secara cepat",
-      metaKeywords: "hapus latar belakang, PNG transparan, penggantian warna, pengeditan gambar, penghapusan latar belakang, gambar transparan"
-    },
-    pngToJpg: {
-      title: "Konversi PNG ke JPG",
-      description: "Konversi gambar PNG ke format JPG dengan pengaturan kualitas yang dapat disesuaikan",
-      metaTitle: "Konversi PNG ke JPG | Alat Gambar",
-      metaDescription: "Konversi gambar PNG ke format JPG dengan kualitas yang dapat disesuaikan",
-      metaKeywords: "PNG ke JPG, konversi gambar, format gambar, kompresi dengan kehilangan, kualitas gambar"
-    },
-    jpgToPng: {
-      title: "Konversi JPG ke PNG",
-      description: "Konversi gambar JPG ke format PNG dengan dukungan transparansi",
-      metaTitle: "Konversi JPG ke PNG | Alat Gambar",
-      metaDescription: "Konversi gambar JPG ke format PNG dengan kualitas tanpa kehilangan",
-      metaKeywords: "JPG ke PNG, konversi gambar, transparansi, format tanpa kehilangan, kualitas gambar"
-    },
-    pngToWebp: {
-      title: "Konversi PNG ke WebP",
-      description: "Konversi gambar PNG ke format WebP untuk performa web yang lebih baik",
-      metaTitle: "Konversi PNG ke WebP | Alat Gambar",
-      metaDescription: "Konversi gambar PNG ke format WebP untuk ukuran file yang lebih kecil",
-      metaKeywords: "PNG ke WebP, konversi gambar, optimasi web, kompresi gambar"
-    },
-    webpToPng: {
-      title: "Konversi WebP ke PNG",
-      description: "Konversi gambar WebP ke format PNG untuk kompatibilitas yang lebih baik",
-      metaTitle: "Konversi WebP ke PNG | Alat Gambar",
-      metaDescription: "Konversi gambar WebP ke format PNG dengan kompatibilitas penuh",
-      metaKeywords: "WebP ke PNG, konversi gambar, format gambar, kompatibilitas"
-    },
-    svgToPng: {
-      title: "Konversi SVG ke PNG",
-      description: "Konversi file SVG vektor ke gambar PNG raster",
-      metaTitle: "Konversi SVG ke PNG | Alat Gambar",
-      metaDescription: "Konversi grafis vektor SVG ke gambar PNG raster dengan dimensi kustom",
-      metaKeywords: "SVG ke PNG, vektor ke raster, konversi gambar, desain grafis"
-    },
-    pngToBase64: {
-      title: "Konversi PNG ke Base64",
-      description: "Konversi gambar PNG ke pengkodean Base64 untuk penyematan di halaman web",
-      metaTitle: "Konversi PNG ke Base64 | Alat Gambar",
-      metaDescription: "Konversi gambar PNG ke string Base64 untuk penyematan web",
-      metaKeywords: "PNG ke Base64, pengkodean gambar, pengembangan web, penyematan gambar"
-    },
-    base64ToPng: {
-      title: "Konversi Base64 ke PNG",
-      description: "Konversi string gambar yang dikodekan Base64 kembali ke file PNG",
-      metaTitle: "Konversi Base64 ke PNG | Alat Gambar",
-      metaDescription: "Konversi string gambar Base64 kembali ke file gambar PNG",
-      metaKeywords: "Base64 ke PNG, dekode gambar, pengembangan web, konversi gambar"
-    },
-    changeColors: {
-      title: "Ubah Warna di PNG",
-      description: "Ganti warna tertentu di gambar PNG dengan warna baru",
-      metaTitle: "Ubah Warna di PNG | Alat Gambar",
-      metaDescription: "Ganti warna tertentu di gambar PNG dengan warna baru dengan mudah",
-      metaKeywords: "ubah warna gambar, penggantian warna, pengeditan PNG, pengubah warna gambar, tukar warna"
-    },
-    changeTone: {
-      title: "Ubah Nada Warna",
-      description: "Terapkan nada dan rona warna pada gambar Anda untuk efek artistik",
-      metaTitle: "Ubah Nada Warna PNG | Alat Gambar",
-      metaDescription: "Terapkan nada dan rona warna pada gambar PNG Anda untuk efek artistik",
-      metaKeywords: "nada warna, pewarnaan gambar, efek artistik, lapisan warna, filter foto"
-    },
-    addNoise: {
-      title: "Tambahkan Noise ke PNG",
-      description: "Tambahkan efek butiran film atau noise ke gambar PNG Anda untuk gaya artistik",
-      metaTitle: "Tambahkan Noise ke PNG | Alat Gambar",
-      metaDescription: "Tambahkan efek butiran film atau noise ke gambar PNG Anda untuk gaya artistik",
-      metaKeywords: "tambahkan noise, butiran film, tekstur gambar, filter artistik, efek foto vintage"
-    },
-    resize: {
-      title: "Ubah Ukuran Gambar",
-      description: "Ubah ukuran gambar ke dimensi yang tepat sambil mempertahankan kualitas",
-      metaTitle: "Ubah Ukuran Gambar | Alat Gambar",
-      metaDescription: "Ubah ukuran gambar Anda dengan mudah ke dimensi yang tepat sambil mempertahankan kualitas",
-      metaKeywords: "ubah ukuran gambar, ubah besar gambar, skala gambar, dimensi gambar, pengubahan ukuran gambar"
-    },
-    rotate: {
-      title: "Putar & Balik",
-      description: "Putar dan balik gambar untuk orientasi yang benar",
-      metaTitle: "Putar & Balik Gambar | Alat Gambar",
-      metaDescription: "Putar gambar dengan mudah ke sudut mana pun dan balik secara horizontal atau vertikal",
-      metaKeywords: "putar gambar, balik gambar, orientasi gambar, putar gambar, balik vertikal"
-    },
-    crop: {
-      title: "Pangkas Gambar",
-      description: "Pangkas gambar untuk menghapus area yang tidak diinginkan dan fokus pada konten penting",
-      metaTitle: "Pangkas Gambar | Alat Gambar",
-      metaDescription: "Pangkas gambar untuk menghapus area yang tidak diinginkan dan meningkatkan komposisi",
-      metaKeywords: "pangkas gambar, pemangkasan gambar, hapus latar belakang, komposisi gambar"
-    },
-    addText: {
-      title: "Tambahkan Teks ke Gambar",
-      description: "Tambahkan teks kustom, keterangan, atau watermark ke gambar Anda",
-      metaTitle: "Tambahkan Teks ke Gambar | Alat Gambar",
-      metaDescription: "Tambahkan teks kustom, keterangan, dan watermark ke gambar Anda dengan opsi pemformatan mudah",
-      metaKeywords: "tambahkan teks ke gambar, keterangan gambar, watermark, lapisan teks, anotasi gambar"
-    },
-    addBorder: {
-      title: "Tambahkan Bingkai",
-      description: "Tambahkan bingkai kustom ke gambar Anda dengan berbagai gaya dan warna",
-      metaTitle: "Tambahkan Bingkai ke Gambar | Alat Gambar",
-      metaDescription: "Tingkatkan gambar Anda dengan bingkai kustom, frame, dan efek",
-      metaKeywords: "tambahkan bingkai gambar, frame foto, pembingkaian gambar, gaya bingkai, peningkatan gambar"
-    },
-    addWatermark: {
-      title: "Tambahkan Watermark",
-      description: "Tambahkan watermark teks atau gambar untuk melindungi foto Anda",
-      metaTitle: "Tambahkan Watermark ke Gambar | Alat Gambar",
-      metaDescription: "Tambahkan watermark teks atau gambar untuk melindungi dan memberi merek pada gambar Anda",
-      metaKeywords: "tambahkan watermark, perlindungan gambar, branding, hak cipta, keamanan gambar"
     }
   },
   repairPdf: {
@@ -2272,9 +2237,7 @@ export default {
     }
   },
   pricing: {
-    // Metadata
-    metaTitle: "Paket Harga - ScanPro",
-    metaDescription: "Pilih paket yang tepat untuk kebutuhan PDF Anda. ScanPro menawarkan opsi harga fleksibel dari gratis hingga enterprise, dengan fitur yang Anda butuhkan.",
+    description: "Pilih paket yang tepat untuk kebutuhan PDF Anda. ScanPro menawarkan opsi harga fleksibel dari gratis hingga enterprise, dengan fitur yang Anda butuhkan.",
 
     // Page content
     title: "Harga sederhana dan transparan",

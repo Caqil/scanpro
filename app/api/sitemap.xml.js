@@ -15,12 +15,12 @@ export default async function handler(req, res) {
         // List of all pages
         const pages = [
             { url: '/', changefreq: 'weekly', priority: 1.0 },
-            { url: '/tools', changefreq: 'weekly', priority: 0.9 },
+            { url: '/pdf-tools', changefreq: 'weekly', priority: 0.9 },
             // Core tools
             { url: '/merge-pdf', changefreq: 'monthly', priority: 0.8 },
             { url: '/split-pdf', changefreq: 'monthly', priority: 0.8 },
             { url: '/compress-pdf', changefreq: 'monthly', priority: 0.8 },
-            { url: '/watermark', changefreq: 'monthly', priority: 0.7 },
+            { url: '/watermark-pdf', changefreq: 'monthly', priority: 0.7 },
             { url: '/ocr', changefreq: 'monthly', priority: 0.8 },
             // Conversion tools - PDF to other formats
             { url: '/convert/pdf-to-docx', changefreq: 'monthly', priority: 0.8 },

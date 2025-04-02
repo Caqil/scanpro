@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
     // Define the core routes that should be present for all languages
     const coreRoutes = [
       { url: '/', changefreq: 'weekly', priority: 1.0 },
-      { url: '/tools', changefreq: 'weekly', priority: 0.9 },
+      { url:  '/pdf-tools', changefreq: 'weekly', priority: 0.9 },
       
       // Conversion tools
       { url: '/convert/pdf-to-docx', changefreq: 'monthly', priority: 0.8 },
@@ -41,8 +41,9 @@ export async function GET(req: NextRequest) {
       { url: '/split-pdf', changefreq: 'monthly', priority: 0.8 },
       { url: '/compress-pdf', changefreq: 'monthly', priority: 0.8 },
       { url: '/compress-file', changefreq: 'monthly', priority: 0.8 },
-      { url: '/rotate', changefreq: 'monthly', priority: 0.7 },
-      { url: '/watermark', changefreq: 'monthly', priority: 0.7 },
+      { url: '/rotate', changefreq: 'monthly', priority: 0.8 },
+      { url: '/watermark-pdf', changefreq: 'monthly', priority: 0.8 },
+      { url: '/repair-pdf', changefreq: 'monthly', priority: 0.8 },
       { url: '/ocr', changefreq: 'monthly', priority: 0.8 },
       
       // Security tools

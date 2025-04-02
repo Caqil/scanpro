@@ -894,7 +894,64 @@ export default {
             enhanceScannedHint: "预处理图像以提高OCR准确性（推荐用于扫描文档）",
             preserveLayout: "保留布局",
             preserveLayoutHint: "尝试保持原始布局，包括段落和换行"
-        }
+        },
+        // Upload area
+        uploadPdf: "上传PDF以提取文本",
+        dragDrop: "将您的PDF文件拖放到此处，或点击浏览",
+        selectPdf: "选择PDF文件",
+        uploading: "上传中...",
+        maxFileSize: "最大文件大小：50MB",
+
+        // File handling
+        invalidFile: "无效文件类型",
+        invalidFileDesc: "请选择一个PDF文件",
+        fileTooLarge: "文件太大",
+        fileTooLargeDesc: "最大文件大小为50MB",
+        noFile: "未选择文件",
+        noFileDesc: "请选择要处理的PDF文件",
+        changeFile: "更改文件",
+
+        // Options
+        languageLabel: "文档语言",
+        selectLanguage: "选择语言",
+        pageRange: "页面范围",
+        allPages: "所有页面",
+        specificPages: "特定页面",
+        pageRangeExample: "例如，1-3，5，7-9",
+        pageRangeInfo: "输入单独页面或用逗号分隔的范围",
+        preserveLayout: "保留布局",
+        preserveLayoutDesc: "尝试保持文档结构和格式",
+
+        // Processing
+        extractText: "提取文本",
+        extractingText: "正在提取文本...",
+        processingPdf: "正在处理您的PDF",
+        processingInfo: "根据文件大小和复杂性，这可能需要几分钟",
+        analyzing: "分析文档",
+        preprocessing: "预处理页面",
+        recognizing: "识别文本",
+        extracting: "提取内容",
+        finalizing: "完成结果",
+        finishing: "结束中",
+
+        // Results
+        extractionComplete: "文本提取完成",
+        extractionCompleteDesc: "您的文本已成功从PDF中提取",
+        extractionError: "文本提取失败",
+        extractionFailed: "无法提取文本",
+        unknownError: "发生未知错误",
+        textCopied: "文本已复制到剪贴板",
+        copyFailed: "文本复制失败",
+        textPreview: "文本预览",
+        rawText: "原始文本",
+        extractedText: "提取的文本",
+        previewDesc: "带格式的提取文本预览",
+        rawTextOutput: "原始文本输出",
+        rawTextDesc: "无格式的纯文本",
+        noTextFound: "文档中未找到文本",
+        copyText: "复制文本",
+        downloadText: "下载文本",
+        processAnother: "处理另一个PDF"
     },
 
     // 保护PDF页面
@@ -1483,18 +1540,63 @@ export default {
     },
     // 关于页面
     about: {
-        title: "关于ScanPro",
-        mission: {
-            title: "我们的使命",
-            description: "我们相信让每个人都能轻松管理PDF。我们的在线工具帮助您快速轻松地处理PDF，无需安装软件。"
+        hero: {
+            title: "赋能数字文档管理",
+            description: "ScanPro源于一个简单的想法：让文档管理变得无缝、高效且人人可及。我们相信可以改变人们与数字文档互动的方式。"
+        },
+        story: {
+            title: "我们的故事",
+            paragraph1: "ScanPro成立于2022年，起源于处理复杂且不直观的PDF工具所带来的挫折感。我们的创始人——技术爱好者和文档管理专家——看到了创造一个既强大又用户友好的解决方案的机会。",
+            paragraph2: "最初作为一个小项目起步，很快就发展成为一个综合平台，为全球数千名用户提供服务，从学生和专业人士到大型企业。"
+        },
+        missionValues: {
+            title: "我们的使命与价值观",
+            mission: {
+                title: "使命",
+                description: "通过提供直观、强大且易于获取的PDF工具，简化数字文档管理，提升生产力和创造力。"
+            },
+            customerFirst: {
+                title: "客户至上",
+                description: "我们优先考虑用户体验，并根据真实用户反馈不断改进我们的工具。您的需求推动我们的创新。"
+            },
+            privacy: {
+                title: "隐私与安全",
+                description: "我们致力于通过最先进的安全措施和对您隐私的绝对尊重来保护您的数据。"
+            }
+        },
+        coreValues: {
+            title: "我们的核心价值观",
+            innovation: {
+                title: "创新",
+                description: "我们不断推动文档管理中可能性的边界。"
+            },
+            collaboration: {
+                title: "协作",
+                description: "我们相信公司内部以及与用户之间的团队合作力量。"
+            },
+            accessibility: {
+                title: "可访问性",
+                description: "我们的工具设计得简单、直观且对所有人开放。"
+            }
         },
         team: {
-            title: "我们的团队",
-            description: "我们是一支致力于创建简单但强大的PDF工具的开发者和设计师团队。"
-        },
-        technology: {
-            title: "我们的技术",
-            description: "我们的平台使用尖端技术，提供高质量的PDF转换、编辑和安全性，同时确保您的数据安全。"
+            title: "认识我们的团队",
+            description: "ScanPro由一个专注为用户打造最佳PDF工具的小型且敬业团队驱动。",
+            member1: {
+                name: "查克拉",
+                role: "应用开发负责人",
+                bio: "负责监督我们应用的开发，实施稳健的后端解决方案，确保我们的工具运行顺畅高效。"
+            },
+            member2: {
+                name: "阿布迪",
+                role: "前端网页开发者",
+                bio: "创建使我们的工具直观且易于访问的用户界面，专注于在所有网页平台上提供卓越的用户体验。"
+            },
+            member3: {
+                name: "安吉",
+                role: "营销专家",
+                bio: "领导我们的营销工作，将工具与需要它们的人连接起来，提升知名度并推动平台增长。"
+            }
         }
     },
     // 条款和隐私页面
@@ -1573,143 +1675,6 @@ export default {
                 question: "有文件大小限制吗？",
                 answer: "是的，您可以压缩每个文件高达100MB。"
             }
-        }
-    },
-    imageTools: {
-        title: "图像工具",
-        description: "用于转换、编辑和变换您的图像的免费在线工具",
-        categories: {
-            conversion: "格式转换",
-            editing: "图像编辑",
-            enhancement: "图像增强",
-            optimization: "优化",
-            advanced: "高级工具"
-        },
-        compressPng: {
-            title: "压缩PNG",
-            description: "在保持质量的同时减小PNG文件大小",
-            metaTitle: "压缩PNG图像 | 图像工具",
-            metaDescription: "在保持质量的同时减小PNG文件大小，以加快网站加载速度和高效存储",
-            metaKeywords: "压缩PNG，减小图像大小，优化图像，图像压缩，无损压缩，文件大小减小"
-        },
-        makeTransparent: {
-            title: "使PNG透明",
-            description: "将PNG文件中的任何颜色替换为透明",
-            metaTitle: "使PNG透明 | 图像工具",
-            metaDescription: "快速将PNG文件中的任何颜色替换为透明",
-            metaKeywords: "移除背景，透明PNG，颜色替换，图像编辑，背景移除，透明图像"
-        },
-        pngToJpg: {
-            title: "将PNG转换为JPG",
-            description: "使用可自定义的质量设置将PNG图像转换为JPG格式",
-            metaTitle: "将PNG转换为JPG | 图像工具",
-            metaDescription: "使用可调整的质量将PNG图像转换为JPG格式",
-            metaKeywords: "PNG转JPG，图像转换，图像格式，有损压缩，图像质量"
-        },
-        jpgToPng: {
-            title: "将JPG转换为PNG",
-            description: "支持透明度将JPG图像转换为PNG格式",
-            metaTitle: "将JPG转换为PNG | 图像工具",
-            metaDescription: "以无损质量将JPG图像转换为PNG格式",
-            metaKeywords: "JPG转PNG，图像转换，透明度，无损格式，图像质量"
-        },
-        pngToWebp: {
-            title: "将PNG转换为WebP",
-            description: "将PNG图像转换为WebP格式以提升网页性能",
-            metaTitle: "将PNG转换为WebP | 图像工具",
-            metaDescription: "将PNG图像转换为WebP格式以减小文件大小",
-            metaKeywords: "PNG转WebP，图像转换，网页优化，图像压缩"
-        },
-        webpToPng: {
-            title: "将WebP转换为PNG",
-            description: "将WebP图像转换为PNG格式以提高兼容性",
-            metaTitle: "将WebP转换为PNG | 图像工具",
-            metaDescription: "以完全兼容性将WebP图像转换为PNG格式",
-            metaKeywords: "WebP转PNG，图像转换，图像格式，兼容性"
-        },
-        svgToPng: {
-            title: "将SVG转换为PNG",
-            description: "将矢量SVG文件转换为光栅PNG图像",
-            metaTitle: "将SVG转换为PNG | 图像工具",
-            metaDescription: "将矢量SVG图形转换为具有自定义尺寸的光栅PNG图像",
-            metaKeywords: "SVG转PNG，矢量转光栅，图像转换，图形设计"
-        },
-        pngToBase64: {
-            title: "将PNG转换为Base64",
-            description: "将PNG图像转换为Base64编码以嵌入网页",
-            metaTitle: "将PNG转换为Base64 | 图像工具",
-            metaDescription: "将PNG图像转换为Base64字符串以用于网页嵌入",
-            metaKeywords: "PNG转Base64，图像编码，网页开发，图像嵌入"
-        },
-        base64ToPng: {
-            title: "将Base64转换为PNG",
-            description: "将Base64编码的图像字符串转换回PNG文件",
-            metaTitle: "将Base64转换为PNG | 图像工具",
-            metaDescription: "将Base64图像字符串转换回PNG图像文件",
-            metaKeywords: "Base64转PNG，图像解码，网页开发，图像转换"
-        },
-        changeColors: {
-            title: "更改PNG中的颜色",
-            description: "将PNG图像中的特定颜色替换为新颜色",
-            metaTitle: "更改PNG中的颜色 | 图像工具",
-            metaDescription: "轻松将PNG图像中的特定颜色替换为新颜色",
-            metaKeywords: "更改图像颜色，颜色替换，PNG编辑，图像颜色更换，颜色交换"
-        },
-        changeTone: {
-            title: "更改色调",
-            description: "为艺术效果将色调和色彩应用到您的图像",
-            metaTitle: "更改PNG色调 | 图像工具",
-            metaDescription: "为艺术效果将色调和色彩应用到您的PNG图像",
-            metaKeywords: "色调，图像调色，艺术效果，颜色叠加，照片滤镜"
-        },
-        addNoise: {
-            title: "为PNG添加噪点",
-            description: "为艺术风格将胶片颗粒或噪点效果添加到您的PNG图像",
-            metaTitle: "为PNG添加噪点 | 图像工具",
-            metaDescription: "为艺术风格将胶片颗粒或噪点效果添加到您的PNG图像",
-            metaKeywords: "添加噪点，胶片颗粒，图像纹理，艺术滤镜，复古照片效果"
-        },
-        resize: {
-            title: "调整图像大小",
-            description: "在保持质量的同时将图像调整为精确尺寸",
-            metaTitle: "调整图像大小 | 图像工具",
-            metaDescription: "在保持质量的同时轻松将图像调整为精确尺寸",
-            metaKeywords: "调整图像大小，更改图像尺寸，缩放图像，图像尺寸，图像大小调整"
-        },
-        rotate: {
-            title: "旋转与翻转",
-            description: "旋转和翻转图像以获得正确方向",
-            metaTitle: "旋转与翻转图像 | 图像工具",
-            metaDescription: "轻松将图像旋转到任意角度并水平或垂直翻转",
-            metaKeywords: "旋转图像，翻转图像，图像方向，转动图像，垂直翻转"
-        },
-        crop: {
-            title: "裁剪图像",
-            description: "裁剪图像以移除不需要的区域并专注于重要内容",
-            metaTitle: "裁剪图像 | 图像工具",
-            metaDescription: "裁剪图像以移除不需要的区域并改善构图",
-            metaKeywords: "裁剪图像，图像修剪，移除背景，图像构图"
-        },
-        addText: {
-            title: "为图像添加文本",
-            description: "为您的图像添加自定义文本、字幕或水印",
-            metaTitle: "为图像添加文本 | 图像工具",
-            metaDescription: "使用简单的格式选项为您的图像添加自定义文本、字幕和水印",
-            metaKeywords: "为图像添加文本，图像字幕，水印，文本叠加，图像注释"
-        },
-        addBorder: {
-            title: "添加边框",
-            description: "使用各种样式和颜色为您的图像添加自定义边框",
-            metaTitle: "为图像添加边框 | 图像工具",
-            metaDescription: "使用自定义边框、框架和效果增强您的图像",
-            metaKeywords: "添加图像边框，照片框架，图像框架，边框样式，图像增强"
-        },
-        addWatermark: {
-            title: "添加水印",
-            description: "为保护您的照片添加文本或图像水印",
-            metaTitle: "为图像添加水印 | 图像工具",
-            metaDescription: "为保护和品牌化您的图像添加文本或图像水印",
-            metaKeywords: "添加水印，图像保护，品牌化，版权，图像安全"
         }
     },
     repairPdf: {
@@ -2269,9 +2234,7 @@ export default {
         }
     },
     pricing: {
-        // Metadata
-        metaTitle: "定价计划 - ScanPro",
-        metaDescription: "选择适合您PDF需求的计划。ScanPro提供从免费到企业的灵活定价选项，包含您所需的功能。",
+        description: "选择适合您PDF需求的计划。ScanPro提供从免费到企业的灵活定价选项，包含您所需的功能。",
 
         // Page content
         title: "简单透明的定价",

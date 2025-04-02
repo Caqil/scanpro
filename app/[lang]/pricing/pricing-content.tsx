@@ -604,7 +604,7 @@ export function PricingContent() {
           <Button size="lg" onClick={() => handleSubscribe("basic")}>
             {t("pricing.cta.startBasic") || "Start with Basic"}
           </Button>
-          <LanguageLink href="/tools">
+          <LanguageLink href="/pdf-tools">
             <Button variant="outline" size="lg">
               {t("pricing.cta.explorePdfTools") || "Explore PDF Tools"}
             </Button>

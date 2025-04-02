@@ -299,7 +299,7 @@ export function ClientConversionContent() {
           ))}
         </div>
         <div className="text-center mt-6">
-          <LanguageLink href="/tools">
+          <LanguageLink href="/pdf-tools">
             <Button variant="outline">{t('popular.viewAll')}</Button>
           </LanguageLink>
         </div>

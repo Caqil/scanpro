@@ -87,14 +87,6 @@ export function CompressionFaqSection() {
     {
       question: t('universalCompressor.faq.sizeLimit.question'),
       answer: t('universalCompressor.faq.sizeLimit.answer')
-    },
-    {
-      question: t('compressPdf.faq.fileStorage.question') || "How long are my files stored on your servers?",
-      answer: t('compressPdf.faq.fileStorage.answer') || "All uploaded and compressed files are automatically deleted after 24 hours for your privacy and security. We recommend downloading your compressed files promptly."
-    },
-    {
-      question: t('compressPdf.faq.free.question') || "Is this service free to use?",
-      answer: t('compressPdf.faq.free.answer') || "Yes, our basic compression service is completely free. Premium features such as higher file size limits, batch processing, and additional format support are available with a subscription."
     }
   ];
 
@@ -167,7 +159,7 @@ export function RelatedToolsSection() {
         ))}
       </div>
       <div className="text-center mt-6">
-        <LanguageLink href="/tools">
+        <LanguageLink href="/pdf-tools">
           <Button variant="outline">{t('popular.viewAll')}</Button>
         </LanguageLink>
       </div>

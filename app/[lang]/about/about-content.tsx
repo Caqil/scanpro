@@ -239,7 +239,7 @@ export default function AboutPageContent() {
           transform your document management experience.
         </p>
         <div className="flex justify-center gap-4">
-          <LanguageLink href="/tools">
+          <LanguageLink href="/pdf-tools">
             <Button variant="default" size="lg">
               Explore Our Tools
             </Button>
