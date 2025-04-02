@@ -1,3 +1,4 @@
+// components/auth/register-form.tsx (updated)
 "use client";
 
 import { useState, useEffect } from "react";
@@ -8,8 +9,8 @@ import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
-import { AlertCircle, Check, Eye, EyeOff, Info } from "lucide-react";
-import { FaGoogle, FaGithub } from "react-icons/fa";
+import { AlertCircle, Check, Eye, EyeOff, Info, Mail } from "lucide-react";
+import { FaGoogle, FaGithub, FaApple } from "react-icons/fa";
 import { signIn } from "next-auth/react";
 import { useLanguageStore } from "@/src/store/store";
 import { toast } from "sonner";
@@ -41,6 +42,7 @@ export function RegisterForm() {
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [confirmPasswordError, setConfirmPasswordError] = useState<string | null>(null);
   const [nameError, setNameError] = useState<string | null>(null);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
   
   // Calculate password strength
   useEffect(() => {
@@ -169,27 +171,15 @@ export function RegisterForm() {
         throw new Error(data.error || t('auth.registrationFailed') || 'Registration failed');
       }
       
-      // Show success toast
-      toast.success(t('auth.accountCreated') || "Account created successfully");
+      // Show success message instead of immediately signing in
+      setRegistrationSuccess(true);
       
-      // Sign in the user after successful registration
-      const signInResult = await signIn('credentials', {
-        redirect: false,
-        email,
-        password
+      toast.success(t('auth.accountCreated') || "Account created successfully", {
+        description: t('auth.verificationEmailSent') || "Please check your email to verify your account."
       });
       
-      if (signInResult?.error) {
-        throw new Error(signInResult.error);
-      }
-      
-      // Redirect to dashboard or callback URL
-      const redirectUrl = `/en/dashboard`;
-      router.push(redirectUrl);
-      router.refresh();
     } catch (error) {
       setError(error instanceof Error ? error.message : t('auth.unknownError') || 'An error occurred');
-    } finally {
       setLoading(false);
     }
   };
@@ -200,6 +190,59 @@ export function RegisterForm() {
   };
   
   const strengthData = getStrengthData();
+  
+  // Show registration success message
+  if (registrationSuccess) {
+    return (
+      <div className="space-y-6">
+        <Alert className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800">
+          <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
+          <AlertDescription className="text-green-700 dark:text-green-300">
+            {t('auth.accountCreated') || "Account created successfully!"}
+          </AlertDescription>
+        </Alert>
+        
+        <div className="bg-muted/20 p-6 rounded-lg border">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+              <Mail className="h-6 w-6" />
+            </div>
+            <div>
+              <h3 className="font-medium text-lg">{t('auth.verifyYourEmail') || "Verify Your Email"}</h3>
+              <p className="text-muted-foreground">{t('auth.checkYourInbox') || "Check your inbox to complete registration"}</p>
+            </div>
+          </div>
+          
+          <p className="mb-4">
+            {t('auth.verificationEmailSentTo') || "We've sent a verification email to"} <strong>{email}</strong>.
+            {t('auth.pleaseClickLink') || " Please click the link in the email to verify your account."}
+          </p>
+          
+          <p className="text-sm text-muted-foreground mb-4">
+            {t('auth.didntReceiveEmail') || "Didn't receive the email?"} {t('auth.checkSpamFolder') || "Check your spam folder or"}{" "}
+            <button 
+              onClick={() => setRegistrationSuccess(false)} 
+              className="text-primary underline underline-offset-4 font-medium hover:text-primary/90"
+            >
+              {t('auth.tryAgain') || "try again"}
+            </button>.
+          </p>
+          
+          <div className="flex justify-between items-center border-t pt-4 mt-2">
+            <p className="text-sm text-muted-foreground">
+              {t('auth.alreadyVerified') || "Already verified?"}
+            </p>
+            <LanguageLink href="/login">
+              <Button>
+                {t('auth.signIn') || "Sign In"}
+              </Button>
+            </LanguageLink>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
   return (
     <div className="space-y-6">
       {error && (
@@ -223,12 +266,12 @@ export function RegisterForm() {
         
         <Button 
           variant="outline" 
-          onClick={() => handleOAuthSignIn("github")} 
+          onClick={() => handleOAuthSignIn("apple")} 
           className="flex-1 relative overflow-hidden group"
           disabled={loading}
         >
-          <FaGithub className="w-4 h-4 mr-2" />
-          <span>GitHub</span>
+          <FaApple className="w-4 h-4 mr-2" />
+          <span>Apple</span>
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
         </Button>
       </div>
@@ -404,6 +447,15 @@ export function RegisterForm() {
           </label>
         </div>
         
+        <div className="pt-2">
+          <Alert variant="default" className="bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
+            <Info className="h-4 w-4 text-blue-500" />
+            <AlertDescription className="text-blue-700 dark:text-blue-300 text-sm">
+              {t('auth.emailVerificationRequired') || "Email verification is required to complete your registration. We'll send you a verification link when you sign up."}
+            </AlertDescription>
+          </Alert>
+        </div>
+        
         <Button
           type="submit"
           className="w-full mt-2"
@@ -423,7 +475,7 @@ export function RegisterForm() {
       <div className="text-center text-sm">
         {t('auth.alreadyHaveAccount') || "Already have an account?"}{" "}
         <LanguageLink href={`/login`} className="text-primary font-medium hover:underline">
-          {t('auth.signIn') || "Sign in"}
+          {t('auth.signIn') || "Sign In"}
         </LanguageLink>
       </div>
     </div>

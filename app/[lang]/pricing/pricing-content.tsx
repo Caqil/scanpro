@@ -177,10 +177,10 @@ export function PricingContent() {
       <div className="md:hidden mx-auto max-w-md space-y-6 mb-12">
         <Tabs defaultValue="free" className="w-full">
           <TabsList className="grid grid-cols-4 mb-6">
-            <TabsTrigger value="free">{t('pricing.planDescriptions.free').split(' ')[0]}</TabsTrigger>
-            <TabsTrigger value="basic">{t('pricing.planDescriptions.basic').split(' ')[0]}</TabsTrigger>
-            <TabsTrigger value="pro">{t('pricing.planDescriptions.pro').split(' ')[0]}</TabsTrigger>
-            <TabsTrigger value="enterprise">{t('pricing.planDescriptions.enterprise').split(' ')[0]}</TabsTrigger>
+            <TabsTrigger value="free">Free</TabsTrigger>
+            <TabsTrigger value="basic">Basic</TabsTrigger>
+            <TabsTrigger value="pro">Pro</TabsTrigger>
+            <TabsTrigger value="enterprise">Enterprise</TabsTrigger>
           </TabsList>
 
           {/* Free Plan Tab */}

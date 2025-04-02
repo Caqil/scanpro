@@ -99,20 +99,23 @@ function isWebUIRequest(request: NextRequest): boolean {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  if (request.nextUrl.pathname === '/api/auth/callback/apple') {
-    // Get all cookies from the request
-    const requestCookies = request.cookies.getAll()
+  if (pathname.startsWith('/api/auth/callback/apple')) {
+    // Create a response object that preserves the request
+    const response = NextResponse.next();
 
-    // Create a response that will pass through to the next middleware/handler
-    const response = NextResponse.next()
+    // Get all cookies from the request and ensure they're preserved
+    const cookies = request.cookies.getAll();
+    cookies.forEach(cookie => {
+      // This is critical - we need to preserve all cookies including PKCE cookies
+      response.cookies.set(cookie.name, cookie.value, {
+        ...cookie,
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production'
+      });
+    });
 
-    // Preserve all cookies in the response
-    requestCookies.forEach(cookie => {
-      // Ensure cookies like PKCE code_verifier and state are preserved
-      response.cookies.set(cookie.name, cookie.value, cookie)
-    })
-
-    return response
+    console.log('Preserving cookies for Apple callback:', cookies.map(c => c.name));
+    return response;
   }
   for (const excludedRoute of EXCLUDED_ROUTES) {
     if (pathname.startsWith(excludedRoute)) {
@@ -151,9 +154,9 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    "/api/auth/callback/:path*",
     "/dashboard/:path*",
     "/api/:path*",
-    "/api/auth/callback/:provider*"
     // Exclude authentication-related paths
     // Don't include /login or /api/auth/:path* here
   ],

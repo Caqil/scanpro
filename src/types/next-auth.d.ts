@@ -1,34 +1,22 @@
-import "next-auth"
-import { DefaultSession, DefaultUser } from "next-auth"
-import { JWT as DefaultJWT } from "next-auth/jwt"
+// types/next-auth.d.ts
+import { DefaultSession } from "next-auth";
 
-// Extend the built-in session types
 declare module "next-auth" {
-  /**
-   * Extend the User interface with your custom fields
-   */
-  interface User extends DefaultUser {
-    role?: string
-  }
-
-  /**
-   * Extend the Session interface
-   */
   interface Session {
     user: {
-      id: string
-      role: string
-      name?: string | null
-      email?: string | null
-      image?: string | null
-    } & DefaultSession["user"]
+      id: string;
+      isEmailVerified: boolean;
+    } & DefaultSession["user"];
+  }
+  
+  interface User {
+    isEmailVerified: boolean;
   }
 }
 
-// Extend the JWT type
 declare module "next-auth/jwt" {
-  interface JWT extends DefaultJWT {
-    id: string
-    role?: string
+  interface JWT {
+    id: string;
+    isEmailVerified: boolean;
   }
 }

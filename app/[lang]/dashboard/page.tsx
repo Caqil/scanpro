@@ -22,13 +22,14 @@ export default async function DashboardPage() {
     redirect("/en/login?callbackUrl=/dashboard");
   }
 
-  // Get user data with subscription info
+  // Get user data with subscription info and include isEmailVerified field
+  // Using only 'include' instead of both 'include' and 'select'
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },
     include: {
       subscription: true,
       apiKeys: true,
-    },
+    }
   });
 
   if (!user) {

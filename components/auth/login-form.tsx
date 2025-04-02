@@ -172,7 +172,7 @@ export function LoginForm({ callbackUrl = "/en/dashboard" }: LoginFormProps) {
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
         </Button>
 
-        <Button 
+        {/* <Button 
           variant="outline" 
           onClick={() => handleOAuthSignIn("apple")} 
           className="flex-1 relative overflow-hidden group h-11 transition-all"
@@ -181,7 +181,7 @@ export function LoginForm({ callbackUrl = "/en/dashboard" }: LoginFormProps) {
           <FaApple className="w-4 h-4 mr-2" />
           <span>Apple</span>
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
-        </Button>
+        </Button> */}
       </div>
 
       <div className="relative">

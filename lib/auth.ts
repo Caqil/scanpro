@@ -1,183 +1,110 @@
-import type { NextAuthOptions } from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
-import GoogleProvider from "next-auth/providers/google"
-import AppleProvider from "next-auth/providers/apple"
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { prisma } from "@/lib/prisma"
-import bcrypt from "bcryptjs"
+// lib/auth.ts
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
+import AppleProvider from "next-auth/providers/apple";
+import bcrypt from "bcryptjs";
+import { prisma } from "./prisma";
 
-// Instead of dynamically generating the client secret, use a static value
-// This is because NextAuth.js initializes providers at build time
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
-
-  // Configure JWT
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-
-  // Configure providers
+  pages: {
+    signIn: "/login",
+    error: "/login",
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
       allowDangerousEmailAccountLinking: true,
     }),
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID || "",
+      clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
+      allowDangerousEmailAccountLinking: true,
+    }),
     AppleProvider({
       clientId: process.env.APPLE_CLIENT_ID || "",
-      clientSecret: process.env.APPLE_CLIENT_SECRET || "", // Use a pre-generated client secret
-      authorization: {
-        params: {
-          scope: "name email",
-          response_mode: "form_post",
-        },
-      },
+      clientSecret: process.env.APPLE_CLIENT_SECRET || "",
+      allowDangerousEmailAccountLinking: true,
     }),
     CredentialsProvider({
-      name: "Credentials",
+      name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          return null
+          return null;
         }
 
-        // Find user in database
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
-          include: {
-            subscription: true,
+          where: {
+            email: credentials.email,
           },
-        })
+        });
 
-        // Check if user exists and password is correct
         if (!user || !user.password) {
-          return null
+          return null;
         }
 
-        const isPasswordValid = await bcrypt.compare(credentials.password, user.password)
+        const passwordMatch = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
 
-        if (!isPasswordValid) {
-          return null
+        if (!passwordMatch) {
+          return null;
         }
 
-        // Return user object without sensitive information
         return {
           id: user.id,
           name: user.name,
           email: user.email,
-          role: user.role,
-          subscription: user.subscription,
           image: user.image,
-        }
+          isEmailVerified: user.isEmailVerified,
+        };
       },
     }),
   ],
-  // Callbacks
   callbacks: {
-    async jwt({ token, user, account }) {
-      // Initial sign in
-      if (user) {
-        token.id = user.id
-        token.role = user.role || "user"
-      }
-
-      // If user data changes, update token
-      if (user && account) {
-        const updatedUser = await prisma.user.findUnique({
-          where: { id: user.id },
-          include: { subscription: true },
-        })
-
-        if (updatedUser) {
-          token.name = updatedUser.name
-          token.email = updatedUser.email
-          token.picture = updatedUser.image
-          token.role = updatedUser.role
-          token.subscription = updatedUser.subscription
-        }
-      }
-
-      return token
-    },
-
     async session({ session, token }) {
-      if (token && session.user) {
-        session.user.id = token.id as string
-        session.user.role = token.role as string
+      if (token) {
+        session.user.id = token.id;
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.image = token.picture;
+        session.user.isEmailVerified = token.isEmailVerified;
+      }
+      return session;
+    },
+    async jwt({ token, user }) {
+      const dbUser = await prisma.user.findFirst({
+        where: {
+          email: token.email,
+        },
+      });
+
+      if (!dbUser) {
+        if (user) {
+          token.id = user.id;
+        }
+        return token;
       }
 
-      return session
-    },
-
-    async redirect({ url, baseUrl }) {
-      // Handle callback URL correctly
-      // Make sure URL is a relative path or from allowed domain
-      if (url.startsWith("/")) {
-        return `${baseUrl}${url}`
-      } else if (new URL(url).origin === baseUrl) {
-        return url
-      }
-      return baseUrl
+      return {
+        id: dbUser.id,
+        name: dbUser.name,
+        email: dbUser.email,
+        picture: dbUser.image,
+        isEmailVerified: dbUser.isEmailVerified,
+      };
     },
   },
-
-  // Pages
-  pages: {
-    signIn: "/en/login",
-    signOut: "/en/logout",
-    error: "/en/login?error=true",
-  },
-
-  // Debug mode in development
-  debug: process.env.NODE_ENV === "development",
-
-  // Secret for JWT encryption
-  secret: process.env.NEXTAUTH_SECRET,
-
-  // Add cookie options to ensure cookies are properly set
-  cookies: {
-    sessionToken: {
-      name: `next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: process.env.NODE_ENV === "production",
-      },
-    },
-    callbackUrl: {
-      name: `next-auth.callback-url`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: process.env.NODE_ENV === "production",
-      },
-    },
-    pkceCodeVerifier: {
-      name: "next-auth.pkce.code_verifier",
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 900, // 15 minutes in seconds
-      },
-    },
-    state: {
-      name: "next-auth.state",
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 900, // 15 minutes in seconds
-      },
-    },
-  },
-}
-
+};

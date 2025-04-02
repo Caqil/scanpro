@@ -1,6 +1,6 @@
 // lib/email.ts
 import nodemailer from 'nodemailer';
-
+import { passwordResetTemplate, passwordResetSuccessTemplate, welcomeTemplate } from './email-templates';
 interface EmailOptions {
   to: string;
   subject: string;
@@ -23,7 +23,7 @@ export const createTransporter = () => {
 // Send email function
 export const sendEmail = async ({ to, subject, html, text }: EmailOptions): Promise<{ success: boolean; messageUrl?: string; error?: string }> => {
   try {
-  
+
 
     const transporter = createTransporter();
 
@@ -59,10 +59,20 @@ export const sendEmail = async ({ to, subject, html, text }: EmailOptions): Prom
     };
   }
 };
+export const sendVerificationEmail = async (email: string, token: string, name?: string) => {
+  const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/en/verify-email?token=${token}`;
 
-// Import email templates
-import { passwordResetTemplate, passwordResetSuccessTemplate } from './email-templates';
+  const htmlContent = welcomeTemplate({
+    name: name || 'there',
+    verificationUrl
+  });
 
+  return await sendEmail({
+    to: email,
+    subject: 'Verify Your Email Address for ScanPro',
+    html: htmlContent
+  });
+};
 // Function to send a password reset email
 export const sendPasswordResetEmail = async (email: string, token: string, username?: string): Promise<{ success: boolean; messageUrl?: string; error?: string }> => {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
