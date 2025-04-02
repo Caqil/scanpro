@@ -134,7 +134,7 @@ export function PricingContent() {
         window.location.href = data.checkoutUrl;
       } else {
         toast.success(data.message || "Subscription updated successfully");
-        router.push("/dashboard");
+        router.push("/en/dashboard");
       }
     } catch (error) {
       console.error("Subscription error:", error);

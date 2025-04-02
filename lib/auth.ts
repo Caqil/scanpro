@@ -1,11 +1,13 @@
-import { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
-import AppleProvider from "next-auth/providers/apple";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { prisma } from "@/lib/prisma";
-import bcrypt from "bcryptjs";
+import type { NextAuthOptions } from "next-auth"
+import CredentialsProvider from "next-auth/providers/credentials"
+import GoogleProvider from "next-auth/providers/google"
+import AppleProvider from "next-auth/providers/apple"
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import { prisma } from "@/lib/prisma"
+import bcrypt from "bcryptjs"
 
+// Instead of dynamically generating the client secret, use a static value
+// This is because NextAuth.js initializes providers at build time
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
 
@@ -24,11 +26,11 @@ export const authOptions: NextAuthOptions = {
     }),
     AppleProvider({
       clientId: process.env.APPLE_CLIENT_ID || "",
-      clientSecret: process.env.APPLE_CLIENT_SECRET || "",
+      clientSecret: process.env.APPLE_CLIENT_SECRET || "", // Use a pre-generated client secret
       authorization: {
         params: {
           scope: "name email",
-          response_mode: "form_post", // Change from form_post to query
+          response_mode: "form_post",
         },
       },
     }),
@@ -36,33 +38,30 @@ export const authOptions: NextAuthOptions = {
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          return null;
+          return null
         }
 
         // Find user in database
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
           include: {
-            subscription: true
-          }
-        });
+            subscription: true,
+          },
+        })
 
         // Check if user exists and password is correct
         if (!user || !user.password) {
-          return null;
+          return null
         }
 
-        const isPasswordValid = await bcrypt.compare(
-          credentials.password,
-          user.password
-        );
+        const isPasswordValid = await bcrypt.compare(credentials.password, user.password)
 
         if (!isPasswordValid) {
-          return null;
+          return null
         }
 
         // Return user object without sensitive information
@@ -72,62 +71,58 @@ export const authOptions: NextAuthOptions = {
           email: user.email,
           role: user.role,
           subscription: user.subscription,
-          image: user.image
-        };
-      }
-    })
+          image: user.image,
+        }
+      },
+    }),
   ],
   // Callbacks
   callbacks: {
     async jwt({ token, user, account }) {
       // Initial sign in
       if (user) {
-        token.id = user.id;
-        token.role = user.role || "user";
-
-
+        token.id = user.id
+        token.role = user.role || "user"
       }
 
       // If user data changes, update token
       if (user && account) {
         const updatedUser = await prisma.user.findUnique({
           where: { id: user.id },
-          include: { subscription: true }
-        });
+          include: { subscription: true },
+        })
 
         if (updatedUser) {
-          token.name = updatedUser.name;
-          token.email = updatedUser.email;
-          token.picture = updatedUser.image;
-          token.role = updatedUser.role;
-          token.subscription = updatedUser.subscription;
+          token.name = updatedUser.name
+          token.email = updatedUser.email
+          token.picture = updatedUser.image
+          token.role = updatedUser.role
+          token.subscription = updatedUser.subscription
         }
       }
 
-      return token;
+      return token
     },
 
     async session({ session, token }) {
       if (token && session.user) {
-        session.user.id = token.id as string;
-        session.user.role = token.role as string;
-
-
+        session.user.id = token.id as string
+        session.user.role = token.role as string
       }
 
-      return session;
+      return session
     },
 
     async redirect({ url, baseUrl }) {
       // Handle callback URL correctly
       // Make sure URL is a relative path or from allowed domain
       if (url.startsWith("/")) {
-        return `${baseUrl}${url}`;
+        return `${baseUrl}${url}`
       } else if (new URL(url).origin === baseUrl) {
-        return url;
+        return url
       }
-      return baseUrl;
-    }
+      return baseUrl
+    },
   },
 
   // Pages
@@ -142,4 +137,47 @@ export const authOptions: NextAuthOptions = {
 
   // Secret for JWT encryption
   secret: process.env.NEXTAUTH_SECRET,
-};
+
+  // Add cookie options to ensure cookies are properly set
+  cookies: {
+    sessionToken: {
+      name: `next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
+    callbackUrl: {
+      name: `next-auth.callback-url`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
+    pkceCodeVerifier: {
+      name: "next-auth.pkce.code_verifier",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 900, // 15 minutes in seconds
+      },
+    },
+    state: {
+      name: "next-auth.state",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 900, // 15 minutes in seconds
+      },
+    },
+  },
+}
+
