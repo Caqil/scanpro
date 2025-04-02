@@ -67,10 +67,10 @@ export function PricingContent() {
   // Plan features table (unchanged from your provided code)
   const planFeatures: PlanFeature[] = [
     { name: t('pricing.features.operations') || "Monthly operations", free: true, basic: true, pro: true, enterprise: true, tooltip: "Number of PDF operations you can perform per month" },
-    { name: t('pricing.features.amount.free') || "100 operations", free: true, basic: false, pro: false, enterprise: false },
-    { name: t('pricing.features.amount.basic') || "1,000 operations", free: false, basic: true, pro: false, enterprise: false },
-    { name: t('pricing.features.amount.pro') || "10,000 operations", free: false, basic: false, pro: true, enterprise: false },
-    { name: t('pricing.features.amount.enterprise') || "100,000 operations", free: false, basic: false, pro: false, enterprise: true },
+    { name: t('pricing.features.amount.free') || "1000 operations", free: true, basic: false, pro: false, enterprise: false },
+    { name: t('pricing.features.amount.basic') || "10.000 operations", free: false, basic: true, pro: false, enterprise: false },
+    { name: t('pricing.features.amount.pro') || "100,000 operations", free: false, basic: false, pro: true, enterprise: false },
+    { name: t('pricing.features.amount.enterprise') || "1000,000 operations", free: false, basic: false, pro: false, enterprise: true },
     { name: t('pricing.features.apiAccess') || "API Access", free: true, basic: true, pro: true, enterprise: true, tooltip: "Programmatic access to our PDF tools via API" },
     { name: t('pricing.features.apiKeys.free') || "1 API key", free: true, basic: false, pro: false, enterprise: false },
     { name: t('pricing.features.apiKeys.basic') || "3 API keys", free: false, basic: true, pro: false, enterprise: false },

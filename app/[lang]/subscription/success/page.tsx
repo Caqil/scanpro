@@ -1,44 +1,58 @@
 // app/[lang]/subscription/success/page.tsx
 "use client";
 
-import { Suspense } from "react";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { LanguageLink } from "@/components/language-link";
-import { CheckCircle, Loader2 } from "lucide-react";
+import { CheckCircle, Loader2, AlertCircle } from "lucide-react";
 import { useLanguageStore } from "@/src/store/store";
+import { Suspense } from "react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 // Create a separate client component that uses hooks
 function SubscriptionSuccessContent() {
   const { t } = useLanguageStore();
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
   const [subscriptionTier, setSubscriptionTier] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const router = useRouter();
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
+  const subscriptionId = searchParams.get("subscription_id");
   
   useEffect(() => {
     // Verify the subscription status with our backend
     const verifySubscription = async () => {
-      if (!sessionId) {
+      if (!sessionId && !subscriptionId) {
         setStatus("error");
+        setErrorMessage("No session or subscription ID found");
         return;
       }
       
       try {
         // Call our API to verify the subscription
-        const response = await fetch(`/api/subscription/verify?session_id=${sessionId}`);
+        const queryParam = subscriptionId 
+          ? `subscription_id=${subscriptionId}` 
+          : `session_id=${sessionId}`;
+          
+        const response = await fetch(`/api/subscription/verify?${queryParam}`);
         const data = await response.json();
+        
+        console.log("Verification response:", data);
         
         if (data.success && data.subscription) {
           setStatus("success");
           setSubscriptionTier(data.subscription.tier);
         } else {
           setStatus("error");
+          setErrorMessage(data.message || "Failed to verify subscription");
         }
       } catch (error) {
         console.error("Error verifying subscription:", error);
         setStatus("error");
+        setErrorMessage("An unexpected error occurred");
       }
     };
     
@@ -52,13 +66,16 @@ function SubscriptionSuccessContent() {
     }, 5000);
     
     return () => clearTimeout(timer);
-  }, [sessionId, status, router]);
+  }, [sessionId, subscriptionId, status, router]);
   
   return (
     <Card>
       <CardHeader>
         {status === "loading" && (
           <>
+            <div className="flex justify-center mb-4">
+              <Loader2 className="h-12 w-12 animate-spin text-primary" />
+            </div>
             <CardTitle className="text-center">Processing your subscription</CardTitle>
             <CardDescription className="text-center">
               Please wait while we process your subscription...
@@ -80,9 +97,12 @@ function SubscriptionSuccessContent() {
         
         {status === "error" && (
           <>
+            <div className="flex justify-center mb-4">
+              <AlertCircle className="h-16 w-16 text-orange-500" />
+            </div>
             <CardTitle className="text-center">Something went wrong</CardTitle>
             <CardDescription className="text-center">
-              We couldn't verify your subscription. Please contact support.
+              We couldn't verify your subscription.
             </CardDescription>
           </>
         )}
@@ -90,7 +110,7 @@ function SubscriptionSuccessContent() {
       
       <CardContent>
         {status === "loading" && (
-          <div className="flex justify-center">
+          <div className="flex justify-center py-4">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
           </div>
         )}
@@ -102,9 +122,15 @@ function SubscriptionSuccessContent() {
         )}
         
         {status === "error" && (
-          <p className="text-center text-sm text-destructive">
-            There was an issue processing your subscription. Your payment may or may not have been processed. Please check your email for confirmation and contact our support team if you need assistance.
-          </p>
+          <>
+            <Alert variant="destructive" className="mb-4">
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>{errorMessage}</AlertDescription>
+            </Alert>
+            <p className="text-center text-sm text-destructive">
+              There was an issue processing your subscription. Your payment may or may not have been processed. Please check your email for confirmation and contact our support team if you need assistance.
+            </p>
+          </>
         )}
       </CardContent>
       
@@ -136,10 +162,6 @@ function SubscriptionSuccessContent() {
     </Card>
   );
 }
-
-// Add necessary imports for the component
-import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 
 // Main page component with Suspense boundary
 export default function SubscriptionSuccessPage() {

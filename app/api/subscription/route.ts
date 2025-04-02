@@ -4,52 +4,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { createSubscription, updateUserSubscription } from '@/lib/paypal';
+// app/api/subscription/route.ts - Fix subscription upgrade flow
 
-// Get subscription details for the current user
-export async function GET(request: NextRequest) {
-    try {
-        // Get the current session
-        const session = await getServerSession(authOptions);
-
-        if (!session?.user?.id) {
-            return NextResponse.json(
-                { error: 'Authentication required' },
-                { status: 401 }
-            );
-        }
-
-        // Get the user with subscription details
-        const user = await prisma.user.findUnique({
-            where: { id: session.user.id },
-            include: { subscription: true },
-        });
-
-        if (!user) {
-            return NextResponse.json(
-                { error: 'User not found' },
-                { status: 404 }
-            );
-        }
-
-        // Return the subscription details
-        return NextResponse.json({
-            success: true,
-            subscription: user.subscription || {
-                tier: 'free',
-                status: 'active',
-            },
-        });
-    } catch (error) {
-        console.error('Error getting subscription details:', error);
-
-        return NextResponse.json(
-            { error: 'Failed to get subscription details' },
-            { status: 500 }
-        );
-    }
-}
-
-// Initialize subscription upgrade/change
 export async function POST(request: NextRequest) {
     try {
         // Get the current session
@@ -65,7 +21,7 @@ export async function POST(request: NextRequest) {
         // Get the request body
         const { tier } = await request.json();
 
-        if (!tier || !['basic', 'pro', 'enterprise'].includes(tier)) {
+        if (!tier || !['basic', 'pro', 'enterprise', 'free'].includes(tier)) {
             return NextResponse.json(
                 { error: 'Invalid subscription tier' },
                 { status: 400 }
@@ -101,6 +57,8 @@ export async function POST(request: NextRequest) {
             await updateUserSubscription(user.id, {
                 tier: 'free',
                 status: 'active',
+                paypalSubscriptionId: null,
+                paypalPlanId: null,
             });
 
             return NextResponse.json({
@@ -109,26 +67,16 @@ export async function POST(request: NextRequest) {
             });
         }
 
-        // Reset subscription status if it was 'pending' or 'canceled'
-        // This ensures users can subscribe again after a failed or canceled subscription
-        if (user.subscription?.status === 'pending' || user.subscription?.status === 'canceled') {
-            // Reset to active free tier first
-            await updateUserSubscription(user.id, {
-                tier: 'free',
-                status: 'active',
-                paypalSubscriptionId: null,
-                paypalPlanId: null,
-            });
-        }
-
         // Create PayPal subscription
         const { subscriptionId, approvalUrl } = await createSubscription(user.id, tier);
 
-        // Update pending subscription in database
+        // Mark subscription as pending until user completes PayPal flow
+        // This is the key change - we're only marking it as pending so if they cancel,
+        // they don't get upgraded
         await updateUserSubscription(user.id, {
             paypalSubscriptionId: subscriptionId,
-            tier,
-            status: 'pending', // Will be updated to 'active' when activated via webhook
+            tier: user.subscription?.tier || 'free', // Keep current tier
+            status: 'pending', // Mark as pending until confirmed
         });
 
         // Return the PayPal approval URL

@@ -37,10 +37,10 @@ const rateLimits = {
 
 // Define usage limits by tier (operations per month)
 const usageLimits = {
-    free: 100,
-    basic: 1000,
-    pro: 10000,
-    enterprise: 100000,
+    free: 1000,        // Updated from 100
+    basic: 10000,      // Updated from 1,000
+    pro: 100000,       // Updated from 10,000
+    enterprise: 1000000, // Updated from 100,000
 };
 
 // Web UI bypass check - this function identifies browser-based requests
@@ -170,7 +170,36 @@ export async function apiMiddleware(request: NextRequest) {
         data: { lastUsed: new Date() }
     });
 
-    // Track usage statistics
+    // Check monthly usage limit BEFORE incrementing
+    const firstDayOfMonth = new Date();
+    firstDayOfMonth.setDate(1);
+    firstDayOfMonth.setHours(0, 0, 0, 0);
+
+    const monthlyUsage = await prisma.usageStats.aggregate({
+        where: {
+            userId: keyRecord.user.id,
+            date: { gte: firstDayOfMonth }
+        },
+        _sum: {
+            count: true
+        }
+    });
+
+    const totalUsage = monthlyUsage._sum.count || 0;
+    const usageLimit = usageLimits[tier as keyof typeof usageLimits];
+
+    if (totalUsage >= usageLimit) {
+        return NextResponse.json(
+            {
+                error: `Monthly usage limit of ${usageLimit} operations reached for your ${tier} plan`,
+                usage: totalUsage,
+                limit: usageLimit
+            },
+            { status: 403 }
+        );
+    }
+
+    // Now we can safely track usage statistics (AFTER checking the limit)
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -192,35 +221,6 @@ export async function apiMiddleware(request: NextRequest) {
             date: today
         }
     });
-
-    // Check monthly usage limit
-    const firstDayOfMonth = new Date();
-    firstDayOfMonth.setDate(1);
-    firstDayOfMonth.setHours(0, 0, 0, 0);
-
-    const monthlyUsage = await prisma.usageStats.aggregate({
-        where: {
-            userId: keyRecord.user.id,
-            date: { gte: firstDayOfMonth }
-        },
-        _sum: {
-            count: true
-        }
-    });
-
-    const totalUsage = monthlyUsage._sum.count || 0;
-    const usageLimit = usageLimits[tier as keyof typeof usageLimits];
-
-    if (totalUsage >= usageLimit) {
-        return NextResponse.json(
-            {
-                error: `Monthly usage limit of ${usageLimit} operations exceeded for your ${tier} plan`,
-                usage: totalUsage,
-                limit: usageLimit
-            },
-            { status: 403 }
-        );
-    }
 
     // Continue with the request
     const response = NextResponse.next();
