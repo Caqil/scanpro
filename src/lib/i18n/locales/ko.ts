@@ -1,10 +1,10 @@
 
 export default {
   metadata: {
-    title: "ScanPro - 무료 PDF 변환 및 편집 온라인",
+    title: "ScanPro - 무료 PDF 변환기, 편집기, OCR 및 PDF 잠금 해제",
     template: "%s | ScanPro - PDF 도구",
-    description: "ScanPro로 PDF를 쉽게 변환, 편집, 압축, 병합, 분할, OCR. 무료, 빠른 온라인 도구—다운로드 불필요.",
-    keywords: "PDF 변환, PDF 편집, 온라인 OCR, PDF 압축, PDF 병합, PDF 분할, 무료 PDF 도구, 온라인 PDF 편집, ScanPro"
+    description: "ScanPro로 PDF 변환, 편집, 잠금 해제, 압축, 병합, 분할 및 OCR을 수행하세요. 무료, 빠른 온라인 PDF 도구—다운로드 필요 없음.",
+    keywords: "PDF 변환기, PDF 편집기, 온라인 OCR, PDF 잠금 해제, PDF 압축, PDF 병합, PDF 분할, 무료 PDF 도구, 온라인 PDF 편집기, ScanPro"
   },
   nav: {
     tools: "도구",

@@ -1,10 +1,10 @@
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   metadata: {
-    title: "ScanPro - Free PDF Converter, Editor & OCR Online",
+    title: "ScanPro - Free PDF Converter, Editor, OCR & Unlock Pdf",
     template: "%s | ScanPro - PDF Tools",
-    description: "Easily convert, edit, compress, merge, split, and OCR PDFs with ScanPro. Free, fast online tools—no downloads required.",
-    keywords: "PDF converter, PDF editor, OCR online, compress PDF, merge PDF, split PDF, free PDF tools, online PDF editor, ScanPro"
+    description: "Convert, edit, unlock, compress, merge, split & OCR PDFs with ScanPro. Free, fast online PDF tools—no downloads needed.",
+    keywords: "PDF converter, PDF editor, OCR online, unlock PDF, compress PDF, merge PDF, split PDF, free PDF tools, online PDF editor, ScanPro"
   },
   nav: {
     tools: "Tools",
@@ -385,7 +385,7 @@ export default {
   },
   features: {
     title: "Advanced PDF Tools & Features | ScanPro",
-    description: "Explore ScanPro's comprehensive suite of PDF tools and features for document management, conversion, editing, and more.",
+    description: "Explore ScanPro's comprehensive suite of PDF tools and features for document management, conversion, editing, unlock pdfs and more.",
 
     hero: {
       title: "Advanced PDF Tools & Features",
@@ -466,11 +466,11 @@ export default {
         features: {
           protect: {
             title: "Password Protection",
-            description: "Encrypt PDFs with password protection to control access and prevent unauthorized viewing."
+            description: "Encrypt PDFs by entering the password you choose to control access and prevent unauthorized viewing."
           },
           unlock: {
             title: "PDF Unlocking",
-            description: "Remove password protection from PDFs where you have authorized access."
+            description: "Use our unlock tool to remove PDF passwords and open the PDF where you have authorized access."
           },
           signature: {
             title: "Digital Signatures",
@@ -2467,5 +2467,11 @@ export default {
     getStarted: "Get Started",
     currentPlan: "Current Plan"
   },
+  notFound: {
+    title: "Page Not Found",
+    description: "The page you're looking for doesn't exist or has been moved.",
+    back: "Go Back",
+    home: "Return to Home"
+  }
 }
 

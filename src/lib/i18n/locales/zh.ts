@@ -1,10 +1,10 @@
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
     metadata: {
-        title: "ScanPro - 免费在线PDF转换与编辑工具",
+        title: "ScanPro - 免费PDF转换器、编辑器、OCR和解锁PDF",
         template: "%s | ScanPro - PDF工具",
-        description: "使用ScanPro轻松转换、编辑、压缩、合并和分割PDF。免费快速在线工具，无需下载。",
-        keywords: "PDF转换, PDF编辑, 在线OCR, PDF压缩, PDF合并, PDF分割, 免费PDF工具, 在线PDF编辑器, ScanPro"
+        description: "使用ScanPro转换、编辑、解锁、压缩、合并、拆分和OCR PDF。免费、快速的在线PDF工具—无需下载。",
+        keywords: "PDF转换器, PDF编辑器, 在线OCR, 解锁PDF, 压缩PDF, 合并PDF, 拆分PDF, 免费PDF工具, 在线PDF编辑器, ScanPro"
     },
     nav: {
         tools: "工具",

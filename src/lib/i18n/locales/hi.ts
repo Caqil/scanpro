@@ -1,10 +1,10 @@
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
     metadata: {
-        title: "स्कैनप्रो - मुफ्त PDF कनवर्टर और संपादक ऑनलाइन",
-        template: "%s | स्कैनप्रो - PDF टूल्स",
-        description: "स्कैनप्रो से PDF को आसानी से कनवर्ट, संपादित, संपीड़ित, मर्ज और विभाजित करें। मुफ्त, तेज़ ऑनलाइन टूल—कोई डाउनलोड नहीं।",
-        keywords: "PDF कनवर्टर, PDF संपादक, ऑनलाइन OCR, PDF संपीड़न, PDF मर्ज, PDF विभाजन, मुफ्त PDF टूल्स, ऑनलाइन PDF संपादक, स्कैनप्रो"
+        title: "ScanPro - मुफ्त PDF कनवर्टर, संपादक, OCR और PDF अनलॉक करें",
+        template: "%s | ScanPro - PDF टूल्स",
+        description: "ScanPro के साथ PDF को कनवर्ट, संपादित, अनलॉक, कंप्रेस, मर्ज, स्प्लिट और OCR करें। मुफ्त, तेज़ ऑनलाइन PDF टूल्स—डाउनलोड की आवश्यकता नहीं।",
+        keywords: "PDF कनवर्टर, PDF संपादक, OCR ऑनलाइन, PDF अनलॉक करें, PDF कंप्रेस करें, PDF मर्ज करें, PDF स्प्लिट करें, मुफ्त PDF टूल्स, ऑनलाइन PDF संपादक, ScanPro"
     },
     nav: {
         tools: "उपकरण",

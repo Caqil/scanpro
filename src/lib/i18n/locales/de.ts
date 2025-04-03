@@ -1,10 +1,10 @@
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   metadata: {
-    title: "ScanPro - Kostenloser PDF-Konverter & Editor",
+    title: "ScanPro - Kostenloser PDF-Konverter, Editor, OCR & PDF entsperren",
     template: "%s | ScanPro - PDF-Tools",
-    description: "Konvertiere, bearbeite, komprimiere, füge zusammen und teile PDFs mit ScanPro. Kostenlose, schnelle Online-Tools ohne Download.",
-    keywords: "PDF-Konverter, PDF-Editor, OCR online, PDF komprimieren, PDF zusammenführen, PDF teilen, kostenlose PDF-Tools, Online-PDF-Editor, ScanPro"
+    description: "Konvertieren, bearbeiten, entsperren, komprimieren, zusammenführen, teilen & OCR für PDFs mit ScanPro. Kostenlose, schnelle Online-PDF-Tools—keine Downloads erforderlich.",
+    keywords: "PDF-Konverter, PDF-Editor, OCR online, PDF entsperren, PDF komprimieren, PDF zusammenführen, PDF teilen, kostenlose PDF-Tools, Online-PDF-Editor, ScanPro"
   },
   nav: {
     tools: "Werkzeuge",

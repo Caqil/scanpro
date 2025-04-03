@@ -88,91 +88,105 @@ export function OcrContent() {
     }
   };
   
-  // Handle form submission
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  
+  if (!file) {
+    toast.error(t('ocr.noFile') || "No file selected", {
+      description: t('ocr.noFileDesc') || "Please select a PDF file to process"
+    });
+    return;
+  }
+  
+  try {
+    setIsProcessing(true);
+    setProgress(0);
+    setStage(t('ocr.analyzing') || "Analyzing document");
     
-    if (!file) {
-      toast.error(t('ocr.noFile') || "No file selected", {
-        description: t('ocr.noFileDesc') || "Please select a PDF file to process"
-      });
-      return;
+    // Create form data
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('language', language);
+    formData.append('preserveLayout', String(preserveLayout));
+    formData.append('pageRange', pageRange);
+    
+    if (pageRange === 'specific' && pages) {
+      formData.append('pages', pages);
     }
     
-    try {
-      setIsProcessing(true);
-      setProgress(0);
-      setStage(t('ocr.analyzing') || "Analyzing document");
-      
-      // Create form data
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('language', language);
-      formData.append('preserveLayout', String(preserveLayout));
-      formData.append('pageRange', pageRange);
-      
-      if (pageRange === 'specific' && pages) {
-        formData.append('pages', pages);
-      }
-      
-      // Simulate progress (in reality this would be from a progress event)
-      const progressInterval = setInterval(() => {
-        setProgress(prev => {
-          if (prev >= 90) {
-            clearInterval(progressInterval);
-            return prev;
-          }
-          
-          // Update stage based on progress
-          if (prev === 20) setStage(t('ocr.preprocessing') || "Preprocessing pages");
-          if (prev === 40) setStage(t('ocr.recognizing') || "Recognizing text");
-          if (prev === 60) setStage(t('ocr.extracting') || "Extracting content");
-          if (prev === 80) setStage(t('ocr.finalizing') || "Finalizing results");
-          
-          return prev + 5;
-        });
-      }, 300);
-      
-      // Send request to API
-      const response = await fetch('/api/ocr/extract', {
-        method: 'POST',
-        body: formData
-      });
-      
-      clearInterval(progressInterval);
-      setProgress(100);
-      setStage(t('ocr.finishing') || "Finishing up");
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || t('ocr.extractionFailed') || 'Failed to extract text');
-      }
-      
-      const data = await response.json();
-      
-      // Set result
-      setResult({
-        success: data.success,
-        text: data.text,
-        fileUrl: data.fileUrl,
-        pagesProcessed: data.pagesProcessed,
-        totalPages: data.totalPages,
-        wordCount: data.wordCount
-      });
-      
-      toast.success(t('ocr.extractionComplete') || "Text extraction complete", {
-        description: t('ocr.extractionCompleteDesc') || "Your text has been successfully extracted from the PDF"
-      });
-    } catch (error) {
-      console.error('Error extracting text:', error);
-      toast.error(t('ocr.extractionError') || "Text extraction failed", {
-        description: error instanceof Error ? error.message : t('ocr.unknownError') || "An unknown error occurred"
-      });
-    } finally {
+    // Set up a timeout to prevent infinite loading
+    const timeoutId = setTimeout(() => {
       setIsProcessing(false);
-      setProgress(100);
+      toast.error(t('ocr.processingTimeout') || "Processing timed out", {
+        description: t('ocr.processingTimeoutDesc') || "The OCR process is taking longer than expected. The operation may still complete in the background."
+      });
+    }, 180000); // 3 minutes timeout
+    
+    // Simulate progress (in reality this would be from a progress event)
+    const progressInterval = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 90) {
+          clearInterval(progressInterval);
+          return prev;
+        }
+        
+        // Update stage based on progress
+        if (prev === 20) setStage(t('ocr.preprocessing') || "Preprocessing pages");
+        if (prev === 40) setStage(t('ocr.recognizing') || "Recognizing text");
+        if (prev === 60) setStage(t('ocr.extracting') || "Extracting content");
+        if (prev === 80) setStage(t('ocr.finalizing') || "Finalizing results");
+        
+        return prev + 5;
+      });
+    }, 300);
+    
+    console.log("Sending OCR request to /api/ocr/extract");
+    
+    // Send request to API
+    const response = await fetch('/api/ocr/extract', {
+      method: 'POST',
+      body: formData
+    });
+    
+    clearInterval(progressInterval);
+    clearTimeout(timeoutId); // Clear the timeout since we got a response
+    setProgress(100);
+    setStage(t('ocr.finishing') || "Finishing up");
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || t('ocr.extractionFailed') || 'Failed to extract text');
     }
-  };
+    
+    const data = await response.json();
+    console.log("OCR API response received:", data);
+    
+    // Set result - Using the correct properties from the API response
+    setResult({
+      success: true,
+      text: data.text, // Direct text from the response
+      fileUrl: data.fileUrl,
+      pagesProcessed: data.pagesProcessed || 0,
+      totalPages: data.totalPages || 0,
+      wordCount: data.wordCount || 0
+    });
+    
+    console.log("OCR process completed, exiting processing state");
+    
+    toast.success(t('ocr.extractionComplete') || "Text extraction complete", {
+      description: t('ocr.extractionCompleteDesc') || "Your text has been successfully extracted from the PDF"
+    });
+  } catch (error) {
+    console.error('Error extracting text:', error);
+    toast.error(t('ocr.extractionError') || "Text extraction failed", {
+      description: error instanceof Error ? error.message : t('ocr.unknownError') || "An unknown error occurred"
+    });
+  } finally {
+    // Ensure we're exiting the processing state
+    setIsProcessing(false);
+    setProgress(100); // Make sure progress is complete
+  }
+};
   
   // Handle copy to clipboard
   const copyToClipboard = () => {

@@ -99,24 +99,7 @@ function isWebUIRequest(request: NextRequest): boolean {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  if (pathname.startsWith('/api/auth/callback/apple')) {
-    // Create a response object that preserves the request
-    const response = NextResponse.next();
-
-    // Get all cookies from the request and ensure they're preserved
-    const cookies = request.cookies.getAll();
-    cookies.forEach(cookie => {
-      // This is critical - we need to preserve all cookies including PKCE cookies
-      response.cookies.set(cookie.name, cookie.value, {
-        ...cookie,
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production'
-      });
-    });
-
-    console.log('Preserving cookies for Apple callback:', cookies.map(c => c.name));
-    return response;
-  }
+ 
   for (const excludedRoute of EXCLUDED_ROUTES) {
     if (pathname.startsWith(excludedRoute)) {
       return NextResponse.next();
