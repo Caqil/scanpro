@@ -159,19 +159,43 @@ export default {
     whiteLabel: "Opzioni white-label"
   },
   profile: {
-    title: "Informazioni Profilo",
-    subtitle: "Aggiorna le tue informazioni personali",
-    changePassword: "Cambia Password",
-    changePasswordDesc: "Aggiorna la password del tuo account",
-    currentPassword: "Password Attuale",
-    newPassword: "Nuova Password",
-    profileUpdated: "Profilo aggiornato con successo",
-    passwordUpdated: "Password aggiornata con successo",
-    updateProfile: "Aggiorna Profilo",
+    // Personal Information
+    personalInfo: "Informazioni personali",
+    updatePersonalInfo: "Aggiorna le tue informazioni personali",
+    name: "Nome",
+    namePlaceholder: "Inserisci il tuo nome completo",
+    email: "Email",
+    emailUnchangeable: "L'email non può essere modificata",
+    memberSince: "Membro dal",
+    updateProfile: "Aggiorna profilo",
     updating: "Aggiornamento in corso...",
-    emailCannotChange: "L'email non può essere modificata",
-    passwordChanged: "La tua password è stata cambiata con successo",
-    incorrectPassword: "La password attuale è errata"
+    updateSuccess: "Profilo aggiornato con successo",
+    updateFailed: "Aggiornamento del profilo fallito",
+    updateError: "Si è verificato un errore durante l'aggiornamento del tuo profilo",
+
+    // Password Management
+    changePassword: "Cambia password",
+    updatePasswordDesc: "Aggiorna la password del tuo account",
+    currentPassword: "Password attuale",
+    currentPasswordPlaceholder: "Inserisci la tua password attuale",
+    newPassword: "Nuova password",
+    newPasswordPlaceholder: "Inserisci una nuova password",
+    confirmPassword: "Conferma nuova password",
+    confirmPasswordPlaceholder: "Conferma la tua nuova password",
+    changingPassword: "Modifica della password in corso...",
+    passwordUpdateSuccess: "Password aggiornata con successo",
+    passwordUpdateFailed: "Aggiornamento della password fallito",
+    passwordUpdateError: "Si è verificato un errore durante l'aggiornamento della tua password",
+
+    // Password Validation
+    passwordWeak: "Debole",
+    passwordFair: "Discreta",
+    passwordGood: "Buona",
+    passwordStrong: "Forte",
+    passwordMismatch: "Le nuove password non corrispondono",
+    passwordLength: "La password deve essere lunga almeno 8 caratteri",
+    passwordStrength: "Forza della password",
+    passwordTips: "Per sicurezza, scegli una password forte con almeno 8 caratteri, inclusi maiuscole, minuscole, numeri e simboli."
   },
 
   // Hero section
@@ -2188,10 +2212,10 @@ export default {
       },
       rateLimits: "Limite di frequenza",
       rateLimit: {
-        free: "10 richieste/ora",
-        basic: "100 richieste/ora",
-        pro: "1.000 richieste/ora",
-        enterprise: "5.000 richieste/ora"
+        free: "100 richieste/ora",
+        basic: "1000 richieste/ora",
+        pro: "10.000 richieste/ora",
+        enterprise: "50.000 richieste/ora"
       },
       fileSizes: "Dimensione massima del file",
       fileSize: {

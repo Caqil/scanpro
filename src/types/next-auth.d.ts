@@ -6,9 +6,12 @@ declare module "next-auth" {
     user: {
       id: string;
       isEmailVerified: boolean;
+      subscription?: {
+        tier: string;
+      };
     } & DefaultSession["user"];
   }
-  
+
   interface User {
     isEmailVerified: boolean;
   }

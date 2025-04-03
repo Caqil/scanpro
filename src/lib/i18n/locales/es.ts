@@ -159,19 +159,43 @@ export default {
     whiteLabel: "Opciones de marca blanca"
   },
   profile: {
-    title: "Información del perfil",
-    subtitle: "Actualiza tu información personal",
-    changePassword: "Cambiar contraseña",
-    changePasswordDesc: "Actualiza la contraseña de tu cuenta",
-    currentPassword: "Contraseña actual",
-    newPassword: "Nueva contraseña",
-    profileUpdated: "Perfil actualizado con éxito",
-    passwordUpdated: "Contraseña actualizada con éxito",
+    // Personal Information
+    personalInfo: "Información personal",
+    updatePersonalInfo: "Actualiza tu información personal",
+    name: "Nombre",
+    namePlaceholder: "Ingresa tu nombre completo",
+    email: "Correo electrónico",
+    emailUnchangeable: "El correo electrónico no se puede cambiar",
+    memberSince: "Miembro desde",
     updateProfile: "Actualizar perfil",
     updating: "Actualizando...",
-    emailCannotChange: "El correo electrónico no se puede cambiar",
-    passwordChanged: "Tu contraseña ha sido cambiada con éxito",
-    incorrectPassword: "La contraseña actual es incorrecta"
+    updateSuccess: "Perfil actualizado con éxito",
+    updateFailed: "No se pudo actualizar el perfil",
+    updateError: "Ocurrió un error al actualizar tu perfil",
+
+    // Password Management
+    changePassword: "Cambiar contraseña",
+    updatePasswordDesc: "Actualiza la contraseña de tu cuenta",
+    currentPassword: "Contraseña actual",
+    currentPasswordPlaceholder: "Ingresa tu contraseña actual",
+    newPassword: "Nueva contraseña",
+    newPasswordPlaceholder: "Ingresa una nueva contraseña",
+    confirmPassword: "Confirmar nueva contraseña",
+    confirmPasswordPlaceholder: "Confirma tu nueva contraseña",
+    changingPassword: "Cambiando contraseña...",
+    passwordUpdateSuccess: "Contraseña actualizada con éxito",
+    passwordUpdateFailed: "No se pudo actualizar la contraseña",
+    passwordUpdateError: "Ocurrió un error al actualizar tu contraseña",
+
+    // Password Validation
+    passwordWeak: "Débil",
+    passwordFair: "Regular",
+    passwordGood: "Bueno",
+    passwordStrong: "Fuerte",
+    passwordMismatch: "Las nuevas contraseñas no coinciden",
+    passwordLength: "La contraseña debe tener al menos 8 caracteres",
+    passwordStrength: "Fuerza de la contraseña",
+    passwordTips: "Por seguridad, elige una contraseña fuerte con al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y símbolos."
   },
 
   // Sección Hero
@@ -2260,10 +2284,10 @@ export default {
       },
       rateLimits: "Límite de tasa",
       rateLimit: {
-        free: "10 solicitudes/hora",
-        basic: "100 solicitudes/hora",
-        pro: "1,000 solicitudes/hora",
-        enterprise: "5,000 solicitudes/hora"
+        free: "100 solicitudes/hora",
+        basic: "1000 solicitudes/hora",
+        pro: "10,000 solicitudes/hora",
+        enterprise: "50,000 solicitudes/hora"
       },
       fileSizes: "Tamaño máximo de archivo",
       fileSize: {

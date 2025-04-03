@@ -159,19 +159,43 @@ export default {
         whiteLabel: "Опции белой метки"
     },
     profile: {
-        title: "Информация о профиле",
-        subtitle: "Обновите вашу личную информацию",
-        changePassword: "Изменить пароль",
-        changePasswordDesc: "Обновите пароль вашего аккаунта",
-        currentPassword: "Текущий пароль",
-        newPassword: "Новый пароль",
-        profileUpdated: "Профиль успешно обновлён",
-        passwordUpdated: "Пароль успешно обновлён",
+        // Personal Information
+        personalInfo: "Личная информация",
+        updatePersonalInfo: "Обновите вашу личную информацию",
+        name: "Имя",
+        namePlaceholder: "Введите ваше полное имя",
+        email: "Электронная почта",
+        emailUnchangeable: "Электронная почта не может быть изменена",
+        memberSince: "Участник с",
         updateProfile: "Обновить профиль",
         updating: "Обновление...",
-        emailCannotChange: "Электронная почта не может быть изменена",
-        passwordChanged: "Ваш пароль успешно изменён",
-        incorrectPassword: "Текущий пароль неверный"
+        updateSuccess: "Профиль успешно обновлен",
+        updateFailed: "Не удалось обновить профиль",
+        updateError: "Произошла ошибка при обновлении вашего профиля",
+
+        // Password Management
+        changePassword: "Сменить пароль",
+        updatePasswordDesc: "Обновите пароль вашей учетной записи",
+        currentPassword: "Текущий пароль",
+        currentPasswordPlaceholder: "Введите ваш текущий пароль",
+        newPassword: "Новый пароль",
+        newPasswordPlaceholder: "Введите новый пароль",
+        confirmPassword: "Подтвердите новый пароль",
+        confirmPasswordPlaceholder: "Подтвердите ваш новый пароль",
+        changingPassword: "Смена пароля...",
+        passwordUpdateSuccess: "Пароль успешно обновлен",
+        passwordUpdateFailed: "Не удалось обновить пароль",
+        passwordUpdateError: "Произошла ошибка при обновлении вашего пароля",
+
+        // Password Validation
+        passwordWeak: "Слабый",
+        passwordFair: "Средний",
+        passwordGood: "Хороший",
+        passwordStrong: "Сильный",
+        passwordMismatch: "Новые пароли не совпадают",
+        passwordLength: "Пароль должен содержать не менее 8 символов",
+        passwordStrength: "Сила пароля",
+        passwordTips: "Для безопасности выберите надежный пароль длиной не менее 8 символов, включая заглавные и строчные буквы, цифры и символы."
     },
 
     // Секция Hero
@@ -2266,10 +2290,10 @@ export default {
             },
             rateLimits: "Ограничение скорости",
             rateLimit: {
-                free: "10 запросов/час",
-                basic: "100 запросов/час",
-                pro: "1 000 запросов/час",
-                enterprise: "5 000 запросов/час"
+                free: "100 запросов/час",
+                basic: "1000 запросов/час",
+                pro: "10 000 запросов/час",
+                enterprise: "50 000 запросов/час"
             },
             fileSizes: "Максимальный размер файла",
             fileSize: {

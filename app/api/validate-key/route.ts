@@ -17,10 +17,10 @@ const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 const CACHE_CLEANUP_INTERVAL = 15 * 60 * 1000; // 15 minutes
 
 const rateLimits = {
-    free: { limit: 10, window: '1 h' },
-    basic: { limit: 100, window: '1 h' },
-    pro: { limit: 1000, window: '1 h' },
-    enterprise: { limit: 5000, window: '1 h' },
+    free: { limit: 100, window: '1 h' },
+    basic: { limit: 1000, window: '1 h' },
+    pro: { limit: 10000, window: '1 h' },
+    enterprise: { limit: 50000, window: '1 h' },
 };
 
 // Schedule cache cleanup

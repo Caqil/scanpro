@@ -159,19 +159,43 @@ export default {
     whiteLabel: "ホワイトラベルオプション"
   },
   profile: {
-    title: "プロフィール情報",
-    subtitle: "個人情報を更新",
-    changePassword: "パスワードを変更",
-    changePasswordDesc: "アカウントのパスワードを更新",
-    currentPassword: "現在のパスワード",
-    newPassword: "新しいパスワード",
-    profileUpdated: "プロフィールが正常に更新されました",
-    passwordUpdated: "パスワードが正常に更新されました",
+    // Personal Information
+    personalInfo: "個人情報",
+    updatePersonalInfo: "個人情報を更新する",
+    name: "名前",
+    namePlaceholder: "フルネームを入力してください",
+    email: "メール",
+    emailUnchangeable: "メールは変更できません",
+    memberSince: "メンバー登録日",
     updateProfile: "プロフィールを更新",
     updating: "更新中...",
-    emailCannotChange: "メールは変更できません",
-    passwordChanged: "パスワードが正常に変更されました",
-    incorrectPassword: "現在のパスワードが正しくありません"
+    updateSuccess: "プロフィールが正常に更新されました",
+    updateFailed: "プロフィールの更新に失敗しました",
+    updateError: "プロフィールの更新中にエラーが発生しました",
+
+    // Password Management
+    changePassword: "パスワードを変更",
+    updatePasswordDesc: "アカウントのパスワードを更新する",
+    currentPassword: "現在のパスワード",
+    currentPasswordPlaceholder: "現在のパスワードを入力してください",
+    newPassword: "新しいパスワード",
+    newPasswordPlaceholder: "新しいパスワードを入力してください",
+    confirmPassword: "新しいパスワードの確認",
+    confirmPasswordPlaceholder: "新しいパスワードを確認してください",
+    changingPassword: "パスワードを変更中...",
+    passwordUpdateSuccess: "パスワードが正常に更新されました",
+    passwordUpdateFailed: "パスワードの更新に失敗しました",
+    passwordUpdateError: "パスワードの更新中にエラーが発生しました",
+
+    // Password Validation
+    passwordWeak: "弱い",
+    passwordFair: "普通",
+    passwordGood: "良い",
+    passwordStrong: "強い",
+    passwordMismatch: "新しいパスワードが一致しません",
+    passwordLength: "パスワードは8文字以上である必要があります",
+    passwordStrength: "パスワードの強度",
+    passwordTips: "セキュリティのために、8文字以上の強力なパスワードを選び、大文字、小文字、数字、記号を含めてください。"
   },
 
   // ヒーローセクション
@@ -2109,10 +2133,10 @@ export default {
       },
       rateLimits: "レート制限",
       rateLimit: {
-        free: "10リクエスト/時間",
-        basic: "100リクエスト/時間",
-        pro: "1,000リクエスト/時間",
-        enterprise: "5,000リクエスト/時間"
+        free: "100リクエスト/時間",
+        basic: "1000リクエスト/時間",
+        pro: "10,000リクエスト/時間",
+        enterprise: "50,000リクエスト/時間"
       },
       fileSizes: "最大ファイルサイズ",
       fileSize: {

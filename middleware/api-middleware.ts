@@ -18,19 +18,19 @@ try {
 // Define rate limits based on subscription tier
 const rateLimits = {
     free: {
-        limit: 10,
+        limit: 100,
         window: 3600, // 10 requests per hour (3600 seconds)
     },
     basic: {
-        limit: 100,
+        limit: 1000,
         window: 3600, // 100 requests per hour
     },
     pro: {
-        limit: 1000,
+        limit: 10000,
         window: 3600, // 1000 requests per hour
     },
     enterprise: {
-        limit: 5000,
+        limit: 50000,
         window: 3600, // 5000 requests per hour
     },
 };

@@ -159,19 +159,43 @@ export default {
         whiteLabel: "व्हाइट-लेबल विकल्प"
     },
     profile: {
-        title: "प्रोफाइल जानकारी",
-        subtitle: "अपनी व्यक्तिगत जानकारी अपडेट करें",
-        changePassword: "पासवर्ड बदलें",
-        changePasswordDesc: "अपने खाते का पासवर्ड अपडेट करें",
-        currentPassword: "वर्तमान पासवर्ड",
-        newPassword: "नया पासवर्ड",
-        profileUpdated: "प्रोफाइल सफलतापूर्वक अपडेट की गई",
-        passwordUpdated: "पासवर्ड सफलतापूर्वक अपडेट किया गया",
+        // Personal Information
+        personalInfo: "व्यक्तिगत जानकारी",
+        updatePersonalInfo: "अपनी व्यक्तिगत जानकारी अपडेट करें",
+        name: "नाम",
+        namePlaceholder: "अपना पूरा नाम दर्ज करें",
+        email: "ईमेल",
+        emailUnchangeable: "ईमेल बदला नहीं जा सकता",
+        memberSince: "सदस्यता शुरू",
         updateProfile: "प्रोफाइल अपडेट करें",
         updating: "अपडेट हो रहा है...",
-        emailCannotChange: "ईमेल बदला नहीं जा सकता",
-        passwordChanged: "आपका पासवर्ड सफलतापूर्वक बदल दिया गया है",
-        incorrectPassword: "वर्तमान पासवर्ड गलत है"
+        updateSuccess: "प्रोफाइल सफलतापूर्वक अपडेट की गई",
+        updateFailed: "प्रोफाइल अपडेट करने में विफल",
+        updateError: "आपकी प्रोफाइल अपडेट करते समय एक त्रुटि हुई",
+
+        // Password Management
+        changePassword: "पासवर्ड बदलें",
+        updatePasswordDesc: "अपने खाते का पासवर्ड अपडेट करें",
+        currentPassword: "वर्तमान पासवर्ड",
+        currentPasswordPlaceholder: "अपना वर्तमान पासवर्ड दर्ज करें",
+        newPassword: "नया पासवर्ड",
+        newPasswordPlaceholder: "एक नया पासवर्ड दर्ज करें",
+        confirmPassword: "नए पासवर्ड की पुष्टि करें",
+        confirmPasswordPlaceholder: "अपने नए पासवर्ड की पुष्टि करें",
+        changingPassword: "पासवर्ड बदल रहा है...",
+        passwordUpdateSuccess: "पासवर्ड सफलतापूर्वक अपडेट किया गया",
+        passwordUpdateFailed: "पासवर्ड अपडेट करने में विफल",
+        passwordUpdateError: "आपके पासवर्ड को अपडेट करते समय एक त्रुटि हुई",
+
+        // Password Validation
+        passwordWeak: "कमजोर",
+        passwordFair: "ठीक",
+        passwordGood: "अच्छा",
+        passwordStrong: "मजबूत",
+        passwordMismatch: "नए पासवर्ड मेल नहीं खाते",
+        passwordLength: "पासवर्ड में कम से कम 8 अक्षर होने चाहिए",
+        passwordStrength: "पासवर्ड की मजबूती",
+        passwordTips: "सुरक्षा के लिए, कम से कम 8 अक्षरों वाला एक मजबूत पासवर्ड चुनें, जिसमें बड़े और छोटे अक्षर, संख्याएँ और प्रतीक शामिल हों।"
     },
 
     // हीरो सेक्शन
@@ -2263,10 +2287,10 @@ export default {
             },
             rateLimits: "दर सीमा",
             rateLimit: {
-                free: "10 अनुरोध/घंटा",
-                basic: "100 अनुरोध/घंटा",
-                pro: "1,000 अनुरोध/घंटा",
-                enterprise: "5,000 अनुरोध/घंटा"
+                free: "100 अनुरोध/घंटा",
+                basic: "1000 अनुरोध/घंटा",
+                pro: "10,000 अनुरोध/घंटा",
+                enterprise: "50,000 अनुरोध/घंटा"
             },
             fileSizes: "अधिकतम फ़ाइल आकार",
             fileSize: {

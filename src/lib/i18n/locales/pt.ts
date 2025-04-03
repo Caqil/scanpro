@@ -159,19 +159,43 @@ export default {
     whiteLabel: "Opções de marca branca"
   },
   profile: {
-    title: "Informações do Perfil",
-    subtitle: "Atualize suas informações pessoais",
-    changePassword: "Mudar Senha",
-    changePasswordDesc: "Atualize a senha da sua conta",
-    currentPassword: "Senha Atual",
-    newPassword: "Nova Senha",
-    profileUpdated: "Perfil atualizado com sucesso",
-    passwordUpdated: "Senha atualizada com sucesso",
-    updateProfile: "Atualizar Perfil",
+    // Personal Information
+    personalInfo: "Informações pessoais",
+    updatePersonalInfo: "Atualize suas informações pessoais",
+    name: "Nome",
+    namePlaceholder: "Digite seu nome completo",
+    email: "E-mail",
+    emailUnchangeable: "O e-mail não pode ser alterado",
+    memberSince: "Membro desde",
+    updateProfile: "Atualizar perfil",
     updating: "Atualizando...",
-    emailCannotChange: "O email não pode ser alterado",
-    passwordChanged: "Sua senha foi alterada com sucesso",
-    incorrectPassword: "A senha atual está incorreta"
+    updateSuccess: "Perfil atualizado com sucesso",
+    updateFailed: "Falha ao atualizar o perfil",
+    updateError: "Ocorreu um erro ao atualizar seu perfil",
+
+    // Password Management
+    changePassword: "Alterar senha",
+    updatePasswordDesc: "Atualize a senha da sua conta",
+    currentPassword: "Senha atual",
+    currentPasswordPlaceholder: "Digite sua senha atual",
+    newPassword: "Nova senha",
+    newPasswordPlaceholder: "Digite uma nova senha",
+    confirmPassword: "Confirmar nova senha",
+    confirmPasswordPlaceholder: "Confirme sua nova senha",
+    changingPassword: "Alterando senha...",
+    passwordUpdateSuccess: "Senha atualizada com sucesso",
+    passwordUpdateFailed: "Falha ao atualizar a senha",
+    passwordUpdateError: "Ocorreu um erro ao atualizar sua senha",
+
+    // Password Validation
+    passwordWeak: "Fraca",
+    passwordFair: "Razoável",
+    passwordGood: "Boa",
+    passwordStrong: "Forte",
+    passwordMismatch: "As novas senhas não coincidem",
+    passwordLength: "A senha deve ter pelo menos 8 caracteres",
+    passwordStrength: "Força da senha",
+    passwordTips: "Por segurança, escolha uma senha forte com pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e símbolos."
   },
 
   // Seção Hero
@@ -2219,10 +2243,10 @@ export default {
       },
       rateLimits: "Limite de taxa",
       rateLimit: {
-        free: "10 solicitações/hora",
-        basic: "100 solicitações/hora",
-        pro: "1.000 solicitações/hora",
-        enterprise: "5.000 solicitações/hora"
+        free: "100 solicitações/hora",
+        basic: "1000 solicitações/hora",
+        pro: "10.000 solicitações/hora",
+        enterprise: "50.000 solicitações/hora"
       },
       fileSizes: "Tamanho máximo do arquivo",
       fileSize: {

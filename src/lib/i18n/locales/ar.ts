@@ -159,19 +159,43 @@ export default {
         whiteLabel: "خيارات العلامة البيضاء"
     },
     profile: {
-        title: "معلومات الملف الشخصي",
-        subtitle: "تحديث معلوماتك الشخصية",
-        changePassword: "تغيير كلمة المرور",
-        changePasswordDesc: "تحديث كلمة مرور حسابك",
-        currentPassword: "كلمة المرور الحالية",
-        newPassword: "كلمة المرور الجديدة",
-        profileUpdated: "تم تحديث الملف الشخصي بنجاح",
-        passwordUpdated: "تم تحديث كلمة المرور بنجاح",
+        // Personal Information
+        personalInfo: "معلومات شخصية",
+        updatePersonalInfo: "تحديث معلوماتك الشخصية",
+        name: "الاسم",
+        namePlaceholder: "أدخل اسمك الكامل",
+        email: "البريد الإلكتروني",
+        emailUnchangeable: "لا يمكن تغيير البريد الإلكتروني",
+        memberSince: "عضو منذ",
         updateProfile: "تحديث الملف الشخصي",
         updating: "جارٍ التحديث...",
-        emailCannotChange: "لا يمكن تغيير البريد الإلكتروني",
-        passwordChanged: "تم تغيير كلمة المرور بنجاح",
-        incorrectPassword: "كلمة المرور الحالية غير صحيحة"
+        updateSuccess: "تم تحديث الملف الشخصي بنجاح",
+        updateFailed: "فشل في تحديث الملف الشخصي",
+        updateError: "حدث خطأ أثناء تحديث ملفك الشخصي",
+
+        // Password Management
+        changePassword: "تغيير كلمة المرور",
+        updatePasswordDesc: "تحديث كلمة مرور حسابك",
+        currentPassword: "كلمة المرور الحالية",
+        currentPasswordPlaceholder: "أدخل كلمة المرور الحالية",
+        newPassword: "كلمة المرور الجديدة",
+        newPasswordPlaceholder: "أدخل كلمة مرور جديدة",
+        confirmPassword: "تأكيد كلمة المرور الجديدة",
+        confirmPasswordPlaceholder: "تأكيد كلمة المرور الجديدة",
+        changingPassword: "جارٍ تغيير كلمة المرور...",
+        passwordUpdateSuccess: "تم تحديث كلمة المرور بنجاح",
+        passwordUpdateFailed: "فشل في تحديث كلمة المرور",
+        passwordUpdateError: "حدث خطأ أثناء تحديث كلمة المرور",
+
+        // Password Validation
+        passwordWeak: "ضعيف",
+        passwordFair: "متوسط",
+        passwordGood: "جيد",
+        passwordStrong: "قوي",
+        passwordMismatch: "كلمات المرور الجديدة غير متطابقة",
+        passwordLength: "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+        passwordStrength: "قوة كلمة المرور",
+        passwordTips: "للأمان، اختر كلمة مرور قوية تحتوي على 8 أحرف على الأقل، بما في ذلك أحرف كبيرة وصغيرة وأرقام ورموز."
     },
 
     // قسم البطل
@@ -2340,10 +2364,10 @@ export default {
             },
             rateLimits: "حد المعدل",
             rateLimit: {
-                free: "10 طلبات/ساعة",
-                basic: "100 طلب/ساعة",
-                pro: "1,000 طلب/ساعة",
-                enterprise: "5,000 طلب/ساعة"
+                free: "100 طلبات/ساعة",
+                basic: "1000 طلب/ساعة",
+                pro: "10,000 طلب/ساعة",
+                enterprise: "50,000 طلب/ساعة"
             },
             fileSizes: "الحد الأقصى لحجم الملف",
             fileSize: {

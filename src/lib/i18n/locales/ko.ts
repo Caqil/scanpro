@@ -159,19 +159,43 @@ export default {
     whiteLabel: "화이트 라벨 옵션"
   },
   profile: {
-    title: "프로필 정보",
-    subtitle: "개인 정보 업데이트",
-    changePassword: "비밀번호 변경",
-    changePasswordDesc: "계정 비밀번호 업데이트",
-    currentPassword: "현재 비밀번호",
-    newPassword: "새 비밀번호",
-    profileUpdated: "프로필이 성공적으로 업데이트되었습니다",
-    passwordUpdated: "비밀번호가 성공적으로 업데이트되었습니다",
+    // Personal Information
+    personalInfo: "개인 정보",
+    updatePersonalInfo: "개인 정보를 업데이트하세요",
+    name: "이름",
+    namePlaceholder: "전체 이름을 입력하세요",
+    email: "이메일",
+    emailUnchangeable: "이메일은 변경할 수 없습니다",
+    memberSince: "가입일",
     updateProfile: "프로필 업데이트",
     updating: "업데이트 중...",
-    emailCannotChange: "이메일은 변경할 수 없습니다",
-    passwordChanged: "비밀번호가 성공적으로 변경되었습니다",
-    incorrectPassword: "현재 비밀번호가 잘못되었습니다"
+    updateSuccess: "프로필이 성공적으로 업데이트되었습니다",
+    updateFailed: "프로필 업데이트에 실패했습니다",
+    updateError: "프로필을 업데이트하는 동안 오류가 발생했습니다",
+
+    // Password Management
+    changePassword: "비밀번호 변경",
+    updatePasswordDesc: "계정 비밀번호를 업데이트하세요",
+    currentPassword: "현재 비밀번호",
+    currentPasswordPlaceholder: "현재 비밀번호를 입력하세요",
+    newPassword: "새 비밀번호",
+    newPasswordPlaceholder: "새 비밀번호를 입력하세요",
+    confirmPassword: "새 비밀번호 확인",
+    confirmPasswordPlaceholder: "새 비밀번호를 확인하세요",
+    changingPassword: "비밀번호 변경 중...",
+    passwordUpdateSuccess: "비밀번호가 성공적으로 업데이트되었습니다",
+    passwordUpdateFailed: "비밀번호 업데이트에 실패했습니다",
+    passwordUpdateError: "비밀번호를 업데이트하는 동안 오류가 발생했습니다",
+
+    // Password Validation
+    passwordWeak: "약함",
+    passwordFair: "보통",
+    passwordGood: "좋음",
+    passwordStrong: "강함",
+    passwordMismatch: "새 비밀번호가 일치하지 않습니다",
+    passwordLength: "비밀번호는 최소 8자 이상이어야 합니다",
+    passwordStrength: "비밀번호 강도",
+    passwordTips: "보안을 위해 최소 8자 이상의 강력한 비밀번호를 선택하세요. 대문자, 소문자, 숫자, 기호를 포함해야 합니다."
   },
 
   // Hero section
@@ -2267,10 +2291,10 @@ export default {
       },
       rateLimits: "속도 제한",
       rateLimit: {
-        free: "10 요청/시간",
-        basic: "100 요청/시간",
-        pro: "1,000 요청/시간",
-        enterprise: "5,000 요청/시간"
+        free: "100 요청/시간",
+        basic: "1000 요청/시간",
+        pro: "10,000 요청/시간",
+        enterprise: "50,000 요청/시간"
       },
       fileSizes: "최대 파일 크기",
       fileSize: {

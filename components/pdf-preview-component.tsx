@@ -4,10 +4,10 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Loader2, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from "lucide-react";
+import { initPDFJS, loadPDF } from "@/lib/pdf-utils";
 
-// Initialize pdfjs worker
+// Initialize PDF.js
 import * as pdfjs from 'pdfjs-dist';
-pdfjs.GlobalWorkerOptions.workerSrc = '/node_modules/pdfjs-dist/build/pdf.worker.min.js';
 
 interface WatermarkOptions {
   text?: string;
@@ -40,11 +40,16 @@ export function PdfWatermarkPreview({ file, watermarkType, options }: PdfWaterma
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   
+  // Initialize PDF.js when component mounts
+  useEffect(() => {
+    initPDFJS();
+  }, []);
+  
   // Load PDF when file changes
   useEffect(() => {
     if (!file) return;
     
-    const loadPdf = async () => {
+    const loadPdfFile = async () => {
       try {
         setLoading(true);
         setError(null);
@@ -52,9 +57,8 @@ export function PdfWatermarkPreview({ file, watermarkType, options }: PdfWaterma
         // Convert File to ArrayBuffer
         const arrayBuffer = await file.arrayBuffer();
         
-        // Load the PDF
-        const loadingTask = pdfjs.getDocument({ data: arrayBuffer });
-        const pdf = await loadingTask.promise;
+        // Load the PDF using our utility
+        const pdf = await loadPDF(arrayBuffer);
         
         setPdfDocument(pdf);
         setTotalPages(pdf.numPages);
@@ -68,7 +72,7 @@ export function PdfWatermarkPreview({ file, watermarkType, options }: PdfWaterma
       }
     };
     
-    loadPdf();
+    loadPdfFile();
     
     // Cleanup
     return () => {

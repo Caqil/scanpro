@@ -159,19 +159,43 @@ export default {
     whiteLabel: "White-Label-Optionen"
   },
   profile: {
-    title: "Profilinformationen",
-    subtitle: "Aktualisieren Sie Ihre persönlichen Informationen",
-    changePassword: "Passwort ändern",
-    changePasswordDesc: "Aktualisieren Sie Ihr Kontopasswort",
-    currentPassword: "Aktuelles Passwort",
-    newPassword: "Neues Passwort",
-    profileUpdated: "Profil erfolgreich aktualisiert",
-    passwordUpdated: "Passwort erfolgreich aktualisiert",
+    // Personal Information
+    personalInfo: "Persönliche Informationen",
+    updatePersonalInfo: "Aktualisieren Sie Ihre persönlichen Informationen",
+    name: "Name",
+    namePlaceholder: "Geben Sie Ihren vollständigen Namen ein",
+    email: "E-Mail",
+    emailUnchangeable: "E-Mail kann nicht geändert werden",
+    memberSince: "Mitglied seit",
     updateProfile: "Profil aktualisieren",
-    updating: "Wird aktualisiert...",
-    emailCannotChange: "E-Mail kann nicht geändert werden",
-    passwordChanged: "Ihr Passwort wurde erfolgreich geändert",
-    incorrectPassword: "Aktuelles Passwort ist falsch"
+    updating: "Aktualisierung läuft...",
+    updateSuccess: "Profil erfolgreich aktualisiert",
+    updateFailed: "Profilaktualisierung fehlgeschlagen",
+    updateError: "Ein Fehler ist bei der Aktualisierung Ihres Profils aufgetreten",
+
+    // Password Management
+    changePassword: "Passwort ändern",
+    updatePasswordDesc: "Aktualisieren Sie Ihr Kontopasswort",
+    currentPassword: "Aktuelles Passwort",
+    currentPasswordPlaceholder: "Geben Sie Ihr aktuelles Passwort ein",
+    newPassword: "Neues Passwort",
+    newPasswordPlaceholder: "Geben Sie ein neues Passwort ein",
+    confirmPassword: "Neues Passwort bestätigen",
+    confirmPasswordPlaceholder: "Bestätigen Sie Ihr neues Passwort",
+    changingPassword: "Passwort wird geändert...",
+    passwordUpdateSuccess: "Passwort erfolgreich aktualisiert",
+    passwordUpdateFailed: "Passwortaktualisierung fehlgeschlagen",
+    passwordUpdateError: "Ein Fehler ist bei der Aktualisierung Ihres Passworts aufgetreten",
+
+    // Password Validation
+    passwordWeak: "Schwach",
+    passwordFair: "Ausreichend",
+    passwordGood: "Gut",
+    passwordStrong: "Stark",
+    passwordMismatch: "Neue Passwörter stimmen nicht überein",
+    passwordLength: "Passwort muss mindestens 8 Zeichen lang sein",
+    passwordStrength: "Passwortstärke",
+    passwordTips: "Wählen Sie aus Sicherheitsgründen ein starkes Passwort mit mindestens 8 Zeichen, einschließlich Groß- und Kleinbuchstaben, Zahlen und Symbolen."
   },
 
   // Hero-Bereich
@@ -2130,10 +2154,10 @@ export default {
       },
       rateLimits: "Ratenbegrenzung",
       rateLimit: {
-        free: "10 Anfragen/Stunde",
-        basic: "100 Anfragen/Stunde",
-        pro: "1.000 Anfragen/Stunde",
-        enterprise: "5.000 Anfragen/Stunde"
+        free: "100 Anfragen/Stunde",
+        basic: "1000 Anfragen/Stunde",
+        pro: "10.000 Anfragen/Stunde",
+        enterprise: "50.000 Anfragen/Stunde"
       },
       fileSizes: "Maximale Dateigröße",
       fileSize: {

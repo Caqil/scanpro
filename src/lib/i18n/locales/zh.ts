@@ -159,19 +159,43 @@ export default {
         whiteLabel: "白标选项"
     },
     profile: {
-        title: "个人资料信息",
-        subtitle: "更新您的个人信息",
-        changePassword: "更改密码",
-        changePasswordDesc: "更新您的账户密码",
-        currentPassword: "当前密码",
-        newPassword: "新密码",
-        profileUpdated: "个人资料已成功更新",
-        passwordUpdated: "密码已成功更新",
+        // Personal Information
+        personalInfo: "个人信息",
+        updatePersonalInfo: "更新您的个人信息",
+        name: "姓名",
+        namePlaceholder: "输入您的全名",
+        email: "电子邮件",
+        emailUnchangeable: "电子邮件无法更改",
+        memberSince: "会员自",
         updateProfile: "更新个人资料",
         updating: "更新中...",
-        emailCannotChange: "电子邮件无法更改",
-        passwordChanged: "您的密码已成功更改",
-        incorrectPassword: "当前密码不正确"
+        updateSuccess: "个人资料更新成功",
+        updateFailed: "更新个人资料失败",
+        updateError: "更新您的个人资料时发生错误",
+
+        // Password Management
+        changePassword: "更改密码",
+        updatePasswordDesc: "更新您的账户密码",
+        currentPassword: "当前密码",
+        currentPasswordPlaceholder: "输入您的当前密码",
+        newPassword: "新密码",
+        newPasswordPlaceholder: "输入新密码",
+        confirmPassword: "确认新密码",
+        confirmPasswordPlaceholder: "确认您的新密码",
+        changingPassword: "正在更改密码...",
+        passwordUpdateSuccess: "密码更新成功",
+        passwordUpdateFailed: "更新密码失败",
+        passwordUpdateError: "更新您的密码时发生错误",
+
+        // Password Validation
+        passwordWeak: "弱",
+        passwordFair: "一般",
+        passwordGood: "好",
+        passwordStrong: "强",
+        passwordMismatch: "新密码不匹配",
+        passwordLength: "密码必须至少有8个字符",
+        passwordStrength: "密码强度",
+        passwordTips: "为了安全起见，请选择一个至少8个字符的强密码，包括大写字母、小写字母、数字和符号。"
     },
 
     // 英雄部分
@@ -2264,10 +2288,10 @@ export default {
             },
             rateLimits: "速率限制",
             rateLimit: {
-                free: "10请求/小时",
-                basic: "100请求/小时",
-                pro: "1,000请求/小时",
-                enterprise: "5,000请求/小时"
+                free: "100请求/小时",
+                basic: "1000请求/小时",
+                pro: "10,000请求/小时",
+                enterprise: "50,000请求/小时"
             },
             fileSizes: "最大文件大小",
             fileSize: {

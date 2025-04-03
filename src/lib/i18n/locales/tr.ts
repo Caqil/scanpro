@@ -159,19 +159,43 @@ export default {
         whiteLabel: "Beyaz Etiket Seçenekleri"
     },
     profile: {
-        title: "Profil Bilgileri",
-        subtitle: "Kişisel bilgilerinizi güncelleyin",
-        changePassword: "Şifreyi Değiştir",
-        changePasswordDesc: "Hesap şifrenizi güncelleyin",
-        currentPassword: "Mevcut Şifre",
-        newPassword: "Yeni Şifre",
-        profileUpdated: "Profil başarıyla güncellendi",
-        passwordUpdated: "Şifre başarıyla güncellendi",
+        // Personal Information
+        personalInfo: "Kişisel Bilgiler",
+        updatePersonalInfo: "Kişisel bilgilerinizi güncelleyin",
+        name: "İsim",
+        namePlaceholder: "Tam adınızı girin",
+        email: "E-posta",
+        emailUnchangeable: "E-posta değiştirilemez",
+        memberSince: "Üyelik Başlangıcı",
         updateProfile: "Profili Güncelle",
         updating: "Güncelleniyor...",
-        emailCannotChange: "E-posta değiştirilemez",
-        passwordChanged: "Şifreniz başarıyla değiştirildi",
-        incorrectPassword: "Mevcut şifre yanlış"
+        updateSuccess: "Profil başarıyla güncellendi",
+        updateFailed: "Profil güncellenemedi",
+        updateError: "Profiliniz güncellenirken bir hata oluştu",
+
+        // Password Management
+        changePassword: "Şifre Değiştir",
+        updatePasswordDesc: "Hesap şifrenizi güncelleyin",
+        currentPassword: "Mevcut Şifre",
+        currentPasswordPlaceholder: "Mevcut şifrenizi girin",
+        newPassword: "Yeni Şifre",
+        newPasswordPlaceholder: "Yeni bir şifre girin",
+        confirmPassword: "Yeni Şifreyi Onayla",
+        confirmPasswordPlaceholder: "Yeni şifrenizi onaylayın",
+        changingPassword: "Şifre değiştiriliyor...",
+        passwordUpdateSuccess: "Şifre başarıyla güncellendi",
+        passwordUpdateFailed: "Şifre güncellenemedi",
+        passwordUpdateError: "Şifreniz güncellenirken bir hata oluştu",
+
+        // Password Validation
+        passwordWeak: "Zayıf",
+        passwordFair: "Orta",
+        passwordGood: "İyi",
+        passwordStrong: "Güçlü",
+        passwordMismatch: "Yeni şifreler eşleşmiyor",
+        passwordLength: "Şifre en az 8 karakter olmalıdır",
+        passwordStrength: "Şifre Gücü",
+        passwordTips: "Güvenlik için, en az 8 karakterden oluşan güçlü bir şifre seçin; büyük harf, küçük harf, rakam ve semboller içermelidir."
     },
 
     // Hero Bölümü
@@ -2266,10 +2290,10 @@ export default {
             },
             rateLimits: "Hız limiti",
             rateLimit: {
-                free: "10 istek/saat",
-                basic: "100 istek/saat",
-                pro: "1.000 istek/saat",
-                enterprise: "5.000 istek/saat"
+                free: "100 istek/saat",
+                basic: "1000 istek/saat",
+                pro: "10.000 istek/saat",
+                enterprise: "50.000 istek/saat"
             },
             fileSizes: "Maksimum dosya boyutu",
             fileSize: {

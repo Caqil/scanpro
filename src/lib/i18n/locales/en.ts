@@ -165,22 +165,44 @@ export default {
     customIntegration: "Custom integration help",
     whiteLabel: "White-label options"
   },
-
-  // Profile
   profile: {
-    title: "Profile Information",
-    subtitle: "Update your personal information",
-    changePassword: "Change Password",
-    changePasswordDesc: "Update your account password",
-    currentPassword: "Current Password",
-    newPassword: "New Password",
-    profileUpdated: "Profile updated successfully",
-    passwordUpdated: "Password updated successfully",
-    updateProfile: "Update Profile",
-    updating: "Updating...",
-    emailCannotChange: "Email cannot be changed",
-    passwordChanged: "Your password has been changed successfully",
-    incorrectPassword: "Current password is incorrect"
+    // Personal Information
+    personalInfo: 'Personal Information',
+    updatePersonalInfo: 'Update your personal information',
+    name: 'Name',
+    namePlaceholder: 'Enter your full name',
+    email: 'Email',
+    emailUnchangeable: 'Email cannot be changed',
+    memberSince: 'Member Since',
+    updateProfile: 'Update Profile',
+    updating: 'Updating...',
+    updateSuccess: 'Profile updated successfully',
+    updateFailed: 'Failed to update profile',
+    updateError: 'An error occurred while updating your profile',
+
+    // Password Management
+    changePassword: 'Change Password',
+    updatePasswordDesc: 'Update your account password',
+    currentPassword: 'Current Password',
+    currentPasswordPlaceholder: 'Enter your current password',
+    newPassword: 'New Password',
+    newPasswordPlaceholder: 'Enter a new password',
+    confirmPassword: 'Confirm New Password',
+    confirmPasswordPlaceholder: 'Confirm your new password',
+    changingPassword: 'Changing Password...',
+    passwordUpdateSuccess: 'Password updated successfully',
+    passwordUpdateFailed: 'Failed to update password',
+    passwordUpdateError: 'An error occurred while updating your password',
+
+    // Password Validation
+    passwordWeak: 'Weak',
+    passwordFair: 'Fair',
+    passwordGood: 'Good',
+    passwordStrong: 'Strong',
+    passwordMismatch: 'New passwords do not match',
+    passwordLength: 'Password must be at least 8 characters',
+    passwordStrength: 'Password Strength',
+    passwordTips: 'For security, choose a strong password with at least 8 characters, including uppercase, lowercase, numbers, and symbols.'
   },
   // Hero section
   hero: {
@@ -2370,10 +2392,10 @@ export default {
       },
       rateLimits: "Rate limit",
       rateLimit: {
-        free: "10 requests/hour",
-        basic: "100 requests/hour",
-        pro: "1,000 requests/hour",
-        enterprise: "5,000 requests/hour"
+        free: "100 requests/hour",
+        basic: "1000 requests/hour",
+        pro: "10,000 requests/hour",
+        enterprise: "50,000 requests/hour"
       },
       fileSizes: "Max file size",
       fileSize: {

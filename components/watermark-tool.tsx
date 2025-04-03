@@ -172,7 +172,7 @@ export function WatermarkTool({ type }: WatermarkToolProps) {
           const pdfjs = await import('pdfjs-dist');
           
           // Set worker path (note: this needs adjustment, see below)
-          pdfjs.GlobalWorkerOptions.workerSrc = '/node_modules/pdfjs-dist/build/pdf.worker.min.js';
+          pdfjs.GlobalWorkerOptions.workerSrc = '/node_modules/pdfjs-dist/build/pdf.worker.mjs';
           
           // Load PDF document
           const loadingTask = pdfjs.getDocument(pdfPreviewUrl);

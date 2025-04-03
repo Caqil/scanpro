@@ -159,19 +159,43 @@ export default {
         whiteLabel: "Options de marque blanche"
     },
     profile: {
-        title: "Informations de profil",
-        subtitle: "Mettez à jour vos informations personnelles",
-        changePassword: "Changer le mot de passe",
-        changePasswordDesc: "Mettez à jour le mot de passe de votre compte",
-        currentPassword: "Mot de passe actuel",
-        newPassword: "Nouveau mot de passe",
-        profileUpdated: "Profil mis à jour avec succès",
-        passwordUpdated: "Mot de passe mis à jour avec succès",
+        // Personal Information
+        personalInfo: "Informations personnelles",
+        updatePersonalInfo: "Mettez à jour vos informations personnelles",
+        name: "Nom",
+        namePlaceholder: "Entrez votre nom complet",
+        email: "E-mail",
+        emailUnchangeable: "L'e-mail ne peut pas être modifié",
+        memberSince: "Membre depuis",
         updateProfile: "Mettre à jour le profil",
         updating: "Mise à jour en cours...",
-        emailCannotChange: "L'email ne peut pas être modifié",
-        passwordChanged: "Votre mot de passe a été modifié avec succès",
-        incorrectPassword: "Le mot de passe actuel est incorrect"
+        updateSuccess: "Profil mis à jour avec succès",
+        updateFailed: "Échec de la mise à jour du profil",
+        updateError: "Une erreur s'est produite lors de la mise à jour de votre profil",
+
+        // Password Management
+        changePassword: "Changer le mot de passe",
+        updatePasswordDesc: "Mettez à jour le mot de passe de votre compte",
+        currentPassword: "Mot de passe actuel",
+        currentPasswordPlaceholder: "Entrez votre mot de passe actuel",
+        newPassword: "Nouveau mot de passe",
+        newPasswordPlaceholder: "Entrez un nouveau mot de passe",
+        confirmPassword: "Confirmer le nouveau mot de passe",
+        confirmPasswordPlaceholder: "Confirmez votre nouveau mot de passe",
+        changingPassword: "Changement de mot de passe en cours...",
+        passwordUpdateSuccess: "Mot de passe mis à jour avec succès",
+        passwordUpdateFailed: "Échec de la mise à jour du mot de passe",
+        passwordUpdateError: "Une erreur s'est produite lors de la mise à jour de votre mot de passe",
+
+        // Password Validation
+        passwordWeak: "Faible",
+        passwordFair: "Moyen",
+        passwordGood: "Bon",
+        passwordStrong: "Fort",
+        passwordMismatch: "Les nouveaux mots de passe ne correspondent pas",
+        passwordLength: "Le mot de passe doit comporter au moins 8 caractères",
+        passwordStrength: "Force du mot de passe",
+        passwordTips: "Pour des raisons de sécurité, choisissez un mot de passe fort avec au moins 8 caractères, incluant des majuscules, des minuscules, des chiffres et des symboles."
     },
 
     // Section Héros
@@ -2263,10 +2287,10 @@ export default {
             },
             rateLimits: "Limite de taux",
             rateLimit: {
-                free: "10 requêtes/heure",
-                basic: "100 requêtes/heure",
-                pro: "1 000 requêtes/heure",
-                enterprise: "5 000 requêtes/heure"
+                free: "100 requêtes/heure",
+                basic: "1000 requêtes/heure",
+                pro: "10 000 requêtes/heure",
+                enterprise: "50 000 requêtes/heure"
             },
             fileSizes: "Taille maximale du fichier",
             fileSize: {

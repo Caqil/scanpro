@@ -159,19 +159,43 @@ export default {
     whiteLabel: "Opsi label putih"
   },
   profile: {
-    title: "Informasi Profil",
-    subtitle: "Perbarui informasi pribadi Anda",
-    changePassword: "Ubah Kata Sandi",
-    changePasswordDesc: "Perbarui kata sandi akun Anda",
-    currentPassword: "Kata Sandi Saat Ini",
-    newPassword: "Kata Sandi Baru",
-    profileUpdated: "Profil berhasil diperbarui",
-    passwordUpdated: "Kata sandi berhasil diperbarui",
+    // Personal Information
+    personalInfo: "Informasi Pribadi",
+    updatePersonalInfo: "Perbarui informasi pribadi Anda",
+    name: "Nama",
+    namePlaceholder: "Masukkan nama lengkap Anda",
+    email: "Email",
+    emailUnchangeable: "Email tidak dapat diubah",
+    memberSince: "Anggota Sejak",
     updateProfile: "Perbarui Profil",
     updating: "Memperbarui...",
-    emailCannotChange: "Email tidak dapat diubah",
-    passwordChanged: "Kata sandi Anda telah berhasil diubah",
-    incorrectPassword: "Kata sandi saat ini salah"
+    updateSuccess: "Profil berhasil diperbarui",
+    updateFailed: "Gagal memperbarui profil",
+    updateError: "Terjadi kesalahan saat memperbarui profil Anda",
+
+    // Password Management
+    changePassword: "Ubah Kata Sandi",
+    updatePasswordDesc: "Perbarui kata sandi akun Anda",
+    currentPassword: "Kata Sandi Saat Ini",
+    currentPasswordPlaceholder: "Masukkan kata sandi Anda saat ini",
+    newPassword: "Kata Sandi Baru",
+    newPasswordPlaceholder: "Masukkan kata sandi baru",
+    confirmPassword: "Konfirmasi Kata Sandi Baru",
+    confirmPasswordPlaceholder: "Konfirmasi kata sandi baru Anda",
+    changingPassword: "Mengubah Kata Sandi...",
+    passwordUpdateSuccess: "Kata sandi berhasil diperbarui",
+    passwordUpdateFailed: "Gagal memperbarui kata sandi",
+    passwordUpdateError: "Terjadi kesalahan saat memperbarui kata sandi Anda",
+
+    // Password Validation
+    passwordWeak: "Lemah",
+    passwordFair: "Cukup",
+    passwordGood: "Baik",
+    passwordStrong: "Kuat",
+    passwordMismatch: "Kata sandi baru tidak cocok",
+    passwordLength: "Kata sandi harus terdiri dari minimal 8 karakter",
+    passwordStrength: "Kekuatan Kata Sandi",
+    passwordTips: "Untuk keamanan, pilih kata sandi yang kuat dengan minimal 8 karakter, termasuk huruf besar, huruf kecil, angka, dan simbol."
   },
 
   // Bagian Hero
@@ -2267,10 +2291,10 @@ export default {
       },
       rateLimits: "Batas tarif",
       rateLimit: {
-        free: "10 permintaan/jam",
-        basic: "100 permintaan/jam",
-        pro: "1.000 permintaan/jam",
-        enterprise: "5.000 permintaan/jam"
+        free: "100 permintaan/jam",
+        basic: "1000 permintaan/jam",
+        pro: "10.000 permintaan/jam",
+        enterprise: "50.000 permintaan/jam"
       },
       fileSizes: "Ukuran file maksimum",
       fileSize: {
