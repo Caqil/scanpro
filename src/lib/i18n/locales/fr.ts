@@ -2289,8 +2289,8 @@ export default {
             rateLimit: {
                 free: "100 requêtes/heure",
                 basic: "1000 requêtes/heure",
-                pro: "10 000 requêtes/heure",
-                enterprise: "50 000 requêtes/heure"
+                pro: "2000 requêtes/heure",
+                enterprise: "5000 requêtes/heure"
             },
             fileSizes: "Taille maximale du fichier",
             fileSize: {

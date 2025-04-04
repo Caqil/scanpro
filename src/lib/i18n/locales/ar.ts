@@ -2366,8 +2366,8 @@ export default {
             rateLimit: {
                 free: "100 طلبات/ساعة",
                 basic: "1000 طلب/ساعة",
-                pro: "10,000 طلب/ساعة",
-                enterprise: "50,000 طلب/ساعة"
+                pro: "2000 طلب/ساعة",
+                enterprise: "5000 طلب/ساعة"
             },
             fileSizes: "الحد الأقصى لحجم الملف",
             fileSize: {

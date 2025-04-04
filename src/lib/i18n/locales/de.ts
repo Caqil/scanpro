@@ -2156,8 +2156,8 @@ export default {
       rateLimit: {
         free: "100 Anfragen/Stunde",
         basic: "1000 Anfragen/Stunde",
-        pro: "10.000 Anfragen/Stunde",
-        enterprise: "50.000 Anfragen/Stunde"
+        pro: "2000 Anfragen/Stunde",
+        enterprise: "5000 Anfragen/Stunde"
       },
       fileSizes: "Maximale Dateigröße",
       fileSize: {

@@ -2290,8 +2290,8 @@ export default {
             rateLimit: {
                 free: "100请求/小时",
                 basic: "1000请求/小时",
-                pro: "10,000请求/小时",
-                enterprise: "50,000请求/小时"
+                pro: "1000请求/小时",
+                enterprise: "5000请求/小时"
             },
             fileSizes: "最大文件大小",
             fileSize: {

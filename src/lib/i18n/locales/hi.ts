@@ -2288,9 +2288,9 @@ export default {
             rateLimits: "दर सीमा",
             rateLimit: {
                 free: "100 अनुरोध/घंटा",
-                basic: "1000 अनुरोध/घंटा",
-                pro: "10,000 अनुरोध/घंटा",
-                enterprise: "50,000 अनुरोध/घंटा"
+                basic: "1.000 अनुरोध/घंटा",
+                pro: "2.000 अनुरोध/घंटा",
+                enterprise: "5.000 अनुरोध/घंटा"
             },
             fileSizes: "अधिकतम फ़ाइल आकार",
             fileSize: {

@@ -2292,9 +2292,9 @@ export default {
       rateLimits: "Batas tarif",
       rateLimit: {
         free: "100 permintaan/jam",
-        basic: "1000 permintaan/jam",
-        pro: "10.000 permintaan/jam",
-        enterprise: "50.000 permintaan/jam"
+        basic: "1.000 permintaan/jam",
+        pro: "2.000 permintaan/jam",
+        enterprise: "5.000 permintaan/jam"
       },
       fileSizes: "Ukuran file maksimum",
       fileSize: {

@@ -26,11 +26,11 @@ const rateLimits = {
         window: 3600, // 100 requests per hour
     },
     pro: {
-        limit: 10000,
+        limit: 2000,
         window: 3600, // 1000 requests per hour
     },
     enterprise: {
-        limit: 50000,
+        limit: 5000,
         window: 3600, // 5000 requests per hour
     },
 };

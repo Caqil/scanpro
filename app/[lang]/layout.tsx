@@ -9,17 +9,18 @@ import { notFound } from "next/navigation"
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "../globals.css"
-import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
+import { Analytics } from '@/lib/analytics'
+
 // Import language configuration
 import { SUPPORTED_LANGUAGES, getTranslation } from "@/src/lib/i18n/config";
 import { AuthProvider } from "./providers"
-import { AnalyticsProvider } from "./analytics-provider"
 import { CookieConsentBanner } from "@/components/cookie-banner-component"
-import { Analytics } from '@/lib/analytics'
-// Font configuration
+
+// Font configuration - optimize with display: swap
 export const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap", // This improves performance by allowing text to display in fallback font while loading
 });
 
 // For static generation of all language variants
@@ -77,21 +78,26 @@ export default async function Layout({
   
   return (
     <html lang={lang} dir={isRTL ? "rtl" : "ltr"} suppressHydrationWarning>
+      <head>
+        {/* Preconnect to Google domains to speed up analytics loading */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+      </head>
       <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
         <AuthProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="relative flex min-h-screen flex-col">
-                <ProHeader urlLanguage={lang} />
-                <div className="flex-1 mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
-                  {children}
-                 
-                  </div>
-                <Footer />
+            <div className="relative flex min-h-screen flex-col">
+              <ProHeader urlLanguage={lang} />
+              <div className="flex-1 mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
+                {children}
               </div>
-              <Toaster />
-              <CookieConsentBanner />
+              <Footer />
+            </div>
+            <Toaster />
+            <CookieConsentBanner />
           </ThemeProvider>
         </AuthProvider>
+        {/* Place Analytics component at the end of body for better performance */}
         <Analytics />
       </body>
     </html>

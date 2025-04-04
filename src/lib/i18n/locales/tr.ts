@@ -2292,8 +2292,8 @@ export default {
             rateLimit: {
                 free: "100 istek/saat",
                 basic: "1000 istek/saat",
-                pro: "10.000 istek/saat",
-                enterprise: "50.000 istek/saat"
+                pro: "1000 istek/saat",
+                enterprise: "5000 istek/saat"
             },
             fileSizes: "Maksimum dosya boyutu",
             fileSize: {
