@@ -2615,6 +2615,127 @@ export default {
     back: "Go Back",
     home: "Return to Home"
   },
-
+  signPdf: {
+    title: "Sign PDF: Add Digital Signatures to Documents",
+    description: "Easily add digital signatures, text annotations, stamps, and drawings to your PDF documents",
+    howTo: {
+      title: "How to Sign PDF Documents",
+      step1: {
+        title: "Upload Your PDF",
+        description: "Upload the PDF document you want to sign or annotate"
+      },
+      step2: {
+        title: "Add Your Signature",
+        description: "Create, upload, or draw your signature and place it on the document"
+      },
+      step3: {
+        title: "Save & Download",
+        description: "Save your changes and download the signed PDF document"
+      }
+    },
+    tools: {
+      signature: "Signature",
+      text: "Text",
+      stamp: "Stamp",
+      draw: "Draw",
+      image: "Image"
+    },
+    options: {
+      draw: "Draw Signature",
+      upload: "Upload Signature",
+      type: "Type Signature",
+      clear: "Clear",
+      save: "Save Signature",
+      color: "Color",
+      fontSize: "Font Size",
+      cancel: "Cancel",
+      apply: "Apply",
+      position: "Position"
+    },
+    stamps: {
+      approved: "Approved",
+      rejected: "Rejected",
+      draft: "Draft",
+      final: "Final",
+      confidential: "Confidential"
+    },
+    messages: {
+      noFile: "No file selected",
+      uploadFirst: "Please upload a PDF file to sign",
+      processing: "Processing your PDF...",
+      signed: "PDF successfully signed!",
+      downloadReady: "Your signed PDF is ready to download",
+      error: "Error signing PDF",
+      errorDesc: "There was an error processing your request. Please try again."
+    },
+    faq: {
+      title: "Frequently Asked Questions",
+      legality: {
+        question: "Are digital signatures legally binding?",
+        answer: "Digital signatures created with our tool are visually similar to handwritten signatures. For legally binding electronic signatures that comply with regulations like eIDAS or ESIGN Act, you may need a qualified electronic signature service. Our tool is suitable for internal documents, drafts, or when visual signatures are sufficient."
+      },
+      security: {
+        question: "How secure are the signatures?",
+        answer: "Our signatures are visual overlays on the PDF document. They provide a visual representation of consent but do not include cryptographic security features found in advanced digital signature solutions. Your documents are processed securely, and we don't store your signed PDFs."
+      },
+      formats: {
+        question: "What signature formats are supported?",
+        answer: "You can create signatures by drawing with your mouse/touchpad, uploading an image file (PNG, JPG with transparent background recommended), or typing your name in various font styles."
+      },
+      multipleSignatures: {
+        question: "Can I add multiple signatures to a document?",
+        answer: "Yes, you can add multiple signatures, text annotations, stamps, and drawings to your document. This is useful for documents that require signatures from multiple parties or need annotations in different locations."
+      }
+    },
+    benefits: {
+      title: "Benefits of Digital Signatures",
+      paperless: {
+        title: "Go Paperless",
+        description: "Eliminate the need to print, sign, scan, and email documents"
+      },
+      time: {
+        title: "Save Time",
+        description: "Sign documents instantly from anywhere without physical handling"
+      },
+      professional: {
+        title: "Professional Appearance",
+        description: "Create clean, professional-looking signed documents"
+      },
+      workflow: {
+        title: "Streamlined Workflow",
+        description: "Speed up document approvals and business processes"
+      }
+    },
+    useCases: {
+      title: "Common Use Cases",
+      contracts: {
+        title: "Contracts & Agreements",
+        description: "Add your signature to business contracts and agreements"
+      },
+      forms: {
+        title: "Forms & Applications",
+        description: "Fill out and sign forms without printing"
+      },
+      approvals: {
+        title: "Document Approvals",
+        description: "Mark documents as approved with official stamps and signatures"
+      },
+      feedback: {
+        title: "Feedback & Revisions",
+        description: "Add comments and annotations to documents during review"
+      }
+    },
+    draw: "Draw",
+    addText: "Add Text",
+    addImage: "Add Image",
+    download: "Download Signed PDF",
+    processing: "Processing...",
+    clearAll: "Clear All",
+    uploadSignature: "Upload Signature",
+    drawSignature: "Draw Signature",
+    signatureOptions: "Signature Options",
+    annotationTools: "Annotation Tools",
+    pages: "Pages"
+  },
 }
 
