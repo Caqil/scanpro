@@ -414,8 +414,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Create file URL
-        const fileUrl = `/repaired/${uniqueId}-repaired.pdf`;
-
+        const fileUrl = `/api/file?folder=repaired&filename=${uniqueId}-repaired.pdf`;
         // Return result
         return NextResponse.json({
             success: repairResult.success,

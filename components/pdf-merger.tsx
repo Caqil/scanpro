@@ -264,10 +264,10 @@ export function PdfMerger() {
         {files.length > 0 && (
           <div className="border rounded-lg">
             <div className="p-3 border-b bg-muted/30 flex justify-between items-center">
-              <h3 className="font-medium">{t('mergePdf.filesToMerge') || "Files to Merge"} ({files.length})</h3>
+              <h3 className="font-medium">{t('mergePdf.ui.filesToMerge') || "Files to Merge"} ({files.length})</h3>
               <div className="flex items-center gap-2">
                 <Badge variant="outline" className="bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
-                  <MoveIcon className="h-3 w-3 mr-1" /> {t('mergePdf.dragToReorder') || "Drag to reorder"}
+                  <MoveIcon className="h-3 w-3 mr-1" /> {t('dragToReorder.dragToReorder') || "Drag to reorder"}
                 </Badge>
                 {!isProcessing && (
                   <Button 
@@ -387,10 +387,10 @@ export function PdfMerger() {
               </div>
               <div className="flex-1">
                 <h3 className="font-medium text-green-600 dark:text-green-400">
-                  {t('mergePdf.successMessage') || "PDFs successfully merged!"}
+                  {t('mergePdf.ui.successMessage') || "PDFs successfully merged!"}
                 </h3>
                 <p className="text-sm text-muted-foreground mt-1 mb-3">
-                  {t('mergePdf.downloadReady') || "Your merged PDF file is now ready for download."}
+                  {t('mergePdf.ui.downloadReady') || "Your merged PDF file is now ready for download."}
                 </p>
                 <Button 
                   className="w-full sm:w-auto" 
@@ -399,7 +399,7 @@ export function PdfMerger() {
                 >
                   <a href={`/api/file?folder=merges&filename=${encodeURIComponent(mergedFileUrl)}`} download>
                     <DownloadIcon className="h-4 w-4 mr-2" />
-                    {t('mergePdf.downloadMerged') || "Download Merged PDF"}
+                    {t('mergePdf.ui.downloadMerged') || "Download Merged PDF"}
                   </a>
                 </Button>
               </div>

@@ -80,9 +80,6 @@ export default async function Layout({
   return (
     <html lang={lang} dir={isRTL ? "rtl" : "ltr"} suppressHydrationWarning>
       <head>
-        {/* Preconnect to Google domains to speed up analytics loading */}
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
