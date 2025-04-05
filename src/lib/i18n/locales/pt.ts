@@ -271,109 +271,109 @@ export default {
   // Página de Conversão
   convert: {
     title: {
-      pdfToWord: "Converter PDF para Word",
-      pdfToExcel: "Converter PDF para Excel",
-      pdfToPowerPoint: "Converter PDF para PowerPoint",
-      pdfToJpg: "Converter PDF para JPG",
-      pdfToPng: "Converter PDF para PNG",
-      pdfToHtml: "Converter PDF para HTML",
-      wordToPdf: "Converter Word para PDF",
-      excelToPdf: "Converter Excel para PDF",
-      powerPointToPdf: "Converter PowerPoint para PDF",
-      jpgToPdf: "Converter JPG para PNG",
-      pngToPdf: "Converter PNG para PDF",
-      htmlToPdf: "Converter HTML para PDF",
-      generic: "Converter Seu Arquivo"
+      pdfToWord: "Converter PDF para Word Online - Ferramenta Gratuita de PDF para DOC",
+      pdfToExcel: "Converter PDF para Excel Online - Extrair Dados de PDF para XLS",
+      pdfToPowerPoint: "Converter PDF para PowerPoint - Conversor de PDF para PPT",
+      pdfToJpg: "Converter PDF para Imagem JPG - PDF para JPEG de Alta Qualidade",
+      pdfToPng: "Converter PDF para PNG Online - PDF para PNG Transparente",
+      pdfToHtml: "Converter PDF para Página HTML - Conversor de PDF para HTML5",
+      wordToPdf: "Converter Word para PDF Online - Conversor Gratuito de DOC para PDF",
+      excelToPdf: "Converter Excel para PDF - Ferramenta de Conversão de XLS para PDF",
+      powerPointToPdf: "Converter PowerPoint para PDF Online - PPT para PDF",
+      jpgToPdf: "Converter JPG para PDF Online - Criador de PDF a partir de Imagem",
+      pngToPdf: "Converter PNG para PDF - Conversor de Imagem Transparente para PDF",
+      htmlToPdf: "Converter HTML para PDF Online - Gerador de Página Web para PDF",
+      generic: "Conversor de Arquivos Online - Converter Documentos, Imagens e Mais"
     },
     description: {
-      pdfToWord: "Transforme documentos PDF em arquivos Word editáveis de forma rápida e fácil",
-      pdfToExcel: "Extraia tabelas e dados de arquivos PDF para planilhas Excel",
-      pdfToPowerPoint: "Transforme apresentações PDF em slides editáveis do PowerPoint",
-      pdfToJpg: "Converta páginas de PDF em imagens JPG de alta qualidade",
-      pdfToPng: "Converta páginas de PDF em imagens PNG transparentes",
-      pdfToHtml: "Converta documentos PDF em páginas web HTML",
-      wordToPdf: "Converta documentos Word em formato PDF com formatação perfeita",
-      excelToPdf: "Transforme planilhas Excel em documentos PDF",
-      powerPointToPdf: "Converta apresentações PowerPoint em formato PDF",
-      jpgToPdf: "Crie arquivos PDF a partir de suas imagens JPG",
-      pngToPdf: "Crie arquivos PDF a partir de suas imagens PNG",
-      htmlToPdf: "Converta páginas web HTML em documentos PDF",
-      generic: "Selecione um arquivo para converter entre formatos"
+      pdfToWord: "Transforme documentos PDF em arquivos Word editáveis rápida e facilmente. Nosso conversor gratuito de PDF para Word preserva formatação para saída DOC/DOCX.",
+      pdfToExcel: "Extraia tabelas e dados de arquivos PDF para planilhas Excel. Converta PDF para XLS/XLSX com formatação de dados precisa para análise.",
+      pdfToPowerPoint: "Transforme apresentações PDF em slides PowerPoint editáveis. Nosso conversor de PDF para PPT mantém layouts de slides e elementos de design.",
+      pdfToJpg: "Converta páginas PDF em imagens JPG de alta qualidade. Extraia imagens de PDF ou salve cada página como JPEG para compartilhamento online.",
+      pdfToPng: "Converta páginas PDF em imagens PNG transparentes. Ideal para designers gráficos que precisam de elementos PDF com fundos transparentes.",
+      pdfToHtml: "Converta documentos PDF em páginas web HTML. Crie sites HTML5 responsivos a partir de arquivos PDF com nosso conversor avançado.",
+      wordToPdf: "Converta documentos Word para formato PDF com formatação perfeita. Conversor gratuito de DOC/DOCX para PDF para resultados profissionais.",
+      excelToPdf: "Transforme planilhas Excel em documentos PDF. Preserve fórmulas, gráficos e tabelas ao converter XLS/XLSX para PDF.",
+      powerPointToPdf: "Converta apresentações PowerPoint para formato PDF. Conversor de PPT/PPTX para PDF mantém transições de slides e notas.",
+      jpgToPdf: "Crie arquivos PDF a partir de suas imagens JPG. Combine várias fotos JPEG em um único documento PDF online.",
+      pngToPdf: "Crie arquivos PDF a partir de suas imagens PNG. Converta gráficos PNG transparentes para PDF preservando transparência.",
+      htmlToPdf: "Converta páginas web HTML em documentos PDF. Salve sites como PDF com nossa ferramenta geradora de HTML para PDF online.",
+      generic: "Selecione um arquivo para converter entre formatos. Conversor de documentos online gratuito para PDF, Word, Excel, PowerPoint, JPG, PNG e HTML."
     },
     howTo: {
-      title: "Como Converter {from} para {to}",
+      title: "Como Converter {from} para {to} Online",
       step1: {
-        title: "Carregar",
-        description: "Carregue o arquivo {from} que você deseja converter"
+        title: "Enviar Arquivo",
+        description: "Envie o arquivo {from} que deseja converter do seu computador, Google Drive ou Dropbox"
       },
       step2: {
-        title: "Converter",
-        description: "Clique no botão Converter e nosso sistema processará seu arquivo"
+        title: "Converter Formato",
+        description: "Clique no botão Converter e nosso sistema processará seu arquivo com tecnologia de conversão avançada"
       },
       step3: {
-        title: "Baixar",
-        description: "Baixe seu arquivo {to} convertido"
+        title: "Baixar Resultado",
+        description: "Baixe seu arquivo {to} convertido instantaneamente ou obtenha um link compartilhável"
       }
     },
     options: {
-      title: "Opções de Conversão",
+      title: "Opções Avançadas de Conversão",
       ocr: "Ativar OCR (Reconhecimento Óptico de Caracteres)",
-      ocrDescription: "Extraia texto de documentos digitalizados ou imagens",
+      ocrDescription: "Extrair texto de documentos digitalizados ou imagens para saída editável",
       preserveLayout: "Preservar layout original",
-      preserveLayoutDescription: "Mantenha a formatação e o layout original do documento",
+      preserveLayoutDescription: "Manter a formatação e o layout originais do documento com precisão",
       quality: "Qualidade de saída",
-      qualityDescription: "Defina o nível de qualidade para o arquivo convertido",
+      qualityDescription: "Definir o nível de qualidade para o arquivo convertido (afeta o tamanho do arquivo)",
       qualityOptions: {
-        low: "Baixa (menor tamanho de arquivo)",
-        medium: "Média (equilibrada)",
-        high: "Alta (melhor qualidade)"
+        low: "Baixa (tamanho menor, processamento mais rápido)",
+        medium: "Média (equilíbrio entre qualidade e tamanho)",
+        high: "Alta (melhor qualidade, arquivos maiores)"
       },
       pageOptions: "Opções de página",
       allPages: "Todas as páginas",
       selectedPages: "Páginas selecionadas",
-      pageRangeDescription: "Insira números de página e/ou intervalos de páginas separados por vírgulas",
-      pageRangeExample: "Exemplo: 1,3,5-12"
+      pageRangeDescription: "Digite números de página e/ou intervalos separados por vírgulas",
+      pageRangeExample: "Exemplo: 1,3,5-12 (converte páginas 1, 3 e de 5 a 12)"
     },
-    moreTools: "Ferramentas de Conversão Relacionadas",
+    moreTools: "Ferramentas Relacionadas de Conversão de Documentos",
     expertTips: {
-      title: "Dicas de Especialistas",
+      title: "Dicas de Especialista em Conversão",
       pdfToWord: [
-        "Para melhores resultados, certifique-se de que seu PDF tenha texto claro e legível por máquina",
-        "Ative o OCR para documentos digitalizados ou PDFs baseados em imagens",
-        "Layouts complexos podem exigir pequenos ajustes após a conversão"
+        "Para melhores resultados de PDF para Word, certifique-se de que seu PDF tenha texto claro e legível por máquina",
+        "Ative OCR para documentos digitalizados ou PDFs baseados em imagem para extrair texto editável",
+        "Layouts complexos podem exigir pequenos ajustes após a conversão para formatação perfeita"
       ],
       pdfToExcel: [
-        "Tabelas com bordas claras convertem com mais precisão",
-        "Pré-processe PDFs digitalizados com OCR para melhor extração de dados",
-        "Verifique as fórmulas da planilha após a conversão, pois elas podem não ser transferidas"
+        "Tabelas com bordas claras convertem com mais precisão de PDF para Excel",
+        "Pré-processe PDFs digitalizados com OCR para melhor extração de dados para XLS/XLSX",
+        "Verifique fórmulas de planilha após a conversão, pois podem não ser transferidas automaticamente"
       ],
       generic: [
-        "Configurações de maior qualidade resultam em tamanhos de arquivo maiores",
+        "Configurações de qualidade mais altas resultam em arquivos maiores, mas melhor saída",
         "Use OCR para documentos com texto digitalizado ou imagens contendo texto",
-        "Revise seu arquivo após a conversão para garantir precisão"
+        "Sempre visualize seu arquivo após a conversão para garantir precisão antes de baixar"
       ]
     },
     advantages: {
-      title: "Vantagens de Converter {from} para {to}",
+      title: "Benefícios de Converter {from} para {to}",
       pdfToWord: [
-        "Edite e modifique texto que estava bloqueado no formato PDF",
-        "Atualize conteúdo sem recriar o documento inteiro",
-        "Extraia informações para uso em outros documentos"
+        "Edite e modifique texto que estava bloqueado em formato PDF com nosso conversor DOC",
+        "Atualize conteúdo sem recriar todo o documento do zero",
+        "Extraia informações para uso em outros documentos Word ou modelos"
       ],
       pdfToExcel: [
-        "Analise e manipule dados que estavam em formato PDF estático",
-        "Crie gráficos e realize cálculos com os dados extraídos",
-        "Atualize relatórios financeiros ou informações numéricas facilmente"
+        "Analise e manipule dados que estavam em formato PDF estático usando ferramentas XLS",
+        "Crie gráficos e execute cálculos com dados de planilha extraídos",
+        "Atualize facilmente relatórios financeiros ou informações numéricas em formato Excel"
       ],
       wordToPdf: [
-        "Crie documentos universalmente legíveis que mantêm a formatação",
-        "Proteja o conteúdo contra modificações indesejadas",
-        "Garanta aparência consistente em todos os dispositivos e plataformas"
+        "Crie documentos PDF universalmente legíveis que mantêm formatação perfeita",
+        "Proteja conteúdo contra modificações indesejadas com saída PDF segura",
+        "Garanta aparência consistente do documento em todos os dispositivos e plataformas"
       ],
       generic: [
-        "Transforme seu documento em um formato mais útil",
-        "Acesse e use conteúdo em programas que suportam o formato de destino",
-        "Compartilhe arquivos em formatos que outros possam abrir facilmente"
+        "Transforme seu documento em um formato mais útil e editável",
+        "Acesse e use conteúdo em programas que suportam o tipo de arquivo de destino",
+        "Compartilhe arquivos em formatos que outros possam abrir facilmente sem software especial"
       ]
     }
   },
@@ -749,231 +749,265 @@ export default {
   },
   // Página de Mesclagem de PDF
   mergePdf: {
-    title: "Mesclar Arquivos PDF",
-    description: "Combine vários arquivos PDF em um único documento de forma rápida e fácil",
+    title: "Mesclar Arquivos PDF Online | Ferramenta Gratuita de Mesclagem de PDF no Navegador Web",
+    description: "Combine vários arquivos PDF em um único documento de forma rápida e fácil com nossa ferramenta de mesclagem baseada em navegador que funciona em todos os sistemas operacionais",
+    intro: "Nossa ferramenta de mesclagem de PDF online permite que você combine vários documentos em um único arquivo mesclado com apenas alguns cliques. Não é necessária instalação - funciona diretamente no seu navegador web em qualquer sistema operacional.",
+
+    // How-to section
     howTo: {
-      title: "Como Mesclar Arquivos PDF",
+      title: "Como Mesclar Arquivos PDF no Seu Navegador",
       step1: {
         title: "Carregar Arquivos",
-        description: "Carregue os arquivos PDF que deseja combinar. Você pode selecionar vários arquivos de uma vez."
+        description: "Carregue os arquivos PDF que você deseja combinar. Selecione vários arquivos de uma vez no seu dispositivo ou arraste e solte diretamente no seu navegador web."
       },
       step2: {
         title: "Organizar Ordem",
-        description: "Arraste e solte para reorganizar os arquivos na ordem em que deseja que apareçam no PDF final."
+        description: "Arraste e solte para reorganizar os arquivos na ordem em que deseja que apareçam no arquivo mesclado final. Nossa ferramenta de mesclagem torna a organização de vários PDFs intuitiva."
       },
       step3: {
         title: "Baixar",
-        description: "Clique no botão Mesclar PDFs e baixe seu arquivo PDF combinado."
+        description: "Clique no botão 'Mesclar PDFs' e baixe seu arquivo PDF combinado diretamente para o seu dispositivo a partir de qualquer navegador web."
       }
     },
+
+    // Benefits section
+    benefits: {
+      title: "Benefícios da Nossa Ferramenta de Mesclagem de PDF Online",
+      compatibility: {
+        title: "Funciona em Todos os Dispositivos",
+        description: "Nossa ferramenta de mesclagem de PDF baseada em navegador web funciona perfeitamente em Windows, macOS, Linux e sistemas operacionais móveis sem necessidade de instalação."
+      },
+      privacy: {
+        title: "Seguro e Privado",
+        description: "Seus documentos são processados no seu navegador web e excluídos automaticamente após a mesclagem, garantindo que suas informações sensíveis permaneçam privadas."
+      },
+      simplicity: {
+        title: "Interface Amigável",
+        description: "A interface intuitiva de arrastar e soltar torna a mesclagem de vários arquivos PDF simples, mesmo para usuários iniciantes da nossa ferramenta online."
+      },
+      quality: {
+        title: "Saída de Alta Qualidade",
+        description: "Nossa ferramenta de mesclagem preserva a formatação original, imagens e qualidade de texto no seu arquivo mesclado, garantindo resultados profissionais."
+      }
+    },
+
+    // Use cases section
+    useCases: {
+      title: "Usos Comuns para Mesclagem de PDF",
+      business: {
+        title: "Documentos Comerciais",
+        description: "Combine relatórios financeiros, contratos e apresentações em uma documentação abrangente para clientes e partes interessadas."
+      },
+      academic: {
+        title: "Trabalhos Acadêmicos",
+        description: "Mesclar artigos de pesquisa, citações e apêndices em uma submissão acadêmica completa pronta para revisão."
+      },
+      personal: {
+        title: "Registros Pessoais",
+        description: "Combine recibos, garantias e manuais de instruções em registros digitais organizados para fácil referência."
+      },
+      professional: {
+        title: "Portfólios Profissionais",
+        description: "Crie portfólios impressionantes mesclando várias amostras de trabalho em um único documento facilmente compartilhável."
+      }
+    },
+
+    // FAQ section
     faq: {
       title: "Perguntas Frequentes",
       q1: {
-        question: "Existe um limite para quantos PDFs posso mesclar?",
-        answer: "Você pode mesclar até 20 arquivos PDF de uma vez com nossa ferramenta gratuita. Para lotes maiores, considere nosso plano premium."
+        question: "Há um limite para quantos PDFs posso mesclar com sua ferramenta online?",
+        answer: "Com nossa ferramenta de mesclagem gratuita baseada em navegador web, você pode combinar até 20 arquivos PDF de uma vez. Para mesclar vários lotes maiores, considere atualizar para nosso plano premium que permite operações de mesclagem ilimitadas."
       },
       q2: {
-        question: "Meus arquivos PDF permanecerão privados?",
-        answer: "Sim, sua privacidade é nossa prioridade. Todos os arquivos carregados são automaticamente excluídos de nossos servidores após o processamento."
+        question: "Meus arquivos PDF permanecerão privados ao usar sua ferramenta de mesclagem online?",
+        answer: "Sim, sua privacidade é nossa prioridade. Todos os arquivos carregados em nossa ferramenta de mesclagem baseada em navegador são processados com segurança e excluídos automaticamente de nossos servidores após o processamento. Nunca acessamos ou armazenamos o conteúdo dos seus documentos."
       },
       q3: {
-        question: "Posso mesclar PDFs protegidos por senha?",
-        answer: "Para PDFs protegidos por senha, você precisará desbloqueá-los primeiro usando nossa ferramenta Desbloquear PDF e, em seguida, mesclá-los."
+        question: "Posso mesclar PDFs protegidos por senha usando sua ferramenta online?",
+        answer: "Para PDFs protegidos por senha, você precisará desbloqueá-los primeiro usando nossa ferramenta online Desbloquear PDF e depois mesclá-los. Nossa ferramenta de mesclagem baseada em navegador irá notificá-lo se detectar documentos protegidos."
+      },
+      q4: {
+        question: "Sua ferramenta de mesclagem de PDF online funciona em todos os sistemas operacionais?",
+        answer: "Sim, nossa ferramenta de mesclagem de PDF baseada em navegador web funciona em todos os principais sistemas operacionais, incluindo Windows, macOS, Linux, iOS e Android. Desde que você tenha um navegador web moderno, pode mesclar PDFs sem instalar nenhum software."
+      },
+      q5: {
+        question: "Qual o tamanho máximo dos arquivos PDF para mesclagem?",
+        answer: "Nossa ferramenta de mesclagem online gratuita suporta arquivos de até 100 MB cada. O tamanho combinado de todos os arquivos sendo mesclados não deve exceder 300 MB para um desempenho ideal no seu navegador web."
+      },
+      q6: {
+        question: "O arquivo mesclado manterá todas as características dos PDFs originais?",
+        answer: "Sim, nossa ferramenta de mesclagem avançada preserva texto, imagens, formatação, hiperlinks e a maioria dos elementos interativos dos PDFs originais no seu arquivo mesclado final."
       }
     },
-    relatedTools: "Explorar Mais Ferramentas de PDF",
-    viewAllTools: "Ver Todas as Ferramentas de PDF",
-    of: "de",
-    files: "arquivos",
-    filesToMerge: "Arquivos para Mesclar",
-    dragToReorder: "Arrastar para Reorganizar",
-    downloadReady: "Download Pronto",
-    downloadMerged: "Download Mesclado",
-    mergePdfs: "Mesclar PDFs",
-    successMessage: "PDF mesclado com sucesso",
+
+    // Tips section
+    tips: {
+      title: "Dicas para Mesclar PDFs de Forma Eficiente",
+      tip1: {
+        title: "Organize Antes de Mesclar",
+        description: "Renomeie seus arquivos numericamente (ex.: 01_intro.pdf, 02_content.pdf) antes de carregá-los em nossa ferramenta de mesclagem para uma organização mais fácil."
+      },
+      tip2: {
+        title: "Otimize Arquivos Grandes",
+        description: "Use nossa ferramenta Comprimir PDF primeiro se estiver mesclando vários documentos grandes para garantir um melhor desempenho do arquivo mesclado final."
+      },
+      tip3: {
+        title: "Verifique a Visualização",
+        description: "Após organizar seus arquivos, use a função de visualização em nossa ferramenta online para verificar a ordem antes de finalizar seu PDF mesclado."
+      },
+      tip4: {
+        title: "Considere Marcadores",
+        description: "Para documentos profissionais, considere adicionar marcadores ao seu arquivo mesclado usando nossa ferramenta Editar PDF para facilitar a navegação."
+      }
+    },
+
+    // Comparison section
+    comparison: {
+      title: "Por Que Escolher Nossa Ferramenta de Mesclagem no Navegador Web",
+      point1: {
+        title: "Sem Instalação de Software",
+        description: "Diferente de aplicativos de desktop, nossa ferramenta de mesclagem de PDF online funciona diretamente no seu navegador web sem necessidade de baixar ou instalar software."
+      },
+      point2: {
+        title: "Compatibilidade Multiplataforma",
+        description: "Nossa ferramenta baseada em navegador funciona em todos os sistemas operacionais, enquanto alternativas de desktop frequentemente suportam apenas plataformas específicas."
+      },
+      point3: {
+        title: "Gratuita e Acessível",
+        description: "Acesse nossas capacidades de mesclagem de PDF sem custo, comparado a alternativas de desktop caras ou serviços de assinatura."
+      },
+      point4: {
+        title: "Atualizações Regulares",
+        description: "Nossa ferramenta de mesclagem online é constantemente aprimorada sem exigir atualizações manuais dos usuários."
+      }
+    },
+
+    // UI elements and messages
+    ui: {
+      of: "de",
+      files: "arquivos",
+      filesToMerge: "Arquivos para Mesclar",
+      dragToReorder: "Arraste para Reordenar",
+      downloadReady: "Pronto para Download",
+      downloadMerged: "Baixar Arquivo Mesclado",
+      mergePdfs: "Mesclar PDFs",
+      processingMerge: "Mesclando seus PDFs...",
+      successMessage: "PDFs mesclados com sucesso!",
+      dragDropHere: "Arraste e solte PDFs aqui",
+      or: "ou",
+      browseFiles: "Procurar Arquivos",
+      fileLimit: "Combine até 20 arquivos PDF",
+      noPdfsSelected: "Nenhum PDF selecionado",
+      addMoreFiles: "Adicionar Mais Arquivos",
+      rearrangeMessage: "Arraste os arquivos para reorganizar a ordem no seu PDF mesclado",
+      removeFile: "Remover",
+      filePreview: "Visualização",
+      startOver: "Recomeçar",
+      mergingInProgress: "Mesclagem em andamento...",
+      pleaseWait: "Por favor, aguarde enquanto combinamos seus arquivos PDF",
+      processingFile: "Processando",
+      retry: "Tentar Mesclar Novamente"
+    },
   },
 
   // Página OCR
   ocr: {
-    title: "Extração de Texto OCR",
-    description: "Extraia texto de PDFs e imagens digitalizados usando tecnologia poderosa de Reconhecimento Óptico de Caracteres",
+    title: "Extração OCR: Reconhecimento de Texto Simplificado",
+    description: "Conver.Concurrente PDFs escaneados e arquivos de imagem em texto editável usando software OCR avançado e aprendizado de máquina",
     howTo: {
-      title: "Como Funciona a Extração de Texto OCR",
-      step1: {
-        title: "Carregar",
-        description: "Carregue seu documento PDF digitalizado ou arquivo PDF baseado em imagem."
-      },
-      step2: {
-        title: "Configurar OCR",
-        description: "Selecione o idioma, intervalo de páginas e opções avançadas para melhores resultados."
-      },
-      step3: {
-        title: "Obter Texto",
-        description: "Copie o texto extraído ou baixe-o como um arquivo de texto para uso posterior."
-      }
+      title: "Como Funciona a Extração OCR",
+      step1: { title: "Carregar", description: "Carregue seu PDF escaneado ou arquivo de imagem no conversor de imagem para texto." },
+      step2: { title: "Configurar a Ferramenta OCR", description: "Selecione o idioma, intervalo de páginas e opções avançadas para um reconhecimento de texto ideal." },
+      step3: { title: "Extrair Texto", description: "Copie o texto extraído ou baixe-o como arquivo .txt com nosso conversor de imagem para texto." }
     },
     faq: {
       title: "Perguntas Frequentes",
       questions: {
-        accuracy: {
-          question: "Quão precisa é a extração de texto OCR?",
-          answer: "Nossa tecnologia OCR geralmente alcança precisão de 90-99% para textos impressos claros em documentos bem digitalizados. A precisão pode diminuir com digitalizações de baixa qualidade, fontes incomuns ou layouts complexos."
-        },
-        languages: {
-          question: "Quais idiomas são suportados?",
-          answer: "Suportamos mais de 100 idiomas, incluindo inglês, francês, alemão, espanhol, italiano, português, chinês, japonês, coreano, russo, árabe, hindi e muitos outros."
-        },
-        recognition: {
-          question: "Por que meu texto não está sendo reconhecido corretamente?",
-          answer: "Vários fatores podem afetar a precisão do OCR: qualidade do documento, resolução, contraste, layouts complexos, escrita à mão, fontes incomuns ou seleção do idioma errado."
-        },
-        pageLimit: {
-          question: "Existe um limite de quantas páginas posso processar?",
-          answer: "Para usuários gratuitos, há um limite de 50 páginas por PDF. Usuários premium podem processar PDFs com até 500 páginas."
-        },
-        security: {
-          question: "Meus dados estão seguros durante o processamento OCR?",
-          answer: "Sim, sua segurança é nossa prioridade. Todos os arquivos carregados são processados em servidores seguros e automaticamente excluídos após o processamento."
-        }
+        accuracy: { question: "Quão precisa é a tecnologia de extração OCR?", answer: "Nosso software OCR alcança uma precisão de 90-99% para textos impressos claros em documentos bem escaneados. A precisão pode diminuir com arquivos de imagem de baixa qualidade ou fontes incomuns." },
+        languages: { question: "Quais idiomas são suportados?", answer: "Suportamos mais de 100 idiomas, incluindo inglês, francês, alemão, espanhol, chinês, japonês, árabe, russo e muitos outros." },
+        recognition: { question: "Por que meu texto não está sendo reconhecido corretamente?", answer: "Vários fatores podem afetar o reconhecimento: qualidade do documento, resolução, contraste, layouts complexos, escrita à mão ou seleção de idioma incorreta." },
+        pageLimit: { question: "Há um limite de páginas que posso processar?", answer: "Para usuários gratuitos, o limite é de 50 páginas por PDF. Usuários premium podem processar PDFs de até 500 páginas." },
+        security: { question: "Meus dados estão seguros durante o processamento OCR?", answer: "Sim, sua segurança é nossa prioridade. Todos os arquivos carregados são processados em servidores seguros e excluídos automaticamente após o processamento." }
       }
     },
-    relatedTools: "Ferramentas de PDF Relacionadas",
-    processing: {
-      title: "Processando OCR",
-      message: "O processamento OCR pode levar alguns minutos dependendo do tamanho e complexidade do documento"
-    },
-    results: {
-      title: "Texto Extraído",
-      copy: "Copiar",
-      download: "Baixar .txt"
-    },
-    languages: {
-      english: "Inglês",
-      french: "Francês",
-      german: "Alemão",
-      spanish: "Espanhol",
-      chinese: "Chinês",
-      japanese: "Japonês",
-      arabic: "Árabe",
-      russian: "Russo"
-    },
+    relatedTools: "Ferramentas Relacionadas de OCR e PDF",
+    processing: { title: "Processamento com Software OCR", message: "O reconhecimento de texto pode levar alguns minutos dependendo do tamanho e da complexidade do arquivo" },
+    results: { title: "Resultados do Texto Extraído", copy: "Copiar", download: "Baixar .txt" },
+    languages: { english: "Inglês", french: "Francês", german: "Alemão", spanish: "Espanhol", chinese: "Chinês", japanese: "Japonês", arabic: "Árabe", russian: "Russo" },
     whatIsOcr: {
-      title: "Reconhecimento Óptico de Caracteres (OCR)",
-      description: "É uma tecnologia que converte diferentes tipos de documentos, como documentos em papel digitalizados, arquivos PDF ou imagens capturadas por uma câmera digital, em dados editáveis e pesquisáveis.",
-      explanation: "O OCR analisa a estrutura da imagem do documento, identifica caracteres e elementos de texto e, em seguida, os converte em um formato legível por máquina.",
-      extractionList: {
-        scannedPdfs: "PDFs digitalizados onde o texto existe como imagem",
-        imageOnlyPdfs: "PDFs apenas de imagem sem camada de texto subjacente",
-        embeddedImages: "PDFs contendo imagens embutidas com texto",
-        textCopyingIssues: "Documentos onde copiar texto diretamente não funciona"
-      }
+      title: "O que é Extração OCR?",
+      description: "Reconhecimento Óptico de Caracteres (OCR) é uma tecnologia apoiada em aprendizado de máquina que converte documentos escaneados, PDFs e arquivos de imagem em texto editável e pesquisável.",
+      explanation: "O conversor de imagem para texto analisa a estrutura da imagem do documento, identifica caracteres e elementos de texto, e os converte em um formato legível por máquina.",
+      extractionList: { scannedPdfs: "PDFs escaneados onde o texto existe como imagem", imageOnlyPdfs: "PDFs apenas de imagem sem camada de texto", embeddedImages: "PDFs contendo imagens embutidas com texto", textCopyingIssues: "Documentos onde a cópia direta de texto não funciona" }
     },
     whenToUse: {
-      title: "Quando Usar a Extração de Texto OCR",
+      title: "Quando Usar um Extrator de Imagem para Texto",
       idealFor: "Ideal para:",
-      idealForList: {
-        scannedDocuments: "Documentos digitalizados salvos como PDFs",
-        oldDocuments: "Documentos antigos sem camadas de texto digital",
-        textSelectionIssues: "PDFs onde a seleção/cópia de texto não funciona",
-        textInImages: "Imagens contendo texto que precisa ser extraído",
-        searchableArchives: "Criação de arquivos pesquisáveis a partir de documentos digitalizados"
-      },
+      idealForList: { scannedDocuments: "Documentos escaneados salvos como PDFs", oldDocuments: "Documentos antigos sem camada de texto digital", textSelectionIssues: "PDFs onde a seleção/cópia de texto não funciona", textInImages: "Arquivos de imagem contendo texto a ser extraído", searchableArchives: "Criação de arquivos pesquisáveis a partir de documentos escaneados" },
       notNecessaryFor: "Não necessário para:",
-      notNecessaryForList: {
-        digitalPdfs: "PDFs digitais nativos onde o texto já pode ser selecionado",
-        createdDigitally: "PDFs criados diretamente de documentos digitais",
-        copyPasteAvailable: "Documentos onde você já pode copiar e colar texto",
-        formatPreservation: "Arquivos que precisam de preservação de formato (use nossa conversão de PDF para DOCX em vez disso)"
-      }
+      notNecessaryForList: { digitalPdfs: "PDFs digitais nativos com texto selecionável", createdDigitally: "PDFs criados diretamente de documentos digitais", copyPasteAvailable: "Documentos onde você já pode copiar e colar texto", formatPreservation: "Arquivos que precisam de preservação de formato (use nossa conversão de PDF para DOCX em vez disso)" }
     },
     limitations: {
-      title: "Limitações e Dicas do OCR",
-      description: "Embora nossa tecnologia OCR seja poderosa, há algumas limitações a serem consideradas:",
-      factorsAffecting: "Fatores que afetam a precisão do OCR:",
-      factorsList: {
-        documentQuality: "Qualidade do documento (resolução, contraste)",
-        complexLayouts: "Layouts e formatação complexos",
-        handwrittenText: "Texto manuscrito (reconhecimento limitado)",
-        specialCharacters: "Caracteres especiais e símbolos",
-        multipleLanguages: "Vários idiomas em um documento"
-      },
+      title: "Limitações e Dicas da Ferramenta OCR",
+      description: "Embora nosso software OCR seja poderoso, há algumas limitações a serem consideradas:",
+      factorsAffecting: "Fatores que afetam a precisão do reconhecimento de texto:",
+      factorsList: { documentQuality: "Qualidade do documento (resolução, contraste)", complexLayouts: "Layouts e formatações complexas", handwrittenText: "Texto manuscrito (reconhecimento limitado)", specialCharacters: "Caracteres especiais e símbolos", multipleLanguages: "Vários idiomas em um documento" },
       tipsForBest: "Dicas para melhores resultados:",
-      tipsList: {
-        highQualityScans: "Use digitalizações de alta qualidade (300 DPI ou superior)",
-        correctLanguage: "Selecione o idioma correto para seu documento",
-        enhanceScannedImages: "Ative \"Melhorar imagens digitalizadas\" para maior precisão",
-        smallerPageRanges: "Processe intervalos de páginas menores para documentos grandes",
-        reviewText: "Revise e corrija o texto extraído depois"
-      }
+      tipsList: { highQualityScans: "Use escaneamentos de alta qualidade (300 DPI ou mais)", correctLanguage: "Selecione o idioma correto para seu documento", enhanceScannedImages: "Ative 'Melhorar imagens escaneadas' para maior precisão", smallerPageRanges: "Processe intervalos de páginas menores para documentos grandes", reviewText: "Revise e corrija o texto extraído depois" }
     },
-    options: {
-      scope: "Páginas para Extrair",
-      all: "Todas as Páginas",
-      custom: "Páginas Específicas",
-      pages: "Números de Página",
-      pagesHint: "Ex.: 1,3,5-9",
-      enhanceScanned: "Melhorar imagens digitalizadas",
-      enhanceScannedHint: "Pré-processar imagens para melhorar a precisão do OCR (recomendado para documentos digitalizados)",
-      preserveLayout: "Preservar layout",
-      preserveLayoutHint: "Tente manter o layout original com parágrafos e quebras de linha"
-    },
-    // Upload area
-    uploadPdf: "Carregar PDF para extração de texto",
-    dragDrop: "Arraste e solte seu arquivo PDF aqui, ou clique para navegar",
-    selectPdf: "Selecionar arquivo PDF",
+    options: { scope: "Páginas a Extrair", all: "Todas as Páginas", custom: "Páginas Específicas", pages: "Números de Página", pagesHint: "Ex. 1,3,5-9", enhanceScanned: "Melhorar imagens escaneadas", enhanceScannedHint: "Pré-processar imagens para melhorar a precisão do OCR (recomendado para documentos escaneados)", preserveLayout: "Preservar layout", preserveLayoutHint: "Tente manter o layout original com parágrafos e quebras de linha" },
+    ocrTool: "Ferramenta de Extração OCR",
+    ocrToolDesc: "Converta documentos escaneados e arquivos de imagem em texto editável com nosso conversor de imagem para texto",
+    uploadPdf: "Carregar Arquivos para Extração OCR",
+    dragDrop: "Arraste e solte seu arquivo PDF ou de imagem aqui, ou clique para navegar",
+    selectPdf: "Selecionar Arquivo",
     uploading: "Carregando...",
     maxFileSize: "Tamanho máximo do arquivo: 50MB",
-
-    // File handling
     invalidFile: "Tipo de arquivo inválido",
-    invalidFileDesc: "Por favor, selecione um arquivo PDF",
+    invalidFileDesc: "Por favor, selecione um arquivo PDF ou de imagem suportado",
     fileTooLarge: "Arquivo muito grande",
     fileTooLargeDesc: "O tamanho máximo do arquivo é 50MB",
     noFile: "Nenhum arquivo selecionado",
-    noFileDesc: "Por favor, selecione um arquivo PDF para processar",
-    changeFile: "Mudar arquivo",
-
-    // Options
-    languageLabel: "Idioma do documento",
+    noFileDesc: "Por favor, selecione um arquivo para reconhecimento de texto",
+    changeFile: "Mudar Arquivo",
+    languageLabel: "Idioma do Documento",
     selectLanguage: "Selecionar idioma",
-    pageRange: "Intervalo de páginas",
-    allPages: "Todas as páginas",
-    specificPages: "Páginas específicas",
-    pageRangeExample: "ex.: 1-3, 5, 7-9",
+    pageRange: "Intervalo de Páginas",
+    allPages: "Todas as Páginas",
+    specificPages: "Páginas Específicas",
+    pageRangeExample: "ex., 1-3, 5, 7-9",
     pageRangeInfo: "Insira páginas individuais ou intervalos separados por vírgulas",
-    preserveLayout: "Preservar layout",
-    preserveLayoutDesc: "Tentar manter a estrutura e formatação do documento",
-
-    // Processing
-    extractText: "Extrair texto",
-    extractingText: "Extraindo texto...",
-    processingPdf: "Processando seu PDF",
-    processingInfo: "Isso pode levar alguns minutos dependendo do tamanho e complexidade do arquivo",
-    analyzing: "Analisando documento",
+    preserveLayout: "Preservar Layout",
+    preserveLayoutDesc: "Tente manter a estrutura e formatação do documento",
+    extractText: "Extrair Texto",
+    extractingText: "Extraindo Texto...",
+    processingPdf: "Processando seu arquivo",
+    processingInfo: "Isso pode levar alguns minutos dependendo do tamanho e da complexidade do arquivo",
+    analyzing: "Analisando conteúdo",
     preprocessing: "Pré-processando páginas",
     recognizing: "Reconhecendo texto",
     extracting: "Extraindo conteúdo",
     finalizing: "Finalizando resultados",
     finishing: "Concluindo",
-
-    // Results
     extractionComplete: "Extração de texto concluída",
-    extractionCompleteDesc: "Seu texto foi extraído com sucesso do PDF",
+    extractionCompleteDesc: "Seu texto foi extraído com sucesso com nosso extrator de imagem para texto",
     extractionError: "Falha na extração de texto",
-    extractionFailed: "Falha ao extrair texto",
+    extractionFailed: "Não foi possível extrair o texto",
     unknownError: "Ocorreu um erro desconhecido",
     textCopied: "Texto copiado para a área de transferência",
-    copyFailed: "Falha ao copiar texto",
-    textPreview: "Visualização do texto",
-    rawText: "Texto bruto",
-    extractedText: "Texto extraído",
+    copyFailed: "Falha ao copiar o texto",
+    textPreview: "Visualização do Texto",
+    rawText: "Texto Bruto",
+    extractedText: "Texto Extraído",
     previewDesc: "Visualização do texto extraído com formatação",
-    rawTextOutput: "Saída de texto bruto",
+    rawTextOutput: "Saída de Texto Bruto",
     rawTextDesc: "Texto simples sem formatação",
-    noTextFound: "Nenhum texto encontrado no documento",
-    copyText: "Copiar texto",
-    downloadText: "Baixar texto",
-    processAnother: "Processar outro PDF"
+    noTextFound: "Nenhum texto encontrado no arquivo",
+    copyText: "Copiar Texto",
+    downloadText: "Baixar Texto",
+    processAnother: "Processar Outro Arquivo",
+    supportedLanguages: "Suporta mais de 15 idiomas, incluindo inglês, espanhol, francês, alemão, chinês, japonês e mais. Selecione o idioma apropriado para maior precisão."
   },
 
   // Página de Proteção de PDF

@@ -64,22 +64,30 @@ const stopWordsByLanguage: Record<string, string[]> = {
     it: ["e", "o", "in", "con", "per", "di", "a", "il", "la"],
     tr: ["ve", "ile", "de", "da", "için", "bu", "şu", "veya"]
 };
-
-// Keyword extraction function
 function extractKeywords(text: string, language: string): string[] {
     const stopWords = stopWordsByLanguage[language] || stopWordsByLanguage["en"];
 
-    const words = text.toLowerCase().replace(/[^\w\s]/g, "").split(/\s+/);
+    // Split text into words and clean it
+    const words = text.toLowerCase().replace(/[^\w\s]/g, "").split(/\s+/).filter(word => word.length > 2);
 
-    const filteredWords = words
-        .filter(word => !stopWords.includes(word) && word.length > 2)
-        .reduce((acc, word) => {
-            acc[word] = (acc[word] || 0) + 1;
-            return acc;
-        }, {} as Record<string, number>);
+    // Generate bigrams (two-word phrases)
+    const bigrams: string[] = [];
+    for (let i = 0; i < words.length - 1; i++) {
+        // Skip if either word is a stop word
+        if (!stopWords.includes(words[i]) && !stopWords.includes(words[i + 1])) {
+            bigrams.push(`${words[i]} ${words[i + 1]}`);
+        }
+    }
 
-    return Object.keys(filteredWords)
-        .sort((a, b) => filteredWords[b] - filteredWords[a])
+    // Count frequency of bigrams
+    const bigramCounts = bigrams.reduce((acc, bigram) => {
+        acc[bigram] = (acc[bigram] || 0) + 1;
+        return acc;
+    }, {} as Record<string, number>);
+
+    // Sort by frequency and take top 5
+    return Object.keys(bigramCounts)
+        .sort((a, b) => bigramCounts[b] - bigramCounts[a])
         .slice(0, 5);
 }
 

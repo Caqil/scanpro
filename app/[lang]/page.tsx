@@ -24,6 +24,7 @@ import {
 import HeroAnimation from "@/components/hero-animation";
 import { useLanguageStore } from '@/src/store/store'
 import { LanguageLink } from "@/components/language-link";
+import FeaturesContent from "./features-content";
 
 // Create a client component that uses useSearchParams
 function ClientHomeContent() {
@@ -199,52 +200,7 @@ function ClientHomeContent() {
           </div>
         </div>
       </section>
-
-      {/* Features section */}
-      <section className="w-full py-12 md:py-24 lg:py-32">
-  <div className="container px-4 md:px-6">
-    <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-      <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-        {t('features.title')}
-      </h2>
-      <p className="max-w-[85%] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-        {t('features.description')}
-      </p>
-    </div>
-    <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3">
-      <FeatureCard 
-        icon={<FileTextIcon className="h-10 w-10" />}
-        title={t('features.categories.conversion.title')}
-        description={t('features.categories.conversion.description')}
-      />
-      <FeatureCard 
-        icon={<TableIcon className="h-10 w-10" />}
-        title={t('features.categories.editing.title')}
-        description={t('features.categories.editing.description')}
-      />
-      <FeatureCard 
-        icon={<ImageIcon className="h-10 w-10" />}
-        title={t('features.categories.ocr.title')}
-        description={t('features.categories.ocr.description')}
-      />
-      <FeatureCard 
-        icon={<FileIcon className="h-10 w-10" />}
-        title={t('features.categories.security.title')}
-        description={t('features.categories.security.description')}
-      />
-      <FeatureCard 
-        icon={<PenToolIcon className="h-10 w-10" />}
-        title={t('features.categories.api.title')}
-        description={t('features.categories.api.description')}
-      />
-      <FeatureCard 
-        icon={<LightbulbIcon className="h-10 w-10" />}
-        title={t('features.categories.cloud.title')}
-        description={t('features.categories.cloud.description')}
-      />
-    </div>
-  </div>
-</section>
+ <FeaturesContent />
 
       {/* CTA section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">

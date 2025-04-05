@@ -21,12 +21,14 @@ export default function MergePDFClient() {
           {t("mergePdf.description") || t("mergePdf.description")}
         </p>
       </div>
-      {/* Rest of your JSX here */}
+      
+      {/* Main content */}
       <div className="mb-8">
         <ClientMergePDFContent />
       </div>
-     {/* How It Works section */}
-     <div className="mb-12">
+      
+      {/* How It Works section */}
+      <div className="mb-12">
         <h2 className="text-2xl font-bold mb-6 text-center">{t("mergePdf.howTo.title")}</h2>
         <div className="grid md:grid-cols-3 gap-8">
           <div className="flex flex-col items-center text-center">
@@ -54,6 +56,130 @@ export default function MergePDFClient() {
             <h3 className="text-lg font-medium mb-2">{t("mergePdf.howTo.step3.title")}</h3>
             <p className="text-sm text-muted-foreground">
               {t("mergePdf.howTo.step3.description")}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Benefits Section */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-bold mb-6 text-center">{t("mergePdf.benefits.title")}</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.benefits.compatibility.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.benefits.compatibility.description")}
+            </p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.benefits.privacy.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.benefits.privacy.description")}
+            </p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.benefits.simplicity.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.benefits.simplicity.description")}
+            </p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.benefits.quality.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.benefits.quality.description")}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Use Cases Section */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-bold mb-6 text-center">{t("mergePdf.useCases.title")}</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.useCases.business.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.useCases.business.description")}
+            </p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.useCases.academic.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.useCases.academic.description")}
+            </p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.useCases.personal.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.useCases.personal.description")}
+            </p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.useCases.professional.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.useCases.professional.description")}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Tips Section */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-bold mb-6 text-center">{t("mergePdf.tips.title")}</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.tips.tip1.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.tips.tip1.description")}
+            </p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.tips.tip2.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.tips.tip2.description")}
+            </p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.tips.tip3.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.tips.tip3.description")}
+            </p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.tips.tip4.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.tips.tip4.description")}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Comparison Section */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-bold mb-6 text-center">{t("mergePdf.comparison.title")}</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.comparison.point1.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.comparison.point1.description")}
+            </p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.comparison.point2.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.comparison.point2.description")}
+            </p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.comparison.point3.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.comparison.point3.description")}
+            </p>
+          </div>
+          <div className="border rounded-lg p-6">
+            <h3 className="text-lg font-medium mb-2">{t("mergePdf.comparison.point4.title")}</h3>
+            <p className="text-muted-foreground">
+              {t("mergePdf.comparison.point4.description")}
             </p>
           </div>
         </div>

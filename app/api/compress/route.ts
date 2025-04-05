@@ -175,7 +175,7 @@ export async function POST(request: NextRequest) {
         const compressionRatio = ((originalSize - compressedSize) / originalSize * 100).toFixed(2);
 
         // Create relative URL for the compressed file
-        const fileUrl = `/compressions/${uniqueId}-compressed.pdf`;
+        const fileUrl = `/api/file?folder=compressions&filename=${uniqueId}-compressed.pdf`;
 
         return NextResponse.json({
             success: true,

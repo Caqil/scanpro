@@ -271,114 +271,112 @@ export default {
   // Convert Page
   convert: {
     title: {
-      pdfToWord: "PDF에서 Word로 변환",
-      pdfToExcel: "PDF에서 Excel로 변환",
-      pdfToPowerPoint: "PDF에서 PowerPoint로 변환",
-      pdfToJpg: "PDF에서 JPG로 변환",
-      pdfToPng: "PDF에서 PNG로 변환",
-      pdfToHtml: "PDF에서 HTML로 변환",
-      wordToPdf: "Word에서 PDF로 변환",
-      excelToPdf: "Excel에서 PDF로 변환",
-      powerPointToPdf: "PowerPoint에서 PDF로 변환",
-      jpgToPdf: "JPG에서 PNG로 변환",
-      pngToPdf: "PNG에서 PDF로 변환",
-      htmlToPdf: "HTML에서 PDF로 변환",
-      generic: "파일 변환"
+      pdfToWord: "PDF를 Word로 온라인 변환 - 무료 PDF에서 DOC 변환 도구",
+      pdfToExcel: "PDF를 Excel로 온라인 변환 - PDF 데이터를 XLS로 추출",
+      pdfToPowerPoint: "PDF를 PowerPoint로 변환 - PDF에서 PPT 변환기",
+      pdfToJpg: "PDF를 JPG 이미지로 변환 - 고품질 PDF에서 JPEG",
+      pdfToPng: "PDF를 PNG로 온라인 변환 - PDF에서 투명 PNG",
+      pdfToHtml: "PDF를 HTML 웹 페이지로 변환 - PDF에서 HTML5 변환기",
+      wordToPdf: "Word를 PDF로 온라인 변환 - 무료 DOC에서 PDF 변환기",
+      excelToPdf: "Excel을 PDF로 변환 - XLS에서 PDF 변환 도구",
+      powerPointToPdf: "PowerPoint를 PDF로 온라인 변환 - PPT에서 PDF",
+      jpgToPdf: "JPG를 PDF로 온라인 변환 - 이미지에서 PDF 생성",
+      pngToPdf: "PNG를 PDF로 변환 - 투명 이미지에서 PDF 변환기",
+      htmlToPdf: "HTML을 PDF로 온라인 변환 - 웹 페이지에서 PDF 생성기",
+      generic: "온라인 파일 변환기 - 문서, 이미지 등 변환"
     },
     description: {
-      pdfToWord: "PDF 문서를 빠르고 쉽게 편집 가능한 Word 파일로 변환합니다",
-      pdfToExcel: "PDF 파일에서 표와 데이터를 Excel 스프레드시트로 추출합니다",
-      pdfToPowerPoint: "PDF 프레젠테이션을 편집 가능한 PowerPoint 슬라이드로 변환합니다",
-      pdfToJpg: "PDF 페이지를 고품질 JPG 이미지로 변환합니다",
-      pdfToPng: "PDF 페이지를 투명 PNG 이미지로 변환합니다",
-      pdfToHtml: "PDF 문서를 HTML 웹 페이지로 변환합니다",
-      wordToPdf: "Word 문서를 완벽한 형식으로 PDF 형식으로 변환합니다",
-      excelToPdf: "Excel 스프레드시트를 PDF 문서로 변환합니다",
-      powerPointToPdf: "PowerPoint 프레젠테이션을 PDF 형식으로 변환합니다",
-      jpgToPdf: "JPG 이미지에서 PDF 파일을 생성합니다",
-      pngToPdf: "PNG 이미지에서 PDF 파일을 생성합니다",
-      htmlToPdf: "HTML 웹 페이지를 PDF 문서로 변환합니다",
-      generic: "형식 간 변환을 위해 파일을 선택하세요"
+      pdfToWord: "PDF 문서를 편집 가능한 Word 파일로 빠르고 쉽게 변환. 무료 PDF에서 Word 변환기는 DOC/DOCX 출력 시 서식을 유지합니다.",
+      pdfToExcel: "PDF 파일에서 표와 데이터를 Excel 스프레드시트로 추출. 분석을 위해 정확한 데이터 서식으로 PDF를 XLS/XLSX로 변환.",
+      pdfToPowerPoint: "PDF 프레젠테이션을 편집 가능한 PowerPoint 슬라이드로 변환. PDF에서 PPT 변환기는 슬라이드 레이아웃과 디자인 요소를 유지.",
+      pdfToJpg: "PDF 페이지를 고품질 JPG 이미지로 변환. PDF에서 이미지 추출 또는 각 페이지를 JPEG로 저장해 온라인 공유.",
+      pdfToPng: "PDF 페이지를 투명 PNG 이미지로 변환. 투명 배경이 필요한 그래픽 디자이너에게 이상적.",
+      pdfToHtml: "PDF 문서를 HTML 웹 페이지로 변환. 고급 변환기로 PDF 파일에서 반응형 HTML5 웹사이트 생성.",
+      wordToPdf: "Word 문서를 완벽한 서식으로 PDF 형식으로 변환. 전문적인 결과를 위한 무료 DOC/DOCX에서 PDF 변환기.",
+      excelToPdf: "Excel 스프레드시트를 PDF 문서로 변환. XLS/XLSX에서 PDF로 변환 시 수식, 차트 및 표 유지.",
+      powerPointToPdf: "PowerPoint 프레젠테이션을 PDF 형식으로 변환. PPT/PPTX에서 PDF 변환기는 슬라이드 전환과 노트를 유지.",
+      jpgToPdf: "JPG 이미지에서 PDF 파일 생성. 여러 JPEG 사진을 하나의 PDF 문서로 온라인 결합.",
+      pngToPdf: "PNG 이미지에서 PDF 파일 생성. 투명성을 유지한 채 투명 PNG 그래픽을 PDF로 변환.",
+      htmlToPdf: "HTML 웹 페이지를 PDF 문서로 변환. 온라인 HTML에서 PDF 생성기 도구로 웹사이트를 PDF로 저장.",
+      generic: "형식 간 변환할 파일 선택. PDF, Word, Excel, PowerPoint, JPG, PNG 및 HTML용 무료 온라인 문서 변환기."
     },
     howTo: {
-      title: "{from}에서 {to}로 변환하는 방법",
+      title: "{from}를 {to}로 온라인 변환 방법",
       step1: {
-        title: "업로드",
-        description: "변환하고 싶은 {from} 파일을 업로드하세요"
+        title: "파일 업로드",
+        description: "컴퓨터, Google Drive 또는 Dropbox에서 변환할 {from} 파일 업로드"
       },
       step2: {
-        title: "변환",
-        description: "변환 버튼을 클릭하면 시스템이 파일을 처리합니다"
+        title: "형식 변환",
+        description: "변환 버튼 클릭 후 고급 변환 기술로 파일 처리"
       },
       step3: {
-        title: "다운로드",
-        description: "변환된 {to} 파일을 다운로드하세요"
+        title: "결과 다운로드",
+        description: "변환된 {to} 파일 즉시 다운로드 또는 공유 가능한 링크 획득"
       }
     },
     options: {
-      title: "변환 옵션",
-      ocr: "OCR(광학 문자 인식) 활성화",
-      ocrDescription: "스캔된 문서나 이미지에서 텍스트를 추출합니다",
+      title: "고급 변환 옵션",
+      ocr: "OCR 활성화 (광학 문자 인식)",
+      ocrDescription: "스캔한 문서 또는 이미지에서 편집 가능한 텍스트 추출",
       preserveLayout: "원본 레이아웃 유지",
-      preserveLayoutDescription: "원본 문서의 형식과 레이아웃을 유지합니다",
+      preserveLayoutDescription: "원본 문서의 서식과 레이아웃 정확히 유지",
       quality: "출력 품질",
-      qualityDescription: "변환된 파일의 품질 수준을 설정합니다",
+      qualityDescription: "변환 파일의 품질 수준 설정 (파일 크기 영향)",
       qualityOptions: {
-        low: "낮음 (작은 파일 크기)",
-        medium: "중간 (균형)",
-        high: "높음 (최고 품질)"
+        low: "낮음 (작은 파일 크기, 빠른 처리)",
+        medium: "중간 (품질과 크기 균형)",
+        high: "높음 (최고 품질, 큰 파일)"
       },
       pageOptions: "페이지 옵션",
       allPages: "모든 페이지",
       selectedPages: "선택한 페이지",
-      pageRangeDescription: "페이지 번호 및/또는 페이지 범위를 쉼표로 구분하여 입력하세요",
-      pageRangeExample: "예: 1,3,5-12"
+      pageRangeDescription: "쉼표로 구분된 페이지 번호 및/또는 페이지 범위 입력",
+      pageRangeExample: "예: 1,3,5-12 (1, 3, 5~12페이지 변환)"
     },
-    moreTools: "관련 변환 도구",
+    moreTools: "관련 문서 변환 도구",
     expertTips: {
-      title: "전문가 팁",
+      title: "전문가 변환 팁",
       pdfToWord: [
-        "최상의 결과를 위해 PDF에 명확하고 기계로 읽을 수 있는 텍스트가 있는지 확인하세요",
-        "스캔된 문서 또는 이미지 기반 PDF에 대해 OCR을 활성화하세요",
-        "복잡한 레이아웃은 변환 후 약간의 조정이 필요할 수 있습니다"
+        "PDF에서 Word로 최상의 결과를 위해 PDF에 기계가 읽을 수 있는 명확한 텍스트 확인",
+        "스캔 문서 또는 이미지 기반 PDF의 경우 OCR 활성화해 편집 가능한 텍스트 추출",
+        "복잡한 레이아웃은 완벽한 서식을 위해 변환 후 약간의 조정 필요"
       ],
       pdfToExcel: [
-        "경계가 명확한 표는 더 정확하게 변환됩니다",
-        "데이터 추출을 개선하려면 스캔된 PDF를 OCR로 전처리하세요",
-        "변환 후 스프레드시트 수식이 전송되지 않을 수 있으므로 확인하세요"
+        "명확한 테두리가 있는 표는 PDF에서 Excel로 더 정확하게 변환",
+        "XLS/XLSX로 더 나은 데이터 추출을 위해 스캔한 PDF를 OCR로 전처리",
+        "변환 후 스프레드시트 수식 확인 (자동 전송되지 않을 수 있음)"
       ],
       generic: [
-        "높은 품질 설정은 더 큰 파일 크기를 초래합니다",
-        "스캔된 텍스트 또는 텍스트가 포함된 이미지 문서에 OCR을 사용하세요",
-        "정확성을 확인하기 위해 변환 후 파일을 미리 보세요"
+        "더 높은 품질 설정은 더 큰 파일 크기지만 더 나은 출력",
+        "스캔한 텍스트 또는 텍스트가 포함된 이미지가 있는 문서에 OCR 사용",
+        "다운로드 전 항상 변환 후 파일 미리보기로 정확성 확인"
       ]
     },
     advantages: {
-      title: "{from}을 {to}로 변환의 장점",
+      title: "{from}를 {to}로 변환의 이점",
       pdfToWord: [
-        "PDF 형식에 잠겨 있던 텍스트를 편집하고 수정할 수 있습니다",
-        "전체 문서를 다시 만들지 않고 콘텐츠를 업데이트하세요",
-        "다른 문서에서 사용할 정보를 추출하세요"
+        "PDF 형식에서 잠긴 텍스트를 DOC 변환기로 편집 및 수정",
+        "처음부터 전체 문서를 다시 만들지 않고 콘텐츠 업데이트",
+        "다른 Word 문서 또는 템플릿에서 사용할 정보 추출"
       ],
       pdfToExcel: [
-        "정적인 PDF 형식의 데이터를 분석하고 조작할 수 있습니다",
-        "추출된 데이터로 차트를 만들고 계산을 수행하세요",
-        "재무 보고서나 숫자 정보를 쉽게 업데이트하세요"
+        "정적 PDF 형식의 데이터를 XLS 도구로 분석 및 조작",
+        "추출된 스프레드시트 데이터로 차트 생성 및 계산 수행",
+        "Excel 형식으로 재무 보고서 또는 숫자 정보 쉽게 업데이트"
       ],
       wordToPdf: [
-        "형식을 유지하는 보편적으로 읽을 수 있는 문서를 만드세요",
-        "원치 않는 수정으로부터 콘텐츠를 보호하세요",
-        "모든 기기와 플랫폼에서 일관된 모습을 보장하세요"
+        "완벽한 서식을 유지하는 보편적으로 읽을 수 있는 PDF 문서 생성",
+        "안전한 PDF 출력으로 원치 않는 수정으로부터 콘텐츠 보호",
+        "모든 기기 및 플랫폼에서 일관된 문서 모양 보장"
       ],
       generic: [
-        "문서를 더 유용한 형식으로 변환하세요",
-        "대상 형식을 지원하는 프로그램에서 콘텐츠에 접근하고 사용하세요",
-        "다른 사람들이 쉽게 열 수 있는 형식으로 파일을 공유하세요"
+        "문서를 더 유용하고 편집 가능한 형식으로 변환",
+        "대상 파일 유형을 지원하는 프로그램에서 콘텐츠 액세스 및 사용",
+        "특수 소프트웨어 없이 다른 사람이 쉽게 열 수 있는 형식으로 파일 공유"
       ]
     }
   },
-
-
   features: {
     title: "고급 PDF 도구 및 기능 | ScanPro",
     description: "문서 관리, 변환, 편집 등을 위한 ScanPro의 포괄적인 PDF 도구 및 기능 제품군을 살펴보세요.",
@@ -752,231 +750,265 @@ export default {
   },
   // Merge PDF Page
   mergePdf: {
-    title: "PDF 파일 병합",
-    description: "여러 PDF 파일을 빠르고 쉽게 하나의 문서로 결합합니다",
+    title: "온라인 PDF 파일 병합 | 무료 웹 브라우저 PDF 병합 도구",
+    description: "모든 운영 체제에서 작동하는 브라우저 기반 병합 도구를 사용하여 여러 PDF 파일을 빠르고 쉽게 하나의 문서로 결합하세요",
+    intro: "온라인 PDF 병합 도구를 사용하면 몇 번의 클릭으로 여러 문서를 하나의 병합 파일로 결합할 수 있습니다. 설치가 필요 없으며 모든 운영 체제의 웹 브라우저에서 바로 작동합니다.",
+
+    // How-to section
     howTo: {
-      title: "PDF 파일 병합 방법",
+      title: "브라우저에서 PDF 파일을 병합하는 방법",
       step1: {
         title: "파일 업로드",
-        description: "결합하려는 PDF 파일을 업로드하세요. 한 번에 여러 파일을 선택할 수 있습니다."
+        description: "결합하고 싶은 PDF 파일을 업로드하세요. 장치에서 여러 파일을 한 번에 선택하거나 웹 브라우저에 직접 드래그 앤 드롭하세요."
       },
       step2: {
-        title: "순서 정렬",
-        description: "최종 PDF에 나타날 순서대로 파일을 드래그 앤 드롭하여 재정렬하세요."
+        title: "순서 조정",
+        description: "드래그 앤 드롭으로 파일을 최종 병합 파일에 나타나길 원하는 순서로 재배열하세요. 저희 병합 도구는 여러 PDF를 직관적으로 정리할 수 있게 해줍니다."
       },
       step3: {
         title: "다운로드",
-        description: "PDF 병합 버튼을 클릭하고 결합된 PDF 파일을 다운로드하세요."
+        description: "'PDF 병합' 버튼을 클릭하고 결합된 PDF 파일을 모든 웹 브라우저에서 장치로 바로 다운로드하세요."
       }
     },
+
+    // Benefits section
+    benefits: {
+      title: "온라인 PDF 병합 도구의 장점",
+      compatibility: {
+        title: "모든 장치에서 작동",
+        description: "저희 웹 브라우저 기반 PDF 병합 도구는 Windows, macOS, Linux 및 모바일 운영 체제에서 설치 없이 완벽하게 작동합니다."
+      },
+      privacy: {
+        title: "안전하고 비공개",
+        description: "귀하의 문서는 웹 브라우저에서 처리되며 병합 후 자동으로 삭제되어 민감한 정보가 비공개로 유지됩니다."
+      },
+      simplicity: {
+        title: "사용자 친화적 인터페이스",
+        description: "직관적인 드래그 앤 드롭 인터페이스로 인해 저희 온라인 도구를 처음 사용하는 사용자도 여러 PDF 파일을 쉽게 병합할 수 있습니다."
+      },
+      quality: {
+        title: "고품질 출력",
+        description: "저희 병합 도구는 병합 파일에서 원본 형식, 이미지 및 텍스트 품질을 유지하여 전문적인 결과를 보장합니다."
+      }
+    },
+
+    // Use cases section
+    useCases: {
+      title: "PDF 병합의 일반적인 사용 사례",
+      business: {
+        title: "비즈니스 문서",
+        description: "재무 보고서, 계약서 및 프레젠테이션을 고객 및 이해관계자를 위한 포괄적인 문서로 결합하세요."
+      },
+      academic: {
+        title: "학술 논문",
+        description: "연구 논문, 인용 및 부록을 검토 준비가 된 완전한 학술 제출물로 병합하세요."
+      },
+      personal: {
+        title: "개인 기록",
+        description: "영수증, 보증서 및 사용 설명서를 쉽게 참조할 수 있는 정리된 디지털 기록으로 결합하세요."
+      },
+      professional: {
+        title: "전문 포트폴리오",
+        description: "여러 작업 샘플을 하나의 쉽게 공유 가능한 문서로 병합하여 인상적인 포트폴리오를 만드세요."
+      }
+    },
+
+    // FAQ section
     faq: {
       title: "자주 묻는 질문",
       q1: {
-        question: "병합할 수 있는 PDF 수에 제한이 있나요?",
-        answer: "무료 도구로 최대 20개의 PDF 파일을 한 번에 병합할 수 있습니다. 더 큰 배치의 경우 프리미엄 플랜을 고려하세요."
+        question: "온라인 도구로 병합할 수 있는 PDF 수에 제한이 있나요?",
+        answer: "저희 무료 웹 브라우저 기반 병합 도구를 사용하면 한 번에 최대 20개의 PDF 파일을 결합할 수 있습니다. 여러 개의 큰 배치를 병합하려면 무제한 병합 작업을 허용하는 프리미엄 플랜으로 업그레이드하는 것을 고려하세요."
       },
       q2: {
-        question: "PDF 파일이 비공개로 유지되나요?",
-        answer: "네, 귀하의 개인 정보가 최우선입니다. 업로드된 모든 파일은 처리 후 서버에서 자동으로 삭제됩니다."
+        question: "온라인 병합 도구를 사용할 때 PDF 파일이 비공개로 유지되나요?",
+        answer: "네, 귀하의 개인 정보 보호가 최우선입니다. 저희 브라우저 기반 병합 도구에 업로드된 모든 파일은 안전하게 처리되며 처리 후 서버에서 자동으로 삭제됩니다. 귀하의 문서 내용에 접근하거나 저장하지 않습니다."
       },
       q3: {
-        question: "비밀번호로 보호된 PDF를 병합할 수 있나요?",
-        answer: "비밀번호로 보호된 PDF의 경우, 먼저 Unlock PDF 도구를 사용하여 잠금을 해제한 후 병합해야 합니다."
+        question: "비밀번호로 보호된 PDF를 온라인 도구로 병합할 수 있나요?",
+        answer: "비밀번호로 보호된 PDF의 경우, 먼저 저희 온라인 PDF 잠금 해제 도구를 사용하여 잠금을 해제한 후 병합해야 합니다. 저희 브라우저 기반 병합 도구는 보호된 문서를 감지하면 알려줍니다."
+      },
+      q4: {
+        question: "온라인 PDF 병합 도구는 모든 운영 체제에서 작동하나요?",
+        answer: "네, 저희 웹 브라우저 기반 PDF 병합 도구는 Windows, macOS, Linux, iOS 및 Android를 포함한 모든 주요 운영 체제에서 작동합니다. 최신 웹 브라우저만 있으면 소프트웨어 설치 없이 PDF를 병합할 수 있습니다."
+      },
+      q5: {
+        question: "병합할 수 있는 PDF 파일의 크기는 어느 정도인가요?",
+        answer: "저희 무료 온라인 병합 도구는 파일당 최대 100MB를 지원합니다. 병합되는 모든 파일의 총 크기는 웹 브라우저에서 최적의 성능을 위해 300MB를 초과하지 않아야 합니다."
+      },
+      q6: {
+        question: "병합된 파일은 원본 PDF의 모든 기능을 유지하나요?",
+        answer: "네, 저희 고급 병합 도구는 원본 PDF의 텍스트, 이미지, 형식, 하이퍼링크 및 대부분의 인터랙티브 요소를 최종 병합 파일에 유지합니다."
       }
     },
-    relatedTools: "더 많은 PDF 도구 탐색",
-    viewAllTools: "모든 PDF 도구 보기",
-    of: "중",
-    files: "파일",
-    filesToMerge: "병합할 파일",
-    dragToReorder: "드래그하여 재정렬",
-    downloadReady: "다운로드 준비 완료",
-    downloadMerged: "병합 다운로드",
-    mergePdfs: "PDF 병합",
-    successMessage: "PDF가 성공적으로 병합되었습니다",
+
+    // Tips section
+    tips: {
+      title: "PDF를 효과적으로 병합하기 위한 팁",
+      tip1: {
+        title: "병합 전에 정리",
+        description: "파일 이름을 숫자로 변경(예: 01_intro.pdf, 02_content.pdf)하여 저희 병합 도구에 업로드하기 전에 쉽게 정리하세요."
+      },
+      tip2: {
+        title: "큰 파일 최적화",
+        description: "여러 개의 큰 문서를 병합할 경우, 먼저 저희 PDF 압축 도구를 사용하여 최종 병합 파일의 성능을 개선하세요."
+      },
+      tip3: {
+        title: "미리보기 확인",
+        description: "파일을 정리한 후, 저희 온라인 도구의 미리보기 기능을 사용하여 병합 PDF를 확정하기 전에 순서를 확인하세요."
+      },
+      tip4: {
+        title: "북마크 고려",
+        description: "전문 문서의 경우, 저희 PDF 편집 도구를 사용하여 병합 파일에 북마크를 추가하여 탐색을 쉽게 하세요."
+      }
+    },
+
+    // Comparison section
+    comparison: {
+      title: "왜 저희 웹 브라우저 병합 도구를 선택해야 하나요",
+      point1: {
+        title: "소프트웨어 설치 불필요",
+        description: "데스크톱 애플리케이션과 달리, 저희 온라인 PDF 병합 도구는 소프트웨어를 다운로드하거나 설치하지 않고 웹 브라우저에서 바로 작동합니다."
+      },
+      point2: {
+        title: "크로스 플랫폼 호환성",
+        description: "저희 브라우저 기반 도구는 모든 운영 체제에서 작동하며, 데스크톱 대안은 종종 특정 플랫폼만 지원합니다."
+      },
+      point3: {
+        title: "무료 및 접근 가능",
+        description: "비싼 데스크톱 대안이나 구독 서비스와 비교하여 저희 PDF 병합 기능을 무료로 이용할 수 있습니다."
+      },
+      point4: {
+        title: "정기적인 업데이트",
+        description: "저희 온라인 병합 도구는 사용자로부터 수동 업데이트 없이 지속적으로 개선됩니다."
+      }
+    },
+
+    // UI elements and messages
+    ui: {
+      of: "의",
+      files: "파일",
+      filesToMerge: "병합할 파일",
+      dragToReorder: "드래그하여 재정렬",
+      downloadReady: "다운로드 준비 완료",
+      downloadMerged: "병합 파일 다운로드",
+      mergePdfs: "PDF 병합",
+      processingMerge: "PDF 병합 중...",
+      successMessage: "PDF가 성공적으로 병합되었습니다!",
+      dragDropHere: "여기에 PDF를 드래그 앤 드롭",
+      or: "또는",
+      browseFiles: "파일 탐색",
+      fileLimit: "최대 20개의 PDF 파일 결합",
+      noPdfsSelected: "선택된 PDF 없음",
+      addMoreFiles: "파일 추가",
+      rearrangeMessage: "병합 PDF에서 순서를 재정렬하려면 파일을 드래그하세요",
+      removeFile: "삭제",
+      filePreview: "미리보기",
+      startOver: "다시 시작",
+      mergingInProgress: "병합 진행 중...",
+      pleaseWait: "PDF 파일을 결합하는 동안 기다려 주세요",
+      processingFile: "처리 중",
+      retry: "병합 재시도"
+    },
   },
 
   // OCR Page
   ocr: {
-    title: "OCR 텍스트 추출",
-    description: "강력한 광학 문자 인식 기술을 사용하여 스캔된 PDF 및 이미지에서 텍스트를 추출합니다",
+    title: "OCR 추출: 간편한 텍스트 인식",
+    description: "고급 OCR 소프트웨어와 기계 학습을 사용하여 스캔된 PDF 및 이미지 파일을 편집 가능한 텍스트로 변환하세요",
     howTo: {
-      title: "OCR 텍스트 추출 작동 방식",
-      step1: {
-        title: "업로드",
-        description: "스캔된 PDF 문서 또는 이미지 기반 PDF 파일을 업로드하세요."
-      },
-      step2: {
-        title: "OCR 설정",
-        description: "최상의 결과를 위해 언어, 페이지 범위 및 고급 옵션을 선택하세요."
-      },
-      step3: {
-        title: "텍스트 가져오기",
-        description: "추출된 텍스트를 복사하거나 추가 사용을 위해 텍스트 파일로 다운로드하세요."
-      }
+      title: "OCR 추출 작동 방식",
+      step1: { title: "업로드", description: "스캔된 PDF 또는 이미지 파일을 이미지에서 텍스트로 변환하는 도구에 업로드하세요." },
+      step2: { title: "OCR 도구 설정", description: "언어, 페이지 범위, 고급 설정을 선택하여 최적의 텍스트 인식을 실현하세요." },
+      step3: { title: "텍스트 추출", description: "추출된 텍스트를 복사하거나 이미지에서 텍스트로 변환 도구를 통해 .txt 파일로 다운로드하세요." }
     },
     faq: {
       title: "자주 묻는 질문",
       questions: {
-        accuracy: {
-          question: "OCR 텍스트 추출의 정확도는 얼마나 되나요?",
-          answer: "저희 OCR 기술은 잘 스캔된 문서에서 명확하게 인쇄된 텍스트에 대해 일반적으로 90-99%의 정확도를 달성합니다. 스캔 품질이 낮거나 특이한 글꼴, 복잡한 레이아웃에서는 정확도가 낮아질 수 있습니다."
-        },
-        languages: {
-          question: "어떤 언어가 지원되나요?",
-          answer: "영어, 프랑스어, 독일어, 스페인어, 이탈리아어, 포르투갈어, 중국어, 일본어, 한국어, 러시아어, 아랍어, 힌디어 등 100개 이상의 언어를 지원합니다."
-        },
-        recognition: {
-          question: "텍스트가 제대로 인식되지 않는 이유는 무엇인가요?",
-          answer: "OCR 정확도에 영향을 미치는 여러 요인이 있습니다: 문서 품질, 해상도, 대비, 복잡한 레이아웃, 손글씨, 특이한 글꼴, 또는 잘못된 언어 선택."
-        },
-        pageLimit: {
-          question: "처리할 수 있는 페이지 수에 제한이 있나요?",
-          answer: "무료 사용자는 PDF당 최대 50페이지를 처리할 수 있습니다. 프리미엄 사용자는 최대 500페이지의 PDF를 처리할 수 있습니다."
-        },
-        security: {
-          question: "OCR 처리 중 데이터가 안전한가요?",
-          answer: "네, 귀하의 보안이 최우선입니다. 업로드된 모든 파일은 보안 서버에서 처리되며 처리 후 자동으로 삭제됩니다."
-        }
+        accuracy: { question: "OCR 추출 기술의 정확도는 어느 정도인가요?", answer: "저희 OCR 소프트웨어는 잘 스캔된 문서의 명확한 인쇄 텍스트에 대해 90~99%의 정확도를 달성합니다. 이미지 파일 품질이 낮거나 특이한 폰트를 사용할 경우 정확도가 떨어질 수 있습니다." },
+        languages: { question: "어떤 언어가 지원되나요?", answer: "영어, 프랑스어, 독일어, 스페인어, 중국어, 일본어, 아랍어, 러시아어 등 100개 이상의 언어를 지원합니다." },
+        recognition: { question: "왜 제 텍스트가 제대로 인식되지 않나요?", answer: "텍스트 인식에는 여러 요인이 영향을 미칠 수 있습니다: 문서 품질, 해상도, 대비, 복잡한 레이아웃, 손글씨, 또는 잘못된 언어 선택." },
+        pageLimit: { question: "처리할 수 있는 페이지 수에 제한이 있나요?", answer: "무료 사용자는 PDF당 50페이지까지 제한됩니다. 프리미엄 사용자는 최대 500페이지의 PDF를 처리할 수 있습니다." },
+        security: { question: "OCR 처리 중 데이터가 안전한가요?", answer: "네, 고객님의 보안이 최우선입니다. 업로드된 모든 파일은 안전한 서버에서 처리되며 처리 후 자동으로 삭제됩니다." }
       }
     },
-    relatedTools: "관련 PDF 도구",
-    processing: {
-      title: "OCR 처리 중",
-      message: "OCR 처리는 문서 크기와 복잡성에 따라 몇 분이 걸릴 수 있습니다"
-    },
-    results: {
-      title: "추출된 텍스트",
-      copy: "복사",
-      download: ".txt 다운로드"
-    },
-    languages: {
-      english: "영어",
-      french: "프랑스어",
-      german: "독일어",
-      spanish: "스페인어",
-      chinese: "중국어",
-      japanese: "일본어",
-      arabic: "아랍어",
-      russian: "러시아어"
-    },
+    relatedTools: "관련 OCR 및 PDF 도구",
+    processing: { title: "OCR 소프트웨어로 처리", message: "텍스트 인식은 파일 크기와 복잡성에 따라 몇 분이 걸릴 수 있습니다" },
+    results: { title: "추출된 텍스트 결과", copy: "복사", download: "다운로드 .txt" },
+    languages: { english: "영어", french: "프랑스어", german: "독일어", spanish: "스페인어", chinese: "중국어", japanese: "일본어", arabic: "아랍어", russian: "러시아어" },
     whatIsOcr: {
-      title: "광학 문자 인식(OCR)",
-      description: "스캔된 종이 문서, PDF 파일 또는 디지털 카메라로 캡처한 이미지와 같은 다양한 유형의 문서를 편집 가능하고 검색 가능한 데이터로 변환하는 기술입니다.",
-      explanation: "OCR은 문서 이미지의 구조를 분석하고, 문자와 텍스트 요소를 식별한 후 이를 기계로 읽을 수 있는 형식으로 변환합니다.",
-      extractionList: {
-        scannedPdfs: "텍스트가 이미지로 존재하는 스캔된 PDF",
-        imageOnlyPdfs: "기본 텍스트 레이어가 없는 이미지 전용 PDF",
-        embeddedImages: "텍스트가 포함된 임베디드 이미지가 있는 PDF",
-        textCopyingIssues: "텍스트를 직접 복사할 수 없는 문서"
-      }
+      title: "OCR 추출이란 무엇인가요?",
+      description: "광학 문자 인식(OCR)은 기계 학습으로 지원되는 기술로, 스캔된 문서, PDF, 이미지 파일을 편집 가능하고 검색 가능한 텍스트로 변환합니다.",
+      explanation: "이미지에서 텍스트로 변환 도구는 문서 이미지의 구조를 분석하고, 문자와 텍스트 요소를 식별하여 기계가 읽을 수 있는 형식으로 변환합니다.",
+      extractionList: { scannedPdfs: "텍스트가 이미지로 존재하는 스캔된 PDF", imageOnlyPdfs: "텍스트 레이어가 없는 이미지 전용 PDF", embeddedImages: "텍스트가 포함된 삽입 이미지가 있는 PDF", textCopyingIssues: "텍스트를 직접 복사할 수 없는 문서" }
     },
     whenToUse: {
-      title: "OCR 텍스트 추출을 언제 사용해야 하나요",
-      idealFor: "이상적인 경우:",
-      idealForList: {
-        scannedDocuments: "PDF로 저장된 스캔 문서",
-        oldDocuments: "디지털 텍스트 레이어가 없는 오래된 문서",
-        textSelectionIssues: "텍스트 선택/복사가 작동하지 않는 PDF",
-        textInImages: "추출해야 할 텍스트가 포함된 이미지",
-        searchableArchives: "스캔된 문서에서 검색 가능한 아카이브 생성"
-      },
-      notNecessaryFor: "필요하지 않은 경우:",
-      notNecessaryForList: {
-        digitalPdfs: "텍스트를 이미 선택할 수 있는 네이티브 디지털 PDF",
-        createdDigitally: "디지털 문서에서 직접 생성된 PDF",
-        copyPasteAvailable: "이미 텍스트를 복사하고 붙여넣을 수 있는 문서",
-        formatPreservation: "형식 보존이 필요한 파일 (대신 PDF에서 DOCX로 변환 사용)"
-      }
+      title: "이미지에서 텍스트 추출 도구를 언제 사용하나요",
+      idealFor: "다음에 이상적:",
+      idealForList: { scannedDocuments: "PDF로 저장된 스캔된 문서", oldDocuments: "디지털 텍스트 레이어가 없는 오래된 문서", textSelectionIssues: "텍스트 선택/복사가 작동하지 않는 PDF", textInImages: "추출이 필요한 텍스트가 포함된 이미지 파일", searchableArchives: "스캔된 문서에서 검색 가능한 아카이브 생성" },
+      notNecessaryFor: "다음에는 불필요:",
+      notNecessaryForList: { digitalPdfs: "텍스트가 선택 가능한 네이티브 디지털 PDF", createdDigitally: "디지털 문서에서 직접 생성된 PDF", copyPasteAvailable: "이미 복사 및 붙여넣기가 가능한 문서", formatPreservation: "형식을 유지해야 하는 파일 (대신 PDF에서 DOCX로 변환 사용)" }
     },
     limitations: {
-      title: "OCR 제한 및 팁",
-      description: "저희 OCR 기술은 강력하지만 몇 가지 주의할 제한이 있습니다:",
-      factorsAffecting: "OCR 정확도에 영향을 미치는 요인:",
-      factorsList: {
-        documentQuality: "문서 품질 (해상도, 대비)",
-        complexLayouts: "복잡한 레이아웃 및 서식",
-        handwrittenText: "손글씨 텍스트 (제한된 인식)",
-        specialCharacters: "특수 문자 및 기호",
-        multipleLanguages: "한 문서 내 여러 언어"
-      },
+      title: "OCR 도구의 한계와 팁",
+      description: "저희 OCR 소프트웨어는 강력하지만, 주의해야 할 몇 가지 한계가 있습니다:",
+      factorsAffecting: "텍스트 인식 정확도에 영향을 미치는 요인:",
+      factorsList: { documentQuality: "문서 품질 (해상도, 대비)", complexLayouts: "복잡한 레이아웃 및 포맷", handwrittenText: "손글씨 텍스트 (인식 제한)", specialCharacters: "특수 문자 및 기호", multipleLanguages: "한 문서 내 여러 언어" },
       tipsForBest: "최상의 결과를 위한 팁:",
-      tipsList: {
-        highQualityScans: "고품질 스캔 사용 (300 DPI 이상)",
-        correctLanguage: "문서에 맞는 올바른 언어 선택",
-        enhanceScannedImages: "더 나은 정확도를 위해 \"스캔 이미지 향상\" 활성화",
-        smallerPageRanges: "큰 문서의 경우 작은 페이지 범위 처리",
-        reviewText: "추출된 텍스트 검토 및 수정"
-      }
+      tipsList: { highQualityScans: "고품질 스캔 사용 (300 DPI 이상)", correctLanguage: "문서에 맞는 언어 선택", enhanceScannedImages: "정확도 향상을 위해 '스캔 이미지 개선' 활성화", smallerPageRanges: "큰 문서의 경우 작은 페이지 범위 처리", reviewText: "추출된 텍스트를 나중에 검토 및 수정" }
     },
-    options: {
-      scope: "추출할 페이지",
-      all: "모든 페이지",
-      custom: "특정 페이지",
-      pages: "페이지 번호",
-      pagesHint: "예: 1,3,5-9",
-      enhanceScanned: "스캔 이미지 향상",
-      enhanceScannedHint: "OCR 정확도를 높이기 위해 이미지를 전처리 (스캔 문서에 권장)",
-      preserveLayout: "레이아웃 유지",
-      preserveLayoutHint: "단락과 줄 바꿈으로 원본 레이아웃을 유지하려고 시도"
-    },
-    // Upload area
-    uploadPdf: "텍스트 추출을 위해 PDF 업로드",
-    dragDrop: "PDF 파일을 여기로 드래그 앤 드롭하거나 클릭하여 탐색",
-    selectPdf: "PDF 파일 선택",
+    options: { scope: "추출할 페이지", all: "모든 페이지", custom: "특정 페이지", pages: "페이지 번호", pagesHint: "예: 1,3,5-9", enhanceScanned: "스캔 이미지 개선", enhanceScannedHint: "OCR 정확도를 높이기 위해 이미지 전처리 (스캔 문서에 권장)", preserveLayout: "레이아웃 유지", preserveLayoutHint: "단락과 줄 바꿈을 포함한 원래 레이아웃을 유지하려고 시도" },
+    ocrTool: "OCR 추출 도구",
+    ocrToolDesc: "스캔된 문서와 이미지 파일을 이미지에서 텍스트로 변환 도구로 편집 가능한 텍스트로 변환",
+    uploadPdf: "OCR 추출을 위한 파일 업로드",
+    dragDrop: "PDF 또는 이미지 파일을 여기로 드래그 앤 드롭하거나 클릭하여 탐색",
+    selectPdf: "파일 선택",
     uploading: "업로드 중...",
     maxFileSize: "최대 파일 크기: 50MB",
-
-    // File handling
     invalidFile: "잘못된 파일 형식",
-    invalidFileDesc: "PDF 파일을 선택해 주세요",
+    invalidFileDesc: "PDF 또는 지원되는 이미지 파일을 선택하세요",
     fileTooLarge: "파일이 너무 큽니다",
     fileTooLargeDesc: "최대 파일 크기는 50MB입니다",
-    noFile: "파일이 선택되지 않음",
-    noFileDesc: "처리할 PDF 파일을 선택해 주세요",
+    noFile: "파일이 선택되지 않았습니다",
+    noFileDesc: "텍스트 인식을 위해 파일을 선택하세요",
     changeFile: "파일 변경",
-
-    // Options
     languageLabel: "문서 언어",
     selectLanguage: "언어 선택",
     pageRange: "페이지 범위",
     allPages: "모든 페이지",
     specificPages: "특정 페이지",
     pageRangeExample: "예: 1-3, 5, 7-9",
-    pageRangeInfo: "개별 페이지 또는 쉼표로 구분된 범위를 입력",
+    pageRangeInfo: "개별 페이지 또는 범위를 쉼표로 구분하여 입력",
     preserveLayout: "레이아웃 유지",
-    preserveLayoutDesc: "문서 구조와 서식을 유지하려고 시도합니다",
-
-    // Processing
+    preserveLayoutDesc: "문서 구조와 포맷을 유지하려고 시도",
     extractText: "텍스트 추출",
     extractingText: "텍스트 추출 중...",
-    processingPdf: "PDF 처리 중",
+    processingPdf: "파일 처리 중",
     processingInfo: "파일 크기와 복잡성에 따라 몇 분이 걸릴 수 있습니다",
-    analyzing: "문서 분석 중",
+    analyzing: "콘텐츠 분석 중",
     preprocessing: "페이지 전처리 중",
     recognizing: "텍스트 인식 중",
     extracting: "콘텐츠 추출 중",
     finalizing: "결과 마무리 중",
-    finishing: "마무리 중",
-
-    // Results
+    finishing: "완료 중",
     extractionComplete: "텍스트 추출 완료",
-    extractionCompleteDesc: "PDF에서 텍스트가 성공적으로 추출되었습니다",
+    extractionCompleteDesc: "텍스트가 이미지에서 텍스트로 추출 도구를 통해 성공적으로 추출되었습니다",
     extractionError: "텍스트 추출 실패",
     extractionFailed: "텍스트를 추출하지 못했습니다",
     unknownError: "알 수 없는 오류가 발생했습니다",
     textCopied: "텍스트가 클립보드에 복사되었습니다",
-    copyFailed: "텍스트 복사에 실패했습니다",
+    copyFailed: "텍스트 복사 실패",
     textPreview: "텍스트 미리보기",
     rawText: "원시 텍스트",
     extractedText: "추출된 텍스트",
-    previewDesc: "서식이 포함된 추출 텍스트 미리보기",
+    previewDesc: "포맷이 포함된 추출된 텍스트 미리보기",
     rawTextOutput: "원시 텍스트 출력",
-    rawTextDesc: "서식 없는 일반 텍스트",
-    noTextFound: "문서에서 텍스트를 찾을 수 없습니다",
+    rawTextDesc: "포맷 없는 일반 텍스트",
+    noTextFound: "파일에서 텍스트를 찾을 수 없습니다",
     copyText: "텍스트 복사",
     downloadText: "텍스트 다운로드",
-    processAnother: "다른 PDF 처리"
+    processAnother: "다른 파일 처리",
+    supportedLanguages: "영어, 스페인어, 프랑스어, 독일어, 중국어, 일본어 등 15개 이상의 언어를 지원합니다. 더 높은 정확도를 위해 적절한 언어를 선택하세요."
   },
 
   // Protect PDF Page

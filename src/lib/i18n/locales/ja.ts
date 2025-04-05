@@ -271,109 +271,109 @@ export default {
   // 変換ページ
   convert: {
     title: {
-      pdfToWord: "PDFからWordに変換",
-      pdfToExcel: "PDFからExcelに変換",
-      pdfToPowerPoint: "PDFからPowerPointに変換",
-      pdfToJpg: "PDFからJPGに変換",
-      pdfToPng: "PDFからPNGに変換",
-      pdfToHtml: "PDFからHTMLに変換",
-      wordToPdf: "WordからPDFに変換",
-      excelToPdf: "ExcelからPDFに変換",
-      powerPointToPdf: "PowerPointからPDFに変換",
-      jpgToPdf: "JPGからPDFに変換",
-      pngToPdf: "PNGからPDFに変換",
-      htmlToPdf: "HTMLからPDFに変換",
-      generic: "ファイルを変換"
+      pdfToWord: "PDFをWordにオンライン変換 - 無料PDFからDOCコンバーター",
+      pdfToExcel: "PDFをExcelにオンライン変換 - PDFデータをXLSに抽出",
+      pdfToPowerPoint: "PDFをPowerPointに変換 - PDFからPPTコンバーター",
+      pdfToJpg: "PDFをJPG画像に変換 - 高品質PDFからJPEG",
+      pdfToPng: "PDFをPNGにオンライン変換 - PDFから透明なPNG",
+      pdfToHtml: "PDFをHTMLウェブページに変換 - PDFからHTML5コンバーター",
+      wordToPdf: "WordをPDFにオンライン変換 - 無料DOCからPDFコンバーター",
+      excelToPdf: "ExcelをPDFに変換 - XLSからPDFコンバーターツール",
+      powerPointToPdf: "PowerPointをPDFにオンライン変換 - PPTからPDF",
+      jpgToPdf: "JPGをPDFにオンライン変換 - 画像からPDF作成",
+      pngToPdf: "PNGをPDFに変換 - 透明画像からPDFコンバーター",
+      htmlToPdf: "HTMLをPDFにオンライン変換 - ウェブページからPDF生成",
+      generic: "オンラインファイルコンバーター - 文書、画像などを変換"
     },
     description: {
-      pdfToWord: "PDFドキュメントを編集可能なWordファイルに迅速かつ簡単に変換",
-      pdfToExcel: "PDFファイルからテーブルやデータをExcelスプレッドシートに抽出",
-      pdfToPowerPoint: "PDFプレゼンテーションを編集可能なPowerPointスライドに変換",
-      pdfToJpg: "PDFページを高品質のJPG画像に変換",
-      pdfToPng: "PDFページを透明PNG画像に変換",
-      pdfToHtml: "PDFドキュメントをHTMLウェブページに変換",
-      wordToPdf: "Wordドキュメントを完璧な書式でPDF形式に変換",
-      excelToPdf: "ExcelスプレッドシートをPDFドキュメントに変換",
-      powerPointToPdf: "PowerPointプレゼンテーションをPDF形式に変換",
-      jpgToPdf: "JPG画像からPDFファイルを作成",
-      pngToPdf: "PNG画像からPDFファイルを作成",
-      htmlToPdf: "HTMLウェブページをPDFドキュメントに変換",
-      generic: "形式間で変換するファイルを選択"
+      pdfToWord: "PDF文書を編集可能なWordファイルに簡単に変換。無料のPDFからWordコンバーターはDOC/DOCX出力で書式を保持します。",
+      pdfToExcel: "PDFファイルから表やデータをExcelスプレッドシートに抽出。分析用に正確なデータ書式でPDFをXLS/XLSXに変換。",
+      pdfToPowerPoint: "PDFプレゼンテーションを編集可能なPowerPointスライドに変換。PDFからPPTコンバーターはスライドレイアウトとデザイン要素を保持。",
+      pdfToJpg: "PDFページを高品質JPG画像に変換。PDFから画像を抽出または各ページをJPEGとして保存しオンラインで共有。",
+      pdfToPng: "PDFページを透明なPNG画像に変換。透明背景が必要なグラフィックデザイナーに最適。",
+      pdfToHtml: "PDF文書をHTMLウェブページに変換。高度なコンバーターでPDFからレスポンシブHTML5ウェブサイトを作成。",
+      wordToPdf: "Word文書を完璧な書式でPDFに変換。プロ品質の無料DOC/DOCXからPDFコンバーター。",
+      excelToPdf: "ExcelスプレッドシートをPDF文書に変換。XLS/XLSXからPDFへの変換で数式、グラフ、表を保持。",
+      powerPointToPdf: "PowerPointプレゼンテーションをPDF形式に変換。PPT/PPTXからPDFコンバーターはスライド遷移とノートを保持。",
+      jpgToPdf: "JPG画像からPDFファイルを作成。複数のJPEG写真を1つのPDF文書にオンラインで結合。",
+      pngToPdf: "PNG画像からPDFファイルを作成。透明性を保持したまま透明PNGグラフィックをPDFに変換。",
+      htmlToPdf: "HTMLウェブページをPDF文書に変換。オンラインHTMLからPDF生成ツールでウェブサイトをPDFとして保存。",
+      generic: "形式間で変換するファイルを選択。PDF、Word、Excel、PowerPoint、JPG、PNG、HTML用の無料オンラインドキュメントコンバーター。"
     },
     howTo: {
-      title: "{from}を{to}に変換する方法",
+      title: "{from}を{to}にオンラインで変換する方法",
       step1: {
-        title: "アップロード",
-        description: "変換したい{from}ファイルをアップロード"
+        title: "ファイルをアップロード",
+        description: "コンピュータ、Google Drive、またはDropboxから変換したい{from}ファイルをアップロード"
       },
       step2: {
-        title: "変換",
-        description: "「変換」ボタンをクリックすると、システムがファイルを処理"
+        title: "形式を変換",
+        description: "変換ボタンをクリックすると、高度な変換技術でファイルが処理されます"
       },
       step3: {
-        title: "ダウンロード",
-        description: "変換された{to}ファイルをダウンロード"
+        title: "結果をダウンロード",
+        description: "変換された{to}ファイルを即時ダウンロードまたは共有可能なリンクを取得"
       }
     },
     options: {
-      title: "変換オプション",
-      ocr: "OCR（光学文字認識）を有効にする",
-      ocrDescription: "スキャンされたドキュメントや画像からテキストを抽出",
+      title: "高度な変換オプション",
+      ocr: "OCRを有効にする（光学文字認識）",
+      ocrDescription: "スキャンした文書や画像から編集可能なテキストを抽出",
       preserveLayout: "元のレイアウトを保持",
-      preserveLayoutDescription: "元のドキュメントの書式とレイアウトを維持",
+      preserveLayoutDescription: "元の文書の書式とレイアウトを正確に維持",
       quality: "出力品質",
-      qualityDescription: "変換されたファイルの品質レベルを設定",
+      qualityDescription: "変換ファイルの品質レベルを設定（ファイルサイズに影響）",
       qualityOptions: {
-        low: "低（ファイルサイズが小さい）",
-        medium: "中（バランス）",
-        high: "高（最高品質）"
+        low: "低（ファイルサイズ小、処理高速）",
+        medium: "中（品質とサイズのバランス）",
+        high: "高（最高品質、ファイル大）"
       },
       pageOptions: "ページオプション",
-      allPages: "全ページ",
+      allPages: "すべてのページ",
       selectedPages: "選択したページ",
-      pageRangeDescription: "ページ番号やページ範囲をカンマで区切って入力",
-      pageRangeExample: "例: 1,3,5-12"
+      pageRangeDescription: "カンマ区切りでページ番号やページ範囲を入力",
+      pageRangeExample: "例: 1,3,5-12（1、3、5～12ページを変換）"
     },
-    moreTools: "関連する変換ツール",
+    moreTools: "関連ドキュメント変換ツール",
     expertTips: {
-      title: "専門家のヒント",
+      title: "変換の専門家のヒント",
       pdfToWord: [
-        "最適な結果を得るには、PDFに明確で機械可読なテキストがあることを確認",
-        "スキャンされたドキュメントや画像ベースのPDFにはOCRを有効に",
-        "複雑なレイアウトは変換後に微調整が必要な場合あり"
+        "PDFからWordへの最適な結果には、PDFに明確な機械可読テキストがあることを確認",
+        "スキャン文書や画像ベースPDFではOCRを有効にして編集可能なテキストを抽出",
+        "複雑なレイアウトは変換後、完璧な書式のために微調整が必要な場合あり"
       ],
       pdfToExcel: [
-        "明確な境界を持つテーブルはより正確に変換",
-        "OCRで前処理されたスキャンPDFでデータ抽出を改善",
-        "変換後にスプレッドシートの数式を確認（転送されない場合あり）"
+        "明確な境界線のある表はPDFからExcelへより正確に変換",
+        "XLS/XLSXへのデータ抽出を改善するためスキャンPDFをOCRで前処理",
+        "変換後スプレッドシート数式を確認（自動転送されない場合あり）"
       ],
       generic: [
-        "高品質設定はファイルサイズを大きくする",
-        "スキャンされたテキストや画像を含むドキュメントにはOCRを使用",
-        "変換後にファイルをプレビューして正確性を確認"
+        "高品質設定はファイルサイズ大だが出力品質向上",
+        "スキャンしたテキストやテキストを含む画像にはOCRを使用",
+        "ダウンロード前に必ず変換後ファイルをプレビューして精度を確認"
       ]
     },
     advantages: {
       title: "{from}を{to}に変換する利点",
       pdfToWord: [
-        "PDF形式でロックされたテキストを編集・修正",
-        "ドキュメント全体を再作成せずに内容を更新",
-        "他のドキュメントで使用するために情報を抽出"
+        "PDF形式でロックされていたテキストをDOCコンバーターで編集・修正",
+        "ドキュメントを一から再作成せずにコンテンツを更新",
+        "他のWord文書やテンプレートで使用する情報を抽出"
       ],
       pdfToExcel: [
-        "静的なPDF形式のデータを分析・操作",
-        "抽出したデータでチャート作成や計算実行",
-        "財務報告や数値情報を簡単に更新"
+        "静的PDF形式のデータをXLSツールで分析・操作",
+        "抽出したスプレッドシートデータでグラフ作成や計算実行",
+        "Excel形式で財務報告書や数値情報を簡単に更新"
       ],
       wordToPdf: [
-        "書式を維持した普遍的に読めるドキュメントを作成",
-        "望ましくない修正からコンテンツを保護",
-        "すべてのデバイスとプラットフォームで一貫した外観を保証"
+        "完璧な書式を維持した普遍的に読めるPDF文書を作成",
+        "安全なPDF出力で不要な変更からコンテンツを保護",
+        "すべてのデバイスとプラットフォームで一貫した文書表示を確保"
       ],
       generic: [
-        "ドキュメントをより便利な形式に変換",
-        "ターゲット形式をサポートするプログラムでコンテンツを利用",
-        "他の人が簡単に開ける形式でファイルを共有"
+        "文書をより有用で編集可能な形式に変換",
+        "対象ファイルタイプをサポートするプログラムでコンテンツにアクセスして使用",
+        "特別なソフトウェアなしで他者が簡単に開ける形式でファイルを共有"
       ]
     }
   },
@@ -749,217 +749,250 @@ export default {
   },
   // PDF結合ページ
   mergePdf: {
-    title: "PDFファイルの結合",
-    description: "複数のPDFファイルを迅速かつ簡単に1つのドキュメントに結合",
+    title: "PDFファイルをオンラインで結合 | 無料ウェブブラウザPDF結合ツール",
+    description: "すべてのオペレーティングシステムで動作するブラウザベースの結合ツールを使用して、複数のPDFファイルを迅速かつ簡単に1つのドキュメントにまとめます",
+    intro: "当社のオンラインPDF結合ツールを使用すると、数回のクリックで複数のドキュメントを1つの結合ファイルにまとめることができます。インストールは不要で、どのオペレーティングシステムのウェブブラウザでも直接動作します。",
+
+    // How-to section
     howTo: {
-      title: "PDFファイルを結合する方法",
+      title: "ブラウザでPDFファイルを結合する方法",
       step1: {
         title: "ファイルのアップロード",
-        description: "結合したいPDFファイルをアップロード。一度に複数のファイルを選択可能。"
+        description: "結合したいPDFファイルをアップロードします。デバイスから複数のファイルを一度に選択するか、ウェブブラウザに直接ドラッグ＆ドロップしてください。"
       },
       step2: {
         title: "順序の調整",
-        description: "ドラッグ＆ドロップでファイルの順序を最終PDFに表示したい順に並べ替え。"
+        description: "ドラッグ＆ドロップでファイルを最終的な結合ファイルに表示したい順序に並べ替えます。当社の結合ツールは複数のPDFの整理を直感的に行えます。"
       },
       step3: {
         title: "ダウンロード",
-        description: "「PDFを結合」ボタンをクリックして結合されたPDFファイルをダウンロード。"
+        description: "「PDFを結合」ボタンをクリックし、どのウェブブラウザからでも結合されたPDFファイルをデバイスに直接ダウンロードします。"
       }
     },
+
+    // Benefits section
+    benefits: {
+      title: "当社のオンラインPDF結合ツールの利点",
+      compatibility: {
+        title: "すべてのデバイスで動作",
+        description: "当社のウェブブラウザベースのPDF結合ツールは、Windows、macOS、Linux、モバイルオペレーティングシステムでインストール不要で完璧に機能します。"
+      },
+      privacy: {
+        title: "安全かつプライベート",
+        description: "あなたのドキュメントはウェブブラウザ内で処理され、結合後に自動的に削除されるため、機密情報がプライベートに保たれます。"
+      },
+      simplicity: {
+        title: "ユーザーフレンドリーなインターフェース",
+        description: "直感的なドラッグ＆ドロップインターフェースにより、当社のオンラインツールを初めて使うユーザーでも複数のPDFファイルを簡単に結合できます。"
+      },
+      quality: {
+        title: "高品質な出力",
+        description: "当社の結合ツールは、結合ファイル内の元の書式、画像、テキスト品質を保持し、プロフェッショナルな結果を保証します。"
+      }
+    },
+
+    // Use cases section
+    useCases: {
+      title: "PDF結合の一般的な用途",
+      business: {
+        title: "ビジネスドキュメント",
+        description: "財務報告書、契約書、プレゼンテーションをクライアントや利害関係者向けの包括的なドキュメントにまとめます。"
+      },
+      academic: {
+        title: "学術論文",
+        description: "研究論文、引用、付録をレビュー用に準備された完全な学術提出物に結合します。"
+      },
+      personal: {
+        title: "個人記録",
+        description: "領収書、保証書、取扱説明書を簡単に参照できる整理されたデジタル記録にまとめます。"
+      },
+      professional: {
+        title: "プロフェッショナルポートフォリオ",
+        description: "複数の作品サンプルを1つの簡単に共有可能なドキュメントに結合して、印象的なポートフォリオを作成します。"
+      }
+    },
+
+    // FAQ section
     faq: {
       title: "よくある質問",
       q1: {
-        question: "結合できるPDFの数に制限はありますか？",
-        answer: "無料ツールでは一度に最大20個のPDFファイルを結合可能。より大きなバッチにはプレミアムプランを検討。"
+        question: "オンライン結合ツールで結合できるPDFの数に制限はありますか？",
+        answer: "当社の無料ウェブブラウザベースの結合ツールでは、一度に最大20のPDFファイルを結合できます。複数の大きなバッチを結合する場合は、無制限の結合操作が可能なプレミアムプランへのアップグレードを検討してください。"
       },
       q2: {
-        question: "PDFファイルはプライベートに保たれますか？",
-        answer: "はい、プライバシーが最優先です。アップロードされたファイルは処理後にサーバーから自動的に削除されます。"
+        question: "オンライン結合ツールを使用する際、PDFファイルはプライベートに保たれますか？",
+        answer: "はい、あなたのプライバシーが最優先です。当社のブラウザベースの結合ツールにアップロードされたすべてのファイルは安全に処理され、処理後にサーバーから自動的に削除されます。ドキュメントの内容にアクセスしたり保存したりすることはありません。"
       },
       q3: {
-        question: "パスワード保護されたPDFを結合できますか？",
-        answer: "パスワード保護されたPDFは、まず「PDFロック解除」ツールで解除してから結合する必要があります。"
+        question: "パスワード保護されたPDFをオンライン結合ツールで結合できますか？",
+        answer: "パスワード保護されたPDFについては、まず当社のオンラインPDFロック解除ツールを使用してロックを解除し、その後結合してください。当社のブラウザベースの結合ツールは、保護されたドキュメントを検出すると通知します。"
+      },
+      q4: {
+        question: "オンラインPDF結合ツールはすべてのオペレーティングシステムで動作しますか？",
+        answer: "はい、当社のウェブブラウザベースのPDF結合ツールは、Windows、macOS、Linux、iOS、Androidを含むすべての主要なオペレーティングシステムで動作します。最新のウェブブラウザがあれば、ソフトウェアをインストールせずにPDFを結合できます。"
+      },
+      q5: {
+        question: "結合できるPDFファイルのサイズはどのくらいですか？",
+        answer: "当社の無料オンライン結合ツールは、各ファイル最大100MBをサポートします。結合されるすべてのファイルの合計サイズは、ウェブブラウザでの最適なパフォーマンスのために300MBを超えないようにしてください。"
+      },
+      q6: {
+        question: "結合されたファイルは元のPDFのすべての機能を保持しますか？",
+        answer: "はい、当社の高度な結合ツールは、元のPDFからのテキスト、画像、書式、ハイパーリンク、ほとんどのインタラクティブ要素を最終的な結合ファイルに保持します。"
       }
     },
-    relatedTools: "さらにPDFツールを探索",
-    viewAllTools: "すべてのPDFツールを表示",
-    of: "の",
-    files: "ファイル",
-    filesToMerge: "結合するファイル",
-    dragToReorder: "ドラッグして並べ替え",
-    downloadReady: "ダウンロード準備完了",
-    downloadMerged: "結合ダウンロード",
-    mergePdfs: "PDFを結合",
-    successMessage: "PDFが正常に結合されました",
+
+    // Tips section
+    tips: {
+      title: "PDFを効果的に結合するためのヒント",
+      tip1: {
+        title: "結合前に整理",
+        description: "ファイル名を数値的に変更（例：01_intro.pdf、02_content.pdf）して、当社の結合ツールにアップロードする前に整理しやすくしてください。"
+      },
+      tip2: {
+        title: "大きなファイルを最適化",
+        description: "複数の大きなドキュメントを結合する場合、まず当社のPDF圧縮ツールを使用して、最終的な結合ファイルのパフォーマンスを向上させてください。"
+      },
+      tip3: {
+        title: "プレビューを確認",
+        description: "ファイルを整理した後、当社のオンラインツールのプレビュー機能を使用して、結合PDFを確定する前に順序を確認してください。"
+      },
+      tip4: {
+        title: "ブックマークを検討",
+        description: "プロフェッショナルなドキュメントの場合、当社のPDF編集ツールを使用して結合ファイルにブックマークを追加し、ナビゲーションを容易にしてください。"
+      }
+    },
+
+    // Comparison section
+    comparison: {
+      title: "なぜ当社のウェブブラウザ結合ツールを選ぶのか",
+      point1: {
+        title: "ソフトウェアのインストール不要",
+        description: "デスクトップアプリケーションとは異なり、当社のオンラインPDF結合ツールは、ソフトウェアをダウンロードまたはインストールせずにウェブブラウザで直接動作します。"
+      },
+      point2: {
+        title: "クロスプラットフォーム互換性",
+        description: "当社のブラウザベースのツールはすべてのオペレーティングシステムで動作し、デスクトップの代替品は特定のプラットフォームのみをサポートすることが多いです。"
+      },
+      point3: {
+        title: "無料でアクセス可能",
+        description: "高価なデスクトップ代替品やサブスクリプションサービスと比較して、当社のPDF結合機能を無料で利用できます。"
+      },
+      point4: {
+        title: "定期的なアップデート",
+        description: "当社のオンライン結合ツールは、ユーザーからの手動アップデートを必要とせずに継続的に改善されています。"
+      }
+    },
+
+    // UI elements and messages
+    ui: {
+      of: "の",
+      files: "ファイル",
+      filesToMerge: "結合するファイル",
+      dragToReorder: "ドラッグして並べ替え",
+      downloadReady: "ダウンロード準備完了",
+      downloadMerged: "結合ファイルのダウンロード",
+      mergePdfs: "PDFを結合",
+      processingMerge: "PDFを結合中...",
+      successMessage: "PDFが正常に結合されました！",
+      dragDropHere: "ここにPDFをドラッグ＆ドロップ",
+      or: "または",
+      browseFiles: "ファイルを閲覧",
+      fileLimit: "最大20のPDFファイルを結合",
+      noPdfsSelected: "PDFが選択されていません",
+      addMoreFiles: "さらにファイルを追加",
+      rearrangeMessage: "結合PDF内の順序を並べ替えるためにファイルをドラッグ",
+      removeFile: "削除",
+      filePreview: "プレビュー",
+      startOver: "最初からやり直す",
+      mergingInProgress: "結合中...",
+      pleaseWait: "PDFファイルを結合する間お待ちください",
+      processingFile: "処理中",
+      retry: "結合を再試行"
+    },
   },
 
   // OCRページ
   ocr: {
-    title: "OCRテキスト抽出",
-    description: "強力な光学文字認識技術を使用して、スキャンされたPDFや画像からテキストを抽出",
+    title: "OCR抽出：簡単なテキスト認識",
+    description: "高度なOCRソフトウェアと機械学習を使用して、スキャンされたPDFや画像ファイルを編集可能なテキストに変換します",
     howTo: {
-      title: "OCRテキスト抽出の仕組み",
-      step1: {
-        title: "アップロード",
-        description: "スキャンされたPDFドキュメントまたは画像ベースのPDFファイルをアップロード。"
-      },
-      step2: {
-        title: "OCRの設定",
-        description: "言語、ページ範囲、高度なオプションを選択して最適な結果を得る。"
-      },
-      step3: {
-        title: "テキスト取得",
-        description: "抽出したテキストをコピーするか、さらに使用するためにテキストファイルとしてダウンロード。"
-      }
+      title: "OCR抽出の仕組み",
+      step1: { title: "アップロード", description: "スキャンされたPDFまたは画像ファイルを画像からテキストへの変換ツールにアップロードします。" },
+      step2: { title: "OCRツールの設定", description: "言語、ページ範囲、高度な設定を選択して、最適なテキスト認識を実現します。" },
+      step3: { title: "テキスト抽出", description: "抽出したテキストをコピーするか、画像からテキストへの変換ツールで.txtファイルとしてダウンロードします。" }
     },
     faq: {
       title: "よくある質問",
       questions: {
-        accuracy: {
-          question: "OCRテキスト抽出の精度はどのくらいですか？",
-          answer: "当社のOCR技術は、明確に印刷されたテキストが良好にスキャンされたドキュメントで通常90-99%の精度を達成。スキャンの品質が悪い場合、珍しいフォント、複雑なレイアウトでは精度が低下する可能性あり。"
-        },
-        languages: {
-          question: "どの言語がサポートされていますか？",
-          answer: "英語、フランス語、ドイツ語、スペイン語、イタリア語、ポルトガル語、中国語、日本語、韓国語、ロシア語、アラビア語、ヒンディー語など100以上の言語をサポート。"
-        },
-        recognition: {
-          question: "なぜテキストが正しく認識されないのですか？",
-          answer: "OCR精度に影響を与える要因：ドキュメントの品質、解像度、コントラスト、複雑なレイアウト、手書き、珍しいフォント、または誤った言語の選択。"
-        },
-        pageLimit: {
-          question: "処理できるページ数に制限はありますか？",
-          answer: "無料ユーザーにはPDFあたり50ページの制限あり。プレミアムユーザーは最大500ページのPDFを処理可能。"
-        },
-        security: {
-          question: "OCR処理中のデータは安全ですか？",
-          answer: "はい、安全が最優先です。アップロードされたファイルはすべて安全なサーバーで処理され、処理後に自動的に削除されます。"
-        }
+        accuracy: { question: "OCR抽出技術の精度はどの程度ですか？", answer: "当社のOCRソフトウェアは、良好にスキャンされたドキュメント内の明確な印刷テキストに対して90～99%の精度を達成します。画像ファイルの品質が低い場合や珍しいフォントでは精度が低下することがあります。" },
+        languages: { question: "どの言語がサポートされていますか？", answer: "英語、フランス語、ドイツ語、スペイン語、中国語、日本語、アラビア語、ロシア語など、100以上の言語をサポートしています。" },
+        recognition: { question: "なぜテキストが正しく認識されないのですか？", answer: "テキスト認識にはいくつかの要因が影響します：ドキュメントの品質、解像度、コントラスト、複雑なレイアウト、手書き、または間違った言語選択。" },
+        pageLimit: { question: "処理できるページ数に制限はありますか？", answer: "無料ユーザーにはPDFあたり50ページの制限があります。プレミアムユーザーは最大500ページのPDFを処理できます。" },
+        security: { question: "OCR処理中のデータは安全ですか？", answer: "はい、お客様のセキュリティが最優先です。アップロードされたすべてのファイルは安全なサーバーで処理され、処理後に自動的に削除されます。" }
       }
     },
-    relatedTools: "関連するPDFツール",
-    processing: {
-      title: "OCR処理中",
-      message: "OCR処理はドキュメントのサイズと複雑さに応じて数分かかる場合があります"
-    },
-    results: {
-      title: "抽出したテキスト",
-      copy: "コピー",
-      download: ".txtをダウンロード"
-    },
-    languages: {
-      english: "英語",
-      french: "フランス語",
-      german: "ドイツ語",
-      spanish: "スペイン語",
-      chinese: "中国語",
-      japanese: "日本語",
-      arabic: "アラビア語",
-      russian: "ロシア語"
-    },
+    relatedTools: "関連するOCRおよびPDFツール",
+    processing: { title: "OCRソフトウェアでの処理", message: "テキスト認識はファイルのサイズと複雑さに応じて数分かかることがあります" },
+    results: { title: "抽出したテキストの結果", copy: "コピー", download: "ダウンロード .txt" },
+    languages: { english: "英語", french: "フランス語", german: "ドイツ語", spanish: "スペイン語", chinese: "中国語", japanese: "日本語", arabic: "アラビア語", russian: "ロシア語" },
     whatIsOcr: {
-      title: "光学文字認識（OCR）",
-      description: "スキャンされた紙のドキュメント、PDFファイル、デジタルカメラで撮影された画像など、さまざまな種類のドキュメントを編集可能かつ検索可能なデータに変換する技術。",
-      explanation: "OCRはドキュメント画像の構造を分析し、文字やテキスト要素を識別し、それらを機械可読形式に変換。",
-      extractionList: {
-        scannedPdfs: "テキストが画像として存在するスキャンされたPDF",
-        imageOnlyPdfs: "テキストレイヤーのない画像のみのPDF",
-        embeddedImages: "テキストを含む埋め込み画像を含むPDF",
-        textCopyingIssues: "テキストを直接コピーできないドキュメント"
-      }
+      title: "OCR抽出とは何ですか？",
+      description: "光学文字認識（OCR）は、機械学習によってサポートされる技術で、スキャンされたドキュメント、PDF、画像ファイルを編集可能かつ検索可能なテキストに変換します。",
+      explanation: "画像からテキストへの変換ツールは、ドキュメント画像の構造を分析し、文字やテキスト要素を識別して、機械が読み取れる形式に変換します。",
+      extractionList: { scannedPdfs: "テキストが画像として存在するスキャンされたPDF", imageOnlyPdfs: "テキストレイヤーのない画像のみのPDF", embeddedImages: "テキストを含む埋め込み画像のあるPDF", textCopyingIssues: "テキストを直接コピーできないドキュメント" }
     },
     whenToUse: {
-      title: "OCRテキスト抽出を使用するタイミング",
-      idealFor: "最適な用途：",
-      idealForList: {
-        scannedDocuments: "PDFとして保存されたスキャンされたドキュメント",
-        oldDocuments: "デジタルテキストレイヤーのない古いドキュメント",
-        textSelectionIssues: "テキスト選択/コピーが機能しないPDF",
-        textInImages: "抽出が必要なテキストを含む画像",
-        searchableArchives: "スキャンされたドキュメントから検索可能なアーカイブを作成"
-      },
-      notNecessaryFor: "必要ない場合：",
-      notNecessaryForList: {
-        digitalPdfs: "テキストがすでに選択可能なネイティブデジタルPDF",
-        createdDigitally: "デジタルドキュメントから直接作成されたPDF",
-        copyPasteAvailable: "すでにコピー＆ペースト可能なテキストがあるドキュメント",
-        formatPreservation: "形式の保持が必要なファイル（代わりにPDFからDOCXへの変換を使用）"
-      }
+      title: "画像からテキスト抽出ツールをいつ使用するか",
+      idealFor: "以下に最適：",
+      idealForList: { scannedDocuments: "PDFとして保存されたスキャンされたドキュメント", oldDocuments: "デジタルテキストレイヤーのない古いドキュメント", textSelectionIssues: "テキスト選択/コピーが機能しないPDF", textInImages: "抽出が必要なテキストを含む画像ファイル", searchableArchives: "スキャンされたドキュメントから検索可能なアーカイブを作成" },
+      notNecessaryFor: "以下には不要：",
+      notNecessaryForList: { digitalPdfs: "テキストが選択可能なネイティブデジタルPDF", createdDigitally: "デジタルドキュメントから直接作成されたPDF", copyPasteAvailable: "すでにコピー＆ペースト可能なドキュメント", formatPreservation: "フォーマットを保持する必要があるファイル（代わりにPDFからDOCXへの変換を使用）" }
     },
     limitations: {
-      title: "OCRの制限とヒント",
-      description: "当社のOCR技術は強力ですが、注意すべき制限があります：",
-      factorsAffecting: "OCR精度に影響を与える要因：",
-      factorsList: {
-        documentQuality: "ドキュメントの品質（解像度、コントラスト）",
-        complexLayouts: "複雑なレイアウトと書式",
-        handwrittenText: "手書きテキスト（認識が限定的）",
-        specialCharacters: "特殊文字とシンボル",
-        multipleLanguages: "1つのドキュメント内の複数の言語"
-      },
+      title: "OCRツールの制限とヒント",
+      description: "当社のOCRソフトウェアは強力ですが、注意すべきいくつかの制限があります：",
+      factorsAffecting: "テキスト認識の精度に影響する要因：",
+      factorsList: { documentQuality: "ドキュメントの品質（解像度、コントラスト）", complexLayouts: "複雑なレイアウトとフォーマット", handwrittenText: "手書きテキスト（認識が制限される）", specialCharacters: "特殊文字とシンボル", multipleLanguages: "1つのドキュメント内の複数の言語" },
       tipsForBest: "最良の結果を得るためのヒント：",
-      tipsList: {
-        highQualityScans: "高品質のスキャンを使用（300 DPI以上）",
-        correctLanguage: "ドキュメントに正しい言語を選択",
-        enhanceScannedImages: "「スキャン画像の強化」を有効にして精度を向上",
-        smallerPageRanges: "大きなドキュメントでは小さいページ範囲を処理",
-        reviewText: "抽出されたテキストを確認して修正"
-      }
+      tipsList: { highQualityScans: "高品質のスキャンを使用（300 DPI以上）", correctLanguage: "ドキュメントに正しい言語を選択", enhanceScannedImages: "「スキャン画像の強化」を有効にして精度を向上", smallerPageRanges: "大きなドキュメントでは小さなページ範囲を処理", reviewText: "抽出したテキストを後で確認・修正" }
     },
-    options: {
-      scope: "抽出するページ",
-      all: "全ページ",
-      custom: "特定のページ",
-      pages: "ページ番号",
-      pagesHint: "例：1,3,5-9",
-      enhanceScanned: "スキャン画像の強化",
-      enhanceScannedHint: "OCR精度を向上させるために画像を前処理（スキャンされたドキュメントに推奨）",
-      preserveLayout: "レイアウトを保持",
-      preserveLayoutHint: "段落や改行を含む元のレイアウトを維持しようとする"
-    },
-    // Upload area
-    uploadPdf: "テキスト抽出のためにPDFをアップロード",
-    dragDrop: "PDFファイルをここにドラッグ＆ドロップするか、クリックして参照",
-    selectPdf: "PDFファイルを選択",
+    options: { scope: "抽出するページ", all: "すべてのページ", custom: "特定のページ", pages: "ページ番号", pagesHint: "例: 1,3,5-9", enhanceScanned: "スキャン画像の強化", enhanceScannedHint: "OCR精度を向上させるために画像を前処理（スキャンドキュメントに推奨）", preserveLayout: "レイアウトを保持", preserveLayoutHint: "段落や改行を含む元のレイアウトを維持しようとする" },
+    ocrTool: "OCR抽出ツール",
+    ocrToolDesc: "スキャンされたドキュメントや画像ファイルを画像からテキストへの変換ツールで編集可能なテキストに変換",
+    uploadPdf: "OCR抽出のためのファイルアップロード",
+    dragDrop: "PDFまたは画像ファイルをここにドラッグ＆ドロップするか、クリックして参照",
+    selectPdf: "ファイルを選択",
     uploading: "アップロード中...",
     maxFileSize: "最大ファイルサイズ：50MB",
-
-    // File handling
-    invalidFile: "無効なファイル形式",
-    invalidFileDesc: "PDFファイルを選択してください",
+    invalidFile: "無効なファイルタイプ",
+    invalidFileDesc: "PDFまたはサポートされている画像ファイルを選択してください",
     fileTooLarge: "ファイルが大きすぎます",
     fileTooLargeDesc: "最大ファイルサイズは50MBです",
     noFile: "ファイルが選択されていません",
-    noFileDesc: "処理するPDFファイルを選択してください",
+    noFileDesc: "テキスト認識のためにファイルを選択してください",
     changeFile: "ファイルを変更",
-
-    // Options
     languageLabel: "ドキュメントの言語",
     selectLanguage: "言語を選択",
     pageRange: "ページ範囲",
-    allPages: "全ページ",
+    allPages: "すべてのページ",
     specificPages: "特定のページ",
-    pageRangeExample: "例：1-3、5、7-9",
-    pageRangeInfo: "個別のページまたはカンマで区切られた範囲を入力",
+    pageRangeExample: "例: 1-3, 5, 7-9",
+    pageRangeInfo: "個別のページまたは範囲をカンマで区切って入力",
     preserveLayout: "レイアウトを保持",
-    preserveLayoutDesc: "ドキュメントの構造と書式を維持しようとします",
-
-    // Processing
+    preserveLayoutDesc: "ドキュメントの構造とフォーマットを維持しようとする",
     extractText: "テキストを抽出",
-    extractingText: "テキストを抽出中...",
-    processingPdf: "PDFを処理中",
-    processingInfo: "ファイルサイズや複雑さによっては数分かかる場合があります",
-    analyzing: "ドキュメントを分析中",
+    extractingText: "テキスト抽出中...",
+    processingPdf: "ファイルを処理中",
+    processingInfo: "ファイルのサイズと複雑さに応じて数分かかることがあります",
+    analyzing: "コンテンツを分析中",
     preprocessing: "ページを前処理中",
     recognizing: "テキストを認識中",
     extracting: "コンテンツを抽出中",
     finalizing: "結果を確定中",
-    finishing: "仕上げ中",
-
-    // Results
-    extractionComplete: "テキスト抽出が完了",
-    extractionCompleteDesc: "PDFからテキストが正常に抽出されました",
-    extractionError: "テキスト抽出に失敗",
+    finishing: "終了中",
+    extractionComplete: "テキスト抽出が完了しました",
+    extractionCompleteDesc: "テキストが画像からテキストへの抽出ツールで正常に抽出されました",
+    extractionError: "テキスト抽出に失敗しました",
     extractionFailed: "テキストを抽出できませんでした",
     unknownError: "不明なエラーが発生しました",
     textCopied: "テキストがクリップボードにコピーされました",
@@ -967,13 +1000,14 @@ export default {
     textPreview: "テキストプレビュー",
     rawText: "生テキスト",
     extractedText: "抽出したテキスト",
-    previewDesc: "書式付きで抽出したテキストのプレビュー",
+    previewDesc: "フォーマット付きの抽出したテキストのプレビュー",
     rawTextOutput: "生テキスト出力",
-    rawTextDesc: "書式なしのプレーンテキスト",
-    noTextFound: "ドキュメントにテキストが見つかりませんでした",
+    rawTextDesc: "フォーマットなしのプレーンテキスト",
+    noTextFound: "ファイルにテキストが見つかりませんでした",
     copyText: "テキストをコピー",
     downloadText: "テキストをダウンロード",
-    processAnother: "別のPDFを処理"
+    processAnother: "別のファイルを処理",
+    supportedLanguages: "英語、スペイン語、フランス語、ドイツ語、中国語、日本語など15以上の言語をサポート。より高い精度のために適切な言語を選択してください。"
   },
 
   // PDF保護ページ

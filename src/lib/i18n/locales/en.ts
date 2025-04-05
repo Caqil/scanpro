@@ -1,10 +1,10 @@
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   metadata: {
-    title: "ScanPro - Free PDF Converter, Editor, OCR & Unlock Pdf",
+    title: "ScanPro - Free PDF Converter, Editor, OCR & Unlock PDF",
     template: "%s | ScanPro - PDF Tools",
-    description: "Convert, edit, unlock, compress, merge, split & OCR PDFs with ScanPro. Free, fast online PDF tools—no downloads needed.",
-    keywords: "PDF converter, PDF editor, OCR online, unlock PDF, compress PDF, merge PDF, split PDF, free PDF tools, online PDF editor, ScanPro"
+    description: "Convert JPG to PDF, edit, unlock, compress, merge, split & OCR PDFs with ScanPro. Free, fast online tools for image files & multiple images—no downloads needed.",
+    keywords: "PDF converter, PDF editor, OCR online, unlock PDF, compress PDF, merge PDF, split PDF, free PDF tools, online PDF editor, convert JPG to PDF, JPG file to PDF, online JPG to PDF, free JPG to PDF converter, convert JPGs to PDFs, image files, image format, multiple images, convert your images, file format, uploading file, operating system, drag and drop, converting multiple, image quality, files are automatically deleted, ScanPro"
   },
   nav: {
     tools: "Tools",
@@ -273,137 +273,135 @@ export default {
     apiDesc: "Use our REST API to convert PDFs programmatically in your application",
     apiDocs: "View API Docs"
   },
-
-  // Convert Page
   convert: {
     title: {
-      pdfToWord: "Convert PDF to Word",
-      pdfToExcel: "Convert PDF to Excel",
-      pdfToPowerPoint: "Convert PDF to PowerPoint",
-      pdfToJpg: "Convert PDF to JPG",
-      pdfToPng: "Convert PDF to PNG",
-      pdfToHtml: "Convert PDF to HTML",
-      wordToPdf: "Convert Word to PDF",
-      excelToPdf: "Convert Excel to PDF",
-      powerPointToPdf: "Convert PowerPoint to PDF",
-      jpgToPdf: "Convert JPG to PNG",
-      pngToPdf: "Convert PNG to PDF",
-      htmlToPdf: "Convert HTML to PDF",
-      generic: "Convert Your File"
+      pdfToWord: "Convert PDF to Word Online - Free PDF to DOC Converter Tool",
+      pdfToExcel: "Convert PDF to Excel Online - Extract PDF Data to XLS",
+      pdfToPowerPoint: "Convert PDF to PowerPoint - PDF to PPT Converter",
+      pdfToJpg: "Convert PDF to JPG Image - High Quality PDF to JPEG",
+      pdfToPng: "Convert PDF to PNG Online - PDF to Transparent PNG",
+      pdfToHtml: "Convert PDF to HTML Web Page - PDF to HTML5 Converter",
+      wordToPdf: "Convert Word to PDF Online - Free DOC to PDF Converter",
+      excelToPdf: "Convert Excel to PDF - XLS to PDF Converter Tool",
+      powerPointToPdf: "Convert PowerPoint to PDF Online - PPT to PDF",
+      jpgToPdf: "Convert JPG to PDF Online - Image to PDF Creator",
+      pngToPdf: "Convert PNG to PDF - Transparent Image to PDF Converter",
+      htmlToPdf: "Convert HTML to PDF Online - Web Page to PDF Generator",
+      generic: "File Converter Online - Convert Documents, Images & More"
     },
     description: {
-      pdfToWord: "Transform PDF documents to editable Word files quickly and easily",
-      pdfToExcel: "Extract tables and data from PDF files into Excel spreadsheets",
-      pdfToPowerPoint: "Turn PDF presentations into editable PowerPoint slides",
-      pdfToJpg: "Convert PDF pages to high-quality JPG images",
-      pdfToPng: "Convert PDF pages to transparent PNG images",
-      pdfToHtml: "Convert PDF documents to HTML web pages",
-      wordToPdf: "Convert Word documents to PDF format with perfect formatting",
-      excelToPdf: "Transform Excel spreadsheets to PDF documents",
-      powerPointToPdf: "Convert PowerPoint presentations to PDF format",
-      jpgToPdf: "Create PDF files from your JPG images",
-      pngToPdf: "Create PDF files from your PNG images",
-      htmlToPdf: "Convert HTML web pages to PDF documents",
-      generic: "Select a file to convert between formats"
+      pdfToWord: "Transform PDF documents to editable Word files quickly and easily. Our free PDF to Word converter preserves formatting for DOC/DOCX output.",
+      pdfToExcel: "Extract tables and data from PDF files into Excel spreadsheets. Convert PDF to XLS/XLSX with accurate data formatting for analysis.",
+      pdfToPowerPoint: "Turn PDF presentations into editable PowerPoint slides. Our PDF to PPT converter maintains slide layouts and design elements.",
+      pdfToJpg: "Convert PDF pages to high-quality JPG images. Extract images from PDF or save each page as JPEG for sharing online.",
+      pdfToPng: "Convert PDF pages to transparent PNG images. Perfect for graphic designers needing PDF elements with transparent backgrounds.",
+      pdfToHtml: "Convert PDF documents to HTML web pages. Create responsive HTML5 websites from PDF files with our advanced converter.",
+      wordToPdf: "Convert Word documents to PDF format with perfect formatting. Free DOC/DOCX to PDF converter for professional results.",
+      excelToPdf: "Transform Excel spreadsheets to PDF documents. Preserve formulas, charts and tables when converting XLS/XLSX to PDF.",
+      powerPointToPdf: "Convert PowerPoint presentations to PDF format. PPT/PPTX to PDF converter maintains slide transitions and notes.",
+      jpgToPdf: "Create PDF files from your JPG images. Combine multiple JPEG photos into a single PDF document online.",
+      pngToPdf: "Create PDF files from your PNG images. Convert transparent PNG graphics to PDF while preserving transparency.",
+      htmlToPdf: "Convert HTML web pages to PDF documents. Save websites as PDF with our online HTML to PDF generator tool.",
+      generic: "Select a file to convert between formats. Free online document converter for PDF, Word, Excel, PowerPoint, JPG, PNG and HTML."
     },
     howTo: {
-      title: "How to Convert {from} to {to}",
+      title: "How to Convert {from} to {to} Online",
       step1: {
-        title: "Upload",
-        description: "Upload the {from} file you want to convert"
+        title: "Upload File",
+        description: "Upload the {from} file you want to convert from your computer, Google Drive or Dropbox"
       },
       step2: {
-        title: "Convert",
-        description: "Click the Convert button and our system will process your file"
+        title: "Convert Format",
+        description: "Click the Convert button and our system will process your file with advanced conversion technology"
       },
       step3: {
-        title: "Download",
-        description: "Download your converted {to} file"
+        title: "Download Result",
+        description: "Download your converted {to} file instantly or get a shareable link"
       }
     },
     options: {
-      title: "Conversion Options",
+      title: "Advanced Conversion Options",
       ocr: "Enable OCR (Optical Character Recognition)",
-      ocrDescription: "Extract text from scanned documents or images",
+      ocrDescription: "Extract text from scanned documents or images for editable output",
       preserveLayout: "Preserve original layout",
-      preserveLayoutDescription: "Maintain the original document's formatting and layout",
+      preserveLayoutDescription: "Maintain the original document's formatting and layout precisely",
       quality: "Output quality",
-      qualityDescription: "Set the quality level for the converted file",
+      qualityDescription: "Set the quality level for the converted file (affects file size)",
       qualityOptions: {
-        low: "Low (smaller file size)",
-        medium: "Medium (balanced)",
-        high: "High (best quality)"
+        low: "Low (smaller file size, faster processing)",
+        medium: "Medium (balanced quality and size)",
+        high: "High (best quality, larger files)"
       },
       pageOptions: "Page options",
       allPages: "All pages",
       selectedPages: "Selected pages",
       pageRangeDescription: "Enter page numbers and/or page ranges separated by commas",
-      pageRangeExample: "Example: 1,3,5-12"
+      pageRangeExample: "Example: 1,3,5-12 (converts pages 1, 3, and 5 through 12)"
     },
-    moreTools: "Related Conversion Tools",
+    moreTools: "Related Document Conversion Tools",
     expertTips: {
-      title: "Expert Tips",
-      pdfToWord: [
-        "For best results, ensure your PDF has clear, machine-readable text",
-        "Enable OCR for scanned documents or image-based PDFs",
-        "Complex layouts may require minor adjustments after conversion"
-      ],
-      pdfToExcel: [
-        "Tables with clear borders convert more accurately",
-        "Pre-process scanned PDFs with OCR for better data extraction",
-        "Check spreadsheet formulas after conversion as they may not transfer"
-      ],
+      title: "Expert Conversion Tips",
+      pdfToWord: {
+        tips1: "For best PDF to Word results, ensure your PDF has clear, machine-readable text",
+        tips2: "Enable OCR for scanned documents or image-based PDFs to extract editable text",
+        tips3: "Complex layouts may require minor adjustments after conversion for perfect formatting"
+      },
+      pdfToExcel: {
+        tips1: "Tables with clear borders convert more accurately from PDF to Excel",
+        tips2: "Pre-process scanned PDFs with OCR for better data extraction to XLS/XLSX",
+        tips3: "Check spreadsheet formulas after conversion as they may not transfer automatically"
+      },
       generic: [
-        "Higher quality settings result in larger file sizes",
+        "Higher quality settings result in larger file sizes but better output",
         "Use OCR for documents with scanned text or images containing text",
-        "Preview your file after conversion to ensure accuracy"
+        "Always preview your file after conversion to ensure accuracy before downloading"
       ]
     },
     advantages: {
-      title: "Advantages of Converting {from} to {to}",
+      title: "Benefits of Converting {from} to {to}",
       pdfToWord: [
-        "Edit and modify text that was locked in PDF format",
-        "Update content without recreating the entire document",
-        "Extract information for use in other documents"
+        "Edit and modify text that was locked in PDF format with our DOC converter",
+        "Update content without recreating the entire document from scratch",
+        "Extract information for use in other Word documents or templates"
       ],
       pdfToExcel: [
-        "Analyze and manipulate data that was in static PDF form",
-        "Create charts and perform calculations with extracted data",
-        "Easily update financial reports or numerical information"
+        "Analyze and manipulate data that was in static PDF form using XLS tools",
+        "Create charts and perform calculations with extracted spreadsheet data",
+        "Easily update financial reports or numerical information in Excel format"
       ],
       wordToPdf: [
-        "Create universally readable documents that maintain formatting",
-        "Protect content from unwanted modifications",
-        "Ensure consistent appearance across all devices and platforms"
+        "Create universally readable PDF documents that maintain perfect formatting",
+        "Protect content from unwanted modifications with secure PDF output",
+        "Ensure consistent document appearance across all devices and platforms"
       ],
       generic: [
-        "Transform your document into a more useful format",
-        "Access and use content in programs that support the target format",
-        "Share files in formats that others can easily open"
+        "Transform your document into a more useful and editable format",
+        "Access and use content in programs that support the target file type",
+        "Share files in formats that others can easily open without special software"
       ]
     }
   },
   features: {
     title: "Advanced PDF Tools & Features | ScanPro",
-    description: "Explore ScanPro's comprehensive suite of PDF tools and features for document management, conversion, editing, unlock pdfs and more.",
+    description: "Explore ScanPro's comprehensive suite of PDF tools and features for document management, conversion, editing, unlock pdfs and more. Convert your files across various file formats like JPG to PDF and DOCX to PDF online for free.",
 
     hero: {
       title: "Advanced PDF Tools & Features",
-      description: "Discover the comprehensive suite of tools and features that make ScanPro the ultimate solution for all your document management needs."
+      description: "Discover the comprehensive suite of tools and features that make ScanPro the ultimate solution for all your document management needs, including drag and drop uploading and converting multiple image files to PDF format across any operating system."
     },
 
     overview: {
       power: {
         title: "Powerful Processing",
-        description: "Advanced algorithms ensure high-quality document processing and conversion with exceptional accuracy."
+        description: "Advanced algorithms ensure high-quality document processing and conversion, including image files to PDF format with exceptional image quality and accuracy."
       },
       security: {
         title: "Bank-Level Security",
-        description: "Your documents are protected with 256-bit SSL encryption and automatically deleted after processing."
+        description: "Your documents, including uploaded JPG files to PDF, are protected with 256-bit SSL encryption and files are automatically deleted after processing."
       },
       accessibility: {
         title: "Universal Accessibility",
-        description: "Access your documents and our tools from any device with full cross-platform compatibility."
+        description: "Access your documents and our tools from any device or operating system with full cross-platform compatibility, including web browsers."
       }
     },
 
@@ -416,11 +414,11 @@ export default {
     categories: {
       conversion: {
         title: "PDF Conversion",
-        description: "Convert PDFs to and from various formats with high accuracy and formatting retention.",
+        description: "Convert PDFs to and from various file formats with high accuracy and formatting retention, including JPG to PDF and Word file to PDF.",
         features: {
           pdfToWord: {
             title: "PDF to Word Conversion",
-            description: "Convert PDF files to editable Word documents with preserved formatting, tables, and images."
+            description: "Convert PDF files to editable Word documents with preserved formatting, tables, and images using Microsoft Word compatible output."
           },
           pdfToExcel: {
             title: "PDF to Excel Conversion",
@@ -428,22 +426,22 @@ export default {
           },
           pdfToImage: {
             title: "PDF to Image Conversion",
-            description: "Convert PDF pages to high-quality JPG, PNG, or TIFF images with customizable resolution."
+            description: "Convert PDF pages to high-quality JPG, PNG, or TIFF image formats with customizable resolution."
           },
           officeToPdf: {
             title: "Office to PDF Conversion",
-            description: "Convert Word, Excel, PowerPoint files to PDF format with preserved layout and formatting."
+            description: "Convert Word, Excel, PowerPoint files to PDF format with preserved layout and formatting, including DOCX files to PDF and Microsoft Office support."
           }
         }
       },
 
       editing: {
         title: "PDF Editing & Management",
-        description: "Edit, organize, and optimize your PDF documents with our comprehensive toolset.",
+        description: "Edit, organize, and optimize your PDF documents with our comprehensive toolset, including options to save as PDF and manage multiple images.",
         features: {
           merge: {
             title: "Merge PDFs",
-            description: "Combine multiple PDF files into a single document with customizable page ordering."
+            description: "Combine multiple PDF files or image files into a single document with customizable page ordering using drag and drop."
           },
           split: {
             title: "Split PDFs",
@@ -462,7 +460,7 @@ export default {
 
       security: {
         title: "PDF Security & Protection",
-        description: "Secure your PDF documents with encryption, password protection, and digital signatures.",
+        description: "Secure your PDF documents with encryption, password protection, and digital signatures; files are automatically deleted after processing.",
         features: {
           protect: {
             title: "Password Protection",
@@ -485,7 +483,7 @@ export default {
 
       ocr: {
         title: "OCR Technology",
-        description: "Extract text from scanned documents and images using our advanced OCR technology.",
+        description: "Extract text from scanned documents and image files using our advanced OCR technology, perfect for converting JPGs to PDFs.",
         features: {
           textExtraction: {
             title: "Text Extraction",
@@ -501,14 +499,14 @@ export default {
           },
           batchProcessing: {
             title: "Batch Processing",
-            description: "Process multiple documents at once with our efficient batch OCR capabilities."
+            description: "Process multiple documents or image files at once with our efficient batch OCR capabilities."
           }
         }
       },
 
       api: {
         title: "API & Integration",
-        description: "Integrate our PDF processing capabilities into your applications with our robust API.",
+        description: "Integrate our PDF processing capabilities into your applications with our robust API, supporting various file formats and online tools.",
         features: {
           restful: {
             title: "RESTful API",
@@ -531,7 +529,7 @@ export default {
 
       cloud: {
         title: "Cloud Platform",
-        description: "Access your documents from anywhere with our secure cloud storage and processing platform.",
+        description: "Access your documents from anywhere with our secure cloud storage and processing platform, supporting uploading files and saving as PDF.",
         features: {
           storage: {
             title: "Cloud Storage",
@@ -539,7 +537,7 @@ export default {
           },
           sync: {
             title: "Cross-Device Sync",
-            description: "Seamlessly sync your documents across all your devices for access on the go."
+            description: "Seamlessly sync your documents across all your devices and operating systems for access on the go."
           },
           sharing: {
             title: "Document Sharing",
@@ -554,11 +552,11 @@ export default {
 
       enterprise: {
         title: "Enterprise Features",
-        description: "Advanced features designed for business and enterprise requirements.",
+        description: "Advanced features designed for business and enterprise requirements, including converting multiple files and custom workflows.",
         features: {
           batch: {
             title: "Batch Processing",
-            description: "Process hundreds of documents simultaneously with our efficient batch processing system."
+            description: "Process hundreds of documents or image files simultaneously with our efficient batch processing system."
           },
           workflow: {
             title: "Custom Workflows",
@@ -578,10 +576,10 @@ export default {
 
     mobile: {
       title: "ScanPro Mobile App",
-      description: "Take ScanPro's powerful PDF tools with you on the go. Our mobile app offers the same robust functionality in a convenient, mobile-friendly interface.",
+      description: "Take ScanPro's powerful PDF tools with you on the go. Our mobile app offers the same robust functionality in a convenient, mobile-friendly interface, including JPG file to PDF conversion.",
       feature1: {
         title: "Scan & Digitize Documents",
-        description: "Use your camera to scan physical documents and convert them to high-quality PDFs instantly."
+        description: "Use your camera to scan physical documents and convert them to high-quality PDFs instantly with our free JPG to PDF converter."
       },
       feature2: {
         title: "Edit PDFs On the Go",
@@ -633,11 +631,11 @@ export default {
 
     cta: {
       title: "Ready to Transform Your Document Workflow?",
-      description: "Join thousands of satisfied users who have streamlined their document management with ScanPro.",
+      description: "Join thousands of satisfied users who have streamlined their document management with ScanPro’s online tools, including our PDF converter for multiple file formats.",
       pricing: "View Pricing",
-      explore: "Explore Tools",
-
+      explore: "Explore Tools"
     }
+
   },
 
   // CTA section
@@ -687,36 +685,36 @@ export default {
     ocr: "Extract text from scanned documents using Optical Character Recognition."
   },
   splitPdf: {
-    title: "Split PDF",
-    description: "Split PDF files into multiple documents or extract specific pages",
+    title: "Split PDF - Separate PDF Pages Online",
+    description: "Easily split PDF files into multiple documents, delete pages, or extract specific pages with our free PDF splitter tool online",
     howTo: {
-      title: "How to Split PDF Files",
+      title: "How to Split PDF Files Online",
       step1: {
-        title: "Upload",
-        description: "Upload the PDF file you want to split or extract pages from"
+        title: "Upload Your PDF",
+        description: "File and click to upload the PDF you want to split, delete pages from, or extract pages from using our drag-and-drop feature"
       },
       step2: {
-        title: "Choose Split Method",
-        description: "Select how you want to split your PDF: by page ranges, extract each page, or split every N pages"
+        title: "Select Pages to Split",
+        description: "Choose your split method: select pages by range, separate PDF pages individually, or split PDFs into multiple files every N pages"
       },
       step3: {
-        title: "Download",
-        description: "Download your split PDF files individually"
+        title: "Download Split Files",
+        description: "Download your split PDF files or separated pages as individual documents instantly"
       }
     },
     options: {
-      splitMethod: "Split Method",
-      byRange: "Split by page ranges",
-      extractAll: "Extract all pages as separate PDFs",
-      everyNPages: "Split every N pages",
-      everyNPagesNumber: "Number of pages per file",
+      splitMethod: "Choose Your Split Method",
+      byRange: "Split by Page Ranges",
+      extractAll: "Extract All Pages as Separate PDFs",
+      everyNPages: "Split Every N Pages",
+      everyNPagesNumber: "Number of Pages per File",
       everyNPagesHint: "Each output file will contain this many pages",
       pageRanges: "Page Ranges",
-      pageRangesHint: "Enter page ranges separated by commas. Example: 1-5, 8, 11-13 will create 3 PDF files"
+      pageRangesHint: "Enter page ranges separated by commas (e.g., 1-5, 8, 11-13) to create multiple PDF files"
     },
     splitting: "Splitting PDF...",
     splitDocument: "Split Document",
-    splitSuccess: "PDF successfully split!",
+    splitSuccess: "PDF Successfully Split!",
     splitSuccessDesc: "Your PDF has been split into {count} separate files",
     results: {
       title: "Split PDF Results",
@@ -725,141 +723,285 @@ export default {
       pagesCount: "pages"
     },
     faq: {
-      title: "Frequently Asked Questions",
+      title: "Frequently Asked Questions About Splitting PDFs",
       q1: {
         question: "What happens to my PDF files after splitting?",
         answer: "All uploaded and generated files are automatically deleted from our servers after 24 hours for your privacy and security."
       },
       q2: {
         question: "Is there a limit to how many pages I can split?",
-        answer: "The free version allows you to split PDFs with up to 100 pages. For larger documents, consider our premium plan."
+        answer: "The free version supports PDFs up to 100 pages. Upgrade to our premium plan for larger files or unlimited splitting."
       },
       q3: {
-        question: "Can I extract specific pages from a PDF?",
-        answer: "Yes, you can use the \"Split by page ranges\" option to extract specific pages or page ranges from your PDF document."
+        question: "Can I delete pages or extract specific pages from a PDF?",
+        answer: "Yes, use the 'Split by page ranges' option to delete pages or extract specific sections from your PDF online."
       },
       q4: {
-        question: "Can I re-order pages while splitting?",
-        answer: "Currently, the split tool maintains the original page order. To reorder pages, you would need to use our PDF Merger tool with the extracted pages."
+        question: "Can I reorder pages while splitting?",
+        answer: "Currently, page order is preserved during splitting. Use our PDF Merger tool with drag-and-drop to reorder pages after splitting."
       }
     },
     useCases: {
-      title: "Popular Uses for PDF Splitting",
+      title: "Popular Uses for Our PDF Splitter Tool",
       chapters: {
-        title: "Chapter Separation",
-        description: "Split large books or reports into individual chapters for easier navigation and sharing"
+        title: "Separate PDF Pages by Chapters",
+        description: "Split large books or reports into individual chapters for easier sharing and navigation"
       },
       extract: {
-        title: "Page Extraction",
-        description: "Extract specific pages like forms, certificates, or important sections from longer documents"
+        title: "Extract Pages from PDF",
+        description: "Select pages like forms or certificates to extract from longer documents with a simple file and click"
       },
       remove: {
-        title: "Remove Pages",
-        description: "Extract all needed pages and leave out unwanted content like advertisements or blank pages"
+        title: "Delete Pages from PDF",
+        description: "Remove unwanted pages like ads or blanks by selecting pages to keep and splitting accordingly"
       },
       size: {
-        title: "Size Reduction",
-        description: "Break large PDFs into smaller files for easier sharing via email or messaging apps"
+        title: "Split PDFs into Multiple Files for Size Reduction",
+        description: "Break large PDFs into smaller files for easier emailing or messaging with our online PDF splitter"
       }
+    },
+    newSection: {
+      title: "Why Use Our Online PDF Splitter?",
+      description: "Our PDF splitter lets you separate PDF pages, delete pages, and split PDFs into multiple files quickly and securely. Enjoy drag-and-drop simplicity, select pages with precision, and manage your documents online without software downloads.",
+      additional: "Whether you need to separate PDF pages for a project, delete pages you don’t want, or split PDFs into multiple files for easier sharing, our online PDF splitter is the perfect tool. With a user-friendly drag-and-drop interface, you can upload your file and click to select pages effortlessly. Our service is fast, secure, and free—ideal for managing PDF documents online without installing software. Split large PDFs, extract specific pages, or reduce file sizes in just a few clicks!"
+    },
+    seoContent: {
+
+      title: "Master Your PDF Management with Our PDF Splitter",
+
+      p1: "Need a hassle-free way to split PDFs into multiple files or pull out specific pages online? Our PDF splitter tool is built to take the stress out of document management. Whether you’re a student, a busy professional, or just organizing personal files, you can delete pages, pick the ones you want, and break down big PDFs in a snap. Drag your file into the uploader, click to pick your split style—page ranges, single pages, or every few pages—and you’re set. It’s one of the handiest online PDF splitters you’ll find today.",
+
+      p2: "Splitting PDFs doesn’t get simpler than this. Want to grab one page from a huge report? Tired of blank sheets or ads cluttering things up? Our tool lets you pinpoint exactly which pages to keep and turn them into separate files or smaller batches. It’s all online—no downloads needed. With our PDF splitter, you can turn a clunky document into neat, manageable chunks, ready for emailing, storing, or sharing without file size headaches.",
+
+      p3: "Our online PDF splitter shines with its easy layout and robust options. Break a textbook into chapters or slice a lengthy contract into key parts without any fuss. The drag-and-drop feature keeps it smooth—just drop your file in and click to kick things off. You can even preview your PDF to choose pages spot-on before splitting. And the best part? It’s free for files up to 100 pages, so anyone can jump in and get started.",
+
+      p4: "Why pick our PDF splitter? It’s quick, safe, and loaded with flexibility. Pull out pages for a presentation, ditch extras to clean up a document, or split PDFs into multiple files for better order—all from your browser. We’ve tuned it to show up for searches like ‘split PDF online,’ ‘delete pages,’ and ‘separate PDF pages,’ so you’ll find us right when you need us. Give it a try today and see how smooth PDF management can be!"
+
+    },
+    relatedTools: "Related Tools",
+    popular: {
+      viewAll: "View All Tools"
     }
   },
   // Merge PDF Page
   mergePdf: {
-    title: "Merge PDF Files",
-    description: "Combine multiple PDF files into a single document quickly and easily",
+    title: "Merge PDF Files Online | Free Web Browser PDF Merging Tool",
+    description: "Combine multiple PDF files into a single document quickly and easily with our browser-based merging tool that works on all operating systems",
+    intro: "Our online PDF merging tool allows you to combine multiple documents into one merged file with just a few clicks. No installation required - works directly in your web browser on any operating system.",
+
+    // How-to section
     howTo: {
-      title: "How to Merge PDF Files",
+      title: "How to Merge PDF Files in Your Browser",
       step1: {
         title: "Upload Files",
-        description: "Upload the PDF files you want to combine. You can select multiple files at once."
+        description: "Upload the PDF files you want to combine. Select multiple files at once from your device or drag & drop them directly into your web browser."
       },
       step2: {
         title: "Arrange Order",
-        description: "Drag and drop to rearrange the files in the order you want them to appear in the final PDF."
+        description: "Drag and drop to rearrange the files in the order you want them to appear in the final merged file. Our merging tool makes organizing multiple PDFs intuitive."
       },
       step3: {
         title: "Download",
-        description: "Click the Merge PDFs button and download your combined PDF file."
+        description: "Click the 'Merge PDFs' button and download your combined PDF file directly to your device from any web browser."
       }
     },
+
+    // Benefits section
+    benefits: {
+      title: "Benefits of Our Online PDF Merger",
+      compatibility: {
+        title: "Works on All Devices",
+        description: "Our web browser-based PDF merging tool functions perfectly on Windows, macOS, Linux, and mobile operating systems without requiring installation."
+      },
+      privacy: {
+        title: "Secure & Private",
+        description: "Your documents are processed in your web browser and automatically deleted after merging, ensuring your sensitive information stays private."
+      },
+      simplicity: {
+        title: "User-Friendly Interface",
+        description: "The intuitive drag-and-drop interface makes merging multiple PDF files simple, even for first-time users of our online tool."
+      },
+      quality: {
+        title: "High-Quality Output",
+        description: "Our merging tool preserves the original formatting, images, and text quality in your merged file, ensuring professional results."
+      }
+    },
+
+    // Use cases section
+    useCases: {
+      title: "Common Uses for PDF Merging",
+      business: {
+        title: "Business Documents",
+        description: "Combine financial reports, contracts, and presentations into comprehensive documentation for clients and stakeholders."
+      },
+      academic: {
+        title: "Academic Papers",
+        description: "Merge research papers, citations, and appendices into a complete academic submission ready for review."
+      },
+      personal: {
+        title: "Personal Records",
+        description: "Combine receipts, warranties, and instruction manuals into organized digital records for easy reference."
+      },
+      professional: {
+        title: "Professional Portfolios",
+        description: "Create impressive portfolios by merging multiple work samples into a single, easily shareable document."
+      }
+    },
+
+    // FAQ section
     faq: {
       title: "Frequently Asked Questions",
       q1: {
-        question: "Is there a limit to how many PDFs I can merge?",
-        answer: "You can merge up to 20 PDF files at once with our free tool. For larger batches, consider our premium plan."
+        question: "Is there a limit to how many PDFs I can merge with your online tool?",
+        answer: "With our free web browser-based merging tool, you can combine up to 20 PDF files at once. For merging multiple larger batches, consider upgrading to our premium plan that allows unlimited merging operations."
       },
       q2: {
-        question: "Will my PDF files remain private?",
-        answer: "Yes, your privacy is our priority. All uploaded files are automatically deleted from our servers after processing."
+        question: "Will my PDF files remain private when using your online merging tool?",
+        answer: "Yes, your privacy is our priority. All files uploaded to our browser-based merging tool are processed securely and automatically deleted from our servers after processing. We never access or store your document contents."
       },
       q3: {
-        question: "Can I merge password-protected PDFs?",
-        answer: "For password-protected PDFs, you will need to unlock them first using our Unlock PDF tool, and then merge them."
+        question: "Can I merge password-protected PDFs using your online tool?",
+        answer: "For password-protected PDFs, you'll need to unlock them first using our online Unlock PDF tool, and then merge them. Our browser-based merging tool will prompt you if it detects protected documents."
+      },
+      q4: {
+        question: "Does your online PDF merging tool work on all operating systems?",
+        answer: "Yes, our web browser-based PDF merging tool works on all major operating systems including Windows, macOS, Linux, iOS, and Android. As long as you have a modern web browser, you can merge PDFs without installing any software."
+      },
+      q5: {
+        question: "How large can the PDF files be for merging?",
+        answer: "Our free online merging tool supports files up to 100MB each. The combined size of all files being merged should not exceed 300MB for optimal performance in your web browser."
+      },
+      q6: {
+        question: "Will the merged file maintain all the features of the original PDFs?",
+        answer: "Yes, our advanced merging tool preserves text, images, formatting, hyperlinks, and most interactive elements from the original PDFs in your final merged file."
       }
     },
+
+    // Tips section
+    tips: {
+      title: "Tips for Merging PDFs Effectively",
+      tip1: {
+        title: "Organize Before Merging",
+        description: "Rename your files numerically (e.g., 01_intro.pdf, 02_content.pdf) before uploading to our merging tool for easier organization."
+      },
+      tip2: {
+        title: "Optimize Large Files",
+        description: "Use our Compress PDF tool first if you're merging multiple large documents to ensure better performance of the final merged file."
+      },
+      tip3: {
+        title: "Check Preview",
+        description: "After arranging your files, use the preview function in our online tool to verify the order before finalizing your merged PDF."
+      },
+      tip4: {
+        title: "Consider Bookmarks",
+        description: "For professional documents, consider adding bookmarks to your merged file using our Edit PDF tool for easier navigation."
+      }
+    },
+
+    // Comparison section
+    comparison: {
+      title: "Why Choose Our Web Browser Merging Tool",
+      point1: {
+        title: "No Software Installation",
+        description: "Unlike desktop applications, our online PDF merging tool works directly in your web browser without downloading or installing any software."
+      },
+      point2: {
+        title: "Cross-Platform Compatibility",
+        description: "Our browser-based tool works on all operating systems, while desktop alternatives often only support specific platforms."
+      },
+      point3: {
+        title: "Free and Accessible",
+        description: "Access our PDF merging capabilities at no cost, compared to expensive desktop alternatives or subscription services."
+      },
+      point4: {
+        title: "Regular Updates",
+        description: "Our online merging tool is constantly improved without requiring manual updates from users."
+      }
+    },
+
+    // UI elements and messages
+    ui: {
+      of: "of",
+      files: "files",
+      filesToMerge: "Files to Merge",
+      dragToReorder: "Drag to Reorder",
+      downloadReady: "Download Ready",
+      downloadMerged: "Download Merged File",
+      mergePdfs: "Merge PDFs",
+      processingMerge: "Merging your PDFs...",
+      successMessage: "PDFs merged successfully!",
+      dragDropHere: "Drag & drop PDFs here",
+      or: "or",
+      browseFiles: "Browse Files",
+      fileLimit: "Combine up to 20 PDF files",
+      noPdfsSelected: "No PDFs selected",
+      addMoreFiles: "Add More Files",
+      rearrangeMessage: "Drag files to rearrange the order in your merged PDF",
+      removeFile: "Remove",
+      filePreview: "Preview",
+      startOver: "Start Over",
+      mergingInProgress: "Merging in progress...",
+      pleaseWait: "Please wait while we combine your PDF files",
+      processingFile: "Processing",
+      retry: "Retry Merging"
+    },
+
+    // Related tools
     relatedTools: "Explore More PDF Tools",
-    viewAllTools: "View All PDF Tools",
-    of: "of",
-    files: "files",
-    filesToMerge: "Files to Merge",
-    dragToReorder: "Drag to Reorder", // Added missing value
-    downloadReady: "Download Ready", // Added missing value
-    downloadMerged: "Download Merged", // Added missing value
-    mergePdfs: "Merge PDFs", // Added missing value
-    successMessage: "PDF merged successfully",
+    viewAllTools: "View All PDF Tools"
   },
 
   // OCR Page
   ocr: {
-    title: "OCR Text Extraction",
-    description: "Extract text from scanned PDFs and images using powerful Optical Character Recognition technology",
+    title: "OCR Extract: Text Recognition Made Simple",
+    description: "Transform scanned PDFs and image files into editable text using advanced OCR software and machine learning technology",
     howTo: {
-      title: "How OCR Text Extraction Works",
+      title: "How OCR Extract Works",
       step1: {
         title: "Upload",
-        description: "Upload your scanned PDF document or image-based PDF file."
+        description: "Upload your scanned PDF or image file to the image to text converter."
       },
       step2: {
-        title: "Configure OCR",
-        description: "Select language, page range, and advanced options for best results."
+        title: "Configure OCR Tool",
+        description: "Choose the language, page range, and advanced settings for optimal text recognition."
       },
       step3: {
-        title: "Get Text",
-        description: "Copy the extracted text or download it as a text file for further use."
+        title: "Extract Text",
+        description: "Copy the extracted text or download it as a .txt file with our picture to text converter."
       }
     },
     faq: {
       title: "Frequently Asked Questions",
       questions: {
         accuracy: {
-          question: "How accurate is the OCR text extraction?",
-          answer: "Our OCR technology typically achieves 90-99% accuracy for clearly printed text in well-scanned documents. Accuracy may decrease with poor quality scans, unusual fonts, or complex layouts."
+          question: "How accurate is OCR extract technology?",
+          answer: "Our OCR software achieves 90-99% accuracy for clear, printed text in high-quality scans. Accuracy may vary with poor image files, handwriting, or complex layouts."
         },
         languages: {
-          question: "Which languages are supported?",
-          answer: "We support over 100 languages including English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese, Korean, Russian, Arabic, Hindi and many more."
+          question: "Which languages does the OCR tool support?",
+          answer: "Over 100 languages are supported, including English, French, German, Spanish, Chinese, Japanese, Arabic, Russian, and more."
         },
         recognition: {
-          question: "Why isn't my text being recognized correctly?",
-          answer: "Several factors can affect OCR accuracy: document quality, resolution, contrast, complex layouts, handwriting, unusual fonts, or selecting the wrong language."
+          question: "Why isn’t my text being recognized correctly?",
+          answer: "Text recognition can be affected by low-quality image files, unusual fonts, handwriting, or incorrect language selection."
         },
         pageLimit: {
-          question: "Is there a limit to how many pages I can process?",
-          answer: "For free users, there's a limit of 50 pages per PDF. Premium users can process PDFs with up to 500 pages."
+          question: "Is there a page limit for processing?",
+          answer: "Free users can process up to 50 pages per PDF, while premium users can handle up to 500 pages with our image to text extractor."
         },
         security: {
-          question: "Is my data secure during OCR processing?",
-          answer: "Yes, your security is our priority. All uploaded files are processed on secure servers and automatically deleted after processing."
+          question: "Are my files safe during OCR processing?",
+          answer: "Yes, our OCR tool uses secure servers, and all uploaded image files are deleted after processing."
         }
       }
     },
-    relatedTools: "Related PDF Tools",
+    relatedTools: "Related OCR and PDF Tools",
     processing: {
-      title: "Processing OCR",
-      message: "OCR processing can take a few minutes depending on document size and complexity"
+      title: "Processing with OCR Software",
+      message: "Text recognition may take a few minutes depending on file size and complexity"
     },
     results: {
-      title: "Extracted Text",
+      title: "Extracted Text Results",
       copy: "Copy",
       download: "Download .txt"
     },
@@ -874,82 +1016,82 @@ export default {
       russian: "Russian"
     },
     whatIsOcr: {
-      title: "Optical Character Recognition (OCR)",
-      description: "Is a technology that converts different types of documents, such as scanned paper documents, PDF files, or images captured by a digital camera, into editable and searchable data.",
-      explanation: "OCR analyzes the structure of the document image, identifies characters and text elements, and then converts them into a machine-readable format.",
+      title: "What Is OCR Extract?",
+      description: "OCR (Optical Character Recognition) is a machine learning-powered technology that converts scanned documents, PDFs, and image files into editable, searchable text.",
+      explanation: "The image to text converter analyzes image files, identifies text patterns, and transforms them into a machine-readable format.",
       extractionList: {
-        scannedPdfs: "Scanned PDFs where the text exists as an image",
-        imageOnlyPdfs: "Image-only PDFs with no underlying text layer",
-        embeddedImages: "PDFs containing embedded images with text",
-        textCopyingIssues: "Documents where copying text directly doesn't work"
+        scannedPdfs: "Scanned PDFs where text is an image",
+        imageOnlyPdfs: "Image-only PDFs without a text layer",
+        embeddedImages: "PDFs with text in embedded images",
+        textCopyingIssues: "Documents where copying text directly fails"
       }
     },
     whenToUse: {
-      title: "When to Use OCR Text Extraction",
+      title: "When to Use an Image to Text Extractor",
       idealFor: "Ideal for:",
       idealForList: {
         scannedDocuments: "Scanned documents saved as PDFs",
-        oldDocuments: "Old documents without digital text layers",
-        textSelectionIssues: "PDFs where text selection/copying doesn't work",
-        textInImages: "Images containing text that needs to be extracted",
-        searchableArchives: "Creating searchable archives from scanned documents"
+        oldDocuments: "Old paper records without digital text",
+        textSelectionIssues: "PDFs where text can’t be selected or copied",
+        textInImages: "Image files with text to extract",
+        searchableArchives: "Building searchable archives from scans"
       },
       notNecessaryFor: "Not necessary for:",
       notNecessaryForList: {
-        digitalPdfs: "Native digital PDFs where text can already be selected",
-        createdDigitally: "PDFs created directly from digital documents",
-        copyPasteAvailable: "Documents where you can already copy and paste text",
-        formatPreservation: "Files that need format preservation (use our PDF to DOCX conversion instead)"
+        digitalPdfs: "Native digital PDFs with selectable text",
+        createdDigitally: "PDFs made from digital sources",
+        copyPasteAvailable: "Documents where copy-paste already works",
+        formatPreservation: "Files needing layout preservation (try PDF to DOCX instead)"
       }
     },
     limitations: {
-      title: "OCR Limitations & Tips",
-      description: "While our OCR technology is powerful, there are some limitations to be aware of:",
-      factorsAffecting: "Factors affecting OCR accuracy:",
+      title: "OCR Tool Limitations & Tips",
+      description: "Our OCR software is advanced, but some limitations exist:",
+      factorsAffecting: "Factors affecting text recognition:",
       factorsList: {
-        documentQuality: "Document quality (resolution, contrast)",
-        complexLayouts: "Complex layouts and formatting",
-        handwrittenText: "Handwritten text (limited recognition)",
-        specialCharacters: "Special characters and symbols",
-        multipleLanguages: "Multiple languages in one document"
+        documentQuality: "Image file quality (resolution, contrast)",
+        complexLayouts: "Complex layouts or formatting",
+        handwrittenText: "Handwritten text (limited support)",
+        specialCharacters: "Special characters or symbols",
+        multipleLanguages: "Multiple languages in one file"
       },
       tipsForBest: "Tips for best results:",
       tipsList: {
-        highQualityScans: "Use high-quality scans (300 DPI or higher)",
-        correctLanguage: "Select the correct language for your document",
-        enhanceScannedImages: "Enable \"Enhance scanned images\" for better accuracy",
-        smallerPageRanges: "Process smaller page ranges for large documents",
-        reviewText: "Review and correct the extracted text afterward"
+        highQualityScans: "Use high-quality image files (300 DPI or higher)",
+        correctLanguage: "Select the right language for your document",
+        enhanceScannedImages: "Enable 'Enhance scanned images' for better accuracy",
+        smallerPageRanges: "Process smaller page ranges for large files",
+        reviewText: "Review and edit extracted text as needed"
       }
     },
     options: {
-      scope: "Pages to Extract",
+      scope: "Pages to Process",
       all: "All Pages",
       custom: "Specific Pages",
       pages: "Page Numbers",
       pagesHint: "E.g. 1,3,5-9",
       enhanceScanned: "Enhance scanned images",
-      enhanceScannedHint: "Pre-process images to improve OCR accuracy (recommended for scanned documents)",
+      enhanceScannedHint: "Pre-process image files to boost OCR accuracy (ideal for scans)",
       preserveLayout: "Preserve layout",
-      preserveLayoutHint: "Try to maintain the original layout with paragraphs and line breaks"
+      preserveLayoutHint: "Maintain paragraphs and line breaks where possible"
     },
-    ocrTool: "OCR Text Extraction Tool",
-    ocrToolDesc: "Convert scanned documents and images to editable text",
+    ocrTool: "OCR Extract Tool",
+    ocrToolDesc: "Convert scanned documents and image files to editable text with our picture to text converter",
 
     // Upload area
-    uploadPdf: "Upload PDF for Text Extraction",
-    dragDrop: "Drag and drop your PDF file here, or click to browse",
-    selectPdf: "Select PDF File",
+    uploadPdf: "Upload Files for OCR Extract",
+    dragDrop: "Drag and drop your PDF or image file here, or click to browse",
+    selectPdf: "Select File",
     uploading: "Uploading...",
     maxFileSize: "Maximum file size: 50MB",
 
     // File handling
     invalidFile: "Invalid file type",
-    invalidFileDesc: "Please select a PDF file",
+    invalidFileDesc: "Please upload a PDF or supported image file",
     fileTooLarge: "File too large",
     fileTooLargeDesc: "Maximum file size is 50MB",
     noFile: "No file selected",
-    noFileDesc: "Please select a PDF file to process",
+    noFileDesc: "Please select a file for text recognition",
     changeFile: "Change File",
 
     // Options
@@ -959,25 +1101,25 @@ export default {
     allPages: "All Pages",
     specificPages: "Specific Pages",
     pageRangeExample: "e.g., 1-3, 5, 7-9",
-    pageRangeInfo: "Enter individual pages or ranges separated by commas",
+    pageRangeInfo: "Enter pages or ranges separated by commas",
     preserveLayout: "Preserve Layout",
-    preserveLayoutDesc: "Attempt to maintain document structure and formatting",
+    preserveLayoutDesc: "Attempt to retain document structure",
 
     // Processing
     extractText: "Extract Text",
     extractingText: "Extracting Text...",
-    processingPdf: "Processing your PDF",
-    processingInfo: "This may take a few minutes depending on the file size and complexity",
-    analyzing: "Analyzing document",
+    processingPdf: "Processing your file",
+    processingInfo: "This may take a few minutes based on file size and complexity",
+    analyzing: "Analyzing content",
     preprocessing: "Preprocessing pages",
     recognizing: "Recognizing text",
-    extracting: "Extracting content",
+    extracting: "Extracting text",
     finalizing: "Finalizing results",
     finishing: "Finishing up",
 
     // Results
     extractionComplete: "Text extraction complete",
-    extractionCompleteDesc: "Your text has been successfully extracted from the PDF",
+    extractionCompleteDesc: "Text has been successfully extracted using our image to text extractor",
     extractionError: "Text extraction failed",
     extractionFailed: "Failed to extract text",
     unknownError: "An unknown error occurred",
@@ -986,16 +1128,16 @@ export default {
     textPreview: "Text Preview",
     rawText: "Raw Text",
     extractedText: "Extracted Text",
-    previewDesc: "Preview of the extracted text with formatting",
+    previewDesc: "Preview of extracted text with formatting",
     rawTextOutput: "Raw Text Output",
     rawTextDesc: "Plain text without formatting",
-    noTextFound: "No text found in the document",
+    noTextFound: "No text found in the file",
     copyText: "Copy Text",
     downloadText: "Download Text",
-    processAnother: "Process Another PDF",
+    processAnother: "Process Another File",
 
     // Additional info
-    supportedLanguages: "Supports 15+ languages including English, Spanish, French, German, Chinese, Japanese, and more. Select the appropriate language for better accuracy."
+    supportedLanguages: "Supports 15+ languages including English, Spanish, French, German, Chinese, Japanese, and more. Choose the correct language for better text recognition."
   },
 
   // Protect PDF Page
@@ -2472,6 +2614,7 @@ export default {
     description: "The page you're looking for doesn't exist or has been moved.",
     back: "Go Back",
     home: "Return to Home"
-  }
+  },
+
 }
 

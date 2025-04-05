@@ -430,7 +430,7 @@ export function PdfMerger() {
           onClick={handleMerge}
           disabled={files.length < 2 || isProcessing}
         >
-          {isProcessing ? t('ui.processing') || "Merging..." : t('mergePdf.mergePdfs') || "Merge PDFs"}
+          {isProcessing ? t('ui.processing') || "Merging..." : t('mergePdf.ui.mergePdfs') || "Merge PDFs"}
         </Button>
       </CardFooter>
     </Card>

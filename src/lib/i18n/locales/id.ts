@@ -271,109 +271,109 @@ export default {
   // Halaman Konversi
   convert: {
     title: {
-      pdfToWord: "Konversi PDF ke Word",
-      pdfToExcel: "Konversi PDF ke Excel",
-      pdfToPowerPoint: "Konversi PDF ke PowerPoint",
-      pdfToJpg: "Konversi PDF ke JPG",
-      pdfToPng: "Konversi PDF ke PNG",
-      pdfToHtml: "Konversi PDF ke HTML",
-      wordToPdf: "Konversi Word ke PDF",
-      excelToPdf: "Konversi Excel ke PDF",
-      powerPointToPdf: "Konversi PowerPoint ke PDF",
-      jpgToPdf: "Konversi JPG ke PDF",
-      pngToPdf: "Konversi PNG ke PDF",
-      htmlToPdf: "Konversi HTML ke PDF",
-      generic: "Konversi File Anda"
+      pdfToWord: "Konversi PDF ke Word Online - Alat Konverter PDF ke DOC Gratis",
+      pdfToExcel: "Konversi PDF ke Excel Online - Ekstrak Data PDF ke XLS",
+      pdfToPowerPoint: "Konversi PDF ke PowerPoint - Konverter PDF ke PPT",
+      pdfToJpg: "Konversi PDF ke Gambar JPG - PDF ke JPEG Kualitas Tinggi",
+      pdfToPng: "Konversi PDF ke PNG Online - PDF ke PNG Transparan",
+      pdfToHtml: "Konversi PDF ke Halaman Web HTML - Konverter PDF ke HTML5",
+      wordToPdf: "Konversi Word ke PDF Online - Konverter DOC ke PDF Gratis",
+      excelToPdf: "Konversi Excel ke PDF - Alat Konverter XLS ke PDF",
+      powerPointToPdf: "Konversi PowerPoint ke PDF Online - PPT ke PDF",
+      jpgToPdf: "Konversi JPG ke PDF Online - Pembuat PDF dari Gambar",
+      pngToPdf: "Konversi PNG ke PDF - Konverter Gambar Transparan ke PDF",
+      htmlToPdf: "Konversi HTML ke PDF Online - Generator Halaman Web ke PDF",
+      generic: "Konverter File Online - Konversi Dokumen, Gambar, dan Lainnya"
     },
     description: {
-      pdfToWord: "Ubah dokumen PDF menjadi file Word yang dapat diedit dengan cepat dan mudah",
-      pdfToExcel: "Ekstrak tabel dan data dari file PDF ke spreadsheet Excel",
-      pdfToPowerPoint: "Ubah presentasi PDF menjadi slide PowerPoint yang dapat diedit",
-      pdfToJpg: "Konversi halaman PDF menjadi gambar JPG berkualitas tinggi",
-      pdfToPng: "Konversi halaman PDF menjadi gambar PNG transparan",
-      pdfToHtml: "Konversi dokumen PDF menjadi halaman web HTML",
-      wordToPdf: "Konversi dokumen Word ke format PDF dengan pemformatan sempurna",
-      excelToPdf: "Ubah spreadsheet Excel menjadi dokumen PDF",
-      powerPointToPdf: "Konversi presentasi PowerPoint ke format PDF",
-      jpgToPdf: "Buat file PDF dari gambar JPG Anda",
-      pngToPdf: "Buat file PDF dari gambar PNG Anda",
-      htmlToPdf: "Konversi halaman web HTML menjadi dokumen PDF",
-      generic: "Pilih file untuk dikonversi antar format"
+      pdfToWord: "Ubah dokumen PDF menjadi file Word yang dapat diedit dengan cepat dan mudah. Konverter PDF ke Word gratis kami mempertahankan pemformatan untuk output DOC/DOCX.",
+      pdfToExcel: "Ekstrak tabel dan data dari file PDF ke spreadsheet Excel. Konversi PDF ke XLS/XLSX dengan pemformatan data yang akurat untuk analisis.",
+      pdfToPowerPoint: "Ubah presentasi PDF menjadi slide PowerPoint yang dapat diedit. Konverter PDF ke PPT kami mempertahankan tata letak slide dan elemen desain.",
+      pdfToJpg: "Konversi halaman PDF ke gambar JPG berkualitas tinggi. Ekstrak gambar dari PDF atau simpan setiap halaman sebagai JPEG untuk berbagi online.",
+      pdfToPng: "Konversi halaman PDF ke gambar PNG transparan. Sempurna untuk desainer grafis yang membutuhkan elemen PDF dengan latar belakang transparan.",
+      pdfToHtml: "Konversi dokumen PDF ke halaman web HTML. Buat situs web HTML5 responsif dari file PDF dengan konverter canggih kami.",
+      wordToPdf: "Konversi dokumen Word ke format PDF dengan pemformatan sempurna. Konverter DOC/DOCX ke PDF gratis untuk hasil profesional.",
+      excelToPdf: "Ubah spreadsheet Excel menjadi dokumen PDF. Pertahankan rumus, bagan, dan tabel saat mengonversi XLS/XLSX ke PDF.",
+      powerPointToPdf: "Konversi presentasi PowerPoint ke format PDF. Konverter PPT/PPTX ke PDF mempertahankan transisi slide dan catatan.",
+      jpgToPdf: "Buat file PDF dari gambar JPG Anda. Gabungkan beberapa foto JPEG menjadi satu dokumen PDF online.",
+      pngToPdf: "Buat file PDF dari gambar PNG Anda. Konversi grafik PNG transparan ke PDF sambil mempertahankan transparansi.",
+      htmlToPdf: "Konversi halaman web HTML ke dokumen PDF. Simpan situs web sebagai PDF dengan alat generator HTML ke PDF online kami.",
+      generic: "Pilih file untuk dikonversi antar format. Konverter dokumen online gratis untuk PDF, Word, Excel, PowerPoint, JPG, PNG, dan HTML."
     },
     howTo: {
-      title: "Cara Mengonversi {from} ke {to}",
+      title: "Cara Mengonversi {from} ke {to} Online",
       step1: {
-        title: "Unggah",
-        description: "Unggah file {from} yang ingin Anda konversi"
+        title: "Unggah File",
+        description: "Unggah file {from} yang ingin Anda konversi dari komputer, Google Drive, atau Dropbox"
       },
       step2: {
-        title: "Konversi",
-        description: "Klik tombol Konversi dan sistem kami akan memproses file Anda"
+        title: "Konversi Format",
+        description: "Klik tombol Konversi dan sistem kami akan memproses file Anda dengan teknologi konversi canggih"
       },
       step3: {
-        title: "Unduh",
-        description: "Unduh file {to} yang telah dikonversi"
+        title: "Unduh Hasil",
+        description: "Unduh file {to} yang telah dikonversi secara instan atau dapatkan tautan yang dapat dibagikan"
       }
     },
     options: {
-      title: "Opsi Konversi",
+      title: "Opsi Konversi Lanjutan",
       ocr: "Aktifkan OCR (Pengenalan Karakter Optik)",
-      ocrDescription: "Ekstrak teks dari dokumen atau gambar yang dipindai",
+      ocrDescription: "Ekstrak teks dari dokumen atau gambar yang dipindai untuk output yang dapat diedit",
       preserveLayout: "Pertahankan tata letak asli",
-      preserveLayoutDescription: "Pertahankan pemformatan dan tata letak dokumen asli",
-      quality: "Kualitas keluaran",
-      qualityDescription: "Atur tingkat kualitas untuk file yang dikonversi",
+      preserveLayoutDescription: "Pertahankan pemformatan dan tata letak dokumen asli dengan tepat",
+      quality: "Kualitas output",
+      qualityDescription: "Atur tingkat kualitas untuk file yang dikonversi (mempengaruhi ukuran file)",
       qualityOptions: {
-        low: "Rendah (ukuran file lebih kecil)",
-        medium: "Sedang (seimbang)",
-        high: "Tinggi (kualitas terbaik)"
+        low: "Rendah (ukuran file lebih kecil, pemrosesan lebih cepat)",
+        medium: "Sedang (keseimbangan kualitas dan ukuran)",
+        high: "Tinggi (kualitas terbaik, file lebih besar)"
       },
       pageOptions: "Opsi halaman",
       allPages: "Semua halaman",
-      selectedPages: "Halaman tertentu",
+      selectedPages: "Halaman terpilih",
       pageRangeDescription: "Masukkan nomor halaman dan/atau rentang halaman yang dipisahkan dengan koma",
-      pageRangeExample: "Contoh: 1,3,5-12"
+      pageRangeExample: "Contoh: 1,3,5-12 (mengonversi halaman 1, 3, dan 5 hingga 12)"
     },
-    moreTools: "Alat Konversi Terkait",
+    moreTools: "Alat Konversi Dokumen Terkait",
     expertTips: {
-      title: "Tips Pakar",
+      title: "Tips Konversi Ahli",
       pdfToWord: [
-        "Untuk hasil terbaik, pastikan PDF Anda memiliki teks yang jelas dan dapat dibaca mesin",
-        "Aktifkan OCR untuk dokumen yang dipindai atau PDF berbasis gambar",
-        "Tata letak yang kompleks mungkin memerlukan penyesuaian kecil setelah konversi"
+        "Untuk hasil PDF ke Word terbaik, pastikan PDF Anda memiliki teks yang jelas dan dapat dibaca mesin",
+        "Aktifkan OCR untuk dokumen yang dipindai atau PDF berbasis gambar untuk mengekstrak teks yang dapat diedit",
+        "Tata letak kompleks mungkin memerlukan penyesuaian kecil setelah konversi untuk pemformatan yang sempurna"
       ],
       pdfToExcel: [
-        "Tabel dengan batas yang jelas akan dikonversi lebih akurat",
-        "Proses awal PDF yang dipindai dengan OCR untuk ekstraksi data yang lebih baik",
-        "Periksa rumus spreadsheet setelah konversi karena mungkin tidak ikut tertransfer"
+        "Tabel dengan batas yang jelas dikonversi lebih akurat dari PDF ke Excel",
+        "Pra-proses PDF yang dipindai dengan OCR untuk ekstraksi data yang lebih baik ke XLS/XLSX",
+        "Periksa rumus spreadsheet setelah konversi karena mungkin tidak ditransfer secara otomatis"
       ],
       generic: [
-        "Pengaturan kualitas yang lebih tinggi menghasilkan ukuran file yang lebih besar",
-        "Gunakan OCR untuk dokumen dengan teks yang dipindai atau gambar yang mengandung teks",
-        "Pratinjau file Anda setelah konversi untuk memastikan akurasi"
+        "Pengaturan kualitas yang lebih tinggi menghasilkan ukuran file yang lebih besar tetapi output yang lebih baik",
+        "Gunakan OCR untuk dokumen dengan teks hasil pindaian atau gambar yang berisi teks",
+        "Selalu pratinjau file Anda setelah konversi untuk memastikan keakuratan sebelum mengunduh"
       ]
     },
     advantages: {
-      title: "Keuntungan Mengonversi {from} ke {to}",
+      title: "Manfaat Mengonversi {from} ke {to}",
       pdfToWord: [
-        "Edit dan modifikasi teks yang terkunci dalam format PDF",
-        "Perbarui konten tanpa membuat ulang seluruh dokumen",
-        "Ekstrak informasi untuk digunakan di dokumen lain"
+        "Edit dan modifikasi teks yang terkunci dalam format PDF dengan konverter DOC kami",
+        "Perbarui konten tanpa membuat ulang seluruh dokumen dari awal",
+        "Ekstrak informasi untuk digunakan dalam dokumen Word atau template lainnya"
       ],
       pdfToExcel: [
-        "Analisis dan manipulasi data yang sebelumnya dalam bentuk PDF statis",
-        "Buat grafik dan lakukan perhitungan dengan data yang diekstraksi",
-        "Perbarui laporan keuangan atau informasi numerik dengan mudah"
+        "Analisis dan manipulasi data yang ada dalam bentuk PDF statis menggunakan alat XLS",
+        "Buat bagan dan lakukan perhitungan dengan data spreadsheet yang diekstraksi",
+        "Perbarui laporan keuangan atau informasi numerik dengan mudah dalam format Excel"
       ],
       wordToPdf: [
-        "Buat dokumen yang dapat dibaca secara universal dengan pemformatan yang terjaga",
-        "Lindungi konten dari modifikasi yang tidak diinginkan",
-        "Pastikan tampilan konsisten di semua perangkat dan platform"
+        "Buat dokumen PDF yang dapat dibaca secara universal dengan pemformatan sempurna",
+        "Lindungi konten dari modifikasi yang tidak diinginkan dengan output PDF yang aman",
+        "Pastikan tampilan dokumen yang konsisten di semua perangkat dan platform"
       ],
       generic: [
-        "Ubah dokumen Anda menjadi format yang lebih berguna",
-        "Akses dan gunakan konten di program yang mendukung format target",
-        "Bagikan file dalam format yang mudah dibuka oleh orang lain"
+        "Ubah dokumen Anda menjadi format yang lebih berguna dan dapat diedit",
+        "Akses dan gunakan konten dalam program yang mendukung jenis file target",
+        "Bagikan file dalam format yang dapat dibuka orang lain dengan mudah tanpa perangkat lunak khusus"
       ]
     }
   },
@@ -751,216 +751,249 @@ export default {
   },
   // Halaman Gabung PDF
   mergePdf: {
-    title: "Gabungkan File PDF",
-    description: "Gabungkan beberapa file PDF menjadi satu dokumen dengan cepat dan mudah",
+    title: "Gabungkan File PDF Online | Alat Penggabungan PDF Gratis Berbasis Browser Web",
+    description: "Gabungkan beberapa file PDF menjadi satu dokumen dengan cepat dan mudah menggunakan alat penggabungan berbasis browser kami yang berfungsi di semua sistem operasi",
+    intro: "Alat penggabungan PDF online kami memungkinkan Anda menggabungkan beberapa dokumen menjadi satu file yang digabungkan hanya dengan beberapa klik. Tidak perlu instalasi - bekerja langsung di browser web Anda di sistem operasi apa pun.",
+
+    // How-to section
     howTo: {
-      title: "Cara Menggabungkan File PDF",
+      title: "Cara Menggabungkan File PDF di Browser Anda",
       step1: {
         title: "Unggah File",
-        description: "Unggah file PDF yang ingin Anda gabungkan. Anda dapat memilih beberapa file sekaligus."
+        description: "Unggah file PDF yang ingin Anda gabungkan. Pilih beberapa file sekaligus dari perangkat Anda atau seret dan lepas langsung ke browser web Anda."
       },
       step2: {
         title: "Atur Urutan",
-        description: "Seret dan lepas untuk menyusun ulang file sesuai urutan yang Anda inginkan dalam PDF akhir."
+        description: "Seret dan lepas untuk menyusun ulang file sesuai urutan yang Anda inginkan dalam file gabungan akhir. Alat penggabungan kami membuat pengorganisasian beberapa PDF menjadi intuitif."
       },
       step3: {
         title: "Unduh",
-        description: "Klik tombol Gabungkan PDF dan unduh file PDF gabungan Anda."
+        description: "Klik tombol 'Gabungkan PDF' dan unduh file PDF gabungan Anda langsung ke perangkat Anda dari browser web mana pun."
       }
     },
+
+    // Benefits section
+    benefits: {
+      title: "Manfaat Alat Penggabungan PDF Online Kami",
+      compatibility: {
+        title: "Bekerja di Semua Perangkat",
+        description: "Alat penggabungan PDF berbasis browser web kami berfungsi sempurna di Windows, macOS, Linux, dan sistem operasi seluler tanpa memerlukan instalasi."
+      },
+      privacy: {
+        title: "Aman & Pribadi",
+        description: "Dokumen Anda diproses di browser web Anda dan dihapus secara otomatis setelah penggabungan, memastikan informasi sensitif Anda tetap pribadi."
+      },
+      simplicity: {
+        title: "Antarmuka Ramah Pengguna",
+        description: "Antarmuka seret-dan-lepas yang intuitif membuat penggabungan beberapa file PDF menjadi sederhana, bahkan untuk pengguna pertama kali alat online kami."
+      },
+      quality: {
+        title: "Keluaran Berkualitas Tinggi",
+        description: "Alat penggabungan kami mempertahankan format asli, gambar, dan kualitas teks dalam file gabungan Anda, memastikan hasil profesional."
+      }
+    },
+
+    // Use cases section
+    useCases: {
+      title: "Penggunaan Umum untuk Penggabungan PDF",
+      business: {
+        title: "Dokumen Bisnis",
+        description: "Gabungkan laporan keuangan, kontrak, dan presentasi menjadi dokumentasi lengkap untuk klien dan pemangku kepentingan."
+      },
+      academic: {
+        title: "Makalah Akademik",
+        description: "Gabungkan makalah penelitian, kutipan, dan lampiran menjadi pengajuan akademik lengkap yang siap untuk ditinjau."
+      },
+      personal: {
+        title: "Catatan Pribadi",
+        description: "Gabungkan tanda terima, garansi, dan panduan instruksi menjadi catatan digital yang terorganisir untuk referensi mudah."
+      },
+      professional: {
+        title: "Portofolio Profesional",
+        description: "Buat portofolio yang mengesankan dengan menggabungkan beberapa sampel kerja menjadi satu dokumen yang mudah dibagikan."
+      }
+    },
+
+    // FAQ section
     faq: {
       title: "Pertanyaan yang Sering Diajukan",
       q1: {
-        question: "Apakah ada batasan berapa banyak PDF yang bisa saya gabungkan?",
-        answer: "Anda dapat menggabungkan hingga 20 file PDF sekaligus dengan alat gratis kami. Untuk batch yang lebih besar, pertimbangkan paket premium kami."
+        question: "Apakah ada batasan berapa banyak PDF yang bisa saya gabungkan dengan alat online Anda?",
+        answer: "Dengan alat penggabungan berbasis browser web gratis kami, Anda dapat menggabungkan hingga 20 file PDF sekaligus. Untuk menggabungkan beberapa batch yang lebih besar, pertimbangkan untuk meningkatkan ke paket premium kami yang memungkinkan operasi penggabungan tanpa batas."
       },
       q2: {
-        question: "Apakah file PDF saya akan tetap pribadi?",
-        answer: "Ya, privasi Anda adalah prioritas kami. Semua file yang diunggah akan otomatis dihapus dari server kami setelah diproses."
+        question: "Apakah file PDF saya akan tetap pribadi saat menggunakan alat penggabungan online Anda?",
+        answer: "Ya, privasi Anda adalah prioritas kami. Semua file yang diunggah ke alat penggabungan berbasis browser kami diproses dengan aman dan dihapus secara otomatis dari server kami setelah pemrosesan. Kami tidak pernah mengakses atau menyimpan isi dokumen Anda."
       },
       q3: {
-        question: "Bisakah saya menggabungkan PDF yang dilindungi kata sandi?",
-        answer: "Untuk PDF yang dilindungi kata sandi, Anda perlu membukanya terlebih dahulu menggunakan alat Buka Kunci PDF kami, lalu menggabungkannya."
+        question: "Apakah saya bisa menggabungkan PDF yang dilindungi kata sandi menggunakan alat online Anda?",
+        answer: "Untuk PDF yang dilindungi kata sandi, Anda perlu membukanya terlebih dahulu menggunakan alat Buka Kunci PDF online kami, lalu menggabungkannya. Alat penggabungan berbasis browser kami akan meminta Anda jika mendeteksi dokumen yang dilindungi."
+      },
+      q4: {
+        question: "Apakah alat penggabungan PDF online Anda bekerja di semua sistem operasi?",
+        answer: "Ya, alat penggabungan PDF berbasis browser web kami bekerja di semua sistem operasi utama termasuk Windows, macOS, Linux, iOS, dan Android. Selama Anda memiliki browser web modern, Anda dapat menggabungkan PDF tanpa menginstal perangkat lunak apa pun."
+      },
+      q5: {
+        question: "Seberapa besar file PDF yang bisa digabungkan?",
+        answer: "Alat penggabungan online gratis kami mendukung file hingga 100MB masing-masing. Ukuran gabungan dari semua file yang digabungkan tidak boleh melebihi 300MB untuk kinerja optimal di browser web Anda."
+      },
+      q6: {
+        question: "Apakah file gabungan akan mempertahankan semua fitur dari PDF asli?",
+        answer: "Ya, alat penggabungan canggih kami mempertahankan teks, gambar, format, tautan hiper, dan sebagian besar elemen interaktif dari PDF asli dalam file gabungan akhir Anda."
       }
     },
-    relatedTools: "Jelajahi Lebih Banyak Alat PDF",
-    viewAllTools: "Lihat Semua Alat PDF",
-    of: "dari",
-    files: "file",
-    filesToMerge: "File untuk Digabungkan",
-    dragToReorder: "Seret untuk Menyusun Ulang",
-    downloadReady: "Unduhan Siap",
-    downloadMerged: "Unduh yang Digabung",
-    mergePdfs: "Gabungkan PDF",
-    successMessage: "PDF berhasil digabungkan",
+
+    // Tips section
+    tips: {
+      title: "Tips untuk Menggabungkan PDF Secara Efektif",
+      tip1: {
+        title: "Atur Sebelum Menggabungkan",
+        description: "Ubah nama file Anda secara numerik (misalnya, 01_intro.pdf, 02_content.pdf) sebelum mengunggah ke alat penggabungan kami untuk organisasi yang lebih mudah."
+      },
+      tip2: {
+        title: "Optimalkan File Besar",
+        description: "Gunakan alat Kompresi PDF kami terlebih dahulu jika Anda menggabungkan beberapa dokumen besar untuk memastikan kinerja yang lebih baik dari file gabungan akhir."
+      },
+      tip3: {
+        title: "Periksa Pratinjau",
+        description: "Setelah mengatur file Anda, gunakan fungsi pratinjau di alat online kami untuk memverifikasi urutan sebelum menyelesaikan PDF gabungan Anda."
+      },
+      tip4: {
+        title: "Pertimbangkan Penanda",
+        description: "Untuk dokumen profesional, pertimbangkan untuk menambahkan penanda ke file gabungan Anda menggunakan alat Edit PDF kami untuk navigasi yang lebih mudah."
+      }
+    },
+
+    // Comparison section
+    comparison: {
+      title: "Mengapa Memilih Alat Penggabungan Browser Web Kami",
+      point1: {
+        title: "Tidak Perlu Instalasi Perangkat Lunak",
+        description: "Berbeda dengan aplikasi desktop, alat penggabungan PDF online kami bekerja langsung di browser web Anda tanpa perlu mengunduh atau menginstal perangkat lunak apa pun."
+      },
+      point2: {
+        title: "Kompatibilitas Lintas Platform",
+        description: "Alat berbasis browser kami bekerja di semua sistem operasi, sementara alternatif desktop sering hanya mendukung platform tertentu."
+      },
+      point3: {
+        title: "Gratis dan Mudah Diakses",
+        description: "Akses kemampuan penggabungan PDF kami tanpa biaya, dibandingkan dengan alternatif desktop yang mahal atau layanan berlangganan."
+      },
+      point4: {
+        title: "Pembaruan Reguler",
+        description: "Alat penggabungan online kami terus ditingkatkan tanpa memerlukan pembaruan manual dari pengguna."
+      }
+    },
+
+    // UI elements and messages
+    ui: {
+      of: "dari",
+      files: "file",
+      filesToMerge: "File untuk Digabungkan",
+      dragToReorder: "Seret untuk Menyusun Ulang",
+      downloadReady: "Siap Diunduh",
+      downloadMerged: "Unduh File Gabungan",
+      mergePdfs: "Gabungkan PDF",
+      processingMerge: "Sedang menggabungkan PDF Anda...",
+      successMessage: "PDF berhasil digabungkan!",
+      dragDropHere: "Seret & lepas PDF di sini",
+      or: "atau",
+      browseFiles: "Jelajahi File",
+      fileLimit: "Gabungkan hingga 20 file PDF",
+      noPdfsSelected: "Tidak ada PDF yang dipilih",
+      addMoreFiles: "Tambah File Lain",
+      rearrangeMessage: "Seret file untuk menyusun ulang urutan di PDF gabungan Anda",
+      removeFile: "Hapus",
+      filePreview: "Pratinjau",
+      startOver: "Mulai Ulang",
+      mergingInProgress: "Penggabungan sedang berlangsung...",
+      pleaseWait: "Harap tunggu saat kami menggabungkan file PDF Anda",
+      processingFile: "Memproses",
+      retry: "Coba Ulang Penggabungan"
+    },
   },
 
   // Halaman OCR
   ocr: {
-    title: "Ekstraksi Teks OCR",
-    description: "Ekstrak teks dari PDF dan gambar yang dipindai menggunakan teknologi Pengenalan Karakter Optik yang kuat",
+    title: "Ekstraksi OCR: Pengenalan Teks yang Mudah",
+    description: "Ubah PDF yang dipindai dan file gambar menjadi teks yang dapat diedit menggunakan perangkat lunak OCR canggih dan pembelajaran mesin",
     howTo: {
-      title: "Cara Kerja Ekstraksi Teks OCR",
-      step1: {
-        title: "Unggah",
-        description: "Unggah dokumen PDF yang dipindai atau file PDF berbasis gambar Anda."
-      },
-      step2: {
-        title: "Konfigurasi OCR",
-        description: "Pilih bahasa, rentang halaman, dan opsi lanjutan untuk hasil terbaik."
-      },
-      step3: {
-        title: "Dapatkan Teks",
-        description: "Salin teks yang diekstraksi atau unduh sebagai file teks untuk penggunaan lebih lanjut."
-      }
-    },
-    whatIsOcr: {
-      title: "Pengenalan Karakter Optik (OCR)",
-      description: "Adalah teknologi yang mengonversi berbagai jenis dokumen, seperti dokumen kertas yang dipindai, file PDF, atau gambar yang diambil oleh kamera digital, menjadi data yang dapat diedit dan dicari.",
-      explanation: "OCR menganalisis struktur gambar dokumen, mengidentifikasi karakter dan elemen teks, kemudian mengonversinya menjadi format yang dapat dibaca mesin.",
-      extractionList: {
-        scannedPdfs: "PDF yang dipindai di mana teks ada sebagai gambar",
-        imageOnlyPdfs: "PDF berbasis gambar tanpa lapisan teks",
-        embeddedImages: "PDF yang berisi gambar dengan teks",
-        textCopyingIssues: "Dokumen di mana penyalinan teks langsung tidak berfungsi"
-      }
-    },
-    whenToUse: {
-      title: "Kapan Menggunakan Ekstraksi Teks OCR",
-      idealFor: "Ideal untuk:",
-      idealForList: {
-        scannedDocuments: "Dokumen yang dipindai dan disimpan sebagai PDF",
-        oldDocuments: "Dokumen lama tanpa lapisan teks digital",
-        textSelectionIssues: "PDF di mana pemilihan/penyalinan teks tidak berfungsi",
-        textInImages: "Gambar yang berisi teks yang perlu diekstraksi",
-        searchableArchives: "Membuat arsip yang dapat dicari dari dokumen yang dipindai"
-      },
-      notNecessaryFor: "Tidak diperlukan untuk:",
-      notNecessaryForList: {
-        digitalPdfs: "PDF digital asli di mana teks dapat dipilih",
-        createdDigitally: "PDF yang dibuat langsung dari dokumen digital",
-        copyPasteAvailable: "Dokumen di mana Anda sudah dapat menyalin dan menempel teks",
-        formatPreservation: "File yang memerlukan preservasi format (gunakan konversi PDF ke DOCX kami)"
-      }
-    },
-    limitations: {
-      title: "Keterbatasan & Tips OCR",
-      description: "Meskipun teknologi OCR kami kuat, ada beberapa keterbatasan yang perlu diperhatikan:",
-      factorsAffecting: "Faktor yang memengaruhi akurasi OCR:",
-      factorsList: {
-        documentQuality: "Kualitas dokumen (resolusi, kontras)",
-        complexLayouts: "Tata letak dan pemformatan yang kompleks",
-        handwrittenText: "Teks tulisan tangan (pengenalan terbatas)",
-        specialCharacters: "Karakter dan simbol khusus",
-        multipleLanguages: "Beberapa bahasa dalam satu dokumen"
-      },
-      tipsForBest: "Tips untuk hasil terbaik:",
-      tipsList: {
-        highQualityScans: "Gunakan pemindaian berkualitas tinggi (300 DPI atau lebih)",
-        correctLanguage: "Pilih bahasa yang benar untuk dokumen Anda",
-        enhanceScannedImages: "Aktifkan \"Tingkatkan gambar yang dipindai\" untuk akurasi lebih baik",
-        smallerPageRanges: "Proses rentang halaman yang lebih kecil untuk dokumen besar",
-        reviewText: "Tinjau dan koreksi teks yang diekstraksi"
-      }
+      title: "Cara Kerja Ekstraksi OCR",
+      step1: { title: "Unggah", description: "Unggah PDF yang dipindai atau file gambar Anda ke konverter gambar ke teks." },
+      step2: { title: "Konfigurasi Alat OCR", description: "Pilih bahasa, rentang halaman, dan pengaturan lanjutan untuk pengenalan teks yang optimal." },
+      step3: { title: "Ekstrak Teks", description: "Salin teks yang diekstrak atau unduh sebagai file .txt dengan konverter gambar ke teks kami." }
     },
     faq: {
       title: "Pertanyaan yang Sering Diajukan",
       questions: {
-        accuracy: {
-          question: "Seberapa akurat ekstraksi teks OCR?",
-          answer: "Teknologi OCR kami biasanya mencapai akurasi 90-99% untuk teks yang dicetak dengan jelas pada dokumen yang dipindai dengan baik. Akurasi dapat menurun dengan pemindaian berkualitas buruk, font yang tidak biasa, atau tata letak yang kompleks."
-        },
-        languages: {
-          question: "Bahasa apa saja yang didukung?",
-          answer: "Kami mendukung lebih dari 100 bahasa termasuk Inggris, Prancis, Jerman, Spanyol, Italia, Portugis, Cina, Jepang, Korea, Rusia, Arab, Hindi, dan banyak lagi."
-        },
-        recognition: {
-          question: "Mengapa teks saya tidak dikenali dengan benar?",
-          answer: "Beberapa faktor dapat memengaruhi akurasi OCR: kualitas dokumen, resolusi, kontras, tata letak yang kompleks, tulisan tangan, font yang tidak biasa, atau memilih bahasa yang salah."
-        },
-        pageLimit: {
-          question: "Apakah ada batasan berapa banyak halaman yang bisa saya proses?",
-          answer: "Untuk pengguna gratis, ada batas 50 halaman per PDF. Pengguna premium dapat memproses PDF hingga 500 halaman."
-        },
-        security: {
-          question: "Apakah data saya aman selama pemrosesan OCR?",
-          answer: "Ya, keamanan Anda adalah prioritas kami. Semua file yang diunggah diproses di server aman dan otomatis dihapus setelah pemrosesan."
-        }
+        accuracy: { question: "Seberapa akurat teknologi ekstraksi OCR?", answer: "Perangkat lunak OCR kami mencapai akurasi 90-99% untuk teks cetak yang jelas dalam dokumen yang dipindai dengan baik. Akurasi dapat menurun dengan file gambar berkualitas buruk atau font yang tidak biasa." },
+        languages: { question: "Bahasa apa saja yang didukung?", answer: "Kami mendukung lebih dari 100 bahasa termasuk Inggris, Prancis, Jerman, Spanyol, Mandarin, Jepang, Arab, Rusia, dan banyak lagi." },
+        recognition: { question: "Mengapa teks saya tidak dikenali dengan benar?", answer: "Beberapa faktor dapat memengaruhi pengenalan teks: kualitas dokumen, resolusi, kontras, tata letak kompleks, tulisan tangan, atau pemilihan bahasa yang salah." },
+        pageLimit: { question: "Apakah ada batasan jumlah halaman yang bisa saya proses?", answer: "Untuk pengguna gratis, batasnya adalah 50 halaman per PDF. Pengguna premium dapat memproses PDF hingga 500 halaman." },
+        security: { question: "Apakah data saya aman selama pemrosesan OCR?", answer: "Ya, keamanan Anda adalah prioritas kami. Semua file yang diunggah diproses di server aman dan dihapus secara otomatis setelah pemrosesan." }
       }
     },
-    relatedTools: "Alat PDF Terkait",
-    processing: {
-      title: "Memproses OCR",
-      message: "Pemrosesan OCR dapat memakan waktu beberapa menit tergantung pada ukuran dan kompleksitas dokumen"
+    relatedTools: "Alat Terkait OCR dan PDF",
+    processing: { title: "Pemrosesan dengan Perangkat Lunak OCR", message: "Pengenalan teks dapat memakan waktu beberapa menit tergantung pada ukuran dan kompleksitas file" },
+    results: { title: "Hasil Teks yang Diekstrak", copy: "Salin", download: "Unduh .txt" },
+    languages: { english: "Inggris", french: "Prancis", german: "Jerman", spanish: "Spanyol", chinese: "Mandarin", japanese: "Jepang", arabic: "Arab", russian: "Rusia" },
+    whatIsOcr: {
+      title: "Apa itu Ekstraksi OCR?",
+      description: "Optical Character Recognition (OCR) adalah teknologi yang didukung pembelajaran mesin yang mengubah dokumen yang dipindai, PDF, dan file gambar menjadi teks yang dapat diedit dan dicari.",
+      explanation: "Konverter gambar ke teks menganalisis struktur gambar dokumen, mengenali karakter dan elemen teks, lalu mengubahnya menjadi format yang dapat dibaca mesin.",
+      extractionList: { scannedPdfs: "PDF yang dipindai di mana teks ada sebagai gambar", imageOnlyPdfs: "PDF hanya gambar tanpa lapisan teks", embeddedImages: "PDF yang berisi gambar tertanam dengan teks", textCopyingIssues: "Dokumen di mana penyalinan teks langsung tidak berfungsi" }
     },
-    results: {
-      title: "Teks yang Diekstraksi",
-      copy: "Salin",
-      download: "Unduh .txt"
+    whenToUse: {
+      title: "Kapan Menggunakan Ekstraktor Gambar ke Teks",
+      idealFor: "Ideal untuk:",
+      idealForList: { scannedDocuments: "Dokumen yang dipindai disimpan sebagai PDF", oldDocuments: "Dokumen lama tanpa lapisan teks digital", textSelectionIssues: "PDF di mana pemilihan/salinan teks tidak berfungsi", textInImages: "File gambar yang berisi teks yang perlu diekstrak", searchableArchives: "Membuat arsip yang dapat dicari dari dokumen yang dipindai" },
+      notNecessaryFor: "Tidak diperlukan untuk:",
+      notNecessaryForList: { digitalPdfs: "PDF digital asli dengan teks yang dapat dipilih", createdDigitally: "PDF yang dibuat langsung dari dokumen digital", copyPasteAvailable: "Dokumen di mana Anda sudah bisa menyalin dan menempel teks", formatPreservation: "File yang membutuhkan pelestarian format (gunakan konversi PDF ke DOCX kami sebagai gantinya)" }
     },
-    languages: {
-      english: "Inggris",
-      french: "Prancis",
-      german: "Jerman",
-      spanish: "Spanyol",
-      chinese: "Cina",
-      japanese: "Jepang",
-      arabic: "Arab",
-      russian: "Rusia"
+    limitations: {
+      title: "Batasan dan Tips Alat OCR",
+      description: "Meskipun perangkat lunak OCR kami kuat, ada beberapa batasan yang perlu diperhatikan:",
+      factorsAffecting: "Faktor yang memengaruhi akurasi pengenalan teks:",
+      factorsList: { documentQuality: "Kualitas dokumen (resolusi, kontras)", complexLayouts: "Tata letak dan pemformatan kompleks", handwrittenText: "Teks tulisan tangan (pengenalan terbatas)", specialCharacters: "Karakter khusus dan simbol", multipleLanguages: "Beberapa bahasa dalam satu dokumen" },
+      tipsForBest: "Tips untuk hasil terbaik:",
+      tipsList: { highQualityScans: "Gunakan pemindaian berkualitas tinggi (300 DPI atau lebih)", correctLanguage: "Pilih bahasa yang tepat untuk dokumen Anda", enhanceScannedImages: "Aktifkan 'Tingkatkan gambar yang dipindai' untuk akurasi lebih baik", smallerPageRanges: "Proses rentang halaman yang lebih kecil untuk dokumen besar", reviewText: "Tinjau dan koreksi teks yang diekstrak setelahnya" }
     },
-    options: {
-      scope: "Halaman untuk Diekstraksi",
-      all: "Semua Halaman",
-      custom: "Halaman Tertentu",
-      pages: "Nomor Halaman",
-      pagesHint: "Misalnya: 1,3,5-9",
-      enhanceScanned: "Tingkatkan gambar yang dipindai",
-      enhanceScannedHint: "Proses awal gambar untuk meningkatkan akurasi OCR (disarankan untuk dokumen yang dipindai)",
-      preserveLayout: "Pertahankan tata letak",
-      preserveLayoutHint: "Coba pertahankan tata letak asli dengan paragraf dan jeda baris"
-    },
-    // Upload area
-    uploadPdf: "Unggah PDF untuk Ekstraksi Teks",
-    dragDrop: "Seret dan lepaskan file PDF Anda di sini, atau klik untuk menelusuri",
-    selectPdf: "Pilih File PDF",
+    options: { scope: "Halaman untuk Diekstrak", all: "Semua Halaman", custom: "Halaman Tertentu", pages: "Nomor Halaman", pagesHint: "Mis. 1,3,5-9", enhanceScanned: "Tingkatkan gambar yang dipindai", enhanceScannedHint: "Pra-proses gambar untuk meningkatkan akurasi OCR (disarankan untuk dokumen yang dipindai)", preserveLayout: "Pertahankan tata letak", preserveLayoutHint: "Coba pertahankan tata letak asli dengan paragraf dan jeda baris" },
+    ocrTool: "Alat Ekstraksi OCR",
+    ocrToolDesc: "Ubah dokumen yang dipindai dan file gambar menjadi teks yang dapat diedit dengan konverter gambar ke teks kami",
+    uploadPdf: "Unggah File untuk Ekstraksi OCR",
+    dragDrop: "Seret dan lepas file PDF atau gambar Anda di sini, atau klik untuk menelusuri",
+    selectPdf: "Pilih File",
     uploading: "Mengunggah...",
-    maxFileSize: "Ukuran file maksimum: 50 MB",
-
-    // File handling
+    maxFileSize: "Ukuran file maksimum: 50MB",
     invalidFile: "Jenis file tidak valid",
-    invalidFileDesc: "Harap pilih file PDF",
+    invalidFileDesc: "Silakan pilih file PDF atau gambar yang didukung",
     fileTooLarge: "File terlalu besar",
-    fileTooLargeDesc: "Ukuran file maksimum adalah 50 MB",
+    fileTooLargeDesc: "Ukuran file maksimum adalah 50MB",
     noFile: "Tidak ada file yang dipilih",
-    noFileDesc: "Harap pilih file PDF untuk diproses",
+    noFileDesc: "Silakan pilih file untuk pengenalan teks",
     changeFile: "Ganti File",
-
-    // Options
     languageLabel: "Bahasa Dokumen",
     selectLanguage: "Pilih bahasa",
     pageRange: "Rentang Halaman",
     allPages: "Semua Halaman",
     specificPages: "Halaman Tertentu",
-    pageRangeExample: "misalnya, 1-3, 5, 7-9",
+    pageRangeExample: "mis., 1-3, 5, 7-9",
     pageRangeInfo: "Masukkan halaman individu atau rentang yang dipisahkan oleh koma",
     preserveLayout: "Pertahankan Tata Letak",
     preserveLayoutDesc: "Coba pertahankan struktur dan pemformatan dokumen",
-
-    // Processing
     extractText: "Ekstrak Teks",
     extractingText: "Mengekstrak Teks...",
-    processingPdf: "Memproses PDF Anda",
+    processingPdf: "Memproses file Anda",
     processingInfo: "Ini mungkin memakan waktu beberapa menit tergantung pada ukuran dan kompleksitas file",
-    analyzing: "Menganalisis dokumen",
-    preprocessing: "Prapemrosesan halaman",
+    analyzing: "Menganalisis konten",
+    preprocessing: "Pra-pemrosesan halaman",
     recognizing: "Mengenali teks",
     extracting: "Mengekstrak konten",
     finalizing: "Menyelesaikan hasil",
     finishing: "Menyelesaikan",
-
-    // Results
     extractionComplete: "Ekstraksi teks selesai",
-    extractionCompleteDesc: "Teks Anda telah berhasil diekstrak dari PDF",
+    extractionCompleteDesc: "Teks Anda telah berhasil diekstrak dengan ekstraktor gambar ke teks kami",
     extractionError: "Ekstraksi teks gagal",
     extractionFailed: "Gagal mengekstrak teks",
     unknownError: "Terjadi kesalahan yang tidak diketahui",
@@ -972,10 +1005,11 @@ export default {
     previewDesc: "Pratinjau teks yang diekstrak dengan pemformatan",
     rawTextOutput: "Keluaran Teks Mentah",
     rawTextDesc: "Teks polos tanpa pemformatan",
-    noTextFound: "Tidak ada teks ditemukan dalam dokumen",
+    noTextFound: "Tidak ada teks yang ditemukan dalam file",
     copyText: "Salin Teks",
     downloadText: "Unduh Teks",
-    processAnother: "Proses PDF Lain"
+    processAnother: "Proses File Lain",
+    supportedLanguages: "Mendukung lebih dari 15 bahasa termasuk Inggris, Spanyol, Prancis, Jerman, Mandarin, Jepang, dan lainnya. Pilih bahasa yang sesuai untuk akurasi lebih baik."
   },
 
   // Halaman Lindungi PDF

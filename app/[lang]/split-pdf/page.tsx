@@ -5,7 +5,9 @@ import {
   HowToSplitSection,
   SplitPdfFaqSection,
   SplitUseCasesSection,
-  RelatedToolsSection
+  RelatedToolsSection,
+  WhyUseSection,
+  SeoContentSection
 } from "./split-content";
 import { SplitPdfClient } from "./split-pdf-client";
 import { Suspense } from "react";
@@ -24,30 +26,22 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   }); 
   
 }
+export default function SplitPdfPage() {
 
-export default function SplitPDFPage() {
   return (
     <div className="container max-w-5xl py-12 mx-auto">
-      <SplitHeaderSection />
-
-      {/* Main Tool Card */}
+      <SplitHeaderSection  />
       <div className="mb-12">
       <Suspense fallback={<div>Loading...</div>}>
         <SplitPdfClient />
       </Suspense>
       </div>
-
-      {/* How It Works */}
-      <HowToSplitSection />
-
-      {/* Use Cases Section */}
-      <SplitUseCasesSection />
-
-      {/* FAQ Section */}
+      <HowToSplitSection  />
+      <WhyUseSection  />
+      <SplitUseCasesSection  />
       <SplitPdfFaqSection />
-
-      {/* Related Tools Section */}
-      <RelatedToolsSection />
+      <RelatedToolsSection/>
+      <SeoContentSection  />
     </div>
   );
 }

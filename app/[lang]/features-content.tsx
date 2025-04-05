@@ -188,60 +188,29 @@ export default function FeaturesPageContent() {
           title: t("features.categories.api.features.restful.title") || "RESTful API",
           description: t("features.categories.api.features.restful.description") || "Simple and powerful RESTful API for PDF processing and document management.",
           icon: <Globe className="h-5 w-5 text-blue-500" />,
-          link: "/api-docs"
+          link: "/en/developer-api"
         },
         {
           title: t("features.categories.api.features.sdks.title") || "SDKs & Libraries",
           description: t("features.categories.api.features.sdks.description") || "Developer-friendly SDKs for various programming languages including JavaScript, Python, and PHP.",
           icon: <Code className="h-5 w-5 text-green-500" />,
-          link: "/api-docs"
+          link: "/en/developer-api"
         },
         {
           title: t("features.categories.api.features.webhooks.title") || "Webhooks",
           description: t("features.categories.api.features.webhooks.description") || "Real-time event notifications for asynchronous PDF processing workflows.",
           icon: <Zap className="h-5 w-5 text-amber-500" />,
-          link: "/api-docs"
+          link: "/en/developer-api"
         },
         {
           title: t("features.categories.api.features.customization.title") || "API Customization",
           description: t("features.categories.api.features.customization.description") || "Tailor the API to your specific needs with customizable endpoints and parameters.",
           icon: <Settings className="h-5 w-5 text-purple-500" />,
-          link: "/api-docs"
+          link: "/en/developer-api"
         }
       ]
     },
-    {
-      id: "cloud-platform",
-      title: t("features.categories.cloud.title") || "Cloud Platform",
-      description: t("features.categories.cloud.description") || "Access your documents from anywhere with our secure cloud storage and processing platform.",
-      icon: <Cloud className="h-6 w-6 text-sky-500" />,
-      features: [
-        {
-          title: t("features.categories.cloud.features.storage.title") || "Cloud Storage",
-          description: t("features.categories.cloud.features.storage.description") || "Securely store and access your documents from anywhere with our encrypted cloud storage.",
-          icon: <Cloud className="h-5 w-5 text-blue-500" />,
-          link: "/dashboard"
-        },
-        {
-          title: t("features.categories.cloud.features.sync.title") || "Cross-Device Sync",
-          description: t("features.categories.cloud.features.sync.description") || "Seamlessly sync your documents across all your devices for access on the go.",
-          icon: <UploadCloud className="h-5 w-5 text-green-500" />,
-          link: "/dashboard"
-        },
-        {
-          title: t("features.categories.cloud.features.sharing.title") || "Document Sharing",
-          description: t("features.categories.cloud.features.sharing.description") || "Easily share documents with secure links and permission controls.",
-          icon: <Users className="h-5 w-5 text-amber-500" />,
-          link: "/dashboard"
-        },
-        {
-          title: t("features.categories.cloud.features.history.title") || "Version History",
-          description: t("features.categories.cloud.features.history.description") || "Track document changes with version history and restore previous versions when needed.",
-          icon: <FileCheck2 className="h-5 w-5 text-purple-500" />,
-          link: "/dashboard"
-        }
-      ]
-    },
+   
     {
       id: "enterprise-features",
       title: t("features.categories.enterprise.title") || "Enterprise Features",
@@ -434,15 +403,7 @@ export default function FeaturesPageContent() {
                 </div>
               </div>
               
-              <div className="flex items-start gap-3">
-                <div className="p-1 rounded-full bg-purple-100 dark:bg-purple-900/30">
-                  <Cloud className="h-4 w-4 text-purple-500" />
-                </div>
-                <div>
-                  <h3 className="font-medium">{t("features.mobile.feature3.title") || "Cloud Synchronization"}</h3>
-                  <p className="text-sm text-muted-foreground">{t("features.mobile.feature3.description") || "Seamlessly sync your documents across all your devices with secure cloud storage."}</p>
-                </div>
-              </div>
+            
             </div>
             
             <div className="mt-8 flex gap-4">
@@ -675,27 +636,6 @@ export default function FeaturesPageContent() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-primary/10 p-10 rounded-xl text-center">
-        <h2 className="text-3xl font-bold mb-4">
-          {t("features.cta.title") || "Ready to Transform Your Document Workflow?"}
-        </h2>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-          {t("features.cta.description") || "Join thousands of satisfied users who have streamlined their document management with ScanPro."}
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <LanguageLink href="/pricing">
-            <Button size="lg">
-              {t("features.cta.pricing") || "View Pricing"}
-            </Button>
-          </LanguageLink>
-          <LanguageLink href="/pdf-tools">
-            <Button variant="outline" size="lg">
-              {t("features.cta.explore") || "Explore Tools"}
-            </Button>
-          </LanguageLink>
-        </div>
-      </section>
     </div>
   );
 }

@@ -271,109 +271,109 @@ export default {
     // 转换页面
     convert: {
         title: {
-            pdfToWord: "PDF转Word",
-            pdfToExcel: "PDF转Excel",
-            pdfToPowerPoint: "PDF转PowerPoint",
-            pdfToJpg: "PDF转JPG",
-            pdfToPng: "PDF转PNG",
-            pdfToHtml: "PDF转HTML",
-            wordToPdf: "Word转PDF",
-            excelToPdf: "Excel转PDF",
-            powerPointToPdf: "PowerPoint转PDF",
-            jpgToPdf: "JPG转PNG",
-            pngToPdf: "PNG转PDF",
-            htmlToPdf: "HTML转PDF",
-            generic: "转换您的文件"
+            pdfToWord: "在线将PDF转换为Word - 免费PDF转DOC工具",
+            pdfToExcel: "在线将PDF转换为Excel - 提取PDF数据到XLS",
+            pdfToPowerPoint: "将PDF转换为PowerPoint - PDF转PPT转换器",
+            pdfToJpg: "将PDF转换为JPG图片 - 高质量PDF转JPEG",
+            pdfToPng: "在线将PDF转换为PNG - PDF转透明PNG",
+            pdfToHtml: "将PDF转换为HTML网页 - PDF转HTML5转换器",
+            wordToPdf: "在线将Word转换为PDF - 免费DOC转PDF转换器",
+            excelToPdf: "将Excel转换为PDF - XLS转PDF工具",
+            powerPointToPdf: "在线将PowerPoint转换为PDF - PPT转PDF",
+            jpgToPdf: "在线将JPG转换为PDF - 图片转PDF生成器",
+            pngToPdf: "将PNG转换为PDF - 透明图片转PDF转换器",
+            htmlToPdf: "在线将HTML转换为PDF - 网页转PDF生成工具",
+            generic: "在线文件转换器 - 转换文档、图片等"
         },
         description: {
-            pdfToWord: "快速轻松地将PDF文档转换为可编辑的Word文件",
-            pdfToExcel: "从PDF文件中提取表格和数据到Excel电子表格",
-            pdfToPowerPoint: "将PDF演示文稿转换为可编辑的PowerPoint幻灯片",
-            pdfToJpg: "将PDF页面转换为高质量JPG图片",
-            pdfToPng: "将PDF页面转换为透明PNG图片",
-            pdfToHtml: "将PDF文档转换为HTML网页",
-            wordToPdf: "将Word文档转换为格式完美的PDF格式",
-            excelToPdf: "将Excel电子表格转换为PDF文档",
-            powerPointToPdf: "将PowerPoint演示文稿转换为PDF格式",
-            jpgToPdf: "从您的JPG图片创建PDF文件",
-            pngToPdf: "从您的PNG图片创建PDF文件",
-            htmlToPdf: "将HTML网页转换为PDF文档",
-            generic: "选择文件以在格式之间转换"
+            pdfToWord: "快速轻松地将PDF文档转换为可编辑的Word文件。我们的免费PDF转Word转换器保留DOC/DOCX输出的格式。",
+            pdfToExcel: "从PDF文件中提取表格和数据到Excel电子表格。将PDF转换为XLS/XLSX，保持准确的数据格式以进行分析。",
+            pdfToPowerPoint: "将PDF演示文稿转换为可编辑的PowerPoint幻灯片。我们的PDF转PPT转换器保留幻灯片布局和设计元素。",
+            pdfToJpg: "将PDF页面转换为高质量的JPG图像。从PDF中提取图像或将每页保存为JPEG以便在线分享。",
+            pdfToPng: "将PDF页面转换为透明的PNG图像。非常适合需要透明背景PDF元素的平面设计师。",
+            pdfToHtml: "将PDF文档转换为HTML网页。使用我们的高级转换器从PDF文件创建响应式HTML5网站。",
+            wordToPdf: "将Word文档转换为完美格式的PDF格式。免费DOC/DOCX转PDF转换器，获得专业效果。",
+            excelToPdf: "将Excel电子表格转换为PDF文档。在将XLS/XLSX转换为PDF时保留公式、图表和表格。",
+            powerPointToPdf: "将PowerPoint演示文稿转换为PDF格式。PPT/PPTX转PDF转换器保留幻灯片过渡和备注。",
+            jpgToPdf: "从您的JPG图像创建PDF文件。在线将多张JPEG照片合并为一个PDF文档。",
+            pngToPdf: "从您的PNG图像创建PDF文件。在保留透明度的同时将透明PNG图形转换为PDF。",
+            htmlToPdf: "将HTML网页转换为PDF文档。使用我们的在线HTML转PDF生成器工具将网站保存为PDF。",
+            generic: "选择要转换格式的文件。免费的在线文档转换器，支持PDF、Word、Excel、PowerPoint、JPG、PNG和HTML。"
         },
         howTo: {
-            title: "如何将{from}转换为{to}",
+            title: "如何在线将{from}转换为{to}",
             step1: {
-                title: "上传",
-                description: "上传您想转换的{from}文件"
+                title: "上传文件",
+                description: "从您的计算机、Google Drive或Dropbox上传要转换的{from}文件"
             },
             step2: {
-                title: "转换",
-                description: "点击转换按钮，我们的系统将处理您的文件"
+                title: "转换格式",
+                description: "点击转换按钮，我们的系统将使用先进的转换技术处理您的文件"
             },
             step3: {
-                title: "下载",
-                description: "下载您转换后的{to}文件"
+                title: "下载结果",
+                description: "立即下载转换后的{to}文件或获取可共享链接"
             }
         },
         options: {
-            title: "转换选项",
+            title: "高级转换选项",
             ocr: "启用OCR（光学字符识别）",
-            ocrDescription: "从扫描文档或图片中提取文本",
+            ocrDescription: "从扫描的文档或图像中提取文本以获得可编辑输出",
             preserveLayout: "保留原始布局",
-            preserveLayoutDescription: "保持原始文档的格式和布局",
+            preserveLayoutDescription: "精确保持原始文档的格式和布局",
             quality: "输出质量",
-            qualityDescription: "设置转换文件的质量级别",
+            qualityDescription: "设置转换文件的质量级别（影响文件大小）",
             qualityOptions: {
-                low: "低（较小文件大小）",
-                medium: "中（平衡）",
-                high: "高（最佳质量）"
+                low: "低（文件较小，处理更快）",
+                medium: "中（质量与大小平衡）",
+                high: "高（最佳质量，文件较大）"
             },
             pageOptions: "页面选项",
             allPages: "所有页面",
             selectedPages: "选定页面",
-            pageRangeDescription: "输入页面编号和/或页面范围，用逗号分隔",
-            pageRangeExample: "示例：1,3,5-12"
+            pageRangeDescription: "输入用逗号分隔的页码和/或页面范围",
+            pageRangeExample: "示例：1,3,5-12（转换第1、3页和第5至12页）"
         },
-        moreTools: "相关转换工具",
+        moreTools: "相关文档转换工具",
         expertTips: {
-            title: "专家提示",
+            title: "专家转换技巧",
             pdfToWord: [
-                "为获得最佳效果，请确保您的PDF具有清晰、可机读的文本",
-                "对扫描文档或基于图片的PDF启用OCR",
-                "复杂布局可能在转换后需要轻微调整"
+                "为了获得最佳的PDF转Word效果，请确保您的PDF具有清晰、机器可读的文本",
+                "对扫描的文档或基于图像的PDF启用OCR以提取可编辑文本",
+                "复杂布局在转换后可能需要微调以获得完美格式"
             ],
             pdfToExcel: [
-                "边框清晰的表格转换更准确",
-                "对扫描的PDF预处理OCR以获得更好的数据提取",
-                "转换后检查电子表格公式，因为它们可能不会转移"
+                "边框清晰的表格从PDF到Excel的转换更准确",
+                "使用OCR预处理扫描的PDF以更好地提取数据到XLS/XLSX",
+                "转换后检查电子表格公式，因为它们可能不会自动转移"
             ],
             generic: [
-                "高质量设置会导致文件大小更大",
-                "对带有扫描文本或含文本图片的文档使用OCR",
-                "转换后预览文件以确保准确性"
+                "更高的质量设置会导致更大的文件大小但更好的输出",
+                "对包含扫描文本或文本的图像文档使用OCR",
+                "转换后始终预览文件以确保准确性再下载"
             ]
         },
         advantages: {
             title: "将{from}转换为{to}的优势",
             pdfToWord: [
-                "编辑和修改锁定在PDF格式中的文本",
-                "无需重新创建整个文档即可更新内容",
-                "提取信息以用于其他文档"
+                "使用我们的DOC转换器编辑和修改PDF格式中锁定的文本",
+                "无需从头重新创建整个文档即可更新内容",
+                "提取信息以用于其他Word文档或模板"
             ],
             pdfToExcel: [
-                "分析和操作静态PDF形式中的数据",
-                "使用提取的数据创建图表和执行计算",
-                "轻松更新财务报告或数字信息"
+                "使用XLS工具分析和操作静态PDF形式的数据",
+                "使用提取的电子表格数据创建图表和执行计算",
+                "轻松更新Excel格式的财务报告或数字信息"
             ],
             wordToPdf: [
-                "创建保持格式的通用的可读文档",
-                "防止内容被意外修改",
-                "确保在所有设备和平台上外观一致"
+                "创建保持完美格式的普遍可读PDF文档",
+                "通过安全的PDF输出保护内容免受不必要的修改",
+                "确保所有设备和平台上文档外观一致"
             ],
             generic: [
-                "将您的文档转换为更有用的格式",
-                "在支持目标格式的程序中访问和使用内容",
-                "以他人易于打开的格式分享文件"
+                "将文档转换为更有用和可编辑的格式",
+                "在支持目标文件类型的程序中访问和使用内容",
+                "以他人无需特殊软件即可轻松打开的格式共享文件"
             ]
         }
     },
@@ -751,231 +751,265 @@ export default {
     },
     // 合并PDF页面
     mergePdf: {
-        title: "合并PDF文件",
-        description: "快速轻松地将多个PDF文件合并为单个文档",
+        title: "在线合并PDF文件 | 免费网页浏览器PDF合并工具",
+        description: "使用我们基于浏览器的合并工具，快速轻松地将多个PDF文件合并成一个文档，适用于所有操作系统",
+        intro: "我们的在线PDF合并工具让您只需几次点击即可将多个文档合并成一个文件。无需安装 - 可在任何操作系统的网页浏览器中直接使用。",
+
+        // How-to section
         howTo: {
-            title: "如何合并PDF文件",
+            title: "如何在浏览器中合并PDF文件",
             step1: {
                 title: "上传文件",
-                description: "上传您想要合并的PDF文件。您可以一次选择多个文件。"
+                description: "上传您想要合并的PDF文件。从您的设备上一次选择多个文件，或直接将其拖放到网页浏览器中。"
             },
             step2: {
                 title: "排列顺序",
-                description: "拖放以按照您希望在最终PDF中出现的顺序重新排列文件。"
+                description: "拖放以重新排列文件顺序，使其按照您希望在最终合并文件中显示的顺序排列。我们的合并工具使多个PDF的组织更加直观。"
             },
             step3: {
                 title: "下载",
-                description: "点击合并PDF按钮并下载您的合并PDF文件。"
+                description: "点击“合并PDF”按钮，从任何网页浏览器直接将合并后的PDF文件下载到您的设备上。"
             }
         },
+
+        // Benefits section
+        benefits: {
+            title: "我们在线PDF合并工具的优势",
+            compatibility: {
+                title: "适用于所有设备",
+                description: "我们基于网页浏览器的PDF合并工具在Windows、macOS、Linux和移动操作系统上无需安装即可完美运行。"
+            },
+            privacy: {
+                title: "安全与隐私",
+                description: "您的文档在网页浏览器中处理，并在合并后自动删除，确保您的敏感信息保持隐私。"
+            },
+            simplicity: {
+                title: "用户友好界面",
+                description: "直观的拖放界面使合并多个PDF文件变得简单，即使是首次使用我们在线工具的用户也能轻松上手。"
+            },
+            quality: {
+                title: "高质量输出",
+                description: "我们的合并工具保留合并文件中原始格式、图片和文本质量，确保专业的结果。"
+            }
+        },
+
+        // Use cases section
+        useCases: {
+            title: "PDF合并的常见用途",
+            business: {
+                title: "商业文档",
+                description: "将财务报告、合同和演示文稿合并成客户和利益相关者的全面文档。"
+            },
+            academic: {
+                title: "学术论文",
+                description: "将研究论文、引文和附录合并成一个完整的学术提交文件，准备好供审查。"
+            },
+            personal: {
+                title: "个人记录",
+                description: "将收据、保修单和说明手册合并成有组织的数字记录，便于参考。"
+            },
+            professional: {
+                title: "专业作品集",
+                description: "通过将多个工作样本合并成一个易于分享的文档，创建令人印象深刻的作品集。"
+            }
+        },
+
+        // FAQ section
         faq: {
-            title: "常见问题",
+            title: "常见问题解答",
             q1: {
-                question: "我可以合并多少个PDF文件？",
-                answer: "使用我们的免费工具，您可以一次合并最多20个PDF文件。对于更大的批量，请考虑我们的高级计划。"
+                question: "使用你们的在线工具合并PDF文件有数量限制吗？",
+                answer: "使用我们免费的基于网页浏览器的合并工具，您可以一次合并最多20个PDF文件。对于需要合并多个较大批量的文件，考虑升级到我们的高级计划，支持无限合并操作。"
             },
             q2: {
-                question: "我的PDF文件会保持私密吗？",
-                answer: "是的，您的隐私是我们的首要任务。所有上传的文件在处理后会自动从我们的服务器中删除。"
+                question: "使用你们的在线合并工具时，我的PDF文件会保持隐私吗？",
+                answer: "是的，您的隐私是我们的首要任务。上传到我们基于浏览器的合并工具的所有文件都将被安全处理，并在处理后从我们的服务器自动删除。我们从不访问或存储您的文档内容。"
             },
             q3: {
-                question: "我可以合并受密码保护的PDF吗？",
-                answer: "对于受密码保护的PDF，您需要先使用我们的解锁PDF工具解锁，然后再合并它们。"
+                question: "我可以使用你们的在线工具合并受密码保护的PDF吗？",
+                answer: "对于受密码保护的PDF，您需要先使用我们的在线解锁PDF工具解锁它们，然后再进行合并。如果检测到受保护的文档，我们基于浏览器的合并工具会提示您。"
+            },
+            q4: {
+                question: "你们的在线PDF合并工具适用于所有操作系统吗？",
+                answer: "是的，我们基于网页浏览器的PDF合并工具适用于所有主要操作系统，包括Windows、macOS、Linux、iOS和Android。只要您有现代网页浏览器，就可以无需安装任何软件即可合并PDF。"
+            },
+            q5: {
+                question: "可以合并多大的PDF文件？",
+                answer: "我们的免费在线合并工具支持每个文件高达100MB。所有被合并文件的总大小不应超过300MB，以确保在您的网页浏览器中获得最佳性能。"
+            },
+            q6: {
+                question: "合并后的文件会保留原始PDF的所有功能吗？",
+                answer: "是的，我们先进的合并工具会在最终合并文件中保留原始PDF的文本、图片、格式、超链接和大多数交互元素。"
             }
         },
-        relatedTools: "探索更多PDF工具",
-        viewAllTools: "查看所有PDF工具",
-        of: "的",
-        files: "文件",
-        filesToMerge: "要合并的文件",
-        dragToReorder: "拖动以重新排序",
-        downloadReady: "下载就绪",
-        downloadMerged: "下载合并文件",
-        mergePdfs: "合并PDF",
-        successMessage: "PDF合并成功"
+
+        // Tips section
+        tips: {
+            title: "有效合并PDF的技巧",
+            tip1: {
+                title: "合并前组织",
+                description: "在上传到我们的合并工具之前，按数字顺序重命名文件（例如01_intro.pdf、02_content.pdf），以便更轻松地组织。"
+            },
+            tip2: {
+                title: "优化大文件",
+                description: "如果您要合并多个大文档，请先使用我们的压缩PDF工具，以确保最终合并文件的更好性能。"
+            },
+            tip3: {
+                title: "检查预览",
+                description: "在排列文件后，使用我们在线工具中的预览功能，在最终确定合并PDF之前验证顺序。"
+            },
+            tip4: {
+                title: "考虑书签",
+                description: "对于专业文档，考虑使用我们的编辑PDF工具为合并文件添加书签，以方便导航。"
+            }
+        },
+
+        // Comparison section
+        comparison: {
+            title: "为什么选择我们的网页浏览器合并工具",
+            point1: {
+                title: "无需安装软件",
+                description: "与桌面应用程序不同，我们的在线PDF合并工具直接在您的网页浏览器中运行，无需下载或安装任何软件。"
+            },
+            point2: {
+                title: "跨平台兼容性",
+                description: "我们基于浏览器的工具适用于所有操作系统，而桌面替代方案通常仅支持特定平台。"
+            },
+            point3: {
+                title: "免费且易于访问",
+                description: "与昂贵的桌面替代品或订阅服务相比，您可以免费访问我们的PDF合并功能。"
+            },
+            point4: {
+                title: "定期更新",
+                description: "我们的在线合并工具不断改进，无需用户手动更新。"
+            }
+        },
+
+        // UI elements and messages
+        ui: {
+            of: "的",
+            files: "文件",
+            filesToMerge: "待合并文件",
+            dragToReorder: "拖动以重新排序",
+            downloadReady: "下载准备就绪",
+            downloadMerged: "下载合并文件",
+            mergePdfs: "合并PDF",
+            processingMerge: "正在合并您的PDF...",
+            successMessage: "PDF合并成功！",
+            dragDropHere: "将PDF拖放到此处",
+            or: "或",
+            browseFiles: "浏览文件",
+            fileLimit: "最多合并20个PDF文件",
+            noPdfsSelected: "未选择PDF",
+            addMoreFiles: "添加更多文件",
+            rearrangeMessage: "拖动文件以重新排列合并PDF中的顺序",
+            removeFile: "移除",
+            filePreview: "预览",
+            startOver: "重新开始",
+            mergingInProgress: "合并进行中...",
+            pleaseWait: "请稍候，我们正在合并您的PDF文件",
+            processingFile: "处理中",
+            retry: "重试合并"
+        },
     },
 
     // OCR页面
     ocr: {
-        title: "OCR文本提取",
-        description: "使用强大的光学字符识别技术从扫描的PDF和图片中提取文本",
+        title: "OCR提取：简易文本识别",
+        description: "使用先进的OCR软件和机器学习，将扫描的PDF和图像文件转换为可编辑的文本",
         howTo: {
-            title: "OCR文本提取如何工作",
-            step1: {
-                title: "上传",
-                description: "上传您的扫描PDF文档或基于图片的PDF文件。"
-            },
-            step2: {
-                title: "配置OCR",
-                description: "选择语言、页面范围和高级选项以获得最佳结果。"
-            },
-            step3: {
-                title: "获取文本",
-                description: "复制提取的文本或将其下载为文本文件以供进一步使用。"
-            }
+            title: "OCR提取如何工作",
+            step1: { title: "上传", description: "将您的扫描PDF或图像文件上传到图像转文本工具。" },
+            step2: { title: "配置OCR工具", description: "选择语言、页面范围和高级设置，以实现最佳文本识别。" },
+            step3: { title: "提取文本", description: "复制提取的文本，或使用我们的图像转文本工具将其下载为.txt文件。" }
         },
         faq: {
             title: "常见问题",
             questions: {
-                accuracy: {
-                    question: "OCR文本提取的准确性如何？",
-                    answer: "我们的OCR技术通常对清晰打印文本和高品质扫描文档的准确率达到90-99%。对于低质量扫描、非常规字体或复杂布局，准确性可能会降低。"
-                },
-                languages: {
-                    question: "支持哪些语言？",
-                    answer: "我们支持超过100种语言，包括英语、法语、德语、西班牙语、意大利语、葡萄牙语、中文、日语、韩语、俄语、阿拉伯语、印地语等。"
-                },
-                recognition: {
-                    question: "为什么我的文本没有被正确识别？",
-                    answer: "几个因素可能影响OCR准确性：文档质量、分辨率、对比度、复杂布局、手写文字、非常规字体或选择了错误的语言。"
-                },
-                pageLimit: {
-                    question: "我可以处理的页面数量有限制吗？",
-                    answer: "对于免费用户，每个PDF限制为50页。高级用户可以处理高达500页的PDF。"
-                },
-                security: {
-                    question: "OCR处理期间我的数据安全吗？",
-                    answer: "是的，您的安全是我们的首要任务。所有上传的文件在安全服务器上处理，并在处理后自动删除。"
-                }
+                accuracy: { question: "OCR提取技术的准确性如何？", answer: "我们的OCR软件对清晰打印文本在高质量扫描文档中可达到90-99%的准确性。图像文件质量差或使用不寻常字体时，准确性可能会降低。" },
+                languages: { question: "支持哪些语言？", answer: "我们支持超过100种语言，包括英语、法语、德语、西班牙语、汉语、日语、阿拉伯语、俄语等。" },
+                recognition: { question: "为什么我的文本无法被正确识别？", answer: "文本识别可能受多种因素影响：文档质量、分辨率、对比度、复杂布局、手写或选择错误的语言。" },
+                pageLimit: { question: "处理页面数量有限制吗？", answer: "免费用户每份PDF限制为50页。高级用户可处理高达500页的PDF。" },
+                security: { question: "OCR处理期间我的数据安全吗？", answer: "是的，您的安全是我们的首要任务。所有上传的文件都在安全服务器上处理，并在处理后自动删除。" }
             }
         },
-        relatedTools: "相关PDF工具",
-        processing: {
-            title: "处理OCR",
-            message: "OCR处理可能需要几分钟，具体取决于文档大小和复杂性"
-        },
-        results: {
-            title: "提取的文本",
-            copy: "复制",
-            download: "下载.txt"
-        },
-        languages: {
-            english: "英语",
-            french: "法语",
-            german: "德语",
-            spanish: "西班牙语",
-            chinese: "中文",
-            japanese: "日语",
-            arabic: "阿拉伯语",
-            russian: "俄语"
-        },
+        relatedTools: "相关的OCR和PDF工具",
+        processing: { title: "使用OCR软件处理", message: "文本识别可能需要几分钟，具体取决于文件大小和复杂性" },
+        results: { title: "提取文本结果", copy: "复制", download: "下载 .txt" },
+        languages: { english: "英语", french: "法语", german: "德语", spanish: "西班牙语", chinese: "汉语", japanese: "日语", arabic: "阿拉伯语", russian: "俄语" },
         whatIsOcr: {
-            title: "光学字符识别（OCR）",
-            description: "是一种技术，可以将各种类型的文档（如扫描的纸质文档、PDF文件或数码相机拍摄的图片）转换为可编辑和可搜索的数据。",
-            explanation: "OCR分析文档图像的结构，识别字符和文本元素，然后将其转换为机器可读的格式。",
-            extractionList: {
-                scannedPdfs: "文本以图像形式存在的扫描PDF",
-                imageOnlyPdfs: "没有底层文本层的仅图像PDF",
-                embeddedImages: "包含带文本的嵌入式图片的PDF",
-                textCopyingIssues: "无法直接复制文本的文档"
-            }
+            title: "什么是OCR提取？",
+            description: "光学字符识别（OCR）是一种由机器学习支持的技术，可将扫描的文档、PDF和图像文件转换为可编辑和可搜索的文本。",
+            explanation: "图像转文本工具分析文档图像的结构，识别字符和文本元素，然后将其转换为机器可读格式。",
+            extractionList: { scannedPdfs: "文本以图像形式存在的扫描PDF", imageOnlyPdfs: "无文本层的仅图像PDF", embeddedImages: "包含嵌入文本图像的PDF", textCopyingIssues: "无法直接复制文本的文档" }
         },
         whenToUse: {
-            title: "何时使用OCR文本提取",
-            idealFor: "非常适合：",
-            idealForList: {
-                scannedDocuments: "保存为PDF的扫描文档",
-                oldDocuments: "没有数字文本层的旧文档",
-                textSelectionIssues: "无法选择/复制文本的PDF",
-                textInImages: "需要提取文本的图片",
-                searchableArchives: "从扫描文档创建可搜索的档案"
-            },
-            notNecessaryFor: "不必要用于：",
-            notNecessaryForList: {
-                digitalPdfs: "已经可以选择文本的原生数字PDF",
-                createdDigitally: "直接从数字文档创建的PDF",
-                copyPasteAvailable: "已经可以复制粘贴文本的文档",
-                formatPreservation: "需要保留格式的文件（请改用我们的PDF转DOCX转换）"
-            }
+            title: "何时使用图像转文本提取工具",
+            idealFor: "适用于：",
+            idealForList: { scannedDocuments: "保存为PDF的扫描文档", oldDocuments: "没有数字文本层的旧文档", textSelectionIssues: "无法选择/复制文本的PDF", textInImages: "需要提取文本的图像文件", searchableArchives: "从扫描文档创建可搜索档案" },
+            notNecessaryFor: "不适用于：",
+            notNecessaryForList: { digitalPdfs: "文本可选择的原生数字PDF", createdDigitally: "直接从数字文档创建的PDF", copyPasteAvailable: "已经可以复制粘贴文本的文档", formatPreservation: "需要保留格式的文件（请使用我们的PDF转DOCX转换工具）" }
         },
         limitations: {
-            title: "OCR限制与建议",
-            description: "虽然我们的OCR技术很强大，但需要注意一些限制：",
-            factorsAffecting: "影响OCR准确性的因素：",
-            factorsList: {
-                documentQuality: "文档质量（分辨率、对比度）",
-                complexLayouts: "复杂布局和格式",
-                handwrittenText: "手写文本（识别有限）",
-                specialCharacters: "特殊字符和符号",
-                multipleLanguages: "一个文档中的多种语言"
-            },
+            title: "OCR工具的局限性与建议",
+            description: "尽管我们的OCR软件功能强大，但仍有一些需要注意的局限性：",
+            factorsAffecting: "影响文本识别准确性的因素：",
+            factorsList: { documentQuality: "文档质量（分辨率、对比度）", complexLayouts: "复杂布局和格式", handwrittenText: "手写文本（识别有限）", specialCharacters: "特殊字符和符号", multipleLanguages: "一个文档中的多种语言" },
             tipsForBest: "获得最佳结果的建议：",
-            tipsList: {
-                highQualityScans: "使用高质量扫描（300 DPI或更高）",
-                correctLanguage: "为您的文档选择正确的语言",
-                enhanceScannedImages: "启用“增强扫描图像”以提高准确性",
-                smallerPageRanges: "处理大文档时使用较小的页面范围",
-                reviewText: "之后审查并更正提取的文本"
-            }
+            tipsList: { highQualityScans: "使用高质量扫描（300 DPI或更高）", correctLanguage: "为您的文档选择正确的语言", enhanceScannedImages: "启用“增强扫描图像”以提高准确性", smallerPageRanges: "为大文档处理smaller页面范围", reviewText: "之后审查并更正提取的文本" }
         },
-        options: {
-            scope: "提取的页面",
-            all: "所有页面",
-            custom: "特定页面",
-            pages: "页面编号",
-            pagesHint: "例如：1,3,5-9",
-            enhanceScanned: "增强扫描图像",
-            enhanceScannedHint: "预处理图像以提高OCR准确性（推荐用于扫描文档）",
-            preserveLayout: "保留布局",
-            preserveLayoutHint: "尝试保持原始布局，包括段落和换行"
-        },
-        // Upload area
-        uploadPdf: "上传PDF以提取文本",
-        dragDrop: "将您的PDF文件拖放到此处，或点击浏览",
-        selectPdf: "选择PDF文件",
+        options: { scope: "要提取的页面", all: "所有页面", custom: "特定页面", pages: "页面编号", pagesHint: "例如：1,3,5-9", enhanceScanned: "增强扫描图像", enhanceScannedHint: "预处理图像以提高OCR准确性（推荐用于扫描文档）", preserveLayout: "保留布局", preserveLayoutHint: "尝试保留原始布局，包括段落和换行" },
+        ocrTool: "OCR提取工具",
+        ocrToolDesc: "使用我们的图像转文本工具将扫描文档和图像文件转换为可编辑文本",
+        uploadPdf: "上传文件以进行OCR提取",
+        dragDrop: "将您的PDF或图像文件拖放到此处，或点击浏览",
+        selectPdf: "选择文件",
         uploading: "上传中...",
         maxFileSize: "最大文件大小：50MB",
-
-        // File handling
         invalidFile: "无效文件类型",
-        invalidFileDesc: "请选择一个PDF文件",
+        invalidFileDesc: "请选择PDF或支持的图像文件",
         fileTooLarge: "文件太大",
         fileTooLargeDesc: "最大文件大小为50MB",
         noFile: "未选择文件",
-        noFileDesc: "请选择要处理的PDF文件",
+        noFileDesc: "请选择一个文件进行文本识别",
         changeFile: "更改文件",
-
-        // Options
         languageLabel: "文档语言",
         selectLanguage: "选择语言",
         pageRange: "页面范围",
         allPages: "所有页面",
         specificPages: "特定页面",
-        pageRangeExample: "例如，1-3，5，7-9",
+        pageRangeExample: "例如：1-3, 5, 7-9",
         pageRangeInfo: "输入单独页面或用逗号分隔的范围",
         preserveLayout: "保留布局",
-        preserveLayoutDesc: "尝试保持文档结构和格式",
-
-        // Processing
+        preserveLayoutDesc: "尝试保留文档结构和格式",
         extractText: "提取文本",
-        extractingText: "正在提取文本...",
-        processingPdf: "正在处理您的PDF",
-        processingInfo: "根据文件大小和复杂性，这可能需要几分钟",
-        analyzing: "分析文档",
+        extractingText: "提取文本中...",
+        processingPdf: "处理您的文件",
+        processingInfo: "这可能需要几分钟，具体取决于文件大小和复杂性",
+        analyzing: "分析内容",
         preprocessing: "预处理页面",
         recognizing: "识别文本",
         extracting: "提取内容",
         finalizing: "完成结果",
-        finishing: "结束中",
-
-        // Results
+        finishing: "结束",
         extractionComplete: "文本提取完成",
-        extractionCompleteDesc: "您的文本已成功从PDF中提取",
+        extractionCompleteDesc: "您的文本已通过我们的图像转文本提取工具成功提取",
         extractionError: "文本提取失败",
         extractionFailed: "无法提取文本",
         unknownError: "发生未知错误",
         textCopied: "文本已复制到剪贴板",
-        copyFailed: "文本复制失败",
+        copyFailed: "复制文本失败",
         textPreview: "文本预览",
         rawText: "原始文本",
         extractedText: "提取的文本",
         previewDesc: "带格式的提取文本预览",
         rawTextOutput: "原始文本输出",
         rawTextDesc: "无格式的纯文本",
-        noTextFound: "文档中未找到文本",
+        noTextFound: "文件中未找到文本",
         copyText: "复制文本",
         downloadText: "下载文本",
-        processAnother: "处理另一个PDF"
+        processAnother: "处理另一个文件",
+        supportedLanguages: "支持超过15种语言，包括英语、西班牙语、法语、德语、汉语、日语等。选择合适的语言以获得更高准确性。"
     },
 
     // 保护PDF页面

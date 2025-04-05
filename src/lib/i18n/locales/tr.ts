@@ -271,109 +271,109 @@ export default {
     // Dönüşüm Sayfası
     convert: {
         title: {
-            pdfToWord: "PDF'den Word'e Dönüştür",
-            pdfToExcel: "PDF'den Excel'e Dönüştür",
-            pdfToPowerPoint: "PDF'den PowerPoint'e Dönüştür",
-            pdfToJpg: "PDF'den JPG'ye Dönüştür",
-            pdfToPng: "PDF'den PNG'ye Dönüştür",
-            pdfToHtml: "PDF'den HTML'ye Dönüştür",
-            wordToPdf: "Word'den PDF'ye Dönüştür",
-            excelToPdf: "Excel'den PDF'ye Dönüştür",
-            powerPointToPdf: "PowerPoint'ten PDF'ye Dönüştür",
-            jpgToPdf: "JPG'den PDF'ye Dönüştür",
-            pngToPdf: "PNG'den PDF'ye Dönüştür",
-            htmlToPdf: "HTML'den PDF'ye Dönüştür",
-            generic: "Dosyanızı Dönüştürün"
+            pdfToWord: "PDF'yi Word'e Çevrimiçi Dönüştür - Ücretsiz PDF'den DOC Dönüştürücü",
+            pdfToExcel: "PDF'yi Excel'e Çevrimiçi Dönüştür - PDF Verilerini XLS'e Çıkar",
+            pdfToPowerPoint: "PDF'yi PowerPoint'e Dönüştür - PDF'den PPT Dönüştürücü",
+            pdfToJpg: "PDF'yi JPG Resmine Dönüştür - Yüksek Kaliteli PDF'den JPEG",
+            pdfToPng: "PDF'yi PNG'ye Çevrimiçi Dönüştür - PDF'den Şeffaf PNG",
+            pdfToHtml: "PDF'yi HTML Web Sayfasına Dönüştür - PDF'den HTML5 Dönüştürücü",
+            wordToPdf: "Word'ü PDF'e Çevrimiçi Dönüştür - Ücretsiz DOC'tan PDF Dönüştürücü",
+            excelToPdf: "Excel'i PDF'e Dönüştür - XLS'ten PDF Dönüştürme Aracı",
+            powerPointToPdf: "PowerPoint'i PDF'e Çevrimiçi Dönüştür - PPT'den PDF",
+            jpgToPdf: "JPG'yi PDF'e Çevrimiçi Dönüştür - Resimden PDF Oluşturucu",
+            pngToPdf: "PNG'yi PDF'e Dönüştür - Şeffaf Resimden PDF Dönüştürücü",
+            htmlToPdf: "HTML'yi PDF'e Çevrimiçi Dönüştür - Web Sayfasından PDF Oluşturucu",
+            generic: "Çevrimiçi Dosya Dönüştürücü - Belgeleri, Resimleri ve Daha Fazlasını Dönüştür"
         },
         description: {
-            pdfToWord: "PDF belgelerini hızlı ve kolay bir şekilde düzenlenebilir Word dosyalarına dönüştürün",
-            pdfToExcel: "PDF dosyalarından tablo ve verileri Excel tablolarına çıkarın",
-            pdfToPowerPoint: "PDF sunumlarını düzenlenebilir PowerPoint slaytlarına dönüştürün",
-            pdfToJpg: "PDF sayfalarını yüksek kaliteli JPG resimlerine dönüştürün",
-            pdfToPng: "PDF sayfalarını şeffaf PNG resimlerine dönüştürün",
-            pdfToHtml: "PDF belgelerini HTML sayfalara dönüştürün",
-            wordToPdf: "Word belgelerini mükemmel biçimlendirme ile PDF formatına dönüştürün",
-            excelToPdf: "Excel tablolarını PDF belgelere dönüştürün",
-            powerPointToPdf: "PowerPoint sunumlarını PDF formatına dönüştürün",
-            jpgToPdf: "JPG resimlerinizden PDF dosyaları oluşturun",
-            pngToPdf: "PNG resimlerinizden PDF dosyaları oluşturun",
-            htmlToPdf: "HTML sayfalarını PDF belgelere dönüştürün",
-            generic: "Formatlar arasında dönüştürmek için bir dosya seçin"
+            pdfToWord: "PDF belgelerini hızlı ve kolayca düzenlenebilir Word dosyalarına dönüştürün. Ücretsiz PDF'den Word dönüştürücümüz DOC/DOCX çıktısı için biçimlendirmeyi korur.",
+            pdfToExcel: "PDF dosyalarından tabloları ve verileri Excel elektronik tablolarına çıkarın. Analiz için doğru veri biçimlendirmesiyle PDF'yi XLS/XLSX'e dönüştürün.",
+            pdfToPowerPoint: "PDF sunumlarını düzenlenebilir PowerPoint slaytlarına dönüştürün. PDF'den PPT dönüştürücümüz slayt düzenlerini ve tasarım öğelerini korur.",
+            pdfToJpg: "PDF sayfalarını yüksek kaliteli JPG resimlerine dönüştürün. PDF'den resim çıkarın veya her sayfayı JPEG olarak kaydederek çevrimiçi paylaşın.",
+            pdfToPng: "PDF sayfalarını şeffaf PNG resimlerine dönüştürün. Şeffaf arka plana ihtiyaç duyan grafik tasarımcılar için idealdir.",
+            pdfToHtml: "PDF belgelerini HTML web sayfalarına dönüştürün. Gelişmiş dönüştürücümüzle PDF dosyalarından duyarlı HTML5 web siteleri oluşturun.",
+            wordToPdf: "Word belgelerini mükemmel biçimlendirmeyle PDF formatına dönüştürün. Profesyonel sonuçlar için ücretsiz DOC/DOCX'ten PDF dönüştürücü.",
+            excelToPdf: "Excel elektronik tablolarını PDF belgelerine dönüştürün. XLS/XLSX'ten PDF'e dönüştürürken formülleri, grafikleri ve tabloları koruyun.",
+            powerPointToPdf: "PowerPoint sunumlarını PDF formatına dönüştürün. PPT/PPTX'ten PDF dönüştürücü slayt geçişlerini ve notları korur.",
+            jpgToPdf: "JPG resimlerinizden PDF dosyaları oluşturun. Birden çok JPEG fotoğrafını tek bir PDF belgesinde çevrimiçi birleştirin.",
+            pngToPdf: "PNG resimlerinizden PDF dosyaları oluşturun. Şeffaflığı koruyarak şeffaf PNG grafiklerini PDF'e dönüştürün.",
+            htmlToPdf: "HTML web sayfalarını PDF belgelerine dönüştürün. Çevrimiçi HTML'den PDF oluşturma aracımızla web sitelerini PDF olarak kaydedin.",
+            generic: "Biçimler arasında dönüştürmek için bir dosya seçin. PDF, Word, Excel, PowerPoint, JPG, PNG ve HTML için ücretsiz çevrimiçi belge dönüştürücü."
         },
         howTo: {
-            title: "{from}'dan {to}'ya Nasıl Dönüştürülür",
+            title: "{from}'yi {to}'ye Çevrimiçi Dönüştürme",
             step1: {
-                title: "Yükle",
-                description: "Dönüştürmek istediğiniz {from} dosyasını yükleyin"
+                title: "Dosya Yükle",
+                description: "Bilgisayarınızdan, Google Drive'dan veya Dropbox'tan dönüştürmek istediğiniz {from} dosyasını yükleyin"
             },
             step2: {
-                title: "Dönüştür",
-                description: "Dönüştür düğmesine tıklayın ve sistemimiz dosyanızı işlesin"
+                title: "Biçimi Dönüştür",
+                description: "Dönüştür düğmesine tıklayın ve sistemimiz gelişmiş dönüştürme teknolojisiyle dosyanızı işleyecek"
             },
             step3: {
-                title: "İndir",
-                description: "Dönüştürülen {to} dosyanızı indirin"
+                title: "Sonucu İndir",
+                description: "Dönüştürülmüş {to} dosyanızı anında indirin veya paylaşılabilir bir bağlantı alın"
             }
         },
         options: {
-            title: "Dönüşüm Seçenekleri",
+            title: "Gelişmiş Dönüştürme Seçenekleri",
             ocr: "OCR'yi Etkinleştir (Optik Karakter Tanıma)",
-            ocrDescription: "Tarama belgelerinden veya resimlerden metin çıkarın",
-            preserveLayout: "Orijinal Düzeni Koru",
-            preserveLayoutDescription: "Belgenin orijinal biçimlendirmesini ve düzenini koruyun",
-            quality: "Çıkış Kalitesi",
-            qualityDescription: "Dönüştürülen dosya için kalite seviyesini ayarlayın",
+            ocrDescription: "Taranmış belgelerden veya resimlerden düzenlenebilir çıktı için metin çıkarın",
+            preserveLayout: "Orijinal düzeni koru",
+            preserveLayoutDescription: "Orijinal belgenin biçimlendirmesini ve düzenini tam olarak koruyun",
+            quality: "Çıktı kalitesi",
+            qualityDescription: "Dönüştürülen dosya için kalite seviyesini ayarlayın (dosya boyutunu etkiler)",
             qualityOptions: {
-                low: "Düşük (daha küçük dosya boyutu)",
-                medium: "Orta (dengeli)",
-                high: "Yüksek (en iyi kalite)"
+                low: "Düşük (daha küçük dosya boyutu, daha hızlı işlem)",
+                medium: "Orta (kalite ve boyut dengesi)",
+                high: "Yüksek (en iyi kalite, daha büyük dosyalar)"
             },
-            pageOptions: "Sayfa Seçenekleri",
-            allPages: "Tüm Sayfalar",
-            selectedPages: "Seçilen Sayfalar",
+            pageOptions: "Sayfa seçenekleri",
+            allPages: "Tüm sayfalar",
+            selectedPages: "Seçili sayfalar",
             pageRangeDescription: "Sayfa numaralarını ve/veya sayfa aralıklarını virgülle ayırarak girin",
-            pageRangeExample: "Örnek: 1,3,5-12"
+            pageRangeExample: "Örnek: 1,3,5-12 (1, 3 ve 5-12. sayfaları dönüştürür)"
         },
-        moreTools: "İlgili Dönüşüm Araçları",
+        moreTools: "İlgili Belge Dönüştürme Araçları",
         expertTips: {
-            title: "Uzman İpuçları",
+            title: "Uzman Dönüştürme İpuçları",
             pdfToWord: [
-                "En iyi sonuçlar için PDF'deki metnin net ve makine tarafından okunabilir olduğundan emin olun",
-                "Tarama belgeleri veya resim tabanlı PDF'ler için OCR'yi etkinleştirin",
-                "Karmaşık düzenler dönüşümden sonra küçük düzeltmeler gerektirebilir"
+                "PDF'den Word'e en iyi sonuçlar için PDF'nizin net, makine tarafından okunabilir metin içerdiğinden emin olun",
+                "Taranmış belgeler veya resim tabanlı PDF'ler için OCR'yi etkinleştirerek düzenlenebilir metin çıkarın",
+                "Karmaşık düzenler mükemmel biçimlendirme için dönüşümden sonra küçük ayarlar gerektirebilir"
             ],
             pdfToExcel: [
-                "Net sınırları olan tablolar daha doğru dönüşür",
-                "Veri çıkarımı için tarama PDF'leri önceden OCR ile işleyin",
-                "Dönüşümden sonra formülleri kontrol edin, çünkü bunlar aktarılmayabilir"
+                "Net kenarlıkları olan tablolar PDF'den Excel'e daha doğru dönüştürülür",
+                "XLS/XLSX'e daha iyi veri çıkarma için taranmış PDF'leri OCR ile ön işleme tabi tutun",
+                "Dönüşümden sonra elektronik tablo formüllerini kontrol edin çünkü otomatik olarak aktarılmayabilir"
             ],
             generic: [
-                "Daha yüksek kalite dosya boyutunu artırır",
-                "Tarama metin veya resimler içeren belgeler için OCR kullanın",
-                "Doğruluk için dönüştürülen dosyayı kontrol edin"
+                "Daha yüksek kalite ayarları daha büyük dosya boyutları ancak daha iyi çıktı sağlar",
+                "Taranmış metin veya metin içeren resimler içeren belgeler için OCR kullanın",
+                "İndirmeden önce her zaman dönüştürme sonrası dosyanızı önizleyerek doğruluğu sağlayın"
             ]
         },
         advantages: {
-            title: "{from}'dan {to}'ya Dönüştürmenin Avantajları",
+            title: "{from}'yi {to}'ye Dönüştürmenin Avantajları",
             pdfToWord: [
-                "PDF formatında kilitli metni düzenleyin ve değiştirin",
-                "Belgeyi yeniden oluşturmadan içeriği güncelleyin",
-                "Diğer belgelerde kullanmak için bilgi çıkarın"
+                "PDF formatında kilitli olan metni DOC dönüştürücümüzle düzenleyin ve değiştirin",
+                "Tüm belgeyi sıfırdan yeniden oluşturmadan içeriği güncelleyin",
+                "Diğer Word belgelerinde veya şablonlarda kullanmak üzere bilgi çıkarın"
             ],
             pdfToExcel: [
-                "Statik PDF'den verileri analiz edin ve işleyin",
-                "Çıkarılan verilerle grafikler oluşturun ve hesaplamalar yapın",
-                "Finansal raporları veya sayısal bilgileri kolayca güncelleyin"
+                "Statik PDF formundaki verileri XLS araçlarıyla analiz edin ve değiştirin",
+                "Çıkarılan elektronik tablo verileriyle grafikler oluşturun ve hesaplamalar yapın",
+                "Excel formatında finansal raporları veya sayısal bilgileri kolayca güncelleyin"
             ],
             wordToPdf: [
-                "Biçimlendirmeyi koruyarak evrensel olarak okunabilir belgeler oluşturun",
-                "İçeriği istenmeyen değişikliklerden koruyun",
-                "Tüm cihazlarda ve platformlarda tutarlı görünüm sağlayın"
+                "Mükemmel biçimlendirmeyi koruyan evrensel olarak okunabilir PDF belgeleri oluşturun",
+                "Güvenli PDF çıktısıyla içeriği istenmeyen değişikliklerden koruyun",
+                "Tüm cihazlarda ve platformlarda tutarlı belge görünümü sağlayın"
             ],
             generic: [
-                "Belgeyi daha kullanışlı bir formata dönüştürün",
-                "Hedef formatı destekleyen programlarda içeriğe erişin ve kullanın",
-                "Dosyaları başkalarının kolayca açabileceği formatlarda paylaşın"
+                "Belgenizi daha kullanışlı ve düzenlenebilir bir formata dönüştürün",
+                "Hedef dosya türünü destekleyen programlarda içeriğe erişin ve kullanın",
+                "Başkalarının özel yazılım olmadan kolayca açabileceği biçimlerde dosya paylaşın"
             ]
         }
     },
@@ -751,231 +751,265 @@ export default {
     },
     // PDF Birleştirme Sayfası
     mergePdf: {
-        title: "PDF Dosyalarını Birleştir",
-        description: "Birden fazla PDF dosyasını hızlı ve kolay bir şekilde tek bir belgede birleştirin",
+        title: "Çevrimiçi PDF Dosyalarını Birleştir | Ücretsiz Web Tarayıcısı PDF Birleştirme Aracı",
+        description: "Tüm işletim sistemleri için tarayıcı tabanlı birleştirme aracımızı kullanarak birden fazla PDF dosyasını hızlı ve kolay bir şekilde tek bir belgede birleştirin",
+        intro: "Çevrimiçi PDF birleştirme aracımız, yalnızca birkaç tıklamayla birden fazla belgeyi tek bir dosyada birleştirmenizi sağlar. Kurulum gerekmez - doğrudan herhangi bir işletim sisteminin web tarayıcısında kullanın.",
+
+        // Nasıl yapılır bölümü
         howTo: {
-            title: "PDF Dosyaları Nasıl Birleştirilir",
+            title: "Bir Tarayıcıda PDF Dosyaları Nasıl Birleştirilir",
             step1: {
                 title: "Dosyaları Yükle",
-                description: "Birleştirmek istediğiniz PDF dosyalarını yükleyin. Aynı anda birden fazla dosya seçebilirsiniz."
+                description: "Birleştirmek istediğiniz PDF dosyalarını yükleyin. Cihazınızdan aynı anda birden fazla dosya seçin veya doğrudan web tarayıcısına sürükleyip bırakın."
             },
             step2: {
                 title: "Sırayı Ayarla",
-                description: "Son PDF'deki sıralarını değiştirmek için dosyaları sürükleyin."
+                description: "Dosya sırasını yeniden düzenlemek için sürükleyip bırakın, böylece nihai birleştirilmiş dosyada görünmesini istediğiniz sırayla olurlar. Birleştirme aracımız birden fazla PDF'nin düzenlenmesini daha sezgisel hale getirir."
             },
             step3: {
                 title: "İndir",
-                description: "PDF Birleştir düğmesine tıklayın ve birleştirilmiş PDF dosyanızı indirin."
+                description: "Birleştirilmiş PDF dosyasını herhangi bir web tarayıcısından doğrudan cihazınıza indirmek için 'PDF'leri Birleştir' düğmesine tıklayın."
             }
         },
+
+        // Avantajlar bölümü
+        benefits: {
+            title: "Çevrimiçi PDF Birleştirme Aracımızın Avantajları",
+            compatibility: {
+                title: "Tüm Cihazlarla Uyumlu",
+                description: "Web tarayıcısı tabanlı PDF birleştirme aracımız, Windows, macOS, Linux ve mobil işletim sistemlerinde kurulum gerektirmeden sorunsuz bir şekilde çalışır."
+            },
+            privacy: {
+                title: "Güvenlik ve Gizlilik",
+                description: "Belgeleriniz web tarayıcısında işlenir ve birleştirildikten sonra otomatik olarak silinir, böylece hassas bilgilerinizin gizli kalması sağlanır."
+            },
+            simplicity: {
+                title: "Kullanıcı Dostu Arayüz",
+                description: "Sezgisel sürükle ve bırak arayüzü, birden fazla PDF dosyasını birleştirmeyi kolaylaştırır, çevrimiçi aracımızı ilk kez kullananlar için bile basittir."
+            },
+            quality: {
+                title: "Yüksek Kaliteli Çıktı",
+                description: "Birleştirme aracımız, profesyonel sonuçlar sağlayarak, birleştirilmiş dosyalardaki orijinal biçimlendirmeyi, görüntüleri ve metin kalitesini korur."
+            }
+        },
+
+        // Kullanım durumları bölümü
+        useCases: {
+            title: "PDF Birleştirmenin Yaygın Kullanım Alanları",
+            business: {
+                title: "Ticari Belgeler",
+                description: "Finansal raporları, sözleşmeleri ve sunumları müşteriler ve paydaşlar için kapsamlı belgelerde birleştirin."
+            },
+            academic: {
+                title: "Akademik Makaleler",
+                description: "Araştırma makalelerini, alıntıları ve ekleri incelemeye hazır, eksiksiz bir akademik gönderimde birleştirin."
+            },
+            personal: {
+                title: "Kişisel Kayıtlar",
+                description: "Makbuzları, garantileri ve kullanım kılavuzlarını kolay başvuru için düzenli dijital kayıtlarda birleştirin."
+            },
+            professional: {
+                title: "Profesyonel Portfolyolar",
+                description: "Birden fazla iş örneğini paylaşılması kolay tek bir belgede birleştirerek etkileyici portfolyolar oluşturun."
+            }
+        },
+
+        // SSS bölümü
         faq: {
             title: "Sıkça Sorulan Sorular",
             q1: {
-                question: "Birleştirebileceğim PDF sayısında bir sınır var mı?",
-                answer: "Ücretsiz sürümümüzle aynı anda 20 PDF dosyasına kadar birleştirebilirsiniz. Daha büyük hacimler için premium planımızı değerlendirin."
+                question: "Çevrimiçi aracınızı kullanarak PDF dosyalarını birleştirirken bir sınır var mı?",
+                answer: "Ücretsiz web tarayıcısı tabanlı birleştirme aracımızla aynı anda en fazla 20 PDF dosyası birleştirebilirsiniz. Daha büyük miktarlarda birden fazla dosya birleştirmeniz gerekiyorsa, sınırsız birleştirme işlemlerini destekleyen premium planımıza yükseltmeyi düşünün."
             },
             q2: {
-                question: "PDF dosyalarım gizli kalacak mı?",
-                answer: "Evet, gizliliğiniz bizim önceliğimizdir. Yüklenen tüm dosyalar işlendikten sonra sunucularımızdan otomatik olarak silinir."
+                question: "Çevrimiçi birleştirme aracınızı kullanırken PDF dosyalarım gizli kalır mı?",
+                answer: "Evet, gizliliğiniz bizim önceliğimizdir. Tarayıcı tabanlı birleştirme aracımıza yüklenen tüm dosyalar güvenli bir şekilde işlenir ve işlendikten sonra sunucularımızdan otomatik olarak silinir. Belge içeriğinize asla erişmeyiz veya saklamayız."
             },
             q3: {
-                question: "Parola korumalı PDF'leri birleştirebilir miyim?",
-                answer: "Parola korumalı PDF'ler için önce PDF Kilidini Aç aracımızla kilidi kaldırmanız, ardından birleştirmeniz gerekir."
+                question: "Çevrimiçi aracınızı kullanarak parola korumalı PDF'leri birleştirebilir miyim?",
+                answer: "Parola korumalı PDF'ler için, birleştirmeden önce çevrimiçi PDF kilidini açma aracımızı kullanarak kilidini açmanız gerekir. Tarayıcı tabanlı birleştirme aracımız korumalı bir belge algılarsa size bilgi verecektir."
+            },
+            q4: {
+                question: "Çevrimiçi PDF birleştirme aracınız tüm işletim sistemleriyle çalışır mı?",
+                answer: "Evet, web tarayıcısı tabanlı PDF birleştirme aracımız Windows, macOS, Linux, iOS ve Android dahil olmak üzere tüm ana işletim sistemleriyle çalışır. Modern bir web tarayıcınız olduğu sürece, herhangi bir yazılım yüklemenize gerek kalmadan PDF'leri birleştirebilirsiniz."
+            },
+            q5: {
+                question: "Ne kadar büyük PDF dosyalarını birleştirebilirim?",
+                answer: "Ücretsiz çevrimiçi birleştirme aracımız, dosya başına 100 MB'a kadar destekler. Birleştirilen tüm dosyaların toplam boyutu, web tarayıcınızda optimum performans sağlamak için 300 MB'ı geçmemelidir."
+            },
+            q6: {
+                question: "Birleştirilen dosya orijinal PDF'lerin tüm özelliklerini koruyacak mı?",
+                answer: "Evet, gelişmiş birleştirme aracımız, nihai birleştirilmiş dosyada orijinal PDF'lerin metnini, resimlerini, biçimlendirmesini, köprülerini ve çoğu etkileşimli öğesini korur."
             }
         },
-        relatedTools: "Diğer PDF Araçlarını Keşfet",
-        viewAllTools: "Tüm PDF Araçlarını Görüntüle",
-        of: " / ",
-        files: "dosya",
-        filesToMerge: "Birleştirilecek Dosyalar",
-        dragToReorder: "Sürükle ve Yeniden Sırala",
-        downloadReady: "İndirme Hazır",
-        downloadMerged: "Birleştirilmiş İndirme",
-        mergePdfs: "PDF'leri Birleştir",
-        successMessage: "PDF başarıyla birleştirildi",
+
+        // İpuçları bölümü
+        tips: {
+            title: "PDF'leri Verimli Bir Şekilde Birleştirmek İçin İpuçları",
+            tip1: {
+                title: "Birleştirmeden Önce Düzenleyin",
+                description: "Birleştirme aracımıza yüklemeden önce, daha kolay düzenleme için dosyaları sayısal sırayla yeniden adlandırın (örneğin, 01_giris.pdf, 02_icerik.pdf)."
+            },
+            tip2: {
+                title: "Büyük Dosyaları Optimize Edin",
+                description: "Birden fazla büyük belgeyi birleştiriyorsanız, nihai birleştirilmiş dosyanın daha iyi performans göstermesini sağlamak için önce PDF'leri Sıkıştır aracımızı kullanın."
+            },
+            tip3: {
+                title: "Önizlemeyi Kontrol Edin",
+                description: "Dosyaları düzenledikten sonra, birleştirilmiş PDF'yi sonlandırmadan önce sırayı doğrulamak için çevrimiçi aracımızdaki önizleme özelliğini kullanın."
+            },
+            tip4: {
+                title: "Yer İşaretlerini Düşünün",
+                description: "Profesyonel belgeler için, kolay gezinme için birleştirilmiş dosyaya yer işaretleri eklemek üzere PDF Düzenleme aracımızı kullanmayı düşünün."
+            }
+        },
+
+        // Karşılaştırma bölümü
+        comparison: {
+            title: "Neden Web Tarayıcısı Birleştirme Aracımızı Seçmelisiniz",
+            point1: {
+                title: "Yazılım Kurulumu Gerekmez",
+                description: "Masaüstü uygulamalarının aksine, çevrimiçi PDF birleştirme aracımız doğrudan web tarayıcınızda çalışır ve herhangi bir yazılım indirme veya kurma ihtiyacını ortadan kaldırır."
+            },
+            point2: {
+                title: "Çapraz Platform Uyumluluğu",
+                description: "Tarayıcı tabanlı aracımız tüm işletim sistemlerinde çalışır, masaüstü alternatifleri genellikle belirli platformları destekler."
+            },
+            point3: {
+                title: "Ücretsiz ve Erişilebilir",
+                description: "Pahalı masaüstü alternatiflerine veya abonelik hizmetlerine kıyasla, PDF birleştirme özelliklerimize ücretsiz olarak erişebilirsiniz."
+            },
+            point4: {
+                title: "Düzenli Güncellemeler",
+                description: "Çevrimiçi birleştirme aracımız sürekli olarak geliştirilmektedir ve kullanıcı tarafından manuel güncelleme gerektirmez."
+            }
+        },
+
+        // UI öğeleri ve mesajları
+        ui: {
+            of: "/",
+            files: "Dosyalar",
+            filesToMerge: "Birleştirilecek Dosyalar",
+            dragToReorder: "Yeniden sıralamak için sürükleyin",
+            downloadReady: "İndirme Hazır",
+            downloadMerged: "Birleştirilmiş Dosyayı İndir",
+            mergePdfs: "PDF'leri Birleştir",
+            processingMerge: "PDF'leriniz birleştiriliyor...",
+            successMessage: "PDF'ler başarıyla birleştirildi!",
+            dragDropHere: "PDF'leri buraya sürükleyip bırakın",
+            or: "veya",
+            browseFiles: "Dosyalara Göz At",
+            fileLimit: "En fazla 20 PDF dosyası birleştirin",
+            noPdfsSelected: "PDF Seçilmedi",
+            addMoreFiles: "Daha Fazla Dosya Ekle",
+            rearrangeMessage: "Birleştirilmiş PDF'deki sırayı yeniden düzenlemek için dosyaları sürükleyin",
+            removeFile: "Kaldır",
+            filePreview: "Önizleme",
+            startOver: "Yeniden Başla",
+            mergingInProgress: "Birleştirme İşlemi Devam Ediyor...",
+            pleaseWait: "Lütfen bekleyin, PDF dosyalarınızı birleştiriyoruz",
+            processingFile: "İşleniyor",
+            retry: "Birleştirmeyi Tekrar Dene"
+        }
     },
 
     // OCR Sayfası
     ocr: {
-        title: "OCR ile Metin Çıkarma",
-        description: "Tarama PDF'lerden ve resimlerden güçlü optik karakter tanıma teknolojisiyle metin çıkarın",
+        title: "OCR Çıkarma: Basit Metin Tanıma",
+        description: "Gelişmiş OCR yazılımı ve makine öğrenimi kullanarak taranmış PDF'leri ve görüntü dosyalarını düzenlenebilir metne dönüştürün",
         howTo: {
-            title: "OCR ile Metin Çıkarma Nasıl Çalışır",
-            step1: {
-                title: "Yükle",
-                description: "Tarama PDF belgenizi veya resim tabanlı PDF'nizi yükleyin."
-            },
-            step2: {
-                title: "OCR'yi Yapılandır",
-                description: "En iyi sonuçlar için dil, sayfa aralığı ve ek ayarları seçin."
-            },
-            step3: {
-                title: "Metni Al",
-                description: "Çıkarılan metni kopyalayın veya daha fazla kullanım için metin dosyası olarak indirin."
-            }
+            title: "OCR Çıkarma Nasıl Çalışır",
+            step1: { title: "Yükle", description: "Taranmış PDF'nizi veya görüntü dosyanızı görüntüden metne dönüştürücüye yükleyin." },
+            step2: { title: "OCR Aracını Yapılandır", description: "Dil, sayfa aralığı ve gelişmiş ayarları seçerek en iyi metin tanımayı sağlayın." },
+            step3: { title: "Metni Çıkar", description: "Çıkarılan metni kopyalayın veya görüntüden metne dönüştürücümüzle .txt dosyası olarak indirin." }
         },
         faq: {
             title: "Sıkça Sorulan Sorular",
             questions: {
-                accuracy: {
-                    question: "OCR ile metin çıkarma ne kadar doğru?",
-                    answer: "OCR teknolojimiz, iyi taranmış belgelerdeki net baskı metinler için genellikle %90-99 doğruluk oranına ulaşır. Düşük kaliteli taramalar, alışılmadık yazı tipleri veya karmaşık düzenler doğruluğu düşürebilir."
-                },
-                languages: {
-                    question: "Hangi diller destekleniyor?",
-                    answer: "İngilizce, Fransızca, Almanca, İspanyolca, İtalyanca, Portekizce, Çince, Japonca, Korece, Rusça, Arapça, Hintçe ve daha birçok dili içeren 100'den fazla dil destekliyoruz."
-                },
-                recognition: {
-                    question: "Metnim neden doğru tanınmıyor?",
-                    answer: "OCR doğruluğu, belge kalitesi, çözünürlük, kontrast, karmaşık düzenler, el yazısı metin, alışılmadık yazı tipleri veya yanlış dil seçimi gibi çeşitli faktörlerden etkilenebilir."
-                },
-                pageLimit: {
-                    question: "İşlenecek sayfa sayısında bir sınır var mı?",
-                    answer: "Ücretsiz kullanıcılar için PDF başına 50 sayfa sınırı vardır. Premium kullanıcılar 500 sayfaya kadar PDF işleyebilir."
-                },
-                security: {
-                    question: "OCR işleme sırasında verilerim güvende mi?",
-                    answer: "Evet, güvenliğiniz bizim önceliğimizdir. Yüklenen tüm dosyalar güvenli sunucularda işlenir ve işlemden sonra otomatik olarak silinir."
-                }
+                accuracy: { question: "OCR çıkarma teknolojisi ne kadar doğru?", answer: "OCR yazılımımız, iyi taranmış belgelerdeki net basılı metinler için %90-99 doğruluk oranına ulaşır. Görüntü dosyalarının kalitesi düşükse veya alışılmadık yazı tipleri kullanılıyorsa doğruluk azalabilir." },
+                languages: { question: "Hangi diller destekleniyor?", answer: "İngilizce, Fransızca, Almanca, İspanyolca, Çince, Japonca, Arapça, Rusça ve daha pek çok dil dahil 100'den fazla dili destekliyoruz." },
+                recognition: { question: "Metnim neden doğru tanınmıyor?", answer: "Metin tanımayı birkaç faktör etkileyebilir: belge kalitesi, çözünürlük, kontrast, karmaşık düzenler, el yazısı veya yanlış dil seçimi." },
+                pageLimit: { question: "İşleyebileceğim sayfa sayısında bir sınır var mı?", answer: "Ücretsiz kullanıcılar için PDF başına 50 sayfa sınırı vardır. Premium kullanıcılar 500 sayfaya kadar PDF işleyebilir." },
+                security: { question: "OCR işleme sırasında verilerim güvende mi?", answer: "Evet, güvenliğiniz bizim önceliğimizdir. Yüklenen tüm dosyalar güvenli sunucularda işlenir ve işlemden sonra otomatik olarak silinir." }
             }
         },
-        relatedTools: "İlgili PDF Araçları",
-        processing: {
-            title: "OCR İşleme",
-            message: "OCR işleme, belgenin boyutuna ve karmaşıklığına bağlı olarak birkaç dakika sürebilir"
-        },
-        results: {
-            title: "Çıkarılan Metin",
-            copy: "Kopyala",
-            download: ".txt Olarak İndir"
-        },
-        languages: {
-            english: "İngilizce",
-            french: "Fransızca",
-            german: "Almanca",
-            spanish: "İspanyolca",
-            chinese: "Çince",
-            japanese: "Japonca",
-            arabic: "Arapça",
-            russian: "Rusça"
-        },
+        relatedTools: "İlgili OCR ve PDF Araçları",
+        processing: { title: "OCR Yazılımı ile İşleme", message: "Metin tanıma, dosya boyutuna ve karmaşıklığına bağlı olarak birkaç dakika sürebilir" },
+        results: { title: "Çıkarılan Metin Sonuçları", copy: "Kopyala", download: "İndir .txt" },
+        languages: { english: "İngilizce", french: "Fransızca", german: "Almanca", spanish: "İspanyolca", chinese: "Çince", japanese: "Japonca", arabic: "Arapça", russian: "Rusça" },
         whatIsOcr: {
-            title: "Optik Karakter Tanıma (OCR)",
-            description: "Bu, taranmış kağıt belgeler, PDF dosyaları veya dijital kamerayla çekilmiş resimler gibi çeşitli belge türlerini düzenlenebilir ve aranabilir verilere dönüştüren bir teknolojidir.",
-            explanation: "OCR, bir belgenin görüntüsünün yapısını analiz eder, karakterleri ve metin öğelerini tanımlar ve ardından bunları makine tarafından okunabilir bir formata dönüştürür.",
-            extractionList: {
-                scannedPdfs: "Metnin resim olarak bulunduğu tarama PDF'ler",
-                imageOnlyPdfs: "Alt metin katmanı olmayan yalnızca resimli PDF'ler",
-                embeddedImages: "Metin içeren gömülü resimlere sahip PDF'ler",
-                textCopyingIssues: "Doğrudan metin kopyalamanın çalışmadığı belgeler"
-            }
+            title: "OCR Çıkarma Nedir?",
+            description: "Optik Karakter Tanıma (OCR), makine öğrenimi ile desteklenen bir teknolojidir ve taranmış belgeleri, PDF'leri ve görüntü dosyalarını düzenlenebilir ve aranabilir metne dönüştürür.",
+            explanation: "Görüntüden metne dönüştürücü, belge görüntüsünün yapısını analiz eder, karakterleri ve metin öğelerini tanır ve bunları makine tarafından okunabilir bir formata çevirir.",
+            extractionList: { scannedPdfs: "Metnin görüntü olarak bulunduğu taranmış PDF'ler", imageOnlyPdfs: "Metin katmanı olmayan yalnızca görüntü PDF'leri", embeddedImages: "Metin içeren gömülü görüntülere sahip PDF'ler", textCopyingIssues: "Metnin doğrudan kopyalanamadığı belgeler" }
         },
         whenToUse: {
-            title: "OCR ile Metin Çıkarma Ne Zaman Kullanılır",
-            idealFor: "İdeal Kullanım Alanları:",
-            idealForList: {
-                scannedDocuments: "PDF olarak kaydedilmiş tarama belgeler",
-                oldDocuments: "Dijital metin katmanı olmayan eski belgeler",
-                textSelectionIssues: "Metin seçme/kopyalamanın çalışmadığı PDF'ler",
-                textInImages: "Metin içeren ve çıkarılması gereken resimler",
-                searchableArchives: "Taranmış belgelerden aranabilir arşivler oluşturma"
-            },
-            notNecessaryFor: "Gerekli Olmayan Durumlar:",
-            notNecessaryForList: {
-                digitalPdfs: "Metnin zaten seçilebilir olduğu dijital PDF'ler",
-                createdDigitally: "Doğrudan dijital belgelerden oluşturulan PDF'ler",
-                copyPasteAvailable: "Zaten kopyalayıp yapıştırabileceğiniz belgeler",
-                formatPreservation: "Formatın korunması gereken dosyalar (bunun yerine PDF'den DOCX'e dönüşüm kullanın)"
-            }
+            title: "Görüntüden Metin Çıkarma Aracını Ne Zaman Kullanmalı",
+            idealFor: "Şunlar için ideal:",
+            idealForList: { scannedDocuments: "PDF olarak kaydedilmiş taranmış belgeler", oldDocuments: "Dijital metin katmanı olmayan eski belgeler", textSelectionIssues: "Metin seçimi/kopyalamanın çalışmadığı PDF'ler", textInImages: "Çıkarılması gereken metin içeren görüntü dosyaları", searchableArchives: "Taranmış belgelerden aranabilir arşivler oluşturma" },
+            notNecessaryFor: "Şunlar için gerekli değil:",
+            notNecessaryForList: { digitalPdfs: "Metnin seçilebilir olduğu yerel dijital PDF'ler", createdDigitally: "Doğrudan dijital belgelerden oluşturulan PDF'ler", copyPasteAvailable: "Zaten kopyalayıp yapıştırabileceğiniz belgeler", formatPreservation: "Formatın korunması gereken dosyalar (bunun yerine PDF'den DOCX'e dönüşümümüzü kullanın)" }
         },
         limitations: {
-            title: "OCR Sınırlamaları ve İpuçları",
-            description: "OCR teknolojimiz güçlü olsa da, dikkate alınması gereken bazı sınırlamalar vardır:",
-            factorsAffecting: "OCR Doğruluğunu Etkileyen Faktörler:",
-            factorsList: {
-                documentQuality: "Belge kalitesi (çözünürlük, kontrast)",
-                complexLayouts: "Karmaşık düzenler ve biçimlendirme",
-                handwrittenText: "El yazısı metin (sınırlı tanıma)",
-                specialCharacters: "Özel karakterler ve işaretler",
-                multipleLanguages: "Tek bir belgede birden fazla dil"
-            },
-            tipsForBest: "En İyi Sonuçlar İçin İpuçları:",
-            tipsList: {
-                highQualityScans: "Yüksek kaliteli tarama kullanın (300 DPI veya daha yüksek)",
-                correctLanguage: "Belgeniz için doğru dili seçin",
-                enhanceScannedImages: "Daha fazla doğruluk için 'Taranmış Görüntüleri Geliştir'i etkinleştirin",
-                smallerPageRanges: "Büyük belgeler için daha küçük sayfa aralıklarını işleyin",
-                reviewText: "İşlemden sonra çıkarılan metni gözden geçirin ve düzeltin"
-            }
+            title: "OCR Aracının Sınırları ve İpuçları",
+            description: "OCR yazılımımız güçlü olsa da, dikkat edilmesi gereken bazı sınırlamalar vardır:",
+            factorsAffecting: "Metin tanıma doğruluğunu etkileyen faktörler:",
+            factorsList: { documentQuality: "Belge kalitesi (çözünürlük, kontrast)", complexLayouts: "Karmaşık düzenler ve biçimlendirme", handwrittenText: "El yazısı metin (sınırlı tanıma)", specialCharacters: "Özel karakterler ve semboller", multipleLanguages: "Bir belgede birden fazla dil" },
+            tipsForBest: "En iyi sonuçlar için ipuçları:",
+            tipsList: { highQualityScans: "Yüksek kaliteli taramalar kullanın (300 DPI veya daha fazla)", correctLanguage: "Belgeniz için doğru dili seçin", enhanceScannedImages: "Daha iyi doğruluk için 'Taranmış görüntüleri geliştir' seçeneğini etkinleştirin", smallerPageRanges: "Büyük belgeler için daha küçük sayfa aralıklarını işleyin", reviewText: "Çıkarılan metni sonradan gözden geçirin ve düzeltin" }
         },
-        options: {
-            scope: "Metin Çıkarılacak Sayfalar",
-            all: "Tüm Sayfalar",
-            custom: "Belirli Sayfalar",
-            pages: "Sayfa Numaraları",
-            pagesHint: "Örnek: 1,3,5-9",
-            enhanceScanned: "Taranmış Görüntüleri Geliştir",
-            enhanceScannedHint: "OCR doğruluğunu artırmak için görüntülerin ön işlenmesi (tarama belgeler için önerilir)",
-            preserveLayout: "Düzeni Koru",
-            preserveLayoutHint: "Paragraflar ve satır sonlarıyla orijinal düzeni korumaya çalışın"
-        },
-        // Upload area
-        uploadPdf: "Metin çıkarma için PDF yükle",
-        dragDrop: "PDF dosyanızı buraya sürükleyip bırakın veya göz atmak için tıklayın",
-        selectPdf: "PDF dosyası seç",
+        options: { scope: "Çıkarılacak Sayfalar", all: "Tüm Sayfalar", custom: "Belirli Sayfalar", pages: "Sayfa Numaraları", pagesHint: "Örn. 1,3,5-9", enhanceScanned: "Taranmış görüntüleri geliştir", enhanceScannedHint: "OCR doğruluğunu artırmak için görüntüleri ön işleme alın (taranmış belgeler için önerilir)", preserveLayout: "Düzeni koru", preserveLayoutHint: "Paragraflar ve satır sonlarıyla orijinal düzeni korumaya çalışın" },
+        ocrTool: "OCR Çıkarma Aracı",
+        ocrToolDesc: "Taranmış belgeleri ve görüntü dosyalarını görüntüden metne dönüştürücümüzle düzenlenebilir metne çevirin",
+        uploadPdf: "OCR Çıkarma için Dosya Yükle",
+        dragDrop: "PDF veya görüntü dosyanızı buraya sürükleyip bırakın veya göz atmak için tıklayın",
+        selectPdf: "Dosya Seç",
         uploading: "Yükleniyor...",
         maxFileSize: "Maksimum dosya boyutu: 50MB",
-
-        // File handling
         invalidFile: "Geçersiz dosya türü",
-        invalidFileDesc: "Lütfen bir PDF dosyası seçin",
+        invalidFileDesc: "Lütfen bir PDF veya desteklenen görüntü dosyası seçin",
         fileTooLarge: "Dosya çok büyük",
-        fileTooLargeDesc: "Maksimum dosya boyutu 50MB’dir",
+        fileTooLargeDesc: "Maksimum dosya boyutu 50MB'dir",
         noFile: "Dosya seçilmedi",
-        noFileDesc: "Lütfen işlenecek bir PDF dosyası seçin",
-        changeFile: "Dosyayı değiştir",
-
-        // Options
-        languageLabel: "Belge dili",
+        noFileDesc: "Metin tanıma için lütfen bir dosya seçin",
+        changeFile: "Dosyayı Değiştir",
+        languageLabel: "Belge Dili",
         selectLanguage: "Dil seç",
-        pageRange: "Sayfa aralığı",
-        allPages: "Tüm sayfalar",
-        specificPages: "Belirli sayfalar",
-        pageRangeExample: "örneğin, 1-3, 5, 7-9",
-        pageRangeInfo: "Bireysel sayfaları veya virgülle ayrılmış aralıkları girin",
-        preserveLayout: "Düzeni koru",
-        preserveLayoutDesc: "Belge yapısını ve biçimlendirmesini korumaya çalışır",
-
-        // Processing
-        extractText: "Metni çıkar",
-        extractingText: "Metin çıkarılıyor...",
-        processingPdf: "PDF’niz işleniyor",
-        processingInfo: "Dosya boyutuna ve karmaşıklığına bağlı olarak bu birkaç dakika sürebilir",
-        analyzing: "Belge analiz ediliyor",
+        pageRange: "Sayfa Aralığı",
+        allPages: "Tüm Sayfalar",
+        specificPages: "Belirli Sayfalar",
+        pageRangeExample: "örn., 1-3, 5, 7-9",
+        pageRangeInfo: "Tek tek sayfaları veya aralıkları virgülle ayırarak girin",
+        preserveLayout: "Düzeni Koru",
+        preserveLayoutDesc: "Belge yapısını ve biçimlendirmeyi korumaya çalışın",
+        extractText: "Metni Çıkar",
+        extractingText: "Metin Çıkarılıyor...",
+        processingPdf: "Dosyanız işleniyor",
+        processingInfo: "Bu, dosya boyutuna ve karmaşıklığına bağlı olarak birkaç dakika sürebilir",
+        analyzing: "İçerik analiz ediliyor",
         preprocessing: "Sayfalar ön işleme alınıyor",
         recognizing: "Metin tanınıyor",
         extracting: "İçerik çıkarılıyor",
         finalizing: "Sonuçlar tamamlanıyor",
-        finishing: "Tamamlanıyor",
-
-        // Results
+        finishing: "Bitiriliyor",
         extractionComplete: "Metin çıkarma tamamlandı",
-        extractionCompleteDesc: "Metniniz PDF’den başarıyla çıkarıldı",
+        extractionCompleteDesc: "Metniniz, görüntüden metne çıkarma aracımızla başarıyla çıkarıldı",
         extractionError: "Metin çıkarma başarısız",
         extractionFailed: "Metin çıkarılamadı",
         unknownError: "Bilinmeyen bir hata oluştu",
         textCopied: "Metin panoya kopyalandı",
         copyFailed: "Metin kopyalanamadı",
-        textPreview: "Metin önizlemesi",
-        rawText: "Ham metin",
-        extractedText: "Çıkarılmış metin",
-        previewDesc: "Biçimlendirmeli çıkarılan metnin önizlemesi",
-        rawTextOutput: "Ham metin çıkışı",
+        textPreview: "Metin Önizlemesi",
+        rawText: "Ham Metin",
+        extractedText: "Çıkarılan Metin",
+        previewDesc: "Biçimlendirme ile çıkarılan metnin önizlemesi",
+        rawTextOutput: "Ham Metin Çıktısı",
         rawTextDesc: "Biçimlendirme olmadan düz metin",
-        noTextFound: "Belgede metin bulunamadı",
-        copyText: "Metni kopyala",
-        downloadText: "Metni indir",
-        processAnother: "Başka bir PDF işle"
+        noTextFound: "Dosyada metin bulunamadı",
+        copyText: "Metni Kopyala",
+        downloadText: "Metni İndir",
+        processAnother: "Başka Bir Dosya İşle",
+        supportedLanguages: "İngilizce, İspanyolca, Fransızca, Almanca, Çince, Japonca ve daha fazlası dahil 15'ten fazla dili destekler. Daha yüksek doğruluk için uygun dili seçin."
     },
 
     // PDF Koruma Sayfası
