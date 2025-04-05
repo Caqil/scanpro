@@ -209,7 +209,7 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
         },
         {
           name: t("popular.signPdf"),
-          href: "/sign",
+          href: "/sign-pdf",
           icon: <PenTool className="h-5 w-5 text-green-500" />,
           description: t("popular.signPdfDesc"),
         },

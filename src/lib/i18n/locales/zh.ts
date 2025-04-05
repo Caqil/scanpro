@@ -2397,5 +2397,126 @@ export default {
         getStarted: "开始",
         currentPlan: "当前计划"
     },
-
+    signPdf: {
+        title: "签署PDF：为文档添加数字签名",
+        description: "轻松为您的PDF文档添加数字签名、文本注释、印章和绘图",
+        howTo: {
+          title: "如何签署PDF文档",
+          step1: {
+            title: "上传您的PDF",
+            description: "上传您想要签署或注释的PDF文档"
+          },
+          step2: {
+            title: "添加您的签名",
+            description: "创建、上传或绘制您的签名并将其放置在文档上"
+          },
+          step3: {
+            title: "保存并下载",
+            description: "保存您的更改并下载已签署的PDF文档"
+          }
+        },
+        tools: {
+          signature: "签名",
+          text: "文本",
+          stamp: "印章",
+          draw: "绘制",
+          image: "图像"
+        },
+        options: {
+          draw: "绘制签名",
+          upload: "上传签名",
+          type: "输入签名",
+          clear: "清除",
+          save: "保存签名",
+          color: "颜色",
+          fontSize: "字体大小",
+          cancel: "取消",
+          apply: "应用",
+          position: "位置"
+        },
+        stamps: {
+          approved: "已批准",
+          rejected: "已拒绝",
+          draft: "草稿",
+          final: "最终版",
+          confidential: "机密"
+        },
+        messages: {
+          noFile: "未选择文件",
+          uploadFirst: "请先上传要签署的PDF文件",
+          processing: "正在处理您的PDF...",
+          signed: "PDF已成功签署！",
+          downloadReady: "您的已签署PDF已准备好下载",
+          error: "签署PDF时出错",
+          errorDesc: "处理您的请求时出现错误。请重试。"
+        },
+        faq: {
+          title: "常见问题解答",
+          legality: {
+            question: "数字签名具有法律约束力吗？",
+            answer: "使用我们工具创建的数字签名在视觉上类似于手写签名。对于符合eIDAS或ESIGN法案等法规的具有法律约束力的电子签名，您可能需要合格的电子签名服务。我们的工具适用于内部文档、草稿或视觉签名足够的情况。"
+          },
+          security: {
+            question: "签名的安全性如何？",
+            answer: "我们的签名是PDF文档上的视觉叠加层。它们提供了同意的视觉表示，但不包括高级数字签名解决方案中常见的加密安全功能。您的文档会得到安全处理，我们不会存储您已签署的PDF。"
+          },
+          formats: {
+            question: "支持哪些签名格式？",
+            answer: "您可以通过鼠标/触摸板绘制、上传图像文件（推荐PNG、JPG透明背景）或以各种字体样式输入您的姓名来创建签名。"
+          },
+          multipleSignatures: {
+            question: "我可以在一个文档中添加多个签名吗？",
+            answer: "是的，您可以在文档中添加多个签名、文本注释、印章和绘图。这对于需要多方签名或在不同位置需要注释的文档非常有用。"
+          }
+        },
+        benefits: {
+          title: "数字签名的优势",
+          paperless: {
+            title: "无纸化",
+            description: "消除打印、签署、扫描和通过电子邮件发送文档的需要"
+          },
+          time: {
+            title: "节省时间",
+            description: "无需物理处理即可随时随地即时签署文档"
+          },
+          professional: {
+            title: "专业外观",
+            description: "创建干净、专业外观的已签署文档"
+          },
+          workflow: {
+            title: "简化工作流程",
+            description: "加快文档批准和业务流程"
+          }
+        },
+        useCases: {
+          title: "常见使用场景",
+          contracts: {
+            title: "合同和协议",
+            description: "为商业合同和协议添加您的签名"
+          },
+          forms: {
+            title: "表格和申请",
+            description: "无需打印即可填写和签署表格"
+          },
+          approvals: {
+            title: "文档批准",
+            description: "使用官方印章和签名将文档标记为已批准"
+          },
+          feedback: {
+            title: "反馈和修订",
+            description: "在审查期间为文档添加评论和注释"
+          }
+        },
+        draw: "绘制",
+        addText: "添加文本",
+        addImage: "添加图像",
+        download: "下载已签署的PDF",
+        processing: "处理中...",
+        clearAll: "全部清除",
+        uploadSignature: "上传签名",
+        drawSignature: "绘制签名",
+        signatureOptions: "签名选项",
+        annotationTools: "注释工具",
+        pages: "页面"
+      },
 }

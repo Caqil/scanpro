@@ -2263,5 +2263,126 @@ export default {
     getStarted: "Loslegen",
     currentPlan: "Aktueller Plan"
   },
-
+  signPdf: {
+    title: "PDF unterschreiben: Digitale Signaturen zu Dokumenten hinzufügen",
+    description: "Fügen Sie Ihren PDF-Dokumenten einfach digitale Signaturen, Textanmerkungen, Stempel und Zeichnungen hinzu",
+    howTo: {
+      title: "Wie man PDF-Dokumente unterschreibt",
+      step1: {
+        title: "Ihr PDF hochladen",
+        description: "Laden Sie das PDF-Dokument hoch, das Sie unterschreiben oder kommentieren möchten"
+      },
+      step2: {
+        title: "Ihre Unterschrift hinzufügen",
+        description: "Erstellen, hochladen oder zeichnen Sie Ihre Unterschrift und platzieren Sie sie auf dem Dokument"
+      },
+      step3: {
+        title: "Speichern & Herunterladen",
+        description: "Speichern Sie Ihre Änderungen und laden Sie das unterschriebene PDF-Dokument herunter"
+      }
+    },
+    tools: {
+      signature: "Unterschrift",
+      text: "Text",
+      stamp: "Stempel",
+      draw: "Zeichnen",
+      image: "Bild"
+    },
+    options: {
+      draw: "Unterschrift zeichnen",
+      upload: "Unterschrift hochladen",
+      type: "Unterschrift tippen",
+      clear: "Löschen",
+      save: "Unterschrift speichern",
+      color: "Farbe",
+      fontSize: "Schriftgröße",
+      cancel: "Abbrechen",
+      apply: "Anwenden",
+      position: "Position"
+    },
+    stamps: {
+      approved: "Genehmigt",
+      rejected: "Abgelehnt",
+      draft: "Entwurf",
+      final: "Endgültig",
+      confidential: "Vertraulich"
+    },
+    messages: {
+      noFile: "Keine Datei ausgewählt",
+      uploadFirst: "Bitte laden Sie zuerst eine PDF-Datei zum Unterschreiben hoch",
+      processing: "Ihr PDF wird verarbeitet...",
+      signed: "PDF erfolgreich unterschrieben!",
+      downloadReady: "Ihr unterschriebenes PDF ist zum Download bereit",
+      error: "Fehler beim Unterschreiben des PDFs",
+      errorDesc: "Es gab einen Fehler bei der Verarbeitung Ihrer Anfrage. Bitte versuchen Sie es erneut."
+    },
+    faq: {
+      title: "Häufig gestellte Fragen",
+      legality: {
+        question: "Sind digitale Unterschriften rechtlich bindend?",
+        answer: "Digitale Unterschriften, die mit unserem Tool erstellt werden, ähneln optisch handschriftlichen Unterschriften. Für rechtlich bindende elektronische Unterschriften, die Vorschriften wie eIDAS oder dem ESIGN Act entsprechen, benötigen Sie möglicherweise einen qualifizierten elektronischen Signaturdienst. Unser Tool eignet sich für interne Dokumente, Entwürfe oder wenn visuelle Unterschriften ausreichend sind."
+      },
+      security: {
+        question: "Wie sicher sind die Unterschriften?",
+        answer: "Unsere Unterschriften sind visuelle Überlagerungen auf dem PDF-Dokument. Sie bieten eine visuelle Darstellung der Zustimmung, enthalten jedoch keine kryptografischen Sicherheitsfunktionen, die in fortschrittlichen digitalen Signaturlösungen zu finden sind. Ihre Dokumente werden sicher verarbeitet, und wir speichern Ihre unterschriebenen PDFs nicht."
+      },
+      formats: {
+        question: "Welche Unterschriftsformate werden unterstützt?",
+        answer: "Sie können Unterschriften erstellen, indem Sie mit der Maus/dem Touchpad zeichnen, eine Bilddatei hochladen (PNG, JPG mit transparentem Hintergrund empfohlen) oder Ihren Namen in verschiedenen Schriftarten eingeben."
+      },
+      multipleSignatures: {
+        question: "Kann ich mehrere Unterschriften zu einem Dokument hinzufügen?",
+        answer: "Ja, Sie können mehrere Unterschriften, Textanmerkungen, Stempel und Zeichnungen zu Ihrem Dokument hinzufügen. Dies ist nützlich für Dokumente, die Unterschriften von mehreren Parteien erfordern oder Anmerkungen an verschiedenen Stellen benötigen."
+      }
+    },
+    benefits: {
+      title: "Vorteile digitaler Unterschriften",
+      paperless: {
+        title: "Papierlos arbeiten",
+        description: "Vermeiden Sie das Drucken, Unterschreiben, Scannen und Versenden von Dokumenten per E-Mail"
+      },
+      time: {
+        title: "Zeit sparen",
+        description: "Unterschreiben Sie Dokumente sofort von überall aus ohne physische Handhabung"
+      },
+      professional: {
+        title: "Professionelles Erscheinungsbild",
+        description: "Erstellen Sie saubere, professionell aussehende unterschriebene Dokumente"
+      },
+      workflow: {
+        title: "Optimierter Workflow",
+        description: "Beschleunigen Sie Dokumentengenehmigungen und Geschäftsprozesse"
+      }
+    },
+    useCases: {
+      title: "Häufige Anwendungsfälle",
+      contracts: {
+        title: "Verträge & Vereinbarungen",
+        description: "Fügen Sie Ihre Unterschrift zu Geschäftsverträgen und Vereinbarungen hinzu"
+      },
+      forms: {
+        title: "Formulare & Anträge",
+        description: "Füllen Sie Formulare aus und unterschreiben Sie sie ohne zu drucken"
+      },
+      approvals: {
+        title: "Dokumentengenehmigungen",
+        description: "Markieren Sie Dokumente als genehmigt mit offiziellen Stempeln und Unterschriften"
+      },
+      feedback: {
+        title: "Feedback & Überarbeitungen",
+        description: "Fügen Sie Kommentare und Anmerkungen zu Dokumenten während der Überprüfung hinzu"
+      }
+    },
+    draw: "Zeichnen",
+    addText: "Text hinzufügen",
+    addImage: "Bild hinzufügen",
+    download: "Unterschriebenes PDF herunterladen",
+    processing: "Wird verarbeitet...",
+    clearAll: "Alles löschen",
+    uploadSignature: "Unterschrift hochladen",
+    drawSignature: "Unterschrift zeichnen",
+    signatureOptions: "Unterschriftsoptionen",
+    annotationTools: "Anmerkungswerkzeuge",
+    pages: "Seiten"
+  },
 }

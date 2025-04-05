@@ -21,6 +21,7 @@
 # Production
 /build
 /public
+/temp
 # Misc
 .DS_Store
 *.pem

@@ -2398,5 +2398,126 @@ export default {
     getStarted: "시작하기",
     currentPlan: "현재 요금제"
   },
-
+  signPdf: {
+    title: "PDF 서명: 문서에 디지털 서명 추가",
+    description: "PDF 문서에 디지털 서명, 텍스트 주석, 도장, 그림을 쉽게 추가하세요",
+    howTo: {
+      title: "PDF 문서에 서명하는 방법",
+      step1: {
+        title: "PDF 업로드",
+        description: "서명하거나 주석을 달고 싶은 PDF 문서를 업로드하세요"
+      },
+      step2: {
+        title: "서명 추가",
+        description: "서명을 생성, 업로드 또는 그려서 문서에 배치하세요"
+      },
+      step3: {
+        title: "저장 및 다운로드",
+        description: "변경 사항을 저장하고 서명된 PDF 문서를 다운로드하세요"
+      }
+    },
+    tools: {
+      signature: "서명",
+      text: "텍스트",
+      stamp: "도장",
+      draw: "그리기",
+      image: "이미지"
+    },
+    options: {
+      draw: "서명 그리기",
+      upload: "서명 업로드",
+      type: "서명 입력",
+      clear: "지우기",
+      save: "서명 저장",
+      color: "색상",
+      fontSize: "글꼴 크기",
+      cancel: "취소",
+      apply: "적용",
+      position: "위치"
+    },
+    stamps: {
+      approved: "승인됨",
+      rejected: "거부됨",
+      draft: "초안",
+      final: "최종",
+      confidential: "기밀"
+    },
+    messages: {
+      noFile: "파일이 선택되지 않음",
+      uploadFirst: "서명할 PDF 파일을 먼저 업로드하세요",
+      processing: "PDF 처리 중...",
+      signed: "PDF가 성공적으로 서명되었습니다!",
+      downloadReady: "서명된 PDF가 다운로드 준비되었습니다",
+      error: "PDF 서명 오류",
+      errorDesc: "요청을 처리하는 중 오류가 발생했습니다. 다시 시도하세요."
+    },
+    faq: {
+      title: "자주 묻는 질문",
+      legality: {
+        question: "디지털 서명은 법적 구속력이 있나요?",
+        answer: "저희 도구로 생성된 디지털 서명은 시각적으로 손으로 쓴 서명과 유사합니다. eIDAS나 ESIGN 법과 같은 규정을 준수하는 법적 구속력이 있는 전자 서명을 위해서는 자격을 갖춘 전자 서명 서비스가 필요할 수 있습니다. 저희 도구는 내부 문서, 초안, 또는 시각적 서명이 충분한 경우에 적합합니다."
+      },
+      security: {
+        question: "서명의 보안성은 어느 정도인가요?",
+        answer: "저희 서명은 PDF 문서 위에 시각적 오버레이입니다. 동의의 시각적 표현을 제공하지만 고급 디지털 서명 솔루션에서 볼 수 있는 암호화 보안 기능은 포함되어 있지 않습니다. 문서는 안전하게 처리되며, 서명된 PDF는 저장되지 않습니다."
+      },
+      formats: {
+        question: "지원되는 서명 형식은 무엇인가요?",
+        answer: "마우스/터치패드로 그리기, 이미지 파일 업로드(PNG, JPG 투명 배경 권장), 또는 다양한 글꼴 스타일로 이름을 입력하여 서명을 생성할 수 있습니다."
+      },
+      multipleSignatures: {
+        question: "문서에 여러 서명을 추가할 수 있나요?",
+        answer: "네, 문서에 여러 서명, 텍스트 주석, 도장, 그림을 추가할 수 있습니다. 이는 여러 당사자의 서명이 필요한 문서나 다양한 위치에 주석이 필요한 경우에 유용합니다."
+      }
+    },
+    benefits: {
+      title: "디지털 서명의 장점",
+      paperless: {
+        title: "종이 없는 작업",
+        description: "문서를 인쇄, 서명, 스캔, 이메일로 보낼 필요를 없앱니다"
+      },
+      time: {
+        title: "시간 절약",
+        description: "물리적 처리 없이 어디서나 즉시 문서에 서명"
+      },
+      professional: {
+        title: "전문적인 외관",
+        description: "깔끔하고 전문적으로 보이는 서명된 문서 생성"
+      },
+      workflow: {
+        title: "효율적인 워크플로우",
+        description: "문서 승인 및 비즈니스 프로세스 가속화"
+      }
+    },
+    useCases: {
+      title: "일반적인 사용 사례",
+      contracts: {
+        title: "계약서 및 합의서",
+        description: "비즈니스 계약서 및 합의서에 서명 추가"
+      },
+      forms: {
+        title: "양식 및 신청서",
+        description: "인쇄 없이 양식을 작성하고 서명"
+      },
+      approvals: {
+        title: "문서 승인",
+        description: "공식 도장과 서명으로 문서를 승인됨으로 표시"
+      },
+      feedback: {
+        title: "피드백 및 수정",
+        description: "검토 중 문서에 댓글과 주석 추가"
+      }
+    },
+    draw: "그리기",
+    addText: "텍스트 추가",
+    addImage: "이미지 추가",
+    download: "서명된 PDF 다운로드",
+    processing: "처리 중...",
+    clearAll: "모두 지우기",
+    uploadSignature: "서명 업로드",
+    drawSignature: "서명 그리기",
+    signatureOptions: "서명 옵션",
+    annotationTools: "주석 도구",
+    pages: "페이지"
+  },
 }

@@ -2399,5 +2399,126 @@ export default {
         getStarted: "Başla",
         currentPlan: "Mevcut Plan"
     },
-
+    signPdf: {
+        title: "PDF İmzalama: Belgelere Dijital İmzalar Ekleyin",
+        description: "PDF belgelerinize kolayca dijital imzalar, metin açıklamaları, damgalar ve çizimler ekleyin",
+        howTo: {
+            title: "PDF Belgeleri Nasıl İmzalanır",
+            step1: {
+                title: "PDF'nizi Yükleyin",
+                description: "İmzalamak veya açıklama eklemek istediğiniz PDF belgesini yükleyin"
+            },
+            step2: {
+                title: "İmzanızı Ekleyin",
+                description: "İmzanızı oluşturun, yükleyin veya çizin ve belgeye yerleştirin"
+            },
+            step3: {
+                title: "Kaydet ve İndir",
+                description: "Değişikliklerinizi kaydedin ve imzalı PDF belgesini indirin"
+            }
+        },
+        tools: {
+            signature: "İmza",
+            text: "Metin",
+            stamp: "Damga",
+            draw: "Çiz",
+            image: "Görüntü"
+        },
+        options: {
+            draw: "İmza Çiz",
+            upload: "İmza Yükle",
+            type: "İmza Yaz",
+            clear: "Temizle",
+            save: "İmzayı Kaydet",
+            color: "Renk",
+            fontSize: "Yazı Tipi Boyutu",
+            cancel: "İptal",
+            apply: "Uygula",
+            position: "Konum"
+        },
+        stamps: {
+            approved: "Onaylandı",
+            rejected: "Reddedildi",
+            draft: "Taslak",
+            final: "Nihai",
+            confidential: "Gizli"
+        },
+        messages: {
+            noFile: "Dosya seçilmedi",
+            uploadFirst: "Lütfen imzalama için bir PDF dosyası yükleyin",
+            processing: "PDF'niz işleniyor...",
+            signed: "PDF başarıyla imzalandı!",
+            downloadReady: "İmzalı PDF'niz indirmeye hazır",
+            error: "PDF imzalama hatası",
+            errorDesc: "İsteğiniz işlenirken bir hata oluştu. Lütfen tekrar deneyin."
+        },
+        faq: {
+            title: "Sıkça Sorulan Sorular",
+            legality: {
+                question: "Dijital imzalar yasal olarak bağlayıcı mı?",
+                answer: "Aracımızla oluşturulan dijital imzalar, görsel olarak el yazısı imzalara benzer. eIDAS veya ESIGN Yasası gibi düzenlemelere uygun yasal olarak bağlayıcı elektronik imzalar için nitelikli bir elektronik imza servisine ihtiyacınız olabilir. Aracımız, iç belgeler, taslaklar veya görsel imzaların yeterli olduğu durumlar için uygundur."
+            },
+            security: {
+                question: "İmzalar ne kadar güvenli?",
+                answer: "İmzalarımız, PDF belgesi üzerinde görsel bir katmandır. Onay görsel bir temsil sağlar ancak gelişmiş dijital imza çözümlerinde bulunan kriptografik güvenlik özelliklerini içermez. Belgeleriniz güvenli bir şekilde işlenir ve imzalı PDF'lerinizi saklamayız."
+            },
+            formats: {
+                question: "Hangi imza formatları destekleniyor?",
+                answer: "Fare/touchpad ile çizerek, bir görüntü dosyası yükleyerek (PNG, JPG şeffaf arka plan önerilir) veya adınızı çeşitli yazı tipi stillerinde yazarak imza oluşturabilirsiniz."
+            },
+            multipleSignatures: {
+                question: "Bir belgeye birden fazla imza ekleyebilir miyim?",
+                answer: "Evet, belgenize birden fazla imza, metin açıklaması, damga ve çizim ekleyebilirsiniz. Bu, birden fazla tarafın imzasını gerektiren belgeler veya farklı konumlarda açıklamalara ihtiyaç duyan durumlar için kullanışlıdır."
+            }
+        },
+        benefits: {
+            title: "Dijital İmzaların Faydaları",
+            paperless: {
+                title: "Kağıtsız Çalışma",
+                description: "Belgeleri yazdırma, imzalama, tarama ve e-posta ile gönderme ihtiyacını ortadan kaldırın"
+            },
+            time: {
+                title: "Zaman Tasarrufu",
+                description: "Fiziksel işlem yapmadan her yerden belgeleri anında imzalayın"
+            },
+            professional: {
+                title: "Profesyonel Görünüm",
+                description: "Temiz, profesyonel görünümlü imzalı belgeler oluşturun"
+            },
+            workflow: {
+                title: "Akıcı İş Akışı",
+                description: "Belge onaylarını ve iş süreçlerini hızlandırın"
+            }
+        },
+        useCases: {
+            title: "Yaygın Kullanım Durumları",
+            contracts: {
+                title: "Sözleşmeler ve Anlaşmalar",
+                description: "İş sözleşmelerine ve anlaşmalara imzanızı ekleyin"
+            },
+            forms: {
+                title: "Formlar ve Başvurular",
+                description: "Formları yazdırmadan doldurun ve imzalayın"
+            },
+            approvals: {
+                title: "Belge Onayları",
+                description: "Resmi damgalar ve imzalarla belgeleri onaylanmış olarak işaretleyin"
+            },
+            feedback: {
+                title: "Geri Bildirim ve Revizyonlar",
+                description: "İnceleme sırasında belgelere yorumlar ve açıklamalar ekleyin"
+            }
+        },
+        draw: "Çiz",
+        addText: "Metin Ekle",
+        addImage: "Görüntü Ekle",
+        download: "İmzalı PDF'yi İndir",
+        processing: "İşleniyor...",
+        clearAll: "Hepsini Temizle",
+        uploadSignature: "İmza Yükle",
+        drawSignature: "İmza Çiz",
+        signatureOptions: "İmza Seçenekleri",
+        annotationTools: "Açıklama Araçları",
+        pages: "Sayfalar"
+    },
 }

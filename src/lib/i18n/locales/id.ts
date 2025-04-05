@@ -2400,5 +2400,126 @@ export default {
     getStarted: "Mulai",
     currentPlan: "Paket Saat Ini"
   },
-
+  signPdf: {
+    title: "Tanda Tangan PDF: Tambahkan Tanda Tangan Digital ke Dokumen",
+    description: "Tambahkan tanda tangan digital, anotasi teks, cap, dan gambar dengan mudah ke dokumen PDF Anda",
+    howTo: {
+      title: "Cara Menandatangani Dokumen PDF",
+      step1: {
+        title: "Unggah PDF Anda",
+        description: "Unggah dokumen PDF yang ingin Anda tanda tangani atau beri anotasi"
+      },
+      step2: {
+        title: "Tambahkan Tanda Tangan Anda",
+        description: "Buat, unggah, atau gambar tanda tangan Anda dan letakkan di dokumen"
+      },
+      step3: {
+        title: "Simpan & Unduh",
+        description: "Simpan perubahan Anda dan unduh dokumen PDF yang telah ditandatangani"
+      }
+    },
+    tools: {
+      signature: "Tanda Tangan",
+      text: "Teks",
+      stamp: "Cap",
+      draw: "Gambar",
+      image: "Gambar"
+    },
+    options: {
+      draw: "Gambar Tanda Tangan",
+      upload: "Unggah Tanda Tangan",
+      type: "Ketik Tanda Tangan",
+      clear: "Hapus",
+      save: "Simpan Tanda Tangan",
+      color: "Warna",
+      fontSize: "Ukuran Font",
+      cancel: "Batal",
+      apply: "Terapkan",
+      position: "Posisi"
+    },
+    stamps: {
+      approved: "Disetujui",
+      rejected: "Ditolak",
+      draft: "Draf",
+      final: "Final",
+      confidential: "Rahasia"
+    },
+    messages: {
+      noFile: "Tidak ada file yang dipilih",
+      uploadFirst: "Silakan unggah file PDF untuk ditandatangani",
+      processing: "Memproses PDF Anda...",
+      signed: "PDF berhasil ditandatangani!",
+      downloadReady: "PDF Anda yang telah ditandatangani siap untuk diunduh",
+      error: "Kesalahan saat menandatangani PDF",
+      errorDesc: "Terjadi kesalahan saat memproses permintaan Anda. Silakan coba lagi."
+    },
+    faq: {
+      title: "Pertanyaan yang Sering Diajukan",
+      legality: {
+        question: "Apakah tanda tangan digital mengikat secara hukum?",
+        answer: "Tanda tangan digital yang dibuat dengan alat kami secara visual mirip dengan tanda tangan tulis tangan. Untuk tanda tangan elektronik yang mengikat secara hukum yang sesuai dengan regulasi seperti eIDAS atau ESIGN Act, Anda mungkin memerlukan layanan tanda tangan elektronik yang memenuhi syarat. Alat kami cocok untuk dokumen internal, draf, atau ketika tanda tangan visual sudah cukup."
+      },
+      security: {
+        question: "Seberapa aman tanda tangan ini?",
+        answer: "Tanda tangan kami adalah lapisan visual pada dokumen PDF. Mereka memberikan representasi visual dari persetujuan tetapi tidak menyertakan fitur keamanan kriptografi yang ditemukan dalam solusi tanda tangan digital canggih. Dokumen Anda diproses dengan aman, dan kami tidak menyimpan PDF yang telah ditandatangani."
+      },
+      formats: {
+        question: "Format tanda tangan apa yang didukung?",
+        answer: "Anda dapat membuat tanda tangan dengan menggambar menggunakan mouse/touchpad, mengunggah file gambar (disarankan PNG, JPG dengan latar belakang transparan), atau mengetik nama Anda dalam berbagai gaya font."
+      },
+      multipleSignatures: {
+        question: "Apakah saya bisa menambahkan beberapa tanda tangan ke dokumen?",
+        answer: "Ya, Anda dapat menambahkan beberapa tanda tangan, anotasi teks, cap, dan gambar ke dokumen Anda. Ini berguna untuk dokumen yang memerlukan tanda tangan dari beberapa pihak atau memerlukan anotasi di lokasi yang berbeda."
+      }
+    },
+    benefits: {
+      title: "Manfaat Tanda Tangan Digital",
+      paperless: {
+        title: "Tanpa Kertas",
+        description: "Hilangkan kebutuhan untuk mencetak, menandatangani, memindai, dan mengirim dokumen melalui email"
+      },
+      time: {
+        title: "Hemat Waktu",
+        description: "Tandatangani dokumen secara instan dari mana saja tanpa penanganan fisik"
+      },
+      professional: {
+        title: "Tampilan Profesional",
+        description: "Buat dokumen yang ditandatangani dengan tampilan bersih dan profesional"
+      },
+      workflow: {
+        title: "Alur Kerja yang Efisien",
+        description: "Percepat persetujuan dokumen dan proses bisnis"
+      }
+    },
+    useCases: {
+      title: "Kasus Penggunaan Umum",
+      contracts: {
+        title: "Kontrak & Perjanjian",
+        description: "Tambahkan tanda tangan Anda ke kontrak dan perjanjian bisnis"
+      },
+      forms: {
+        title: "Formulir & Aplikasi",
+        description: "Isi dan tandatangani formulir tanpa mencetak"
+      },
+      approvals: {
+        title: "Persetujuan Dokumen",
+        description: "Tandai dokumen sebagai disetujui dengan cap dan tanda tangan resmi"
+      },
+      feedback: {
+        title: "Umpan Balik & Revisi",
+        description: "Tambahkan komentar dan anotasi ke dokumen selama peninjauan"
+      }
+    },
+    draw: "Gambar",
+    addText: "Tambah Teks",
+    addImage: "Tambah Gambar",
+    download: "Unduh PDF yang Ditandatangani",
+    processing: "Memproses...",
+    clearAll: "Hapus Semua",
+    uploadSignature: "Unggah Tanda Tangan",
+    drawSignature: "Gambar Tanda Tangan",
+    signatureOptions: "Opsi Tanda Tangan",
+    annotationTools: "Alat Anotasi",
+    pages: "Halaman"
+  },
 }

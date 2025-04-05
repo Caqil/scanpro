@@ -2393,5 +2393,126 @@ export default {
     getStarted: "Comenzar",
     currentPlan: "Plan actual"
   },
-
+  signPdf: {
+    title: "Firmar PDF: Añadir firmas digitales a documentos",
+    description: "Añade fácilmente firmas digitales, anotaciones de texto, sellos y dibujos a tus documentos PDF",
+    howTo: {
+      title: "Cómo firmar documentos PDF",
+      step1: {
+        title: "Sube tu PDF",
+        description: "Sube el documento PDF que deseas firmar o anotar"
+      },
+      step2: {
+        title: "Añade tu firma",
+        description: "Crea, sube o dibuja tu firma y colócala en el documento"
+      },
+      step3: {
+        title: "Guardar y descargar",
+        description: "Guarda tus cambios y descarga el documento PDF firmado"
+      }
+    },
+    tools: {
+      signature: "Firma",
+      text: "Texto",
+      stamp: "Sello",
+      draw: "Dibujar",
+      image: "Imagen"
+    },
+    options: {
+      draw: "Dibujar firma",
+      upload: "Subir firma",
+      type: "Escribir firma",
+      clear: "Borrar",
+      save: "Guardar firma",
+      color: "Color",
+      fontSize: "Tamaño de fuente",
+      cancel: "Cancelar",
+      apply: "Aplicar",
+      position: "Posición"
+    },
+    stamps: {
+      approved: "Aprobado",
+      rejected: "Rechazado",
+      draft: "Borrador",
+      final: "Final",
+      confidential: "Confidencial"
+    },
+    messages: {
+      noFile: "No se seleccionó ningún archivo",
+      uploadFirst: "Por favor, sube un archivo PDF para firmar",
+      processing: "Procesando tu PDF...",
+      signed: "¡PDF firmado con éxito!",
+      downloadReady: "Tu PDF firmado está listo para descargar",
+      error: "Error al firmar el PDF",
+      errorDesc: "Hubo un error al procesar tu solicitud. Por favor, intenta de nuevo."
+    },
+    faq: {
+      title: "Preguntas frecuentes",
+      legality: {
+        question: "¿Son las firmas digitales legalmente vinculantes?",
+        answer: "Las firmas digitales creadas con nuestra herramienta son visualmente similares a las firmas manuscritas. Para firmas electrónicas legalmente vinculantes que cumplan con regulaciones como eIDAS o la Ley ESIGN, es posible que necesites un servicio de firma electrónica calificada. Nuestra herramienta es adecuada para documentos internos, borradores o cuando las firmas visuales son suficientes."
+      },
+      security: {
+        question: "¿Qué tan seguras son las firmas?",
+        answer: "Nuestras firmas son superposiciones visuales en el documento PDF. Proporcionan una representación visual del consentimiento, pero no incluyen funciones de seguridad criptográfica que se encuentran en soluciones avanzadas de firma digital. Tus documentos se procesan de forma segura y no almacenamos tus PDFs firmados."
+      },
+      formats: {
+        question: "¿Qué formatos de firma se admiten?",
+        answer: "Puedes crear firmas dibujando con el ratón/touchpad, subiendo un archivo de imagen (se recomienda PNG, JPG con fondo transparente) o escribiendo tu nombre en varios estilos de fuente."
+      },
+      multipleSignatures: {
+        question: "¿Puedo añadir múltiples firmas a un documento?",
+        answer: "Sí, puedes añadir múltiples firmas, anotaciones de texto, sellos y dibujos a tu documento. Esto es útil para documentos que requieren firmas de varias partes o necesitan anotaciones en diferentes ubicaciones."
+      }
+    },
+    benefits: {
+      title: "Beneficios de las firmas digitales",
+      paperless: {
+        title: "Sin papel",
+        description: "Elimina la necesidad de imprimir, firmar, escanear y enviar documentos por correo electrónico"
+      },
+      time: {
+        title: "Ahorra tiempo",
+        description: "Firma documentos al instante desde cualquier lugar sin manipulación física"
+      },
+      professional: {
+        title: "Apariencia profesional",
+        description: "Crea documentos firmados limpios y de aspecto profesional"
+      },
+      workflow: {
+        title: "Flujo de trabajo optimizado",
+        description: "Acelera las aprobaciones de documentos y los procesos comerciales"
+      }
+    },
+    useCases: {
+      title: "Casos de uso comunes",
+      contracts: {
+        title: "Contratos y acuerdos",
+        description: "Añade tu firma a contratos y acuerdos comerciales"
+      },
+      forms: {
+        title: "Formularios y solicitudes",
+        description: "Rellena y firma formularios sin imprimir"
+      },
+      approvals: {
+        title: "Aprobaciones de documentos",
+        description: "Marca documentos como aprobados con sellos y firmas oficiales"
+      },
+      feedback: {
+        title: "Comentarios y revisiones",
+        description: "Añade comentarios y anotaciones a documentos durante la revisión"
+      }
+    },
+    draw: "Dibujar",
+    addText: "Añadir texto",
+    addImage: "Añadir imagen",
+    download: "Descargar PDF firmado",
+    processing: "Procesando...",
+    clearAll: "Borrar todo",
+    uploadSignature: "Subir firma",
+    drawSignature: "Dibujar firma",
+    signatureOptions: "Opciones de firma",
+    annotationTools: "Herramientas de anotación",
+    pages: "Páginas"
+  },
 }

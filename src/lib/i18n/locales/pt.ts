@@ -2352,5 +2352,126 @@ export default {
     getStarted: "Começar",
     currentPlan: "Plano Atual"
   },
-
+  signPdf: {
+    title: "Assinar PDF: Adicionar Assinaturas Digitais a Documentos",
+    description: "Adicione facilmente assinaturas digitais, anotações de texto, carimbos e desenhos aos seus documentos PDF",
+    howTo: {
+      title: "Como Assinar Documentos PDF",
+      step1: {
+        title: "Carregar Seu PDF",
+        description: "Carregue o documento PDF que você deseja assinar ou anotar"
+      },
+      step2: {
+        title: "Adicionar Sua Assinatura",
+        description: "Crie, carregue ou desenhe sua assinatura e coloque-a no documento"
+      },
+      step3: {
+        title: "Salvar e Baixar",
+        description: "Salve suas alterações e baixe o documento PDF assinado"
+      }
+    },
+    tools: {
+      signature: "Assinatura",
+      text: "Texto",
+      stamp: "Carimbo",
+      draw: "Desenhar",
+      image: "Imagem"
+    },
+    options: {
+      draw: "Desenhar Assinatura",
+      upload: "Carregar Assinatura",
+      type: "Digitar Assinatura",
+      clear: "Limpar",
+      save: "Salvar Assinatura",
+      color: "Cor",
+      fontSize: "Tamanho da Fonte",
+      cancel: "Cancelar",
+      apply: "Aplicar",
+      position: "Posição"
+    },
+    stamps: {
+      approved: "Aprovado",
+      rejected: "Rejeitado",
+      draft: "Rascunho",
+      final: "Final",
+      confidential: "Confidencial"
+    },
+    messages: {
+      noFile: "Nenhum arquivo selecionado",
+      uploadFirst: "Por favor, carregue um arquivo PDF para assinar",
+      processing: "Processando seu PDF...",
+      signed: "PDF assinado com sucesso!",
+      downloadReady: "Seu PDF assinado está pronto para download",
+      error: "Erro ao assinar o PDF",
+      errorDesc: "Houve um erro ao processar sua solicitação. Por favor, tente novamente."
+    },
+    faq: {
+      title: "Perguntas Frequentes",
+      legality: {
+        question: "As assinaturas digitais são legalmente vinculativas?",
+        answer: "As assinaturas digitais criadas com nossa ferramenta são visualmente semelhantes às assinaturas manuscritas. Para assinaturas eletrônicas legalmente vinculativas que cumprem regulamentos como eIDAS ou a Lei ESIGN, você pode precisar de um serviço de assinatura eletrônica qualificado. Nossa ferramenta é adequada para documentos internos, rascunhos ou quando assinaturas visuais são suficientes."
+      },
+      security: {
+        question: "Quão seguras são as assinaturas?",
+        answer: "Nossas assinaturas são sobreposições visuais no documento PDF. Elas fornecem uma representação visual de consentimento, mas não incluem recursos de segurança criptográfica encontrados em soluções avançadas de assinatura digital. Seus documentos são processados com segurança, e nós não armazenamos seus PDFs assinados."
+      },
+      formats: {
+        question: "Quais formatos de assinatura são suportados?",
+        answer: "Você pode criar assinaturas desenhando com o mouse/touchpad, carregando um arquivo de imagem (PNG, JPG com fundo transparente recomendado) ou digitando seu nome em vários estilos de fonte."
+      },
+      multipleSignatures: {
+        question: "Posso adicionar várias assinaturas a um documento?",
+        answer: "Sim, você pode adicionar várias assinaturas, anotações de texto, carimbos e desenhos ao seu documento. Isso é útil para documentos que exigem assinaturas de várias partes ou precisam de anotações em diferentes locais."
+      }
+    },
+    benefits: {
+      title: "Benefícios das Assinaturas Digitais",
+      paperless: {
+        title: "Sem Papel",
+        description: "Elimine a necessidade de imprimir, assinar, escanear e enviar documentos por e-mail"
+      },
+      time: {
+        title: "Economize Tempo",
+        description: "Assine documentos instantaneamente de qualquer lugar sem manuseio físico"
+      },
+      professional: {
+        title: "Aparência Profissional",
+        description: "Crie documentos assinados limpos e com aparência profissional"
+      },
+      workflow: {
+        title: "Fluxo de Trabalho Otimizado",
+        description: "Acelere aprovações de documentos e processos de negócios"
+      }
+    },
+    useCases: {
+      title: "Casos de Uso Comuns",
+      contracts: {
+        title: "Contratos e Acordos",
+        description: "Adicione sua assinatura a contratos e acordos comerciais"
+      },
+      forms: {
+        title: "Formulários e Solicitações",
+        description: "Preencha e assine formulários sem imprimir"
+      },
+      approvals: {
+        title: "Aprovações de Documentos",
+        description: "Marque documentos como aprovados com carimbos e assinaturas oficiais"
+      },
+      feedback: {
+        title: "Feedback e Revisões",
+        description: "Adicione comentários e anotações a documentos durante a revisão"
+      }
+    },
+    draw: "Desenhar",
+    addText: "Adicionar Texto",
+    addImage: "Adicionar Imagem",
+    download: "Baixar PDF Assinado",
+    processing: "Processando...",
+    clearAll: "Limpar Tudo",
+    uploadSignature: "Carregar Assinatura",
+    drawSignature: "Desenhar Assinatura",
+    signatureOptions: "Opções de Assinatura",
+    annotationTools: "Ferramentas de Anotação",
+    pages: "Páginas"
+  },
 }

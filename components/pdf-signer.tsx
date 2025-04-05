@@ -12,6 +12,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { toast } from "sonner";
 import { useLanguageStore } from "@/src/store/store";
+import { SignatureToolbar } from "./signature-toolbar";
+import { SignaturePanel } from "./signature-panel";
 import { 
   PenIcon, 
   TypeIcon, 
@@ -27,6 +29,7 @@ import {
   LoaderIcon,
   DownloadIcon
 } from "lucide-react";
+import { SignatureCanvas } from "./signature-canvas";
 
 // Types for our elements
 export type ElementType = 'signature' | 'text' | 'stamp' | 'drawing' | 'image';
@@ -343,50 +346,55 @@ export function PdfSigner({ initialTool = 'signature' }: Props) {
     setElements(elements.filter(element => element.id !== id));
     setSelectedElement(null);
   };
-  
   // Handle element move start
-  const handleElementMoveStart = (
-    event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
-    element: SignatureElement
-  ) => {
-    event.stopPropagation();
-    setIsDragging(true);
-    setDraggedElement(element);
-    setSelectedElement(element.id);
-  };
-  
-  // Handle element move
-  const handleCanvasMouseMove = (event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
-    if (!isDragging || !draggedElement || !canvasRef.current) return;
-    
-    event.preventDefault();
-    
-    const canvasBounds = canvasRef.current.getBoundingClientRect();
-    
-    // Get mouse/touch coordinates
-    let clientX: number, clientY: number;
-    
-    if ('touches' in event) {
-      clientX = event.touches[0].clientX;
-      clientY = event.touches[0].clientY;
-    } else {
-      clientX = event.clientX;
-      clientY = event.clientY;
-    }
-    
-    // Calculate new position
-    const newX = clientX - canvasBounds.left - (draggedElement.size.width / 2);
-    const newY = clientY - canvasBounds.top - (draggedElement.size.height / 2);
-    
-    // Update element position
-    setElements(prevElements => 
-      prevElements.map(el => 
-        el.id === draggedElement.id 
-          ? { ...el, position: { x: newX, y: newY } }
-          : el
-      )
-    );
-  };
+const handleElementMoveStart = (
+  event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
+  element: SignatureElement
+) => {
+  event.preventDefault(); // Prevent default behavior (e.g., text selection)
+  event.stopPropagation();
+  setIsDragging(true);
+  setDraggedElement(element);
+  setSelectedElement(element.id);
+};
+
+// Handle element move
+const handleCanvasMouseMove = (event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
+  if (!isDragging || !draggedElement || !canvasRef.current) return;
+
+  event.preventDefault(); // Prevent scrolling or other default behaviors
+
+  const canvasBounds = canvasRef.current.getBoundingClientRect();
+  const scrollLeft = canvasRef.current.scrollLeft;
+  const scrollTop = canvasRef.current.scrollTop;
+
+  // Get mouse/touch coordinates
+  let clientX: number, clientY: number;
+  if ('touches' in event) {
+    clientX = event.touches[0].clientX;
+    clientY = event.touches[0].clientY;
+  } else {
+    clientX = event.clientX;
+    clientY = event.clientY;
+  }
+
+  // Calculate new position relative to canvas, accounting for scroll
+  const newX = clientX - canvasBounds.left + scrollLeft - (draggedElement.size.width / 2);
+  const newY = clientY - canvasBounds.top + scrollTop - (draggedElement.size.height / 2);
+
+  // Optional: Constrain within canvas bounds
+  const constrainedX = Math.max(0, Math.min(newX, canvasBounds.width - draggedElement.size.width));
+  const constrainedY = Math.max(0, Math.min(newY, canvasBounds.height - draggedElement.size.height));
+
+  // Update element position
+  setElements((prevElements) =>
+    prevElements.map((el) =>
+      el.id === draggedElement.id
+        ? { ...el, position: { x: constrainedX, y: constrainedY } }
+        : el
+    )
+  );
+};
   
   // Handle element move end
   const handleCanvasMouseUp = () => {
@@ -462,6 +470,22 @@ export function PdfSigner({ initialTool = 'signature' }: Props) {
       const result = await response.json();
       
       if (result.success) {
+        // Modify the download approach for PDF
+        const downloadResponse = await fetch(result.fileUrl);
+        const blob = await downloadResponse.blob();
+        
+        // Create a download link specifically for PDFs
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = result.originalName || 'signed-document.pdf';
+        link.type = 'application/pdf';
+        document.body.appendChild(link);
+        link.click();
+        
+        // Clean up
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(link.href);
+        
         setSignedPdfUrl(result.fileUrl);
         setProgress(100);
         toast.success(t('signPdf.messages.signed'));
@@ -568,29 +592,29 @@ export function PdfSigner({ initialTool = 'signature' }: Props) {
             </div>
           );
           
-        case 'stamp':
-          return (
-            <div
-              key={element.id}
-              style={elementStyles}
-              onClick={() => handleElementSelect(element.id)}
-              onMouseDown={(e) => handleElementMoveStart(e, element)}
-              onTouchStart={(e) => handleElementMoveStart(e, element)}
-              dangerouslySetInnerHTML={{ __html: element.data }}
-            >
-              {selectedElement === element.id && (
-                <button
-                  className="absolute -top-3 -right-3 bg-red-500 rounded-full p-1"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleElementDelete(element.id);
-                  }}
-                >
-                  <XIcon className="h-3 w-3 text-white" />
-                </button>
-              )}
-            </div>
-          );
+          case 'stamp':
+            return (
+              <div
+                key={element.id}
+                style={elementStyles}
+                onClick={() => handleElementSelect(element.id)}
+                onMouseDown={(e) => handleElementMoveStart(e, element)}
+                onTouchStart={(e) => handleElementMoveStart(e, element)}
+              >
+                <div dangerouslySetInnerHTML={{ __html: element.data }} />
+                {selectedElement === element.id && (
+                  <button
+                    className="absolute -top-3 -right-3 bg-red-500 rounded-full p-1"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleElementDelete(element.id);
+                    }}
+                  >
+                    <XIcon className="h-3 w-3 text-white" />
+                  </button>
+                )}
+              </div>
+            );
           
         case 'image':
           return (
@@ -701,35 +725,36 @@ export function PdfSigner({ initialTool = 'signature' }: Props) {
               </div>
               
               <div 
-                className="relative bg-white rounded-md border shadow-sm overflow-auto"
-                style={{ 
-                  height: '650px', 
-                  width: '100%',
-                }}
-                onMouseMove={handleCanvasMouseMove}
-                onMouseUp={handleCanvasMouseUp}
-                onMouseLeave={handleCanvasMouseUp}
-                onTouchMove={handleCanvasMouseMove}
-                onTouchEnd={handleCanvasMouseUp}
-                ref={canvasRef}
-              >
-                {pages[currentPage] && (
-                  <div className="relative">
-                    <img 
-                      src={pages[currentPage].imageUrl} 
-                      alt={`Page ${currentPage + 1}`} 
-                      style={{ 
-                        width: '100%', 
-                        height: 'auto',
-                        transform: `scale(${scale})`,
-                        transformOrigin: 'top left'
-                      }}
-                    />
-                    {/* Render all elements for the current page */}
-                    {renderElements()}
-                  </div>
-                )}
-              </div>
+  className="relative bg-white rounded-md border shadow-sm overflow-auto"
+  style={{ 
+    height: '100%', 
+    width: '100%',
+  }}
+  onMouseMove={handleCanvasMouseMove}
+  onMouseUp={handleCanvasMouseUp}
+  onMouseLeave={handleCanvasMouseUp}
+  onTouchMove={handleCanvasMouseMove}
+  onTouchEnd={handleCanvasMouseUp}
+  onTouchCancel={handleCanvasMouseUp} // Add this for better touch support
+  ref={canvasRef}
+>
+  {pages[currentPage] && (
+    <div className="relative">
+      <img 
+        src={pages[currentPage].imageUrl} 
+        alt={`Page ${currentPage + 1}`} 
+        style={{ 
+          width: '100%', 
+          height: 'auto',
+          transform: `scale(${scale})`,
+          transformOrigin: 'top left'
+        }}
+      />
+      {/* Render all elements for the current page */}
+      {renderElements()}
+    </div>
+  )}
+</div>
               
               <div className="flex justify-between mt-4">
                 <Button
@@ -792,13 +817,13 @@ export function PdfSigner({ initialTool = 'signature' }: Props) {
                       
                       <TabsContent value="draw" className="mt-4">
                         <div className="border rounded-md p-2 mb-3 bg-white">
-                          {/* <SignatureCanvas
+                          <SignatureCanvas
                             ref={signatureCanvasRef}
                             penColor={color}
                             canvasProps={{
                               className: 'signature-canvas w-full h-32',
                             }}
-                          /> */}
+                          />
                         </div>
                         
                         <div className="flex items-center mb-3 gap-2">

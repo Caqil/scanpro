@@ -2242,5 +2242,126 @@ export default {
     getStarted: "始める",
     currentPlan: "現在のプラン"
   },
-
+  signPdf: {
+    title: "PDFに署名：文書にデジタル署名を追加",
+    description: "PDF文書にデジタル署名、テキスト注釈、スタンプ、描画を簡単に追加できます",
+    howTo: {
+      title: "PDF文書に署名する方法",
+      step1: {
+        title: "PDFをアップロード",
+        description: "署名または注釈を付けたいPDF文書をアップロードしてください"
+      },
+      step2: {
+        title: "署名を追加",
+        description: "署名を作成、アップロード、または描画して文書に配置してください"
+      },
+      step3: {
+        title: "保存＆ダウンロード",
+        description: "変更を保存し、署名済みのPDF文書をダウンロードしてください"
+      }
+    },
+    tools: {
+      signature: "署名",
+      text: "テキスト",
+      stamp: "スタンプ",
+      draw: "描画",
+      image: "画像"
+    },
+    options: {
+      draw: "署名を描画",
+      upload: "署名をアップロード",
+      type: "署名を入力",
+      clear: "クリア",
+      save: "署名を保存",
+      color: "色",
+      fontSize: "フォントサイズ",
+      cancel: "キャンセル",
+      apply: "適用",
+      position: "位置"
+    },
+    stamps: {
+      approved: "承認済み",
+      rejected: "却下",
+      draft: "下書き",
+      final: "最終版",
+      confidential: "機密"
+    },
+    messages: {
+      noFile: "ファイルが選択されていません",
+      uploadFirst: "署名するPDFファイルをまずアップロードしてください",
+      processing: "PDFを処理中...",
+      signed: "PDFが正常に署名されました！",
+      downloadReady: "署名済みのPDFがダウンロード可能です",
+      error: "PDFの署名にエラー",
+      errorDesc: "リクエストの処理中にエラーが発生しました。もう一度お試しください。"
+    },
+    faq: {
+      title: "よくある質問",
+      legality: {
+        question: "デジタル署名は法的に拘束力がありますか？",
+        answer: "当ツールで作成されたデジタル署名は、手書きの署名と視覚的に似ています。eIDASやESIGN法などの規制に準拠した法的に拘束力のある電子署名には、資格のある電子署名サービスが必要な場合があります。当ツールは内部文書、下書き、または視覚的な署名で十分な場合に適しています。"
+      },
+      security: {
+        question: "署名の安全性はどの程度ですか？",
+        answer: "当ツールの署名はPDF文書上の視覚的なオーバーレイです。同意の視覚的表現を提供しますが、高度なデジタル署名ソリューションに見られる暗号化セキュリティ機能は含まれていません。文書は安全に処理され、署名済みのPDFは保存されません。"
+      },
+      formats: {
+        question: "サポートされている署名形式は何ですか？",
+        answer: "マウス/タッチパッドで描画、画像ファイル（PNG、JPG、透明背景推奨）のアップロード、またはさまざまなフォントスタイルで名前を入力することで署名を作成できます。"
+      },
+      multipleSignatures: {
+        question: "1つの文書に複数の署名を追加できますか？",
+        answer: "はい、複数の署名、テキスト注釈、スタンプ、描画を文書に追加できます。これは、複数の関係者からの署名が必要な文書や、異なる場所に注釈が必要な場合に便利です。"
+      }
+    },
+    benefits: {
+      title: "デジタル署名の利点",
+      paperless: {
+        title: "ペーパーレス化",
+        description: "文書を印刷、署名、スキャン、メールで送信する必要をなくします"
+      },
+      time: {
+        title: "時間節約",
+        description: "物理的な取り扱いなしでどこからでも即座に文書に署名"
+      },
+      professional: {
+        title: "プロフェッショナルな外観",
+        description: "クリーンでプロフェッショナルな署名済み文書を作成"
+      },
+      workflow: {
+        title: "効率的なワークフロー",
+        description: "文書の承認とビジネスプロセスを加速"
+      }
+    },
+    useCases: {
+      title: "一般的な使用例",
+      contracts: {
+        title: "契約書と合意書",
+        description: "ビジネス契約書や合意書に署名を追加"
+      },
+      forms: {
+        title: "フォームと申請書",
+        description: "印刷せずにフォームを記入して署名"
+      },
+      approvals: {
+        title: "文書承認",
+        description: "公式スタンプと署名で文書を承認済みとしてマーク"
+      },
+      feedback: {
+        title: "フィードバックと修正",
+        description: "レビュー中に文書にコメントや注釈を追加"
+      }
+    },
+    draw: "描画",
+    addText: "テキストを追加",
+    addImage: "画像を追加",
+    download: "署名済みPDFをダウンロード",
+    processing: "処理中...",
+    clearAll: "すべてクリア",
+    uploadSignature: "署名をアップロード",
+    drawSignature: "署名を描画",
+    signatureOptions: "署名オプション",
+    annotationTools: "注釈ツール",
+    pages: "ページ"
+  },
 }

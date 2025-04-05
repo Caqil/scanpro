@@ -2396,5 +2396,126 @@ export default {
         getStarted: "Commencer",
         currentPlan: "Plan actuel"
     },
-
+    signPdf: {
+        title: "Signer un PDF : Ajouter des signatures numériques aux documents",
+        description: "Ajoutez facilement des signatures numériques, des annotations textuelles, des tampons et des dessins à vos documents PDF",
+        howTo: {
+            title: "Comment signer des documents PDF",
+            step1: {
+                title: "Téléchargez votre PDF",
+                description: "Téléchargez le document PDF que vous souhaitez signer ou annoter"
+            },
+            step2: {
+                title: "Ajoutez votre signature",
+                description: "Créez, téléchargez ou dessinez votre signature et placez-la sur le document"
+            },
+            step3: {
+                title: "Enregistrer et télécharger",
+                description: "Enregistrez vos modifications et téléchargez le document PDF signé"
+            }
+        },
+        tools: {
+            signature: "Signature",
+            text: "Texte",
+            stamp: "Tampon",
+            draw: "Dessiner",
+            image: "Image"
+        },
+        options: {
+            draw: "Dessiner la signature",
+            upload: "Télécharger la signature",
+            type: "Taper la signature",
+            clear: "Effacer",
+            save: "Enregistrer la signature",
+            color: "Couleur",
+            fontSize: "Taille de la police",
+            cancel: "Annuler",
+            apply: "Appliquer",
+            position: "Position"
+        },
+        stamps: {
+            approved: "Approuvé",
+            rejected: "Rejeté",
+            draft: "Brouillon",
+            final: "Final",
+            confidential: "Confidentiel"
+        },
+        messages: {
+            noFile: "Aucun fichier sélectionné",
+            uploadFirst: "Veuillez d'abord télécharger un fichier PDF à signer",
+            processing: "Traitement de votre PDF en cours...",
+            signed: "PDF signé avec succès !",
+            downloadReady: "Votre PDF signé est prêt à être téléchargé",
+            error: "Erreur lors de la signature du PDF",
+            errorDesc: "Une erreur s'est produite lors du traitement de votre demande. Veuillez réessayer."
+        },
+        faq: {
+            title: "Questions fréquemment posées",
+            legality: {
+                question: "Les signatures numériques sont-elles juridiquement contraignantes ?",
+                answer: "Les signatures numériques créées avec notre outil ressemblent visuellement à des signatures manuscrites. Pour des signatures électroniques juridiquement contraignantes conformes à des réglementations comme eIDAS ou la loi ESIGN, vous pourriez avoir besoin d’un service de signature électronique qualifié. Notre outil convient aux documents internes, aux brouillons ou lorsque des signatures visuelles suffisent."
+            },
+            security: {
+                question: "Quelle est la sécurité des signatures ?",
+                answer: "Nos signatures sont des superpositions visuelles sur le document PDF. Elles offrent une représentation visuelle du consentement mais n’incluent pas les fonctionnalités de sécurité cryptographique présentes dans les solutions avancées de signature numérique. Vos documents sont traités en toute sécurité, et nous ne conservons pas vos PDFs signés."
+            },
+            formats: {
+                question: "Quels formats de signature sont pris en charge ?",
+                answer: "Vous pouvez créer des signatures en dessinant avec la souris/le pavé tactile, en téléchargeant un fichier image (PNG, JPG avec fond transparent recommandé) ou en tapant votre nom dans différents styles de police."
+            },
+            multipleSignatures: {
+                question: "Puis-je ajouter plusieurs signatures à un document ?",
+                answer: "Oui, vous pouvez ajouter plusieurs signatures, annotations textuelles, tampons et dessins à votre document. Cela est utile pour les documents nécessitant des signatures de plusieurs parties ou des annotations à différents endroits."
+            }
+        },
+        benefits: {
+            title: "Avantages des signatures numériques",
+            paperless: {
+                title: "Sans papier",
+                description: "Éliminez le besoin d’imprimer, signer, scanner et envoyer des documents par e-mail"
+            },
+            time: {
+                title: "Gain de temps",
+                description: "Signez des documents instantanément de n’importe où sans manipulation physique"
+            },
+            professional: {
+                title: "Apparence professionnelle",
+                description: "Créez des documents signés propres et d’aspect professionnel"
+            },
+            workflow: {
+                title: "Flux de travail simplifié",
+                description: "Accélérez les approbations de documents et les processus métier"
+            }
+        },
+        useCases: {
+            title: "Cas d’utilisation courants",
+            contracts: {
+                title: "Contrats et accords",
+                description: "Ajoutez votre signature aux contrats et accords commerciaux"
+            },
+            forms: {
+                title: "Formulaires et demandes",
+                description: "Remplissez et signez des formulaires sans les imprimer"
+            },
+            approvals: {
+                title: "Approbations de documents",
+                description: "Marquez les documents comme approuvés avec des tampons et signatures officiels"
+            },
+            feedback: {
+                title: "Commentaires et révisions",
+                description: "Ajoutez des commentaires et annotations aux documents pendant la révision"
+            }
+        },
+        draw: "Dessiner",
+        addText: "Ajouter du texte",
+        addImage: "Ajouter une image",
+        download: "Télécharger le PDF signé",
+        processing: "Traitement en cours...",
+        clearAll: "Tout effacer",
+        uploadSignature: "Télécharger la signature",
+        drawSignature: "Dessiner la signature",
+        signatureOptions: "Options de signature",
+        annotationTools: "Outils d’annotation",
+        pages: "Pages"
+    },
 }
