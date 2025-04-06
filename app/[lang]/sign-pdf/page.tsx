@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 export default function SignPdfPage() {
   return (
-    <div className="container max-w-5xl py-12 mx-auto">
+    <div className="container max-full">
       <SignHeaderSection />
       
       {/* Main Tool Card */}

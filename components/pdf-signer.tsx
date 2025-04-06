@@ -25,8 +25,10 @@ import {
   DownloadIcon,
   UserIcon,
   CalendarIcon,
+  RotateCcwIcon,
 } from "lucide-react";
 import { SignatureCanvas } from "./sign/signature-canvas";
+import { Separator } from "./ui/separator";
 
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
@@ -543,17 +545,14 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
         />
       ));
   };
-
   const renderPageThumbnails = () => {
     return (
-      <div className="w-20 p-2 overflow-y-auto">
-        {pages.map((page, index) => (
+      <div className="space-y-2">
+        {pages.map((_, index) => (
           <div
             key={index}
-            className={`mb-2 cursor-pointer border-2 ${
-              currentPage === index ? 'border-primary' : 'border-transparent'
-            }`}
-            onClick={() => handlePageChange(index)}
+            className={`cursor-pointer ${currentPage === index ? "border-2 border-blue-500" : "border border-gray-200"}`}
+            onClick={() => setCurrentPage(index)}
           >
             <Document file={file}>
               <Page
@@ -563,7 +562,7 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
                 renderAnnotationLayer={false}
               />
             </Document>
-            <div className="text-center text-sm">{index + 1}</div>
+            <div className="text-center text-sm">Page {index + 1}</div>
           </div>
         ))}
       </div>
@@ -571,111 +570,115 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
   };
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-background">
       {/* Left Sidebar: Page Thumbnails */}
       {file && !processing && !signedPdfUrl && pages.length > 0 && (
-        <div className="hidden md:block">{renderPageThumbnails()}</div>
+        <div className="w-24 bg-muted/50 border-r p-2 overflow-y-auto space-y-2">
+          {renderPageThumbnails()}
+        </div>
       )}
-
-      {/* Main Content */}
+  
+      {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
-        {/* File Upload Section */}
-        {!file && (
-          <Card className="m-4">
-            <CardContent className="p-6">
-              <div
-                className={`border-2 border-dashed rounded-lg p-12 text-center ${
-                  isDragOver ? "border-primary bg-primary/10" : "border-muted-foreground/25"
-                }`}
-                onDragOver={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setIsDragOver(true);
-                }}
-                onDragLeave={() => setIsDragOver(false)}
-                onDrop={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setIsDragOver(false);
-                  const files = e.dataTransfer.files;
-                  if (files && files.length > 0) {
-                    const uploadedFile = files[0];
-                    if (uploadedFile.type !== "application/pdf") {
-                      toast.error(t("ui.error"));
-                      return;
-                    }
-                    setFile(uploadedFile);
-                    setElements([]);
-                    setSignedPdfUrl("");
-                    setCurrentPage(0);
-                    processPdf(uploadedFile);
-                  }
+        {/* Header */}
+        <div className="bg-background border-b px-4 py-3 flex items-center justify-between">
+          {file && !processing && !signedPdfUrl && (
+            <div className="flex items-center space-x-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => {
+                  setFile(null);
+                  setElements([]);
+                  setSignedPdfUrl("");
+                  setPages([]);
                 }}
               >
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  className="hidden"
-                  accept=".pdf"
-                  onChange={handleFileUpload}
-                />
-                <div className="mb-4 p-3 rounded-full bg-muted mx-auto w-16 h-16 flex items-center justify-center">
-                  <UploadIcon className="h-8 w-8 text-primary" />
+                <Trash2Icon className="h-4 w-4 mr-2" />
+                Clear
+              </Button>
+            </div>
+          )}
+        </div>
+  
+        {/* File Upload Section */}
+        {!file && (
+          <div className="flex-1 flex items-center justify-center p-6">
+            <Card className="w-full max-w-full">
+              <CardContent className="p-6">
+                <div
+                  className={`border-2 border-dashed rounded-lg p-12 text-center transition-colors ${
+                    isDragOver ? "border-primary bg-primary/10" : "border-muted-foreground/25"
+                  }`}
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsDragOver(true);
+                  }}
+                  onDragLeave={() => setIsDragOver(false)}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsDragOver(false);
+                    const files = e.dataTransfer.files;
+                    if (files && files.length > 0) {
+                      const uploadedFile = files[0];
+                      if (uploadedFile.type !== "application/pdf") {
+                        toast.error(t("ui.error"));
+                        return;
+                      }
+                      setFile(uploadedFile);
+                      setElements([]);
+                      setSignedPdfUrl("");
+                      setCurrentPage(0);
+                      processPdf(uploadedFile);
+                    }
+                  }}
+                >
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    className="hidden"
+                    accept=".pdf"
+                    onChange={handleFileUpload}
+                  />
+                  <div className="mb-4 p-3 rounded-full bg-muted mx-auto w-16 h-16 flex items-center justify-center">
+                    <UploadIcon className="h-8 w-8 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{t("signPdf.uploadTitle")}</h3>
+                  <p className="text-muted-foreground mb-6">{t("signPdf.uploadDesc")}</p>
+                  <Button onClick={() => fileInputRef.current?.click()}>
+                    {t("ui.browse")}
+                  </Button>
+                  <p className="mt-4 text-sm text-muted-foreground">{t("ui.filesSecurity")}</p>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{t("signPdf.uploadTitle")}</h3>
-                <p className="text-muted-foreground mb-6">{t("signPdf.uploadDesc")}</p>
-                <Button onClick={() => fileInputRef.current?.click()}>
-                  {t("ui.browse")}
-                </Button>
-                <p className="mt-4 text-sm text-muted-foreground">{t("ui.filesSecurity")}</p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Processing Section */}
-        {file && processing && !signedPdfUrl && (
-          <div className="text-center py-8">
-            <LoaderIcon className="h-12 w-12 animate-spin text-primary mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">{t("signPdf.processing")}</h3>
-            <p className="text-muted-foreground mb-4">{t("signPdf.messages.processing")}</p>
-            <Progress value={progress} className="max-w-md mx-auto" />
+              </CardContent>
+            </Card>
           </div>
         )}
-
+  
+        {/* Processing Section */}
+        {file && processing && !signedPdfUrl && (
+          <div className="flex-1 flex flex-col items-center justify-center">
+            <LoaderIcon className="h-12 w-12 animate-spin text-primary mb-4" />
+            <h3 className="text-xl font-semibold mb-2">{t("signPdf.processing")}</h3>
+            <p className="text-muted-foreground mb-4">{t("signPdf.messages.processing")}</p>
+            <Progress value={progress} className="w-64" />
+          </div>
+        )}
+  
         {/* PDF Viewer and Signing Area */}
         {file && !processing && !signedPdfUrl && pages.length > 0 && (
           <div className="flex-1 flex">
             {/* PDF Viewer */}
             <div className="flex-1 p-4 overflow-auto">
-              <div className="bg-muted p-1 rounded-md mb-2 flex justify-between items-center">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 0}
-                >
-                  <ChevronLeftIcon className="h-4 w-4" />
-                </Button>
-                <span className="text-sm">
-                  {t("signPdf.pages")} {currentPage + 1} / {pages.length}
-                </span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === pages.length - 1}
-                >
-                  <ChevronRightIcon className="h-4 w-4" />
-                </Button>
-              </div>
-
+  
               <div
-                className="relative rounded-md border shadow-sm"
+                className="relative rounded-lg border shadow-sm bg-white"
                 style={{
                   width: '100%',
-                  height: '100%', // Full height
-                  overflow: 'auto', // Allow scrolling if needed
+                  height: 'calc(100vh - 200px)', 
+                  overflow: 'auto',
                   touchAction: isDragging ? 'none' : 'auto',
                 }}
                 onMouseMove={handleCanvasMouseMove}
@@ -702,144 +705,149 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
                 </Document>
               </div>
             </div>
-
+  
             {/* Right Sidebar: Signing Options */}
-            <div className="w-80 p-4 border-l">
+            <div className="w-96 p-4 border-l bg-background">
               <Tabs defaultValue="type" onValueChange={setActiveTab}>
-                <TabsList className="grid grid-cols-2 w-full">
+                <TabsList className="grid grid-cols-2 w-full mb-4">
                   <TabsTrigger
                     value="type"
-                    className={activeTab === "type" ? "border-2 border-destructive" : ""}
+                    className={activeTab === "type" ? "border-2 border-primary" : ""}
                   >
                     Type
                   </TabsTrigger>
                   <TabsTrigger
                     value="draw"
-                    className={activeTab === "draw" ? "border-2 border-destructive" : ""}
+                    className={activeTab === "draw" ? "border-2 border-primary" : ""}
                   >
                     Draw
                   </TabsTrigger>
                 </TabsList>
-
-                <TabsContent value="type">
-                  <div className="mt-4">
-                   
-                    <h3 className="text-sm font-semibold mt-4 mb-2">Optional Fields</h3>
+  
+                <TabsContent value="type" className="space-y-4">
+                  <div className="space-y-4">
                     <div className="space-y-2">
-                      <Button
-                        variant="outline"
-                        className="w-full flex items-center"
-                        onClick={() => handleAddField("date")}
-                      >
-                        <CalendarIcon className="h-4 w-4 mr-2" />
-                        Date
-                      </Button>
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          <Label htmlFor="text-input">Text</Label>
-                          <Input
-                            id="text-input"
-                            value={textValue}
-                            onChange={(e) => setTextValue(e.target.value)}
-                            placeholder="Enter text"
-                            className="flex-1"
-                          />
-                        </div>
+                      <Label>Optional Fields</Label>
+                      <Separator />
+                      <div className="grid grid-cols-2 gap-2">
                         <Button
                           variant="outline"
-                          className="w-full flex items-center"
-                          onClick={() => handleAddField("text")}
+                          className="flex items-center justify-center"
+                          onClick={() => handleAddField("date")}
                         >
-                          <TypeIcon className="h-4 w-4 mr-2" />
-                          Add Text
+                          <CalendarIcon className="h-4 w-4 mr-2" />
+                          Date
                         </Button>
-                      </div>
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          <Label>Stamp</Label>
-                          <select
-                            value={stampType}
-                            onChange={(e) => setStampType(e.target.value)}
-                            className="flex-1 p-2 border rounded-md"
-                          >
-                            <option value="approved">Approved</option>
-                            <option value="rejected">Rejected</option>
-                          </select>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Label>Custom Stamp</Label>
-                          <input
-                            type="file"
-                            accept="image/*"
-                            ref={stampInputRef}
-                            onChange={handleStampUpload}
-                            className="flex-1 text-sm"
-                          />
-                        </div>
                         <Button
                           variant="outline"
-                          className="w-full flex items-center"
+                          className="flex items-center justify-center"
                           onClick={() => handleAddField("stamp")}
                         >
                           <StampIcon className="h-4 w-4 mr-2" />
-                          Add Stamp
+                          Stamp
                         </Button>
+                      </div>
+                    </div>
+  
+                    <div className="space-y-2">
+                      <Label htmlFor="text-input">Text</Label>
+                      <div className="flex space-x-2">
+                        <Input
+                          id="text-input"
+                          value={textValue}
+                          onChange={(e) => setTextValue(e.target.value)}
+                          placeholder="Enter text"
+                          className="flex-1"
+                        />
+                        <Button
+                          variant="outline"
+                          onClick={() => handleAddField("text")}
+                        >
+                          <TypeIcon className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+  
+                    <div className="space-y-2">
+                      <Label>Stamp Type</Label>
+                      <select
+                        value={stampType}
+                        onChange={(e) => setStampType(e.target.value)}
+                        className="w-full p-2 border rounded-md"
+                      >
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
+                      </select>
+                    </div>
+  
+                    <div className="space-y-2">
+                      <Label>Custom Stamp</Label>
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          ref={stampInputRef}
+                          onChange={handleStampUpload}
+                          className="flex-1 text-sm"
+                        />
                       </div>
                     </div>
                   </div>
                 </TabsContent>
-
-                <TabsContent value="draw">
-                  <div className="mt-4">
-                    <div className="border rounded-md p-2 mb-3">
-                      <SignatureCanvas
-                        ref={signatureCanvasRef}
-                        penColor="currentColor"
-                        canvasProps={{
-                          className: "signature-canvas w-full h-32",
-                        }}
-                      />
-                    </div>
-                    <div className="space-y-3">
-                      <div className="flex gap-2">
-                        <Button
-                          variant="outline"
-                          className="flex-1"
-                          onClick={() => signatureCanvasRef.current?.clear()}
-                        >
-                          Clear
-                        </Button>
-                        <Button
-                          className="flex-1"
-                          onClick={handleSignatureDraw}
-                        >
-                          Apply
-                        </Button>
-                      </div>
-                    </div>
+  
+                <TabsContent value="draw" className="space-y-4">
+                  <div className="border rounded-lg p-3">
+                    <SignatureCanvas
+                      ref={signatureCanvasRef}
+                      penColor="currentColor"
+                      canvasProps={{
+                        className: "signature-canvas w-full h-40",
+                      }}
+                    />
+                  </div>
+                  <div className="flex space-x-2">
+                    <Button
+                      variant="outline"
+                      className="flex-1"
+                      onClick={() => signatureCanvasRef.current?.clear()}
+                    >
+                      <RotateCcwIcon className="h-4 w-4 mr-2" />
+                      Clear
+                    </Button>
+                    <Button
+                      className="flex-1"
+                      onClick={handleSignatureDraw}
+                    >
+                      <CheckIcon className="h-4 w-4 mr-2" />
+                      Apply
+                    </Button>
                   </div>
                 </TabsContent>
               </Tabs>
-
+  
+              <Separator className="my-4" />
+  
               <Button
-                className="w-full mt-4 bg-destructive hover:bg-destructive/90 text-white"
+                className="w-full"
+                size="lg"
                 onClick={handleSavePdf}
               >
-                Sign <span className="ml-2">+</span>
+                Sign Document
+                <CheckIcon className="h-4 w-4 ml-2" />
               </Button>
             </div>
           </div>
         )}
-
+  
         {/* Signed PDF Section */}
         {signedPdfUrl && (
-          <div className="text-center py-8">
+          <div className="flex-1 flex flex-col items-center justify-center p-6">
             <div className="mb-6 p-3 rounded-full bg-muted mx-auto w-16 h-16 flex items-center justify-center">
               <CheckIcon className="h-8 w-8 text-primary" />
             </div>
             <h3 className="text-xl font-semibold mb-2">{t("signPdf.messages.signed")}</h3>
             <p className="text-muted-foreground mb-6">{t("signPdf.messages.downloadReady")}</p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex space-x-3">
               <Button asChild>
                 <a href={signedPdfUrl} download>
                   <DownloadIcon className="h-4 w-4 mr-2" />
