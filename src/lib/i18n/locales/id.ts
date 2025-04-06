@@ -1439,7 +1439,7 @@ export default {
     description: "Hapus kata sandi PDF dan buka perlindungan file PDF dengan cepat menggunakan alat buka kunci PDF online kami. Buka kunci PDF untuk membuat file PDF yang tidak aman di sistem operasi apa pun.",
     metaDescription: "Buka kunci file PDF dengan mudah menggunakan PDF unlocker kami. Hapus kata sandi izin PDF, buka perlindungan PDF online, dan unduh file Anda yang telah dibuka kuncinya dengan aman.",
     keywords: "buka kunci file PDF, cara membuka kunci file PDF, membuka kunci PDF, membuka kunci file PDF, buka ke PDF, buka kunci file PDF, file PDF tidak aman, PDF unlocker, file yang dibuka kunci, buka kunci dokumen PDF, SmallPDF unlock, buka kunci PDFs, alat proteksi PDF, kata sandi izin, mengunduh file Anda, kata sandi dari PDF, PDF online, hapus kata sandi PDF, SmallPDF buka kunci PDF, hapus PDF, klik simpan, klik kata sandi, alat buka kunci PDF",
-  
+
     // Benefits Section
     benefits: {
       title: "Mengapa Menggunakan Alat Buka Kunci PDF Kami untuk Membuka Kunci File PDF",
@@ -1462,7 +1462,7 @@ export default {
         }
       ]
     },
-  
+
     // Use Cases Section
     useCases: {
       title: "Cara Membuka Kunci File PDF: Kasus Penggunaan Teratas",
@@ -1485,7 +1485,7 @@ export default {
         }
       ]
     },
-  
+
     // How-To Section
     howTo: {
       title: "Cara Membuka Kunci File PDF dalam 3 Langkah",
@@ -1502,7 +1502,7 @@ export default {
         description: "Selesaikan membuka kunci file PDF dengan mengunduh file Anda sebagai file PDF yang tidak aman setelah kami menghapus kata sandi PDF."
       }
     },
-  
+
     // Features Section
     features: {
       title: "Fitur Utama dari PDF Unlocker Kami",
@@ -1525,7 +1525,7 @@ export default {
         }
       ]
     },
-  
+
     // FAQ Section
     faq: {
       passwordRequired: {
@@ -1549,7 +1549,7 @@ export default {
         answer: "Ya, alat buka kunci PDF kami bekerja di sistem operasi apa pun dan menjadi alternatif yang bagus untuk SmallPDF unlock, membuka kunci file PDF secara online."
       }
     },
-  
+
     // Status Messages
     passwordProtected: "Dilindungi Kata Sandi",
     notPasswordProtected: "Tidak Dilindungi Kata Sandi",
@@ -2603,4 +2603,50 @@ export default {
     annotationTools: "Alat Anotasi",
     pages: "Halaman"
   },
+  ocrPdf: {
+    title: 'OCR PDF',
+    description: 'Ubah file PDF yang tidak dapat dipilih menjadi PDF yang dapat dipilih dan dicari dengan tingkat akurasi tinggi menggunakan teknologi teks OCR',
+    step1Title: 'Unggah PDF Anda',
+    step1Description: 'Unggah PDF yang dipindai atau dokumen berbasis gambar yang ingin Anda jadikan dapat dicari dengan teks OCR',
+    step2Title: 'Pemrosesan OCR',
+    step2Description: 'Teknologi OCR canggih kami mengenali dan mengekstrak teks yang dipindai dari PDF Anda',
+    step3Title: 'Unduh PDF yang Dapat Dicari',
+    step3Description: 'Dapatkan PDF Anda yang diperbaiki dengan file teks yang dapat dipilih, disalin, dan dicari',
+    howItWorksTitle: 'Cara Teknologi OCR Bekerja',
+    howItWorksDescription: 'Pengenalan Tulisan Optik (OCR) adalah teknologi yang mengubah berbagai jenis dokumen, seperti file PDF yang dipindai atau gambar, menjadi data yang dapat diedit dan dicari. Terapkan OCR pada PDF yang dipindai Anda untuk mengeditnya di Adobe Acrobat.',
+    feature1Title: 'Dokumen yang Dipindai ke Teks',
+    feature1Description: 'OCR mengubah dokumen yang dipindai dan gambar menjadi teks yang dapat dibaca mesin, sehingga mereka dapat dicari dan diedit di Adobe Acrobat.',
+    feature2Title: 'Dukungan Multi-bahasa',
+    feature2Description: 'Mesin OCR kami mengenali teks dalam beberapa bahasa dengan tingkat akurasi tinggi, bahkan dalam dokumen yang kompleks.',
+    benefitsTitle: 'Mengapa Menggunakan OCR untuk PDF Anda?',
+    benefit1Title: 'Ketercariabilitas',
+    benefit1Description: 'Temukan informasi dengan cepat dengan mencari teks OCR dalam dokumen Anda',
+    benefit2Title: 'Salin & Tempel',
+    benefit2Description: 'Salin teks langsung dari dokumen PDF daripada mengetik ulang konten',
+    benefit3Title: 'Pengarsipan',
+    benefit3Description: 'Buat arsip yang dapat dicari dari dokumen yang dipindai dan file teks yang lebih tua',
+    benefit4Title: 'Analisis',
+    benefit4Description: 'Analisis konten dokumen dengan ekstraksi teks dan pemrosesan data',
+    faqTitle: 'Pertanyaan yang Sering Diajukan',
+    faq1Question: 'Apakah data saya aman selama pemrosesan OCR?',
+    faq1Answer: 'Ya, kami sangat memprioritaskan keamanan data. Semua unggahan file dan pemrosesan dilakukan di server yang aman. File Anda akan secara otomatis dihapus setelah 24 jam, dan kami tidak menggunakan dokumen Anda untuk tujuan apa pun selain memberikan layanan OCR.',
+    relatedToolsTitle: 'Alat PDF Terkait',
+    tool1Href: '/compress-pdf',
+    tool1Title: 'Kompres PDF',
+    tool1IconColor: 'text-green-500',
+    tool1BgColor: 'bg-green-100 dark:bg-green-900/30',
+    tool2Href: '/pdf-to-word',
+    tool2Title: 'PDF ke Word',
+    tool2IconColor: 'text-blue-500',
+    tool2BgColor: 'bg-blue-100 dark:bg-blue-900/30',
+    tool3Href: '/merge-pdf',
+    tool3Title: 'Gabung PDF',
+    tool3IconColor: 'text-red-500',
+    tool3BgColor: 'bg-red-100 dark:bg-red-900/30',
+    tool4Href: '/pdf-tools',
+    tool4Title: 'Semua Alat PDF',
+    tool4IconColor: 'text-purple-500',
+    tool4BgColor: 'bg-purple-100 dark:bg-purple-900/30'
+  }
+
 }

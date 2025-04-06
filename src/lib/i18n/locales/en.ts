@@ -1641,7 +1641,7 @@ export default {
     description: "Remove PDF passwords and unprotect PDF files quickly with our online PDF unlock tool. Unlock PDFs to create an unsecured PDF file on any operating system.",
     metaDescription: "Unlock PDF files effortlessly with our PDF unlocker. Remove the PDF permissions password, unprotect online PDFs, and download your unlocked file securely.",
     keywords: "unlock PDF file, how to unlock PDF file, unlocking PDF, unlocking PDF files, unlock to PDF, unlock PDF files, unsecured PDF file, PDF unlocker, unlocked file, PDF document unlock, SmallPDF unlock, unlock PDFs, protect PDF tool, permissions password, downloading your file, password from PDF, online PDF, remove PDF passwords, SmallPDF unlock PDF, remove the PDF, click save, password click, unlock PDF tool",
-  
+
     // Benefits Section
     benefits: {
       title: "Why Use Our Unlock PDF Tool for Unlocking PDF Files",
@@ -1664,7 +1664,7 @@ export default {
         }
       ]
     },
-  
+
     // Use Cases Section
     useCases: {
       title: "How to Unlock PDF File: Top Use Cases",
@@ -1687,7 +1687,7 @@ export default {
         }
       ]
     },
-  
+
     // How-To Section
     howTo: {
       title: "How to Unlock PDF File in 3 Steps",
@@ -1704,7 +1704,7 @@ export default {
         description: "Finish unlocking PDF files by downloading your file as an unsecured PDF file after we remove the PDF password."
       }
     },
-  
+
     // Features Section
     features: {
       title: "Key Features of Our PDF Unlocker",
@@ -1727,7 +1727,7 @@ export default {
         }
       ]
     },
-  
+
     // FAQ Section
     faq: {
       passwordRequired: {
@@ -1751,7 +1751,7 @@ export default {
         answer: "Yes, our unlock PDF tool works on any operating system and serves as a great alternative to SmallPDF unlock, unlocking PDF files online."
       }
     },
-  
+
     // Status Messages
     passwordProtected: "Password Protected",
     notPasswordProtected: "Not Password Protected",
@@ -2818,5 +2818,50 @@ export default {
     annotationTools: "Annotation Tools",
     pages: "Pages"
   },
+  ocrPdf: {
+    title: 'OCR PDF',
+    description: 'Convert non-selectable PDF files into selectable and searchable PDF with high accuracy using OCR text technology',
+    step1Title: 'Upload Your PDF',
+    step1Description: 'Upload the scanned PDF or image-based document you want to make searchable with OCR text',
+    step2Title: 'OCR Processing',
+    step2Description: 'Our advanced OCR technology recognizes and extracts scanned text from your PDF',
+    step3Title: 'Download Searchable PDF',
+    step3Description: 'Get your enhanced PDF with selectable, copyable, and searchable text files',
+    howItWorksTitle: 'How OCR Technology Works',
+    howItWorksDescription: 'Optical Character Recognition (OCR) is a technology that converts different types of documents, such as scanned PDF files or images, into editable and searchable data. Apply OCR to your scanned PDF to edit in Adobe Acrobat.',
+    feature1Title: 'Scanned Documents to Text',
+    feature1Description: 'OCR converts scanned documents and images into machine-readable text, making them searchable and editable in Adobe Acrobat.',
+    feature2Title: 'Multi-language Support',
+    feature2Description: 'Our OCR engine recognizes text in multiple languages with high accuracy, even in complex documents.',
+    benefitsTitle: 'Why Use OCR for Your PDFs?',
+    benefit1Title: 'Searchability',
+    benefit1Description: 'Find information quickly by searching for OCR text within your documents',
+    benefit2Title: 'Copy & Paste',
+    benefit2Description: 'Copy text directly from PDF documents instead of retyping content',
+    benefit3Title: 'Archiving',
+    benefit3Description: 'Create searchable archives from scanned documents and older text files',
+    benefit4Title: 'Analytics',
+    benefit4Description: 'Analyze document content with text extraction and data processing',
+    faqTitle: 'Frequently Asked Questions',
+    faq1Question: 'Is my data secure during OCR processing?',
+    faq1Answer: 'Yes, we take data security seriously. All file uploads and processing occur on secure servers. Your files are automatically deleted after 24 hours, and we don\'t use your documents for any purpose other than providing the OCR service.',
+    relatedToolsTitle: 'Related PDF Tools',
+    tool1Href: '/compress-pdf',
+    tool1Title: 'Compress PDF',
+    tool1IconColor: 'text-green-500',
+    tool1BgColor: 'bg-green-100 dark:bg-green-900/30',
+    tool2Href: '/pdf-to-word',
+    tool2Title: 'PDF to Word',
+    tool2IconColor: 'text-blue-500',
+    tool2BgColor: 'bg-blue-100 dark:bg-blue-900/30',
+    tool3Href: '/merge-pdf',
+    tool3Title: 'Merge PDF',
+    tool3IconColor: 'text-red-500',
+    tool3BgColor: 'bg-red-100 dark:bg-red-900/30',
+    tool4Href: '/pdf-tools',
+    tool4Title: 'All PDF Tools',
+    tool4IconColor: 'text-purple-500',
+    tool4BgColor: 'bg-purple-100 dark:bg-purple-900/30'
+  }
 }
 
