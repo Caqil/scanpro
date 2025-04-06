@@ -2522,7 +2522,9 @@ export default {
     drawSignature: "Disegna firma",
     signatureOptions: "Opzioni firma",
     annotationTools: "Strumenti di annotazione",
-    pages: "Pagine"
+    pages: "Pagine",
+    uploadTitle: "Carica PDF da firmare",
+    uploadDesc: "Trascina e rilascia il tuo file PDF qui, o clicca per sfogliare"
   },
   ocrPdf: {
     title: 'OCR PDF',

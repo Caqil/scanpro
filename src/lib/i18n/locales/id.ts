@@ -2601,7 +2601,9 @@ export default {
     drawSignature: "Gambar Tanda Tangan",
     signatureOptions: "Opsi Tanda Tangan",
     annotationTools: "Alat Anotasi",
-    pages: "Halaman"
+    pages: "Halaman",
+    uploadTitle: "Unggah PDF untuk Ditandatangani",
+    uploadDesc: "Seret dan jatuhkan file PDF Anda di sini, atau klik untuk menelusuri"
   },
   ocrPdf: {
     title: 'OCR PDF',

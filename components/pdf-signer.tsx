@@ -503,7 +503,7 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
       setElements: React.Dispatch<React.SetStateAction<SignatureElement[]>>;
       setSelectedElement: React.Dispatch<React.SetStateAction<string | null>>;
     }) => {
-      const pdfScale = canvasRef.current?.dataset.pdfScale 
+       const pdfScale = canvasRef.current?.dataset.pdfScale 
       ? parseFloat(canvasRef.current.dataset.pdfScale) 
       : 1;
       const elementStyles: React.CSSProperties = {

@@ -2600,7 +2600,9 @@ export default {
         drawSignature: "İmza Çiz",
         signatureOptions: "İmza Seçenekleri",
         annotationTools: "Açıklama Araçları",
-        pages: "Sayfalar"
+        pages: "Sayfalar",
+        uploadTitle: "İmzalamak için PDF yükle",
+        uploadDesc: "PDF dosyanızı buraya sürükleyip bırakın veya gözatmak için tıklayın"
     },
     ocrPdf: {
         title: 'OCR PDF',

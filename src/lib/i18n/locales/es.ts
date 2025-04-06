@@ -2594,7 +2594,9 @@ export default {
     drawSignature: "Dibujar firma",
     signatureOptions: "Opciones de firma",
     annotationTools: "Herramientas de anotación",
-    pages: "Páginas"
+    pages: "Páginas",
+    uploadTitle: "Subir PDF para firmar",
+    uploadDesc: "Arrastra y suelta tu archivo PDF aquí, o haz clic para buscar"
   },
   ocrPdf: {
     title: 'OCR PDF',

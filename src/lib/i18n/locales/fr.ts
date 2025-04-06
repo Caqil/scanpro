@@ -2597,7 +2597,9 @@ export default {
         drawSignature: "Dessiner la signature",
         signatureOptions: "Options de signature",
         annotationTools: "Outils d’annotation",
-        pages: "Pages"
+        pages: "Pages",
+        uploadTitle: "Télécharger un PDF à signer",
+        uploadDesc: "Glissez et déposez votre fichier PDF ici, ou cliquez pour parcourir"
     },
     ocrPdf: {
         title: 'OCR PDF',

@@ -2761,7 +2761,9 @@ export default {
         drawSignature: "رسم التوقيع",
         signatureOptions: "خيارات التوقيع",
         annotationTools: "أدوات التعليق",
-        pages: "صفحات"
+        pages: "صفحات",
+        uploadTitle: "رفع ملف PDF للتوقيع",
+        uploadDesc: "اسحب وأفلت ملف PDF الخاص بك هنا، أو انقر للتصفح"
     },
     ocrPdf: {
         title: 'OCR PDF',

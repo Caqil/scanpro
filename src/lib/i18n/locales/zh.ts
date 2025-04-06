@@ -2598,7 +2598,9 @@ export default {
         drawSignature: "绘制签名",
         signatureOptions: "签名选项",
         annotationTools: "注释工具",
-        pages: "页面"
+        pages: "页面",
+        uploadTitle: "上传PDF以签名",
+        uploadDesc: "将您的PDF文件拖放到此处，或点击浏览"
     },
     ocrPdf: {
         title: 'OCR PDF',

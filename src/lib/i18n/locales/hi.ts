@@ -2597,7 +2597,9 @@ export default {
         drawSignature: "हस्ताक्षर ड्रा करें",
         signatureOptions: "हस्ताक्षर विकल्प",
         annotationTools: "एनोटेशन टूल",
-        pages: "पृष्ठ"
+        pages: "पृष्ठ",
+        uploadTitle: "हस्ताक्षर के लिए PDF अपलोड करें",
+        uploadDesc: "अपनी PDF फ़ाइल को यहाँ खींचें और छोड़ें, या ब्राउज़ करने के लिए क्लिक करें"
     },
     ocrPdf: {
         title: 'OCR PDF',

@@ -2443,7 +2443,9 @@ export default {
     drawSignature: "署名を描画",
     signatureOptions: "署名オプション",
     annotationTools: "注釈ツール",
-    pages: "ページ"
+    pages: "ページ",
+    uploadTitle: "署名用PDFをアップロード",
+    uploadDesc: "PDFファイルをここにドラッグ＆ドロップするか、クリックして参照してください"
   },
   ocrPdf: {
     title: 'OCR PDF',

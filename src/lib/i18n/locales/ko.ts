@@ -2599,7 +2599,9 @@ export default {
     drawSignature: "서명 그리기",
     signatureOptions: "서명 옵션",
     annotationTools: "주석 도구",
-    pages: "페이지"
+    pages: "페이지",
+    uploadTitle: "서명할 PDF 업로드",
+    uploadDesc: "PDF 파일을 여기로 드래그 앤 드롭하거나 클릭하여 찾아보세요"
   },
   ocrPdf: {
     title: 'OCR PDF',

@@ -2599,7 +2599,9 @@ export default {
         drawSignature: "Нарисовать подпись",
         signatureOptions: "Опции подписи",
         annotationTools: "Инструменты аннотации",
-        pages: "Страницы"
+        pages: "Страницы",
+        uploadTitle: "Загрузить PDF для подписи",
+        uploadDesc: "Перетащите ваш PDF-файл сюда или нажмите, чтобы выбрать"
     },
     ocrPdf: {
         title: 'OCR PDF',

@@ -2464,7 +2464,9 @@ export default {
     drawSignature: "Unterschrift zeichnen",
     signatureOptions: "Unterschriftsoptionen",
     annotationTools: "Anmerkungswerkzeuge",
-    pages: "Seiten"
+    pages: "Seiten",
+    uploadTitle: "PDF zum Unterschreiben hochladen",
+    uploadDesc: "Ziehen Sie Ihre PDF-Datei hierher oder klicken Sie zum Durchsuchen"
   },
   ocrPdf: {
     title: 'OCR PDF',
