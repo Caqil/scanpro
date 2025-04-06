@@ -5,9 +5,9 @@ import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
-import { SignatureCanvas } from "./signature-canvas";
 import { SignatureToolbar } from "./signature-toolbar";
 import { DownloadIcon } from "lucide-react";
+import { SignatureCanvas } from "./sign/signature-canvas";
 
 interface SignaturePanelProps {
   onSave: (dataUrl: string) => void;

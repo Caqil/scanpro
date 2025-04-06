@@ -1,5 +1,5 @@
 "use client";
-
+import React, { memo } from "react";
 import { useState, useRef, useEffect } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { Card, CardContent } from "@/components/ui/card";
@@ -26,8 +26,8 @@ import {
   UserIcon,
   CalendarIcon,
 } from "lucide-react";
+import { SignatureCanvas } from "./sign/signature-canvas";
 
-import { SignatureCanvas } from "./signature-canvas";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -409,112 +409,139 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
       setProcessing(false);
     }
   };
-
+  const SignatureElementComponent = memo(
+    ({
+      element,
+      selectedElement,
+      handleElementClick,
+      handleElementMoveStart,
+      handleResizeStart,
+      setElements,
+      setSelectedElement,
+    }: {
+      element: SignatureElement;
+      selectedElement: string | null;
+      handleElementClick: (
+        event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
+        element: SignatureElement
+      ) => void;
+      handleElementMoveStart: (
+        event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
+        element: SignatureElement
+      ) => void;
+      handleResizeStart: (
+        event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
+        element: SignatureElement
+      ) => void;
+      setElements: React.Dispatch<React.SetStateAction<SignatureElement[]>>;
+      setSelectedElement: React.Dispatch<React.SetStateAction<string | null>>;
+    }) => {
+      const elementStyles: React.CSSProperties = {
+        position: "absolute",
+        left: `${element.position.x}px`,
+        top: `${element.position.y}px`,
+        width: `${element.size.width}px`,
+        height: `${element.size.height}px`,
+        transform: `rotate(${element.rotation}deg)`,
+        cursor: "pointer",
+        border: selectedElement === element.id ? "2px dashed #3b82f6" : "1px solid",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        userSelect: "none",
+        touchAction: "none",
+        zIndex: selectedElement === element.id ? 999 : 1,
+        backgroundColor: "rgba(255, 255, 255, 0.8)",
+        padding: "4px",
+      };
+  
+      const resizeHandleStyles: React.CSSProperties = {
+        position: "absolute",
+        bottom: "-5px",
+        right: "-5px",
+        width: "10px",
+        height: "10px",
+        backgroundColor: "#3b82f6",
+        borderRadius: "50%",
+        cursor: "se-resize",
+        touchAction: "none",
+      };
+  
+      return (
+        <div
+          key={element.id}
+          style={elementStyles}
+          className="signature-element border-muted"
+          onClick={(e) => handleElementClick(e, element)}
+          onMouseDown={(e) => handleElementMoveStart(e, element)}
+          onTouchStart={(e) => handleElementMoveStart(e, element)}
+        >
+          {element.type === "signature" && element.data !== "Signature Placeholder" ? (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundImage: `url(${element.data})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                pointerEvents: "none",
+              }}
+            />
+          ) : element.type === "stamp" && element.data.startsWith("data:image/") ? (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundImage: `url(${element.data})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                pointerEvents: "none",
+              }}
+            />
+          ) : (
+            <span className="text-muted-foreground">{element.data}</span>
+          )}
+          {selectedElement === element.id && (
+            <>
+              <button
+                className="absolute -top-3 -right-3 bg-destructive rounded-full p-1"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setElements((prev) => prev.filter((el) => el.id !== element.id));
+                  setSelectedElement(null);
+                }}
+              >
+                <XIcon className="h-3 w-3 text-white" />
+              </button>
+              <div
+                style={resizeHandleStyles}
+                onMouseDown={(e) => handleResizeStart(e, element)}
+                onTouchStart={(e) => handleResizeStart(e, element)}
+              />
+            </>
+          )}
+        </div>
+      );
+    }
+  );
+  
   const renderElements = () => {
     return elements
       .filter((element) => element.page === currentPage)
-      .map((element) => {
-        const elementStyles: React.CSSProperties = {
-          position: 'absolute',
-          left: `${element.position.x}px`,
-          top: `${element.position.y}px`,
-          width: `${element.size.width}px`,
-          height: `${element.size.height}px`,
-          transform: `rotate(${element.rotation}deg)`,
-          cursor: 'pointer',
-          border: selectedElement === element.id ? '2px dashed #3b82f6' : '1px solid',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          userSelect: 'none',
-          touchAction: 'none',
-          zIndex: selectedElement === element.id ? 999 : 1,
-          backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          padding: '4px',
-        };
-
-        const resizeHandleStyles: React.CSSProperties = {
-          position: 'absolute',
-          bottom: '-5px',
-          right: '-5px',
-          width: '10px',
-          height: '10px',
-          backgroundColor: '#3b82f6',
-          borderRadius: '50%',
-          cursor: 'se-resize',
-          touchAction: 'none',
-        };
-
-        return (
-          <div
-            key={element.id}
-            style={elementStyles}
-            className="signature-element border-muted"
-            onClick={(e) => handleElementClick(e, element)}
-            onMouseDown={(e) => handleElementMoveStart(e, element)}
-            onTouchStart={(e) => handleElementMoveStart(e, element)}
-          >
-            {element.type === "signature" && element.data !== "Signature Placeholder" ? (
-              <div
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  backgroundImage: `url(${element.data})`,
-                  backgroundSize: 'contain',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'center',
-                  pointerEvents: 'none',
-                }}
-              />
-            ) : element.type === "stamp" && element.data.startsWith("data:image/") ? (
-              <div
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  backgroundImage: `url(${element.data})`,
-                  backgroundSize: 'contain',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'center',
-                  pointerEvents: 'none',
-                }}
-              />
-            ) : element.type === "stamp" ? (
-              <div
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(element.data)}")`,
-                  backgroundSize: 'contain',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'center',
-                  pointerEvents: 'none',
-                }}
-              />
-            ) : (
-              <span className="text-muted-foreground">{element.data}</span>
-            )}
-            {selectedElement === element.id && (
-              <>
-                <button
-                  className="absolute -top-3 -right-3 bg-destructive rounded-full p-1"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setElements(elements.filter((el) => el.id !== element.id));
-                    setSelectedElement(null);
-                  }}
-                >
-                  <XIcon className="h-3 w-3 text-white" />
-                </button>
-                <div
-                  style={resizeHandleStyles}
-                  onMouseDown={(e) => handleResizeStart(e, element)}
-                  onTouchStart={(e) => handleResizeStart(e, element)}
-                />
-              </>
-            )}
-          </div>
-        );
-      });
+      .map((element) => (
+        <SignatureElementComponent
+          key={element.id}
+          element={element}
+          selectedElement={selectedElement}
+          handleElementClick={handleElementClick}
+          handleElementMoveStart={handleElementMoveStart}
+          handleResizeStart={handleResizeStart}
+          setElements={setElements}
+          setSelectedElement={setSelectedElement}
+        />
+      ));
   };
 
   const renderPageThumbnails = () => {
@@ -696,54 +723,9 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
 
                 <TabsContent value="type">
                   <div className="mt-4">
-                    <h3 className="text-sm font-semibold mb-2">Required Fields</h3>
-                    <div className="space-y-2">
-                      <Button
-                        variant="outline"
-                        className="w-full flex justify-between items-center"
-                        onClick={() => handleAddField("signature")}
-                      >
-                        <span className="flex items-center">
-                          <PenIcon className="h-4 w-4 mr-2" />
-                          Signature
-                        </span>
-                        <span className="text-muted-foreground">cscac</span>
-                      </Button>
-                    </div>
-
+                   
                     <h3 className="text-sm font-semibold mt-4 mb-2">Optional Fields</h3>
                     <div className="space-y-2">
-                      <Button
-                        variant="outline"
-                        className="w-full flex justify-between items-center"
-                        onClick={() => handleAddField("initials")}
-                      >
-                        <span className="flex items-center">
-                          <PenIcon className="h-4 w-4 mr-2" />
-                          Initials
-                        </span>
-                        <span className="text-muted-foreground">C</span>
-                      </Button>
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          <Label htmlFor="name-input">Name</Label>
-                          <Input
-                            id="name-input"
-                            value={nameValue}
-                            onChange={(e) => setNameValue(e.target.value)}
-                            placeholder="Enter name"
-                            className="flex-1"
-                          />
-                        </div>
-                        <Button
-                          variant="outline"
-                          className="w-full flex items-center"
-                          onClick={() => handleAddField("name")}
-                        >
-                          <UserIcon className="h-4 w-4 mr-2" />
-                          Add Name
-                        </Button>
-                      </div>
                       <Button
                         variant="outline"
                         className="w-full flex items-center"
