@@ -1433,46 +1433,127 @@ export default {
 
     // Déverrouiller PDF
     unlockPdf: {
-        title: "Déverrouiller des Fichiers PDF",
-        description: "Supprimez la protection par mot de passe de vos documents PDF pour un accès sans restriction",
+        title: "Déverrouiller facilement les fichiers PDF avec notre déverrouilleur de PDF",
+        description: "Supprimez les mots de passe PDF et déprotégez rapidement les fichiers PDF avec notre outil de déverrouillage PDF en ligne. Déverrouillez les PDF pour créer un fichier PDF non sécurisé sur n'importe quel système d'exploitation.",
+        metaDescription: "Déverrouillez facilement les fichiers PDF avec notre déverrouilleur de PDF. Supprimez le mot de passe des permissions PDF, déprotégez les PDF en ligne et téléchargez votre fichier déverrouillé en toute sécurité.",
+        keywords: "déverrouiller fichier PDF, comment déverrouiller un fichier PDF, déverrouiller PDF, déverrouiller fichiers PDF, déverrouiller vers PDF, déverrouiller fichiers PDF, fichier PDF non sécurisé, déverrouilleur de PDF, fichier déverrouillé, déverrouiller document PDF, SmallPDF déverrouiller, déverrouiller PDFs, outil de protection PDF, mot de passe des permissions, télécharger votre fichier, mot de passe du PDF, PDF en ligne, supprimer mots de passe PDF, SmallPDF déverrouiller PDF, supprimer le PDF, cliquer sur enregistrer, clic mot de passe, outil de déverrouillage PDF",
+
+        // Benefits Section
+        benefits: {
+            title: "Pourquoi utiliser notre outil de déverrouillage PDF pour déverrouiller les fichiers PDF",
+            list: [
+                {
+                    title: "Déverrouilleur PDF rapide",
+                    description: "Utilisez notre outil de déverrouillage PDF pour supprimer rapidement le mot de passe PDF et créer un fichier PDF non sécurisé, prêt à être téléchargé instantanément."
+                },
+                {
+                    title: "Déverrouiller facilement les fichiers PDF",
+                    description: "Avec une simple boîte de saisie de mot de passe, déverrouillez les fichiers PDF en ligne en entrant le mot de passe des permissions ou le mot de passe d'ouverture du document — cliquez sur enregistrer et c'est terminé."
+                },
+                {
+                    title: "Déverrouiller les PDF sur n'importe quelle plateforme",
+                    description: "Notre déverrouilleur PDF en ligne fonctionne sur n'importe quel système d'exploitation, rendant le déverrouillage des fichiers PDF transparent, que vous utilisiez SmallPDF déverrouiller ou notre outil de déverrouillage PDF."
+                },
+                {
+                    title: "Déverrouillage sécurisé des documents PDF",
+                    description: "Supprimez en toute sécurité les mots de passe des fichiers PDF avec notre outil, garantissant que votre fichier déverrouillé reste privé après le déverrouillage."
+                }
+            ]
+        },
+
+        // Use Cases Section
+        useCases: {
+            title: "Comment déverrouiller un fichier PDF : Principaux cas d'utilisation",
+            list: [
+                {
+                    title: "Déverrouiller un fichier PDF avec un mot de passe de permissions",
+                    description: "Utilisez notre déverrouilleur PDF pour supprimer le mot de passe des permissions et déverrouiller vers PDF pour un accès complet lorsque vous connaissez le mot de passe."
+                },
+                {
+                    title: "PDF en ligne pour les entreprises",
+                    description: "Déverrouillez les fichiers PDF en ligne pour supprimer les mots de passe PDF des documents professionnels, simplifiant le partage et l'édition avec un simple clic sur enregistrer."
+                },
+                {
+                    title: "Déverrouiller du matériel d'étude en PDF",
+                    description: "Déprotégez les ressources d'étude en PDF en ligne avec notre outil de déverrouillage PDF pour créer un fichier PDF non sécurisé pour un apprentissage fluide."
+                },
+                {
+                    title: "Déverrouiller un document PDF personnel",
+                    description: "Apprenez comment déverrouiller un fichier PDF de votre collection personnelle en téléchargeant votre fichier après avoir utilisé notre alternative à SmallPDF déverrouiller PDF."
+                }
+            ]
+        },
+
+        // How-To Section
         howTo: {
-            title: "Comment Déverrouiller des Fichiers PDF",
+            title: "Comment déverrouiller un fichier PDF en 3 étapes",
             upload: {
-                title: "Télécharger",
-                description: "Téléchargez le fichier PDF protégé par mot de passe que vous souhaitez déverrouiller."
+                title: "Étape 1 : Téléversez votre PDF en ligne",
+                description: "Commencez à déverrouiller PDF en téléchargeant le fichier PDF que vous souhaitez déprotéger avec notre outil de déverrouillage PDF."
             },
             enterPassword: {
-                title: "Entrer le Mot de Passe",
-                description: "Si nécessaire, entrez le mot de passe actuel qui protège le PDF."
+                title: "Étape 2 : Entrez le mot de passe des permissions",
+                description: "Utilisez la boîte de saisie de mot de passe pour entrer le mot de passe du PDF, comme le mot de passe d'ouverture du document ou le mot de passe des permissions."
             },
             download: {
-                title: "Télécharger",
-                description: "Téléchargez votre fichier PDF déverrouillé sans restrictions de mot de passe."
+                title: "Étape 3 : Téléchargez le fichier déverrouillé",
+                description: "Terminez de déverrouiller les fichiers PDF en téléchargeant votre fichier comme un fichier PDF non sécurisé après avoir supprimé le mot de passe PDF."
             }
         },
+
+        // Features Section
+        features: {
+            title: "Fonctionnalités clés de notre déverrouilleur de PDF",
+            list: [
+                {
+                    title: "Prend en charge tous les PDF en ligne",
+                    description: "Déverrouillez les fichiers PDF avec des mots de passe de permissions ou des mots de passe d'ouverture de document sans effort."
+                },
+                {
+                    title: "Processus rapide de déverrouillage PDF",
+                    description: "Supprimez les mots de passe PDF en quelques secondes avec notre outil de déverrouillage PDF rapide, idéal pour télécharger votre fichier."
+                },
+                {
+                    title: "Déverrouillage de documents PDF multiplateforme",
+                    description: "Utilisez notre déverrouilleur PDF sur n'importe quel système d'exploitation pour déverrouiller les fichiers PDF en toute transparence."
+                },
+                {
+                    title: "Alternative sécurisée à SmallPDF déverrouiller",
+                    description: "Déprotégez les fichiers PDF avec un traitement chiffré, offrant une alternative sécurisée à SmallPDF déverrouiller PDF."
+                }
+            ]
+        },
+
+        // FAQ Section
         faq: {
             passwordRequired: {
-                question: "Dois-je connaître le mot de passe actuel ?",
-                answer: "Oui, pour déverrouiller un PDF, vous devez connaître le mot de passe actuel. Notre outil ne peut pas contourner ou craquer les mots de passe ; il supprime simplement la protection après que vous avez fourni le mot de passe correct."
+                question: "Ai-je besoin de cliquer sur le mot de passe pour déverrouiller les fichiers PDF ?",
+                answer: "Oui, vous devez entrer le mot de passe du PDF — comme le mot de passe d'ouverture du document ou le mot de passe des permissions — dans la boîte de saisie de mot de passe pour déverrouiller les PDFs. Notre outil ne contourne pas les mots de passe."
             },
             security: {
-                question: "Le processus de déverrouillage est-il sécurisé ?",
-                answer: "Oui, tout le traitement se fait sur nos serveurs sécurisés. Nous ne stockons pas vos PDF ni vos mots de passe. Les fichiers sont automatiquement supprimés après traitement, et toutes les données transférées sont chiffrées."
+                question: "Est-il sécuritaire de déverrouiller les fichiers PDF avec cet outil ?",
+                answer: "Oui, notre outil de déverrouillage PDF traite les PDF en ligne sur des serveurs chiffrés. Nous ne stockons pas vos fichiers ou mots de passe après avoir téléchargé votre fichier."
             },
             restrictions: {
-                question: "Puis-je déverrouiller un PDF avec des restrictions de propriétaire mais sans mot de passe d’ouverture ?",
-                answer: "Oui, certains PDF ne nécessitent pas de mot de passe pour être ouverts mais ont des restrictions sur l’impression, l’édition ou la copie. Notre outil peut également supprimer ces restrictions. Téléchargez simplement le fichier sans entrer de mot de passe."
+                question: "Puis-je déverrouiller vers PDF sans cliquer sur le mot de passe ?",
+                answer: "Oui, s'il n'y a pas de mot de passe d'ouverture de document mais qu'un mot de passe des permissions existe, téléversez-le pour supprimer les restrictions du PDF."
             },
             quality: {
-                question: "Le déverrouillage affectera-t-il la qualité ou le contenu du PDF ?",
-                answer: "Non, notre processus de déverrouillage supprime uniquement les paramètres de sécurité. Il n’altère en aucune façon le contenu, le formatage ou la qualité de votre fichier PDF."
+                question: "Le déverrouillage PDF affecte-t-il la qualité ?",
+                answer: "Non, notre déverrouilleur de PDF supprime uniquement le mot de passe des paramètres du PDF — votre fichier déverrouillé conserve sa qualité d'origine."
+            },
+            compatibility: {
+                question: "Cela fonctionne-t-il pour les utilisateurs de SmallPDF déverrouiller PDF ?",
+                answer: "Oui, notre outil de déverrouillage PDF fonctionne sur n'importe quel système d'exploitation et sert d'excellente alternative à SmallPDF déverrouiller, déverrouillant les fichiers PDF en ligne."
             }
         },
-        passwordProtected: "Protégé par Mot de Passe",
-        notPasswordProtected: "Non Protégé par Mot de Passe",
-        unlocking: "Déverrouillage de votre PDF...",
+
+        // Status Messages
+        passwordProtected: "Protégé par mot de passe",
+        notPasswordProtected: "Non protégé par mot de passe",
+        unlocking: "Déverrouillage du PDF...",
         unlockSuccess: "PDF déverrouillé avec succès !",
-        unlockSuccessDesc: "Votre fichier PDF a été déverrouillé et est prêt à être téléchargé."
+        unlockSuccessDesc: "Le déverrouillage de votre document PDF est terminé ! Téléchargez votre fichier déverrouillé maintenant."
     },
 
     // Téléchargeur de Fichiers

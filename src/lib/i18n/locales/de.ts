@@ -1432,46 +1432,127 @@ export default {
 
   // PDF entsperren
   unlockPdf: {
-    title: "PDF-Dateien entsperren",
-    description: "Entfernen Sie den Passwortschutz von Ihren PDF-Dokumenten für uneingeschränkten Zugriff",
+    title: "PDF-Dateien einfach mit unserem PDF-Entsperrer entsperren",
+    description: "Entfernen Sie PDF-Passwörter und schützen Sie PDF-Dateien schnell mit unserem Online-PDF-Entsperrungstool. Entsperren Sie PDFs, um eine ungeschützte PDF-Datei auf jedem Betriebssystem zu erstellen.",
+    metaDescription: "Entsperren Sie PDF-Dateien mühelos mit unserem PDF-Entsperrer. Entfernen Sie das PDF-Berechtigungskennwort, schützen Sie Online-PDFs und laden Sie Ihre entsperrte Datei sicher herunter.",
+    keywords: "PDF-Datei entsperren, wie man eine PDF-Datei entsperrt, PDF entsperren, PDF-Dateien entsperren, zu PDF entsperren, PDF-Dateien entsperren, ungeschützte PDF-Datei, PDF-Entsperrer, entsperrte Datei, PDF-Dokument entsperren, SmallPDF entsperren, PDFs entsperren, PDF-Schutztool, Berechtigungskennwort, Herunterladen Ihrer Datei, Passwort von PDF, Online-PDF, PDF-Passwörter entfernen, SmallPDF PDF entsperren, PDF entfernen, Speichern klicken, Passwort klicken, PDF-Entsperrungstool",
+
+    // Benefits Section
+    benefits: {
+      title: "Warum unser PDF-Entsperrungstool zum Entsperren von PDF-Dateien verwenden",
+      list: [
+        {
+          title: "Schneller PDF-Entsperrer",
+          description: "Verwenden Sie unser PDF-Entsperrungstool, um schnell das PDF-Passwort zu entfernen und eine ungeschützte PDF-Datei zu erstellen, die sofort zum Herunterladen bereit ist."
+        },
+        {
+          title: "Einfaches Entsperren von PDF-Dateien",
+          description: "Mit einem einfachen Passworteingabefeld können Sie PDF-Dateien online entsperren, indem Sie das Berechtigungskennwort oder das Dokumentöffnungskennwort eingeben – klicken Sie auf Speichern und Sie sind fertig."
+        },
+        {
+          title: "PDFs auf jeder Plattform entsperren",
+          description: "Unser Online-PDF-Entsperrer funktioniert auf jedem Betriebssystem, sodass das Entsperren von PDF-Dateien nahtlos funktioniert, egal ob Sie SmallPDF entsperren oder unser PDF-Entsperrungstool verwenden."
+        },
+        {
+          title: "Sicheres Entsperren von PDF-Dokumenten",
+          description: "Entfernen Sie sicher Passwörter aus PDF-Dateien mit unserem Tool und stellen Sie sicher, dass Ihre entsperrte Datei nach dem Entsperren privat bleibt."
+        }
+      ]
+    },
+
+    // Use Cases Section
+    useCases: {
+      title: "Wie man eine PDF-Datei entsperrt: Top-Anwendungsfälle",
+      list: [
+        {
+          title: "PDF-Datei mit Berechtigungskennwort entsperren",
+          description: "Verwenden Sie unseren PDF-Entsperrer, um das Berechtigungskennwort zu entfernen und PDF für vollen Zugriff zu entsperren, wenn Sie das Passwort kennen."
+        },
+        {
+          title: "Online-PDF für Unternehmen",
+          description: "Entsperren Sie PDF-Dateien online, um PDF-Passwörter aus Geschäftsdokumenten zu entfernen und so das Teilen und Bearbeiten mit einem schnellen Klick zu vereinfachen."
+        },
+        {
+          title: "Studienmaterial in PDF entsperren",
+          description: "Schützen Sie Online-PDF-Studienressourcen mit unserem PDF-Entsperrungstool, um eine ungeschützte PDF-Datei für nahtloses Lernen zu erstellen."
+        },
+        {
+          title: "Persönliches PDF-Dokument entsperren",
+          description: "Erfahren Sie, wie Sie eine PDF-Datei aus Ihrer persönlichen Sammlung entsperren, indem Sie Ihre Datei nach der Verwendung unserer SmallPDF-Entsperrungsalternative herunterladen."
+        }
+      ]
+    },
+
+    // How-To Section
     howTo: {
-      title: "So entsperren Sie PDF-Dateien",
+      title: "Wie man eine PDF-Datei in 3 Schritten entsperrt",
       upload: {
-        title: "Hochladen",
-        description: "Laden Sie die passwortgeschützte PDF-Datei hoch, die Sie entsperren möchten."
+        title: "Schritt 1: Laden Sie Ihr Online-PDF hoch",
+        description: "Beginnen Sie mit dem Entsperren von PDF, indem Sie die PDF-Datei hochladen, die Sie mit unserem PDF-Entsperrungstool entsperren möchten."
       },
       enterPassword: {
-        title: "Passwort eingeben",
-        description: "Geben Sie bei Bedarf das aktuelle Passwort ein, das das PDF schützt."
+        title: "Schritt 2: Berechtigungskennwort eingeben",
+        description: "Verwenden Sie das Passworteingabefeld, um das Passwort aus der PDF einzugeben, z. B. das Dokumentöffnungskennwort oder das Berechtigungskennwort."
       },
       download: {
-        title: "Herunterladen",
-        description: "Laden Sie Ihre entsperrte PDF-Datei ohne Passwortbeschränkungen herunter."
+        title: "Schritt 3: Entsperrte Datei herunterladen",
+        description: "Schließen Sie das Entsperren von PDF-Dateien ab, indem Sie Ihre Datei als ungeschützte PDF-Datei herunterladen, nachdem wir das PDF-Passwort entfernt haben."
       }
     },
+
+    // Features Section
+    features: {
+      title: "Hauptmerkmale unseres PDF-Entsperrers",
+      list: [
+        {
+          title: "Unterstützt alle Online-PDFs",
+          description: "Entsperren Sie PDF-Dateien mit Berechtigungskennwörtern oder Dokumentöffnungskennwörtern mühelos."
+        },
+        {
+          title: "Schneller PDF-Entsperrungsprozess",
+          description: "Entfernen Sie PDF-Passwörter in Sekundenschnelle mit unserem schnellen PDF-Entsperrungstool, ideal zum Herunterladen Ihrer Datei."
+        },
+        {
+          title: "Plattformübergreifendes Entsperren von PDF-Dokumenten",
+          description: "Verwenden Sie unseren PDF-Entsperrer auf jedem Betriebssystem für nahtloses Entsperren von PDF-Dateien."
+        },
+        {
+          title: "Sichere Alternative zu SmallPDF-Entsperrung",
+          description: "Schützen Sie PDF-Dateien mit verschlüsselter Verarbeitung und bieten Sie eine sichere Alternative zur SmallPDF-PDF-Entsperrung."
+        }
+      ]
+    },
+
+    // FAQ Section
     faq: {
       passwordRequired: {
-        question: "Muss ich das aktuelle Passwort kennen?",
-        answer: "Ja, um ein PDF zu entsperren, müssen Sie das aktuelle Passwort kennen. Unser Tool kann Passwörter nicht umgehen oder knacken; es entfernt lediglich den Schutz, nachdem Sie das richtige Passwort eingegeben haben."
+        question: "Benötige ich einen Passwortklick, um PDF-Dateien zu entsperren?",
+        answer: "Ja, Sie müssen das Passwort aus der PDF – wie das Dokumentöffnungskennwort oder das Berechtigungskennwort – im Passworteingabefeld eingeben, um PDFs zu entsperren. Unser Tool umgeht keine Passwörter."
       },
       security: {
-        question: "Ist der Entsperrprozess sicher?",
-        answer: "Ja, die gesamte Verarbeitung erfolgt auf unseren sicheren Servern. Wir speichern Ihre PDFs oder Passwörter nicht. Dateien werden nach der Verarbeitung automatisch gelöscht, und alle Datenübertragungen sind verschlüsselt."
+        question: "Ist das Entsperren von PDF-Dateien mit diesem Tool sicher?",
+        answer: "Ja, unser PDF-Entsperrungstool verarbeitet Online-PDFs auf verschlüsselten Servern. Wir speichern Ihre Dateien oder Passwörter nach dem Herunterladen Ihrer Datei nicht."
       },
       restrictions: {
-        question: "Kann ich ein PDF mit Besitzerbeschränkungen, aber ohne Öffnungspasswort entsperren?",
-        answer: "Ja, einige PDFs erfordern kein Passwort zum Öffnen, haben jedoch Beschränkungen für Drucken, Bearbeiten oder Kopieren. Unser Tool kann auch diese Beschränkungen entfernen. Laden Sie einfach die Datei hoch, ohne ein Passwort einzugeben."
+        question: "Kann ich PDF ohne Passwortklick entsperren?",
+        answer: "Ja, wenn es kein Dokumentöffnungskennwort gibt, aber ein Berechtigungskennwort vorhanden ist, laden Sie es hoch, um die PDF-Einschränkungen zu entfernen."
       },
       quality: {
-        question: "Beeinflusst das Entsperren die PDF-Qualität oder den Inhalt?",
-        answer: "Nein, unser Entsperrprozess entfernt nur die Sicherheitseinstellungen. Er verändert den Inhalt, die Formatierung oder die Qualität Ihrer PDF-Datei in keiner Weise."
+        question: "Beeinträchtigt das Entsperren von PDF die Qualität?",
+        answer: "Nein, unser PDF-Entsperrer entfernt nur das Passwort aus den PDF-Einstellungen – Ihre entsperrte Datei behält ihre ursprüngliche Qualität."
+      },
+      compatibility: {
+        question: "Funktioniert dies für SmallPDF-PDF-Entsperrungsbenutzer?",
+        answer: "Ja, unser PDF-Entsperrungstool funktioniert auf jedem Betriebssystem und dient als großartige Alternative zur SmallPDF-Entsperrung, um PDF-Dateien online zu entsperren."
       }
     },
+
+    // Status Messages
     passwordProtected: "Passwortgeschützt",
     notPasswordProtected: "Nicht passwortgeschützt",
     unlocking: "PDF wird entsperrt...",
     unlockSuccess: "PDF erfolgreich entsperrt!",
-    unlockSuccessDesc: "Ihre PDF-Datei wurde entsperrt und ist zum Download bereit."
+    unlockSuccessDesc: "Ihr PDF-Dokument wurde erfolgreich entsperrt! Laden Sie Ihre entsperrte Datei jetzt herunter."
   },
 
   // Datei-Uploader

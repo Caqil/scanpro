@@ -1690,6 +1690,129 @@ export default {
       }
     }
   },
+  unlockPdf: {
+    title: "Desbloqueie Arquivos PDF Facilmente com Nosso Desbloqueador de PDF",
+    description: "Remova senhas de PDF e desproteja arquivos PDF rapidamente com nossa ferramenta de desbloqueio de PDF online. Desbloqueie PDFs para criar um arquivo PDF não seguro em qualquer sistema operacional.",
+    metaDescription: "Desbloqueie arquivos PDF sem esforço com nosso desbloqueador de PDF. Remova a senha de permissão do PDF, desproteja PDFs online e baixe seu arquivo desbloqueado com segurança.",
+    keywords: "desbloquear arquivo PDF, como desbloquear arquivo PDF, desbloqueio de PDF, desbloqueio de arquivos PDF, desbloquear para PDF, desbloquear arquivos PDF, arquivo PDF não seguro, desbloqueador de PDF, arquivo desbloqueado, desbloqueio de documento PDF, SmallPDF desbloquear, desbloquear PDFs, ferramenta de proteção de PDF, senha de permissão, baixar seu arquivo, senha do PDF, PDF online, remover senhas de PDF, SmallPDF desbloquear PDF, remover o PDF, clicar em salvar, clicar na senha, ferramenta de desbloqueio de PDF",
+
+    // Benefits Section
+    benefits: {
+      title: "Por que Usar Nossa Ferramenta de Desbloqueio de PDF para Desbloquear Arquivos PDF",
+      list: [
+        {
+          title: "Desbloqueador de PDF Rápido",
+          description: "Use nossa ferramenta de desbloqueio de PDF para remover rapidamente a senha do PDF e criar um arquivo PDF não seguro, pronto para baixar seu arquivo instantaneamente."
+        },
+        {
+          title: "Desbloqueio Fácil de Arquivos PDF",
+          description: "Com uma simples caixa de entrada de senha, desbloqueie arquivos PDF online inserindo a senha de permissão ou a senha de abertura do documento—clique em salvar e pronto."
+        },
+        {
+          title: "Desbloqueie PDFs em Qualquer Plataforma",
+          description: "Nosso desbloqueador de PDF online funciona em qualquer sistema operacional, tornando o desbloqueio de arquivos PDF fluido, seja usando SmallPDF desbloquear ou nossa ferramenta de desbloqueio de PDF."
+        },
+        {
+          title: "Desbloqueio Seguro de Documento PDF",
+          description: "Remova a senha de arquivos PDF com segurança usando nossa ferramenta, garantindo que seu arquivo desbloqueado permaneça privado após o desbloqueio do PDF."
+        }
+      ]
+    },
+
+    // Use Cases Section
+    useCases: {
+      title: "Como Desbloquear Arquivo PDF: Principais Casos de Uso",
+      list: [
+        {
+          title: "Desbloquear Arquivo PDF com Senha de Permissão",
+          description: "Use nosso desbloqueador de PDF para remover a senha de permissão e desbloquear para PDF para acesso total quando você souber clicar na senha."
+        },
+        {
+          title: "PDF Online para Negócios",
+          description: "Desbloqueie arquivos PDF online para remover senhas de PDF de documentos comerciais, simplificando o compartilhamento e a edição com um rápido clicar em salvar."
+        },
+        {
+          title: "Desbloqueio de Materiais de Estudo em PDF",
+          description: "Desproteja recursos de estudo em PDF online com nossa ferramenta de desbloqueio de PDF para criar um arquivo PDF não seguro para aprendizado contínuo."
+        },
+        {
+          title: "Desbloqueio de Documento PDF Pessoal",
+          description: "Aprenda como desbloquear um arquivo PDF da sua coleção pessoal baixando seu arquivo após usar nossa alternativa ao SmallPDF desbloquear PDF."
+        }
+      ]
+    },
+
+    // How-To Section
+    howTo: {
+      title: "Como Desbloquear Arquivo PDF em 3 Passos",
+      upload: {
+        title: "Passo 1: Carregue Seu PDF Online",
+        description: "Comece a desbloquear o PDF carregando o arquivo PDF que deseja desproteger com nossa ferramenta de desbloqueio de PDF."
+      },
+      enterPassword: {
+        title: "Passo 2: Insira a Senha de Permissão",
+        description: "Use a caixa de entrada de senha para inserir a senha do PDF, como a senha de abertura do documento ou a senha de permissão."
+      },
+      download: {
+        title: "Passo 3: Baixe o Arquivo Desbloqueado",
+        description: "Finalize o desbloqueio de arquivos PDF baixando seu arquivo como um arquivo PDF não seguro após removermos a senha do PDF."
+      }
+    },
+
+    // Features Section
+    features: {
+      title: "Principais Recursos do Nosso Desbloqueador de PDF",
+      list: [
+        {
+          title: "Suporta Todos os PDFs Online",
+          description: "Desbloqueie arquivos PDF com senhas de permissão ou senhas de abertura de documento sem esforço."
+        },
+        {
+          title: "Processo Rápido de Desbloqueio de PDF",
+          description: "Remova senhas de PDF em segundos com nossa ferramenta de desbloqueio de PDF rápida, ideal para baixar seu arquivo."
+        },
+        {
+          title: "Desbloqueio de Documento PDF Multiplataforma",
+          description: "Use nosso desbloqueador de PDF em qualquer sistema operacional para desbloquear arquivos PDF sem problemas."
+        },
+        {
+          title: "Alternativa Segura ao SmallPDF Desbloquear",
+          description: "Desproteja arquivos PDF com processamento criptografado, oferecendo uma alternativa segura ao SmallPDF desbloquear PDF."
+        }
+      ]
+    },
+
+    // FAQ Section
+    faq: {
+      passwordRequired: {
+        question: "Preciso clicar na senha para desbloquear arquivos PDF?",
+        answer: "Sim, você deve inserir a senha do PDF—como a senha de abertura do documento ou a senha de permissão—na caixa de entrada de senha para desbloquear PDFs. Nossa ferramenta não contorna senhas."
+      },
+      security: {
+        question: "Desbloquear arquivos PDF com esta ferramenta é seguro?",
+        answer: "Sim, nossa ferramenta de desbloqueio de PDF processa PDFs online em servidores criptografados. Não armazenamos seus arquivos ou senhas após baixar seu arquivo."
+      },
+      restrictions: {
+        question: "Posso desbloquear para PDF sem clicar na senha?",
+        answer: "Sim, se não houver senha de abertura de documento, mas houver uma senha de permissão, carregue para remover as restrições do PDF."
+      },
+      quality: {
+        question: "O desbloqueio de PDF afeta a qualidade?",
+        answer: "Não, nosso desbloqueador de PDF remove apenas a senha das configurações do PDF—seu arquivo desbloqueado mantém a qualidade original."
+      },
+      compatibility: {
+        question: "Isso funciona para usuários do SmallPDF desbloquear PDF?",
+        answer: "Sim, nossa ferramenta de desbloqueio de PDF funciona em qualquer sistema operacional e serve como uma ótima alternativa ao SmallPDF desbloquear, desbloqueando arquivos PDF online."
+      }
+    },
+
+    // Status Messages
+    passwordProtected: "Protegido por Senha",
+    notPasswordProtected: "Não Protegido por Senha",
+    unlocking: "Desbloqueando PDF...",
+    unlockSuccess: "PDF Desbloqueado com Sucesso!",
+    unlockSuccessDesc: "O desbloqueio do seu documento PDF está concluído! Baixe seu arquivo desbloqueado agora."
+  },
   repairPdf: {
     title: "Reparar Arquivos PDF",
     description: "Repare arquivos PDF corrompidos, recupere conteúdo e otimize a estrutura do documento",

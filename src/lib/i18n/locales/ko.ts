@@ -1434,46 +1434,127 @@ export default {
 
   // Unlock PDF
   unlockPdf: {
-    title: "PDF 파일 잠금 해제",
-    description: "제한 없는 접근을 위해 PDF 문서에서 비밀번호 보호를 제거합니다",
+    title: "우리 PDF 잠금 해제 도구로 PDF 파일을 쉽게 잠금 해제하세요",
+    description: "온라인 PDF 잠금 해제 도구를 사용하여 PDF 비밀번호를 제거하고 PDF 파일을 빠르게 보호 해제하세요. 모든 운영 체제에서 안전하지 않은 PDF 파일을 만들기 위해 PDF를 잠금 해제하세요.",
+    metaDescription: "우리 PDF 잠금 해제 도구로 PDF 파일을 손쉽게 잠금 해제하세요. PDF 권한 비밀번호를 제거하고, 온라인 PDF를 보호 해제하며, 잠금 해제된 파일을 안전하게 다운로드하세요.",
+    keywords: "PDF 파일 잠금 해제, PDF 파일 잠금 해제 방법, PDF 잠금 해제, PDF 파일 잠금 해제하기, PDF로 잠금 해제, PDF 파일 잠금 해제, 안전하지 않은 PDF 파일, PDF 잠금 해제 도구, 잠금 해제된 파일, PDF 문서 잠금 해제, SmallPDF 잠금 해제, PDFs 잠금 해제, PDF 보호 도구, 권한 비밀번호, 파일 다운로드, PDF에서 비밀번호, 온라인 PDF, PDF 비밀번호 제거, SmallPDF PDF 잠금 해제, PDF 제거, 저장 클릭, 비밀번호 클릭, PDF 잠금 해제 도구",
+
+    // Benefits Section
+    benefits: {
+      title: "PDF 파일 잠금 해제를 위해 우리 PDF 잠금 해제 도구를 사용하는 이유",
+      list: [
+        {
+          title: "빠른 PDF 잠금 해제 도구",
+          description: "우리 PDF 잠금 해제 도구를 사용하여 PDF 비밀번호를 빠르게 제거하고 안전하지 않은 PDF 파일을 만들어 즉시 파일을 다운로드할 준비를 하세요."
+        },
+        {
+          title: "PDF 파일을 쉽게 잠금 해제",
+          description: "간단한 비밀번호 입력 상자를 통해 권한 비밀번호 또는 문서 열기 비밀번호를 입력하여 온라인으로 PDF 파일을 잠금 해제하세요—저장을 클릭하면 완료됩니다."
+        },
+        {
+          title: "모든 플랫폼에서 PDFs 잠금 해제",
+          description: "우리 온라인 PDF 잠금 해제 도구는 모든 운영 체제에서 작동하며, SmallPDF 잠금 해제나 우리 PDF 잠금 해제 도구를 사용하든 PDF 파일 잠금 해제가 매끄럽습니다."
+        },
+        {
+          title: "안전한 PDF 문서 잠금 해제",
+          description: "우리 도구로 PDF 파일에서 비밀번호를 안전하게 제거하여 PDF 잠금 해제 후 잠금 해제된 파일이 비공개로 유지되도록 보장합니다."
+        }
+      ]
+    },
+
+    // Use Cases Section
+    useCases: {
+      title: "PDF 파일 잠금 해제 방법: 주요 사용 사례",
+      list: [
+        {
+          title: "권한 비밀번호로 PDF 파일 잠금 해제",
+          description: "우리 PDF 잠금 해제 도구를 사용하여 권한 비밀번호를 제거하고 비밀번호 클릭을 알 때 완전한 접근을 위해 PDF로 잠금 해제하세요."
+        },
+        {
+          title: "비즈니스용 온라인 PDF",
+          description: "비즈니스 문서에서 PDF 비밀번호를 제거하기 위해 온라인으로 PDF 파일을 잠금 해제하여 빠른 저장 클릭으로 공유와 편집을 간소화하세요."
+        },
+        {
+          title: "PDF 학습 자료 잠금 해제",
+          description: "우리 PDF 잠금 해제 도구로 온라인 PDF 학습 자원을 보호 해제하여 매끄러운 학습을 위한 안전하지 않은 PDF 파일을 만드세요."
+        },
+        {
+          title: "개인 PDF 문서 잠금 해제",
+          description: "우리 SmallPDF 잠금 해제 PDF 대안을 사용한 후 개인 컬렉션에서 PDF 파일을 잠금 해제하는 방법을 배우고 파일을 다운로드하세요."
+        }
+      ]
+    },
+
+    // How-To Section
     howTo: {
-      title: "PDF 파일 잠금 해제 방법",
+      title: "3단계로 PDF 파일 잠금 해제 방법",
       upload: {
-        title: "업로드",
-        description: "잠금 해제하려는 비밀번호로 보호된 PDF 파일을 업로드하세요."
+        title: "1단계: 온라인 PDF 업로드",
+        description: "우리 PDF 잠금 해제 도구로 보호 해제하고 싶은 PDF 파일을 업로드하여 PDF 잠금 해제를 시작하세요."
       },
       enterPassword: {
-        title: "비밀번호 입력",
-        description: "필요한 경우, PDF를 보호하는 현재 비밀번호를 입력하세요."
+        title: "2단계: 권한 비밀번호 입력",
+        description: "PDF에서 비밀번호(문서 열기 비밀번호 또는 권한 비밀번호 등)를 입력하기 위해 비밀번호 입력 상자를 사용하세요."
       },
       download: {
-        title: "다운로드",
-        description: "비밀번호 제한이 없는 잠금 해제된 PDF 파일을 다운로드하세요."
+        title: "3단계: 잠금 해제된 파일 다운로드",
+        description: "PDF 비밀번호를 제거한 후 파일을 안전하지 않은 PDF 파일로 다운로드하여 PDF 파일 잠금 해제를 완료하세요."
       }
     },
+
+    // Features Section
+    features: {
+      title: "우리 PDF 잠금 해제 도구의 주요 기능",
+      list: [
+        {
+          title: "모든 온라인 PDF 지원",
+          description: "권한 비밀번호 또는 문서 열기 비밀번호가 있는 PDF 파일을 손쉽게 잠금 해제하세요."
+        },
+        {
+          title: "빠른 PDF 잠금 해제 프로세스",
+          description: "우리 빠른 PDF 잠금 해제 도구로 몇 초 안에 PDF 비밀번호를 제거하여 파일 다운로드에 이상적입니다."
+        },
+        {
+          title: "크로스 플랫폼 PDF 문서 잠금 해제",
+          description: "모든 운영 체제에서 우리 PDF 잠금 해제 도구를 사용하여 PDF 파일을 매끄럽게 잠금 해제하세요."
+        },
+        {
+          title: "안전한 SmallPDF 잠금 해제 대안",
+          description: "암호화된 처리로 PDF 파일을 보호 해제하여 SmallPDF 잠금 해제 PDF의 안전한 대안을 제공합니다."
+        }
+      ]
+    },
+
+    // FAQ Section
     faq: {
       passwordRequired: {
-        question: "현재 비밀번호를 알아야 하나요?",
-        answer: "네, PDF 잠금을 해제하려면 현재 비밀번호를 알아야 합니다. 저희 도구는 비밀번호를 우회하거나 해독할 수 없으며, 올바른 비밀번호를 제공한 후 보호를 제거합니다."
+        question: "PDF 파일을 잠금 해제하려면 비밀번호 클릭이 필요한가요?",
+        answer: "네, PDFs를 잠금 해제하려면 비밀번호 입력 상자에 PDF에서 비밀번호(문서 열기 비밀번호 또는 권한 비밀번호 등)를 입력해야 합니다. 우리 도구는 비밀번호를 우회하지 않습니다."
       },
       security: {
-        question: "잠금 해제 과정이 안전한가요?",
-        answer: "네, 모든 처리는 보안 서버에서 이루어집니다. PDF나 비밀번호를 저장하지 않으며, 파일은 처리 후 자동으로 삭제되고 모든 데이터 전송은 암호화됩니다."
+        question: "이 도구로 PDF 파일을 잠금 해제하는 것이 안전한가요?",
+        answer: "네, 우리 PDF 잠금 해제 도구는 암호화된 서버에서 온라인 PDF를 처리합니다. 파일을 다운로드한 후 파일이나 비밀번호를 저장하지 않습니다."
       },
       restrictions: {
-        question: "열기 비밀번호 없이 소유자 제한이 있는 PDF를 잠금 해제할 수 있나요?",
-        answer: "네, 일부 PDF는 열기 비밀번호가 필요 없지만 인쇄, 편집, 복사에 제한이 있습니다. 저희 도구는 비밀번호 입력 없이 파일을 업로드하여 이러한 제한도 제거할 수 있습니다."
+        question: "비밀번호 클릭 없이 PDF로 잠금 해제할 수 있나요?",
+        answer: "네, 문서 열기 비밀번호가 없지만 권한 비밀번호가 있는 경우, PDF 제한을 제거하기 위해 업로드하세요."
       },
       quality: {
-        question: "잠금 해제가 PDF 품질이나 콘텐츠에 영향을 미치나요?",
-        answer: "아니요, 잠금 해제 과정은 보안 설정만 제거하며 PDF 파일의 콘텐츠, 형식 또는 품질을 전혀 변경하지 않습니다."
+        question: "PDF 잠금 해제가 품질에 영향을 미치나요?",
+        answer: "아니요, 우리 PDF 잠금 해제 도구는 PDF 설정에서 비밀번호만 제거합니다—잠금 해제된 파일은 원래 품질을 유지합니다."
+      },
+      compatibility: {
+        question: "SmallPDF 잠금 해제 PDF 사용자에게도 작동하나요?",
+        answer: "네, 우리 PDF 잠금 해제 도구는 모든 운영 체제에서 작동하며 SmallPDF 잠금 해제의 훌륭한 대안으로 온라인에서 PDF 파일을 잠금 해제합니다."
       }
     },
+
+    // Status Messages
     passwordProtected: "비밀번호로 보호됨",
     notPasswordProtected: "비밀번호로 보호되지 않음",
     unlocking: "PDF 잠금 해제 중...",
     unlockSuccess: "PDF가 성공적으로 잠금 해제되었습니다!",
-    unlockSuccessDesc: "귀하의 PDF 파일이 잠금 해제되었으며 다운로드할 준비가 되었습니다."
+    unlockSuccessDesc: "PDF 문서 잠금 해제가 완료되었습니다! 지금 잠금 해제된 파일을 다운로드하세요."
   },
 
   // File Uploader

@@ -1356,46 +1356,127 @@ export default {
   },
   // Unlock PDF
   unlockPdf: {
-    title: "Desbloquear Archivos PDF",
-    description: "Elimina la protección por contraseña de tus documentos PDF para acceso sin restricciones",
+    title: "Sblocca Facilmente i File PDF con il Nostro Sblocca PDF",
+    description: "Rimuovi le password dai PDF e sblocca i file PDF rapidamente con il nostro strumento di sblocco PDF online. Sblocca i PDF per creare un file PDF non protetto su qualsiasi sistema operativo.",
+    metaDescription: "Sblocca i file PDF senza sforzo con il nostro sblocca PDF. Rimuovi la password di autorizzazione PDF, sblocca i PDF online e scarica il tuo file sbloccato in sicurezza.",
+    keywords: "sblocca file PDF, come sbloccare file PDF, sblocco PDF, sblocco file PDF, sblocca in PDF, sblocca file PDF, file PDF non protetto, sblocca PDF, file sbloccato, sblocco documento PDF, SmallPDF sblocca, sblocca PDFs, strumento protezione PDF, password di autorizzazione, scarica il tuo file, password dal PDF, PDF online, rimuovi password PDF, SmallPDF sblocca PDF, rimuovi il PDF, clicca salva, clicca password, strumento sblocca PDF",
+
+    // Benefits Section
+    benefits: {
+      title: "Perché Usare il Nostro Strumento Sblocca PDF per Sbloccare i File PDF",
+      list: [
+        {
+          title: "Sblocca PDF Veloce",
+          description: "Usa il nostro strumento sblocca PDF per rimuovere rapidamente la password del PDF e creare un file PDF non protetto, pronto per scaricare il tuo file istantaneamente."
+        },
+        {
+          title: "Sblocco Facile dei File PDF",
+          description: "Con una semplice casella di inserimento password, sblocca i file PDF online inserendo la password di autorizzazione o la password di apertura del documento—clicca salva e hai finito."
+        },
+        {
+          title: "Sblocca PDFs su Qualsiasi Piattaforma",
+          description: "Il nostro sblocca PDF online funziona su qualsiasi sistema operativo, rendendo lo sblocco dei file PDF fluido sia che tu usi SmallPDF sblocca o il nostro strumento sblocca PDF."
+        },
+        {
+          title: "Sblocco Sicuro del Documento PDF",
+          description: "Rimuovi in sicurezza la password dai file PDF con il nostro strumento, garantendo che il tuo file sbloccato rimanga privato dopo lo sblocco del PDF."
+        }
+      ]
+    },
+
+    // Use Cases Section
+    useCases: {
+      title: "Come Sbloccare un File PDF: Principali Casi d'Uso",
+      list: [
+        {
+          title: "Sblocca File PDF con Password di Autorizzazione",
+          description: "Usa il nostro sblocca PDF per rimuovere la password di autorizzazione e sblocca in PDF per un accesso completo quando conosci il clicca password."
+        },
+        {
+          title: "PDF Online per Affari",
+          description: "Sblocca i file PDF online per rimuovere le password PDF dai documenti aziendali, semplificando la condivisione e la modifica con un rapido clicca salva."
+        },
+        {
+          title: "Sblocco di Materiali di Studio PDF",
+          description: "Sblocca risorse di studio PDF online con il nostro strumento sblocca PDF per creare un file PDF non protetto per un apprendimento fluido."
+        },
+        {
+          title: "Sblocco di Documenti PDF Personali",
+          description: "Scopri come sbloccare un file PDF dalla tua collezione personale scaricando il tuo file dopo aver usato la nostra alternativa a SmallPDF sblocca PDF."
+        }
+      ]
+    },
+
+    // How-To Section
     howTo: {
-      title: "Cómo Desbloquear Archivos PDF",
+      title: "Come Sbloccare un File PDF in 3 Passaggi",
       upload: {
-        title: "Subir",
-        description: "Sube el archivo PDF protegido con contraseña que deseas desbloquear."
+        title: "Passaggio 1: Carica il Tuo PDF Online",
+        description: "Inizia a sbloccare il PDF caricando il file PDF che desideri sbloccare con il nostro strumento sblocca PDF."
       },
       enterPassword: {
-        title: "Ingresar Contraseña",
-        description: "Si es necesario, ingresa la contraseña actual que protege el PDF."
+        title: "Passaggio 2: Inserisci la Password di Autorizzazione",
+        description: "Usa la casella di inserimento password per inserire la password dal PDF, come la password di apertura del documento o la password di autorizzazione."
       },
       download: {
-        title: "Descargar",
-        description: "Descarga tu archivo PDF desbloqueado sin restricciones de contraseña."
+        title: "Passaggio 3: Scarica il File Sbloccato",
+        description: "Completa lo sblocco dei file PDF scaricando il tuo file come file PDF non protetto dopo che abbiamo rimosso la password del PDF."
       }
     },
+
+    // Features Section
+    features: {
+      title: "Caratteristiche Chiave del Nostro Sblocca PDF",
+      list: [
+        {
+          title: "Supporta Tutti i PDF Online",
+          description: "Sblocca i file PDF con password di autorizzazione o password di apertura del documento senza sforzo."
+        },
+        {
+          title: "Processo di Sblocco PDF Rapido",
+          description: "Rimuovi le password PDF in pochi secondi con il nostro veloce strumento sblocca PDF, ideale per scaricare il tuo file."
+        },
+        {
+          title: "Sblocco Documento PDF Multipiattaforma",
+          description: "Usa il nostro sblocca PDF su qualsiasi sistema operativo per sbloccare i file PDF senza problemi."
+        },
+        {
+          title: "Alternativa Sicura a SmallPDF Sblocca",
+          description: "Sblocca i file PDF con elaborazione crittografata, offrendo un'alternativa sicura a SmallPDF sblocca PDF."
+        }
+      ]
+    },
+
+    // FAQ Section
     faq: {
       passwordRequired: {
-        question: "¿Necesito saber la contraseña actual?",
-        answer: "Sí, para desbloquear un PDF, necesitas conocer la contraseña actual. Nuestra herramienta no puede eludir ni descifrar contraseñas; solo elimina la protección después de que proporciones la contraseña correcta."
+        question: "Ho bisogno del clicca password per sbloccare i file PDF?",
+        answer: "Sì, devi inserire la password dal PDF—come la password di apertura del documento o la password di autorizzazione—nella casella di inserimento password per sbloccare i PDFs. Il nostro strumento non aggira le password."
       },
       security: {
-        question: "¿Es seguro el proceso de desbloqueo?",
-        answer: "Sí, todo el procesamiento ocurre en nuestros servidores seguros. No almacenamos tus PDFs ni contraseñas. Los archivos se eliminan automáticamente después del procesamiento, y toda la transferencia de datos está encriptada."
+        question: "È sicuro sbloccare i file PDF con questo strumento?",
+        answer: "Sì, il nostro strumento sblocca PDF elabora i PDF online su server crittografati. Non conserviamo i tuoi file o password dopo aver scaricato il tuo file."
       },
       restrictions: {
-        question: "¿Puedo desbloquear un PDF con restricciones de propietario pero sin contraseña de apertura?",
-        answer: "Sí, algunos PDFs no requieren contraseña para abrirse pero tienen restricciones de impresión, edición o copia. Nuestra herramienta también puede eliminar estas restricciones. Solo sube el archivo sin ingresar una contraseña."
+        question: "Posso sbloccare in PDF senza clicca password?",
+        answer: "Sì, se non c'è una password di apertura del documento ma esiste una password di autorizzazione, caricalo per rimuovere le restrizioni del PDF."
       },
       quality: {
-        question: "¿Afectará el desbloqueo la calidad o el contenido del PDF?",
-        answer: "No, nuestro proceso de desbloqueo solo elimina las configuraciones de seguridad. No altera el contenido, el formato ni la calidad de tu archivo PDF de ninguna manera."
+        question: "Lo sblocco del PDF influisce sulla qualità?",
+        answer: "No, il nostro sblocca PDF rimuove solo la password dalle impostazioni del PDF—il tuo file sbloccato mantiene la qualità originale."
+      },
+      compatibility: {
+        question: "Funziona per gli utenti di SmallPDF sblocca PDF?",
+        answer: "Sì, il nostro strumento sblocca PDF funziona su qualsiasi sistema operativo ed è un'ottima alternativa a SmallPDF sblocca, sbloccando i file PDF online."
       }
     },
-    passwordProtected: "Protegido con Contraseña",
-    notPasswordProtected: "No Protegido con Contraseña",
-    unlocking: "Desbloqueando tu PDF...",
-    unlockSuccess: "¡PDF desbloqueado con éxito!",
-    unlockSuccessDesc: "Tu archivo PDF ha sido desbloqueado y está listo para descargar."
+
+    // Status Messages
+    passwordProtected: "Protetto da Password",
+    notPasswordProtected: "Non Protetto da Password",
+    unlocking: "Sblocco PDF in corso...",
+    unlockSuccess: "PDF Sbloccato con Successo!",
+    unlockSuccessDesc: "Lo sblocco del tuo documento PDF è completo! Scarica il tuo file sbloccato ora."
   },
 
   // File Uploader

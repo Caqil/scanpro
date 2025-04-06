@@ -1435,46 +1435,127 @@ export default {
 
     // 解锁PDF
     unlockPdf: {
-        title: "解锁PDF文件",
-        description: "移除PDF文档的密码保护以实现无限制访问",
+        title: "使用我们的PDF解锁器轻松解锁PDF文件",
+        description: "使用我们的在线PDF解锁工具快速移除PDF密码并解除PDF文件的保护。在任何操作系统上解锁PDF以创建不安全的PDF文件。",
+        metaDescription: "使用我们的PDF解锁器轻松解锁PDF文件。移除PDF权限密码，解除在线PDF的保护，并安全下载您的解锁文件。",
+        keywords: "解锁PDF文件, 如何解锁PDF文件, PDF解锁, 解锁PDF文件, 解锁到PDF, 解锁PDF文件, 不安全的PDF文件, PDF解锁器, 解锁文件, PDF文档解锁, SmallPDF解锁, 解锁PDFs, PDF保护工具, 权限密码, 下载您的文件, PDF中的密码, 在线PDF, 移除PDF密码, SmallPDF解锁PDF, 移除PDF, 点击保存, 点击密码, PDF解锁工具",
+
+        // Benefits Section
+        benefits: {
+            title: "为什么使用我们的PDF解锁工具来解锁PDF文件",
+            list: [
+                {
+                    title: "快速PDF解锁器",
+                    description: "使用我们的PDF解锁工具快速移除PDF密码并创建不安全的PDF文件，随时准备下载您的文件。"
+                },
+                {
+                    title: "轻松解锁PDF文件",
+                    description: "通过简单的密码输入框，输入权限密码或文档打开密码即可在线解锁PDF文件—点击保存即可完成。"
+                },
+                {
+                    title: "在任何平台上解锁PDFs",
+                    description: "我们的在线PDF解锁器适用于任何操作系统，无论您使用SmallPDF解锁还是我们的PDF解锁工具，都能无缝解锁PDF文件。"
+                },
+                {
+                    title: "安全的PDF文档解锁",
+                    description: "使用我们的工具安全移除PDF文件中的密码，确保解锁PDF后您的解锁文件保持隐私。"
+                }
+            ]
+        },
+
+        // Use Cases Section
+        useCases: {
+            title: "如何解锁PDF文件：顶级使用场景",
+            list: [
+                {
+                    title: "使用权限密码解锁PDF文件",
+                    description: "使用我们的PDF解锁器移除权限密码，并在您知道点击密码时解锁到PDF以获得完全访问权限。"
+                },
+                {
+                    title: "商务在线PDF",
+                    description: "在线解锁PDF文件以移除商务文档中的PDF密码，通过快速点击保存简化共享和编辑。"
+                },
+                {
+                    title: "解锁PDF学习材料",
+                    description: "使用我们的PDF解锁工具解除在线PDF学习资源的保护，创建不安全的PDF文件以实现无缝学习。"
+                },
+                {
+                    title: "个人PDF文档解锁",
+                    description: "了解如何使用我们的SmallPDF解锁PDF替代方案从您的个人收藏中解锁PDF文件并下载您的文件。"
+                }
+            ]
+        },
+
+        // How-To Section
         howTo: {
-            title: "如何解锁PDF文件",
+            title: "如何在3个步骤中解锁PDF文件",
             upload: {
-                title: "上传",
-                description: "上传您想解锁的受密码保护的PDF文件。"
+                title: "步骤1：上传您的在线PDF",
+                description: "通过上传您想解除保护的PDF文件，使用我们的PDF解锁工具开始解锁PDF。"
             },
             enterPassword: {
-                title: "输入密码",
-                description: "如有需要，输入保护PDF的当前密码。"
+                title: "步骤2：输入权限密码",
+                description: "使用密码输入框输入PDF中的密码，例如文档打开密码或权限密码。"
             },
             download: {
-                title: "下载",
-                description: "下载您解锁后的PDF文件，没有密码限制。"
+                title: "步骤3：下载解锁文件",
+                description: "在我们移除PDF密码后，将您的文件下载为不安全的PDF文件，完成PDF文件的解锁。"
             }
         },
+
+        // Features Section
+        features: {
+            title: "我们PDF解锁器的主要功能",
+            list: [
+                {
+                    title: "支持所有在线PDF",
+                    description: "轻松解锁带有权限密码或文档打开密码的PDF文件。"
+                },
+                {
+                    title: "快速PDF解锁过程",
+                    description: "使用我们快速的PDF解锁工具在几秒钟内移除PDF密码，非常适合下载您的文件。"
+                },
+                {
+                    title: "跨平台PDF文档解锁",
+                    description: "在任何操作系统上使用我们的PDF解锁器无缝解锁PDF文件。"
+                },
+                {
+                    title: "安全的SmallPDF解锁替代方案",
+                    description: "通过加密处理解除PDF文件的保护，提供SmallPDF解锁PDF的安全替代方案。"
+                }
+            ]
+        },
+
+        // FAQ Section
         faq: {
             passwordRequired: {
-                question: "我需要知道当前密码吗？",
-                answer: "是的，要解锁PDF，您需要知道当前密码。我们的工具无法绕过或破解密码；它只是在您提供正确密码后移除保护。"
+                question: "解锁PDF文件需要点击密码吗？",
+                answer: "是的，您必须在密码输入框中输入PDF中的密码—如文档打开密码或权限密码—以解锁PDFs。我们的工具不会绕过密码。"
             },
             security: {
-                question: "解锁过程安全吗？",
-                answer: "是的，所有处理都在我们的安全服务器上进行。我们不会存储您的PDF或密码。文件在处理后自动删除，所有数据传输都经过加密。"
+                question: "使用此工具解锁PDF文件安全吗？",
+                answer: "是的，我们的PDF解锁工具在加密服务器上处理在线PDF。下载您的文件后，我们不会存储您的文件或密码。"
             },
             restrictions: {
-                question: "我可以解锁有所有者限制但无打开密码的PDF吗？",
-                answer: "是的，有些PDF不需要密码即可打开，但对打印、编辑或复制有限制。我们的工具也可以移除这些限制。只需上传文件，无需输入密码。"
+                question: "可以在没有点击密码的情况下解锁到PDF吗？",
+                answer: "是的，如果没有文档打开密码但存在权限密码，请上传以移除PDF限制。"
             },
             quality: {
-                question: "解锁会影响PDF质量或内容吗？",
-                answer: "不会，我们的解锁过程仅移除安全设置，不会以任何方式改变PDF文件的内容、格式或质量。"
+                question: "解锁PDF会影响质量吗？",
+                answer: "不会，我们的PDF解锁器仅从PDF设置中移除密码—您的解锁文件保持原始质量。"
+            },
+            compatibility: {
+                question: "这对SmallPDF解锁PDF用户有效吗？",
+                answer: "是的，我们的PDF解锁工具适用于任何操作系统，是SmallPDF解锁的绝佳替代方案，可以在线解锁PDF文件。"
             }
         },
+
+        // Status Messages
         passwordProtected: "受密码保护",
         notPasswordProtected: "未受密码保护",
-        unlocking: "正在解锁您的PDF...",
-        unlockSuccess: "PDF成功解锁！",
-        unlockSuccessDesc: "您的PDF文件已解锁并准备好下载。"
+        unlocking: "正在解锁PDF...",
+        unlockSuccess: "PDF解锁成功！",
+        unlockSuccessDesc: "您的PDF文档解锁已完成！现在下载您的解锁文件。"
     },
 
     // 文件上传器
@@ -2401,111 +2482,111 @@ export default {
         title: "签署PDF：为文档添加数字签名",
         description: "轻松为您的PDF文档添加数字签名、文本注释、印章和绘图",
         howTo: {
-          title: "如何签署PDF文档",
-          step1: {
-            title: "上传您的PDF",
-            description: "上传您想要签署或注释的PDF文档"
-          },
-          step2: {
-            title: "添加您的签名",
-            description: "创建、上传或绘制您的签名并将其放置在文档上"
-          },
-          step3: {
-            title: "保存并下载",
-            description: "保存您的更改并下载已签署的PDF文档"
-          }
+            title: "如何签署PDF文档",
+            step1: {
+                title: "上传您的PDF",
+                description: "上传您想要签署或注释的PDF文档"
+            },
+            step2: {
+                title: "添加您的签名",
+                description: "创建、上传或绘制您的签名并将其放置在文档上"
+            },
+            step3: {
+                title: "保存并下载",
+                description: "保存您的更改并下载已签署的PDF文档"
+            }
         },
         tools: {
-          signature: "签名",
-          text: "文本",
-          stamp: "印章",
-          draw: "绘制",
-          image: "图像"
+            signature: "签名",
+            text: "文本",
+            stamp: "印章",
+            draw: "绘制",
+            image: "图像"
         },
         options: {
-          draw: "绘制签名",
-          upload: "上传签名",
-          type: "输入签名",
-          clear: "清除",
-          save: "保存签名",
-          color: "颜色",
-          fontSize: "字体大小",
-          cancel: "取消",
-          apply: "应用",
-          position: "位置"
+            draw: "绘制签名",
+            upload: "上传签名",
+            type: "输入签名",
+            clear: "清除",
+            save: "保存签名",
+            color: "颜色",
+            fontSize: "字体大小",
+            cancel: "取消",
+            apply: "应用",
+            position: "位置"
         },
         stamps: {
-          approved: "已批准",
-          rejected: "已拒绝",
-          draft: "草稿",
-          final: "最终版",
-          confidential: "机密"
+            approved: "已批准",
+            rejected: "已拒绝",
+            draft: "草稿",
+            final: "最终版",
+            confidential: "机密"
         },
         messages: {
-          noFile: "未选择文件",
-          uploadFirst: "请先上传要签署的PDF文件",
-          processing: "正在处理您的PDF...",
-          signed: "PDF已成功签署！",
-          downloadReady: "您的已签署PDF已准备好下载",
-          error: "签署PDF时出错",
-          errorDesc: "处理您的请求时出现错误。请重试。"
+            noFile: "未选择文件",
+            uploadFirst: "请先上传要签署的PDF文件",
+            processing: "正在处理您的PDF...",
+            signed: "PDF已成功签署！",
+            downloadReady: "您的已签署PDF已准备好下载",
+            error: "签署PDF时出错",
+            errorDesc: "处理您的请求时出现错误。请重试。"
         },
         faq: {
-          title: "常见问题解答",
-          legality: {
-            question: "数字签名具有法律约束力吗？",
-            answer: "使用我们工具创建的数字签名在视觉上类似于手写签名。对于符合eIDAS或ESIGN法案等法规的具有法律约束力的电子签名，您可能需要合格的电子签名服务。我们的工具适用于内部文档、草稿或视觉签名足够的情况。"
-          },
-          security: {
-            question: "签名的安全性如何？",
-            answer: "我们的签名是PDF文档上的视觉叠加层。它们提供了同意的视觉表示，但不包括高级数字签名解决方案中常见的加密安全功能。您的文档会得到安全处理，我们不会存储您已签署的PDF。"
-          },
-          formats: {
-            question: "支持哪些签名格式？",
-            answer: "您可以通过鼠标/触摸板绘制、上传图像文件（推荐PNG、JPG透明背景）或以各种字体样式输入您的姓名来创建签名。"
-          },
-          multipleSignatures: {
-            question: "我可以在一个文档中添加多个签名吗？",
-            answer: "是的，您可以在文档中添加多个签名、文本注释、印章和绘图。这对于需要多方签名或在不同位置需要注释的文档非常有用。"
-          }
+            title: "常见问题解答",
+            legality: {
+                question: "数字签名具有法律约束力吗？",
+                answer: "使用我们工具创建的数字签名在视觉上类似于手写签名。对于符合eIDAS或ESIGN法案等法规的具有法律约束力的电子签名，您可能需要合格的电子签名服务。我们的工具适用于内部文档、草稿或视觉签名足够的情况。"
+            },
+            security: {
+                question: "签名的安全性如何？",
+                answer: "我们的签名是PDF文档上的视觉叠加层。它们提供了同意的视觉表示，但不包括高级数字签名解决方案中常见的加密安全功能。您的文档会得到安全处理，我们不会存储您已签署的PDF。"
+            },
+            formats: {
+                question: "支持哪些签名格式？",
+                answer: "您可以通过鼠标/触摸板绘制、上传图像文件（推荐PNG、JPG透明背景）或以各种字体样式输入您的姓名来创建签名。"
+            },
+            multipleSignatures: {
+                question: "我可以在一个文档中添加多个签名吗？",
+                answer: "是的，您可以在文档中添加多个签名、文本注释、印章和绘图。这对于需要多方签名或在不同位置需要注释的文档非常有用。"
+            }
         },
         benefits: {
-          title: "数字签名的优势",
-          paperless: {
-            title: "无纸化",
-            description: "消除打印、签署、扫描和通过电子邮件发送文档的需要"
-          },
-          time: {
-            title: "节省时间",
-            description: "无需物理处理即可随时随地即时签署文档"
-          },
-          professional: {
-            title: "专业外观",
-            description: "创建干净、专业外观的已签署文档"
-          },
-          workflow: {
-            title: "简化工作流程",
-            description: "加快文档批准和业务流程"
-          }
+            title: "数字签名的优势",
+            paperless: {
+                title: "无纸化",
+                description: "消除打印、签署、扫描和通过电子邮件发送文档的需要"
+            },
+            time: {
+                title: "节省时间",
+                description: "无需物理处理即可随时随地即时签署文档"
+            },
+            professional: {
+                title: "专业外观",
+                description: "创建干净、专业外观的已签署文档"
+            },
+            workflow: {
+                title: "简化工作流程",
+                description: "加快文档批准和业务流程"
+            }
         },
         useCases: {
-          title: "常见使用场景",
-          contracts: {
-            title: "合同和协议",
-            description: "为商业合同和协议添加您的签名"
-          },
-          forms: {
-            title: "表格和申请",
-            description: "无需打印即可填写和签署表格"
-          },
-          approvals: {
-            title: "文档批准",
-            description: "使用官方印章和签名将文档标记为已批准"
-          },
-          feedback: {
-            title: "反馈和修订",
-            description: "在审查期间为文档添加评论和注释"
-          }
+            title: "常见使用场景",
+            contracts: {
+                title: "合同和协议",
+                description: "为商业合同和协议添加您的签名"
+            },
+            forms: {
+                title: "表格和申请",
+                description: "无需打印即可填写和签署表格"
+            },
+            approvals: {
+                title: "文档批准",
+                description: "使用官方印章和签名将文档标记为已批准"
+            },
+            feedback: {
+                title: "反馈和修订",
+                description: "在审查期间为文档添加评论和注释"
+            }
         },
         draw: "绘制",
         addText: "添加文本",
@@ -2518,5 +2599,5 @@ export default {
         signatureOptions: "签名选项",
         annotationTools: "注释工具",
         pages: "页面"
-      },
+    },
 }

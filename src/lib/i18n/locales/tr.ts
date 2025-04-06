@@ -1435,46 +1435,127 @@ export default {
 
     // PDF Kilidini Açma
     unlockPdf: {
-        title: "PDF Dosyalarının Kilidini Aç",
-        description: "PDF belgelerinizden parola korumasını kaldırarak sınırsız erişim sağlayın",
+        title: "PDF Kilit Açıcı ile PDF Dosyalarını Kolayca Kilidini Açın",
+        description: "Çevrimiçi PDF kilit açma aracımızla PDF şifrelerini kaldırın ve PDF dosyalarını hızla korumasız hale getirin. Herhangi bir işletim sisteminde güvenli olmayan bir PDF dosyası oluşturmak için PDF'lerin kilidini açın.",
+        metaDescription: "PDF kilit açıcı ile PDF dosyalarını zahmetsizce kilidini açın. PDF izin şifresini kaldırın, çevrimiçi PDF'leri korumasız hale getirin ve kilidi açılmış dosyanızı güvenli bir şekilde indirin.",
+        keywords: "PDF dosyası kilidini aç, PDF dosyası nasıl kilidini açılır, PDF kilidini açma, PDF dosyalarını kilidini açma, PDF'ye kilidini aç, PDF dosyaları kilidini aç, güvenli olmayan PDF dosyası, PDF kilit açıcı, kilidi açılmış dosya, PDF belge kilidini açma, SmallPDF kilidini aç, PDF'leri kilidini aç, PDF koruma aracı, izin şifresi, dosyanızı indirme, PDF'den şifre, çevrimiçi PDF, PDF şifrelerini kaldır, SmallPDF PDF kilidini aç, PDF'yi kaldır, kaydet'e tıkla, şifre tıkla, PDF kilit açma aracı",
+
+        // Benefits Section
+        benefits: {
+            title: "PDF Dosyalarını Kilidini Açmak İçin Neden PDF Kilit Açma Aracımızı Kullanmalısınız",
+            list: [
+                {
+                    title: "Hızlı PDF Kilit Açıcı",
+                    description: "PDF kilit açma aracımızı kullanarak PDF şifresini hızlıca kaldırın ve güvenli olmayan bir PDF dosyası oluşturun, dosyanızı anında indirmeye hazır hale getirin."
+                },
+                {
+                    title: "PDF Dosyalarını Kolayca Kilidini Açma",
+                    description: "Basit bir şifre giriş kutusu ile izin şifresini veya belge açma şifresini girerek çevrimiçi PDF dosyalarının kilidini açın—kaydet'e tıklayın ve işiniz bitti."
+                },
+                {
+                    title: "Her Platformda PDF'lerin Kilidini Açın",
+                    description: "Çevrimiçi PDF kilit açıcı aracımız her işletim sisteminde çalışır, SmallPDF kilidini aç veya bizim PDF kilit açma aracımızı kullanıyor olsanız da PDF dosyalarını kilidini açma işlemini sorunsuz hale getirir."
+                },
+                {
+                    title: "Güvenli PDF Belge Kilidini Açma",
+                    description: "Aracımızla PDF dosyalarından şifreyi güvenli bir şekilde kaldırın, PDF kilidini açtıktan sonra kilidi açılmış dosyanızın gizli kalmasını sağlayın."
+                }
+            ]
+        },
+
+        // Use Cases Section
+        useCases: {
+            title: "PDF Dosyası Nasıl Kilidini Açılır: En İyi Kullanım Senaryoları",
+            list: [
+                {
+                    title: "İzin Şifresi ile PDF Dosyasının Kilidini Açma",
+                    description: "PDF kilit açıcı aracımızı kullanarak izin şifresini kaldırın ve şifre tıklamasını bildiğinizde tam erişim için PDF'ye kilidini açın."
+                },
+                {
+                    title: "İş için Çevrimiçi PDF",
+                    description: "İş belgelerinden PDF şifrelerini kaldırmak için çevrimiçi PDF dosyalarının kilidini açın, hızlı bir kaydet'e tıklama ile paylaşımı ve düzenlemeyi basitleştirin."
+                },
+                {
+                    title: "PDF Çalışma Materyallerinin Kilidini Açma",
+                    description: "PDF kilit açma aracımızla çevrimiçi PDF çalışma kaynaklarını korumasız hale getirin, sorunsuz öğrenme için güvenli olmayan bir PDF dosyası oluşturun."
+                },
+                {
+                    title: "Kişisel PDF Belge Kilidini Açma",
+                    description: "SmallPDF kilidini aç PDF alternatifimizi kullanarak kişisel koleksiyonunuzdan PDF dosyasının kilidini nasıl açacağınızı öğrenin ve dosyanızı indirin."
+                }
+            ]
+        },
+
+        // How-To Section
         howTo: {
-            title: "PDF Dosyaları Nasıl Kilit Açılır",
+            title: "PDF Dosyası 3 Adımda Nasıl Kilidini Açılır",
             upload: {
-                title: "Yükle",
-                description: "Kilidini açmak istediğiniz parola korumalı PDF dosyasını yükleyin."
+                title: "Adım 1: Çevrimiçi PDF'nizi Yükleyin",
+                description: "PDF kilit açma aracımızla korumadan çıkarmak istediğiniz PDF dosyasını yükleyerek PDF kilidini açmaya başlayın."
             },
             enterPassword: {
-                title: "Parolayı Gir",
-                description: "Gerekirse PDF'yi koruyan mevcut parolayı girin."
+                title: "Adım 2: İzin Şifresini Girin",
+                description: "PDF'den şifreyi (belge açma şifresi veya izin şifresi gibi) girmek için şifre giriş kutusunu kullanın."
             },
             download: {
-                title: "İndir",
-                description: "Parola kısıtlamaları olmadan kilidi açılmış PDF dosyanızı indirin."
+                title: "Adım 3: Kilidi Açılmış Dosyayı İndirin",
+                description: "PDF şifresini kaldırdıktan sonra dosyanızı güvenli olmayan bir PDF dosyası olarak indirerek PDF dosyalarının kilidini açma işlemini tamamlayın."
             }
         },
+
+        // Features Section
+        features: {
+            title: "PDF Kilit Açıcı Aracımızın Temel Özellikleri",
+            list: [
+                {
+                    title: "Tüm Çevrimiçi PDF'leri Destekler",
+                    description: "İzin şifreleri veya belge açma şifreleri ile PDF dosyalarının kilidini zahmetsizce açın."
+                },
+                {
+                    title: "Hızlı PDF Kilidini Açma Süreci",
+                    description: "Hızlı PDF kilit açma aracımızla saniyeler içinde PDF şifrelerini kaldırın, dosyanızı indirmek için idealdir."
+                },
+                {
+                    title: "Çapraz Platform PDF Belge Kilidini Açma",
+                    description: "Herhangi bir işletim sisteminde PDF kilit açıcı aracımızı kullanarak PDF dosyalarının kilidini sorunsuzca açın."
+                },
+                {
+                    title: "Güvenli SmallPDF Kilidini Aç Alternatifi",
+                    description: "Şifreli işlemle PDF dosyalarını korumasız hale getirin, SmallPDF kilidini aç PDF için güvenli bir alternatif sunar."
+                }
+            ]
+        },
+
+        // FAQ Section
         faq: {
             passwordRequired: {
-                question: "Mevcut parolayı bilmem gerekiyor mu?",
-                answer: "Evet, bir PDF'nin kilidini açmak için mevcut parolayı bilmeniz gerekir. Aracımız parolaları atlayamaz veya kırmaz; doğru parola girildiğinde yalnızca korumayı kaldırır."
+                question: "PDF dosyalarının kilidini açmak için şifre tıklaması gerekiyor mu?",
+                answer: "Evet, PDF'lerin kilidini açmak için şifre giriş kutusuna PDF'den şifreyi—belge açma şifresi veya izin şifresi gibi—girmelisiniz. Aracımız şifreleri atlamaz."
             },
             security: {
-                question: "Kilidini açma işlemi güvenli mi?",
-                answer: "Evet, tüm işlemler güvenli sunucularımızda gerçekleşir. PDF'lerinizi veya parolalarınızı saklamayız. Dosyalar işlemden sonra otomatik olarak silinir ve veri aktarımı şifrelenir."
+                question: "Bu araçla PDF dosyalarının kilidini açmak güvenli mi?",
+                answer: "Evet, PDF kilit açma aracımız çevrimiçi PDF'leri şifreli sunucularda işler. Dosyanızı indirdikten sonra dosyalarınızı veya şifrelerinizi saklamayız."
             },
             restrictions: {
-                question: "Açma parolası olmayan ancak sahip kısıtlamaları olan bir PDF'nin kilidini açabilir miyim?",
-                answer: "Evet, bazı PDF'ler açmak için parola gerektirmez ancak yazdırma, düzenleme veya kopyalama gibi kısıtlamalara sahiptir. Aracımız bu kısıtlamaları da kaldırabilir. Dosyayı parola girmeden yüklemeniz yeterlidir."
+                question: "Şifre tıklaması olmadan PDF'ye kilidini açabilir miyim?",
+                answer: "Evet, belge açma şifresi yoksa ancak izin şifresi varsa, PDF kısıtlamalarını kaldırmak için yükleyin."
             },
             quality: {
-                question: "Kilidini açma PDF'nin kalitesini veya içeriğini etkiler mi?",
-                answer: "Hayır, kilidini açma işlemi yalnızca güvenlik ayarlarını kaldırır. PDF dosyanızın içeriğini, biçimlendirmesini veya kalitesini değiştirmez."
+                question: "PDF kilidini açma kaliteyi etkiler mi?",
+                answer: "Hayır, PDF kilit açıcı aracımız yalnızca PDF ayarlarından şifreyi kaldırır—kilidi açılmış dosyanız orijinal kalitesini korur."
+            },
+            compatibility: {
+                question: "Bu, SmallPDF kilidini aç PDF kullanıcıları için çalışıyor mu?",
+                answer: "Evet, PDF kilit açma aracımız herhangi bir işletim sisteminde çalışır ve SmallPDF kilidini aç için harika bir alternatif olarak çevrimiçi PDF dosyalarının kilidini açar."
             }
         },
-        passwordProtected: "Parola Korumalı",
-        notPasswordProtected: "Parola Korumalı Değil",
-        unlocking: "PDF'nizin kilidi açılıyor...",
-        unlockSuccess: "PDF Başarıyla Kilit Açıldı!",
-        unlockSuccessDesc: "PDF dosyanız kilit açıldı ve indirmeye hazır."
+
+        // Status Messages
+        passwordProtected: "Şifre Korumalı",
+        notPasswordProtected: "Şifre Korumalı Değil",
+        unlocking: "PDF Kilidi Açılıyor...",
+        unlockSuccess: "PDF Başarıyla Kilidi Açıldı!",
+        unlockSuccessDesc: "PDF belgenizin kilidi açma işlemi tamamlandı! Kilidi açılmış dosyanızı şimdi indirin."
     },
 
     // Dosya Yükleyici

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { PdfUnlocker } from "@/components/pdf-unlocker";
 import { useLanguageStore } from "@/src/store/store";
 import { Suspense } from "react";
-import { FAQSection, HowToUnlockSection, RelatedToolsSection, UnlockHeaderSection } from "./unlock-content";
+import { BenefitsSection, FAQSection, HowToUnlockSection, RelatedToolsSection, UnlockHeaderSection, UseCasesSection } from "./unlock-content";
 import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
 import { generatePageSeoMetadata } from "@/lib/seo/schemas";
 import { SEO } from "@/components/SEO";
@@ -34,7 +34,8 @@ export default function UnlockPDFPage() {
 
       {/* How It Works */}
       <HowToUnlockSection />
-
+      <BenefitsSection />
+      <UseCasesSection />
       {/* FAQ Section */}
       <FAQSection />
 

@@ -115,18 +115,13 @@ async function extractTextFromPdf(pdfPath: string): Promise<string> {
 // Create searchable PDF using OCRmyPDF
 async function createSearchablePdf(pdfPath: string, outputPath: string, language: string = 'eng'): Promise<boolean> {
     try {
-        const hasOcrmypdf = await isOcrmypdfInstalled();
-        if (!hasOcrmypdf) {
-            console.error('OCRmyPDF not installed');
-            return false;
-        }
-
-        // Updated to use --force-ocr instead of --skip-text to ensure all content is OCR'd
-        await execPromise(`ocrmypdf --skip-text --deskew -l ${language} --output-type pdf "${pdfPath}" "${outputPath}"`);
-
+        const scriptPath = path.join(process.cwd(), 'scripts', 'ocr.py');
+        const command = `python3 "${scriptPath}" "${pdfPath}" "${outputPath}" "${language}"`;
+        console.log(`Running: ${command}`);
+        await execPromise(command);
         return existsSync(outputPath);
     } catch (error) {
-        console.error('Error creating searchable PDF:', error);
+        console.error('Error during OCR process:', error);
         return false;
     }
 }

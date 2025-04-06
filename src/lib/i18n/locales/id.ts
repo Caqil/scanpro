@@ -1435,46 +1435,127 @@ export default {
 
   // Buka Kunci PDF
   unlockPdf: {
-    title: "Buka Kunci File PDF",
-    description: "Hapus perlindungan kata sandi dari dokumen PDF Anda untuk akses tanpa batas",
+    title: "Buka Kunci File PDF dengan Mudah Menggunakan PDF Unlocker Kami",
+    description: "Hapus kata sandi PDF dan buka perlindungan file PDF dengan cepat menggunakan alat buka kunci PDF online kami. Buka kunci PDF untuk membuat file PDF yang tidak aman di sistem operasi apa pun.",
+    metaDescription: "Buka kunci file PDF dengan mudah menggunakan PDF unlocker kami. Hapus kata sandi izin PDF, buka perlindungan PDF online, dan unduh file Anda yang telah dibuka kuncinya dengan aman.",
+    keywords: "buka kunci file PDF, cara membuka kunci file PDF, membuka kunci PDF, membuka kunci file PDF, buka ke PDF, buka kunci file PDF, file PDF tidak aman, PDF unlocker, file yang dibuka kunci, buka kunci dokumen PDF, SmallPDF unlock, buka kunci PDFs, alat proteksi PDF, kata sandi izin, mengunduh file Anda, kata sandi dari PDF, PDF online, hapus kata sandi PDF, SmallPDF buka kunci PDF, hapus PDF, klik simpan, klik kata sandi, alat buka kunci PDF",
+  
+    // Benefits Section
+    benefits: {
+      title: "Mengapa Menggunakan Alat Buka Kunci PDF Kami untuk Membuka Kunci File PDF",
+      list: [
+        {
+          title: "PDF Unlocker Cepat",
+          description: "Gunakan alat buka kunci PDF kami untuk menghapus kata sandi PDF dengan cepat dan membuat file PDF yang tidak aman, siap untuk mengunduh file Anda secara instan."
+        },
+        {
+          title: "Membuka Kunci File PDF dengan Mudah",
+          description: "Dengan kotak masukkan kata sandi sederhana, buka kunci file PDF secara online dengan memasukkan kata sandi izin atau kata sandi pembukaan dokumen—klik simpan dan selesai."
+        },
+        {
+          title: "Buka Kunci PDFs di Platform Apa Saja",
+          description: "PDF unlocker online kami bekerja di sistem operasi apa pun, membuat pembukaan kunci file PDF menjadi mulus baik Anda menggunakan SmallPDF unlock atau alat buka kunci PDF kami."
+        },
+        {
+          title: "Buka Kunci Dokumen PDF yang Aman",
+          description: "Hapus kata sandi dari file PDF dengan aman menggunakan alat kami, memastikan file Anda yang telah dibuka kuncinya tetap pribadi setelah membuka kunci PDF."
+        }
+      ]
+    },
+  
+    // Use Cases Section
+    useCases: {
+      title: "Cara Membuka Kunci File PDF: Kasus Penggunaan Teratas",
+      list: [
+        {
+          title: "Buka Kunci File PDF dengan Kata Sandi Izin",
+          description: "Gunakan PDF unlocker kami untuk menghapus kata sandi izin dan buka ke PDF untuk akses penuh saat Anda tahu klik kata sandi."
+        },
+        {
+          title: "PDF Online untuk Bisnis",
+          description: "Buka kunci file PDF secara online untuk menghapus kata sandi PDF dari dokumen bisnis, menyederhanakan berbagi dan pengeditan dengan klik simpan cepat."
+        },
+        {
+          title: "Membuka Kunci Materi Studi PDF",
+          description: "Buka perlindungan sumber daya studi PDF online dengan alat buka kunci PDF kami untuk membuat file PDF yang tidak aman demi pembelajaran yang mulus."
+        },
+        {
+          title: "Buka Kunci Dokumen PDF Pribadi",
+          description: "Pelajari cara membuka kunci file PDF dari koleksi pribadi Anda dengan mengunduh file Anda setelah menggunakan alternatif SmallPDF buka kunci PDF kami."
+        }
+      ]
+    },
+  
+    // How-To Section
     howTo: {
-      title: "Cara Membuka Kunci File PDF",
+      title: "Cara Membuka Kunci File PDF dalam 3 Langkah",
       upload: {
-        title: "Unggah",
-        description: "Unggah file PDF yang dilindungi kata sandi yang ingin Anda buka kuncinya."
+        title: "Langkah 1: Unggah PDF Online Anda",
+        description: "Mulai membuka kunci PDF dengan mengunggah file PDF yang ingin Anda buka perlindungannya dengan alat buka kunci PDF kami."
       },
       enterPassword: {
-        title: "Masukkan Kata Sandi",
-        description: "Jika diperlukan, masukkan kata sandi saat ini yang melindungi PDF."
+        title: "Langkah 2: Masukkan Kata Sandi Izin",
+        description: "Gunakan kotak masukkan kata sandi untuk memasukkan kata sandi dari PDF, seperti kata sandi pembukaan dokumen atau kata sandi izin."
       },
       download: {
-        title: "Unduh",
-        description: "Unduh file PDF Anda yang telah dibuka kuncinya tanpa batasan kata sandi."
+        title: "Langkah 3: Unduh File yang Telah Dibuka Kunci",
+        description: "Selesaikan membuka kunci file PDF dengan mengunduh file Anda sebagai file PDF yang tidak aman setelah kami menghapus kata sandi PDF."
       }
     },
+  
+    // Features Section
+    features: {
+      title: "Fitur Utama dari PDF Unlocker Kami",
+      list: [
+        {
+          title: "Mendukung Semua PDF Online",
+          description: "Buka kunci file PDF dengan kata sandi izin atau kata sandi pembukaan dokumen dengan mudah."
+        },
+        {
+          title: "Proses Membuka Kunci PDF Cepat",
+          description: "Hapus kata sandi PDF dalam hitungan detik dengan alat buka kunci PDF cepat kami, ideal untuk mengunduh file Anda."
+        },
+        {
+          title: "Buka Kunci Dokumen PDF Lintas Platform",
+          description: "Gunakan PDF unlocker kami di sistem operasi apa pun untuk membuka kunci file PDF dengan mulus."
+        },
+        {
+          title: "Alternatif Aman untuk SmallPDF Unlock",
+          description: "Buka perlindungan file PDF dengan pemrosesan terenkripsi, menawarkan alternatif aman untuk SmallPDF buka kunci PDF."
+        }
+      ]
+    },
+  
+    // FAQ Section
     faq: {
       passwordRequired: {
-        question: "Apakah saya perlu mengetahui kata sandi saat ini?",
-        answer: "Ya, untuk membuka kunci PDF, Anda perlu mengetahui kata sandi saat ini. Alat kami tidak dapat melewati atau memecahkan kata sandi; alat ini hanya menghapus perlindungan setelah Anda memberikan kata sandi yang benar."
+        question: "Apakah saya memerlukan klik kata sandi untuk membuka kunci file PDF?",
+        answer: "Ya, Anda harus memasukkan kata sandi dari PDF—seperti kata sandi pembukaan dokumen atau kata sandi izin—di kotak masukkan kata sandi untuk membuka kunci PDFs. Alat kami tidak melewati kata sandi."
       },
       security: {
-        question: "Apakah proses pembukaan kunci aman?",
-        answer: "Ya, semua pemrosesan dilakukan di server aman kami. Kami tidak menyimpan PDF atau kata sandi Anda. File akan otomatis dihapus setelah diproses, dan semua transfer data dienkripsi."
+        question: "Apakah membuka kunci file PDF dengan alat ini aman?",
+        answer: "Ya, alat buka kunci PDF kami memproses PDF online di server terenkripsi. Kami tidak menyimpan file atau kata sandi Anda setelah mengunduh file Anda."
       },
       restrictions: {
-        question: "Bisakah saya membuka kunci PDF dengan batasan pemilik tetapi tanpa kata sandi buka?",
-        answer: "Ya, beberapa PDF tidak memerlukan kata sandi untuk dibuka tetapi memiliki batasan pada pencetakan, pengeditan, atau penyalinan. Alat kami juga dapat menghapus batasan ini. Cukup unggah file tanpa memasukkan kata sandi."
+        question: "Bisakah saya membuka ke PDF tanpa klik kata sandi?",
+        answer: "Ya, jika tidak ada kata sandi pembukaan dokumen tetapi ada kata sandi izin, unggah untuk menghapus pembatasan PDF."
       },
       quality: {
-        question: "Apakah pembukaan kunci akan memengaruhi kualitas atau konten PDF?",
-        answer: "Tidak, proses pembukaan kunci kami hanya menghapus pengaturan keamanan. Ini tidak mengubah konten, pemformatan, atau kualitas file PDF Anda dengan cara apa pun."
+        question: "Apakah membuka kunci PDF memengaruhi kualitas?",
+        answer: "Tidak, PDF unlocker kami hanya menghapus kata sandi dari pengaturan PDF—file Anda yang telah dibuka kuncinya tetap mempertahankan kualitas aslinya."
+      },
+      compatibility: {
+        question: "Apakah ini berfungsi untuk pengguna SmallPDF buka kunci PDF?",
+        answer: "Ya, alat buka kunci PDF kami bekerja di sistem operasi apa pun dan menjadi alternatif yang bagus untuk SmallPDF unlock, membuka kunci file PDF secara online."
       }
     },
+  
+    // Status Messages
     passwordProtected: "Dilindungi Kata Sandi",
     notPasswordProtected: "Tidak Dilindungi Kata Sandi",
-    unlocking: "Membuka kunci PDF Anda...",
-    unlockSuccess: "PDF berhasil dibuka kuncinya!",
-    unlockSuccessDesc: "File PDF Anda telah dibuka kuncinya dan siap untuk diunduh."
+    unlocking: "Membuka Kunci PDF...",
+    unlockSuccess: "PDF Berhasil Dibuka Kunci!",
+    unlockSuccessDesc: "Pembukaan kunci dokumen PDF Anda selesai! Unduh file Anda yang telah dibuka kuncinya sekarang."
   },
 
   // Pengunggah File
