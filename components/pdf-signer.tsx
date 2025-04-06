@@ -8,7 +8,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { useLanguageStore } from "@/src/store/store";
 import {
@@ -26,10 +26,9 @@ import {
   UserIcon,
   CalendarIcon,
   RotateCcwIcon,
+  TextIcon,
 } from "lucide-react";
 import { SignatureCanvas } from "./sign/signature-canvas";
-import { Separator } from "./ui/separator";
-
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -61,6 +60,11 @@ interface Props {
   initialTool?: string;
 }
 
+/**
+ * PDF Signer Component
+ * A clean, modern interface for signing PDF documents with signatures, text, stamps, and dates.
+ * Features drag-and-drop functionality, page navigation, and real-time element manipulation.
+ */
 export function PdfSigner({ initialTool = "signature" }: Props) {
   const { t } = useLanguageStore();
 
@@ -199,21 +203,38 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
 
   const generateStampSvg = (type: string): string => {
     let text = "";
+    let fillColor = "";
+    
     switch (type) {
       case "approved":
         text = "APPROVED";
+        fillColor = "#4caf50"; // Green for approved
         break;
       case "rejected":
         text = "REJECTED";
+        fillColor = "#f44336"; // Red for rejected
+        break;
+      case "draft":
+        text = "DRAFT";
+        fillColor = "#2196f3"; // Blue for draft
+        break;
+      case "final":
+        text = "FINAL";
+        fillColor = "#ff9800"; // Orange for final
+        break;
+      case "confidential":
+        text = "CONFIDENTIAL";
+        fillColor = "#9c27b0"; // Purple for confidential
         break;
       default:
         text = "APPROVED";
+        fillColor = "#4caf50";
     }
 
     return `
       <svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 150 50">
-        <rect x="0" y="0" width="150" height="50" fill="none" stroke="currentColor" stroke-width="2" />
-        <text x="75" y="25" font-family="Arial" font-size="16" fill="currentColor" text-anchor="middle" dominant-baseline="middle">${text}</text>
+        <rect x="0" y="0" width="150" height="50" fill="none" stroke="${fillColor}" stroke-width="2" />
+        <text x="75" y="30" font-family="Arial" font-size="16" font-weight="bold" fill="${fillColor}" text-anchor="middle" dominant-baseline="middle">${text}</text>
       </svg>
     `;
   };
@@ -412,6 +433,7 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
       setProcessing(false);
     }
   };
+
   const SignatureElementComponent = memo(
     ({
       element,
@@ -446,35 +468,39 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
         width: `${element.size.width}px`,
         height: `${element.size.height}px`,
         transform: `rotate(${element.rotation}deg)`,
-        cursor: "pointer",
-        border: selectedElement === element.id ? "2px dashed #3b82f6" : "1px solid",
+        cursor: "move",
+        border: selectedElement === element.id ? "2px dashed #3b82f6" : "1px solid transparent",
+        borderRadius: "4px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         userSelect: "none",
         touchAction: "none",
         zIndex: selectedElement === element.id ? 999 : 1,
-        backgroundColor: "rgba(255, 255, 255, 0.8)",
+        backgroundColor: selectedElement === element.id ? "rgba(255, 255, 255, 0.8)" : "transparent",
         padding: "4px",
+        transition: "border 0.2s ease, background-color 0.2s ease",
       };
   
       const resizeHandleStyles: React.CSSProperties = {
         position: "absolute",
-        bottom: "-5px",
-        right: "-5px",
-        width: "10px",
-        height: "10px",
+        bottom: "-6px",
+        right: "-6px",
+        width: "12px",
+        height: "12px",
         backgroundColor: "#3b82f6",
         borderRadius: "50%",
         cursor: "se-resize",
         touchAction: "none",
+        border: "2px solid white",
+        boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
       };
   
       return (
         <div
           key={element.id}
           style={elementStyles}
-          className="signature-element border-muted"
+          className="signature-element"
           onClick={(e) => handleElementClick(e, element)}
           onMouseDown={(e) => handleElementMoveStart(e, element)}
           onTouchStart={(e) => handleElementMoveStart(e, element)}
@@ -503,18 +529,28 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
                 pointerEvents: "none",
               }}
             />
+          ) : element.type === "stamp" && element.data.startsWith("<svg") ? (
+            <div
+              dangerouslySetInnerHTML={{ __html: element.data }}
+              style={{
+                width: "100%",
+                height: "100%",
+                pointerEvents: "none",
+              }}
+            />
           ) : (
-            <span className="text-muted-foreground">{element.data}</span>
+            <span className="text-muted-foreground font-medium">{element.data}</span>
           )}
           {selectedElement === element.id && (
             <>
               <button
-                className="absolute -top-3 -right-3 bg-destructive rounded-full p-1"
+                className="absolute -top-3 -right-3 bg-destructive rounded-full p-1 shadow-md hover:bg-destructive/90 transition-colors"
                 onClick={(e) => {
                   e.stopPropagation();
                   setElements((prev) => prev.filter((el) => el.id !== element.id));
                   setSelectedElement(null);
                 }}
+                title="Remove element"
               >
                 <XIcon className="h-3 w-3 text-white" />
               </button>
@@ -522,6 +558,7 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
                 style={resizeHandleStyles}
                 onMouseDown={(e) => handleResizeStart(e, element)}
                 onTouchStart={(e) => handleResizeStart(e, element)}
+                title="Resize"
               />
             </>
           )}
@@ -546,24 +583,31 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
         />
       ));
   };
+
   const renderPageThumbnails = () => {
     return (
-      <div className="space-y-2">
+      <div className="space-y-3 p-2">
         {pages.map((_, index) => (
           <div
             key={index}
-            className={`cursor-pointer ${currentPage === index ? "border-2 border-blue-500" : "border border-gray-200"}`}
+            className={`cursor-pointer transition-all duration-200 rounded-md overflow-hidden ${
+              currentPage === index 
+                ? "border-2 border-primary shadow-md" 
+                : "border border-muted hover:border-muted-foreground/50"
+            }`}
             onClick={() => setCurrentPage(index)}
           >
             <Document file={file}>
               <Page
                 pageNumber={index + 1}
-                width={60}
+                width={70}
                 renderTextLayer={false}
                 renderAnnotationLayer={false}
               />
             </Document>
-            <div className="text-center text-sm">Page {index + 1}</div>
+            <div className="text-center text-xs py-1 font-medium bg-muted/50">
+              {index + 1}
+            </div>
           </div>
         ))}
       </div>
@@ -571,20 +615,19 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
   };
 
   return (
-    <div className="flex h-screen bg-background">
-      {/* Left Sidebar: Page Thumbnails */}
-      {file && !processing && !signedPdfUrl && pages.length > 0 && (
-        <div className="w-24 bg-muted/50 border-r p-2 overflow-y-auto space-y-2">
-          {renderPageThumbnails()}
-        </div>
-      )}
-  
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col">
+    <div className="bg-muted/30 rounded-lg p-1 md:p-4 w-full">
+      <div className="flex flex-col h-[calc(100vh-10rem)] md:h-[calc(100vh-12rem)] bg-background rounded-lg overflow-hidden border shadow-sm">
         {/* Header */}
-        <div className="bg-background border-b px-4 py-3 flex items-center justify-between">
+        <div className="bg-muted/20 border-b px-4 py-3 flex items-center justify-between sticky top-0 z-10">
+          <div className="flex items-center gap-2">
+            <div className="text-lg font-semibold flex items-center gap-2">
+              <PenIcon className="h-5 w-5 text-primary" />
+              <span>PDF Signer</span>
+            </div>
+          </div>
+          
           {file && !processing && !signedPdfUrl && (
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center gap-2">
               <Button 
                 variant="outline" 
                 size="sm" 
@@ -598,18 +641,26 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
                 <Trash2Icon className="h-4 w-4 mr-2" />
                 Clear
               </Button>
+              
+              <Button 
+                size="sm"
+                onClick={handleSavePdf}
+              >
+                <CheckIcon className="h-4 w-4 mr-2" />
+                Sign Document
+              </Button>
             </div>
           )}
         </div>
-  
+
         {/* File Upload Section */}
         {!file && (
           <div className="flex-1 flex items-center justify-center p-6">
-            <Card className="w-full max-w-full">
-              <CardContent className="p-6">
+            <Card className="w-full max-w-2xl">
+              <CardContent className="p-8">
                 <div
                   className={`border-2 border-dashed rounded-lg p-12 text-center transition-colors ${
-                    isDragOver ? "border-primary bg-primary/10" : "border-muted-foreground/25"
+                    isDragOver ? "border-primary bg-primary/5" : "border-muted-foreground/20"
                   }`}
                   onDragOver={(e) => {
                     e.preventDefault();
@@ -643,322 +694,104 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
                     accept=".pdf"
                     onChange={handleFileUpload}
                   />
-                  <div className="mb-4 p-3 rounded-full bg-muted mx-auto w-16 h-16 flex items-center justify-center">
-                    <UploadIcon className="h-8 w-8 text-primary" />
+                  <div className="mb-6 p-4 rounded-full bg-primary/10 mx-auto w-20 h-20 flex items-center justify-center">
+                    <UploadIcon className="h-10 w-10 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{t("signPdf.uploadTitle")}</h3>
-                  <p className="text-muted-foreground mb-6">{t("signPdf.uploadDesc")}</p>
-                  <Button onClick={() => fileInputRef.current?.click()}>
+                  <h3 className="text-2xl font-semibold mb-3">{t("signPdf.uploadTitle")}</h3>
+                  <p className="text-muted-foreground mb-8 max-w-md mx-auto">{t("signPdf.uploadDesc")}</p>
+                  <Button 
+                    size="lg"
+                    className="px-8"
+                    onClick={() => fileInputRef.current?.click()}
+                  >
                     {t("ui.browse")}
                   </Button>
-                  <p className="mt-4 text-sm text-muted-foreground">{t("ui.filesSecurity")}</p>
+                  <p className="mt-6 text-sm text-muted-foreground">{t("ui.filesSecurity")}</p>
                 </div>
               </CardContent>
             </Card>
           </div>
         )}
-  
+
         {/* Processing Section */}
         {file && processing && !signedPdfUrl && (
           <div className="flex-1 flex flex-col items-center justify-center">
-            <LoaderIcon className="h-12 w-12 animate-spin text-primary mb-4" />
-            <h3 className="text-xl font-semibold mb-2">{t("signPdf.processing")}</h3>
-            <p className="text-muted-foreground mb-4">{t("signPdf.messages.processing")}</p>
-            <Progress value={progress} className="w-64" />
+            <div className="bg-background rounded-lg p-8 shadow-sm border w-96 text-center">
+              <LoaderIcon className="h-16 w-16 animate-spin text-primary mb-6 mx-auto" />
+              <h3 className="text-xl font-semibold mb-3">{t("signPdf.processing")}</h3>
+              <p className="text-muted-foreground mb-6">{t("signPdf.messages.processing")}</p>
+              <Progress value={progress} className="w-full h-2" />
+            </div>
           </div>
         )}
-  
+
         {/* PDF Viewer and Signing Area */}
         {file && !processing && !signedPdfUrl && pages.length > 0 && (
-          <div className="flex-1 flex">
-            <div className="flex-1 p-4">
-  <div
-    className="relative rounded-lg shadow-sm bg-white"
-    style={{
-      width: "100%",
-      height: "calc(100vh - 120px)", // Adjust based on your layout
-      overflow: "hidden", // Prevent scrolling
-      touchAction: isDragging ? "none" : "auto",
-      border: "2px solid #000000", // Visible black border
-      padding: "10px", // Internal padding to create space between border and PDF
-      boxSizing: "border-box", // Ensure padding doesn’t increase outer size
-    }}
-    onMouseMove={handleCanvasMouseMove}
-    onMouseUp={handleCanvasMouseUp}
-    onMouseLeave={handleCanvasMouseUp}
-    onTouchMove={handleCanvasMouseMove}
-    onTouchEnd={handleCanvasMouseUp}
-    onTouchCancel={handleCanvasMouseUp}
-    ref={canvasRef}
-  >
-    <Document file={file}>
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#f0f0f0", // Light gray background to distinguish PDF area
-        }}
-      >
-        <Page
-          pageNumber={currentPage + 1}
-          renderTextLayer={false}
-          renderAnnotationLayer={false}
-          width={
-            pages[currentPage]
-              ? Math.min(
-                  pages[currentPage].width,
-                  (canvasRef.current?.clientWidth || window.innerWidth - 40) - 20 // Account for padding
-                )
-              : undefined
-          }
-          scale={
-            window.innerWidth < 768
-              ? 0.9
-              : Math.min(
-                  ((canvasRef.current?.clientWidth || window.innerWidth - 40) - 20) /
-                    (pages[currentPage]?.width || 1),
-                  ((canvasRef.current?.clientHeight || window.innerHeight - 120) - 20) /
-                    (pages[currentPage]?.height || 1)
-                )
-          }
-          className="w-auto h-auto shadow-md" // Slight shadow for PDF page
-        />
-      </div>
-      <div style={{ position: "absolute", top: "10px", left: "10px", width: "calc(100% - 20px)", height: "calc(100% - 20px)" }}>
-        {renderElements()}
-      </div>
-    </Document>
-  </div>
+          <div className="flex-1 flex overflow-hidden">
+            {/* Left Sidebar: Page Thumbnails */}
+            <div className="w-24 bg-muted/10 border-r overflow-y-auto hidden md:block">
+              {renderPageThumbnails()}
+            </div>
 
-  {/* Pagination Controls */}
-  {pages.length > 1 && (
-    <div className="flex justify-center items-center mt-4 space-x-2">
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={() => handlePageChange(Math.max(0, currentPage - 1))}
-        disabled={currentPage === 0}
-      >
-        <ChevronLeftIcon className="h-4 w-4" />
-      </Button>
-      <span>
-        Page {currentPage + 1} of {pages.length}
-      </span>
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={() => handlePageChange(Math.min(pages.length - 1, currentPage + 1))}
-        disabled={currentPage === pages.length - 1}
-      >
-        <ChevronRightIcon className="h-4 w-4" />
-      </Button>
-    </div>
-  )}
-</div>
-  
-            {/* Right Sidebar: Signing Options */}
-            <div className="w-96 p-4 border-l bg-background">
-              <Tabs defaultValue="type" onValueChange={setActiveTab}>
-                <TabsList className="grid grid-cols-2 w-full mb-4">
-                  <TabsTrigger
-                    value="type"
-                    className={activeTab === "type" ? "border-2 border-primary" : ""}
-                  >
-                    Type
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="draw"
-                    className={activeTab === "draw" ? "border-2 border-primary" : ""}
-                  >
-                    Draw
-                  </TabsTrigger>
-                </TabsList>
-  
-                <TabsContent value="type" className="space-y-4">
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <Label>Optional Fields</Label>
-                      <Separator />
-                      <div className="grid grid-cols-2 gap-2">
-                        <Button
-                          variant="outline"
-                          className="flex items-center justify-center"
-                          onClick={() => handleAddField("date")}
-                        >
-                          <CalendarIcon className="h-4 w-4 mr-2" />
-                          Date
-                        </Button>
-                        <Button
-                          variant="outline"
-                          className="flex items-center justify-center"
-                          onClick={() => handleAddField("stamp")}
-                        >
-                          <StampIcon className="h-4 w-4 mr-2" />
-                          Stamp
-                        </Button>
-                      </div>
-                    </div>
-  
-                    <div className="space-y-2">
-                      <Label htmlFor="text-input">Text</Label>
-                      <div className="flex space-x-2">
-                        <Input
-                          id="text-input"
-                          value={textValue}
-                          onChange={(e) => setTextValue(e.target.value)}
-                          placeholder="Enter text"
-                          className="flex-1"
+            {/* Main PDF Viewer */}
+            <div className="flex-1 flex flex-col overflow-hidden">
+              <div className="flex-1 relative">
+                <div
+                  ref={canvasRef}
+                  className="absolute inset-0 bg-muted/5 overflow-auto"
+                  onMouseMove={handleCanvasMouseMove}
+                  onMouseUp={handleCanvasMouseUp}
+                  onMouseLeave={handleCanvasMouseUp}
+                  onTouchMove={handleCanvasMouseMove}
+                  onTouchEnd={handleCanvasMouseUp}
+                  onTouchCancel={handleCanvasMouseUp}
+                >
+                  <div className="min-h-full flex items-center justify-center p-4">
+                    <div className="relative shadow-lg">
+                      <Document file={file}>
+                        <Page
+                          pageNumber={currentPage + 1}
+                          renderTextLayer={false}
+                          renderAnnotationLayer={false}
+                          width={
+                            pages[currentPage]
+                              ? Math.min(
+                                  pages[currentPage].width,
+                                  window.innerWidth - 500 // Adjusted for sidebar widths
+                                )
+                              : undefined
+                          }
                         />
-                        <Button
-                          variant="outline"
-                          onClick={() => handleAddField("text")}
-                        >
-                          <TypeIcon className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
-  
-                    <div className="space-y-2">
-                      <Label>Stamp Type</Label>
-                      <select
-                        value={stampType}
-                        onChange={(e) => setStampType(e.target.value)}
-                        className="w-full p-2 border rounded-md"
-                      >
-                        <option value="approved">Approved</option>
-                        <option value="rejected">Rejected</option>
-                      </select>
-                    </div>
-  
-                    <div className="space-y-2">
-                      <Label>Custom Stamp</Label>
-                      <div className="flex items-center space-x-2">
-                        <input
-                          type="file"
-                          accept="image/*"
-                          ref={stampInputRef}
-                          onChange={handleStampUpload}
-                          className="flex-1 text-sm"
-                        />
-                      </div>
+                        <div className="absolute inset-0">{renderElements()}</div>
+                      </Document>
                     </div>
                   </div>
-                </TabsContent>
-  
-                <TabsContent value="draw" className="space-y-4">
-  <div className="border rounded-lg p-3">
-    <SignatureCanvas
-      ref={signatureCanvasRef}
-      penColor={penColor} // Pass dynamic pen color
-      backgroundColor={backgroundColor} // Pass dynamic background color
-      canvasProps={{
-        className: "signature-canvas w-full h-40",
-      }}
-    />
-  </div>
-  {/* Color Selection Controls */}
-  <div className="space-y-4">
-    <div className="space-y-2">
-      <Label htmlFor="pen-color">Pen Color</Label>
-      <div className="flex items-center space-x-2">
-        <input
-          type="color"
-          id="pen-color"
-          value={penColor}
-          onChange={(e) => setPenColor(e.target.value)}
-          className="w-10 h-10 p-0 border-none rounded cursor-pointer"
-        />
-        <Input
-          value={penColor}
-          onChange={(e) => setPenColor(e.target.value)}
-          placeholder="#000000"
-          className="flex-1"
-        />
-      </div>
-    </div>
-    <div className="space-y-2">
-      <Label htmlFor="bg-color">Background Color</Label>
-      <div className="flex items-center space-x-2">
-        <input
-          type="color"
-          id="bg-color"
-          value={backgroundColor}
-          onChange={(e) => setBackgroundColor(e.target.value)}
-          className="w-10 h-10 p-0 border-none rounded cursor-pointer"
-        />
-        <Input
-          value={backgroundColor}
-          onChange={(e) => setBackgroundColor(e.target.value)}
-          placeholder="#ffffff"
-          className="flex-1"
-        />
-      </div>
-    </div>
-  </div>
-  <div className="flex space-x-2">
-    <Button
-      variant="outline"
-      className="flex-1"
-      onClick={() => signatureCanvasRef.current?.clear()}
-    >
-      <RotateCcwIcon className="h-4 w-4 mr-2" />
-      Clear
-    </Button>
-    <Button className="flex-1" onClick={handleSignatureDraw}>
-      <CheckIcon className="h-4 w-4 mr-2" />
-      Apply
-    </Button>
-  </div>
-</TabsContent>
-              </Tabs>
-  
-              <Separator className="my-4" />
-  
-              <Button
-                className="w-full"
-                size="lg"
-                onClick={handleSavePdf}
-              >
-                Sign Document
-                <CheckIcon className="h-4 w-4 ml-2" />
-              </Button>
-            </div>
-          </div>
-        )}
-  
-        {/* Signed PDF Section */}
-        {signedPdfUrl && (
-          <div className="flex-1 flex flex-col items-center justify-center p-6">
-            <div className="mb-6 p-3 rounded-full bg-muted mx-auto w-16 h-16 flex items-center justify-center">
-              <CheckIcon className="h-8 w-8 text-primary" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">{t("signPdf.messages.signed")}</h3>
-            <p className="text-muted-foreground mb-6">{t("signPdf.messages.downloadReady")}</p>
-            <div className="flex space-x-3">
-              <Button asChild>
-                <a href={signedPdfUrl} download>
-                  <DownloadIcon className="h-4 w-4 mr-2" />
-                  {t("signPdf.download")}
-                </a>
-              </Button>
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setFile(null);
-                  setElements([]);
-                  setSignedPdfUrl("");
-                  setPages([]);
-                }}
-              >
-                {t("ui.reupload")}
-              </Button>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
+                </div>
+              </div>
+
+              {/* Mobile Pagination Controls */}
+              <div className="md:hidden flex justify-center items-center py-3 bg-background border-t">
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handlePageChange(Math.max(0, currentPage - 1))}
+                    disabled={currentPage === 0}
+                  >
+                    <ChevronLeftIcon className="h-4 w-4" />
+                  </Button>
+                  <span className="text-sm font-medium">
+                    {currentPage + 1} / {pages.length}
+                  </span>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handlePageChange(Math.min(pages.length - 1, currentPage + 1))}
+                    disabled={currentPage === pages.length - 1}
+                  >
+                    <ChevronRightIcon className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+
+              {/* Desktop
