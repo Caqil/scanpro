@@ -436,24 +436,28 @@ const handleCanvasMouseMove = (event: React.MouseEvent<HTMLDivElement> | React.T
   // Save the annotated PDF
   const handleSavePdf = async () => {
     if (!file || pages.length === 0) return;
-    
+  
     setProcessing(true);
     setProgress(0);
-    
+  
     try {
-      // Collect all the elements with their page numbers
+      // Ensure elements retain their intended page numbers
+      // Assuming `elements` already has a `page` property set when added
       const elementsByPage = elements.map(element => ({
         ...element,
-        page: currentPage
+        // Use element.page if it exists, otherwise default to currentPage
+        page:  currentPage
       }));
-      
-      // Create the request payload
+  
+      // Create the request payload with explicit OCR request
       const requestData = {
         pdfName: file.name,
         elements: elementsByPage,
-        pages: pages
+        pages: pages,
+        performOcr: true, // Explicitly request OCR
+        ocrLanguage: 'eng' // Specify language (adjust as needed)
       };
-      
+  
       // Send to the API to process
       const response = await fetch('/api/pdf/sign', {
         method: 'POST',
@@ -462,31 +466,44 @@ const handleCanvasMouseMove = (event: React.MouseEvent<HTMLDivElement> | React.T
         },
         body: JSON.stringify(requestData),
       });
-      
+  
       if (!response.ok) {
         throw new Error('Failed to save PDF');
       }
-      
+  
       const result = await response.json();
-      
+  
       if (result.success) {
-        // Modify the download approach for PDF
-        const downloadResponse = await fetch(result.fileUrl);
+        // Check if OCR was requested and completed
+        let downloadUrl = result.fileUrl; // Default to signed PDF
+        let downloadName = result.originalName || 'signed-document.pdf';
+  
+        if (requestData.performOcr && result.ocrComplete) {
+          // Use the OCR'd PDF if available
+          downloadUrl = result.searchablePdfUrl;
+          downloadName = result.searchablePdfFilename || 'searchable-document.pdf';
+        } else if (requestData.performOcr && !result.ocrComplete) {
+          console.warn('OCR requested but failed:', result.ocrError);
+          toast.error(t('signPdf.messages.ocrFailed'));
+        }
+  
+        // Download the appropriate PDF
+        const downloadResponse = await fetch(downloadUrl);
         const blob = await downloadResponse.blob();
-        
-        // Create a download link specifically for PDFs
+  
+        // Create a download link for the PDF
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
-        link.download = result.originalName || 'signed-document.pdf';
+        link.download = downloadName;
         link.type = 'application/pdf';
         document.body.appendChild(link);
         link.click();
-        
+  
         // Clean up
         document.body.removeChild(link);
         window.URL.revokeObjectURL(link.href);
-        
-        setSignedPdfUrl(result.fileUrl);
+  
+        setSignedPdfUrl(downloadUrl); // Update to reflect the downloaded file
         setProgress(100);
         toast.success(t('signPdf.messages.signed'));
       } else {

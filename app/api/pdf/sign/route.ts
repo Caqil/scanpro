@@ -1,4 +1,3 @@
-// app/api/pdf/sign/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir, readFile, unlink } from 'fs/promises';
 import { existsSync } from 'fs';
@@ -8,7 +7,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { trackApiUsage, validateApiKey } from '@/lib/validate-key';
 import sharp from 'sharp';
 import { PDFDocument, rgb, degrees } from 'pdf-lib';
-import fs from 'fs';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 
@@ -90,23 +88,23 @@ async function extractTextFromPdf(pdfPath: string): Promise<string> {
         if (!hasPdftotext) {
             return "Cannot extract text - pdftotext not installed";
         }
-        
+
         const outputPath = `${pdfPath}.txt`;
         await execPromise(`pdftotext -layout "${pdfPath}" "${outputPath}"`);
-        
+
         if (existsSync(outputPath)) {
             const text = await readFile(outputPath, 'utf-8');
-            
+
             // Clean up
             try {
                 await unlink(outputPath);
             } catch (error) {
                 console.error(`Failed to delete text file ${outputPath}:`, error);
             }
-            
+
             return text;
         }
-        
+
         return "Failed to extract text from PDF";
     } catch (error) {
         console.error('Error extracting text from PDF:', error);
@@ -122,97 +120,13 @@ async function createSearchablePdf(pdfPath: string, outputPath: string, language
             console.error('OCRmyPDF not installed');
             return false;
         }
-        
-        // Run OCRmyPDF
-        // --force-ocr: Process all pages with OCR, even if they already have text
-        // --deskew: Straighten pages
-        // -l: Language
-        // --output-type pdf: Create a standard searchable PDF
-        await execPromise(`ocrmypdf --force-ocr --deskew -l ${language} --output-type pdf "${pdfPath}" "${outputPath}"`);
-        
+
+        // Updated to use --force-ocr instead of --skip-text to ensure all content is OCR'd
+        await execPromise(`ocrmypdf --skip-text --deskew -l ${language} --output-type pdf "${pdfPath}" "${outputPath}"`);
+
         return existsSync(outputPath);
     } catch (error) {
         console.error('Error creating searchable PDF:', error);
-        return false;
-    }
-}
-
-// Create searchable PDF using alternative methods if OCRmyPDF is not available
-async function createSearchablePdfAlternative(pdfPath: string, outputPath: string, language: string = 'eng'): Promise<boolean> {
-    try {
-        // Check if we have the necessary tools
-        const hasTesseract = await isTesseractInstalled();
-        const hasGhostscript = await commandExists(process.platform === 'win32' ? 'gswin64c' : 'gs');
-        
-        if (!hasTesseract || !hasGhostscript) {
-            console.error('Missing required tools for OCR');
-            return false;
-        }
-        
-        // Create a temporary directory for this operation
-        const tempDir = `${path.dirname(outputPath)}/temp-${path.basename(outputPath, '.pdf')}`;
-        if (!existsSync(tempDir)) {
-            await mkdir(tempDir, { recursive: true });
-        }
-        
-        // 1. Convert PDF to images
-        console.log('Converting PDF to images...');
-        const gsCommand = process.platform === 'win32' ? 'gswin64c' : 'gs';
-        for (let i = 1; ; i++) {
-            const outputImagePath = join(tempDir, `page-${i.toString().padStart(3, '0')}.png`);
-            try {
-                await execPromise(`${gsCommand} -dQUIET -dBATCH -dNOPAUSE -sDEVICE=png16m -r300 -dFirstPage=${i} -dLastPage=${i} -sOutputFile="${outputImagePath}" "${pdfPath}"`);
-                
-                if (!existsSync(outputImagePath)) {
-                    // No more pages
-                    break;
-                }
-            } catch (error) {
-                console.error(`Error extracting page ${i}:`, error);
-                break;
-            }
-        }
-        
-        // 2. OCR each image and create a text file
-        console.log('Performing OCR on images...');
-        const images = fs.readdirSync(tempDir).filter(file => file.endsWith('.png')).sort();
-        
-        for (const image of images) {
-            const imagePath = join(tempDir, image);
-            const textPath = join(tempDir, image.replace('.png', '.txt'));
-            
-            try {
-                await execPromise(`tesseract "${imagePath}" "${imagePath.replace('.png', '')}" -l ${language} txt`);
-            } catch (error) {
-                console.error(`Error OCR'ing ${image}:`, error);
-            }
-        }
-        
-        // 3. Create a new PDF with OCR text layer using pdf-lib
-        console.log('Creating searchable PDF...');
-        
-        // Load the original PDF
-        const pdfBytes = await readFile(pdfPath);
-        const pdfDoc = await PDFDocument.load(pdfBytes);
-        
-        // Save the new PDF
-        const newPdfBytes = await pdfDoc.save();
-        await writeFile(outputPath, newPdfBytes);
-        
-        // Clean up
-        try {
-            for (const file of fs.readdirSync(tempDir)) {
-                await unlink(join(tempDir, file));
-            }
-            fs.rmdirSync(tempDir);
-        } catch (error) {
-            console.error('Error cleaning up temporary files:', error);
-        }
-        
-        // This alternative method is not as good as OCRmyPDF but provides a fallback
-        return existsSync(outputPath);
-    } catch (error) {
-        console.error('Error in alternative searchable PDF creation:', error);
         return false;
     }
 }
@@ -249,12 +163,12 @@ export async function POST(request: NextRequest) {
 
         // Parse request body
         const body = await request.json();
-        const { 
-            pdfName, 
-            elements, 
-            pages, 
+        const {
+            pdfName,
+            elements,
+            pages,
             performOcr: shouldPerformOcr = true, // Default to true
-            ocrLanguage = 'eng' 
+            ocrLanguage = 'eng'
         } = body as {
             pdfName: string;
             elements: SignatureElement[];
@@ -312,10 +226,10 @@ export async function POST(request: NextRequest) {
 
             // Embed the page image
             const pageImage = await pdfDoc.embedJpg(jpegBuffer);
-            
+
             // Create a page with the image dimensions
             const pdfPage = pdfDoc.addPage([page.originalWidth, page.originalHeight]);
-            
+
             // Draw the image on the page (full page)
             pdfPage.drawImage(pageImage, {
                 x: 0,
@@ -326,16 +240,16 @@ export async function POST(request: NextRequest) {
 
             // Add elements to this page
             const pageElements = elements.filter(el => el.page === pageIndex);
-            
+
             for (const element of pageElements) {
                 console.log(`Adding element type ${element.type} to page ${pageIndex + 1}`);
-                
+
                 if (element.type === 'signature' || element.type === 'image') {
                     // Process image or signature
                     if (element.data.startsWith('data:image')) {
                         const base64Data = element.data.split(',')[1];
                         const buffer = Buffer.from(base64Data, 'base64');
-                        
+
                         try {
                             // We need to determine if it's PNG or JPEG
                             let elementImage;
@@ -348,17 +262,19 @@ export async function POST(request: NextRequest) {
                                     .toBuffer();
                                 elementImage = await pdfDoc.embedJpg(jpegBuffer);
                             }
-                            
+                            const scaleX = page.originalWidth / page.width;
+                            const scaleY = page.originalHeight / page.height;
+
                             // Draw the element on the page
                             pdfPage.drawImage(elementImage, {
-                                x: element.position.x,
-                                y: page.originalHeight - element.position.y - element.size.height, // PDF coordinates are bottom-left origin
-                                width: element.size.width,
-                                height: element.size.height,
+                                x: element.position.x * scaleX,
+                                y: page.originalHeight - (element.position.y * scaleY) - (element.size.height * scaleY),
+                                width: element.size.width * scaleX,
+                                height: element.size.height * scaleY,
                                 rotate: element.rotation ? degrees(element.rotation) : undefined,
                                 opacity: element.scale || 1.0, // Use scale as opacity if provided
                             });
-                            
+
                             console.log(`Added image/signature to page ${pageIndex + 1}`);
                         } catch (error) {
                             console.error(`Error embedding image/signature:`, error);
@@ -371,26 +287,25 @@ export async function POST(request: NextRequest) {
                         const font = await pdfDoc.embedFont('Helvetica');
                         const fontSize = element.fontSize || 16;
                         const color = element.color || '#000000';
-                        
+
                         // Parse the hex color for rgb function
                         const red = parseInt(color.slice(1, 3), 16) / 255;
                         const green = parseInt(color.slice(3, 5), 16) / 255;
                         const blue = parseInt(color.slice(5, 7), 16) / 255;
-                        
-                        // Calculate vertical position (PDF uses bottom-left origin)
-                        const y = page.originalHeight - element.position.y - element.size.height / 2;
-                        
+
+                        const scaleX = page.originalWidth / page.width;
+                        const scaleY = page.originalHeight / page.height;
                         // Draw the text
                         pdfPage.drawText(element.data, {
-                            x: element.position.x + element.size.width / 2,
-                            y,
+                            x: element.position.x * scaleX,
+                            y: page.originalHeight - (element.position.y * scaleY) - (element.size.height * scaleY),
                             size: fontSize,
                             font,
                             color: rgb(red, green, blue),
                             rotate: element.rotation ? degrees(element.rotation) : undefined,
                             opacity: element.scale || 1.0,
                         });
-                        
+
                         console.log(`Added text to page ${pageIndex + 1}`);
                     } catch (error) {
                         console.error(`Error adding text:`, error);
@@ -403,20 +318,21 @@ export async function POST(request: NextRequest) {
                         const pngBuffer = await sharp(svgBuffer)
                             .png()
                             .toBuffer();
-                        
+
                         // Embed the PNG
                         const stampImage = await pdfDoc.embedPng(pngBuffer);
-                        
+                        const scaleX = page.originalWidth / page.width;
+                        const scaleY = page.originalHeight / page.height;
                         // Draw the stamp
                         pdfPage.drawImage(stampImage, {
-                            x: element.position.x,
-                            y: page.originalHeight - element.position.y - element.size.height,
+                            x: element.position.x * scaleX,
+                            y: page.originalHeight - (element.position.y * scaleY) - (element.size.height * scaleY),
                             width: element.size.width,
                             height: element.size.height,
                             rotate: element.rotation ? degrees(element.rotation) : undefined,
                             opacity: element.scale || 1.0,
                         });
-                        
+
                         console.log(`Added stamp to page ${pageIndex + 1}`);
                     } catch (error) {
                         console.error(`Error adding stamp:`, error);
@@ -443,39 +359,32 @@ export async function POST(request: NextRequest) {
         if (shouldPerformOcr) {
             try {
                 console.log('Creating searchable PDF with OCR...');
-                
-                // Try OCRmyPDF first (best option)
-                let ocrSuccess = await createSearchablePdf(outputPdfPath, ocrPdfPath, ocrLanguage);
-                
-                // If OCRmyPDF failed, try alternative method
-                if (!ocrSuccess) {
-                    console.log('OCRmyPDF failed, trying alternative method...');
-                    ocrSuccess = await createSearchablePdfAlternative(outputPdfPath, ocrPdfPath, ocrLanguage);
-                }
-                
+                const ocrSuccess = await createSearchablePdf(outputPdfPath, ocrPdfPath, ocrLanguage);
+
                 if (ocrSuccess) {
                     // Extract text from the searchable PDF
                     const extractedText = await extractTextFromPdf(ocrPdfPath);
-                    
+
                     // Save extracted text to file
                     await writeFile(ocrTextPath, extractedText);
-                    
+
                     // Add OCR data to response
                     responseData.ocrComplete = true;
                     responseData.searchablePdfUrl = `/api/file?folder=ocr&filename=${sessionId}-searchable.pdf`;
                     responseData.searchablePdfFilename = `${sessionId}-searchable.pdf`;
                     responseData.ocrText = extractedText;
                     responseData.ocrTextUrl = `/ocr/${path.basename(ocrTextPath)}`;
-                    
+
                     console.log('Searchable PDF created successfully');
                 } else {
                     responseData.ocrComplete = false;
-                    responseData.ocrError = 'Failed to create searchable PDF';
+                    responseData.ocrError = 'OCR failed - OCRmyPDF may not be installed or configured correctly';
+                    console.log('OCR failed - check if OCRmyPDF is installed');
                 }
             } catch (error) {
                 console.error('Error during OCR processing:', error);
                 responseData.ocrComplete = false;
-                responseData.ocrError = String(error);
+                responseData.ocrError = `OCR failed: ${error instanceof Error ? error.message : String(error)}`;
             }
         }
 
