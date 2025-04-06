@@ -86,7 +86,8 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
   const [stampType, setStampType] = useState<string>("approved");
   const [customStamp, setCustomStamp] = useState<string | null>(null);
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
-
+  const [penColor, setPenColor] = useState<string>("#000000");
+  const [backgroundColor, setBackgroundColor] = useState<string>("#ffffff");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
   const fileReader = useRef<FileReader | null>(null);
@@ -670,41 +671,93 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
         {/* PDF Viewer and Signing Area */}
         {file && !processing && !signedPdfUrl && pages.length > 0 && (
           <div className="flex-1 flex">
-            {/* PDF Viewer */}
-            <div className="flex-1 p-4 overflow-auto">
-  
-              <div
-                className="relative rounded-lg border shadow-sm bg-white"
-                style={{
-                  width: '100%',
-                  height: 'calc(100vh - 200px)', 
-                  overflow: 'auto',
-                  touchAction: isDragging ? 'none' : 'auto',
-                }}
-                onMouseMove={handleCanvasMouseMove}
-                onMouseUp={handleCanvasMouseUp}
-                onMouseLeave={handleCanvasMouseUp}
-                onTouchMove={handleCanvasMouseMove}
-                onTouchEnd={handleCanvasMouseUp}
-                onTouchCancel={handleCanvasMouseUp}
-                ref={canvasRef}
-              >
-                <Document file={file}>
-                  <Page
-                    pageNumber={currentPage + 1}
-                    width={pages[currentPage]?.width}
-                    height={pages[currentPage]?.height}
-                    renderTextLayer={false}
-                    renderAnnotationLayer={false}
-                    scale={window.innerWidth < 768 ? 0.9 : 1}
-                    className="w-full h-auto"
-                  />
-                  <div style={{ position: 'absolute', top: 0, left: 0 }}>
-                    {renderElements()}
-                  </div>
-                </Document>
-              </div>
-            </div>
+            <div className="flex-1 p-4">
+  <div
+    className="relative rounded-lg shadow-sm bg-white"
+    style={{
+      width: "100%",
+      height: "calc(100vh - 120px)", // Adjust based on your layout
+      overflow: "hidden", // Prevent scrolling
+      touchAction: isDragging ? "none" : "auto",
+      border: "2px solid #000000", // Visible black border
+      padding: "10px", // Internal padding to create space between border and PDF
+      boxSizing: "border-box", // Ensure padding doesn’t increase outer size
+    }}
+    onMouseMove={handleCanvasMouseMove}
+    onMouseUp={handleCanvasMouseUp}
+    onMouseLeave={handleCanvasMouseUp}
+    onTouchMove={handleCanvasMouseMove}
+    onTouchEnd={handleCanvasMouseUp}
+    onTouchCancel={handleCanvasMouseUp}
+    ref={canvasRef}
+  >
+    <Document file={file}>
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#f0f0f0", // Light gray background to distinguish PDF area
+        }}
+      >
+        <Page
+          pageNumber={currentPage + 1}
+          renderTextLayer={false}
+          renderAnnotationLayer={false}
+          width={
+            pages[currentPage]
+              ? Math.min(
+                  pages[currentPage].width,
+                  (canvasRef.current?.clientWidth || window.innerWidth - 40) - 20 // Account for padding
+                )
+              : undefined
+          }
+          scale={
+            window.innerWidth < 768
+              ? 0.9
+              : Math.min(
+                  ((canvasRef.current?.clientWidth || window.innerWidth - 40) - 20) /
+                    (pages[currentPage]?.width || 1),
+                  ((canvasRef.current?.clientHeight || window.innerHeight - 120) - 20) /
+                    (pages[currentPage]?.height || 1)
+                )
+          }
+          className="w-auto h-auto shadow-md" // Slight shadow for PDF page
+        />
+      </div>
+      <div style={{ position: "absolute", top: "10px", left: "10px", width: "calc(100% - 20px)", height: "calc(100% - 20px)" }}>
+        {renderElements()}
+      </div>
+    </Document>
+  </div>
+
+  {/* Pagination Controls */}
+  {pages.length > 1 && (
+    <div className="flex justify-center items-center mt-4 space-x-2">
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => handlePageChange(Math.max(0, currentPage - 1))}
+        disabled={currentPage === 0}
+      >
+        <ChevronLeftIcon className="h-4 w-4" />
+      </Button>
+      <span>
+        Page {currentPage + 1} of {pages.length}
+      </span>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => handlePageChange(Math.min(pages.length - 1, currentPage + 1))}
+        disabled={currentPage === pages.length - 1}
+      >
+        <ChevronRightIcon className="h-4 w-4" />
+      </Button>
+    </div>
+  )}
+</div>
   
             {/* Right Sidebar: Signing Options */}
             <div className="w-96 p-4 border-l bg-background">
@@ -796,33 +849,70 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
                 </TabsContent>
   
                 <TabsContent value="draw" className="space-y-4">
-                  <div className="border rounded-lg p-3">
-                    <SignatureCanvas
-                      ref={signatureCanvasRef}
-                      penColor="currentColor"
-                      canvasProps={{
-                        className: "signature-canvas w-full h-40",
-                      }}
-                    />
-                  </div>
-                  <div className="flex space-x-2">
-                    <Button
-                      variant="outline"
-                      className="flex-1"
-                      onClick={() => signatureCanvasRef.current?.clear()}
-                    >
-                      <RotateCcwIcon className="h-4 w-4 mr-2" />
-                      Clear
-                    </Button>
-                    <Button
-                      className="flex-1"
-                      onClick={handleSignatureDraw}
-                    >
-                      <CheckIcon className="h-4 w-4 mr-2" />
-                      Apply
-                    </Button>
-                  </div>
-                </TabsContent>
+  <div className="border rounded-lg p-3">
+    <SignatureCanvas
+      ref={signatureCanvasRef}
+      penColor={penColor} // Pass dynamic pen color
+      backgroundColor={backgroundColor} // Pass dynamic background color
+      canvasProps={{
+        className: "signature-canvas w-full h-40",
+      }}
+    />
+  </div>
+  {/* Color Selection Controls */}
+  <div className="space-y-4">
+    <div className="space-y-2">
+      <Label htmlFor="pen-color">Pen Color</Label>
+      <div className="flex items-center space-x-2">
+        <input
+          type="color"
+          id="pen-color"
+          value={penColor}
+          onChange={(e) => setPenColor(e.target.value)}
+          className="w-10 h-10 p-0 border-none rounded cursor-pointer"
+        />
+        <Input
+          value={penColor}
+          onChange={(e) => setPenColor(e.target.value)}
+          placeholder="#000000"
+          className="flex-1"
+        />
+      </div>
+    </div>
+    <div className="space-y-2">
+      <Label htmlFor="bg-color">Background Color</Label>
+      <div className="flex items-center space-x-2">
+        <input
+          type="color"
+          id="bg-color"
+          value={backgroundColor}
+          onChange={(e) => setBackgroundColor(e.target.value)}
+          className="w-10 h-10 p-0 border-none rounded cursor-pointer"
+        />
+        <Input
+          value={backgroundColor}
+          onChange={(e) => setBackgroundColor(e.target.value)}
+          placeholder="#ffffff"
+          className="flex-1"
+        />
+      </div>
+    </div>
+  </div>
+  <div className="flex space-x-2">
+    <Button
+      variant="outline"
+      className="flex-1"
+      onClick={() => signatureCanvasRef.current?.clear()}
+    >
+      <RotateCcwIcon className="h-4 w-4 mr-2" />
+      Clear
+    </Button>
+    <Button className="flex-1" onClick={handleSignatureDraw}>
+      <CheckIcon className="h-4 w-4 mr-2" />
+      Apply
+    </Button>
+  </div>
+</TabsContent>
               </Tabs>
   
               <Separator className="my-4" />

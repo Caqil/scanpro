@@ -10,13 +10,13 @@ interface Point {
 }
 
 interface SignatureCanvasProps {
-  penColor: string;
-  canvasProps: React.CanvasHTMLAttributes<HTMLCanvasElement>;
+  penColor?: string;
+  canvasProps?: React.CanvasHTMLAttributes<HTMLCanvasElement>;
   clearOnResize?: boolean;
   minWidth?: number;
   maxWidth?: number;
   velocityFilterWeight?: number;
-  backgroundColor?: string;
+  backgroundColor?: string; // Already included, but we'll use it dynamically
   dotSize?: number;
 }
 
@@ -28,10 +28,10 @@ export const SignatureCanvas = forwardRef<any, SignatureCanvasProps>((props, ref
     minWidth = 0.5,
     maxWidth = 2.5,
     velocityFilterWeight = 0.7,
-    backgroundColor = 'rgba(0,0,0,0)',
-    dotSize = 2
+    backgroundColor = 'rgba(0,0,0,0)', // Default transparent
+    dotSize = 2,
   } = props;
-  
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
   const points = useRef<Point[]>([]);
@@ -39,35 +39,35 @@ export const SignatureCanvas = forwardRef<any, SignatureCanvasProps>((props, ref
   const lastWidth = useRef<number>(0);
   const isDrawing = useRef<boolean>(false);
   const prevPoint = useRef<Point | null>(null);
-  
+
   // Initialize canvas
   const initCanvas = () => {
     if (!canvasRef.current) return;
-    
+
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
-    
+
     canvas.width = rect.width;
     canvas.height = rect.height;
-    
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-    
+
     // Set canvas styles
-    ctx.fillStyle = backgroundColor;
+    ctx.fillStyle = backgroundColor; // Use prop value
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
     ctx.strokeStyle = penColor;
-    
+
     contextRef.current = ctx;
   };
-  
+
   // Handle window resize
   useEffect(() => {
     const resizeCanvas = () => {
       if (!canvasRef.current || !contextRef.current) return;
-      
+
       // Store current drawing
       let imageData: ImageData | null = null;
       if (!clearOnResize) {
@@ -75,34 +75,24 @@ export const SignatureCanvas = forwardRef<any, SignatureCanvasProps>((props, ref
           0, 0, canvasRef.current.width, canvasRef.current.height
         );
       }
-      
+
       // Resize canvas
       initCanvas();
-      
+
       // Restore drawing
       if (imageData && contextRef.current) {
         contextRef.current.putImageData(imageData, 0, 0);
       }
     };
-    
+
     window.addEventListener('resize', resizeCanvas);
-    
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-    };
-  }, [clearOnResize]);
-  
-  // Initialize canvas on mount
+    return () => window.removeEventListener('resize', resizeCanvas);
+  }, [clearOnResize, backgroundColor, penColor]); // Add dependencies
+
+  // Initialize canvas on mount and update on prop changes
   useEffect(() => {
     initCanvas();
-  }, []);
-  
-  // Update pen color when prop changes
-  useEffect(() => {
-    if (contextRef.current) {
-      contextRef.current.strokeStyle = penColor;
-    }
-  }, [penColor]);
+  }, [backgroundColor, penColor]);
   
   // Get point from event
   const getPointFromEvent = (event: MouseEvent | TouchEvent): Point | null => {
@@ -274,32 +264,26 @@ export const SignatureCanvas = forwardRef<any, SignatureCanvasProps>((props, ref
   const handlePointerLeave = (event: React.PointerEvent<HTMLCanvasElement>) => {
     handlePointerUp(event);
   };
-  
-  // Clear canvas
   const clear = () => {
     if (!contextRef.current || !canvasRef.current) return;
-    
-    contextRef.current.fillStyle = backgroundColor;
+
+    contextRef.current.fillStyle = backgroundColor; // Use current background color
     contextRef.current.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-    contextRef.current.strokeStyle = penColor;
+    contextRef.current.strokeStyle = penColor; // Reset stroke color
     isDrawing.current = false;
     points.current = [];
     prevPoint.current = null;
     lastWidth.current = minWidth;
   };
-  
-  // Get data URL
-  const toDataURL = (type = 'image/png', encoderOptions = 1): string => {
-    return canvasRef.current?.toDataURL(type, encoderOptions) || '';
-  };
-  
+
   // Expose methods via ref
   useImperativeHandle(ref, () => ({
     clear,
-    toDataURL,
-    getCanvas: () => canvasRef.current
+    toDataURL: (type = 'image/png', encoderOptions = 1) =>
+      canvasRef.current?.toDataURL(type, encoderOptions) || '',
+    getCanvas: () => canvasRef.current,
   }));
-  
+
   return (
     <canvas
       ref={canvasRef}
@@ -309,7 +293,7 @@ export const SignatureCanvas = forwardRef<any, SignatureCanvasProps>((props, ref
       onPointerLeave={handlePointerLeave}
       style={{ 
         touchAction: 'none',
-        cursor: 'crosshair'
+        cursor: 'crosshair',
       }}
       {...canvasProps}
     />
