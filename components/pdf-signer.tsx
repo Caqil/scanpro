@@ -1,944 +1,919 @@
+// components/pdf-signer.tsx
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Progress } from "@/components/ui/progress";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { toast } from "sonner";
-import { useLanguageStore } from "@/src/store/store";
-import {
-  PenIcon,
-  TypeIcon,
-  StampIcon,
-  PencilIcon,
-  ImageIcon,
-  UploadIcon,
-  Trash2Icon,
-  XIcon,
-  CheckIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  LoaderIcon,
-  DownloadIcon,
-} from "lucide-react";
+import React, { useState, useRef, useEffect } from 'react';
+import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { FileUploader } from '@/components/file-uploader';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Loader2, Download, Trash2 } from 'lucide-react';
+import { useLanguageStore } from '@/src/store/store';
+import { v4 as uuidv4 } from 'uuid';
 
-import { SignatureCanvas } from "./signature-canvas";
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
-
-export type ElementType = "signature" | "text" | "stamp" | "image";
-export type Position = { x: number; y: number };
-export type Size = { width: number; height: number };
-
-export interface SignatureElement {
+// Define the types for our elements
+interface SignatureElement {
   id: string;
-  type: ElementType;
-  position: Position;
-  size: Size;
+  type: 'signature' | 'text' | 'stamp' | 'drawing' | 'image';
+  position: { x: number; y: number };
+  size: { width: number; height: number };
   data: string;
-  rotation: number;
-  scale: number;
+  rotation?: number;
+  scale?: number;
+  page: number;
   color?: string;
   fontSize?: number;
   fontFamily?: string;
-  page: number;
 }
 
-interface PdfPage {
+// Define page data structure
+interface PageData {
   width: number;
   height: number;
   originalWidth: number;
   originalHeight: number;
+  imageUrl?: string;
 }
 
-interface Props {
+interface PdfSignerProps {
   initialTool?: string;
 }
 
-export function PdfSigner({ initialTool = "signature" }: Props) {
-  const { t } = useLanguageStore();
-
-  const [file, setFile] = useState<File | null>(null);
-  const [activeTool, setActiveTool] = useState<ElementType>(initialTool as ElementType);
-  const [activeTab, setActiveTab] = useState<string>("draw");
-  const [pages, setPages] = useState<PdfPage[]>([]);
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const [elements, setElements] = useState<SignatureElement[]>([]);
-  const [processing, setProcessing] = useState<boolean>(false);
-  const [progress, setProgress] = useState<number>(0);
-  const [signedPdfUrl, setSignedPdfUrl] = useState<string>("");
-  const [selectedElement, setSelectedElement] = useState<string | null>(null);
-  const [draggedElement, setDraggedElement] = useState<SignatureElement | null>(null);
-  const [isDragging, setIsDragging] = useState<boolean>(false);
-  const [isResizing, setIsResizing] = useState<boolean>(false);
-  const [signatureSize, setSignatureSize] = useState<Size>({ width: 200, height: 100 });
-  const [color, setColor] = useState<string>("#000000");
-  const [signatureDataUrl, setSignatureDataUrl] = useState<string>("");
-  const [textValue, setTextValue] = useState<string>("");
-  const [fontSize, setFontSize] = useState<number>(16);
-  const [fontFamily, setFontFamily] = useState<string>("Arial");
-  const [stampType, setStampType] = useState<string>("approved");
-  const [isDragOver, setIsDragOver] = useState<boolean>(false);
-
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const canvasRef = useRef<HTMLDivElement>(null);
-  const fileReader = useRef<FileReader | null>(null);
-  const signatureCanvasRef = useRef<any>(null);
-  const imageInputRef = useRef<HTMLInputElement>(null);
+// SignatureElement Component
+const SignatureElement: React.FC<{
+  element: SignatureElement;
+  onUpdate: (id: string, position: { x: number; y: number }) => void;
+  onSelect: (id: string) => void;
+  isSelected: boolean;
+  scale: number;
+}> = ({ element, onUpdate, onSelect, isSelected, scale }) => {
+  const elementRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [position, setPosition] = useState(element.position);
+  
+  // Track touch start position for mobile
+  const touchStartRef = useRef({ x: 0, y: 0 });
+  // Track element's original position at touch start
+  const elementStartPosRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    fileReader.current = new FileReader();
-    return () => {
-      fileReader.current = null;
+    setPosition(element.position);
+  }, [element.position]);
+
+  // Handle touch start event - specifically for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    // Prevent default to avoid screen scrolling during drag
+    e.preventDefault();
+    
+    // Select the element
+    onSelect(element.id);
+    
+    // Record the start touch position
+    touchStartRef.current = {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY
     };
-  }, []);
-
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (!files || files.length === 0) return;
-
-    const uploadedFile = files[0];
-    if (uploadedFile.type !== "application/pdf") {
-      toast.error(t("ui.error"));
-      return;
-    }
-
-    setFile(uploadedFile);
-    setElements([]);
-    setSignedPdfUrl("");
-    setCurrentPage(0);
-
-    processPdf(uploadedFile);
+    
+    // Record the element's current position
+    elementStartPosRef.current = {
+      x: position.x,
+      y: position.y
+    };
+    
+    setIsDragging(true);
   };
 
-  const handleFileDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const files = event.dataTransfer.files;
-    if (!files || files.length === 0) return;
-
-    const uploadedFile = files[0];
-    if (uploadedFile.type !== "application/pdf") {
-      toast.error(t("ui.error"));
-      return;
-    }
-
-    setFile(uploadedFile);
-    setElements([]);
-    setSignedPdfUrl("");
-    setCurrentPage(0);
-
-    processPdf(uploadedFile);
+  // Handle touch move event - specifically for mobile
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    
+    // Prevent default to avoid screen scrolling during drag
+    e.preventDefault();
+    
+    // Calculate the delta movement from the touch start
+    const deltaX = (e.touches[0].clientX - touchStartRef.current.x) / scale;
+    const deltaY = (e.touches[0].clientY - touchStartRef.current.y) / scale;
+    
+    // Update position based on the original position plus the delta
+    const newPosition = {
+      x: elementStartPosRef.current.x + deltaX,
+      y: elementStartPosRef.current.y + deltaY
+    };
+    
+    setPosition(newPosition);
   };
 
-  const processPdf = async (pdfFile: File) => {
-    setProcessing(true);
-    setProgress(0);
+  // Handle touch end event - specifically for mobile
+  const handleTouchEnd = () => {
+    if (isDragging) {
+      // Update the parent component with the new position
+      onUpdate(element.id, position);
+      setIsDragging(false);
+    }
+  };
 
-    try {
-      const fileUrl = URL.createObjectURL(pdfFile);
-      const pdf = await pdfjs.getDocument(fileUrl).promise;
-      const numPages = pdf.numPages;
-      const newPages: PdfPage[] = [];
+  // Handle mouse drag event - for desktop
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    
+    // Calculate the delta movement from the touch start
+    const deltaX = (e.clientX - touchStartRef.current.x) / scale;
+    const deltaY = (e.clientY - touchStartRef.current.y) / scale;
+    
+    // Update position based on the original position plus the delta
+    const newPosition = {
+      x: elementStartPosRef.current.x + deltaX,
+      y: elementStartPosRef.current.y + deltaY
+    };
+    
+    setPosition(newPosition);
+  };
 
-      for (let i = 1; i <= numPages; i++) {
-        const page = await pdf.getPage(i);
-        const viewport = page.getViewport({ scale: 1 });
-        newPages.push({
-          width: viewport.width,
-          height: viewport.height,
-          originalWidth: viewport.width,
-          originalHeight: viewport.height,
-        });
+  const handleMouseDown = (e: React.MouseEvent) => {
+    // Select the element
+    onSelect(element.id);
+    
+    // Record the start mouse position
+    touchStartRef.current = {
+      x: e.clientX,
+      y: e.clientY
+    };
+    
+    // Record the element's current position
+    elementStartPosRef.current = {
+      x: position.x,
+      y: position.y
+    };
+    
+    setIsDragging(true);
+    
+    // Add mouse event listeners to document
+    document.addEventListener('mousemove', handleMouseMove as any);
+    document.addEventListener('mouseup', handleMouseUp);
+  };
+
+  const handleMouseUp = () => {
+    if (isDragging) {
+      // Update the parent component with the new position
+      onUpdate(element.id, position);
+      setIsDragging(false);
+      
+      // Remove mouse event listeners
+      document.removeEventListener('mousemove', handleMouseMove as any);
+      document.removeEventListener('mouseup', handleMouseUp);
+    }
+  };
+
+  // Render the appropriate content based on element type
+  const renderContent = () => {
+    switch (element.type) {
+      case 'signature':
+      case 'image':
+        return (
+          <img
+            src={element.data}
+            alt="Signature"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
+              userSelect: 'none',
+              pointerEvents: 'none',
+            }}
+            draggable="false"
+          />
+        );
+      case 'text':
+        return (
+          <div
+            style={{
+              width: '100%',
+              height: '100%',
+              color: element.color || '#000',
+              fontSize: `${element.fontSize || 16}px`,
+              fontFamily: element.fontFamily || 'Arial',
+              userSelect: 'none',
+              pointerEvents: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '4px',
+            }}
+          >
+            {element.data}
+          </div>
+        );
+      case 'stamp':
+        return (
+          <div
+            style={{
+              width: '100%',
+              height: '100%',
+              border: '2px solid red',
+              color: 'red',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '20px',
+              fontWeight: 'bold',
+              userSelect: 'none',
+              pointerEvents: 'none',
+              padding: '4px',
+            }}
+          >
+            {element.data.toUpperCase()}
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div
+      ref={elementRef}
+      style={{
+        position: 'absolute',
+        left: position.x,
+        top: position.y,
+        width: element.size.width,
+        height: element.size.height,
+        cursor: 'move',
+        transform: element.rotation ? `rotate(${element.rotation}deg)` : undefined,
+        opacity: element.scale || 1,
+        touchAction: 'none', // Important for preventing browser gestures during touch
+      }}
+      className={`signature-element ${isSelected ? 'ring-2 ring-primary' : ''}`}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onMouseDown={handleMouseDown}
+      onClick={() => onSelect(element.id)}
+    >
+      {renderContent()}
+      {isSelected && (
+        <div className="absolute -top-2 -left-2 -right-2 -bottom-2 border-2 border-dashed border-primary rounded-sm pointer-events-none" />
+      )}
+    </div>
+  );
+};
+
+// PageContainer Component
+const PageContainer: React.FC<{
+  page: PageData;
+  elements: SignatureElement[];
+  onElementUpdate: (id: string, position: { x: number; y: number }) => void;
+  onElementSelect: (id: string) => void;
+  selectedElementId: string | null;
+  pageIndex: number;
+  scale: number;
+}> = ({ page, elements, onElementUpdate, onElementSelect, selectedElementId, pageIndex, scale }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [touchBlocked, setTouchBlocked] = useState(false);
+
+  // Filter elements for the current page
+  const pageElements = elements.filter(element => element.page === pageIndex);
+
+  // Handle container touch start - prevent default only when we have elements
+  const handleContainerTouchStart = (e: React.TouchEvent) => {
+    if (pageElements.length > 0) {
+      // Don't prevent default here, just check if we should block page scrolling
+      const touch = e.touches[0];
+      
+      // Check if the touch is on any of our signature elements
+      const touchOnElement = pageElements.some(element => {
+        const elementRect = {
+          left: element.position.x,
+          top: element.position.y,
+          right: element.position.x + element.size.width,
+          bottom: element.position.y + element.size.height,
+        };
+        
+        // Get container bounds
+        const container = containerRef.current?.getBoundingClientRect();
+        if (!container) return false;
+        
+        // Adjust touch coordinates relative to the container
+        const relativeX = (touch.clientX - container.left) / scale;
+        const relativeY = (touch.clientY - container.top) / scale;
+        
+        // Check if touch is within element bounds
+        return (
+          relativeX >= elementRect.left &&
+          relativeX <= elementRect.right &&
+          relativeY >= elementRect.top &&
+          relativeY <= elementRect.bottom
+        );
+      });
+      
+      if (touchOnElement) {
+        // Only prevent default if we're touching a signature element
+        e.preventDefault();
+        setTouchBlocked(true);
       }
-
-      setPages(newPages);
-      setProgress(100);
-      URL.revokeObjectURL(fileUrl);
-    } catch (error) {
-      console.error("Error processing PDF:", error);
-      toast.error(t("signPdf.messages.error"));
-    } finally {
-      setProcessing(false);
     }
   };
 
-  const handleSignatureDraw = () => {
-    if (!signatureCanvasRef.current) return;
+  // Clear the touch blocked state on touch end
+  const handleContainerTouchEnd = () => {
+    setTouchBlocked(false);
+  };
 
-    const signatureData = signatureCanvasRef.current.toDataURL("image/png");
-    setSignatureDataUrl(signatureData);
+  // Handle touch move on container
+  const handleContainerTouchMove = (e: React.TouchEvent) => {
+    // Only prevent default if we're interacting with an element
+    if (touchBlocked) {
+      e.preventDefault();
+    }
+  };
 
-    if (canvasRef.current && pages.length > 0 && currentPage < pages.length) {
-      const canvasBounds = canvasRef.current.getBoundingClientRect();
-      const centerX = (canvasBounds.width - signatureSize.width) / 2;
-      const centerY = (canvasBounds.height - signatureSize.height) / 2;
+  return (
+    <div className="relative mb-8 shadow-lg">
+      <div
+        ref={containerRef}
+        className="relative bg-white"
+        style={{
+          width: page.width,
+          height: page.height,
+          touchAction: touchBlocked ? 'none' : 'auto', // Only disable touch actions when interacting with elements
+        }}
+        onTouchStart={handleContainerTouchStart}
+        onTouchMove={handleContainerTouchMove}
+        onTouchEnd={handleContainerTouchEnd}
+      >
+        {/* Page background */}
+        {page.imageUrl && (
+          <img
+            src={page.imageUrl}
+            alt={`Page ${pageIndex + 1}`}
+            className="absolute top-0 left-0 w-full h-full object-contain"
+            style={{ userSelect: 'none', pointerEvents: 'none' }}
+            draggable="false"
+          />
+        )}
 
-      const newElement: SignatureElement = {
-        id: `signature-${Date.now()}`,
-        type: "signature",
-        position: { x: centerX, y: centerY },
-        size: { ...signatureSize },
-        data: signatureData,
-        rotation: 0,
-        scale: 1,
-        page: currentPage,
+        {/* Page elements */}
+        {pageElements.map((element) => (
+          <SignatureElement
+            key={element.id}
+            element={element}
+            onUpdate={onElementUpdate}
+            onSelect={onElementSelect}
+            isSelected={selectedElementId === element.id}
+            scale={scale}
+          />
+        ))}
+      </div>
+      <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
+        Page {pageIndex + 1}
+      </div>
+    </div>
+  );
+};
+
+// SignaturePanel Component
+const SignaturePanel: React.FC<{
+  onAdd: (element: Omit<SignatureElement, 'id' | 'position' | 'page'>) => void;
+  type: 'signature' | 'text' | 'stamp';
+}> = ({ onAdd, type }) => {
+  const { t } = useLanguageStore();
+  const [signatureData, setSignatureData] = useState<string>('');
+  const [signatureMode, setSignatureMode] = useState<'draw' | 'type' | 'upload'>('draw');
+  const [text, setText] = useState<string>('');
+  const [stamp, setStamp] = useState<string>('APPROVED');
+  const [color, setColor] = useState<string>('#000000');
+  const [fontSize, setFontSize] = useState<number>(20);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [lastPosition, setLastPosition] = useState<{ x: number, y: number } | null>(null);
+
+  // Create signature drawing canvas
+  useEffect(() => {
+    if (type === 'signature' && signatureMode === 'draw' && canvasRef.current) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+      }
+    }
+  }, [type, signatureMode, color]);
+
+  const handleDrawStart = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    if (!canvasRef.current) return;
+    setIsDrawing(true);
+
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+
+    let clientX, clientY;
+    if ('touches' in e) {
+      clientX = e.touches[0].clientX;
+      clientY = e.touches[0].clientY;
+    } else {
+      clientX = e.clientX;
+      clientY = e.clientY;
+    }
+
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+    
+    setLastPosition({ x, y });
+  };
+
+  const handleDrawMove = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    if (!isDrawing || !lastPosition || !canvasRef.current) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const rect = canvas.getBoundingClientRect();
+    
+    let clientX, clientY;
+    if ('touches' in e) {
+      e.preventDefault(); // Prevent scrolling on touch devices
+      clientX = e.touches[0].clientX;
+      clientY = e.touches[0].clientY;
+    } else {
+      clientX = e.clientX;
+      clientY = e.clientY;
+    }
+
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+
+    ctx.beginPath();
+    ctx.moveTo(lastPosition.x, lastPosition.y);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    
+    setLastPosition({ x, y });
+  };
+
+  const handleDrawEnd = () => {
+    setIsDrawing(false);
+    setLastPosition(null);
+    
+    if (canvasRef.current) {
+      // Save the signature data
+      const signatureImg = canvasRef.current.toDataURL('image/png');
+      setSignatureData(signatureImg);
+    }
+  };
+
+  const handleClearCanvas = () => {
+    if (canvasRef.current) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        setSignatureData('');
+      }
+    }
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          setSignatureData(event.target.result as string);
+        }
       };
-
-      setElements([...elements, newElement]);
-      setSelectedElement(newElement.id);
+      reader.readAsDataURL(file);
     }
   };
 
-  const handleAddText = () => {
-    if (!textValue.trim() || !canvasRef.current || pages.length === 0 || currentPage >= pages.length) return;
+  const handleAddElement = () => {
+    if (type === 'signature' && !signatureData) {
+      return; // Don't add empty signature
+    }
 
-    const canvasBounds = canvasRef.current.getBoundingClientRect();
-    const centerX = (canvasBounds.width - 200) / 2;
-    const centerY = (canvasBounds.height - 30) / 2;
+    if (type === 'text' && !text) {
+      return; // Don't add empty text
+    }
 
-    const newElement: SignatureElement = {
-      id: `text-${Date.now()}`,
-      type: "text",
-      position: { x: centerX, y: centerY },
-      size: { width: 200, height: 30 },
-      data: textValue,
-      rotation: 0,
-      scale: 1,
-      color: color,
-      fontSize: fontSize,
-      fontFamily: fontFamily,
-      page: currentPage,
-    };
-
-    setElements([...elements, newElement]);
-    setSelectedElement(newElement.id);
-    setTextValue("");
-  };
-
-  const handleAddStamp = () => {
-    if (!canvasRef.current || pages.length === 0 || currentPage >= pages.length) return;
-
-    const canvasBounds = canvasRef.current.getBoundingClientRect();
-    const centerX = (canvasBounds.width - 150) / 2;
-    const centerY = (canvasBounds.height - 150) / 2;
-
-    const stampData = generateStampSvg(stampType, color);
-
-    const newElement: SignatureElement = {
-      id: `stamp-${Date.now()}`,
-      type: "stamp",
-      position: { x: centerX, y: centerY },
-      size: { width: 150, height: 150 },
-      data: stampData,
-      rotation: 0,
-      scale: 1,
-      color: color,
-      page: currentPage,
-    };
-
-    setElements([...elements, newElement]);
-    setSelectedElement(newElement.id);
-  };
-
-  const generateStampSvg = (type: string, color: string): string => {
-    let text = "";
+    let elementData;
+    
     switch (type) {
-      case "approved":
-        text = t("signPdf.stamps.approved");
+      case 'signature':
+        elementData = {
+          type: 'signature',
+          data: signatureData,
+          size: { width: 200, height: 100 },
+        };
         break;
-      case "rejected":
-        text = t("signPdf.stamps.rejected");
+      case 'text':
+        elementData = {
+          type: 'text',
+          data: text,
+          size: { width: text.length * fontSize * 0.6, height: fontSize * 1.5 },
+          color,
+          fontSize,
+          fontFamily: 'Arial',
+        };
         break;
-      case "draft":
-        text = t("signPdf.stamps.draft");
-        break;
-      case "final":
-        text = t("signPdf.stamps.final");
-        break;
-      case "confidential":
-        text = t("signPdf.stamps.confidential");
+      case 'stamp':
+        elementData = {
+          type: 'stamp',
+          data: stamp,
+          size: { width: 200, height: 80 },
+        };
         break;
       default:
-        text = t("signPdf.stamps.approved");
+        return;
     }
 
-    return `
-      <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
-        <circle cx="75" cy="75" r="70" fill="none" stroke="${color}" stroke-width="5" />
-        <text x="75" y="75" font-family="Arial" font-size="24" fill="${color}" text-anchor="middle" dominant-baseline="middle">${text}</text>
-        <line x1="20" y1="75" x2="130" y2="75" stroke="${color}" stroke-width="2" />
-      </svg>
-    `;
+    onAdd(elementData as any);
   };
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (!files || files.length === 0 || !canvasRef.current || pages.length === 0 || currentPage >= pages.length) return;
+  if (type === 'signature') {
+    return (
+      <div className="space-y-4">
+        <div className="flex flex-wrap gap-2">
+          <Button
+            variant={signatureMode === 'draw' ? "default" : "outline"}
+            onClick={() => setSignatureMode('draw')}
+            size="sm"
+          >
+            {t('signPdf.draw')}
+          </Button>
+          <Button
+            variant={signatureMode === 'upload' ? "default" : "outline"}
+            onClick={() => setSignatureMode('upload')}
+            size="sm"
+          >
+            {t('signPdf.uploadSignature')}
+          </Button>
+          <Button
+            variant={signatureMode === 'type' ? "default" : "outline"}
+            onClick={() => setSignatureMode('type')}
+            size="sm"
+          >
+            {t('signPdf.options.type')}
+          </Button>
+        </div>
 
-    const uploadedFile = files[0];
-    if (!uploadedFile.type.startsWith("image/")) {
-      toast.error(t("ui.error"));
-      return;
+        {signatureMode === 'draw' && (
+          <div className="border p-2 rounded-md">
+            <canvas
+              ref={canvasRef}
+              width={300}
+              height={150}
+              className="border border-dashed rounded-md bg-white w-full touch-none"
+              onMouseDown={handleDrawStart}
+              onMouseMove={handleDrawMove}
+              onMouseUp={handleDrawEnd}
+              onMouseLeave={handleDrawEnd}
+              onTouchStart={handleDrawStart}
+              onTouchMove={handleDrawMove}
+              onTouchEnd={handleDrawEnd}
+            />
+            <div className="flex justify-between mt-2">
+              <input
+                type="color"
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+                className="w-8 h-8 rounded-md"
+              />
+              <Button variant="outline" size="sm" onClick={handleClearCanvas}>
+                {t('signPdf.options.clear')}
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {signatureMode === 'upload' && (
+          <div className="border p-4 rounded-md text-center">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileUpload}
+              className="hidden"
+              id="signature-upload"
+            />
+            <label
+              htmlFor="signature-upload"
+              className="cursor-pointer block border-2 border-dashed rounded-md p-6 text-muted-foreground hover:border-primary"
+            >
+              {signatureData ? (
+                <img
+                  src={signatureData}
+                  alt="Uploaded signature"
+                  className="max-h-20 mx-auto"
+                />
+              ) : (
+                <div>
+                  <span className="block">{t('signPdf.uploadSignature')}</span>
+                  <span className="text-xs">PNG, JPG, GIF</span>
+                </div>
+              )}
+            </label>
+          </div>
+        )}
+
+        {signatureMode === 'type' && (
+          <div className="space-y-2">
+            <input
+              type="text"
+              value={text}
+              onChange={(e) => {
+                setText(e.target.value);
+                // Generate signature data from text
+                if (e.target.value) {
+                  const canvas = document.createElement('canvas');
+                  canvas.width = 300;
+                  canvas.height = 150;
+                  const ctx = canvas.getContext('2d');
+                  if (ctx) {
+                    ctx.font = `italic bold 30px cursive`;
+                    ctx.fillStyle = color;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(e.target.value, 150, 75);
+                    setSignatureData(canvas.toDataURL('image/png'));
+                  }
+                } else {
+                  setSignatureData('');
+                }
+              }}
+              className="w-full p-2 border rounded-md"
+              placeholder="Type your signature"
+            />
+            <div className="flex gap-2">
+              <input
+                type="color"
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+                className="w-8 h-8 rounded-md"
+              />
+            </div>
+          </div>
+        )}
+
+        <div className="mt-4">
+          <Button
+            onClick={handleAddElement}
+            disabled={!signatureData}
+            className="w-full"
+          >
+            {t('signPdf.options.apply')}
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'text') {
+    return (
+      <div className="space-y-4">
+        <textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          className="w-full p-2 border rounded-md h-32"
+          placeholder="Enter text..."
+        />
+        <div className="flex justify-between">
+          <div>
+            <label className="text-sm">{t('signPdf.options.color')}</label>
+            <input
+              type="color"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+              className="block w-8 h-8 rounded-md mt-1"
+            />
+          </div>
+          <div>
+            <label className="text-sm">{t('signPdf.options.fontSize')}</label>
+            <input
+              type="number"
+              value={fontSize}
+              onChange={(e) => setFontSize(parseInt(e.target.value))}
+              className="block w-20 p-2 border rounded-md mt-1"
+              min={8}
+              max={72}
+            />
+          </div>
+        </div>
+        <Button
+          onClick={handleAddElement}
+          disabled={!text}
+          className="w-full"
+        >
+          {t('signPdf.addText')}
+        </Button>
+      </div>
+    );
+  }
+
+  if (type === 'stamp') {
+    return (
+      <div className="space-y-4">
+        <div className="grid grid-cols-1 gap-2">
+          {['APPROVED', 'REJECTED', 'DRAFT', 'CONFIDENTIAL', 'FINAL'].map((stampText) => (
+            <Button
+              key={stampText}
+              variant={stamp === stampText ? "default" : "outline"}
+              onClick={() => setStamp(stampText)}
+              className="justify-start"
+            >
+              <div
+                className="border-2 border-red-500 text-red-500 px-2 py-1 text-sm font-bold"
+              >
+                {stampText}
+              </div>
+            </Button>
+          ))}
+        </div>
+        <Button
+          onClick={handleAddElement}
+          className="w-full"
+        >
+          {t('signPdf.options.apply')}
+        </Button>
+      </div>
+    );
+  }
+
+  return null;
+};
+
+export const PdfSigner: React.FC<PdfSignerProps> = ({ initialTool = 'signature' }) => {
+  const { t } = useLanguageStore();
+  const { toast } = useToast();
+  const [file, setFile] = useState<File | null>(null);
+  const [pages, setPages] = useState<PageData[]>([]);
+  const [elements, setElements] = useState<SignatureElement[]>([]);
+  const [selectedTool, setSelectedTool] = useState<string>(initialTool);
+  const [loading, setLoading] = useState(false);
+  const [processing, setProcessing] = useState(false);
+  const [selectedElementId, setSelectedElementId] = useState<string | null>(null);
+  const [scale, setScale] = useState(1);
+  const [signedPdfUrl, setSignedPdfUrl] = useState<string | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Calculate viewport scale factor for proper positioning on different screen sizes
+  useEffect(() => {
+    if (containerRef.current && pages.length > 0) {
+      const containerWidth = containerRef.current.clientWidth;
+      const pageWidth = pages[0].width;
+      
+      if (containerWidth < pageWidth) {
+        setScale(containerWidth / pageWidth);
+      } else {
+        setScale(1);
+      }
     }
+  }, [pages, containerRef.current?.clientWidth]);
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      if (e.target && e.target.result) {
-        const canvasBounds = canvasRef.current!.getBoundingClientRect();
-        const centerX = (canvasBounds.width - 200) / 2;
-        const centerY = (canvasBounds.height - 200) / 2;
-
-        const newElement: SignatureElement = {
-          id: `image-${Date.now()}`,
-          type: "image",
-          position: { x: centerX, y: centerY },
-          size: { width: 200, height: 200 },
-          data: e.target.result as string,
-          rotation: 0,
-          scale: 1,
-          page: currentPage,
-        };
-
-        setElements([...elements, newElement]);
-        setSelectedElement(newElement.id);
+  // Handle window resize to recalculate scale
+  useEffect(() => {
+    const handleResize = () => {
+      if (containerRef.current && pages.length > 0) {
+        const containerWidth = containerRef.current.clientWidth;
+        const pageWidth = pages[0].width;
+        
+        if (containerWidth < pageWidth) {
+          setScale(containerWidth / pageWidth);
+        } else {
+          setScale(1);
+        }
       }
     };
 
-    reader.readAsDataURL(uploadedFile);
-  };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [pages]);
 
-  const handleElementSelect = (id: string) => {
-    setSelectedElement(id === selectedElement ? null : id);
-  };
-
-  const handleElementDelete = (id: string) => {
-    setElements(elements.filter((element) => element.id !== id));
-    setSelectedElement(null);
-  };
-
-  const handleElementMoveStart = (
-    event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
-    element: SignatureElement
-  ) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setIsDragging(true);
-    setDraggedElement(element);
-    setSelectedElement(element.id);
-  
-    // Prevent PDF scrolling on touch devices
-    if ("touches" in event) {
-      document.body.style.overflow = "hidden"; // Disable body scroll
-    }
-  };
-  const handleCanvasMouseMove = (event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
-    if (!canvasRef.current || (!isDragging && !isResizing)) return;
-  
-    event.preventDefault();
-    const canvasBounds = canvasRef.current.getBoundingClientRect();
-    const scrollLeft = canvasRef.current.scrollLeft;
-    const scrollTop = canvasRef.current.scrollTop;
-  
-    let clientX: number, clientY: number;
-    if ("touches" in event) {
-      clientX = event.touches[0].clientX;
-      clientY = event.touches[0].clientY;
-    } else {
-      clientX = event.clientX;
-      clientY = event.clientY;
-    }
-  
-    const x = clientX - canvasBounds.left + scrollLeft;
-    const y = clientY - canvasBounds.top + scrollTop;
-  
-    if (isDragging && draggedElement) {
-      const newX = x - draggedElement.size.width / 2;
-      const newY = y - draggedElement.size.height / 2;
-  
-      const constrainedX = Math.max(0, Math.min(newX, canvasBounds.width - draggedElement.size.width));
-      const constrainedY = Math.max(0, Math.min(newY, canvasBounds.height - draggedElement.size.height));
-  
-      setElements((prevElements) =>
-        prevElements.map((el) =>
-          el.id === draggedElement.id ? { ...el, position: { x: constrainedX, y: constrainedY } } : el
-        )
-      );
-    } else if (isResizing && selectedElement) {
-      const element = elements.find((el) => el.id === selectedElement);
-      if (element) {
-        const newWidth = Math.max(50, x - element.position.x);
-        const newHeight = Math.max(25, y - element.position.y);
-        setElements((prevElements) =>
-          prevElements.map((el) =>
-            el.id === selectedElement ? { ...el, size: { width: newWidth, height: newHeight } } : el
-          )
-        );
-      }
-    }
-  };
-
-  const handleCanvasMouseUp = () => {
-    setIsDragging(false);
-    setIsResizing(false);
-    setDraggedElement(null);
-    document.body.style.overflow = ""; // Re-enable body scroll
-  };
-
-  const handleResizeStart = (
-    event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
-    element: SignatureElement
-  ) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setIsResizing(true);
-    setSelectedElement(element.id);
-  };
-
-  const handlePageChange = (direction: "prev" | "next") => {
-    if (direction === "prev" && currentPage > 0) {
-      setCurrentPage(currentPage - 1);
-    } else if (direction === "next" && currentPage < pages.length - 1) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handleSavePdf = async () => {
-    if (!file || pages.length === 0) return;
-
-    setProcessing(true);
-    setProgress(0);
+  // Handle file upload
+  const handleFileUpload = async (uploadedFile: File) => {
+    setFile(uploadedFile);
+    setLoading(true);
+    setElements([]);
+    setSelectedElementId(null);
+    setSignedPdfUrl(null);
 
     try {
       const formData = new FormData();
-      formData.append("file", file);
-      formData.append("elements", JSON.stringify(elements));
-      formData.append("pages", JSON.stringify(pages));
-      formData.append("performOcr", "true");
-      formData.append("ocrLanguage", "eng");
+      formData.append('file', uploadedFile);
 
-      const response = await fetch("/api/pdf/sign", {
-        method: "POST",
+      const response = await fetch('/api/pdf/process', {
+        method: 'POST',
         body: formData,
       });
 
       if (!response.ok) {
-        throw new Error("Failed to save PDF");
+        throw new Error('Failed to process PDF');
       }
 
-      const result = await response.json();
-
-      if (result.success) {
-        let pdfUrl = result.fileUrl;
-        let pdfName = result.originalName || "signed-document.pdf";
-
-        if (result.ocrComplete) {
-          pdfUrl = result.searchablePdfUrl;
-          pdfName = result.searchablePdfFilename || "searchable-document.pdf";
-        } else if (!result.ocrComplete && result.ocrError) {
-          console.warn("OCR requested but failed:", result.ocrError);
-          toast.error(t("signPdf.messages.ocrFailed"));
-        }
-
-        setSignedPdfUrl(pdfUrl);
-        setProgress(100);
-        toast.success(t("signPdf.messages.signed"));
-
-        return { url: pdfUrl, name: pdfName };
+      const data = await response.json();
+      
+      if (data.success) {
+        setPages(data.pages);
       } else {
-        throw new Error(result.error || "Unknown error");
+        throw new Error(data.error || 'Unknown error');
       }
     } catch (error) {
-      console.error("Error saving PDF:", error);
-      toast.error(t("signPdf.messages.error"));
+      console.error('Error processing PDF:', error);
+      toast({
+        title: t('signPdf.messages.error'),
+        description: t('signPdf.messages.errorDesc'),
+        variant: 'destructive',
+      });
     } finally {
-      setProcessing(false);
+      setLoading(false);
     }
   };
 
+  // Add new element (signature, text, etc.)
+  const handleAddElement = (elementData: Omit<SignatureElement, 'id' | 'position' | 'page'>) => {
+    if (pages.length === 0) {
+      toast({
+        title: t('signPdf.messages.noFile'),
+        description: t('signPdf.messages.uploadFirst'),
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    // Create new element with unique ID and centered position on the current page
+    const newElement: SignatureElement = {
+      ...elementData,
+      id: `element-${uuidv4()}`,
+      position: {
+        x: (pages[0].width - elementData.size.width) / 2,
+        y: (pages[0].height - elementData.size.height) / 2,
+      },
+      page: 0, // Default to first page
+    };
+
+    setElements([...elements, newElement]);
+    setSelectedElementId(newElement.id);
+  };
+
+  // Update element position
+  const handleElementUpdate = (id: string, position: { x: number; y: number }) => {
+    setElements(
+      elements.map((element) =>
+        element.id === id ? { ...element, position } : element
+      )
+    );
+  };
+
+  // Remove selected element
+  const handleRemoveSelected = () => {
+    if (selectedElementId) {
+      setElements(elements.filter((element) => element.id !== selectedElementId));
+      setSelectedElementId(null);
+    }
+  };
+
+  // Clear all elements
   const handleClearAll = () => {
     setElements([]);
-    setSelectedElement(null);
+    setSelectedElementId(null);
   };
 
-  const handleBrowseClick = () => {
-    fileInputRef.current?.click();
-  };
-  const renderElements = () => {
-    return elements
-      .filter((element) => element.page === currentPage)
-      .map((element) => {
-        const elementStyles = {
-          position: "absolute" as const,
-          left: `${element.position.x}px`,
-          top: `${element.position.y}px`,
-          width: `${element.size.width}px`,
-          height: `${element.size.height}px`,
-          transform: `rotate(${element.rotation}deg)`,
-          cursor: isDragging && draggedElement?.id === element.id ? "grabbing" : "grab",
-          border: selectedElement === element.id ? "2px dashed #3b82f6" : "none",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          userSelect: "none" as const,
-          touchAction: "none" as const, // Prevent default touch behavior
-          zIndex: selectedElement === element.id ? 999 : 1,
-        };
-  
-        const resizeHandleStyles = {
-          position: "absolute" as const,
-          bottom: "-5px",
-          right: "-5px",
-          width: "10px",
-          height: "10px",
-          backgroundColor: "#3b82f6",
-          borderRadius: "50%",
-          cursor: "se-resize",
-          touchAction: "none" as const, // Prevent default touch behavior
-        };
-  
-        // Rest of the switch statement remains the same, just apply elementStyles
-        switch (element.type) {
-          case "signature":
-            return (
-              <div
-                key={element.id}
-                style={elementStyles}
-                onClick={() => handleElementSelect(element.id)}
-                onMouseDown={(e) => handleElementMoveStart(e, element)}
-                onTouchStart={(e) => handleElementMoveStart(e, element)}
-              >
-                <div
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    backgroundImage: `url(${element.data})`,
-                    backgroundSize: "contain",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                    pointerEvents: "none",
-                  }}
-                />
-                {selectedElement === element.id && (
-                  <>
-                    <button
-                      className="absolute -top-3 -right-3 bg-red-500 rounded-full p-1"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleElementDelete(element.id);
-                      }}
-                    >
-                      <XIcon className="h-3 w-3 text-white" />
-                    </button>
-                    <div
-                      style={resizeHandleStyles}
-                      onMouseDown={(e) => handleResizeStart(e, element)}
-                      onTouchStart={(e) => handleResizeStart(e, element)}
-                    />
-                  </>
-                )}
-              </div>
-            );
-          // Other cases (text, stamp, image) remain the same, just update their styles similarly
-        }
+  // Process the PDF with signatures and other elements
+  const handleSavePdf = async () => {
+    if (!file || elements.length === 0) {
+      toast({
+        title: 'No changes to save',
+        description: 'Add signatures or other elements before saving',
+        variant: 'destructive',
       });
-  };
+      return;
+    }
 
-  return (
-    <Card className="w-full">
-      <CardContent className="p-6">
-        {!file && (
-          <div
-            className={`border-2 border-dashed rounded-lg p-12 text-center ${
-              isDragOver ? "border-primary bg-primary/10" : "border-muted-foreground/25"
-            }`}
-            onDragOver={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setIsDragOver(true);
-            }}
-            onDragLeave={() => setIsDragOver(false)}
-            onDrop={(e) => {
-              setIsDragOver(false);
-              handleFileDrop(e);
-            }}
-          >
-            <input
-              type="file"
-              ref={fileInputRef}
-              className="hidden"
-              accept=".pdf"
-              onChange={handleFileUpload}
-            />
-            <div className="mb-4 p-3 rounded-full bg-blue-100 dark:bg-blue-900/30 mx-auto w-16 h-16 flex items-center justify-center">
-              <UploadIcon className="h-8 w-8 text-blue-500" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">{t("signPdf.uploadTitle")}</h3>
-            <p className="text-muted-foreground mb-6">{t("signPdf.uploadDesc")}</p>
-            <Button onClick={handleBrowseClick}>{t("ui.browse")}</Button>
-            <p className="mt-4 text-sm text-muted-foreground/75">{t("ui.filesSecurity")}</p>
-          </div>
-        )}
+    setProcessing(true);
 
-        {file && processing && !signedPdfUrl && (
-          <div className="text-center py-8">
-            <LoaderIcon className="h-12 w-12 animate-spin text-primary mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">{t("signPdf.processing")}</h3>
-            <p className="text-muted-foreground mb-4">{t("signPdf.messages.processing")}</p>
-            <Progress value={progress} className="max-w-md mx-auto" />
-          </div>
-        )}
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('elements', JSON.stringify(elements));
+      formData.append('pages', JSON.stringify(pages));
 
-        {file && !processing && !signedPdfUrl && pages.length > 0 && (
-          <div className="flex flex-col md:flex-row gap-6">
-            <div className="flex-1 min-h-[500px]">
-              <div className="bg-muted/30 p-1 rounded-md mb-2 flex justify-between items-center">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handlePageChange("prev")}
-                  disabled={currentPage === 0}
-                >
-                  <ChevronLeftIcon className="h-4 w-4" />
-                </Button>
-                <span className="text-sm">
-                  {t("signPdf.pages")} {currentPage + 1} / {pages.length}
-                </span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handlePageChange("next")}
-                  disabled={currentPage === pages.length - 1}
-                >
-                  <ChevronRightIcon className="h-4 w-4" />
-                </Button>
-              </div>
+      const response = await fetch('/api/pdf/sign', {
+        method: 'POST',
+        body: formData,
+      });
 
-              <div
-  className="relative bg-white rounded-md border shadow-sm overflow-auto"
-  style={{
-    height: "100%",
-    width: "100%",
-    minHeight: "500px",
-    touchAction: isDragging ? "none" : "auto", // Disable touch scrolling when dragging
-  }}
-  onMouseMove={handleCanvasMouseMove}
-  onMouseUp={handleCanvasMouseUp}
-  onMouseLeave={handleCanvasMouseUp}
-  onTouchMove={handleCanvasMouseMove}
-  onTouchEnd={handleCanvasMouseUp}
-  onTouchCancel={handleCanvasMouseUp}
-  ref={canvasRef}
->
-  {file && (
-    <Document file={file}>
-      <Page
-        pageNumber={currentPage + 1}
-        width={pages[currentPage]?.width}
-        height={pages[currentPage]?.height}
-        renderTextLayer={false}
-        renderAnnotationLayer={false}
-      />
-      <div style={{ position: "absolute", top: 0, left: 0 }}>
-        {renderElements()}
-      </div>
-    </Document>
-  )}
-</div>
+      if (!response.ok) {
+        throw new Error('Failed to sign PDF');
+      }
 
-              <div className="flex justify-between mt-4">
-                <Button variant="outline" onClick={handleClearAll} className="text-sm">
-                  <Trash2Icon className="h-4 w-4 mr-2" />
-                  {t("signPdf.clearAll")}
-                </Button>
-                <Button onClick={handleSavePdf} className="text-sm">
-                  <CheckIcon className="h-4 w-4 mr-2" />
-                  {t("signPdf.download")}
-                </Button>
-              </div>
-            </div>
+      const data = await response.json();
 
-            <div className="w-full md:w-72">
-              <Tabs defaultValue="signature" onValueChange={(value) => setActiveTool(value as ElementType)}>
-                <TabsList className="grid grid-cols-4 w-full">
-                  <TabsTrigger value="signature" className="text-xs">
-                    <PenIcon className="h-4 w-4 mr-1" />
-                    {t("signPdf.tools.signature")}
-                  </TabsTrigger>
-                  <TabsTrigger value="text" className="text-xs">
-                    <TypeIcon className="h-4 w-4 mr-1" />
-                    {t("signPdf.tools.text")}
-                  </TabsTrigger>
-                  <TabsTrigger value="stamp" className="text-xs">
-                    <StampIcon className="h-4 w-4 mr-1" />
-                    {t("signPdf.tools.stamp")}
-                  </TabsTrigger>
-                  <TabsTrigger value="image" className="text-xs">
-                    <ImageIcon className="h-4 w-4 mr-1" />
-                    {t("signPdf.tools.image")}
-                  </TabsTrigger>
-                </TabsList>
-
-                <div className="mt-4 p-4 border rounded-md">
-                  <TabsContent value="signature">
-                    <h3 className="text-lg font-medium mb-3">{t("signPdf.signatureOptions")}</h3>
-                    <Tabs defaultValue="draw" onValueChange={setActiveTab}>
-                      <TabsList className="w-full">
-                        <TabsTrigger value="draw" className="flex-1">
-                          <PencilIcon className="h-4 w-4 mr-1" />
-                          {t("signPdf.drawSignature")}
-                        </TabsTrigger>
-                        <TabsTrigger value="upload" className="flex-1">
-                          <UploadIcon className="h-4 w-4 mr-1" />
-                          {t("signPdf.uploadSignature")}
-                        </TabsTrigger>
-                      </TabsList>
-
-                      <TabsContent value="draw" className="mt-4">
-                        <div className="border rounded-md p-2 mb-3 bg-white">
-                          <SignatureCanvas
-                            ref={signatureCanvasRef}
-                            penColor={color}
-                            canvasProps={{
-                              className: "signature-canvas w-full h-32",
-                            }}
-                          />
-                        </div>
-                        <div className="space-y-3">
-                          <div className="flex items-center gap-2">
-                            <Label>{t("signPdf.options.color")}</Label>
-                            <input
-                              type="color"
-                              value={color}
-                              onChange={(e) => setColor(e.target.value)}
-                              className="w-8 h-8 p-0 border-0"
-                            />
-                          </div>
-                          <div>
-                            <div className="flex justify-between">
-                              <Label>Width</Label>
-                              <span className="text-sm text-muted-foreground">{signatureSize.width}px</span>
-                            </div>
-                            <Slider
-                              min={50}
-                              max={400}
-                              step={1}
-                              value={[signatureSize.width]}
-                              onValueChange={(value) => setSignatureSize((prev) => ({ ...prev, width: value[0] }))}
-                              className="mt-2"
-                            />
-                          </div>
-                          <div>
-                            <div className="flex justify-between">
-                              <Label>Height</Label>
-                              <span className="text-sm text-muted-foreground">{signatureSize.height}px</span>
-                            </div>
-                            <Slider
-                              min={25}
-                              max={200}
-                              step={1}
-                              value={[signatureSize.height]}
-                              onValueChange={(value) => setSignatureSize((prev) => ({ ...prev, height: value[0] }))}
-                              className="mt-2"
-                            />
-                          </div>
-                          <div className="flex gap-2">
-                            <Button
-                              variant="outline"
-                              className="flex-1"
-                              onClick={() => signatureCanvasRef.current?.clear()}
-                            >
-                              {t("signPdf.options.clear")}
-                            </Button>
-                            <Button className="flex-1" onClick={handleSignatureDraw}>
-                              {t("signPdf.options.apply")}
-                            </Button>
-                          </div>
-                        </div>
-                      </TabsContent>
-
-                      <TabsContent value="upload" className="mt-4">
-                        <input
-                          type="file"
-                          accept="image/*"
-                          ref={imageInputRef}
-                          onChange={handleImageUpload}
-                          className="w-full mb-3 text-sm"
-                        />
-                        <Alert className="mb-3">
-                          <AlertDescription className="text-xs">
-                            {t("signPdf.faq.formats.answer")}
-                          </AlertDescription>
-                        </Alert>
-                      </TabsContent>
-                    </Tabs>
-                  </TabsContent>
-
-                  <TabsContent value="text">
-                    <h3 className="text-lg font-medium mb-3">{t("signPdf.addText")}</h3>
-                    <div className="space-y-3">
-                      <div>
-                        <Label htmlFor="text-input">{t("signPdf.tools.text")}</Label>
-                        <Input
-                          id="text-input"
-                          value={textValue}
-                          onChange={(e) => setTextValue(e.target.value)}
-                          placeholder="Enter text here"
-                          className="mt-1"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="font-family">{t("signPdf.options.fontFamily")}</Label>
-                        <select
-                          id="font-family"
-                          value={fontFamily}
-                          onChange={(e) => setFontFamily(e.target.value)}
-                          className="w-full p-2 border rounded-md mt-1"
-                        >
-                          <option value="Arial">Arial</option>
-                          <option value="Times New Roman">Times New Roman</option>
-                          <option value="Courier New">Courier New</option>
-                          <option value="Verdana">Verdana</option>
-                          <option value="Georgia">Georgia</option>
-                        </select>
-                      </div>
-                      <div>
-                        <div className="flex justify-between">
-                          <Label htmlFor="font-size">{t("signPdf.options.fontSize")}</Label>
-                          <span className="text-sm text-muted-foreground">{fontSize}px</span>
-                        </div>
-                        <Slider
-                          id="font-size"
-                          min={8}
-                          max={72}
-                          step={1}
-                          value={[fontSize]}
-                          onValueChange={(value) => setFontSize(value[0])}
-                          className="mt-2"
-                        />
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Label>{t("signPdf.options.color")}</Label>
-                        <input
-                          type="color"
-                          value={color}
-                          onChange={(e) => setColor(e.target.value)}
-                          className="w-8 h-8 p-0 border-0"
-                        />
-                      </div>
-                      <Button
-                        className="w-full"
-                        onClick={handleAddText}
-                        disabled={!textValue.trim()}
-                      >
-                        {t("signPdf.options.apply")}
-                      </Button>
-                    </div>
-                  </TabsContent>
-
-                  <TabsContent value="stamp">
-                    <h3 className="text-lg font-medium mb-3">{t("signPdf.tools.stamp")}</h3>
-                    <div className="space-y-3">
-                      <RadioGroup
-                        value={stampType}
-                        onValueChange={setStampType}
-                        className="grid grid-cols-2 gap-2"
-                      >
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="approved" id="approved" />
-                          <Label htmlFor="approved">{t("signPdf.stamps.approved")}</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="rejected" id="rejected" />
-                          <Label htmlFor="rejected">{t("signPdf.stamps.rejected")}</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="draft" id="draft" />
-                          <Label htmlFor="draft">{t("signPdf.stamps.draft")}</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="final" id="final" />
-                          <Label htmlFor="final">{t("signPdf.stamps.final")}</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="confidential" id="confidential" />
-                          <Label htmlFor="confidential">{t("signPdf.stamps.confidential")}</Label>
-                        </div>
-                      </RadioGroup>
-                      <div className="flex items-center gap-2 mt-4">
-                        <Label>{t("signPdf.options.color")}</Label>
-                        <input
-                          type="color"
-                          value={color}
-                          onChange={(e) => setColor(e.target.value)}
-                          className="w-8 h-8 p-0 border-0"
-                        />
-                      </div>
-                      <Button className="w-full" onClick={handleAddStamp}>
-                        {t("signPdf.options.apply")}
-                      </Button>
-                    </div>
-                  </TabsContent>
-
-                  <TabsContent value="image">
-                    <h3 className="text-lg font-medium mb-3">{t("signPdf.addImage")}</h3>
-                    <div className="space-y-3">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="w-full mb-3 text-sm"
-                      />
-                      <Alert>
-                        <AlertDescription className="text-xs">
-                          For best results, use PNG images with transparent backgrounds.
-                        </AlertDescription>
-                      </Alert>
-                    </div>
-                  </TabsContent>
-                </div>
-              </Tabs>
-            </div>
-          </div>
-        )}
-
-        {signedPdfUrl && (
-          <div className="text-center py-8">
-            <div className="mb-6 p-3 rounded-full bg-green-100 dark:bg-green-900/30 mx-auto w-16 h-16 flex items-center justify-center">
-              <CheckIcon className="h-8 w-8 text-green-500" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">{t("signPdf.messages.signed")}</h3>
-            <p className="text-muted-foreground mb-6">{t("signPdf.messages.downloadReady")}</p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button asChild>
-                <a href={signedPdfUrl} download>
-                  <DownloadIcon className="h-4 w-4 mr-2" />
-                  {t("signPdf.download")}
-                </a>
-              </Button>
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setFile(null);
-                  setElements([]);
-                  setSignedPdfUrl("");
-                  setPages([]);
-                }}
-              >
-                {t("ui.reupload")}
-              </Button>
-            </div>
-          </div>
-        )}
-      </CardContent>
-    </Card>
-  );
-}
+      if (data.success) {
+        setSignedPdfUrl(data.fileUrl);
+        toast({
+          title: t('signPdf.messages.signed'),
+          description: t('signPdf.messages.downloadReady'),
+        });
+      } else {
+        throw new Error
