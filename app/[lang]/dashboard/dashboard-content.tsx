@@ -61,7 +61,7 @@ export function DashboardContent({
         </TabsContent>
         
         <TabsContent value="api-keys" className="space-y-6">
-          <ApiKeyManager user={user} />
+          <ApiKeyManager />
         </TabsContent>
         
         <TabsContent value="subscription" className="space-y-6">
