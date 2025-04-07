@@ -1333,91 +1333,91 @@ export default {
         howTo: {
             title: "Comment compresser des fichiers PDF",
             step1: {
-                title: "Télécharger un PDF",
-                description: "Téléchargez le fichier PDF que vous souhaitez compresser. Les fichiers jusqu'à 100 Mo sont pris en charge."
+                title: "Téléverser un PDF",
+                description: "Téléversez les fichiers PDF volumineux que vous souhaitez compresser. Notre compresseur PDF gratuit prend en charge les fichiers jusqu'à 100 Mo et fonctionne sur Windows, Linux et d'autres plateformes."
             },
             step2: {
                 title: "Choisir la qualité",
-                description: "Sélectionnez votre niveau de compression préféré selon vos besoins."
+                description: "Sélectionnez votre niveau de compression préféré pour réduire la taille du fichier sans perdre en qualité. Choisissez le meilleur mode en fonction de la compression souhaitée pour un PDF."
             },
             step3: {
                 title: "Télécharger",
-                description: "Téléchargez votre fichier PDF compressé, prêt à être partagé ou stocké."
+                description: "Téléchargez votre fichier PDF compressé. Obtenez une taille de fichier plus petite, parfaite pour le partage en ligne ou les pièces jointes aux e-mails."
             }
         },
         why: {
             title: "Pourquoi compresser des PDF ?",
             uploadSpeed: {
-                title: "Téléchargements ultra-rapides",
-                description: "Partagez des PDF compressés rapidement avec des vitesses de téléchargement plus élevées"
+                title: "Téléversements ultra-rapides",
+                description: "Les fichiers PDF compressés se téléversent plus rapidement, en particulier les fichiers PDF volumineux, vous permettant de partager des documents en ligne sans retard."
             },
             emailFriendly: {
                 title: "Adapté aux e-mails",
-                description: "Respectez les limites de taille des e-mails sans compromettre la qualité"
+                description: "Réduisez la taille du fichier pour que vos PDF s'adaptent aux limites de taille des e-mails. Notre outil de compression PDF garantit un partage facile sans perte de qualité."
             },
             storage: {
-                title: "Stockage efficace",
-                description: "Optimisez l'espace sur vos appareils et le stockage en cloud"
+                title: "Efficacité de stockage",
+                description: "Économisez de l'espace de stockage sur votre appareil ou dans le cloud en utilisant notre compresseur PDF pour réduire les fichiers PDF volumineux en fichiers plus petits et plus efficaces en termes d'espace."
             },
             quality: {
                 title: "Qualité préservée",
-                description: "Choisissez des niveaux de compression qui préservent la qualité dont vous avez besoin"
+                description: "Compressez des PDFs sans compromettre la qualité. Nos modes intelligents conservent une clarté visuelle élevée tout en réduisant la taille du fichier."
             }
         },
         faq: {
-            title: "Questions fréquentes",
+            title: "Questions fréquemment posées",
             howMuch: {
                 question: "Dans quelle mesure les fichiers PDF peuvent-ils être compressés ?",
-                answer: "La plupart des fichiers PDF peuvent être compressés de 20 à 80 %, selon le contenu. Les documents avec beaucoup d'images obtiennent généralement des taux de compression plus élevés que les documents avec beaucoup de texte. Notre outil de compression offre différents niveaux de qualité pour équilibrer la taille du fichier et la qualité visuelle selon vos besoins."
+                answer: "La plupart des fichiers PDF volumineux peuvent être compressés de 20 à 80 %, selon le contenu. Notre compresseur PDF est optimisé pour différents cas d'utilisation, vous aidant à réduire efficacement la taille des fichiers — en particulier pour les PDF riches en images."
             },
             quality: {
                 question: "La compression affectera-t-elle la qualité de mon PDF ?",
-                answer: "Notre outil de compression offre différents réglages de qualité. La compression haute qualité maintient la fidélité visuelle tout en réduisant la taille du fichier. Les réglages de qualité moyenne et basse appliquent une compression plus agressive, ce qui peut affecter la qualité de l'image mais résulte en des fichiers plus petits. Le contenu textuel reste net et lisible à tous les niveaux de compression."
+                answer: "Notre outil vous donne le choix : compressez un PDF en mode sans perte pour aucune différence visuelle ou choisissez une compression élevée pour une réduction maximale de la taille du fichier. Vous pouvez obtenir un PDF compressé gratuitement sans perdre en qualité essentielle."
             },
             secure: {
-                question: "Mes données PDF sont-elles en sécurité lors de la compression ?",
-                answer: "Oui, nous prenons la sécurité des données très au sérieux. Tout le traitement des fichiers se fait sur nos serveurs sécurisés, et vos fichiers sont automatiquement supprimés après le traitement (généralement dans les 24 heures). Nous ne partageons pas vos fichiers avec des tiers, et toutes les transferts de données sont chiffrés en HTTPS."
+                question: "Mes données PDF sont-elles sécurisées lors de la compression ?",
+                answer: "Oui, vos données sont sécurisées. Tous les fichiers PDF sont traités en ligne de manière sécurisée et supprimés automatiquement après 24 heures. Que vous utilisiez Windows ou Linux, votre fichier est chiffré et jamais partagé."
             },
             fileLimits: {
                 question: "Quelles sont les limites de taille des fichiers ?",
-                answer: "Les utilisateurs gratuits peuvent compresser des fichiers PDF jusqu'à 10 Mo. Les abonnés premium peuvent compresser des fichiers plus volumineux : le plan Basique permet jusqu'à 50 Mo, le plan Pro jusqu'à 100 Mo, et le plan Entreprise jusqu'à 500 Mo par fichier. Si vous avez besoin de traiter des fichiers plus volumineux, contactez-nous pour des solutions personnalisées."
+                answer: "Les utilisateurs gratuits peuvent compresser des fichiers PDF jusqu'à 10 Mo. Les plans premium prennent en charge jusqu'à 500 Mo par fichier. Que vous compressiez un PDF ou plusieurs, notre outil gère facilement les fichiers PDF volumineux."
             },
             batch: {
                 question: "Puis-je compresser plusieurs PDF à la fois ?",
-                answer: "Oui, notre outil prend en charge la compression par lots. Vous pouvez télécharger et compresser plusieurs fichiers PDF simultanément, ce qui vous fait gagner du temps lors du traitement de plusieurs documents. Les utilisateurs premium bénéficient de limites plus élevées pour le traitement par lots."
+                answer: "Oui, vous pouvez compresser des PDF par lots. Téléversez plusieurs fichiers et laissez notre compresseur PDF réduire efficacement la taille de chaque fichier en une seule session — idéal pour les individus et les équipes."
             }
         },
         modes: {
             title: "Modes de compression",
             moderate: {
                 title: "Compression modérée",
-                description: "Approche équilibrée qui réduit la taille du fichier tout en maintenant une bonne qualité visuelle. Parfait pour la plupart des documents où la qualité est importante mais où une certaine réduction de taille est nécessaire."
+                description: "Un mode équilibré qui compresse les fichiers PDF sans perte de qualité. Parfait pour le partage en ligne ou l'archivage de PDF tout en conservant une bonne qualité visuelle."
             },
             high: {
-                title: "Haute compression",
-                description: "Compression plus agressive qui réduit significativement la taille du fichier. Une certaine perte de qualité d'image peut être visible, mais le texte reste clair et lisible."
+                title: "Compression élevée",
+                description: "Réduisez la taille du fichier de manière agressive avec une compression notable. Idéal pour réduire rapidement les fichiers PDF volumineux — meilleur lorsque la taille réduite est plus importante que la haute résolution."
             },
             lossless: {
                 title: "Compression sans perte",
-                description: "Réduit la taille du fichier sans affecter la qualité en supprimant les données redondantes, en optimisant la structure et en nettoyant les métadonnées. Aucune différence visuelle par rapport à l'original."
+                description: "Compressez des PDF en nettoyant les données inutiles, réduisant la taille du fichier sans affecter l'apparence — la meilleure option lorsque la qualité est primordiale."
             }
         },
         bestPractices: {
-            title: "Bonnes pratiques pour la compression de PDF",
+            title: "Bonnes pratiques pour la compression PDF",
             dos: "À faire",
             donts: "À ne pas faire",
             dosList: [
                 "Compressez les images avant de créer des PDF pour de meilleurs résultats",
                 "Choisissez le niveau de compression approprié à vos besoins",
-                "Conservez les fichiers originaux comme sauvegarde avant la compression",
+                "Conservez les fichiers originaux comme sauvegardes avant compression",
                 "Utilisez la compression sans perte pour les documents importants",
                 "Supprimez les pages inutiles pour réduire davantage la taille du fichier"
             ],
             dontsList: [
-                "Ne surcompressez pas les documents destinés à l'impression",
+                "Ne surcompressez pas les documents nécessaires à l'impression",
                 "Ne compressez pas les documents juridiques ou d'archives si chaque détail compte",
-                "Ne compressez pas plusieurs fois des PDF déjà fortement compressés",
-                "Ne vous attendez pas à de grandes réductions pour les PDF contenant principalement du texte",
+                "Ne compressez pas à plusieurs reprises des PDF déjà très compressés",
+                "Ne vous attendez pas à des réductions importantes pour les PDF contenant principalement du texte",
                 "Ne compressez pas si la taille du fichier n'est pas un problème"
             ]
         },

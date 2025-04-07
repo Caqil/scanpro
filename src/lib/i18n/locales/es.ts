@@ -1333,72 +1333,72 @@ export default {
       title: "Cómo comprimir archivos PDF",
       step1: {
         title: "Subir PDF",
-        description: "Sube el archivo PDF que deseas comprimir. Se admiten archivos de hasta 100MB."
+        description: "Sube los archivos PDF grandes que deseas comprimir. Nuestro compresor de PDF gratuito admite archivos de hasta 100 MB y funciona en Windows, Linux y otras plataformas."
       },
       step2: {
         title: "Elegir calidad",
-        description: "Selecciona tu nivel de compresión preferido según tus necesidades."
+        description: "Selecciona tu nivel de compresión preferido para reducir el tamaño del archivo sin perder calidad. Elige el mejor modo según cuánto deseas comprimir un PDF."
       },
       step3: {
         title: "Descargar",
-        description: "Descarga tu archivo PDF comprimido, listo para compartir o almacenar."
+        description: "Descarga tu archivo PDF comprimido. Obtén un tamaño de archivo más pequeño perfecto para compartir en línea o adjuntar en correos electrónicos."
       }
     },
     why: {
-      title: "¿Por qué comprimir PDFs?",
+      title: "¿Por qué comprimir PDF?",
       uploadSpeed: {
-        title: "Cargas ultrarrápidas",
-        description: "Comparte PDFs comprimidos rápidamente con velocidades de carga más rápidas"
+        title: "Subidas ultrarrápidas",
+        description: "Los archivos PDF comprimidos se suben más rápido, especialmente los archivos PDF grandes, lo que te ayuda a compartir documentos en línea sin demoras."
       },
       emailFriendly: {
-        title: "Apto para correo electrónico",
-        description: "Ajustate a los límites de tamaño de correo electrónico sin comprometer la calidad"
+        title: "Amigable con el correo electrónico",
+        description: "Reduce el tamaño del archivo para que tus PDFs encajen en los límites de tamaño del correo electrónico. Nuestra herramienta de compresión de PDF garantiza un intercambio fácil sin perder calidad."
       },
       storage: {
-        title: "Almacenamiento eficiente",
-        description: "Maximiza el espacio en tus dispositivos y almacenamiento en la nube"
+        title: "Eficiencia de almacenamiento",
+        description: "Ahorra espacio de almacenamiento en tu dispositivo o en la nube usando nuestro compresor de PDF para reducir archivos PDF grandes a archivos más pequeños y eficientes en espacio."
       },
       quality: {
         title: "Calidad mantenida",
-        description: "Elige niveles de compresión que preserven la calidad que necesitas"
+        description: "Comprime PDFs sin comprometer la calidad. Nuestros modos inteligentes mantienen una alta claridad visual mientras reducen el tamaño del archivo."
       }
     },
     faq: {
       title: "Preguntas frecuentes",
       howMuch: {
         question: "¿Cuánto se pueden comprimir los archivos PDF?",
-        answer: "La mayoría de los archivos PDF se pueden comprimir entre un 20-80%, dependiendo del contenido. Los documentos con muchas imágenes generalmente logran tasas de compresión más altas que los documentos con mucho texto. Nuestra herramienta de compresión ofrece diferentes niveles de calidad para equilibrar el tamaño del archivo y la calidad visual según tus necesidades."
+        answer: "La mayoría de los archivos PDF grandes se pueden comprimir entre un 20% y un 80%, dependiendo del contenido. Nuestro compresor de PDF está optimizado para diferentes casos de uso, ayudándote a reducir el tamaño del archivo de manera efectiva, especialmente para PDFs con muchas imágenes."
       },
       quality: {
         question: "¿La compresión afectará la calidad de mi PDF?",
-        answer: "Nuestra herramienta de compresión ofrece diferentes configuraciones de calidad. La compresión de alta calidad mantiene la fidelidad visual mientras reduce el tamaño del archivo. Las configuraciones de calidad media y baja aplican una compresión más agresiva, que puede afectar la calidad de la imagen pero resulta en archivos más pequeños. El contenido de texto permanece nítido y legible en todos los niveles de compresión."
+        answer: "Nuestra herramienta te da la opción: comprimir un PDF usando el modo sin pérdida para que no haya diferencia visual o elegir alta compresión para la máxima reducción del tamaño del archivo. Puedes obtener un PDF comprimido gratis sin perder calidad esencial."
       },
       secure: {
-        question: "¿Están seguros mis datos PDF al comprimir?",
-        answer: "Sí, nos tomamos la seguridad de los datos muy en serio. Todo el procesamiento de archivos ocurre en nuestros servidores seguros, y tus archivos se eliminan automáticamente después del procesamiento (normalmente dentro de las 24 horas). No compartimos tus archivos con terceros, y todas las transferencias de datos están encriptadas usando HTTPS."
+        question: "¿Mis datos PDF están seguros al comprimir?",
+        answer: "Sí, tus datos están seguros. Todos los archivos PDF se procesan en línea de forma segura y se eliminan automáticamente después de 24 horas. Ya sea que uses Windows o Linux, tu archivo está encriptado y nunca se comparte."
       },
       fileLimits: {
         question: "¿Cuáles son los límites de tamaño de archivo?",
-        answer: "Los usuarios gratuitos pueden comprimir archivos PDF de hasta 10MB. Los suscriptores premium pueden comprimir archivos más grandes: el plan Básico permite hasta 50MB, el plan Pro hasta 100MB, y el plan Empresarial hasta 500MB por archivo. Si necesitas procesar archivos más grandes, contáctanos para soluciones personalizadas."
+        answer: "Los usuarios gratuitos pueden comprimir archivos PDF de hasta 10 MB. Los planes premium admiten hasta 500 MB por archivo. Ya sea que comprimas un PDF o varios, nuestra herramienta maneja archivos PDF grandes con facilidad."
       },
       batch: {
-        question: "¿Puedo comprimir múltiples PDFs a la vez?",
-        answer: "Sí, nuestra herramienta admite compresión por lotes. Puedes subir y comprimir múltiples archivos PDF simultáneamente, ahorrándote tiempo al procesar múltiples documentos. Los usuarios premium obtienen límites más altos en el procesamiento por lotes."
+        question: "¿Puedo comprimir varios PDFs a la vez?",
+        answer: "Sí, puedes comprimir PDFs en lotes. Sube varios archivos y deja que nuestro compresor de PDF reduzca el tamaño de cada archivo de manera eficiente en una sola sesión, ideal tanto para individuos como para equipos."
       }
     },
     modes: {
       title: "Modos de compresión",
       moderate: {
         title: "Compresión moderada",
-        description: "Enfoque equilibrado que reduce el tamaño del archivo mientras mantiene buena calidad visual. Perfecto para la mayoría de los documentos donde la calidad es importante pero se necesita cierta reducción de tamaño."
+        description: "Un modo equilibrado que comprime archivos PDF sin perder calidad. Perfecto para compartir PDFs en línea o archivarlos manteniendo una buena calidad visual."
       },
       high: {
-        title: "Alta compresión",
-        description: "Compresión más agresiva que reduce significativamente el tamaño del archivo. Puede notarse cierta pérdida de calidad de imagen, pero el texto permanece claro y legible."
+        title: "Compresión alta",
+        description: "Reduce el tamaño del archivo de manera agresiva con una compresión notable. Ideal para reducir rápidamente archivos PDF grandes, mejor cuando el tamaño más pequeño es más importante que la alta resolución."
       },
       lossless: {
         title: "Compresión sin pérdida",
-        description: "Reduce el tamaño del archivo sin afectar la calidad eliminando datos redundantes, optimizando la estructura y limpiando metadatos. Sin diferencias visuales respecto al original."
+        description: "Comprime PDFs eliminando datos innecesarios, reduciendo el tamaño del archivo sin afectar la apariencia, la mejor opción cuando la calidad es lo más importante."
       }
     },
     bestPractices: {
@@ -1406,18 +1406,18 @@ export default {
       dos: "Qué hacer",
       donts: "Qué no hacer",
       dosList: [
-        "Comprimir imágenes antes de crear PDFs para mejores resultados",
-        "Elegir el nivel de compresión apropiado para tus necesidades",
-        "Mantener archivos originales como respaldo antes de la compresión",
-        "Usar compresión sin pérdida para documentos importantes",
-        "Eliminar páginas innecesarias para reducir aún más el tamaño del archivo"
+        "Comprime imágenes antes de crear PDFs para obtener los mejores resultados",
+        "Elige el nivel de compresión adecuado para tus necesidades",
+        "Guarda archivos originales como copias de seguridad antes de comprimir",
+        "Usa compresión sin pérdida para documentos importantes",
+        "Elimina páginas innecesarias para reducir aún más el tamaño del archivo"
       ],
       dontsList: [
-        "No sobrecomprimir documentos necesarios para impresión",
-        "No comprimir documentos legales o de archivo si cada detalle importa",
-        "No comprimir repetidamente PDFs ya fuertemente comprimidos",
-        "No esperar grandes reducciones para PDFs con mayormente texto",
-        "No comprimir si el tamaño del archivo no es un problema"
+        "No sobrecomprimas documentos necesarios para imprimir",
+        "No comprimas documentos legales o de archivo si cada detalle es importante",
+        "No comprimas PDFs ya muy comprimidos repetidamente",
+        "No esperes grandes reducciones para PDFs con principalmente texto",
+        "No comprimas si el tamaño del archivo no es un problema"
       ]
     },
     relatedTools: {

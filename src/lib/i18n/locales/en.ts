@@ -437,7 +437,7 @@ export default {
 
       editing: {
         title: "PDF Editing & Management",
-        description: "Edit, organize, and optimize your PDF documents with our comprehensive toolset, including options to save as PDF and manage multiple images.",
+        description: "Online pdf editor, organize, and optimize your PDF documents with our comprehensive toolset, including options to save as PDF and manage multiple images.",
         features: {
           merge: {
             title: "Merge PDFs",
@@ -1534,77 +1534,76 @@ export default {
       unknown: "An unknown error occurred",
       failed: "Failed to compress your file"
     },
-    // Added sections for the new content components
     howTo: {
       title: "How to Compress PDF Files",
       step1: {
         title: "Upload PDF",
-        description: "Upload the PDF file you want to compress. Files up to 100MB are supported."
+        description: "Upload the large PDF files you want to compress. Our free PDF compressor supports files up to 100MB and works on Windows, Linux, and other platforms."
       },
       step2: {
         title: "Choose Quality",
-        description: "Select your preferred compression level based on your needs."
+        description: "Select your preferred compression level to reduce file size without losing quality. Choose the best mode based on how much you want to compress a PDF."
       },
       step3: {
         title: "Download",
-        description: "Download your compressed PDF file, ready to share or store."
+        description: "Download your compressed PDF file. Get a smaller file size that’s perfect for online sharing or email attachments."
       }
     },
     why: {
       title: "Why Compress PDFs?",
       uploadSpeed: {
         title: "Lightning-Fast Uploads",
-        description: "Share compressed PDFs quickly with faster upload speeds"
+        description: "Compressed PDF files upload faster, especially large PDF files, helping you share documents online without delays."
       },
       emailFriendly: {
         title: "Email Friendly",
-        description: "Fit within email size limits without compromising quality"
+        description: "Reduce file size so your PDFs fit within email size limits. Our PDF compress tool ensures easy sharing without losing quality."
       },
       storage: {
         title: "Storage Efficient",
-        description: "Maximize space on your devices and cloud storage"
+        description: "Save storage on your device or cloud by using our PDF compressor to shrink large PDFs into smaller, space-efficient files."
       },
       quality: {
         title: "Maintained Quality",
-        description: "Choose compression levels that preserve the quality you need"
+        description: "Compress PDFs without compromising quality. Our smart modes retain high visual clarity while lowering file size."
       }
     },
     faq: {
       title: "Frequently Asked Questions",
       howMuch: {
         question: "How much can PDF files be compressed?",
-        answer: "Most PDF files can be compressed by 20-80%, depending on the content. Documents with many images typically achieve higher compression rates than text-heavy documents. Our compression tool offers different quality levels to balance file size and visual quality based on your needs."
+        answer: "Most large PDF files can be compressed by 20-80%, depending on content. Our PDF compressor is optimized for different use cases, helping you reduce file size effectively — especially for image-heavy PDFs."
       },
       quality: {
         question: "Will compression affect the quality of my PDF?",
-        answer: "Our compression tool offers different quality settings. High quality compression maintains visual fidelity while still reducing file size. Medium and low quality settings apply more aggressive compression, which may affect image quality but results in smaller files. Text content remains sharp and readable at all compression levels."
+        answer: "Our tool gives you the choice: compress a PDF using lossless mode for no visual difference or choose high compression for maximum file size reduction. You can get a free PDF compressed without losing essential quality."
       },
       secure: {
         question: "Is my PDF data secure when compressing?",
-        answer: "Yes, we take data security seriously. All file processing happens on our secure servers, and your files are automatically deleted after processing (typically within 24 hours). We don't share your files with third parties, and all data transfers are encrypted using HTTPS."
+        answer: "Yes, your data is safe. All PDF files are processed securely online and automatically deleted after 24 hours. Whether you use Windows or Linux, your file is encrypted and never shared."
       },
       fileLimits: {
         question: "What are the file size limits?",
-        answer: "Free users can compress PDF files up to 10MB. Premium subscribers can compress larger files: Basic plan allows up to 50MB, Pro plan up to 100MB, and Enterprise plan up to 500MB per file. If you need to process larger files, please contact us for custom solutions."
+        answer: "Free users can compress PDF files up to 10MB. Premium plans support up to 500MB per file. Whether you’re compressing one PDF or multiple, our tool handles large PDF files with ease."
       },
       batch: {
         question: "Can I compress multiple PDFs at once?",
-        answer: "Yes, our tool supports batch compression. You can upload and compress multiple PDF files simultaneously, saving you time when processing multiple documents. Premium users get higher limits on batch processing."
+        answer: "Yes, you can compress PDFs in batches. Upload multiple files and let our PDF compressor reduce each file’s size efficiently in a single session — great for both individuals and teams."
       }
     },
     modes: {
       title: "Compression Modes",
       moderate: {
         title: "Moderate Compression",
-        description: "Balanced approach that reduces file size while maintaining good visual quality. Perfect for most documents where quality is important but some size reduction is needed."
+        description: "A balanced mode that compresses PDF files without losing quality. Perfect for online PDF sharing or archiving while preserving good visuals."
       },
       high: {
         title: "High Compression",
-        description: "More aggressive compression that significantly reduces file size. Some image quality loss may be noticeable, but text remains clear and legible."
+        description: "Reduce file size aggressively with noticeable compression. Ideal for shrinking large PDF files quickly — best when smaller size is more important than high resolution."
       },
       lossless: {
         title: "Lossless Compression",
-        description: "Reduces file size without affecting quality by removing redundant data, optimizing structure, and cleaning metadata. No visual differences from the original."
+        description: "Compress PDFs by cleaning up unnecessary data, reducing file size without affecting the look — the best option when quality matters most."
       }
     },
     bestPractices: {

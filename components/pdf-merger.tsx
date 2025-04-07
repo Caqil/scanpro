@@ -267,7 +267,7 @@ export function PdfMerger() {
               <h3 className="font-medium">{t('mergePdf.ui.filesToMerge') || "Files to Merge"} ({files.length})</h3>
               <div className="flex items-center gap-2">
                 <Badge variant="outline" className="bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
-                  <MoveIcon className="h-3 w-3 mr-1" /> {t('dragToReorder.dragToReorder') || "Drag to reorder"}
+                  <MoveIcon className="h-3 w-3 mr-1" /> {t('mergePdf.ui.dragToReorder') || "Drag to reorder"}
                 </Badge>
                 {!isProcessing && (
                   <Button 

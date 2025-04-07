@@ -177,12 +177,20 @@ export function PdfTools() {
           icon: <ArrowDownIcon className="h-6 w-6 text-green-500" />,
           iconBg: "bg-green-100 dark:bg-green-900/30",
           href: "/split-pdf",
-          isNew: true
         },
         { 
           id: "ocr",
           name: t('ocr.title'), 
           href: "/ocr", 
+          icon: <FileCheck2 className="h-5 w-5 text-blue-500" />,
+          description: t('toolDescriptions.ocr'),
+          iconBg: "bg-green-100 dark:bg-yellow-900/30",
+          isNew: true
+        },
+        { 
+          id: "sign-pdf",
+          name: t('signPdf.title'), 
+          href: "/sign-pdf", 
           icon: <FileCheck2 className="h-5 w-5 text-blue-500" />,
           description: t('toolDescriptions.ocr'),
           iconBg: "bg-green-100 dark:bg-yellow-900/30",

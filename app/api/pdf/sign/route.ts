@@ -315,11 +315,11 @@ export async function POST(request: NextRequest) {
                 Math.round(element.size.width * 2), // Higher resolution for better quality
                 Math.round(element.size.height * 2)
               );
-        
+
               const pngData = pngDataUrl.split(",")[1];
               const pngBuffer = Buffer.from(pngData, "base64");
               const stampImage = await pdfDoc.embedPng(pngBuffer);
-        
+
               page.drawImage(stampImage, {
                 x: pdfX,
                 y: pdfY,
@@ -328,13 +328,13 @@ export async function POST(request: NextRequest) {
                 rotate: element.rotation ? degrees(element.rotation) : undefined,
                 opacity: element.scale || 1.0,
               });
-        
+
               console.log(`Added stamp (SVG converted to PNG) to page ${pageIndex + 1}`);
             } else if (element.data.startsWith("data:image")) {
               // Handle image-based stamps the same way as regular images
               const base64Data = element.data.split(",")[1];
               const buffer = Buffer.from(base64Data, "base64");
-        
+
               let stampImage;
               if (element.data.includes("image/png")) {
                 stampImage = await pdfDoc.embedPng(buffer);
@@ -342,7 +342,7 @@ export async function POST(request: NextRequest) {
                 const jpegBuffer = await sharp(buffer).png().toBuffer();
                 stampImage = await pdfDoc.embedPng(jpegBuffer);
               }
-        
+
               page.drawImage(stampImage, {
                 x: pdfX,
                 y: pdfY,
@@ -351,7 +351,7 @@ export async function POST(request: NextRequest) {
                 rotate: element.rotation ? degrees(element.rotation) : undefined,
                 opacity: element.scale || 1.0,
               });
-        
+
               console.log(`Added stamp (image) to page ${pageIndex + 1}`);
             } else {
               // Fall back to text-based stamp if no image data is available
@@ -360,7 +360,7 @@ export async function POST(request: NextRequest) {
           } catch (error) {
             console.error(`Error adding stamp:`, error);
           }
-        
+
         } else if (element.type === "drawing") {
           try {
             // For drawing elements, draw a placeholder or embed the drawing data

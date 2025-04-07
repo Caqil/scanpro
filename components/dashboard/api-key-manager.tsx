@@ -38,7 +38,7 @@ export function ApiKeyManager({ user }: ApiKeyManagerProps) {
   const [newKeyName, setNewKeyName] = useState("");
   const [showNewKey, setShowNewKey] = useState<string | null>(null);
   const [selectedPermissions, setSelectedPermissions] = useState<string[]>([
-    "convert", "compress", "merge", "split"
+    "convert", "compress", "merge", "split", "sign", "ocr", "repair", "protect", "unlock"
   ]);
   const [openDialog, setOpenDialog] = useState(false);
   

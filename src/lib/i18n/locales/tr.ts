@@ -1333,75 +1333,75 @@ export default {
             failed: "Dosyanız sıkıştırılırken hata oluştu"
         },
         howTo: {
-            title: "PDF Dosyaları Nasıl Sıkıştırılır?",
+            title: "PDF Dosyaları Nasıl Sıkıştırılır",
             step1: {
                 title: "PDF Yükle",
-                description: "Sıkıştırmak istediğiniz PDF dosyasını yükleyin. 100MB'a kadar dosyalar desteklenir."
+                description: "Sıkıştırmak istediğiniz büyük PDF dosyalarını yükleyin. Ücretsiz PDF sıkıştırıcımız 100MB'a kadar dosyaları destekler ve Windows, Linux ve diğer platformlarda çalışır."
             },
             step2: {
                 title: "Kalite Seç",
-                description: "İhtiyaçlarınıza göre tercih ettiğiniz sıkıştırma seviyesini seçin."
+                description: "Kaliteden ödün vermeden dosya boyutunu küçültmek için tercih ettiğiniz sıkıştırma seviyesini seçin. Bir PDF'yi ne kadar sıkıştırmak istediğinize göre en iyi modu seçin."
             },
             step3: {
                 title: "İndir",
-                description: "Sıkıştırılmış PDF dosyanızı paylaşmaya veya saklamaya hazır şekilde indirin."
+                description: "Sıkıştırılmış PDF dosyanızı indirin. Çevrimiçi paylaşım veya e-posta ekleri için mükemmel olan daha küçük bir dosya boyutu elde edin."
             }
         },
         why: {
             title: "PDF'leri Neden Sıkıştırmalı?",
             uploadSpeed: {
-                title: "Ultra Hızlı Yükleme",
-                description: "Daha hızlı yükleme hızlarıyla sıkıştırılmış PDF'leri paylaşın"
+                title: "Yıldırım Hızında Yükleme",
+                description: "Sıkıştırılmış PDF dosyaları, özellikle büyük PDF'ler daha hızlı yüklenir, belgeleri gecikme olmadan çevrimiçi paylaşmanıza yardımcı olur."
             },
             emailFriendly: {
-                title: "E-posta Uyumlu",
-                description: "Kaliteden ödün vermeden e-posta boyut sınırlarına uyun"
+                title: "E-posta Dostu",
+                description: "Dosya boyutunu küçülterek PDF'lerinizin e-posta boyut sınırlarına uymasını sağlayın. PDF sıkıştırma aracımız, kaliteden ödün vermeden kolay paylaşım sağlar."
             },
             storage: {
-                title: "Verimli Depolama",
-                description: "Cihazlarınızda ve bulut depolamada alandan tasarruf edin"
+                title: "Depolama Verimliliği",
+                description: "Büyük PDF'leri daha küçük ve yer tasarruflu dosyalara dönüştürmek için PDF sıkıştırıcımızı kullanarak cihazınızda veya bulutta depolama alanından tasarruf edin."
             },
             quality: {
-                title: "Kalite Korundu",
-                description: "İhtiyacınız olan kaliteyi koruyan sıkıştırma seviyeleri seçin"
+                title: "Korunan Kalite",
+                description: "Kaliteden ödün vermeden PDF'leri sıkıştırın. Akıllı modlarımız dosya boyutunu küçültürken yüksek görsel netliği korur."
             }
         },
         faq: {
-            title: "SSS",
+            title: "Sıkça Sorulan Sorular",
             howMuch: {
                 question: "PDF dosyaları ne kadar sıkıştırılabilir?",
-                answer: "Çoğu PDF dosyası içeriğine bağlı olarak %20-80 oranında sıkıştırılabilir. Çok fazla resim içeren belgeler genellikle çok fazla metin içeren belgelerden daha yüksek sıkıştırma oranları elde eder. Sıkıştırma aracımız, dosya boyutu ile görsel kaliteyi ihtiyaçlarınıza göre dengelemek için farklı kalite seviyeleri sunar."
+                answer: "Çoğu büyük PDF dosyası içeriğe bağlı olarak %20-80 oranında sıkıştırılabilir. PDF sıkıştırıcımız farklı kullanım durumları için optimize edilmiştir, özellikle görsel ağırlıklı PDF'lerde dosya boyutunu etkili şekilde küçültmenize yardımcı olur."
             },
             quality: {
-                question: "Sıkıştırma PDF'mimin kalitesini etkiler mi?",
-                answer: "Sıkıştırma aracımız farklı kalite ayarları sunar. Yüksek kalite sıkıştırma, dosya boyutunu küçültürken görsel doğruluğu korur. Orta ve düşük kalite ayarları daha agresif sıkıştırma uygular ve bu görüntü kalitesini etkileyebilir ancak daha küçük dosyalarla sonuçlanır. Metin içeriği tüm sıkıştırma seviyelerinde net ve okunabilir kalır."
+                question: "Sıkıştırma PDF'mın kalitesini etkiler mi?",
+                answer: "Aracımız size seçenek sunar: görsel fark olmadan kayıpsız modda PDF sıkıştırın veya maksimum dosya küçültme için yüksek sıkıştırma seçin. Temel kaliteden ödün vermeden ücretsiz sıkıştırılmış PDF alabilirsiniz."
             },
             secure: {
                 question: "PDF verilerim sıkıştırılırken güvende mi?",
-                answer: "Evet, veri güvenliğini çok ciddiye alıyoruz. Tüm dosya işlemleri güvenli sunucularımızda gerçekleşir ve dosyalarınız işlendikten sonra otomatik olarak silinir (genellikle 24 saat içinde). Dosyalarınızı üçüncü şahıslarla paylaşmayız ve tüm veri transferleri HTTPS kullanılarak şifrelenir."
+                answer: "Evet, verileriniz güvende. Tüm PDF dosyaları güvenli şekilde çevrimiçi işlenir ve 24 saat sonra otomatik silinir. Windows veya Linux kullanıyor olun, dosyanız şifrelenir ve asla paylaşılmaz."
             },
             fileLimits: {
                 question: "Dosya boyutu sınırları nedir?",
-                answer: "Ücretsiz kullanıcılar 10MB'a kadar PDF dosyalarını sıkıştırabilir. Premium aboneler daha büyük dosyaları sıkıştırabilir: Temel plan 50MB'a, Pro plan 100MB'a ve Kurumsal plan dosya başına 500MB'a kadar izin verir. Daha büyük dosyaları işlemeniz gerekiyorsa özel çözümler için bizimle iletişime geçin."
+                answer: "Ücretsiz kullanıcılar 10MB'a kadar PDF sıkıştırabilir. Premium planlar dosya başına 500MB'a kadar destekler. Tek bir PDF veya birden fazla sıkıştırıyor olsanız da aracımız büyük PDF'leri kolayca işler."
             },
             batch: {
                 question: "Aynı anda birden fazla PDF sıkıştırabilir miyim?",
-                answer: "Evet, aracımız toplu sıkıştırmayı destekler. Aynı anda birden fazla PDF dosyası yükleyip sıkıştırabilir, böylece birden fazla belgeyi işlerken zaman kazanırsınız. Premium kullanıcılar toplu işlemde daha yüksek limitler alır."
+                answer: "Evet, toplu PDF sıkıştırma yapabilirsiniz. Birden fazla dosya yükleyin ve PDF sıkıştırıcımız her dosyanın boyutunu tek bir oturumda verimli şekilde küçültsün — bireyler ve ekipler için harika."
             }
         },
         modes: {
             title: "Sıkıştırma Modları",
             moderate: {
                 title: "Orta Sıkıştırma",
-                description: "Dosya boyutunu küçültürken iyi görsel kaliteyi koruyan dengeli bir yaklaşım. Kalitenin önemli olduğu ancak belirli bir boyut küçültme gerektiren çoğu belge için idealdir."
+                description: "Kalite kaybı olmadan PDF'leri sıkıştıran dengeli bir mod. İyi görsel kalite korurken çevrimiçi paylaşım veya arşivleme için mükemmel."
             },
             high: {
                 title: "Yüksek Sıkıştırma",
-                description: "Dosya boyutunu önemli ölçüde küçülten daha agresif bir sıkıştırma. Görüntü kalitesinde biraz kayıp görülebilir ancak metin net ve okunabilir kalır."
+                description: "Belirgin sıkıştırmayla dosya boyutunu agresif şekilde küçültün. Büyük PDF'leri hızla küçültmek için ideal — yüksek çözünürlükten daha önemli olduğunda en iyisi."
             },
             lossless: {
                 title: "Kayıpsız Sıkıştırma",
-                description: "Fazlalık verileri kaldırarak, yapıyı optimize ederek ve meta verileri temizleyerek dosya boyutunu kaliteyi etkilemeden küçültür. Orijinal ile görsel olarak hiçbir fark yoktur."
+                description: "Gereksiz verileri temizleyerek PDF'leri sıkıştırın, görünümü etkilemeden boyutu küçültün — kalite en önemli olduğunda en iyi seçenek."
             }
         },
         bestPractices: {
@@ -1409,17 +1409,17 @@ export default {
             dos: "Yapılması Gerekenler",
             donts: "Yapılmaması Gerekenler",
             dosList: [
-                "Daha iyi sonuçlar için PDF oluşturmadan önce resimleri sıkıştırın",
+                "En iyi sonuçlar için PDF oluşturmadan önce görselleri sıkıştırın",
                 "İhtiyaçlarınıza uygun sıkıştırma seviyesi seçin",
                 "Sıkıştırmadan önce orijinal dosyaları yedek olarak saklayın",
                 "Önemli belgeler için kayıpsız sıkıştırma kullanın",
-                "Dosya boyutunu daha da küçültmek için gereksiz sayfaları silin"
+                "Dosya boyutunu daha da küçültmek için gereksiz sayfaları kaldırın"
             ],
             dontsList: [
                 "Yazdırma için gerekli belgeleri aşırı sıkıştırmayın",
                 "Her detayın önemli olduğu yasal veya arşiv belgelerini sıkıştırmayın",
-                "Zaten yüksek oranda sıkıştırılmış PDF'leri tekrar tekrar sıkıştırmayın",
-                "Çoğunlukla metin içeren PDF'ler için büyük küçültme beklemeyin",
+                "Zaten yüksek oranda sıkıştırılmış PDF'leri tekrar sıkıştırmayın",
+                "Çoğunlukla metin içeren PDF'lerde büyük küçülme beklemeyin",
                 "Dosya boyutu sorun değilse sıkıştırmayın"
             ]
         },

@@ -1333,75 +1333,75 @@ export default {
       failed: "Gagal mengompresi file Anda"
     },
     howTo: {
-      title: "Cara Mengompresi File PDF",
+      title: "Cara Mengompres File PDF",
       step1: {
         title: "Unggah PDF",
-        description: "Unggah file PDF yang ingin Anda kompresi. File hingga 100MB didukung."
+        description: "Unggah file PDF besar yang ingin Anda kompres. Kompresor PDF gratis kami mendukung file hingga 100MB dan berfungsi di Windows, Linux, dan platform lainnya."
       },
       step2: {
         title: "Pilih Kualitas",
-        description: "Pilih tingkat kompresi yang Anda inginkan sesuai kebutuhan."
+        description: "Pilih tingkat kompresi yang Anda inginkan untuk mengurangi ukuran file tanpa kehilangan kualitas. Pilih mode terbaik berdasarkan seberapa banyak Anda ingin mengompres PDF."
       },
       step3: {
         title: "Unduh",
-        description: "Unduh file PDF terkompresi Anda, siap untuk dibagikan atau disimpan."
+        description: "Unduh file PDF terkompres Anda. Dapatkan ukuran file yang lebih kecil yang sempurna untuk berbagi online atau lampiran email."
       }
     },
     why: {
-      title: "Mengapa Mengompresi PDF?",
+      title: "Mengapa Mengompres PDF?",
       uploadSpeed: {
-        title: "Unggahan Super Cepat",
-        description: "Bagikan PDF terkompresi dengan cepat dengan kecepatan unggah lebih tinggi"
+        title: "Unggah Super Cepat",
+        description: "File PDF terkompres diunggah lebih cepat, terutama file PDF besar, membantu Anda berbagi dokumen online tanpa penundaan."
       },
       emailFriendly: {
         title: "Ramah Email",
-        description: "Sesuaikan dengan batas ukuran email tanpa mengorbankan kualitas"
+        description: "Kurangi ukuran file agar PDF Anda sesuai dengan batas ukuran email. Alat kompres PDF kami memastikan berbagi yang mudah tanpa kehilangan kualitas."
       },
       storage: {
-        title: "Penyimpanan Efisien",
-        description: "Maksimalkan ruang di perangkat dan penyimpanan cloud Anda"
+        title: "Efisien Penyimpanan",
+        description: "Hemat penyimpanan di perangkat atau cloud Anda dengan menggunakan kompresor PDF kami untuk mengecilkan file PDF besar menjadi file yang lebih kecil dan efisien ruang."
       },
       quality: {
         title: "Kualitas Terjaga",
-        description: "Pilih tingkat kompresi yang mempertahankan kualitas yang Anda butuhkan"
+        description: "Kompres PDF tanpa mengorbankan kualitas. Mode pintar kami mempertahankan kejernihan visual tinggi sambil mengurangi ukuran file."
       }
     },
     faq: {
-      title: "Pertanyaan Umum",
+      title: "Pertanyaan yang Sering Diajukan",
       howMuch: {
-        question: "Seberapa banyak file PDF dapat dikompresi?",
-        answer: "Sebagian besar file PDF dapat dikompresi antara 20-80%, tergantung pada kontennya. Dokumen dengan banyak gambar umumnya mencapai rasio kompresi lebih tinggi daripada dokumen dengan banyak teks. Alat kompresi kami menawarkan berbagai tingkat kualitas untuk menyeimbangkan ukuran file dan kualitas visual sesuai kebutuhan Anda."
+        question: "Seberapa banyak file PDF bisa dikompres?",
+        answer: "Sebagian besar file PDF besar dapat dikompres 20-80%, tergantung pada konten. Kompresor PDF kami dioptimalkan untuk berbagai kasus penggunaan, membantu Anda mengurangi ukuran file secara efektif — terutama untuk PDF yang kaya gambar."
       },
       quality: {
         question: "Apakah kompresi akan memengaruhi kualitas PDF saya?",
-        answer: "Alat kompresi kami menawarkan berbagai pengaturan kualitas. Kompresi kualitas tinggi mempertahankan kesetiaan visual sambil mengurangi ukuran file. Pengaturan kualitas menengah dan rendah menerapkan kompresi yang lebih agresif, yang dapat memengaruhi kualitas gambar tetapi menghasilkan file yang lebih kecil. Konten teks tetap tajam dan terbaca di semua tingkat kompresi."
+        answer: "Alat kami memberi Anda pilihan: kompres PDF menggunakan mode lossless tanpa perbedaan visual atau pilih kompresi tinggi untuk pengurangan ukuran file maksimal. Anda bisa mendapatkan PDF terkompres gratis tanpa kehilangan kualitas esensial."
       },
       secure: {
-        question: "Apakah data PDF saya aman saat dikompresi?",
-        answer: "Ya, kami sangat serius dalam hal keamanan data. Semua pemrosesan file terjadi di server aman kami, dan file Anda akan dihapus secara otomatis setelah pemrosesan (biasanya dalam 24 jam). Kami tidak membagikan file Anda kepada pihak ketiga, dan semua transfer data dienkripsi menggunakan HTTPS."
+        question: "Apakah data PDF saya aman saat dikompres?",
+        answer: "Ya, data Anda aman. Semua file PDF diproses secara online dengan aman dan dihapus otomatis setelah 24 jam. Baik Anda menggunakan Windows atau Linux, file Anda dienkripsi dan tidak pernah dibagikan."
       },
       fileLimits: {
-        question: "Apa batasan ukuran file?",
-        answer: "Pengguna gratis dapat mengompresi file PDF hingga 10MB. Pelanggan premium dapat mengompresi file yang lebih besar: Paket Dasar memungkinkan hingga 50MB, Paket Pro hingga 100MB, dan Paket Perusahaan hingga 500MB per file. Jika Anda perlu memproses file yang lebih besar, hubungi kami untuk solusi khusus."
+        question: "Apa batas ukuran file?",
+        answer: "Pengguna gratis dapat mengompres file PDF hingga 10MB. Paket premium mendukung hingga 500MB per file. Baik Anda mengompres satu PDF atau banyak, alat kami dengan mudah menangani file PDF besar."
       },
       batch: {
-        question: "Dapatkah saya mengompresi beberapa PDF sekaligus?",
-        answer: "Ya, alat kami mendukung kompresi batch. Anda dapat mengunggah dan mengompresi beberapa file PDF sekaligus, menghemat waktu saat memproses banyak dokumen. Pengguna premium mendapatkan batas lebih tinggi dalam pemrosesan batch."
+        question: "Bisakah saya mengompres beberapa PDF sekaligus?",
+        answer: "Ya, Anda bisa mengompres PDF dalam batch. Unggah beberapa file dan biarkan kompresor PDF kami mengurangi ukuran setiap file secara efisien dalam satu sesi — bagus untuk individu dan tim."
       }
     },
     modes: {
       title: "Mode Kompresi",
       moderate: {
         title: "Kompresi Sedang",
-        description: "Pendekatan seimbang yang mengurangi ukuran file sambil mempertahankan kualitas visual yang baik. Cocok untuk sebagian besar dokumen di mana kualitas penting tetapi pengurangan ukuran tertentu diperlukan."
+        description: "Mode seimbang yang mengompres file PDF tanpa kehilangan kualitas. Sempurna untuk berbagi PDF online atau pengarsipan sambil mempertahankan visual yang baik."
       },
       high: {
         title: "Kompresi Tinggi",
-        description: "Kompresi lebih agresif yang secara signifikan mengurangi ukuran file. Beberapa penurunan kualitas gambar mungkin terlihat, tetapi teks tetap jelas dan terbaca."
+        description: "Kurangi ukuran file secara agresif dengan kompresi yang terlihat. Ideal untuk mengecilkan file PDF besar dengan cepat — terbaik ketika ukuran lebih kecil lebih penting daripada resolusi tinggi."
       },
       lossless: {
-        title: "Kompresi Tanpa Kehilangan",
-        description: "Mengurangi ukuran file tanpa memengaruhi kualitas dengan menghapus data yang berlebihan, mengoptimalkan struktur, dan membersihkan metadata. Tidak ada perbedaan visual dari aslinya."
+        title: "Kompresi Lossless",
+        description: "Kompres PDF dengan membersihkan data yang tidak perlu, mengurangi ukuran file tanpa memengaruhi tampilan — pilihan terbaik ketika kualitas paling penting."
       }
     },
     bestPractices: {
@@ -1409,18 +1409,18 @@ export default {
       dos: "Yang Harus Dilakukan",
       donts: "Yang Tidak Boleh Dilakukan",
       dosList: [
-        "Kompresi gambar sebelum membuat PDF untuk hasil terbaik",
+        "Kompres gambar sebelum membuat PDF untuk hasil terbaik",
         "Pilih tingkat kompresi yang sesuai untuk kebutuhan Anda",
         "Simpan file asli sebagai cadangan sebelum kompresi",
-        "Gunakan kompresi tanpa kehilangan untuk dokumen penting",
+        "Gunakan kompresi lossless untuk dokumen penting",
         "Hapus halaman yang tidak perlu untuk lebih mengurangi ukuran file"
       ],
       dontsList: [
-        "Jangan terlalu mengompresi dokumen yang diperlukan untuk pencetakan",
-        "Jangan mengompresi dokumen hukum atau arsip jika setiap detail penting",
-        "Jangan mengompresi berulang kali PDF yang sudah sangat terkompresi",
+        "Jangan terlalu mengompres dokumen yang diperlukan untuk dicetak",
+        "Jangan mengompres dokumen hukum atau arsip jika setiap detail penting",
+        "Jangan mengompres PDF yang sudah sangat terkompres berulang kali",
         "Jangan berharap pengurangan besar untuk PDF yang sebagian besar berisi teks",
-        "Jangan mengompresi jika ukuran file bukan masalah"
+        "Jangan kompres jika ukuran file bukan masalah"
       ]
     },
     relatedTools: {
