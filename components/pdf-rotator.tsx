@@ -25,7 +25,8 @@ import {
   FileText,
   AlertTriangle,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  ListFilter
 } from "lucide-react";
 
 // Initialize pdf.js worker
@@ -53,6 +54,7 @@ export function PdfRotator() {
   const [pageFormat, setPageFormat] = useState<string>("all");
   const [customRange, setCustomRange] = useState<string>("");
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
+  const [showPageSelector, setShowPageSelector] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -229,7 +231,7 @@ export function PdfRotator() {
       if (result.success) {
         setProgress(100);
         setProcessedFileUrl(result.fileUrl);
-        toast.success(t("rotatePdf.success") || "PDF rotated successfully!");
+        toast.success(t("rotatePdf.messages.success") || "PDF rotated successfully!");
       } else {
         throw new Error(result.error || "Unknown error occurred");
       }
@@ -316,6 +318,94 @@ export function PdfRotator() {
     setSelectedPages(newSelectedPages.sort((a, b) => a - b));
   };
 
+  const renderPageSelector = () => (
+    <div className="border rounded-lg mb-4 bg-muted/10">
+      <div className="p-4 border-b">
+        <h3 className="font-medium mb-3">{t("rotatePdf.form.selectPages") || "Select Pages"}</h3>
+        
+        <div className="mb-4">
+          <Tabs value={pageFormat} onValueChange={handlePageFormatChange}>
+            <TabsList className="grid grid-cols-4 h-8 text-xs">
+              <TabsTrigger value="all">{t("rotatePdf.form.rotateAll") || "All"}</TabsTrigger>
+              <TabsTrigger value="even">{t("rotatePdf.form.rotateEven") || "Even"}</TabsTrigger>
+              <TabsTrigger value="odd">{t("rotatePdf.form.rotateOdd") || "Odd"}</TabsTrigger>
+              <TabsTrigger value="custom">{t("rotatePdf.form.rotateSelected") || "Custom"}</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
+        
+        {pageFormat === "custom" && (
+          <div className="flex gap-2 mb-4">
+            <Input 
+              className="h-8 text-xs"
+              placeholder="e.g. 1-3, 5, 7-9"
+              value={customRange}
+              onChange={(e) => setCustomRange(e.target.value)}
+            />
+            <Button 
+              variant="secondary" 
+              className="h-8 text-xs px-2"
+              onClick={parseCustomRange}
+            >
+              {t("ui.apply") || "Apply"}
+            </Button>
+          </div>
+        )}
+        
+        <div className="flex justify-between items-center mb-2">
+          <div className="flex items-center space-x-2">
+            <Checkbox 
+              id="selectAll"
+              checked={selectedPages.length === numPages && numPages > 0}
+              onCheckedChange={handleSelectAll}
+            />
+            <Label htmlFor="selectAll" className="text-xs">
+              {t("rotatePdf.messages.selectAll") || "Select All"}
+            </Label>
+          </div>
+          <span className="text-xs text-muted-foreground">
+            {selectedPages.length}/{numPages} {t("rotatePdf.messages.pageOf") || "selected"}
+          </span>
+        </div>
+      </div>
+      
+      <div className="p-3 max-h-40 overflow-y-auto grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2">
+        {isPagesLoading ? (
+          <div className="flex justify-center p-4 col-span-full">
+            <Loader2 className="h-6 w-6 animate-spin" />
+          </div>
+        ) : (
+          Array.from(new Array(numPages), (_, index) => (
+            <div 
+              key={index} 
+              className={cn(
+                "flex flex-col items-center p-2 rounded-md cursor-pointer border",
+                selectedPages.includes(index + 1) && "bg-primary/10 border-primary",
+                index + 1 === currentPage && "ring-1 ring-primary"
+              )}
+              onClick={() => setCurrentPage(index + 1)}
+            >
+              <span className="text-xs font-medium mb-1">
+                {index + 1}
+              </span>
+              <Checkbox 
+                checked={selectedPages.includes(index + 1)}
+                onCheckedChange={() => handlePageSelect(index + 1)}
+                onClick={(e) => e.stopPropagation()}
+                className="mt-1"
+              />
+              {pageRotations.find(r => r.pageNumber === index + 1)?.angle !== 0 && (
+                <span className="text-xs text-primary font-medium mt-1">
+                  {pageRotations.find(r => r.pageNumber === index + 1)?.angle}°
+                </span>
+              )}
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+
   const renderUploadSection = () => (
     <div 
       className={cn(
@@ -341,10 +431,10 @@ export function PdfRotator() {
         <Upload className="h-10 w-10 text-primary" />
       </div>
       <h3 className="text-2xl font-semibold mb-3">
-        {t("rotatePdf.upload.title") || "Upload PDF to Rotate"}
+        {t("rotatePdf.form.uploadTitle") || "Upload PDF to Rotate"}
       </h3>
       <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-        {t("rotatePdf.upload.description") || "Upload your PDF file to rotate pages. You can rotate individual pages or apply rotation to multiple pages at once."}
+        {t("rotatePdf.form.uploadDesc") || "Upload your PDF file to rotate pages. You can rotate individual pages or apply rotation to multiple pages at once."}
       </p>
       <Button 
         size="lg" 
@@ -364,10 +454,10 @@ export function PdfRotator() {
       <div className="bg-background rounded-lg p-8 shadow-sm border w-96 text-center">
         <Loader2 className="h-16 w-16 animate-spin text-primary mb-6 mx-auto" />
         <h3 className="text-xl font-semibold mb-3">
-          {t("rotatePdf.processing.title") || "Processing PDF"}
+          {t("rotatePdf.processing") || "Processing PDF..."}
         </h3>
         <p className="text-muted-foreground mb-6">
-          {t("rotatePdf.processing.description") || "Please wait while we rotate your PDF pages..."}
+          {t("rotatePdf.messages.processing") || "Please wait while we rotate your PDF pages..."}
         </p>
         <Progress value={progress} className="w-full h-2" />
       </div>
@@ -381,10 +471,10 @@ export function PdfRotator() {
           <Check className="h-10 w-10" />
         </div>
         <h3 className="text-xl font-semibold mb-3">
-          {t("rotatePdf.success.title") || "PDF Rotated Successfully!"}
+          {t("rotatePdf.success") || "PDF Rotated Successfully!"}
         </h3>
         <p className="text-muted-foreground mb-6">
-          {t("rotatePdf.success.description") || "Your PDF has been processed and is ready to download."}
+          {t("rotatePdf.messages.downloadReady") || "Your PDF has been processed and is ready to download."}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button 
@@ -406,237 +496,171 @@ export function PdfRotator() {
   );
 
   const renderEditorSection = () => (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      {/* Left sidebar with pages list */}
-      <div className="lg:col-span-3 order-2 lg:order-1 border rounded-lg">
-        <div className="p-4 border-b bg-muted/30">
-          <h3 className="font-medium mb-2">{t("rotatePdf.pages.title") || "Pages"}</h3>
-          
-          <div className="mb-4">
-            <Tabs value={pageFormat} onValueChange={handlePageFormatChange}>
-              <TabsList className="grid grid-cols-4 h-8 text-xs">
-                <TabsTrigger value="all">All</TabsTrigger>
-                <TabsTrigger value="even">Even</TabsTrigger>
-                <TabsTrigger value="odd">Odd</TabsTrigger>
-                <TabsTrigger value="custom">Custom</TabsTrigger>
-              </TabsList>
-            </Tabs>
-          </div>
-          
-          {pageFormat === "custom" && (
-            <div className="flex gap-2 mb-4">
-              <Input 
-                className="h-8 text-xs"
-                placeholder="e.g. 1-3, 5, 7-9"
-                value={customRange}
-                onChange={(e) => setCustomRange(e.target.value)}
-              />
-              <Button 
-                variant="secondary" 
-                className="h-8 text-xs px-2"
-                onClick={parseCustomRange}
-              >
-                Apply
-              </Button>
-            </div>
-          )}
-          
-          <div className="flex justify-between items-center mb-2">
-            <div className="flex items-center space-x-2">
-              <Checkbox 
-                id="selectAll"
-                checked={selectedPages.length === numPages && numPages > 0}
-                onCheckedChange={handleSelectAll}
-              />
-              <Label htmlFor="selectAll" className="text-xs">
-                {t("rotatePdf.selectAll") || "Select All"}
-              </Label>
-            </div>
-            <span className="text-xs text-muted-foreground">
-              {selectedPages.length}/{numPages} {t("rotatePdf.pagesSelected") || "selected"}
-            </span>
+    <div className="flex flex-col">
+      {/* Page selector toggle button */}
+      <div className="mb-3 flex justify-end">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setShowPageSelector(!showPageSelector)}
+          className="flex items-center gap-1"
+        >
+          <ListFilter className="h-4 w-4" />
+          {showPageSelector ? (t("rotatePdf.form.hideSelector") || "Hide Page Selector") : (t("rotatePdf.form.showSelector") || "Select Pages")}
+        </Button>
+      </div>
+      
+      {/* Page selector panel */}
+      {showPageSelector && renderPageSelector()}
+      
+      {/* Main PDF preview */}
+      <div className="border rounded-lg flex-1 overflow-hidden flex flex-col">
+        <div className="p-4 border-b bg-muted/30 flex justify-between items-center">
+          <h3 className="font-medium">
+            {t("ui.preview") || "Preview"}: {file?.name}
+          </h3>
+          <div className="flex items-center">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handleRotateSelected("counterclockwise")}
+              disabled={selectedPages.length === 0}
+              className="mr-2"
+            >
+              <RotateCcw className="h-4 w-4 mr-1" />
+              {t("rotatePdf.form.counterClockwise90") || "Rotate Left"}
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handleRotateSelected("clockwise")}
+              disabled={selectedPages.length === 0}
+            >
+              <RotateCw className="h-4 w-4 mr-1" />
+              {t("rotatePdf.form.clockwise90") || "Rotate Right"}
+            </Button>
           </div>
         </div>
         
-        <div className="p-2 space-y-1 max-h-[500px] overflow-y-auto">
+        <div className="flex-1 overflow-auto bg-muted/10 flex items-center justify-center p-6 min-h-[500px]">
           {isPagesLoading ? (
             <div className="flex justify-center p-4">
-              <Loader2 className="h-6 w-6 animate-spin" />
+              <Loader2 className="h-8 w-8 animate-spin" />
             </div>
           ) : (
-            Array.from(new Array(numPages), (_, index) => (
-              <div 
-                key={index} 
-                className={cn(
-                  "flex items-center p-2 rounded-md cursor-pointer group",
-                  selectedPages.includes(index + 1) && "bg-primary/10",
-                  index + 1 === currentPage && "ring-1 ring-primary"
-                )}
-                onClick={() => setCurrentPage(index + 1)}
+            <div className="shadow-lg">
+              <Document
+                file={fileUrl}
+                onLoadSuccess={handleDocumentLoadSuccess}
+                onLoadStart={() => setIsPagesLoading(true)}
+                loading={<Loader2 className="h-8 w-8 animate-spin" />}
+                error={
+                  <div className="text-center p-4">
+                    <AlertTriangle className="h-8 w-8 text-red-500 mx-auto mb-2" />
+                    <p>{t("rotatePdf.errors.loadFailed") || "Failed to load PDF. Please try a different file."}</p>
+                  </div>
+                }
               >
-                <Checkbox 
-                  checked={selectedPages.includes(index + 1)}
-                  onCheckedChange={() => handlePageSelect(index + 1)}
-                  onClick={(e) => e.stopPropagation()}
-                  className="mr-2"
-                />
-                <span className="text-sm flex-1">
-                  {t("rotatePdf.page") || "Page"} {index + 1}
-                </span>
-                <div className={cn(
-                  "flex opacity-0 group-hover:opacity-100 transition-opacity",
-                  selectedPages.includes(index + 1) && "opacity-100"
-                )}>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-7 w-7"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleRotatePage(index + 1, "counterclockwise");
-                    }}
-                  >
-                    <RotateCcw className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-7 w-7"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleRotatePage(index + 1, "clockwise");
-                    }}
-                  >
-                    <RotateCw className="h-4 w-4" />
-                  </Button>
-                </div>
-                
-                {/* Show rotation indicator if page is rotated */}
-                {pageRotations.find(r => r.pageNumber === index + 1)?.angle !== 0 && (
-                  <span className="text-xs text-primary font-medium ml-1">
-                    {pageRotations.find(r => r.pageNumber === index + 1)?.angle}°
-                  </span>
+                {numPages > 0 && (
+                  <div className="relative">
+                    <Page
+                      pageNumber={currentPage}
+                      renderTextLayer={false}
+                      renderAnnotationLayer={false}
+                      width={500}
+                      rotate={pageRotations.find(r => r.pageNumber === currentPage)?.angle || 0}
+                    />
+                    {/* Selection indicator */}
+                    {selectedPages.includes(currentPage) && (
+                      <div className="absolute inset-0 border-4 border-primary/50"></div>
+                    )}
+                    
+                    {/* Page rotation controls */}
+                    <div className="absolute top-2 right-2 bg-background/80 p-1 rounded-md shadow-sm flex">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => handleRotatePage(currentPage, "counterclockwise")}
+                        title={t("rotatePdf.form.counterClockwise90") || "90° Counterclockwise"}
+                      >
+                        <RotateCcw className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => handleRotatePage(currentPage, "clockwise")}
+                        title={t("rotatePdf.form.clockwise90") || "90° Clockwise"}
+                      >
+                        <RotateCw className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    
+                    {/* Selection checkbox */}
+                    <div className="absolute top-2 left-2 bg-background/80 p-1 rounded-md shadow-sm">
+                      <div className="flex items-center space-x-2">
+                        <Checkbox 
+                          id={`select-page-${currentPage}`}
+                          checked={selectedPages.includes(currentPage)}
+                          onCheckedChange={() => handlePageSelect(currentPage)}
+                        />
+                        <Label htmlFor={`select-page-${currentPage}`} className="text-xs">
+                          {t("rotatePdf.form.selectThisPage") || "Select"}
+                        </Label>
+                      </div>
+                    </div>
+                  </div>
                 )}
-              </div>
-            ))
+              </Document>
+            </div>
           )}
+        </div>
+        
+        {/* Page navigation */}
+        <div className="p-3 border-t bg-muted/30 flex justify-between items-center">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            <ChevronLeft className="h-4 w-4 mr-1" />
+            {t("ui.previous") || "Previous"}
+          </Button>
+          
+          <span className="text-sm">
+            {`Page ${currentPage} of ${numPages}`}
+          </span>
+          
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, numPages))}
+            disabled={currentPage === numPages}
+          >
+            {t("ui.next") || "Next"}
+            <ChevronRight className="h-4 w-4 ml-1" />
+          </Button>
         </div>
       </div>
       
-      {/* Main content with PDF preview */}
-      <div className="lg:col-span-9 order-1 lg:order-2 flex flex-col">
-        <div className="border rounded-lg flex-1 overflow-hidden flex flex-col">
-          <div className="p-4 border-b bg-muted/30 flex justify-between items-center">
-            <h3 className="font-medium">
-              {t("rotatePdf.preview") || "Preview"}: {file?.name}
-            </h3>
-            <div className="flex items-center">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleRotateSelected("counterclockwise")}
-                disabled={selectedPages.length === 0}
-                className="mr-2"
-              >
-                <RotateCcw className="h-4 w-4 mr-1" />
-                {t("rotatePdf.rotateLeft") || "Rotate Left"}
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleRotateSelected("clockwise")}
-                disabled={selectedPages.length === 0}
-              >
-                <RotateCw className="h-4 w-4 mr-1" />
-                {t("rotatePdf.rotateRight") || "Rotate Right"}
-              </Button>
-            </div>
-          </div>
-          
-          <div className="flex-1 overflow-auto bg-muted/10 flex items-center justify-center p-6">
-            {isPagesLoading ? (
-              <div className="flex justify-center p-4">
-                <Loader2 className="h-8 w-8 animate-spin" />
-              </div>
-            ) : (
-              <div className="shadow-lg">
-                <Document
-                  file={fileUrl}
-                  onLoadSuccess={handleDocumentLoadSuccess}
-                  onLoadStart={() => setIsPagesLoading(true)}
-                  loading={<Loader2 className="h-8 w-8 animate-spin" />}
-                  error={
-                    <div className="text-center p-4">
-                      <AlertTriangle className="h-8 w-8 text-red-500 mx-auto mb-2" />
-                      <p>{t("rotatePdf.errors.loadFailed") || "Failed to load PDF. Please try a different file."}</p>
-                    </div>
-                  }
-                >
-                  {numPages > 0 && (
-                    <div className="relative">
-                      <Page
-                        pageNumber={currentPage}
-                        renderTextLayer={false}
-                        renderAnnotationLayer={false}
-                        width={500}
-                        rotate={pageRotations.find(r => r.pageNumber === currentPage)?.angle || 0}
-                      />
-                      {/* Selection indicator */}
-                      {selectedPages.includes(currentPage) && (
-                        <div className="absolute inset-0 border-4 border-primary/50"></div>
-                      )}
-                    </div>
-                  )}
-                </Document>
-              </div>
-            )}
-          </div>
-          
-          {/* Page navigation */}
-          <div className="p-3 border-t bg-muted/30 flex justify-between items-center">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-            >
-              <ChevronLeft className="h-4 w-4 mr-1" />
-              {t("ui.previous") || "Previous"}
-            </Button>
-            
-            <span className="text-sm">
-              {t("page") || "Page"} {currentPage} {t("pageOf") || "of"} {numPages}
-            </span>
-            
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setCurrentPage(prev => Math.min(prev + 1, numPages))}
-              disabled={currentPage === numPages}
-            >
-              {t("ui.next") || "Next"}
-              <ChevronRight className="h-4 w-4 ml-1" />
-            </Button>
-          </div>
-        </div>
-        
-        <div className="mt-4 flex justify-center">
-          <Button 
-            variant="outline" 
-            className="mr-2"
-            onClick={handleReset}
-          >
-            <Trash className="h-4 w-4 mr-2" />
-            {t("ui.reset") || "Reset"}
-          </Button>
-          <Button
-            onClick={handleProcessPdf}
-            disabled={isProcessing || pageRotations.every(r => r.angle === 0)}
-          >
-            <RotateCw className="h-4 w-4 mr-2" />
-            {t("rotatePdf.process") || "Rotate PDF"}
-          </Button>
-        </div>
+      <div className="mt-4 flex justify-center">
+        <Button 
+          variant="outline" 
+          className="mr-2"
+          onClick={handleReset}
+        >
+          <Trash className="h-4 w-4 mr-2" />
+          {t("rotatePdf.form.reset") || "Reset"}
+        </Button>
+        <Button
+          onClick={handleProcessPdf}
+          disabled={isProcessing || pageRotations.every(r => r.angle === 0)}
+        >
+          <RotateCw className="h-4 w-4 mr-2" />
+          {t("rotatePdf.form.apply") || "Rotate PDF"}
+        </Button>
       </div>
     </div>
   );
@@ -649,7 +673,7 @@ export function PdfRotator() {
           {t("rotatePdf.title") || "Rotate PDF Pages"}
         </CardTitle>
         <CardDescription>
-          {t("rotatePdf.cardDescription") || "Easily rotate pages in your PDF document to the correct orientation."}
+          {t("rotatePdf.description") || "Easily rotate pages in your PDF document to the correct orientation."}
         </CardDescription>
       </CardHeader>
       
@@ -664,7 +688,7 @@ export function PdfRotator() {
         <div className="flex items-start gap-2 text-xs text-muted-foreground">
           <Info className="h-4 w-4 mt-0.5 flex-shrink-0" />
           <p>
-            {t("rotatePdf.securityNote") || "Your files are processed securely. All uploads are automatically deleted after processing to ensure privacy."}
+            {t("ui.filesSecurity") || "Your files are processed securely. All uploads are automatically deleted after processing to ensure privacy."}
           </p>
         </div>
       </CardFooter>

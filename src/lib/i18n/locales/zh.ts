@@ -2647,6 +2647,140 @@ export default {
         tool4IconColor: 'text-purple-500',
         tool4BgColor: 'bg-purple-100 dark:bg-purple-900/30'
     },
-    
+    rotatePdf: {
+        title: "旋转PDF页面",
+        description: "使用我们的在线工具轻松将PDF页面顺时针、逆时针或上下颠倒旋转。使用精确的PDF编辑工具和按钮修复扫描错误的文档，旋转所选页面或页面范围。",
+        howTo: {
+            title: "如何旋转PDF页面",
+            step1: {
+                title: "上传PDF",
+                description: "通过拖放或点击上传要旋转的文件来选择PDF。"
+            },
+            step2: {
+                title: "选择旋转",
+                description: "点击页面缩略图选择页面或页面范围，然后使用旋转工具指定角度（90°、180°或270°）。"
+            },
+            step3: {
+                title: "下载",
+                description: "处理并下载旋转后的PDF文档，所有选定的页面都已正确定向。"
+            }
+        },
+        why: {
+            title: "为什么旋转PDF页面",
+            fixScanned: {
+                title: "修复扫描文档",
+                description: "使用页面缩略图和旋转工具修复扫描错误的页面方向，使其可读。"
+            },
+            presentation: {
+                title: "改善演示文稿",
+                description: "旋转PDF页面或单个页面，以优化屏幕显示或演示文稿中的显示。"
+            },
+            mixedOrientation: {
+                title: "修复混合方向",
+                description: "通过旋转所选页面或页面范围，标准化包含混合纵向和横向页面的文档。"
+            },
+            printing: {
+                title: "优化打印",
+                description: "使用按钮旋转页面范围，确保在打印前所有页面都已正确定向，节省纸张。"
+            }
+        },
+        features: {
+            title: "旋转功能",
+            individual: {
+                title: "单页旋转",
+                description: "点击页面缩略图选择并旋转文档中的单个页面。"
+            },
+            batch: {
+                title: "批量页面选择",
+                description: "选择页面范围并使用奇数、偶数或所有页面的选项，一次旋转多个页面。"
+            },
+            preview: {
+                title: "实时预览",
+                description: "在处理之前，使用所选页面的缩略图查看旋转后的页面外观。"
+            },
+            precision: {
+                title: "精确控制",
+                description: "使用旋转工具为每个页面选择精确的旋转角度（90°、180°或270°）。"
+            }
+        },
+        form: {
+            uploadTitle: "上传PDF以旋转",
+            uploadDesc: "将您的PDF文件拖放到此处，或点击按钮选择PDF并打开进行编辑。",
+            rotateAll: "旋转所有页面",
+            rotateEven: "旋转偶数页面",
+            rotateOdd: "旋转奇数页面",
+            rotateSelected: "旋转所选页面",
+            selectPages: "选择页面",
+            rotateDirection: "旋转方向",
+            clockwise90: "顺时针90°",
+            clockwise180: "180°（上下颠倒）",
+            counterClockwise90: "逆时针90°",
+            apply: "应用旋转",
+            reset: "重置所有",
+            processing: "处理PDF中...",
+            success: "PDF旋转成功！",
+            error: "旋转PDF时出错",
+            showSelector: "选择页面",
+            hideSelector: "隐藏页面选择器"
+        },
+        faq: {
+            title: "常见问题",
+            permanent: {
+                question: "旋转是永久的吗？",
+                answer: "是的，旋转将永久应用于PDF。但是，您可以随时重新打开PDF并使用按钮将其旋转回原位。"
+            },
+            quality: {
+                question: "旋转会影响PDF质量吗？",
+                answer: "不会，我们的在线工具保留了您的PDF的原始质量。由于我们只更改了所选页面的方向而没有重新压缩内容，因此图像或文本质量不会受到影响。"
+            },
+            size: {
+                question: "旋转会改变我的文件大小吗？",
+                answer: "旋转页面通常对文件大小影响很小。由于更新的元数据，文件大小可能会略有变化，但您的页面范围内容保持不变。"
+            },
+            limitations: {
+                question: "旋转有限制吗？",
+                answer: "您可以使用我们的免费计划旋转大小为100MB的文件。对于更大的文件，请考虑升级到我们的高级计划。此外，旋转工具为所选页面提供标准角度（90°、180°、270°），而不是任意角度。"
+            },
+            secured: {
+                question: "旋转过程中我的文件安全吗？",
+                answer: "是的，所有文件都在我们的服务器上安全处理，并在处理后自动删除。选择要旋转的PDF时，我们不会与第三方共享或保留您的文档。"
+            }
+        },
+        bestPractices: {
+            title: "PDF旋转的最佳实践",
+            dosList: [
+                "在下载最终版本之前，使用页面缩略图预览文档",
+                "使用旋转工具将倒置页面旋转180°",
+                "如果整个文档或页面范围存在相同的方向问题，请一次旋转所有页面",
+                "在旋转之前将原始文件另存为备份",
+                "旋转后检查所有选定页面，确保方向正确"
+            ],
+            dontsList: [
+                "不要在未解锁的情况下旋转受密码保护的PDF",
+                "如果一致性很重要，不要在同一文档中混合使用90°和270°旋转",
+                "不要假设所有页面都需要相同的旋转 - 检查每个页面缩略图",
+                "如果需要保持表单字段的功能，请勿旋转表单字段",
+                "如果PDF已经正确定向，请勿旋转"
+            ],
+            dos: "建议",
+            donts: "不建议"
+        },
+        relatedTools: {
+            title: "相关工具",
+            compress: "压缩PDF",
+            merge: "合并PDF",
+            split: "拆分PDF",
+            edit: "编辑PDF",
+            viewAll: "查看所有工具"
+        },
+        messages: {
+            selectAll: "全选",
+            downloading: "准备下载中...",
+            rotationApplied: "已将旋转应用于{count}页",
+            dragDrop: "拖放以重新排列页面",
+            pageOf: "第{current}页，共{total}页",
+            selectPageInfo: "点击页面缩略图选择要旋转的页面"
+        }
+    }
 
 }

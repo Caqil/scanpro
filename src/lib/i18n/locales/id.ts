@@ -2649,6 +2649,142 @@ export default {
     tool4Title: 'Semua Alat PDF',
     tool4IconColor: 'text-purple-500',
     tool4BgColor: 'bg-purple-100 dark:bg-purple-900/30'
+  },
+  rotatePdf: {
+    title: "Putar Halaman PDF",
+    description: "Putar halaman PDF dengan mudah searah jarum jam, berlawanan jarum jam, atau terbalik dengan alat online kami. Perbaiki dokumen yang di-scan dengan salah menggunakan alat editing PDF yang presisi dan tombol untuk memutar halaman yang dipilih atau rentang halaman.",
+    howTo: {
+      title: "Cara Memutar Halaman PDF",
+      step1: {
+        title: "Unggah PDF",
+        description: "Pilih PDF dengan menyeret dan menjatuhkannya atau klik untuk mengunggah file yang ingin Anda putar."
+      },
+      step2: {
+        title: "Pilih Rotasi",
+        description: "Klik pada thumbnail halaman untuk memilih halaman atau rentang halaman, kemudian gunakan alat rotasi untuk menentukan sudut (90°, 180°, atau 270°)."
+      },
+      step3: {
+        title: "Unduh",
+        description: "Proses dan unduh dokumen PDF yang diputar dengan semua halaman yang dipilih terorientasi dengan benar."
+      }
+    },
+    why: {
+      title: "Mengapa Memutar Halaman PDF",
+      fixScanned: {
+        title: "Perbaiki Dokumen yang Di-scan",
+        description: "Perbaiki orientasi halaman yang di-scan dengan salah agar dapat dibaca menggunakan thumbnail halaman dan alat rotasi."
+      },
+      presentation: {
+        title: "Perbaiki Presentasi",
+        description: "Putar halaman PDF atau satu halaman untuk mengoptimalkan tampilan pada layar atau selama presentasi."
+      },
+      mixedOrientation: {
+        title: "Perbaiki Orientasi Campuran",
+        description: "Standarkan dokumen dengan halaman potret dan lanskap campuran dengan memutar halaman yang dipilih atau rentang halaman."
+      },
+      printing: {
+        title: "Optimalkan untuk Mencetak",
+        description: "Pastikan semua halaman terorientasi dengan benar sebelum mencetak dengan menggunakan tombol untuk memutar rentang halaman, menghemat kertas."
+      }
+    },
+    features: {
+      title: "Fitur Rotasi",
+      individual: {
+        title: "Rotasi Halaman Individu",
+        description: "Klik pada thumbnail halaman untuk memilih dan memutar satu halaman dalam dokumen Anda."
+      },
+      batch: {
+        title: "Pemilihan Halaman Batch",
+        description: "Putar beberapa halaman sekaligus dengan memilih rentang halaman dengan opsi untuk halaman ganjil, genap, atau semua halaman."
+      },
+      preview: {
+        title: "Pratinjau Langsung",
+        description: "Lihat bagaimana halaman yang diputar akan terlihat sebelum diproses dengan thumbnail halaman yang dipilih."
+      },
+      precision: {
+        title: "Kontrol Presisi",
+        description: "Pilih sudut rotasi yang tepat 90°, 180°, atau 270° untuk setiap halaman menggunakan alat rotasi."
+      }
+    },
+    form: {
+      uploadTitle: "Unggah PDF untuk Diputar",
+      uploadDesc: "Seret dan jatuhkan file PDF Anda di sini atau klik tombol untuk memilih PDF dan membukanya untuk diedit.",
+      rotateAll: "Putar Semua Halaman",
+      rotateEven: "Putar Halaman Genap",
+      rotateOdd: "Putar Halaman Ganjil",
+      rotateSelected: "Putar Halaman yang Dipilih",
+      selectPages: "Pilih Halaman",
+      rotateDirection: "Arah Rotasi",
+      clockwise90: "90° Searah Jarum Jam",
+      clockwise180: "180° (Terbalik)",
+      counterClockwise90: "90° Berlawanan Jarum Jam",
+      apply: "Terapkan Rotasi",
+      reset: "Reset Semua",
+      processing: "Memproses PDF...",
+      success: "PDF berhasil diputar!",
+      error: "Terjadi kesalahan saat memutar PDF",
+      showSelector: "Pilih Halaman",
+      hideSelector: "Sembunyikan Selektor Halaman"
+    },
+    faq: {
+      title: "Pertanyaan yang Sering Diajukan",
+      permanent: {
+        question: "Apakah rotasi permanen?",
+        answer: "Ya, rotasi diterapkan secara permanen pada PDF. Namun, Anda selalu dapat membuka kembali PDF dan menggunakan tombol untuk memutarnya kembali jika diperlukan."
+      },
+      quality: {
+        question: "Apakah rotasi mempengaruhi kualitas PDF?",
+        answer: "Tidak, alat online kami mempertahankan kualitas asli PDF Anda. Karena kami hanya mengubah orientasi halaman yang dipilih dan tidak mengompres ulang konten, tidak ada kehilangan kualitas gambar atau teks."
+      },
+      size: {
+        question: "Apakah rotasi akan mengubah ukuran file saya?",
+        answer: "Memutar halaman biasanya memiliki dampak minimal pada ukuran file. Ukuran file mungkin berubah sedikit karena metadata yang diperbarui, tetapi konten rentang halaman Anda tetap tidak berubah."
+      },
+      limitations: {
+        question: "Apakah ada batasan pada rotasi?",
+        answer: "Anda dapat memutar file hingga 100MB dengan paket gratis kami. Untuk file yang lebih besar, pertimbangkan untuk meningkatkan ke paket premium kami. Selain itu, alat rotasi menyediakan sudut standar (90°, 180°, 270°) untuk halaman yang dipilih daripada sudut sembarang."
+      },
+      secured: {
+        question: "Apakah file saya aman selama rotasi?",
+        answer: "Ya, semua file diproses secara aman di server kami dan dihapus secara otomatis setelah diproses. Kami tidak menyimpan atau berbagi dokumen Anda dengan pihak ketiga ketika Anda memilih PDF untuk diputar."
+      }
+    },
+    bestPractices: {
+      title: "Praktik Terbaik untuk Rotasi PDF",
+      dosList: [
+        "Pratinjau dokumen dengan thumbnail halaman sebelum mengunduh versi final",
+        "Gunakan rotasi 180° untuk halaman terbalik dengan alat rotasi",
+        "Putar semua halaman sekaligus jika seluruh dokumen atau rentang halaman memiliki masalah orientasi yang sama",
+        "Simpan file asli sebelum rotasi sebagai cadangan",
+        "Periksa semua halaman yang dipilih setelah rotasi untuk memastikan orientasi yang benar"
+      ],
+      dontsList: [
+        "Jangan putar PDF yang dilindungi kata sandi tanpa membuka kuncinya terlebih dahulu",
+        "Jangan campurkan rotasi 90° dan 270° dalam dokumen yang sama jika konsistensi penting",
+        "Jangan asumsikan semua halaman membutuhkan rotasi yang sama - periksa setiap thumbnail halaman",
+        "Jangan putar bidang formulir jika Anda perlu mempertahankan fungsinya",
+        "Jangan putar jika PDF sudah terorientasi dengan benar"
+      ],
+      dos: "Dos",
+      donts: "Donts"
+    },
+    relatedTools: {
+      title: "Alat Terkait",
+      compress: "Kompres PDF",
+      merge: "Gabung PDF",
+      split: "Pisah PDF",
+      edit: "Edit PDF",
+      viewAll: "Lihat Semua Alat"
+    },
+    messages: {
+      selectAll: "Pilih semua",
+      downloading: "Mempersiapkan unduhan...",
+      rotationApplied: "Rotasi diterapkan pada {count} halaman",
+      dragDrop: "Seret dan jatuhkan untuk mengurutkan ulang halaman",
+      pageOf: "Halaman {current} dari {total}",
+      selectPageInfo: "Klik pada thumbnail halaman untuk memilih halaman untuk rotasi"
+    }
   }
+
 
 }

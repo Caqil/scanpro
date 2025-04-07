@@ -2512,6 +2512,142 @@ export default {
     tool4Title: 'Alle PDF-Tools',
     tool4IconColor: 'text-purple-500',
     tool4BgColor: 'bg-purple-100 dark:bg-purple-900/30'
+  },
+  rotatePdf: {
+    title: "PDF-Seiten drehen",
+    description: "Drehen Sie PDF-Seiten einfach im oder gegen den Uhrzeigersinn oder auf den Kopf mit unserem Online-Tool. Beheben Sie falsch gescanntes Dokumente mit präzisen PDF-Bearbeitungswerkzeugen und Schaltflächen zum Drehen ausgewählter Seiten oder eines Seitenbereichs.",
+    howTo: {
+      title: "So drehen Sie PDF-Seiten",
+      step1: {
+        title: "PDF hochladen",
+        description: "Wählen Sie die PDF-Datei aus, indem Sie sie per Drag-and-Drop verschieben oder auf das Hochladen klicken, um die zu drehende Datei auszuwählen."
+      },
+      step2: {
+        title: "Drehung auswählen",
+        description: "Klicken Sie auf die Seitenminiaturen, um Seiten oder einen Seitenbereich auszuwählen, und verwenden Sie dann das Drehwerkzeug, um die Winkel (90°, 180° oder 270°) festzulegen."
+      },
+      step3: {
+        title: "Herunterladen",
+        description: "Verarbeiten und laden Sie Ihr gedrehtes PDF-Dokument mit allen korrekt ausgerichteten ausgewählten Seiten herunter."
+      }
+    },
+    why: {
+      title: "Warum PDF-Seiten drehen",
+      fixScanned: {
+        title: "Gescanntes Dokument beheben",
+        description: "Korrigieren Sie die Ausrichtung falsch gescanntes Seiten, um sie lesbar zu machen, indem Sie Seitenminiaturen und das Drehwerkzeug verwenden."
+      },
+      presentation: {
+        title: "Präsentationen verbessern",
+        description: "Drehen Sie PDF-Seiten oder eine einzelne Seite, um die Ansicht auf Bildschirmen oder während Präsentationen zu optimieren."
+      },
+      mixedOrientation: {
+        title: "Gemischte Ausrichtungen beheben",
+        description: "Vereinheitlichen Sie Dokumente mit gemischten Hoch- und Querformatseiten, indem Sie ausgewählte Seiten oder einen Seitenbereich drehen."
+      },
+      printing: {
+        title: "Für den Druck optimieren",
+        description: "Stellen Sie sicher, dass alle Seiten vor dem Drucken korrekt ausgerichtet sind, indem Sie Schaltflächen zum Drehen eines Seitenbereichs verwenden, wodurch Papier gespart wird."
+      }
+    },
+    features: {
+      title: "Drehfunktionen",
+      individual: {
+        title: "Einzelne Seite drehen",
+        description: "Klicken Sie auf die Seitenminiaturen, um eine einzelne Seite innerhalb Ihres Dokuments auszuwählen und zu drehen."
+      },
+      batch: {
+        title: "Stapelweise Seitenauswahl",
+        description: "Drehen Sie mehrere Seiten gleichzeitig, indem Sie einen Seitenbereich mit Optionen für ungerade, gerade oder alle Seiten auswählen."
+      },
+      preview: {
+        title: "Live-Vorschau",
+        description: "Sehen Sie, wie Ihre gedrehten Seiten vor der Verarbeitung mit Seitenminiaturen der ausgewählten Seiten aussehen werden."
+      },
+      precision: {
+        title: "Präzise Steuerung",
+        description: "Wählen Sie genaue Drehwinkel von 90°, 180° oder 270° für jede Seite mit dem Drehwerkzeug."
+      }
+    },
+    form: {
+      uploadTitle: "PDF zum Drehen hochladen",
+      uploadDesc: "Ziehen Sie Ihre PDF-Datei hierher oder klicken Sie auf die Schaltfläche, um die PDF auszuwählen und zum Bearbeiten zu öffnen.",
+      rotateAll: "Alle Seiten drehen",
+      rotateEven: "Gerade Seiten drehen",
+      rotateOdd: "Ungerade Seiten drehen",
+      rotateSelected: "Ausgewählte Seiten drehen",
+      selectPages: "Seiten auswählen",
+      rotateDirection: "Drehrichtung",
+      clockwise90: "90° im Uhrzeigersinn",
+      clockwise180: "180° (auf den Kopf gestellt)",
+      counterClockwise90: "90° gegen den Uhrzeigersinn",
+      apply: "Drehung anwenden",
+      reset: "Alles zurücksetzen",
+      processing: "PDF wird verarbeitet...",
+      success: "PDF erfolgreich gedreht!",
+      error: "Beim Drehen der PDF ist ein Fehler aufgetreten",
+      showSelector: "Seiten auswählen",
+      hideSelector: "Seitenauswahl ausblenden"
+    },
+    faq: {
+      title: "Häufig gestellte Fragen",
+      permanent: {
+        question: "Ist die Drehung dauerhaft?",
+        answer: "Ja, die Drehung wird dauerhaft auf die PDF angewendet. Sie können die PDF jedoch jederzeit erneut öffnen und die Schaltflächen verwenden, um sie bei Bedarf zurückzudrehen."
+      },
+      quality: {
+        question: "Beeinflusst die Drehung die PDF-Qualität?",
+        answer: "Nein, unser Online-Tool bewahrt die ursprüngliche Qualität Ihrer PDF. Da wir nur die Ausrichtung der ausgewählten Seiten ändern und den Inhalt nicht neu komprimieren, geht keine Bild- oder Textqualität verloren."
+      },
+      size: {
+        question: "Ändert die Drehung meine Dateigröße?",
+        answer: "Das Drehen von Seiten hat in der Regel nur geringen Einfluss auf die Dateigröße. Die Dateigröße kann sich aufgrund aktualisierter Metadaten geringfügig ändern, aber der Inhalt Ihres Seitenbereichs bleibt unverändert."
+      },
+      limitations: {
+        question: "Gibt es Einschränkungen beim Drehen?",
+        answer: "Sie können mit unserem kostenlosen Plan Dateien bis zu 100 MB drehen. Für größere Dateien sollten Sie unsere Premium-Pläne in Betracht ziehen. Darüber hinaus bietet das Drehwerkzeug Standardwinkel (90°, 180°, 270°) für ausgewählte Seiten anstelle von beliebigen Winkeln."
+      },
+      secured: {
+        question: "Sind meine Dateien während der Drehung sicher?",
+        answer: "Ja, alle Dateien werden sicher auf unseren Servern verarbeitet und nach der Verarbeitung automatisch gelöscht. Wir speichern oder teilen Ihre Dokumente nicht mit Dritten, wenn Sie die PDF zum Drehen auswählen."
+      }
+    },
+    bestPractices: {
+      title: "Beste Praktiken für die PDF-Drehung",
+      dosList: [
+        "Vorschau des Dokuments mit Seitenminiaturen vor dem Herunterladen der endgültigen Version",
+        "Verwenden Sie die 180°-Drehung für auf dem Kopf stehende Seiten mit dem Drehwerkzeug",
+        "Drehen Sie alle Seiten gleichzeitig, wenn das gesamte Dokument oder ein Seitenbereich dasselbe Ausrichtungsproblem hat",
+        "Speichern Sie die Originaldatei vor der Drehung als Sicherung",
+        "Überprüfen Sie alle ausgewählten Seiten nach der Drehung, um die korrekte Ausrichtung sicherzustellen"
+      ],
+      dontsList: [
+        "Drehen Sie keine kennwortgeschützten PDFs, ohne sie zuerst zu entsperren",
+        "Mischen Sie keine 90°- und 270°-Drehungen im selben Dokument, wenn Konsistenz wichtig ist",
+        "Gehen Sie nicht davon aus, dass alle Seiten dieselbe Drehung benötigen – überprüfen Sie jede Seitenminiatur",
+        "Drehen Sie keine Formularfelder, wenn Sie sie funktionsfähig halten möchten",
+        "Drehen Sie nicht, wenn das PDF bereits korrekt ausgerichtet ist"
+      ],
+      dos: "Dos",
+      donts: "Donts"
+    },
+    relatedTools: {
+      title: "Verwandte Tools",
+      compress: "PDF komprimieren",
+      merge: "PDF zusammenführen",
+      split: "PDF teilen",
+      edit: "PDF bearbeiten",
+      viewAll: "Alle Tools anzeigen"
+    },
+    messages: {
+      selectAll: "Alle auswählen",
+      downloading: "Download wird vorbereitet...",
+      rotationApplied: "Drehung auf {count} Seiten angewendet",
+      dragDrop: "Ziehen und Ablegen, um Seiten neu anzuordnen",
+      pageOf: "Seite {current} von {total}",
+      selectPageInfo: "Klicken Sie auf die Seitenminiaturen, um Seiten für die Drehung auszuwählen"
+    }
   }
+
 
 }

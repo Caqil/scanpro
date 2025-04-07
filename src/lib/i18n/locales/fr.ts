@@ -2645,6 +2645,141 @@ export default {
         tool4Title: 'Tous les outils PDF',
         tool4IconColor: 'text-purple-500',
         tool4BgColor: 'bg-purple-100 dark:bg-purple-900/30'
+    },
+    rotatePdf: {
+        title: "Faire Pivoter les Pages PDF",
+        description: "Faites pivoter facilement les pages PDF dans le sens des aiguilles d'une montre, dans le sens inverse ou à l'envers avec notre outil en ligne. Corrigez les documents scannés incorrectement à l'aide d'outils d'édition PDF précis et de boutons pour faire pivoter les pages sélectionnées ou une plage de pages.",
+        howTo: {
+            title: "Comment Faire Pivoter les Pages PDF",
+            step1: {
+                title: "Télécharger le PDF",
+                description: "Sélectionnez le PDF en le faisant glisser et en le déposant ou en cliquant pour télécharger le fichier que vous souhaitez faire pivoter."
+            },
+            step2: {
+                title: "Choisir la Rotation",
+                description: "Cliquez sur les miniatures des pages pour sélectionner des pages ou une plage de pages, puis utilisez l'outil de rotation pour spécifier les angles (90°, 180° ou 270°)."
+            },
+            step3: {
+                title: "Télécharger",
+                description: "Traitez et téléchargez votre document PDF pivoté avec toutes les pages sélectionnées correctement orientées."
+            }
+        },
+        why: {
+            title: "Pourquoi Faire Pivoter les Pages PDF",
+            fixScanned: {
+                title: "Corriger les Documents Scannés",
+                description: "Corrigez l'orientation des pages scannées incorrectement pour les rendre lisibles en utilisant les miniatures des pages et l'outil de rotation."
+            },
+            presentation: {
+                title: "Améliorer les Présentations",
+                description: "Faites pivoter les pages PDF ou une seule page pour optimiser l'affichage sur les écrans ou lors des présentations."
+            },
+            mixedOrientation: {
+                title: "Corriger les Orientations Mixtes",
+                description: "Standardisez les documents avec des pages en orientation portrait et paysage mélangées en faisant pivoter les pages sélectionnées ou une plage de pages."
+            },
+            printing: {
+                title: "Optimiser pour l'Impression",
+                description: "Assurez-vous que toutes les pages sont correctement orientées avant l'impression en utilisant des boutons pour faire pivoter une plage de pages, économisant ainsi du papier."
+            }
+        },
+        features: {
+            title: "Fonctionnalités de Rotation",
+            individual: {
+                title: "Rotation de Page Individuelle",
+                description: "Cliquez sur les miniatures des pages pour sélectionner et faire pivoter une seule page dans votre document."
+            },
+            batch: {
+                title: "Sélection de Pages par Lots",
+                description: "Faites pivoter plusieurs pages à la fois en sélectionnant une plage de pages avec des options pour les pages impaires, paires ou toutes les pages."
+            },
+            preview: {
+                title: "Aperçu en Direct",
+                description: "Voyez à quoi ressembleront vos pages pivotées avant le traitement avec les miniatures des pages sélectionnées."
+            },
+            precision: {
+                title: "Contrôle Précis",
+                description: "Choisissez des angles de rotation exacts de 90°, 180° ou 270° pour chaque page en utilisant l'outil de rotation."
+            }
+        },
+        form: {
+            uploadTitle: "Télécharger le PDF pour le Faire Pivoter",
+            uploadDesc: "Faites glisser et déposez votre fichier PDF ici ou cliquez sur le bouton pour sélectionner le PDF et l'ouvrir pour l'éditer.",
+            rotateAll: "Faire Pivoter Toutes les Pages",
+            rotateEven: "Faire Pivoter les Pages Paires",
+            rotateOdd: "Faire Pivoter les Pages Impaires",
+            rotateSelected: "Faire Pivoter les Pages Sélectionnées",
+            selectPages: "Sélectionner les Pages",
+            rotateDirection: "Direction de Rotation",
+            clockwise90: "90° dans le Sens des Aiguilles d'une Montre",
+            clockwise180: "180° (À l'Envers)",
+            counterClockwise90: "90° dans le Sens Inverse des Aiguilles d'une Montre",
+            apply: "Appliquer la Rotation",
+            reset: "Réinitialiser Tout",
+            processing: "Traitement du PDF en cours...",
+            success: "PDF pivoté avec succès !",
+            error: "Une erreur s'est produite lors de la rotation du PDF",
+            showSelector: "Sélectionner les Pages",
+            hideSelector: "Masquer le Sélecteur de Pages"
+        },
+        faq: {
+            title: "Questions Fréquentes",
+            permanent: {
+                question: "La rotation est-elle permanente ?",
+                answer: "Oui, la rotation est appliquée de manière permanente au PDF. Cependant, vous pouvez toujours rouvrir le PDF et utiliser les boutons pour le faire pivoter à nouveau si nécessaire."
+            },
+            quality: {
+                question: "La rotation affecte-t-elle la qualité du PDF ?",
+                answer: "Non, notre outil en ligne conserve la qualité originale de votre PDF. Puisque nous ne changeons que l'orientation des pages sélectionnées et ne recompressons pas le contenu, il n'y a pas de perte de qualité d'image ou de texte."
+            },
+            size: {
+                question: "La rotation va-t-elle changer la taille de mon fichier ?",
+                answer: "Faire pivoter les pages a généralement un impact minimal sur la taille du fichier. La taille du fichier peut changer légèrement en raison des métadonnées mises à jour, mais le contenu de votre plage de pages reste inchangé."
+            },
+            limitations: {
+                question: "Y a-t-il des limitations à la rotation ?",
+                answer: "Vous pouvez faire pivoter des fichiers jusqu'à 100 Mo avec notre plan gratuit. Pour des fichiers plus volumineux, envisagez de passer à nos plans premium. De plus, l'outil de rotation fournit des angles standard (90°, 180°, 270°) pour les pages sélectionnées plutôt que des angles arbitraires."
+            },
+            secured: {
+                question: "Mes fichiers sont-ils sécurisés pendant la rotation ?",
+                answer: "Oui, tous les fichiers sont traités de manière sécurisée sur nos serveurs et supprimés automatiquement après le traitement. Nous ne conservons ni ne partageons vos documents avec des tiers lorsque vous sélectionnez le PDF à faire pivoter."
+            }
+        },
+        bestPractices: {
+            title: "Meilleures Pratiques pour la Rotation de PDF",
+            dosList: [
+                "Prévisualisez le document avec les miniatures des pages avant de télécharger la version finale",
+                "Utilisez la rotation de 180° pour les pages à l'envers avec l'outil de rotation",
+                "Faites pivoter toutes les pages en même temps si l'ensemble du document ou une plage de pages a le même problème d'orientation",
+                "Sauvegardez le fichier original avant la rotation",
+                "Vérifiez toutes les pages sélectionnées après la rotation pour vous assurer de la bonne orientation"
+            ],
+            dontsList: [
+                "Ne faites pas pivoter les PDF protégés par mot de passe sans les déverrouiller d'abord",
+                "Ne mélangez pas les rotations de 90° et 270° dans le même document si la cohérence est importante",
+                "Ne supposez pas que toutes les pages nécessitent la même rotation : vérifiez chaque miniature de page",
+                "Ne faites pas pivoter les champs de formulaire si vous devez les garder fonctionnels",
+                "Ne faites pas pivoter si le PDF est déjà correctement orienté"
+            ],
+            dos: "À Faire",
+            donts: "À Ne Pas Faire"
+        },
+        relatedTools: {
+            title: "Outils Connexes",
+            compress: "Compresser le PDF",
+            merge: "Fusionner le PDF",
+            split: "Diviser le PDF",
+            edit: "Éditer le PDF",
+            viewAll: "Voir Tous les Outils"
+        },
+        messages: {
+            selectAll: "Sélectionner tout",
+            downloading: "Préparation du téléchargement...",
+            rotationApplied: "Rotation appliquée à {count} pages",
+            dragDrop: "Glisser-déposer pour réorganiser les pages",
+            pageOf: "Page {current} sur {total}",
+            selectPageInfo: "Cliquez sur les miniatures des pages pour sélectionner les pages à faire pivoter"
+        }
     }
 
 }

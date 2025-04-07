@@ -2864,5 +2864,157 @@ export default {
     tool4IconColor: 'text-purple-500',
     tool4BgColor: 'bg-purple-100 dark:bg-purple-900/30'
   },
+  rotatePdf: {
+    // Page title and description
+    title: "Rotate PDF Pages",
+    description: "Easily rotate PDF pages clockwise, counterclockwise, or upside down with our online tool. Fix incorrectly scanned documents using precise pdf editing tools and buttons to rotate selected pages or a page range.",
+
+    // How To section
+    howTo: {
+      title: "How to Rotate PDF Pages",
+      step1: {
+        title: "Upload PDF",
+        description: "Select the PDF by dragging and dropping it or clicking to upload the file you want to rotate."
+      },
+      step2: {
+        title: "Choose Rotation",
+        description: "Click on the page thumbnails to select pages or a page range, then use the rotation tool to specify angles (90°, 180°, or 270°)."
+      },
+      step3: {
+        title: "Download",
+        description: "Process and download your rotated PDF document with all selected pages correctly oriented."
+      }
+    },
+
+    // Why use this tool section
+    why: {
+      title: "Why Rotate PDF Pages",
+      fixScanned: {
+        title: "Fix Scanned Documents",
+        description: "Correct the orientation of incorrectly scanned pages to make them readable using page thumbnails and the rotation tool."
+      },
+      presentation: {
+        title: "Improve Presentations",
+        description: "Rotate PDF pages or a single page to optimize viewing on screens or during presentations."
+      },
+      mixedOrientation: {
+        title: "Fix Mixed Orientations",
+        description: "Standardize documents with mixed portrait and landscape pages by rotating selected pages or a page range."
+      },
+      printing: {
+        title: "Optimize for Printing",
+        description: "Ensure all pages are correctly oriented before printing by using buttons to rotate a page range, saving paper."
+      }
+    },
+
+    // Features section
+    features: {
+      title: "Rotation Features",
+      individual: {
+        title: "Individual Page Rotation",
+        description: "Click on the page thumbnails to select and rotate a single page within your document."
+      },
+      batch: {
+        title: "Batch Page Selection",
+        description: "Rotate multiple pages at once by selecting a page range with options for odd, even, or all pages."
+      },
+      preview: {
+        title: "Live Preview",
+        description: "See how your rotated pages will look before processing with page thumbnails of selected pages."
+      },
+      precision: {
+        title: "Precise Control",
+        description: "Choose exact rotation angles of 90°, 180°, or 270° for each page using the rotation tool."
+      }
+    },
+
+    // Form and UI elements
+    form: {
+      uploadTitle: "Upload PDF to Rotate",
+      uploadDesc: "Drag and drop your PDF file here or click on the button to select the PDF and open the PDF for editing.",
+      rotateAll: "Rotate All Pages",
+      rotateEven: "Rotate Even Pages",
+      rotateOdd: "Rotate Odd Pages",
+      rotateSelected: "Rotate Selected Pages",
+      selectPages: "Select Pages",
+      rotateDirection: "Rotation Direction",
+      clockwise90: "90° Clockwise",
+      clockwise180: "180° (Upside Down)",
+      counterClockwise90: "90° Counterclockwise",
+      apply: "Apply Rotation",
+      reset: "Reset All",
+      processing: "Processing PDF...",
+      success: "PDF rotated successfully!",
+      error: "An error occurred while rotating the PDF",
+      showSelector: "Select Pages",
+      hideSelector: "Hide Page Selector"
+    },
+
+    // FAQ section
+    faq: {
+      title: "Frequently Asked Questions",
+      permanent: {
+        question: "Is the rotation permanent?",
+        answer: "Yes, the rotation is permanently applied to the PDF. However, you can always open the PDF again and use buttons to rotate it back if needed."
+      },
+      quality: {
+        question: "Does rotation affect PDF quality?",
+        answer: "No, our online tool preserves the original quality of your PDF. Since we're only changing the orientation of selected pages and not recompressing the content, there's no loss in image or text quality."
+      },
+      size: {
+        question: "Will rotation change my file size?",
+        answer: "Rotating pages typically has minimal impact on file size. The file size might change slightly due to updated metadata, but the content of your page range remains unchanged."
+      },
+      limitations: {
+        question: "Are there any limitations on rotation?",
+        answer: "You can rotate files up to 100MB with our free plan. For larger files, consider upgrading to our premium plans. Additionally, the rotation tool provides standard angles (90°, 180°, 270°) for selected pages rather than arbitrary angles."
+      },
+      secured: {
+        question: "Are my files secure during rotation?",
+        answer: "Yes, all files are processed securely on our servers and automatically deleted after processing. We don’t retain or share your documents with any third parties when you select the PDF to rotate."
+      }
+    },
+
+    // Best practices section
+    bestPractices: {
+      title: "Best Practices for PDF Rotation",
+      dosList: [
+        "Preview the document with page thumbnails before downloading the final version",
+        "Use 180° rotation for upside-down pages with the rotation tool",
+        "Rotate all pages at once if the entire document or a page range has the same orientation issue",
+        "Save the original file before rotation as a backup",
+        "Check all selected pages after rotation to ensure correct orientation"
+      ],
+      dontsList: [
+        "Don't rotate password-protected PDFs without unlocking them first",
+        "Don't mix 90° and 270° rotations in the same document if consistency is important",
+        "Don't assume all pages need the same rotation - check each page thumbnail",
+        "Don't rotate form fields if you need to keep them functional",
+        "Don't rotate if the PDF is already correctly oriented"
+      ],
+      dos: "Do's",
+      donts: "Don'ts"
+    },
+
+    // Related tools section
+    relatedTools: {
+      title: "Related Tools",
+      compress: "Compress PDF",
+      merge: "Merge PDF",
+      split: "Split PDF",
+      edit: "Edit PDF",
+      viewAll: "View All Tools"
+    },
+
+    // Messages
+    messages: {
+      selectAll: "Select all",
+      downloading: "Preparing download...",
+      rotationApplied: "Rotation applied to {count} pages",
+      dragDrop: "Drag and drop to reorder pages",
+      pageOf: "Page {current} of {total}",
+      selectPageInfo: "Click on the page thumbnails to select pages for rotation"
+    }
+  }
 }
 

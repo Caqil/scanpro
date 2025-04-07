@@ -17,6 +17,7 @@ import {
   FileCheck2,
   FileBadge2Icon,
   ReplaceAllIcon,
+  PenLineIcon,
 } from "lucide-react";
 
 export function PdfTools() {
@@ -191,9 +192,9 @@ export function PdfTools() {
           id: "sign-pdf",
           name: t('signPdf.title'), 
           href: "/sign-pdf", 
-          icon: <FileCheck2 className="h-5 w-5 text-blue-500" />,
+          icon: <PenLineIcon className="h-5 w-5 text-red-500" />,
           description: t('toolDescriptions.ocr'),
-          iconBg: "bg-green-100 dark:bg-yellow-900/30",
+          iconBg: "bg-purple-100 dark:bg-yellow-900/30",
           isNew: true
         }
       ]
@@ -208,7 +209,7 @@ export function PdfTools() {
           description: t('toolDescriptions.rotatePdf'),
           icon: <RotateCcwIcon className="h-6 w-6 text-purple-500" />,
           iconBg: "bg-purple-100 dark:bg-purple-900/30",
-          href: "/rotate"
+          href: "/rotate-pdf"
         },
         {
           id: "watermark",

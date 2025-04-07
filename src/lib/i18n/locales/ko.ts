@@ -2647,6 +2647,142 @@ export default {
     tool4Title: '모든 PDF 도구',
     tool4IconColor: 'text-purple-500',
     tool4BgColor: 'bg-purple-100 dark:bg-purple-900/30'
+  },
+  rotatePdf: {
+    title: "PDF 페이지 회전",
+    description: "온라인 도구를 사용하여 PDF 페이지를 시계 방향, 반시계 방향 또는 뒤집어서 쉽게 회전시키세요. 정확한 PDF 편집 도구와 버튼을 사용하여 잘못 스캔된 문서를 수정하고 선택한 페이지 또는 페이지 범위를 회전시키세요.",
+    howTo: {
+      title: "PDF 페이지 회전 방법",
+      step1: {
+        title: "PDF 업로드",
+        description: "회전하려는 파일을 선택하려면 PDF를 드래그하여 놓거나 업로드하려면 클릭하세요."
+      },
+      step2: {
+        title: "회전 선택",
+        description: "페이지 썸네일을 클릭하여 페이지 또는 페이지 범위를 선택한 다음 회전 도구를 사용하여 각도(90°, 180° 또는 270°)를 지정하세요."
+      },
+      step3: {
+        title: "다운로드",
+        description: "선택한 모든 페이지가 올바르게 정렬되도록 회전된 PDF 문서를 처리하고 다운로드하세요."
+      }
+    },
+    why: {
+      title: "PDF 페이지를 회전하는 이유",
+      fixScanned: {
+        title: "스캔된 문서 수정",
+        description: "페이지 썸네일과 회전 도구를 사용하여 잘못 스캔된 페이지의 방향을 수정하여 읽을 수 있도록 하세요."
+      },
+      presentation: {
+        title: "프레젠테이션 개선",
+        description: "프레젠테이션 중 또는 화면에서 보기를 최적화하기 위해 PDF 페이지 또는 한 페이지를 회전시키세요."
+      },
+      mixedOrientation: {
+        title: "혼합 방향 수정",
+        description: "세로 및 가로 페이지가 혼합된 문서를 표준화하기 위해 선택한 페이지 또는 페이지 범위를 회전시키세요."
+      },
+      printing: {
+        title: "인쇄 최적화",
+        description: "페이지 범위를 회전시키는 버튼을 사용하여 인쇄하기 전에 모든 페이지가 올바르게 정렬되었는지 확인하고 종이를 절약하세요."
+      }
+    },
+    features: {
+      title: "회전 기능",
+      individual: {
+        title: "개별 페이지 회전",
+        description: "문서 내에서 하나의 페이지를 선택하고 회전시키려면 페이지 썸네일을 클릭하세요."
+      },
+      batch: {
+        title: "일괄 페이지 선택",
+        description: "홀수 페이지, 짝수 페이지 또는 모든 페이지 옵션으로 페이지 범위를 선택하여 여러 페이지를 한 번에 회전시키세요."
+      },
+      preview: {
+        title: "실시간 미리 보기",
+        description: "선택한 페이지의 썸네일로 회전된 페이지가 처리되기 전에 어떻게 보일지 확인하세요."
+      },
+      precision: {
+        title: "정밀한 제어",
+        description: "회전 도구를 사용하여 각 페이지에 대해 90°, 180° 또는 270°의 정확한 회전 각도를 선택하세요."
+      }
+    },
+    form: {
+      uploadTitle: "회전할 PDF 업로드",
+      uploadDesc: "PDF를 편집하려면 여기에 PDF 파일을 드래그하여 놓거나 버튼을 클릭하여 PDF를 선택하세요.",
+      rotateAll: "모든 페이지 회전",
+      rotateEven: "짝수 페이지 회전",
+      rotateOdd: "홀수 페이지 회전",
+      rotateSelected: "선택한 페이지 회전",
+      selectPages: "페이지 선택",
+      rotateDirection: "회전 방향",
+      clockwise90: "시계 방향 90°",
+      clockwise180: "180° (뒤집기)",
+      counterClockwise90: "반시계 방향 90°",
+      apply: "회전 적용",
+      reset: "모두 재설정",
+      processing: "PDF 처리 중...",
+      success: "PDF가 성공적으로 회전되었습니다!",
+      error: "PDF를 회전하는 동안 오류가 발생했습니다",
+      showSelector: "페이지 선택",
+      hideSelector: "페이지 선택기 숨기기"
+    },
+    faq: {
+      title: "자주 묻는 질문",
+      permanent: {
+        question: "회전이 영구적인가요?",
+        answer: "네, 회전은 PDF에 영구적으로 적용됩니다. 하지만 필요한 경우 PDF를 다시 열고 버튼을 사용하여 다시 회전시킬 수 있습니다."
+      },
+      quality: {
+        question: "회전이 PDF 품질에 영향을 미치나요?",
+        answer: "아니요, 온라인 도구는 PDF의 원본 품질을 유지합니다. 선택한 페이지의 방향만 변경하고 콘텐츠를 다시 압축하지 않기 때문에 이미지 또는 텍스트 품질이 저하되지 않습니다."
+      },
+      size: {
+        question: "회전이 파일 크기를 변경하나요?",
+        answer: "페이지를 회전하는 것은 파일 크기에 최소한의 영향을 미칩니다. 메타데이터가 업데이트되어 파일 크기가 약간 변경될 수 있지만 페이지 범위의 콘텐츠는 변경되지 않습니다."
+      },
+      limitations: {
+        question: "회전에 제한이 있나요?",
+        answer: "무료 플랜으로 100MB 크기의 파일을 회전할 수 있습니다. 더 큰 파일의 경우 프리미엄 플랜을 고려해 보세요. 또한, 회전 도구는 선택한 페이지에 대해 표준 각도(90°, 180°, 270°)를 제공합니다."
+      },
+      secured: {
+        question: "회전 중 파일이 안전한가요?",
+        answer: "네, 모든 파일은 서버에서 안전하게 처리되며 처리 후 자동으로 삭제됩니다. PDF를 회전하려고 선택하면 파일이 제3자와 공유되거나 저장되지 않습니다."
+      }
+    },
+    bestPractices: {
+      title: "PDF 회전 모범 사례",
+      dosList: [
+        "최종 버전을 다운로드하기 전에 페이지 썸네일로 문서를 미리 보세요",
+        "회전 도구를 사용하여 뒤집힌 페이지에 180° 회전을 적용하세요",
+        "문서 전체 또는 페이지 범위에 동일한 방향 문제가 있는 경우 모든 페이지를 한 번에 회전시키세요",
+        "회전하기 전에 원본 파일을 백업으로 저장하세요",
+        "회전 후 선택한 모든 페이지가 올바르게 정렬되었는지 확인하세요"
+      ],
+      dontsList: [
+        "잠금 해제하지 않은 상태에서 비밀번호로 보호된 PDF를 회전하지 마세요",
+        "일관성이 중요한 경우 동일한 문서 내에서 90°와 270° 회전을 혼합하지 마세요",
+        "모든 페이지가 동일한 회전을 필요로 한다고 가정하지 말고 각 페이지 썸네일을 확인하세요",
+        "폼 필드를 작동 상태로 유지하려면 회전하지 마세요",
+        "PDF가 이미 올바르게 정렬된 경우 회전하지 마세요"
+      ],
+      dos: "할 일",
+      donts: "하지 말 일"
+    },
+    relatedTools: {
+      title: "관련 도구",
+      compress: "PDF 압축",
+      merge: "PDF 병합",
+      split: "PDF 분할",
+      edit: "PDF 편집",
+      viewAll: "모든 도구 보기"
+    },
+    messages: {
+      selectAll: "모두 선택",
+      downloading: "다운로드 준비 중...",
+      rotationApplied: "{count}페이지에 회전 적용",
+      dragDrop: "페이지를 정렬하려면 드래그하여 놓기",
+      pageOf: "{total}중 페이지 {current}",
+      selectPageInfo: "회전할 페이지를 선택하려면 페이지 썸네일을 클릭"
+    }
   }
+
 
 }

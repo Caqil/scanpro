@@ -2648,6 +2648,142 @@ export default {
         tool4Title: 'Tüm PDF Araçları',
         tool4IconColor: 'text-purple-500',
         tool4BgColor: 'bg-purple-100 dark:bg-purple-900/30'
+    },
+    rotatePdf: {
+        title: "PDF Sayfalarını Döndür",
+        description: "Çevrimiçi aracımızla PDF sayfalarını saat yönünde, saat yönünün tersine veya ters çevirerek kolayca döndürün. Yanlış taranan belgeleri, hassas PDF düzenleme araçları ve seçilen sayfaları veya sayfa aralığını döndürmek için düğmeler kullanarak düzeltin.",
+        howTo: {
+            title: "PDF Sayfalarını Nasıl Döndürürsünüz",
+            step1: {
+                title: "PDF Yükle",
+                description: "Döndürmek istediğiniz dosyayı seçmek için PDF'i sürükleyip bırakın veya yükleme için tıklayın."
+            },
+            step2: {
+                title: "Döndürmeyi Seçin",
+                description: "Sayfaları veya sayfa aralığını seçmek için sayfa küçük resimlerine tıklayın, ardından açıları (90°, 180° veya 270°) belirlemek için döndürme aracını kullanın."
+            },
+            step3: {
+                title: "İndir",
+                description: "Seçilen tüm sayfaların doğru yönlendirilmiş olduğu döndürülmüş PDF belgenizi işleyin ve indirin."
+            }
+        },
+        why: {
+            title: "PDF Sayfalarını Neden Döndürmeliyim",
+            fixScanned: {
+                title: "Taranan Belgeleri Düzeltin",
+                description: "Yanlış taranan sayfaların yönünü, sayfa küçük resimlerini ve döndürme aracını kullanarak okunabilir hale getirin."
+            },
+            presentation: {
+                title: "Sunumları İyileştirin",
+                description: "Ekranlarda görüntülemek veya sunumlar sırasında PDF sayfalarını veya tek bir sayfayı döndürün."
+            },
+            mixedOrientation: {
+                title: "Karışık Yönleri Düzeltin",
+                description: "Karışık dikey ve yatay sayfaları olan belgeleri, seçilen sayfaları veya sayfa aralığını döndürerek standartlaştırın."
+            },
+            printing: {
+                title: "Yazdırmaya Yönelik İyileştirme",
+                description: "Sayfa aralığını döndürmek için düğmeleri kullanarak yazdırmadan önce tüm sayfaların doğru yönlendirilmiş olduğundan emin olun, kağıt tasarrufu sağlayın."
+            }
+        },
+        features: {
+            title: "Döndürme Özellikleri",
+            individual: {
+                title: "Tek Sayfa Döndürme",
+                description: "Belgeniz içindeki tek bir sayfayı seçmek ve döndürmek için sayfa küçük resimlerine tıklayın."
+            },
+            batch: {
+                title: "Toplu Sayfa Seçimi",
+                description: "Tek, çift veya tüm sayfalar için seçeneklerle bir sayfa aralığı seçerek birden çok sayfayı aynı anda döndürün."
+            },
+            preview: {
+                title: "Canlı Önizleme",
+                description: "Seçilen sayfaların küçük resimleriyle döndürülmüş sayfalarınızın işleme öncesi nasıl görüneceğini görün."
+            },
+            precision: {
+                title: "Hassas Kontrol",
+                description: "Döndürme aracını kullanarak her sayfa için 90°, 180° veya 270° gibi hassas döndürme açılarını seçin."
+            }
+        },
+        form: {
+            uploadTitle: "Döndürmek İçin PDF Yükle",
+            uploadDesc: "PDF'inizi buraya sürükleyip bırakın veya düzenlemek için PDF'i seçmek ve açmak için düğmeye tıklayın.",
+            rotateAll: "Tüm Sayfaları Döndür",
+            rotateEven: "Çift Sayfaları Döndür",
+            rotateOdd: "Tek Sayfaları Döndür",
+            rotateSelected: "Seçilen Sayfaları Döndür",
+            selectPages: "Sayfaları Seç",
+            rotateDirection: "Döndürme Yönü",
+            clockwise90: "90° Saat Yönünde",
+            clockwise180: "180° (Ters)",
+            counterClockwise90: "90° Saat Yönünün Tersine",
+            apply: "Döndürmeyi Uygula",
+            reset: "Tümünü Sıfırla",
+            processing: "PDF İşleniyor...",
+            success: "PDF başarıyla döndürüldü!",
+            error: "PDF döndürülürken bir hata oluştu",
+            showSelector: "Sayfaları Seç",
+            hideSelector: "Sayfa Seçicisini Gizle"
+        },
+        faq: {
+            title: "Sıkça Sorulan Sorular",
+            permanent: {
+                question: "Döndürme kalıcı mı?",
+                answer: "Evet, döndürme PDF'e kalıcı olarak uygulanır. Ancak, gerekirse PDF'i yeniden açıp döndürme düğmelerini kullanarak geri döndürebilirsiniz."
+            },
+            quality: {
+                question: "Döndürme PDF kalitesini etkiler mi?",
+                answer: "Hayır, çevrimiçi aracımız PDF'inizin orijinal kalitesini korur. Sadece seçilen sayfaların yönünü değiştirdiğimiz ve içeriği yeniden sıkıştırmadığımız için görüntü veya metin kalitesinde kayıp yoktur."
+            },
+            size: {
+                question: "Döndürme dosya boyutumu değiştirir mi?",
+                answer: "Sayfaları döndürmek genellikle dosya boyutuna minimal etkiye sahiptir. Dosya boyutu güncellenmiş meta verilerden dolayı hafifçe değişebilir, ancak sayfa aralığınızın içeriği değişmez."
+            },
+            limitations: {
+                question: "Döndürmede herhangi bir sınırlama var mı?",
+                answer: "Ücretsiz planımızla 100MB'a kadar dosya döndürebilirsiniz. Daha büyük dosyalar için premium planlarımıza geçmeyi düşünün. Ayrıca, döndürme aracı seçilen sayfalar için standart açılar (90°, 180°, 270°) sunar, rastgele açılar yerine."
+            },
+            secured: {
+                question: "Döndürme sırasında dosyalarım güvenli mi?",
+                answer: "Evet, tüm dosyalar sunucularımızda güvenli bir şekilde işlenir ve işlemden sonra otomatik olarak silinir. PDF'i döndürmek için seçtiğinizde, dosyalarınızı üçüncü taraflarla paylaşmadan veya saklamadan işliyoruz."
+            }
+        },
+        bestPractices: {
+            title: "PDF Döndürme İçin En İyi Uygulamalar",
+            dosList: [
+                "Son sürümü indirmeden önce sayfa küçük resimleriyle belgeyi önizleyin",
+                "Döndürme aracını kullanarak ters sayfalar için 180° döndürmeyi kullanın",
+                "Tüm belge veya sayfa aralığı aynı yönlendirme sorununa sahipse, tüm sayfaları aynı anda döndürün",
+                "Döndürmeden önce orijinal dosyayı yedek olarak kaydedin",
+                "Döndürmeden sonra tüm seçilen sayfaların doğru yönlendirilmiş olduğundan emin olun"
+            ],
+            dontsList: [
+                "Parola korumalı PDF'leri önce kilidini açmadan döndürmeyin",
+                "Tutarlılık önemliyse, aynı belgede 90° ve 270° döndürmeleri karıştırmayın",
+                "Tüm sayfaların aynı döndürmeye ihtiyaç duyacağını varsaymayın - her sayfa küçük resmini kontrol edin",
+                "İşlevsel kalmaları gerekiyorsa form alanlarını döndürmeyin",
+                "PDF zaten doğru yönlendirilmişse döndürmeyin"
+            ],
+            dos: "Önerilenler",
+            donts: "Önerilmeyenler"
+        },
+        relatedTools: {
+            title: "İlgili Araçlar",
+            compress: "PDF'i Sıkıştır",
+            merge: "PDF'i Birleştir",
+            split: "PDF'i Böl",
+            edit: "PDF'i Düzenle",
+            viewAll: "Tüm Araçları Gör"
+        },
+        messages: {
+            selectAll: "Tümünü Seç",
+            downloading: "İndirme hazırlanıyor...",
+            rotationApplied: "{count} sayfaya döndürme uygulandı",
+            dragDrop: "Sayfaları yeniden sıralamak için sürükle ve bırak",
+            pageOf: "{total} içindeki {current}. sayfa",
+            selectPageInfo: "Döndürmek için sayfaları seçmek üzere sayfa küçük resimlerine tıklayın"
+        }
     }
+
 
 }

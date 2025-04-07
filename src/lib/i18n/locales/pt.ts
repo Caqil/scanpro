@@ -2643,6 +2643,141 @@ export default {
     tool4Title: 'Todas as ferramentas PDF',
     tool4IconColor: 'text-purple-500',
     tool4BgColor: 'bg-purple-100 dark:bg-purple-900/30'
+  },
+  rotatePdf: {
+    title: "Girar Páginas de PDF",
+    description: "Gire facilmente as páginas de PDF no sentido horário, anti-horário ou de cabeça para baixo com a nossa ferramenta online. Corrija documentos digitalizados incorretamente usando ferramentas de edição de PDF precisas e botões para girar páginas selecionadas ou um intervalo de páginas.",
+    howTo: {
+      title: "Como Girar Páginas de PDF",
+      step1: {
+        title: "Carregar PDF",
+        description: "Selecione o PDF arrastando e soltando ou clicando para carregar o arquivo que deseja girar."
+      },
+      step2: {
+        title: "Escolher Rotação",
+        description: "Clique nas miniaturas das páginas para selecionar páginas ou um intervalo de páginas, depois use a ferramenta de rotação para especificar os ângulos (90°, 180° ou 270°)."
+      },
+      step3: {
+        title: "Baixar",
+        description: "Processe e baixe seu documento PDF girado com todas as páginas selecionadas corretamente orientadas."
+      }
+    },
+    why: {
+      title: "Por Que Girar Páginas de PDF",
+      fixScanned: {
+        title: "Corrigir Documentos Digitalizados",
+        description: "Corrija a orientação de páginas digitalizadas incorretamente para torná-las legíveis usando miniaturas de páginas e a ferramenta de rotação."
+      },
+      presentation: {
+        title: "Melhorar Apresentações",
+        description: "Gire páginas de PDF ou uma única página para otimizar a visualização em telas ou durante apresentações."
+      },
+      mixedOrientation: {
+        title: "Corrigir Orientação Mista",
+        description: "Padronize documentos com páginas em retrato e paisagem misturadas girando páginas selecionadas ou um intervalo de páginas."
+      },
+      printing: {
+        title: "Otimizar para Impressão",
+        description: "Garanta que todas as páginas estejam corretamente orientadas antes da impressão usando botões para girar um intervalo de páginas, economizando papel."
+      }
+    },
+    features: {
+      title: "Recursos de Rotação",
+      individual: {
+        title: "Rotação de Página Individual",
+        description: "Clique nas miniaturas das páginas para selecionar e girar uma única página dentro do seu documento."
+      },
+      batch: {
+        title: "Seleção de Páginas em Lote",
+        description: "Gire várias páginas de uma vez selecionando um intervalo de páginas com opções para páginas ímpares, pares ou todas as páginas."
+      },
+      preview: {
+        title: "Pré-visualização ao Vivo",
+        description: "Veja como suas páginas giradas ficarão antes do processamento com miniaturas das páginas selecionadas."
+      },
+      precision: {
+        title: "Controle Preciso",
+        description: "Escolha ângulos de rotação precisos de 90°, 180° ou 270° para cada página usando a ferramenta de rotação."
+      }
+    },
+    form: {
+      uploadTitle: "Carregar PDF para Girar",
+      uploadDesc: "Arraste e solte seu arquivo PDF aqui ou clique no botão para selecionar o PDF e abri-lo para edição.",
+      rotateAll: "Girar Todas as Páginas",
+      rotateEven: "Girar Páginas Pares",
+      rotateOdd: "Girar Páginas Ímpares",
+      rotateSelected: "Girar Páginas Selecionadas",
+      selectPages: "Selecionar Páginas",
+      rotateDirection: "Direção de Rotação",
+      clockwise90: "90° no Sentido Horário",
+      clockwise180: "180° (De Cabeça para Baixo)",
+      counterClockwise90: "90° no Sentido Anti-Horário",
+      apply: "Aplicar Rotação",
+      reset: "Redefinir Tudo",
+      processing: "Processando PDF...",
+      success: "PDF girado com sucesso!",
+      error: "Ocorreu um erro ao girar o PDF",
+      showSelector: "Selecionar Páginas",
+      hideSelector: "Ocultar Seletor de Páginas"
+    },
+    faq: {
+      title: "Perguntas Frequentes",
+      permanent: {
+        question: "A rotação é permanente?",
+        answer: "Sim, a rotação é aplicada permanentemente ao PDF. No entanto, você sempre pode reabrir o PDF e usar os botões para girá-lo novamente se necessário."
+      },
+      quality: {
+        question: "A rotação afeta a qualidade do PDF?",
+        answer: "Não, nossa ferramenta online mantém a qualidade original do seu PDF. Como apenas alteramos a orientação das páginas selecionadas e não recomprimimos o conteúdo, não há perda de qualidade na imagem ou no texto."
+      },
+      size: {
+        question: "A rotação alterará o tamanho do meu arquivo?",
+        answer: "Girar páginas geralmente tem um impacto mínimo no tamanho do arquivo. O tamanho do arquivo pode mudar levemente devido aos metadados atualizados, mas o conteúdo do seu intervalo de páginas permanece inalterado."
+      },
+      limitations: {
+        question: "Existem limitações na rotação?",
+        answer: "Você pode girar arquivos de até 100MB com nosso plano gratuito. Para arquivos maiores, considere atualizar para nossos planos premium. Além disso, a ferramenta de rotação fornece ângulos padrão (90°, 180°, 270°) para páginas selecionadas em vez de ângulos arbitrários."
+      },
+      secured: {
+        question: "Meus arquivos estão seguros durante a rotação?",
+        answer: "Sim, todos os arquivos são processados de forma segura em nossos servidores e excluídos automaticamente após o processamento. Não retenemos nem compartilhamos seus documentos com terceiros quando você seleciona o PDF para girar."
+      }
+    },
+    bestPractices: {
+      title: "Melhores Práticas para Rotação de PDF",
+      dosList: [
+        "Visualize o documento com miniaturas de páginas antes de baixar a versão final",
+        "Use a rotação de 180° para páginas invertidas com a ferramenta de rotação",
+        "Gire todas as páginas de uma vez se o documento inteiro ou um intervalo de páginas tiver o mesmo problema de orientação",
+        "Salve o arquivo original antes da rotação como backup",
+        "Verifique todas as páginas selecionadas após a rotação para garantir a orientação correta"
+      ],
+      dontsList: [
+        "Não gire PDFs protegidos por senha sem desbloqueá-los primeiro",
+        "Não misture rotações de 90° e 270° no mesmo documento se a consistência for importante",
+        "Não presuma que todas as páginas precisam da mesma rotação - verifique cada miniatura de página",
+        "Não gire campos de formulário se precisar mantê-los funcionais",
+        "Não gire se o PDF já estiver corretamente orientado"
+      ],
+      dos: "Dicas",
+      donts: "Não Faça"
+    },
+    relatedTools: {
+      title: "Ferramentas Relacionadas",
+      compress: "Comprimir PDF",
+      merge: "Mesclar PDF",
+      split: "Dividir PDF",
+      edit: "Editar PDF",
+      viewAll: "Ver Todas as Ferramentas"
+    },
+    messages: {
+      selectAll: "Selecionar tudo",
+      downloading: "Preparando download...",
+      rotationApplied: "Rotação aplicada a {count} páginas",
+      dragDrop: "Arraste e solte para reordenar páginas",
+      pageOf: "Página {current} de {total}",
+      selectPageInfo: "Clique nas miniaturas das páginas para selecionar páginas para rotação"
+    }
   }
 
 }
