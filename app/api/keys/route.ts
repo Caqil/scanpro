@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth';
 import { randomBytes } from 'crypto';
 import { authOptions } from "@/lib/auth";
 import { prisma } from '@/lib/prisma';
+import { API_OPERATIONS } from '@/lib/validate-key';
 
 // Define interface for API key
 interface ApiKey {
@@ -63,6 +64,7 @@ export async function GET(request: NextRequest) {
         );
     }
 }
+
 export async function POST(request: NextRequest) {
     try {
         const session = await getServerSession(authOptions);
@@ -102,13 +104,48 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        // Validate permissions
+        let validatedPermissions: string[] = [];
+        
+        // If permissions are provided, validate each one
+        if (permissions && Array.isArray(permissions)) {
+            // Filter to only include valid operations
+            validatedPermissions = permissions.filter(perm => 
+                API_OPERATIONS.includes(perm) || perm === '*'
+            );
+            
+            // If wildcard permission is included, just use that
+            if (permissions.includes('*')) {
+                validatedPermissions = ['*'];
+            }
+        }
+        
+        // If no valid permissions were provided, use defaults based on subscription tier
+        if (validatedPermissions.length === 0) {
+            switch(tier) {
+                case 'enterprise':
+                    validatedPermissions = ['*']; // All permissions
+                    break;
+                case 'pro':
+                    validatedPermissions = API_OPERATIONS; // All specific operations
+                    break;
+                case 'basic':
+                    // Standard operations for basic tier
+                    validatedPermissions = ['convert', 'compress', 'merge', 'split', 'protect', 'unlock'];
+                    break;
+                default: // free tier
+                    // Limited operations for free tier
+                    validatedPermissions = ['convert', 'compress', 'merge', 'split'];
+            }
+        }
+
         // Create new API key
         const apiKey = await prisma.apiKey.create({
             data: {
                 userId: session.user.id,
                 name: name || 'API Key',
                 key: generateApiKey(),
-                permissions: permissions || ['convert', 'compress', 'merge', 'split'],
+                permissions: validatedPermissions,
             }
         });
 
