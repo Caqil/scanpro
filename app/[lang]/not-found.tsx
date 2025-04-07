@@ -15,22 +15,20 @@ export default function NotFoundPage() {
         <div className="space-y-2">
           <h1 className="text-9xl font-bold">404</h1>
           <h2 className="text-3xl font-bold">
-            {t('notFound.title') || "Page Not Found"}
+            {t('error.notFound') || "Page Not Found"}
           </h2>
         </div>
         
         <p className="text-muted-foreground max-w-md">
-          {t('notFound.description') || "The page you're looking for doesn't exist or has been moved."}
+          {t('error.notFoundDesc') || "The page you're looking for doesn't exist or has been moved."}
         </p>
         
         <div className="flex gap-4 pt-4">
-          <Button variant="outline" onClick={() => window.history.back()}>
-            {t('notFound.back') || "Go Back"}
-          </Button>
+          
           
           <LanguageLink href="/">
             <Button>
-              {t('notFound.home') || "Return to Home"}
+              {t('error.goHome') || "Return to Home"}
             </Button>
           </LanguageLink>
         </div>

@@ -2646,6 +2646,7 @@ export default {
         tool4Title: '所有PDF工具',
         tool4IconColor: 'text-purple-500',
         tool4BgColor: 'bg-purple-100 dark:bg-purple-900/30'
-    }
+    },
+    
 
 }
