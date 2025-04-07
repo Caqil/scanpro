@@ -671,80 +671,96 @@ export default {
     ocr: "Extrahieren Sie Text aus gescannten Dokumenten mit Optical Character Recognition."
   },
   splitPdf: {
-    title: "PDF Teilen",
-    description: "Teilen Sie PDF-Dateien in mehrere Dokumente oder extrahieren Sie bestimmte Seiten",
+    title: "PDF teilen - PDF-Seiten online trennen",
+    description: "Teilen Sie PDF-Dateien einfach in mehrere Dokumente, löschen Sie Seiten oder extrahieren Sie bestimmte Seiten mit unserem kostenlosen PDF-Splitter-Tool online",
     howTo: {
-      title: "Wie man PDF-Dateien teilt",
+      title: "Wie man PDF-Dateien online teilt",
       step1: {
-        title: "Hochladen",
-        description: "Laden Sie die PDF-Datei hoch, die Sie teilen oder aus der Sie Seiten extrahieren möchten"
+        title: "Laden Sie Ihr PDF hoch",
+        description: "Datei und klicken Sie, um das PDF hochzuladen, das Sie teilen, Seiten daraus löschen oder Seiten extrahieren möchten, mit unserer Drag-and-Drop-Funktion"
       },
       step2: {
-        title: "Teilungsmethode wählen",
-        description: "Wählen Sie, wie Sie Ihr PDF teilen möchten: nach Seitenbereichen, jede Seite extrahieren oder alle N Seiten teilen"
+        title: "Seiten zum Teilen auswählen",
+        description: "Wählen Sie Ihre Teilungsmethode: Wählen Sie Seiten nach Bereich, trennen Sie PDF-Seiten einzeln oder teilen Sie PDFs alle N Seiten in mehrere Dateien"
       },
       step3: {
-        title: "Herunterladen",
-        description: "Laden Sie Ihre geteilten PDF-Dateien einzeln herunter"
+        title: "Geteilte Dateien herunterladen",
+        description: "Laden Sie Ihre geteilten PDF-Dateien oder getrennten Seiten als einzelne Dokumente sofort herunter"
       }
     },
     options: {
-      splitMethod: "Teilungsmethode",
+      splitMethod: "Wählen Sie Ihre Teilungsmethode",
       byRange: "Nach Seitenbereichen teilen",
       extractAll: "Alle Seiten als separate PDFs extrahieren",
       everyNPages: "Alle N Seiten teilen",
       everyNPagesNumber: "Anzahl der Seiten pro Datei",
       everyNPagesHint: "Jede Ausgabedatei enthält diese Anzahl an Seiten",
       pageRanges: "Seitenbereiche",
-      pageRangesHint: "Geben Sie Seitenbereiche durch Kommas getrennt ein. Beispiel: 1-5, 8, 11-13 erstellt 3 PDF-Dateien"
+      pageRangesHint: "Geben Sie Seitenbereiche durch Kommas getrennt ein (z. B. 1-5, 8, 11-13), um mehrere PDF-Dateien zu erstellen"
     },
     splitting: "PDF wird geteilt...",
     splitDocument: "Dokument teilen",
     splitSuccess: "PDF erfolgreich geteilt!",
     splitSuccessDesc: "Ihr PDF wurde in {count} separate Dateien aufgeteilt",
     results: {
-      title: "Ergebnisse der PDF-Teilung",
+      title: "Ergebnisse des PDF-Teilens",
       part: "Teil",
       pages: "Seiten",
       pagesCount: "Seiten"
     },
     faq: {
-      title: "Häufig gestellte Fragen",
+      title: "Häufig gestellte Fragen zum Teilen von PDFs",
       q1: {
         question: "Was passiert mit meinen PDF-Dateien nach dem Teilen?",
         answer: "Alle hochgeladenen und generierten Dateien werden nach 24 Stunden automatisch von unseren Servern gelöscht, um Ihre Privatsphäre und Sicherheit zu gewährleisten."
       },
       q2: {
-        question: "Gibt es eine Begrenzung für die Anzahl der Seiten, die ich teilen kann?",
-        answer: "Die kostenlose Version erlaubt das Teilen von PDFs mit bis zu 100 Seiten. Für größere Dokumente ziehen Sie unseren Premium-Plan in Betracht."
+        question: "Gibt es eine Begrenzung, wie viele Seiten ich teilen kann?",
+        answer: "Die kostenlose Version unterstützt PDFs mit bis zu 100 Seiten. Upgraden Sie auf unseren Premium-Plan für größere Dateien oder unbegrenztes Teilen."
       },
       q3: {
-        question: "Kann ich bestimmte Seiten aus einem PDF extrahieren?",
-        answer: "Ja, Sie können die Option \"Nach Seitenbereichen teilen\" verwenden, um bestimmte Seiten oder Seitenbereiche aus Ihrem PDF-Dokument zu extrahieren."
+        question: "Kann ich Seiten löschen oder bestimmte Seiten aus einem PDF extrahieren?",
+        answer: "Ja, verwenden Sie die Option 'Nach Seitenbereichen teilen', um Seiten zu löschen oder bestimmte Abschnitte aus Ihrem PDF online zu extrahieren."
       },
       q4: {
-        question: "Kann ich die Seiten beim Teilen neu anordnen?",
-        answer: "Derzeit behält das Teilungstool die ursprüngliche Seitenreihenfolge bei. Um Seiten neu anzuordnen, müssen Sie unser PDF-Zusammenführungstool mit den extrahierten Seiten verwenden."
+        question: "Kann ich Seiten während des Teilens neu anordnen?",
+        answer: "Derzeit wird die Seitenreihenfolge beim Teilen beibehalten. Verwenden Sie unser PDF-Zusammenführungs-Tool mit Drag-and-Drop, um Seiten nach dem Teilen neu anzuordnen."
       }
     },
     useCases: {
-      title: "Beliebte Verwendungszwecke für das Teilen von PDFs",
+      title: "Beliebte Anwendungen für unser PDF-Splitter-Tool",
       chapters: {
-        title: "Kapiteltrennung",
-        description: "Teilen Sie große Bücher oder Berichte in einzelne Kapitel für einfachere Navigation und Weitergabe"
+        title: "PDF-Seiten nach Kapiteln trennen",
+        description: "Teilen Sie große Bücher oder Berichte in einzelne Kapitel für einfacheres Teilen und Navigieren"
       },
       extract: {
-        title: "Seitenextraktion",
-        description: "Extrahieren Sie bestimmte Seiten wie Formulare, Zertifikate oder wichtige Abschnitte aus längeren Dokumenten"
+        title: "Seiten aus PDF extrahieren",
+        description: "Wählen Sie Seiten wie Formulare oder Zertifikate aus, um sie mit einem einfachen Datei- und Klickvorgang aus längeren Dokumenten zu extrahieren"
       },
       remove: {
-        title: "Seiten entfernen",
-        description: "Extrahieren Sie alle benötigten Seiten und lassen Sie unerwünschte Inhalte wie Werbung oder leere Seiten weg"
+        title: "Seiten aus PDF löschen",
+        description: "Entfernen Sie unerwünschte Seiten wie Werbung oder leere Seiten, indem Sie die zu behaltenden Seiten auswählen und entsprechend teilen"
       },
       size: {
-        title: "Größenreduktion",
-        description: "Teilen Sie große PDFs in kleinere Dateien für einfacheres Teilen per E-Mail oder Messaging-Apps"
+        title: "PDFs in mehrere Dateien teilen zur Größenreduktion",
+        description: "Zerlegen Sie große PDFs in kleinere Dateien für einfacheres Versenden per E-Mail oder Messaging mit unserem Online-PDF-Splitter"
       }
+    },
+    newSection: {
+      title: "Warum unser Online-PDF-Splitter verwenden?",
+      description: "Unser PDF-Splitter ermöglicht es Ihnen, PDF-Seiten zu trennen, Seiten zu löschen und PDFs schnell und sicher in mehrere Dateien zu teilen. Genießen Sie die Einfachheit von Drag-and-Drop, wählen Sie Seiten präzise aus und verwalten Sie Ihre Dokumente online ohne Software-Downloads.",
+      additional: "Ob Sie PDF-Seiten für ein Projekt trennen, unerwünschte Seiten löschen oder PDFs in mehrere Dateien für einfacheres Teilen aufteilen müssen, unser Online-PDF-Splitter ist das perfekte Tool. Mit einer benutzerfreundlichen Drag-and-Drop-Oberfläche können Sie Ihre Datei hochladen und mit einem Klick Seiten mühelos auswählen. Unser Service ist schnell, sicher und kostenlos – ideal für die Verwaltung von PDF-Dokumenten online ohne Software-Installation. Teilen Sie große PDFs, extrahieren Sie bestimmte Seiten oder reduzieren Sie Dateigrößen mit nur wenigen Klicks!"
+    },
+    seoContent: {
+      title: "Meistern Sie Ihre PDF-Verwaltung mit unserem PDF-Splitter",
+      p1: "Brauchen Sie eine stressfreie Möglichkeit, PDFs in mehrere Dateien zu teilen oder bestimmte Seiten online herauszuziehen? Unser PDF-Splitter-Tool ist darauf ausgelegt, die Belastung der Dokumentenverwaltung zu reduzieren. Egal, ob Sie Student, vielbeschäftigter Profi oder einfach nur persönliche Dateien organisieren, Sie können Seiten löschen, die gewünschten auswählen und große PDFs im Handumdrehen aufteilen. Ziehen Sie Ihre Datei in den Uploader, klicken Sie, um Ihren Teilungsstil auszuwählen – Seitenbereiche, einzelne Seiten oder alle paar Seiten – und Sie sind fertig. Es ist einer der praktischsten Online-PDF-Splitter, die Sie heute finden werden.",
+      p2: "Das Teilen von PDFs wird nicht einfacher als das. Möchten Sie eine Seite aus einem riesigen Bericht herausziehen? Genervt von leeren Blättern oder Werbung, die alles durcheinanderbringen? Mit unserem Tool können Sie genau festlegen, welche Seiten Sie behalten möchten, und sie in separate Dateien oder kleinere Stapel umwandeln. Alles online – keine Downloads nötig. Mit unserem PDF-Splitter können Sie ein unhandliches Dokument in ordentliche, überschaubare Teile verwandeln, bereit zum Versenden per E-Mail, Speichern oder Teilen ohne Dateigrößenprobleme.",
+      p3: "Unser Online-PDF-Splitter glänzt mit seinem einfachen Layout und robusten Optionen. Teilen Sie ein Lehrbuch in Kapitel oder schneiden Sie einen langen Vertrag in wichtige Teile ohne Aufwand. Die Drag-and-Drop-Funktion macht es reibungslos – einfach Datei ablegen und klicken, um loszulegen. Sie können Ihr PDF sogar vorher ansehen, um Seiten punktgenau auszuwählen, bevor Sie teilen. Und das Beste? Es ist kostenlos für Dateien bis zu 100 Seiten, sodass jeder sofort loslegen kann.",
+      p4: "Warum unseren PDF-Splitter wählen? Er ist schnell, sicher und bietet viel Flexibilität. Ziehen Sie Seiten für eine Präsentation heraus, entfernen Sie Extras, um ein Dokument zu bereinigen, oder teilen Sie PDFs in mehrere Dateien für bessere Ordnung – alles direkt aus Ihrem Browser. Wir haben es optimiert, um bei Suchen wie 'PDF online teilen', 'Seiten löschen' und 'PDF-Seiten trennen' aufzutauchen, damit Sie uns genau dann finden, wenn Sie uns brauchen. Probieren Sie es heute aus und sehen Sie, wie reibungslos die PDF-Verwaltung sein kann!"
+    },
+    relatedTools: "Verwandte Tools",
+    popular: {
+      viewAll: "Alle Tools anzeigen"
     }
   },
   // PDFs zusammenführen-Seite

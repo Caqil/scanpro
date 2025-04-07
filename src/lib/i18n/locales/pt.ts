@@ -671,36 +671,36 @@ export default {
     ocr: "Extraia texto de documentos digitalizados usando Reconhecimento Óptico de Caracteres."
   },
   splitPdf: {
-    title: "Dividir PDF",
-    description: "Divida arquivos PDF em vários documentos ou extraia páginas específicas",
+    title: "Dividir PDF - Separar Páginas de PDF Online",
+    description: "Divida facilmente arquivos PDF em vários documentos, exclua páginas ou extraia páginas específicas com nossa ferramenta gratuita de divisão de PDF online",
     howTo: {
-      title: "Como Dividir Arquivos PDF",
+      title: "Como Dividir Arquivos PDF Online",
       step1: {
-        title: "Carregar",
-        description: "Carregue o arquivo PDF que você deseja dividir ou extrair páginas"
+        title: "Faça Upload do Seu PDF",
+        description: "Arquivo e clique para fazer upload do PDF que você deseja dividir, excluir páginas ou extrair páginas usando nossa função de arrastar e soltar"
       },
       step2: {
-        title: "Escolher Método de Divisão",
-        description: "Selecione como você quer dividir seu PDF: por intervalos de páginas, extrair cada página ou dividir a cada N páginas"
+        title: "Selecione as Páginas para Dividir",
+        description: "Escolha seu método de divisão: selecione páginas por intervalo, separe páginas de PDF individualmente ou divida PDFs em vários arquivos a cada N páginas"
       },
       step3: {
-        title: "Baixar",
-        description: "Baixe seus arquivos PDF divididos individualmente"
+        title: "Baixe os Arquivos Divididos",
+        description: "Baixe seus arquivos PDF divididos ou páginas separadas como documentos individuais instantaneamente"
       }
     },
     options: {
-      splitMethod: "Método de Divisão",
-      byRange: "Dividir por intervalos de páginas",
-      extractAll: "Extrair todas as páginas como PDFs separados",
-      everyNPages: "Dividir a cada N páginas",
-      everyNPagesNumber: "Número de páginas por arquivo",
+      splitMethod: "Escolha Seu Método de Divisão",
+      byRange: "Dividir por Intervalos de Páginas",
+      extractAll: "Extrair Todas as Páginas como PDFs Separados",
+      everyNPages: "Dividir a Cada N Páginas",
+      everyNPagesNumber: "Número de Páginas por Arquivo",
       everyNPagesHint: "Cada arquivo de saída conterá esse número de páginas",
       pageRanges: "Intervalos de Páginas",
-      pageRangesHint: "Insira intervalos de páginas separados por vírgulas. Exemplo: 1-5, 8, 11-13 criará 3 arquivos PDF"
+      pageRangesHint: "Insira intervalos de páginas separados por vírgulas (por exemplo, 1-5, 8, 11-13) para criar vários arquivos PDF"
     },
     splitting: "Dividindo PDF...",
     splitDocument: "Dividir Documento",
-    splitSuccess: "PDF dividido com sucesso!",
+    splitSuccess: "PDF Dividido com Sucesso!",
     splitSuccessDesc: "Seu PDF foi dividido em {count} arquivos separados",
     results: {
       title: "Resultados da Divisão de PDF",
@@ -709,42 +709,58 @@ export default {
       pagesCount: "páginas"
     },
     faq: {
-      title: "Perguntas Frequentes",
+      title: "Perguntas Frequentes Sobre a Divisão de PDFs",
       q1: {
         question: "O que acontece com meus arquivos PDF após a divisão?",
-        answer: "Todos os arquivos enviados e gerados são automaticamente excluídos de nossos servidores após 24 horas por sua privacidade e segurança."
+        answer: "Todos os arquivos enviados e gerados são automaticamente excluídos de nossos servidores após 24 horas para sua privacidade e segurança."
       },
       q2: {
-        question: "Há um limite para o número de páginas que posso dividir?",
-        answer: "A versão gratuita permite dividir PDFs com até 100 páginas. Para documentos maiores, considere nosso plano premium."
+        question: "Há um limite para quantas páginas eu posso dividir?",
+        answer: "A versão gratuita suporta PDFs de até 100 páginas. Atualize para nosso plano premium para arquivos maiores ou divisão ilimitada."
       },
       q3: {
-        question: "Posso extrair páginas específicas de um PDF?",
-        answer: "Sim, você pode usar a opção \"Dividir por intervalos de páginas\" para extrair páginas específicas ou intervalos de páginas do seu documento PDF."
+        question: "Posso excluir páginas ou extrair páginas específicas de um PDF?",
+        answer: "Sim, use a opção 'Dividir por intervalos de páginas' para excluir páginas ou extrair seções específicas do seu PDF online."
       },
       q4: {
-        question: "Posso reordenar as páginas ao dividir?",
-        answer: "Atualmente, a ferramenta de divisão mantém a ordem original das páginas. Para reordenar, você precisará usar nossa ferramenta de Fusão de PDF com as páginas extraídas."
+        question: "Posso reordenar as páginas durante a divisão?",
+        answer: "Atualmente, a ordem das páginas é mantida durante a divisão. Use nossa ferramenta de fusão de PDF com arrastar e soltar para reordenar as páginas após a divisão."
       }
     },
     useCases: {
-      title: "Usos Populares para Divisão de PDF",
+      title: "Usos Populares da Nossa Ferramenta de Divisão de PDF",
       chapters: {
-        title: "Separação de Capítulos",
-        description: "Divida livros ou relatórios grandes em capítulos individuais para facilitar a navegação e o compartilhamento"
+        title: "Separar Páginas de PDF por Capítulos",
+        description: "Divida livros ou relatórios grandes em capítulos individuais para facilitar o compartilhamento e a navegação"
       },
       extract: {
-        title: "Extração de Páginas",
-        description: "Extraia páginas específicas como formulários, certificados ou seções importantes de documentos mais longos"
+        title: "Extrair Páginas de PDF",
+        description: "Selecione páginas como formulários ou certificados para extrair de documentos mais longos com um simples arquivo e clique"
       },
       remove: {
-        title: "Remover Páginas",
-        description: "Extraia todas as páginas necessárias e deixe de fora conteúdo indesejado, como anúncios ou páginas em branco"
+        title: "Excluir Páginas de PDF",
+        description: "Remova páginas indesejadas como anúncios ou espaços em branco selecionando as páginas que deseja manter e dividindo conforme necessário"
       },
       size: {
-        title: "Redução de Tamanho",
-        description: "Divida PDFs grandes em arquivos menores para facilitar o compartilhamento por e-mail ou aplicativos de mensagens"
+        title: "Dividir PDFs em Vários Arquivos para Redução de Tamanho",
+        description: "Divida PDFs grandes em arquivos menores para facilitar o envio por e-mail ou mensagens com nosso divisor de PDF online"
       }
+    },
+    newSection: {
+      title: "Por Que Usar Nosso Divisor de PDF Online?",
+      description: "Nosso divisor de PDF permite que você separe páginas de PDF, exclua páginas e divida PDFs em vários arquivos de forma rápida e segura. Desfrute da simplicidade de arrastar e soltar, selecione páginas com precisão e gerencie seus documentos online sem downloads de software.",
+      additional: "Seja para separar páginas de PDF para um projeto, excluir páginas que você não deseja ou dividir PDFs em vários arquivos para facilitar o compartilhamento, nosso divisor de PDF online é a ferramenta perfeita. Com uma interface amigável de arrastar e soltar, você pode fazer upload do seu arquivo e clicar para selecionar páginas sem esforço. Nosso serviço é rápido, seguro e gratuito—ideal para gerenciar documentos PDF online sem instalar software. Divida PDFs grandes, extraia páginas específicas ou reduza o tamanho dos arquivos com apenas alguns cliques!"
+    },
+    seoContent: {
+      title: "Domine a Gestão dos Seus PDFs com Nosso Divisor de PDF",
+      p1: "Precisa de uma maneira simples de dividir PDFs em vários arquivos ou extrair páginas específicas online? Nossa ferramenta de divisão de PDF foi projetada para aliviar o estresse da gestão de documentos. Seja você estudante, profissional ocupado ou apenas organizando arquivos pessoais, pode excluir páginas, escolher as que deseja e dividir PDFs grandes em um instante. Arraste seu arquivo para o uploader, clique para escolher seu estilo de divisão—intervalos de páginas, páginas individuais ou a cada poucas páginas—e pronto. É uma das ferramentas de divisão de PDF online mais úteis que você encontrará hoje.",
+      p2: "Dividir PDFs não fica mais simples que isso. Quer pegar uma página de um relatório enorme? Cansado de folhas em branco ou anúncios que atrapalham tudo? Nossa ferramenta permite que você indique exatamente quais páginas manter e as transforme em arquivos separados ou lotes menores. Tudo online—sem necessidade de downloads. Com nosso divisor de PDF, você pode transformar um documento complicado em partes organizadas e gerenciáveis, prontas para envio por e-mail, armazenamento ou compartilhamento sem problemas de tamanho de arquivo.",
+      p3: "Nosso divisor de PDF online se destaca com seu layout simples e opções robustas. Divida um livro didático em capítulos ou corte um contrato longo em partes-chave sem complicações. A função de arrastar e soltar torna tudo fluido—basta soltar seu arquivo e clicar para começar. Você pode até visualizar seu PDF para escolher as páginas com precisão antes de dividir. E o melhor? É grátis para arquivos de até 100 páginas, então qualquer um pode começar imediatamente.",
+      p4: "Por que escolher nosso divisor de PDF? É rápido, seguro e cheio de flexibilidade. Extraia páginas para uma apresentação, elimine extras para limpar um documento ou divida PDFs em vários arquivos para uma melhor organização—tudo a partir do seu navegador. Otimizamos para aparecer em buscas como 'dividir PDF online', 'excluir páginas' e 'separar páginas de PDF', para que você nos encontre exatamente quando precisar. Experimente hoje e veja como a gestão de PDFs pode ser tranquila!"
+    },
+    relatedTools: "Ferramentas Relacionadas",
+    popular: {
+      viewAll: "Ver Todas as Ferramentas"
     }
   },
   // Página de Mesclagem de PDF

@@ -79,13 +79,36 @@ export function PdfRedactor() {
   const [removeMetadata, setRemoveMetadata] = useState<boolean>(true);
   
   // Auto redaction state
-  const [patterns, setPatterns] = useState<Array<{type: PatternType, pattern: string, enabled: boolean}>>([
-    { type: 'ssn', pattern: '\\d{3}-\\d{2}-\\d{4}', enabled: true },
-    { type: 'email', pattern: '[\\w.-]+@[\\w.-]+\\.[\\w]{2,}', enabled: true },
-    { type: 'phone', pattern: '\\(\\d{3}\\)\\s?\\d{3}-\\d{4}|\\d{3}-\\d{3}-\\d{4}', enabled: true },
-    { type: 'creditCard', pattern: '\\d{4}[\\s-]\\d{4}[\\s-]\\d{4}[\\s-]\\d{4}', enabled: true },
-    { type: 'custom', pattern: '', enabled: false }
-  ]);
+ // Add more predefined patterns and make them more robust
+// In your PDF Redactor component
+const [patterns, setPatterns] = useState<Array<{type: string, pattern: string, enabled: boolean}>>([
+  { 
+    type: 'ssn', 
+    pattern: '\\b\\d{3}-\\d{2}-\\d{4}\\b', 
+    enabled: true  // Ensure this is true by default
+  },
+  { 
+    type: 'email', 
+    pattern: '\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b', 
+    enabled: true  // Ensure this is true by default
+  },
+  { 
+    type: 'phone', 
+    pattern: '\\b(?:\\+\\d{1,2}\\s?)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}\\b', 
+    enabled: true  // Ensure this is true by default
+  },
+  { 
+    type: 'creditCard', 
+    pattern: '\\b(?:\\d{4}[-\\s]?){3}\\d{4}\\b', 
+    enabled: true  // Ensure this is true by default
+  },
+  { 
+    type: 'custom', 
+    pattern: '', 
+    enabled: false 
+  }
+]);
+
   const [customPattern, setCustomPattern] = useState<string>('');
   
   // Drawing state
@@ -177,43 +200,61 @@ export function PdfRedactor() {
     });
   };
   
-  // Mouse and touch event handlers for redaction rectangle drawing
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!pdfCanvasRef.current || activeTool !== 'rect') return;
-    
-    const rect = pdfCanvasRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / scale;
-    const y = (e.clientY - rect.top) / scale;
-    
-    setIsDrawing(true);
-    setStartPos({ x, y });
+
+// Improve mouse event handling
+const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+  if (!pdfCanvasRef.current || activeTool !== 'rect') return;
+  
+  const pdfPage = pdfCanvasRef.current.querySelector('.react-pdf__Page');
+  if (!pdfPage) return;
+
+  const pdfPageRect = pdfPage.getBoundingClientRect();
+  const scaleX = pdfPage.clientWidth / pageDetails[currentPage - 1].width;
+  
+  const x = (e.clientX - pdfPageRect.left) / scaleX;
+  const y = (e.clientY - pdfPageRect.top) / scaleX;
+  
+  setIsDrawing(true);
+  setStartPos({ x, y });
+  setScale(scaleX); // Dynamically adjust scale
+};
+
+const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  if (!isDrawing || !startPos || !pdfCanvasRef.current) return;
+  
+  const pdfPage = pdfCanvasRef.current.querySelector('.react-pdf__Page');
+  if (!pdfPage) return;
+
+  const pdfPageRect = pdfPage.getBoundingClientRect();
+  const scaleX = pdfPage.clientWidth / pageDetails[currentPage - 1].width;
+  
+  const x = (e.clientX - pdfPageRect.left) / scaleX;
+  const y = (e.clientY - pdfPageRect.top) / scaleX;
+  
+  const tempRect: RedactionRect = {
+    id: 'temp',
+    pageIndex: currentPage - 1,
+    x: Math.min(startPos.x, x),
+    y: Math.min(startPos.y, y),
+    width: Math.abs(x - startPos.x),
+    height: Math.abs(y - startPos.y),
+    color: redactionColor,
+    label: showLabels ? redactionLabel : undefined
   };
   
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDrawing || !startPos || !pdfCanvasRef.current) return;
-    
-    const rect = pdfCanvasRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / scale;
-    const y = (e.clientY - rect.top) / scale;
-    
-    // Create temporary redaction rectangle as visual feedback
-    const tempRect: RedactionRect = {
-      id: 'temp',
-      pageIndex: currentPage - 1,
-      x: Math.min(startPos.x, x),
-      y: Math.min(startPos.y, y),
-      width: Math.abs(x - startPos.x),
-      height: Math.abs(y - startPos.y),
-      color: redactionColor,
-      label: showLabels ? redactionLabel : undefined
-    };
-    
-    // Update existing temp or add new one
-    setRedactionRects(prev => {
-      const withoutTemp = prev.filter(r => r.id !== 'temp');
-      return [...withoutTemp, tempRect];
-    });
-  };
+  setRedactionRects(prev => {
+    const withoutTemp = prev.filter(r => r.id !== 'temp');
+    return [...withoutTemp, tempRect];
+  });
+};
+
+// Add a warning for browser compatibility
+useEffect(() => {
+  if (typeof window === 'undefined' || !window.FileReader) {
+    toast.warning('Your browser may not fully support all PDF redaction features.');
+  }
+}, []);
+  
   
   const handleMouseUp = () => {
     if (!isDrawing || !startPos) return;
@@ -371,31 +412,31 @@ export function PdfRedactor() {
   
   // Handle auto redaction pattern detection
   const handleAutoRedaction = async () => {
-    if (!file || !pdfCanvasRef.current) return;
+    if (!file) return;
     
     setIsProcessing(true);
     setProgress(10);
     
     try {
-      // Prepare active patterns for search
-      const activePatterns = patterns.filter(p => p.enabled).map(p => {
-        // Handle custom pattern separately
-        if (p.type === 'custom' && customPattern) {
-          return { ...p, pattern: customPattern };
+      const activePatterns = patterns
+        .filter(p => p.enabled)
+        .map(p => ({
+          type: p.type,
+          pattern: p.type === 'custom' ? customPattern : p.pattern
+        }))
+        .filter(p => p.pattern); // Remove empty patterns
+      
+        if (activePatterns.length === 0) {
+          // Automatically enable at least some default patterns
+          setPatterns(prev => prev.map(p => {
+            if (p.type !== 'custom') {
+              return { ...p, enabled: true };
+            }
+            return p;
+          }));
+          
+          toast.warning('Automatically enabled default patterns');
         }
-        return p;
-      });
-      
-      if (activePatterns.length === 0) {
-        toast.error(t('redactPdf.errors.noPatterns') || "Please enable at least one pattern for automatic redaction");
-        setIsProcessing(false);
-        return;
-      }
-      
-      setProgress(20);
-      
-      // In a real implementation, we would extract text from the PDF and find matches
-      // Here we'll simulate the process by sending the file and patterns to our API
       
       const formData = new FormData();
       formData.append('file', file);
@@ -410,18 +451,15 @@ export function PdfRedactor() {
       setProgress(60);
       
       if (!response.ok) {
-        throw new Error(`Error detecting patterns: ${response.statusText}`);
+        throw new Error(await response.text());
       }
       
       const result = await response.json();
       
       if (!result.success) {
-        throw new Error(result.error || 'Failed to detect patterns');
+        throw new Error(result.error || 'Automatic detection failed');
       }
       
-      setProgress(80);
-      
-      // Add the detected areas as redaction rectangles
       const autoRects: RedactionRect[] = result.matches.map((match: any) => ({
         id: `auto-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         pageIndex: match.pageIndex,
@@ -430,21 +468,41 @@ export function PdfRedactor() {
         width: match.width,
         height: match.height,
         color: redactionColor,
-        label: showLabels ? `${match.patternType}: ${match.text}` : undefined
+        label: showLabels 
+          ? `${match.patternType}: ${match.text || 'Sensitive Data'}` 
+          : undefined
       }));
+      
+      // Group matches by page to provide summary
+      const matchesByPage = autoRects.reduce((acc, rect) => {
+        acc[rect.pageIndex] = (acc[rect.pageIndex] || 0) + 1;
+        return acc;
+      }, {} as Record<number, number>);
       
       setRedactionRects(prev => [...prev, ...autoRects]);
       setProgress(100);
       
-      if (autoRects.length > 0) {
-        toast.success(`Found and marked ${autoRects.length} items for redaction`);
-        setActiveTab('manual'); // Switch to manual tab to review marked items
+      // Provide detailed toast message
+      const totalMatches = autoRects.length;
+      if (totalMatches > 0) {
+        const pagesSummary = Object.entries(matchesByPage)
+          .map(([page, count]) => `Page ${Number(page) + 1}: ${count} match${count > 1 ? 'es' : ''}`)
+          .join(', ');
+        
+        toast.success(
+          `Found ${totalMatches} items for redaction: ${pagesSummary}`,
+          { duration: 5000 }
+        );
       } else {
         toast.info('No matching patterns found in the document');
       }
     } catch (error) {
       console.error('Auto redaction error:', error);
-      toast.error(error instanceof Error ? error.message : 'An error occurred during automatic redaction');
+      toast.error(
+        error instanceof Error 
+          ? error.message 
+          : 'An unexpected error occurred during automatic redaction'
+      );
     } finally {
       setIsProcessing(false);
     }

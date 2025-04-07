@@ -673,36 +673,36 @@ export default {
     ocr: "Ekstrak teks dari dokumen yang dipindai menggunakan Pengenalan Karakter Optik."
   },
   splitPdf: {
-    title: "Pisah PDF",
-    description: "Pisahkan file PDF menjadi beberapa dokumen atau ekstrak halaman tertentu",
+    title: "Pisah PDF - Pisahkan Halaman PDF Secara Online",
+    description: "Pisahkan file PDF dengan mudah menjadi beberapa dokumen, hapus halaman, atau ekstrak halaman tertentu dengan alat pemisah PDF gratis kami secara online",
     howTo: {
-      title: "Cara Memisahkan File PDF",
+      title: "Cara Memisahkan File PDF Secara Online",
       step1: {
-        title: "Unggah",
-        description: "Unggah file PDF yang ingin Anda pisahkan atau ekstrak halamannya"
+        title: "Unggah PDF Anda",
+        description: "File dan klik untuk mengunggah PDF yang ingin Anda pisahkan, hapus halaman darinya, atau ekstrak halaman darinya menggunakan fitur seret dan lepas kami"
       },
       step2: {
-        title: "Pilih Metode Pemisahan",
-        description: "Pilih cara Anda ingin memisahkan PDF: berdasarkan rentang halaman, ekstrak setiap halaman, atau pisah setiap N halaman"
+        title: "Pilih Halaman untuk Dipisahkan",
+        description: "Pilih metode pemisahan Anda: pilih halaman berdasarkan rentang, pisahkan halaman PDF secara individu, atau pisahkan PDF menjadi beberapa file setiap N halaman"
       },
       step3: {
-        title: "Unduh",
-        description: "Unduh file PDF yang telah dipisahkan secara individu"
+        title: "Unduh File yang Dipisahkan",
+        description: "Unduh file PDF yang telah dipisahkan atau halaman yang dipisahkan sebagai dokumen individu secara instan"
       }
     },
     options: {
-      splitMethod: "Metode Pemisahan",
-      byRange: "Pisah berdasarkan rentang halaman",
-      extractAll: "Ekstrak semua halaman sebagai PDF terpisah",
-      everyNPages: "Pisah setiap N halaman",
-      everyNPagesNumber: "Jumlah halaman per file",
+      splitMethod: "Pilih Metode Pemisahan Anda",
+      byRange: "Pisahkan berdasarkan Rentang Halaman",
+      extractAll: "Ekstrak Semua Halaman sebagai PDF Terpisah",
+      everyNPages: "Pisahkan Setiap N Halaman",
+      everyNPagesNumber: "Jumlah Halaman per File",
       everyNPagesHint: "Setiap file keluaran akan berisi jumlah halaman ini",
       pageRanges: "Rentang Halaman",
-      pageRangesHint: "Masukkan rentang halaman yang dipisahkan dengan koma. Contoh: 1-5, 8, 11-13 akan menghasilkan 3 file PDF"
+      pageRangesHint: "Masukkan rentang halaman yang dipisahkan oleh koma (misalnya, 1-5, 8, 11-13) untuk membuat beberapa file PDF"
     },
     splitting: "Memisahkan PDF...",
-    splitDocument: "Pisah Dokumen",
-    splitSuccess: "PDF berhasil dipisahkan!",
+    splitDocument: "Pisahkan Dokumen",
+    splitSuccess: "PDF Berhasil Dipisahkan!",
     splitSuccessDesc: "PDF Anda telah dipisahkan menjadi {count} file terpisah",
     results: {
       title: "Hasil Pemisahan PDF",
@@ -711,43 +711,59 @@ export default {
       pagesCount: "halaman"
     },
     faq: {
-      title: "Pertanyaan yang Sering Diajukan",
+      title: "Pertanyaan yang Sering Diajukan Tentang Memisahkan PDF",
       q1: {
         question: "Apa yang terjadi pada file PDF saya setelah dipisahkan?",
         answer: "Semua file yang diunggah dan dihasilkan akan otomatis dihapus dari server kami setelah 24 jam demi privasi dan keamanan Anda."
       },
       q2: {
-        question: "Apakah ada batasan jumlah halaman yang bisa dipisahkan?",
-        answer: "Versi gratis memungkinkan Anda memisahkan PDF hingga 100 halaman. Untuk dokumen yang lebih besar, pertimbangkan paket premium kami."
+        question: "Apakah ada batasan jumlah halaman yang bisa saya pisahkan?",
+        answer: "Versi gratis mendukung PDF hingga 100 halaman. Tingkatkan ke paket premium kami untuk file yang lebih besar atau pemisahan tanpa batas."
       },
       q3: {
-        question: "Apakah saya bisa mengekstrak halaman tertentu dari PDF?",
-        answer: "Ya, Anda bisa menggunakan opsi \"Pisah berdasarkan rentang halaman\" untuk mengekstrak halaman atau rentang halaman tertentu dari dokumen PDF Anda."
+        question: "Apakah saya bisa menghapus halaman atau mengekstrak halaman tertentu dari PDF?",
+        answer: "Ya, gunakan opsi 'Pisahkan berdasarkan rentang halaman' untuk menghapus halaman atau mengekstrak bagian tertentu dari PDF Anda secara online."
       },
       q4: {
         question: "Apakah saya bisa mengatur ulang halaman saat memisahkan?",
-        answer: "Saat ini, alat pemisahan mempertahankan urutan halaman asli. Untuk mengatur ulang halaman, Anda perlu menggunakan alat Penggabung PDF kami dengan halaman yang telah diekstrak."
+        answer: "Saat ini, urutan halaman dipertahankan selama pemisahan. Gunakan alat Penggabung PDF kami dengan fitur seret dan lepas untuk mengatur ulang halaman setelah pemisahan."
       }
     },
     useCases: {
-      title: "Penggunaan Populer untuk Pemisahan PDF",
+      title: "Penggunaan Populer untuk Alat Pemisah PDF Kami",
       chapters: {
-        title: "Pemisahan Bab",
-        description: "Pisahkan buku atau laporan besar menjadi bab-bab individu untuk navigasi dan berbagi yang lebih mudah"
+        title: "Pisahkan Halaman PDF berdasarkan Bab",
+        description: "Pisahkan buku atau laporan besar menjadi bab-bab individu untuk memudahkan berbagi dan navigasi"
       },
       extract: {
-        title: "Ekstraksi Halaman",
-        description: "Ekstrak halaman tertentu seperti formulir, sertifikat, atau bagian penting dari dokumen yang lebih panjang"
+        title: "Ekstrak Halaman dari PDF",
+        description: "Pilih halaman seperti formulir atau sertifikat untuk diekstrak dari dokumen yang lebih panjang dengan file dan klik sederhana"
       },
       remove: {
-        title: "Hapus Halaman",
-        description: "Ekstrak semua halaman yang dibutuhkan dan tinggalkan konten yang tidak diinginkan seperti iklan atau halaman kosong"
+        title: "Hapus Halaman dari PDF",
+        description: "Hapus halaman yang tidak diinginkan seperti iklan atau halaman kosong dengan memilih halaman yang ingin dipertahankan dan memisahkan sesuai itu"
       },
       size: {
-        title: "Pengurangan Ukuran",
-        description: "Pecah PDF besar menjadi file yang lebih kecil untuk memudahkan berbagi melalui email atau aplikasi pesan"
+        title: "Pisahkan PDF menjadi Beberapa File untuk Pengurangan Ukuran",
+        description: "Pecah PDF besar menjadi file yang lebih kecil untuk memudahkan pengiriman email atau pesan dengan pemisah PDF online kami"
       }
     },
+    newSection: {
+      title: "Mengapa Menggunakan Pemisah PDF Online Kami?",
+      description: "Pemisah PDF kami memungkinkan Anda memisahkan halaman PDF, menghapus halaman, dan memisahkan PDF menjadi beberapa file dengan cepat dan aman. Nikmati kesederhanaan seret dan lepas, pilih halaman dengan presisi, dan kelola dokumen Anda secara online tanpa unduhan perangkat lunak.",
+      additional: "Apakah Anda perlu memisahkan halaman PDF untuk proyek, menghapus halaman yang tidak Anda inginkan, atau memisahkan PDF menjadi beberapa file untuk berbagi lebih mudah, pemisah PDF online kami adalah alat yang sempurna. Dengan antarmuka seret dan lepas yang ramah pengguna, Anda dapat mengunggah file dan klik untuk memilih halaman dengan mudah. Layanan kami cepat, aman, dan gratis—ideal untuk mengelola dokumen PDF secara online tanpa menginstal perangkat lunak. Pisahkan PDF besar, ekstrak halaman tertentu, atau kurangi ukuran file hanya dalam beberapa klik!"
+    },
+    seoContent: {
+      title: "Kuasai Manajemen PDF Anda dengan Pemisah PDF Kami",
+      p1: "Perlu cara bebas repot untuk memisahkan PDF menjadi beberapa file atau menarik halaman tertentu secara online? Alat pemisah PDF kami dirancang untuk mengurangi stres manajemen dokumen. Baik Anda mahasiswa, profesional sibuk, atau hanya mengatur file pribadi, Anda bisa menghapus halaman, memilih yang Anda inginkan, dan memecah PDF besar dalam sekejap. Seret file Anda ke pengunggah, klik untuk memilih gaya pemisahan—rentang halaman, halaman tunggal, atau setiap beberapa halaman—dan selesai. Ini adalah salah satu pemisah PDF online paling berguna yang akan Anda temukan hari ini.",
+      p2: "Memisahkan PDF tidak lebih sederhana dari ini. Ingin mengambil satu halaman dari laporan besar? Bosan dengan lembar kosong atau iklan yang mengacaukannya? Alat kami memungkinkan Anda menentukan dengan tepat halaman mana yang ingin dipertahankan dan mengubahnya menjadi file terpisah atau kelompok kecil. Semuanya online—tidak perlu unduhan. Dengan pemisah PDF kami, Anda bisa mengubah dokumen yang rumit menjadi potongan rapi dan mudah dikelola, siap untuk dikirim melalui email, disimpan, atau dibagikan tanpa masalah ukuran file.",
+      p3: "Pemisah PDF online kami bersinar dengan tata letak sederhana dan opsi kuatnya. Pecah buku teks menjadi bab atau potong kontrak panjang menjadi bagian kunci tanpa repot. Fitur seret dan lepas membuatnya lancar—cukup lepaskan file Anda dan klik untuk memulai. Anda bahkan bisa mempratinjau PDF Anda untuk memilih halaman dengan tepat sebelum memisahkan. Dan bagian terbaiknya? Ini gratis untuk file hingga 100 halaman, jadi siapa saja bisa langsung mulai.",
+      p4: "Mengapa memilih pemisah PDF kami? Ini cepat, aman, dan penuh fleksibilitas. Tarik halaman untuk presentasi, buang yang berlebihan untuk membersihkan dokumen, atau pisahkan PDF menjadi beberapa file untuk pengaturan lebih baik—semua dari browser Anda. Kami telah menyesuaikannya untuk muncul di pencarian seperti 'pisah PDF online', 'hapus halaman', dan 'pisahkan halaman PDF', sehingga Anda akan menemukan kami tepat saat Anda membutuhkan kami. Cobalah hari ini dan lihat betapa mulusnya manajemen PDF bisa!"
+    },
+    relatedTools: "Alat Terkait",
+    popular: {
+      viewAll: "Lihat Semua Alat"
+    }
   },
   // Halaman Gabung PDF
   mergePdf: {

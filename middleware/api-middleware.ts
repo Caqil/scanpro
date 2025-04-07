@@ -19,15 +19,15 @@ try {
 const rateLimits = {
     free: {
         limit: 100,
-        window: 3600, // 10 requests per hour (3600 seconds)
+        window: 3600, // 100 requests per hour (3600 seconds)
     },
     basic: {
         limit: 1000,
-        window: 3600, // 100 requests per hour
+        window: 3600, // 1000 requests per hour
     },
     pro: {
         limit: 2000,
-        window: 3600, // 1000 requests per hour
+        window: 3600, // 2000 requests per hour
     },
     enterprise: {
         limit: 5000,

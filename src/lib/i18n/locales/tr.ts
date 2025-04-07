@@ -673,80 +673,96 @@ export default {
         ocr: "Tarama belgelerinden optik karakter tanıma ile metin çıkarın."
     },
     splitPdf: {
-        title: "PDF’yi Böl",
-        description: "PDF dosyalarını birden fazla belgeye ayırın veya belirli sayfaları çıkarın",
+        title: "PDF Böl - PDF Sayfalarını Çevrimiçi Ayır",
+        description: "Ücretsiz çevrimiçi PDF ayırıcı aracımızla PDF dosyalarını kolayca birden fazla belgeye bölün, sayfaları silin veya belirli sayfaları çıkarın",
         howTo: {
-            title: "PDF Dosyaları Nasıl Bölünür",
+            title: "PDF Dosyalarını Çevrimiçi Nasıl Bölerim",
             step1: {
-                title: "Yükle",
-                description: "Bölmek veya sayfa çıkarmak istediğiniz PDF dosyasını yükleyin"
+                title: "PDF'nizi Yükleyin",
+                description: "Dosya ve tıklayın ile bölmek, sayfaları silmek veya sayfaları çıkarmak istediğiniz PDF'yi sürükle ve bırak özelliğimizle yükleyin"
             },
             step2: {
-                title: "Bölme Yöntemini Seç",
-                description: "PDF’nizi nasıl bölmek istediğinizi seçin: sayfa aralıklarına göre, her sayfayı çıkararak veya her N sayfada bir bölerek"
+                title: "Bölmek İçin Sayfaları Seçin",
+                description: "Bölme yönteminizi seçin: sayfaları aralıklarla seçin, PDF sayfalarını tek tek ayırın veya PDF'leri her N sayfada birden fazla dosyaya bölün"
             },
             step3: {
-                title: "İndir",
-                description: "Bölünmüş PDF dosyalarınızı tek tek indirin"
+                title: "Bölünmüş Dosyaları İndirin",
+                description: "Bölünmüş PDF dosyalarınızı veya ayrılmış sayfaları anında bireysel belgeler olarak indirin"
             }
         },
         options: {
-            splitMethod: "Bölme Yöntemi",
-            byRange: "Sayfa aralıklarına göre böl",
-            extractAll: "Tüm sayfaları ayrı PDF’ler olarak çıkar",
-            everyNPages: "Her N sayfada bir böl",
-            everyNPagesNumber: "Dosya başına sayfa sayısı",
+            splitMethod: "Bölme Yönteminizi Seçin",
+            byRange: "Sayfa Aralıklarına Göre Böl",
+            extractAll: "Tüm Sayfaları Ayrı PDF'ler Olarak Çıkar",
+            everyNPages: "Her N Sayfada Böl",
+            everyNPagesNumber: "Dosya Başına Sayfa Sayısı",
             everyNPagesHint: "Her çıktı dosyası bu kadar sayfa içerecek",
             pageRanges: "Sayfa Aralıkları",
-            pageRangesHint: "Virgülle ayrılmış sayfa aralıklarını girin. Örnek: 1-5, 8, 11-13, 3 PDF dosyası oluşturur"
+            pageRangesHint: "Birden fazla PDF dosyası oluşturmak için virgülle ayrılmış sayfa aralıklarını girin (örneğin, 1-5, 8, 11-13)"
         },
-        splitting: "PDF bölünüyor...",
+        splitting: "PDF Bölünüyor...",
         splitDocument: "Belgeyi Böl",
-        splitSuccess: "PDF başarıyla bölündü!",
-        splitSuccessDesc: "PDF’niz {count} ayrı dosyaya bölündü",
+        splitSuccess: "PDF Başarıyla Bölündü!",
+        splitSuccessDesc: "PDF'niz {count} ayrı dosyaya bölündü",
         results: {
             title: "PDF Bölme Sonuçları",
             part: "Bölüm",
             pages: "Sayfalar",
-            pagesCount: "sayfa"
+            pagesCount: "sayfalar"
         },
         faq: {
-            title: "Sıkça Sorulan Sorular",
+            title: "PDF Bölme Hakkında Sıkça Sorulan Sorular",
             q1: {
                 question: "PDF dosyalarım bölündükten sonra ne oluyor?",
                 answer: "Gizliliğiniz ve güvenliğiniz için tüm yüklenen ve oluşturulan dosyalar 24 saat sonra sunucularımızdan otomatik olarak silinir."
             },
             q2: {
                 question: "Bölebileceğim sayfa sayısında bir sınır var mı?",
-                answer: "Ücretsiz sürüm, 100 sayfaya kadar PDF’leri bölmenize izin verir. Daha büyük belgeler için premium planımızı düşünebilirsiniz."
+                answer: "Ücretsiz sürüm 100 sayfaya kadar PDF'leri destekler. Daha büyük dosyalar veya sınırsız bölme için premium planımıza yükseltin."
             },
             q3: {
-                question: "PDF’den belirli sayfaları çıkarabilir miyim?",
-                answer: "Evet, PDF belgenizden belirli sayfaları veya sayfa aralıklarını çıkarmak için \"Sayfa aralıklarına göre böl\" seçeneğini kullanabilirsiniz."
+                question: "PDF'den sayfaları silebilir veya belirli sayfaları çıkarabilir miyim?",
+                answer: "Evet, 'Sayfa aralıklarına göre böl' seçeneğini kullanarak sayfaları sebilir veya PDF'nizden belirli bölümleri çevrimiçi olarak çıkarabilirsiniz."
             },
             q4: {
                 question: "Bölme sırasında sayfaları yeniden sıralayabilir miyim?",
-                answer: "Şu anda bölme aracı orijinal sayfa sırasını korur. Sayfaları yeniden sıralamak için, çıkarılan sayfalarla PDF Birleştirme aracımızı kullanmanız gerekir."
+                answer: "Şu anda bölme sırasında sayfa sırası korunur. Bölmeden sonra sayfaları yeniden sıralamak için sürükle ve bırak özellikli PDF Birleştirme aracımızı kullanın."
             }
         },
         useCases: {
-            title: "PDF Bölme için Popüler Kullanımlar",
+            title: "PDF Ayırıcı Aracımızın Popüler Kullanımları",
             chapters: {
-                title: "Bölüm Ayırma",
-                description: "Büyük kitapları veya raporları ayrı bölümlere ayırarak gezinmeyi ve paylaşmayı kolaylaştırın"
+                title: "PDF Sayfalarını Bölümlere Göre Ayır",
+                description: "Büyük kitapları veya raporları bireysel bölümlere ayırarak paylaşımı ve gezinmeyi kolaylaştırın"
             },
             extract: {
-                title: "Sayfa Çıkarma",
-                description: "Uzun belgelerden formlar, sertifikalar veya önemli bölümler gibi belirli sayfaları çıkarın"
+                title: "PDF'den Sayfaları Çıkar",
+                description: "Formlar veya sertifikalar gibi sayfaları seçerek uzun belgelerden basit bir dosya ve tıklama ile çıkarın"
             },
             remove: {
-                title: "Sayfaları Kaldır",
-                description: "İhtiyacınız olan tüm sayfaları çıkarın ve reklamlar veya boş sayfalar gibi istenmeyen içeriği dışarıda bırakın"
+                title: "PDF'den Sayfaları Sil",
+                description: "Reklamlar veya boş sayfalar gibi istenmeyen sayfaları, tutmak istediğiniz sayfaları seçip buna göre bölerek kaldırın"
             },
             size: {
-                title: "Boyut Küçültme",
-                description: "Büyük PDF’leri daha küçük dosyalara ayırarak e-posta veya mesajlaşma uygulamalarıyla paylaşımı kolaylaştırın"
+                title: "Boyut Azaltma İçin PDF'leri Birden Fazla Dosyaya Böl",
+                description: "Çevrimiçi PDF ayırıcımızla büyük PDF'leri daha küçük dosyalara ayırarak e-posta veya mesajlaşmayı kolaylaştırın"
             }
+        },
+        newSection: {
+            title: "Neden Çevrimiçi PDF Ayırıcımızı Kullanmalısınız?",
+            description: "PDF ayırıcımız, PDF sayfalarını ayırmanıza, sayfaları silmenize ve PDF'leri birden fazla dosyaya hızlı ve güvenli bir şekilde bölmenize olanak tanır. Sürükle ve bırak basitliğini yaşayın, sayfaları hassasiyetle seçin ve yazılım indirmeden belgelerinizi çevrimiçi olarak yönetin.",
+            additional: "Bir proje için PDF sayfalarını ayırmanız, istemediğiniz sayfaları silmeniz veya paylaşımı kolaylaştırmak için PDF'leri birden fazla dosyaya bölmeniz gerekirse, çevrimiçi PDF ayırıcımız mükemmel bir araçtır. Kullanıcı dostu sürükle ve bırak arayüzü ile dosyanızı yükleyebilir ve sayfaları zahmetsizce seçebilirsiniz. Hizmetimiz hızlı, güvenli ve ücretsizdir—yazılım kurmadan PDF belgelerini çevrimiçi yönetmek için idealdir. Büyük PDF'leri bölün, belirli sayfaları çıkarın veya birkaç tıklamayla dosya boyutlarını küçültün!"
+        },
+        seoContent: {
+            title: "PDF Ayırıcımızla PDF Yönetiminizi Ustalaştırın",
+            p1: "PDF'leri birden fazla dosyaya bölmek veya belirli sayfaları çevrimiçi olarak çıkarmak için sorunsuz bir yola mı ihtiyacınız var? PDF ayırıcı aracımız, belge yönetiminin stresini azaltmak için tasarlandı. Öğrenci, yoğun bir profesyonel veya sadece kişisel dosyaları organize ediyor olsanız da, sayfaları silebilir, istediğinizi seçebilir ve büyük PDF'leri anında bölebilirsiniz. Dosyanızı yükleyiciye sürükleyin, bölme stilinizi tıklayarak seçin—sayfa aralıkları, tek sayfalar veya her birkaç sayfa—ve hazırsınız. Bugün bulabileceğiniz en kullanışlı çevrimiçi PDF ayırıcılardan biridir.",
+            p2: "PDF bölme bundan daha basit olamaz. Büyük bir rapordan bir sayfa mı almak istiyorsunuz? Boş sayfalar veya reklamlar her şeyi karıştırdığı için yorulmadınız mı? Aracımız, hangi sayfaları tutmak istediğinizi tam olarak belirlemenize ve bunları ayrı dosyalara veya daha küçük gruplara dönüştürmenize olanak tanır. Hepsi çevrimiçi—indirme gerekmez. PDF ayırıcımızla, hantal bir belgeyi düzenli ve yönetilebilir parçalara dönüştürebilirsiniz, dosya boyutu sorunu olmadan e-posta göndermeye, depolamaya veya paylaşmaya hazır hale gelir.",
+            p3: "Çevrimiçi PDF ayırıcımız, basit düzeni ve sağlam seçenekleriyle parlar. Bir ders kitabını bölümlere ayırın veya uzun bir sözleşmeyi önemli kısımlara kolayca kesin. Sürükle ve bırak özelliği bunu akıcı hale getirir—dosyanızı bırakın ve tıklayarak başlayın. PDF'nizi bölmeden önce önizleme yaparak sayfaları tam isabetle seçebilirsiniz. Ve en iyi kısmı? 100 sayfaya kadar olan dosyalar için ücretsizdir, böylece herkes hemen başlayabilir.",
+            p4: "Neden PDF ayırıcımızı seçmelisiniz? Hızlı, güvenli ve esneklikle doludur. Bir sunum için sayfaları çıkarın, bir belgeyi temizlemek için fazlalıkları atın veya daha iyi düzenleme için PDF'leri birden fazla dosyaya bölün—hepsi tarayıcınızdan. 'Çevrimiçi PDF böl', 'sayfaları sil' ve 'PDF sayfalarını ayır' gibi aramalarda görünmesi için optimize ettik, böylece ihtiyacınız olduğunda bizi bulabilirsiniz. Bugün deneyin ve PDF yönetiminin ne kadar sorunsuz olabileceğini görün!"
+        },
+        relatedTools: "İlgili Araçlar",
+        popular: {
+            viewAll: "Tüm Araçları Görüntüle"
         }
     },
     // PDF Birleştirme Sayfası
