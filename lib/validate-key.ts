@@ -1,5 +1,25 @@
-// lib/validate-key.ts
+// lib/validate-key.ts with expanded permissions
 import { prisma } from '@/lib/prisma';
+
+// Define all available operations for API permissions
+export const API_OPERATIONS = [
+    'convert',   // PDF conversion (to/from various formats)
+    'compress',  // PDF compression
+    'merge',     // Merge multiple PDFs
+    'split',     // Split PDF into multiple files
+    'protect',   // Password protect PDF
+    'unlock',    // Remove password from PDF
+    'watermark', // Add watermark to PDF
+    'sign',      // Add signatures to PDF
+    'rotate',    // Rotate PDF pages
+    'ocr',       // Optical Character Recognition
+    'repair',    // Repair corrupted PDF
+    'edit',      // Edit PDF content
+    'annotate',  // Add annotations to PDF
+    'extract',   // Extract content from PDF
+    'redact',    // Redact content from PDF
+    'organize',  // Organize/rearrange PDF pages
+];
 
 // Define usage limits by tier (operations per month)
 const usageLimits = {

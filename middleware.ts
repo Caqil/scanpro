@@ -1,5 +1,6 @@
 // middleware.ts
 import { NextRequest, NextResponse } from 'next/server';
+import { API_OPERATIONS } from './lib/validate-key';
 
 // Define API routes that require API key validation
 const API_ROUTES = [
@@ -12,6 +13,16 @@ const API_ROUTES = [
   '/api/pdf/protect',
   '/api/pdf/unlock',
   '/api/ocr',
+  '/api/pdf/sign',
+  '/api/pdf/edit',
+  '/api/pdf/repair',
+  '/api/pdf/extract',
+  '/api/pdf/annotate',
+  '/api/pdf/redact',
+  '/api/pdf/organize',
+  '/api/pdf/process',
+  '/api/pdf/save',
+  '/api/pdf/info',
 ];
 
 // Routes that should be excluded from API key validation
@@ -29,35 +40,13 @@ const EXCLUDED_ROUTES = [
   '/api/auth/callback/apple',
   '/forgot-password', // Exclude forgot password route
   '/reset-password',  // Exclude reset password route
-  '/en/forgot-password', // Ensure language-specific routes work
-  '/en/reset-password',  // Ensure language-specific routes work
-  '/id/forgot-password', // Support other languages
-  '/id/reset-password',
-  '/es/forgot-password',
-  '/es/reset-password',
-  '/fr/forgot-password',
-  '/fr/reset-password',
-  '/zh/forgot-password',
-  '/zh/reset-password',
-  '/ar/forgot-password',
-  '/ar/reset-password',
-  '/hi/forgot-password',
-  '/hi/reset-password',
-  '/ru/forgot-password',
-  '/ru/reset-password',
-  '/pt/forgot-password',
-  '/pt/reset-password',
-  '/de/forgot-password',
-  '/de/reset-password',
-  '/ja/forgot-password',
-  '/ja/reset-password',
-  '/ko/forgot-password',
-  '/ko/reset-password',
-  '/it/forgot-password',
-  '/it/reset-password',
-  '/tr/forgot-password',
-  '/tr/reset-password',
-
+  
+  // Language-specific auth routes
+  ...['en', 'id', 'es', 'fr', 'zh', 'ar', 'hi', 'ru', 'pt', 'de', 'ja', 'ko', 'it', 'tr'].flatMap(lang => [
+    `/${lang}/forgot-password`,
+    `/${lang}/reset-password`,
+  ]),
+  
   // Public file download/status routes
   '/api/convert/status',
   '/api/convert/download',
@@ -96,10 +85,33 @@ function isWebUIRequest(request: NextRequest): boolean {
   return fromBrowser && (acceptsHtml || ownSiteReferer);
 }
 
+// Map API route patterns to operation types
+const ROUTE_TO_OPERATION_MAP: Record<string, string> = {
+  '/api/convert': 'convert',
+  '/api/compress': 'compress',
+  '/api/merge': 'merge',
+  '/api/split': 'split',
+  '/api/pdf/watermark': 'watermark',
+  '/api/rotate': 'rotate',
+  '/api/pdf/protect': 'protect',
+  '/api/pdf/unlock': 'unlock',
+  '/api/ocr': 'ocr',
+  '/api/pdf/sign': 'sign',
+  '/api/pdf/edit': 'edit',
+  '/api/pdf/repair': 'repair',
+  '/api/pdf/extract': 'extract',
+  '/api/pdf/annotate': 'annotate',
+  '/api/pdf/redact': 'redact',
+  '/api/pdf/organize': 'organize',
+  '/api/pdf/process': 'process',
+  '/api/pdf/save': 'edit',
+  '/api/pdf/info': 'extract',
+};
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
- 
+  // Check if route should be excluded from API key validation
   for (const excludedRoute of EXCLUDED_ROUTES) {
     if (pathname.startsWith(excludedRoute)) {
       return NextResponse.next();
@@ -107,32 +119,63 @@ export async function middleware(request: NextRequest) {
   }
 
   // Check if this is an API route that needs authentication
+  let requiresApiKey = false;
+  let operationType = '';
+  
   for (const apiRoute of API_ROUTES) {
     if (pathname.startsWith(apiRoute)) {
-      // Skip API key validation for requests from the web UI
-      if (isWebUIRequest(request)) {
-        console.log(`Bypassing API key check for web UI request to ${pathname}`);
-        return NextResponse.next();
+      requiresApiKey = true;
+      
+      // Determine operation type for this route
+      for (const [routePattern, operation] of Object.entries(ROUTE_TO_OPERATION_MAP)) {
+        if (pathname.startsWith(routePattern)) {
+          operationType = operation;
+          break;
+        }
       }
-
-      // For programmatic API access, check API key
-      const apiKey = request.headers.get('x-api-key') || request.nextUrl.searchParams.get('api_key');
-
-      if (!apiKey) {
-        return NextResponse.json(
-          { error: 'API key is required' },
-          { status: 401 }
-        );
+      
+      // If no specific mapping is found, use the last part of the path
+      if (!operationType) {
+        const pathParts = pathname.split('/');
+        operationType = pathParts[pathParts.length - 1];
       }
-
-      // Simply pass the API key to the endpoint
-      // Let the endpoint handle validation directly with the database
-      return NextResponse.next();
+      
+      break;
     }
   }
+  
+  if (!requiresApiKey) {
+    // Not an API route that needs validation
+    return NextResponse.next();
+  }
 
-  // Continue for non-API routes
-  return NextResponse.next();
+  // Skip API key validation for requests from the web UI
+  if (isWebUIRequest(request)) {
+    console.log(`Bypassing API key check for web UI request to ${pathname}`);
+    return NextResponse.next();
+  }
+
+  // For programmatic API access, check API key
+  const apiKey = request.headers.get('x-api-key') || request.nextUrl.searchParams.get('api_key');
+
+  if (!apiKey) {
+    return NextResponse.json(
+      { error: 'API key is required' },
+      { status: 401 }
+    );
+  }
+
+  // Add operation type to the request headers for the API route to use
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-operation-type', operationType);
+
+  // Simply pass the API key to the endpoint
+  // Let the endpoint handle validation directly with the database
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
 }
 
 export const config = {

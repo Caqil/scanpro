@@ -210,14 +210,10 @@ export function PdfMerger() {
       setProgress(100);
       setMergedFileUrl(data.filename);
       
-      toast.success(t('mergePdf.success') || "Merge Successful", {
-        description: `${t('mergePdf.successDesc') || "Successfully merged"} ${data.fileCount} ${t('mergePdf.files') || "PDF files"}.`,
-      });
+      toast.success(t('mergePdf.ui.successMessage') || "Merge Successful", );
     } catch (err) {
       setError(err instanceof Error ? err.message : "An unknown error occurred");
-      toast.error(t('mergePdf.error.failed') || "Merge Failed", {
-        description: err instanceof Error ? err.message : t('mergePdf.error.generic') || "Failed to merge your files",
-      });
+      toast.error( "Merge Failed",);
     } finally {
       setIsProcessing(false);
     }
