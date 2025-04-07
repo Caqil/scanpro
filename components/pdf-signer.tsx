@@ -219,44 +219,99 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
     reader.readAsDataURL(uploadedFile);
   };
 
+  const svgToImageDataUrl = async (svgString: string, width: number, height: number): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      try {
+        // Create a temporary image to load the SVG
+        const img = new Image();
+        // Convert SVG to a data URL
+        const svgBlob = new Blob([svgString], { type: 'image/svg+xml' });
+        const svgUrl = URL.createObjectURL(svgBlob);
+        
+        img.onload = () => {
+          // Create a canvas to render the image
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          
+          if (!ctx) {
+            reject(new Error('Could not get canvas context'));
+            return;
+          }
+          
+          // Draw SVG image on canvas
+          ctx.drawImage(img, 0, 0, width, height);
+          
+          // Convert canvas to data URL (PNG format)
+          const dataUrl = canvas.toDataURL('image/png');
+          
+          // Clean up
+          URL.revokeObjectURL(svgUrl);
+          
+          resolve(dataUrl);
+        };
+        
+        img.onerror = () => {
+          URL.revokeObjectURL(svgUrl);
+          reject(new Error('Failed to load SVG'));
+        };
+        
+        // Set source to SVG data URL
+        img.src = svgUrl;
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+  
+  // 2. Update the generateStampSvg function to create a more compatible SVG
   const generateStampSvg = (type: string): string => {
     let text = "";
     let fillColor = "";
-
+    let borderColor = "";
+  
     switch (type) {
       case "approved":
         text = "APPROVED";
         fillColor = "#4caf50"; // Green for approved
+        borderColor = "#388e3c";
         break;
       case "rejected":
         text = "REJECTED";
         fillColor = "#f44336"; // Red for rejected
+        borderColor = "#d32f2f";
         break;
       case "draft":
         text = "DRAFT";
         fillColor = "#2196f3"; // Blue for draft
+        borderColor = "#1976d2";
         break;
       case "final":
         text = "FINAL";
         fillColor = "#ff9800"; // Orange for final
+        borderColor = "#f57c00";
         break;
       case "confidential":
         text = "CONFIDENTIAL";
         fillColor = "#9c27b0"; // Purple for confidential
+        borderColor = "#7b1fa2";
         break;
       default:
         text = "APPROVED";
         fillColor = "#4caf50";
+        borderColor = "#388e3c";
     }
-
-    return `
-      <svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 150 50">
-        <rect x="0" y="0" width="150" height="50" fill="none" stroke="${fillColor}" stroke-width="2" />
-        <text x="75" y="30" font-family="Arial" font-size="16" font-weight="bold" fill="${fillColor}" text-anchor="middle" dominant-baseline="middle">${text}</text>
-      </svg>
-    `;
+  
+    // Create a more compatible SVG with inline styles
+    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+  <svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 150 50">
+    <rect x="2" y="2" width="146" height="46" rx="4" ry="4" fill="white" stroke="${borderColor}" stroke-width="2" />
+    <text x="75" y="30" font-family="Arial" font-size="16" font-weight="bold" fill="${fillColor}" text-anchor="middle" alignment-baseline="middle">${text}</text>
+  </svg>`;
   };
-
+  
+  
   const handleAddField = (type: ElementType) => {
     if (!canvasRef.current || pages.length === 0 || currentPage >= pages.length)
       return;
@@ -516,7 +571,6 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
       setProcessing(false);
     }
   };
-
   const SignatureElementComponent = memo(
     ({
       element,
@@ -579,7 +633,7 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
         padding: "4px",
         transition: "border 0.2s ease, background-color 0.2s ease",
       };
-
+  
       const resizeHandleStyles: React.CSSProperties = {
         position: "absolute",
         bottom: "-6px",
@@ -593,7 +647,7 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
         border: "2px solid white",
         boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
       };
-
+  
       return (
         <div
           key={element.id}
@@ -616,8 +670,7 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
                 pointerEvents: "none",
               }}
             />
-          ) : element.type === "stamp" &&
-            element.data.startsWith("data:image/") ? (
+          ) : element.type === "stamp" && element.data.startsWith("data:") ? (
             <div
               style={{
                 width: "100%",
@@ -629,14 +682,16 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
                 pointerEvents: "none",
               }}
             />
-          ) : element.type === "stamp" && element.data.startsWith("<svg") ? (
-            <div
-              dangerouslySetInnerHTML={{ __html: element.data }}
+          ) : element.type === "stamp" && element.data.includes("<svg") ? (
+            // Fix: Create an img element with a data URL for SVG content
+            <img 
+              src={`data:image/svg+xml;base64,${btoa(element.data)}`}
               style={{
                 width: "100%",
                 height: "100%",
                 pointerEvents: "none",
               }}
+              alt="Stamp"
             />
           ) : (
             <span className="text-muted-foreground font-medium">
@@ -757,9 +812,7 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
         {/* File Upload Section */}
         {!file && (
           <div className="flex-1 flex items-center justify-center p-6">
-            <Card className="w-full max-w-2xl">
-              <CardContent className="p-8">
-                <div
+            <div
                   className={`border-2 border-dashed rounded-lg p-12 text-center transition-colors ${
                     isDragOver
                       ? "border-primary bg-primary/5"
@@ -817,8 +870,6 @@ export function PdfSigner({ initialTool = "signature" }: Props) {
                     {t("ui.filesSecurity")}
                   </p>
                 </div>
-              </CardContent>
-            </Card>
           </div>
         )}
 
