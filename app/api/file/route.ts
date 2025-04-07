@@ -52,7 +52,8 @@ export async function GET(req: NextRequest) {
     "signatures",
     "ocr",
     "edited",
-    "processed"
+    "processed",
+    "unwatermarked"
   ];
 
   if (!allowedFolders.includes(folder)) {
