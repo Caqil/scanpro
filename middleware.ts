@@ -19,6 +19,7 @@ const API_ROUTES = [
   '/api/pdf/extract',
   '/api/pdf/annotate',
   '/api/pdf/redact',
+  '/api/pdf/redact/detect',
   '/api/pdf/organize',
   '/api/pdf/process',
   '/api/pdf/save',
@@ -40,13 +41,13 @@ const EXCLUDED_ROUTES = [
   '/api/auth/callback/apple',
   '/forgot-password', // Exclude forgot password route
   '/reset-password',  // Exclude reset password route
-  
+
   // Language-specific auth routes
   ...['en', 'id', 'es', 'fr', 'zh', 'ar', 'hi', 'ru', 'pt', 'de', 'ja', 'ko', 'it', 'tr'].flatMap(lang => [
     `/${lang}/forgot-password`,
     `/${lang}/reset-password`,
   ]),
-  
+
   // Public file download/status routes
   '/api/convert/status',
   '/api/convert/download',
@@ -102,6 +103,7 @@ const ROUTE_TO_OPERATION_MAP: Record<string, string> = {
   '/api/pdf/extract': 'extract',
   '/api/pdf/annotate': 'annotate',
   '/api/pdf/redact': 'redact',
+  '/api/pdf/redact/detect': 'detect',
   '/api/pdf/organize': 'organize',
   '/api/pdf/process': 'process',
   '/api/pdf/save': 'edit',
@@ -121,11 +123,11 @@ export async function middleware(request: NextRequest) {
   // Check if this is an API route that needs authentication
   let requiresApiKey = false;
   let operationType = '';
-  
+
   for (const apiRoute of API_ROUTES) {
     if (pathname.startsWith(apiRoute)) {
       requiresApiKey = true;
-      
+
       // Determine operation type for this route
       for (const [routePattern, operation] of Object.entries(ROUTE_TO_OPERATION_MAP)) {
         if (pathname.startsWith(routePattern)) {
@@ -133,17 +135,17 @@ export async function middleware(request: NextRequest) {
           break;
         }
       }
-      
+
       // If no specific mapping is found, use the last part of the path
       if (!operationType) {
         const pathParts = pathname.split('/');
         operationType = pathParts[pathParts.length - 1];
       }
-      
+
       break;
     }
   }
-  
+
   if (!requiresApiKey) {
     // Not an API route that needs validation
     return NextResponse.next();

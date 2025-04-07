@@ -31,12 +31,12 @@ import {
   Eraser,
   Text,
   Image,
-  SquareSelection,
   Info,
   FileText,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { SelectIcon } from "@radix-ui/react-select";
 
 // Initialize pdfjs worker
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -97,7 +97,16 @@ export function PdfRedactor() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const pdfCanvasRef = useRef<HTMLDivElement>(null);
-  
+
+  // Effect to handle cleanup of redacted PDF URL
+  useEffect(() => {
+    return () => {
+      if (redactedPdfUrl) {
+        URL.revokeObjectURL(redactedPdfUrl);
+      }
+    };
+  }, [redactedPdfUrl]);
+
   // Handle file upload through click or drag and drop
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -360,6 +369,87 @@ export function PdfRedactor() {
     }
   };
   
+  // Handle auto redaction pattern detection
+  const handleAutoRedaction = async () => {
+    if (!file || !pdfCanvasRef.current) return;
+    
+    setIsProcessing(true);
+    setProgress(10);
+    
+    try {
+      // Prepare active patterns for search
+      const activePatterns = patterns.filter(p => p.enabled).map(p => {
+        // Handle custom pattern separately
+        if (p.type === 'custom' && customPattern) {
+          return { ...p, pattern: customPattern };
+        }
+        return p;
+      });
+      
+      if (activePatterns.length === 0) {
+        toast.error(t('redactPdf.errors.noPatterns') || "Please enable at least one pattern for automatic redaction");
+        setIsProcessing(false);
+        return;
+      }
+      
+      setProgress(20);
+      
+      // In a real implementation, we would extract text from the PDF and find matches
+      // Here we'll simulate the process by sending the file and patterns to our API
+      
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('patterns', JSON.stringify(activePatterns));
+      formData.append('removeMetadata', removeMetadata.toString());
+      
+      const response = await fetch('/api/pdf/redact/detect', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      setProgress(60);
+      
+      if (!response.ok) {
+        throw new Error(`Error detecting patterns: ${response.statusText}`);
+      }
+      
+      const result = await response.json();
+      
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to detect patterns');
+      }
+      
+      setProgress(80);
+      
+      // Add the detected areas as redaction rectangles
+      const autoRects: RedactionRect[] = result.matches.map((match: any) => ({
+        id: `auto-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        pageIndex: match.pageIndex,
+        x: match.x,
+        y: match.y,
+        width: match.width,
+        height: match.height,
+        color: redactionColor,
+        label: showLabels ? `${match.patternType}: ${match.text}` : undefined
+      }));
+      
+      setRedactionRects(prev => [...prev, ...autoRects]);
+      setProgress(100);
+      
+      if (autoRects.length > 0) {
+        toast.success(`Found and marked ${autoRects.length} items for redaction`);
+        setActiveTab('manual'); // Switch to manual tab to review marked items
+      } else {
+        toast.info('No matching patterns found in the document');
+      }
+    } catch (error) {
+      console.error('Auto redaction error:', error);
+      toast.error(error instanceof Error ? error.message : 'An error occurred during automatic redaction');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   // Render redaction rectangles
   const renderRedactionRects = () => {
     return redactionRects
@@ -473,7 +563,7 @@ export function PdfRedactor() {
             <SelectContent>
               <SelectItem value="rect">
                 <div className="flex items-center gap-2">
-                  <SquareSelection className="h-4 w-4" />
+                  <SelectIcon className="h-4 w-4" />
                   <span>{t('redactPdf.tools.rectangle') || "Rectangle"}</span>
                 </div>
               </SelectItem>
@@ -584,13 +674,13 @@ export function PdfRedactor() {
                 renderTextLayer={activeTool === 'text'}
                 renderAnnotationLayer={false}
                 onLoadSuccess={onPageLoadSuccess}
-                customTextRenderer={
-                  activeTool === 'text'
-                    ? (textItem) => (
-                        <span style={{ cursor: 'pointer' }}>{textItem.str}</span>
-                      )
-                    : undefined
-                }
+                // customTextRenderer={
+                //   activeTool === 'text'
+                //     ? (textItem) => (
+                //         <span style={{ cursor: 'pointer' }}>{textItem.str}</span>
+                //       )
+                //     : undefined
+                // }
               />
               {renderRedactionRects()}
             </Document>
@@ -794,7 +884,7 @@ export function PdfRedactor() {
               <TabsList>
                 <TabsTrigger value="manual">
                   <div className="flex items-center gap-1">
-                    <SquareSelection className="h-4 w-4" />
+                    <SelectIcon className="h-4 w-4" />
                     <span className="hidden sm:inline">{t('redactPdf.tabs.manual') || "Manual"}</span>
                   </div>
                 </TabsTrigger>
@@ -815,6 +905,7 @@ export function PdfRedactor() {
         
         {file && !redactedPdfUrl && (
           <div className="h-full">
+            <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsContent value="manual" className="h-full m-0">
               {renderPdfEditor()}
             </TabsContent>
@@ -822,6 +913,7 @@ export function PdfRedactor() {
             <TabsContent value="auto" className="m-0">
               {renderAutoRedactionTab()}
             </TabsContent>
+            </Tabs>
           </div>
         )}
         
@@ -836,82 +928,4 @@ export function PdfRedactor() {
       </CardFooter>
     </Card>
   );
-  
-  // Function to handle automatic text search and redaction based on patterns
-  const handleAutoRedaction = async () => {
-    if (!file || !pdfCanvasRef.current) return;
-    
-    setIsProcessing(true);
-    setProgress(10);
-    
-    try {
-      // Prepare active patterns for search
-      const activePatterns = patterns.filter(p => p.enabled).map(p => {
-        // Handle custom pattern separately
-        if (p.type === 'custom' && customPattern) {
-          return { ...p, pattern: customPattern };
-        }
-        return p;
-      });
-      
-      if (activePatterns.length === 0) {
-        toast.error(t('redactPdf.errors.noPatterns') || "Please enable at least one pattern for automatic redaction");
-        setIsProcessing(false);
-        return;
-      }
-      
-      setProgress(20);
-      
-      // In a real implementation, we would extract text from the PDF and find matches
-      // Here we'll simulate the process by sending the file and patterns to our API
-      
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('patterns', JSON.stringify(activePatterns));
-      formData.append('removeMetadata', removeMetadata.toString());
-      
-      const response = await fetch('/api/pdf/redact/detect', {
-        method: 'POST',
-        body: formData,
-      });
-      
-      setProgress(60);
-      
-      if (!response.ok) {
-        throw new Error(`Error detecting patterns: ${response.statusText}`);
-      }
-      
-      const result = await response.json();
-      
-      if (!result.success) {
-        throw new Error(result.error || 'Failed to detect patterns');
-      }
-      
-      setProgress(80);
-      
-      // Add the detected areas as redaction rectangles
-      const autoRects: RedactionRect[] = result.matches.map((match: any) => ({
-        id: `auto-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-        pageIndex: match.pageIndex,
-        x: match.x,
-        y: match.y,
-        width: match.width,
-        height: match.height,
-        color: redactionColor,
-        label: showLabels ? `${match.patternType}: ${match.text}` : undefined
-      }));
-      
-      setRedactionRects(prev => [...prev, ...autoRects]);
-      setProgress(100);
-      
-      if (autoRects.length > 0) {
-        toast.success(`Found and marked ${autoRects.length} items for redaction`);
-      } else {
-        toast.info('No matching patterns found in the document');
-      }
-    } catch (error) {
-      console.error('Auto redaction error:', error);
-      toast.error(error instanceof Error ? error.message : 'An error occurred during automatic redaction');
-    } finally {
-      setIsProcessing(false);
-    }
+}

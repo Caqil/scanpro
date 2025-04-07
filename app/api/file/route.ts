@@ -53,7 +53,8 @@ export async function GET(req: NextRequest) {
     "ocr",
     "edited",
     "processed",
-    "unwatermarked"
+    "unwatermarked",
+    "redacted"
   ];
 
   if (!allowedFolders.includes(folder)) {
