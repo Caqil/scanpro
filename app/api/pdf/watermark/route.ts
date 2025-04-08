@@ -97,6 +97,60 @@ function hexToRgb(hex: string): [number, number, number] {
     return [r, g, b];
 }
 
+// Calculate watermark positions based on position type
+function calculateWatermarkPositions(
+    position: string,
+    width: number,
+    height: number,
+    customX?: number,
+    customY?: number
+): { x: number, y: number }[] {
+    let positions: { x: number, y: number }[] = [];
+
+    switch(position) {
+        case 'center':
+            // Single watermark in the center
+            positions.push({
+                x: width / 2,
+                y: height / 2
+            });
+            break;
+        case 'tile':
+            // Tile watermarks across the page
+            const spacingX = width / 3;
+            const spacingY = height / 3;
+            
+            for (let x = spacingX / 2; x < width; x += spacingX) {
+                for (let y = spacingY / 2; y < height; y += spacingY) {
+                    positions.push({ x, y });
+                }
+            }
+            break;
+        case 'custom':
+            // Custom position using provided coordinates (as percentages)
+            if (customX !== undefined && customY !== undefined) {
+                const x = (width * customX) / 100;
+                const y = (height * customY) / 100;
+                positions.push({ x, y });
+            } else {
+                // Default to center if coordinates not provided
+                positions.push({
+                    x: width / 2,
+                    y: height / 2
+                });
+            }
+            break;
+        default:
+            // Default to center
+            positions.push({
+                x: width / 2,
+                y: height / 2
+            });
+    }
+    
+    return positions;
+}
+
 // Add text watermark to PDF
 async function addTextWatermark(
     pdfDoc: PDFDocument,
@@ -109,6 +163,8 @@ async function addTextWatermark(
         opacity: number;
         rotation: number;
         position: string;
+        customX?: number;
+        customY?: number;
     }
 ): Promise<void> {
     try {
@@ -146,44 +202,25 @@ async function addTextWatermark(
             const page = pdfDoc.getPage(pageIndex);
             const { width, height } = page.getSize();
 
-            // Set text size and get dimensions
-            const textSize = options.fontSize;
-            const textWidth = font.widthOfTextAtSize(options.text, textSize);
-            const textHeight = font.heightAtSize(textSize);
-
-            // Determine positions based on the chosen position option
-            let positions: { x: number, y: number }[] = [];
-
-            if (options.position === 'center') {
-                // Single watermark in the center
-                positions.push({
-                    x: (width - textWidth) / 2,
-                    y: (height - textHeight) / 2
-                });
-            } else if (options.position === 'tile') {
-                // Tile watermarks across the page
-                const spacingX = Math.max(textWidth * 2, width / 3);
-                const spacingY = Math.max(textHeight * 2, height / 3);
-
-                for (let x = spacingX / 2; x < width; x += spacingX) {
-                    for (let y = spacingY / 2; y < height; y += spacingY) {
-                        positions.push({ x, y });
-                    }
-                }
-            } else {
-                // Custom positioning (centered by default)
-                positions.push({
-                    x: (width - textWidth) / 2,
-                    y: (height - textHeight) / 2
-                });
-            }
+            // Calculate positions based on the selected position type
+            const positions = calculateWatermarkPositions(
+                options.position,
+                width,
+                height,
+                options.customX,
+                options.customY
+            );
 
             // Draw watermarks at each position
             for (const pos of positions) {
+                // Calculate text dimensions for centering
+                const textWidth = font.widthOfTextAtSize(options.text, options.fontSize);
+                const textHeight = font.heightAtSize(options.fontSize);
+
                 page.drawText(options.text, {
-                    x: pos.x,
-                    y: pos.y,
-                    size: textSize,
+                    x: pos.x - textWidth / 2,
+                    y: pos.y - textHeight / 2,
+                    size: options.fontSize,
                     font,
                     color: rgb(r, g, b),
                     opacity: options.opacity / 100,
@@ -207,6 +244,8 @@ async function addImageWatermark(
         opacity: number;
         rotation: number;
         position: string;
+        customX?: number;
+        customY?: number;
     }
 ): Promise<void> {
     try {
@@ -240,45 +279,27 @@ async function addImageWatermark(
             }
 
             const page = pdfDoc.getPage(pageIndex);
-            const { width, height } = page.getSize();
+            const { width: pageWidth, height: pageHeight } = page.getSize();
+
+            // Calculate positions based on the selected position type
+            const positions = calculateWatermarkPositions(
+                options.position,
+                pageWidth,
+                pageHeight,
+                options.customX,
+                options.customY
+            );
 
             // Scale image
             const scaleFactor = options.scale / 100;
             const scaledWidth = imgWidth * scaleFactor;
             const scaledHeight = imgHeight * scaleFactor;
 
-            // Determine positions based on the chosen position option
-            let positions: { x: number, y: number }[] = [];
-
-            if (options.position === 'center') {
-                // Single watermark in the center
-                positions.push({
-                    x: (width - scaledWidth) / 2,
-                    y: (height - scaledHeight) / 2
-                });
-            } else if (options.position === 'tile') {
-                // Tile watermarks across the page
-                const spacingX = Math.max(scaledWidth * 1.5, width / 3);
-                const spacingY = Math.max(scaledHeight * 1.5, height / 3);
-
-                for (let x = spacingX / 2; x < width; x += spacingX) {
-                    for (let y = spacingY / 2; y < height; y += spacingY) {
-                        positions.push({ x, y });
-                    }
-                }
-            } else {
-                // Custom positioning (centered by default)
-                positions.push({
-                    x: (width - scaledWidth) / 2,
-                    y: (height - scaledHeight) / 2
-                });
-            }
-
             // Draw watermarks at each position
             for (const pos of positions) {
                 page.drawImage(embeddedImage, {
-                    x: pos.x,
-                    y: pos.y,
+                    x: pos.x - scaledWidth / 2,
+                    y: pos.y - scaledHeight / 2,
                     width: scaledWidth,
                     height: scaledHeight,
                     opacity: options.opacity / 100,
@@ -362,6 +383,12 @@ export async function POST(request: NextRequest) {
         const position = formData.get('position') as string || 'center';
         const pages = formData.get('pages') as string || 'all';
         const customPages = formData.get('customPages') as string || '';
+        const opacity = parseInt(formData.get('opacity') as string || '30');
+        const rotation = parseInt(formData.get('rotation') as string || '45');
+        
+        // Get custom position coordinates if applicable
+        const customX = position === 'custom' ? parseFloat(formData.get('customX') as string || '50') : undefined;
+        const customY = position === 'custom' ? parseFloat(formData.get('customY') as string || '50') : undefined;
 
         if (!file) {
             return NextResponse.json(
@@ -383,9 +410,10 @@ export async function POST(request: NextRequest) {
         const inputPath = join(UPLOAD_DIR, `${uniqueId}-input.pdf`);
         const outputPath = join(WATERMARKED_DIR, `${uniqueId}-watermarked.pdf`);
 
-        // Write file to disk
+        // Save the uploaded PDF
         const buffer = Buffer.from(await file.arrayBuffer());
         await writeFile(inputPath, buffer);
+        console.log(`PDF saved to ${inputPath}`);
 
         // Load the PDF document
         const pdfBytes = await readFile(inputPath);
@@ -410,8 +438,6 @@ export async function POST(request: NextRequest) {
             const textColor = formData.get('textColor') as string || '#FF0000';
             const fontSize = parseInt(formData.get('fontSize') as string || '48');
             const fontFamily = formData.get('fontFamily') as string || 'Arial';
-            const opacity = parseInt(formData.get('opacity') as string || '30');
-            const rotation = parseInt(formData.get('rotation') as string || '45');
 
             // Add text watermark
             await addTextWatermark(pdfDoc, pagesToWatermark, {
@@ -421,7 +447,9 @@ export async function POST(request: NextRequest) {
                 color: textColor,
                 opacity,
                 rotation,
-                position
+                position,
+                customX,
+                customY
             });
         } else if (watermarkType === 'image') {
             // Get image watermark
@@ -436,8 +464,6 @@ export async function POST(request: NextRequest) {
 
             // Get image watermark options
             const scale = parseInt(formData.get('scale') as string || '50');
-            const opacity = parseInt(formData.get('opacity') as string || '30');
-            const rotation = parseInt(formData.get('rotation') as string || '0');
 
             // Read image file
             const imageBuffer = Buffer.from(await watermarkImage.arrayBuffer());
@@ -447,7 +473,9 @@ export async function POST(request: NextRequest) {
                 scale,
                 opacity,
                 rotation,
-                position
+                position,
+                customX,
+                customY
             });
         } else {
             return NextResponse.json(
