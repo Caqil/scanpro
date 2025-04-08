@@ -21,6 +21,8 @@ import {
   FileBoxIcon,
   FileCheck2,
   PenTool,
+  ScanFace,
+  ScanEyeIcon,
 } from "lucide-react"
 import { useLanguageStore } from "@/src/store/store"
 import {
@@ -219,6 +221,12 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           icon: <FileCheck2 className="h-5 w-5 text-blue-500" />,
           description: t("popular.ocrDesc"),
         },
+        {
+          name: t("ocrPdf.title"),
+          href: "/ocr-pdf",
+          icon: <ScanEyeIcon className="h-5 w-5 text-blue-500" />,
+          description: t("ocrPdf.description"),
+        },
       ],
     },
   ]
@@ -266,7 +274,6 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
               <a
                 href="https://apps.apple.com/us/app/scanpro-pdf-scanner-app/id6743518395"
                 target="_blank"
-                rel="noopener noreferrer"
                 className="text-xs font-medium bg-black text-white px-2 py-1 rounded-md flex items-center"
               >
                 <Apple className="h-3 w-3 mr-1" /> iOS
@@ -274,7 +281,6 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
               <a
                 href="https://play.google.com/store/apps/details?id=com.scanpro.documentconverter"
                 target="_blank"
-                rel="noopener noreferrer"
                 className="text-xs font-medium bg-primary-foreground text-primary px-2 py-1 rounded-md flex items-center"
               >
                 <svg

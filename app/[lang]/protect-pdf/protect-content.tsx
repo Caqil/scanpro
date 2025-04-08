@@ -285,7 +285,7 @@ export function RelatedToolsSection() {
       bg: "bg-blue-100 dark:bg-blue-900/30"
     },
     { 
-      href: "/sign", 
+      href: "/sign-pdf", 
       icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-500">
         <path d="M20 20h-8.5c-.83 0-1.5-.67-1.5-1.5v-8c0-.83.67-1.5 1.5-1.5h8.5"></path>
         <path d="M16 8V4c0-.5.5-1 1-1h4"></path>

@@ -305,7 +305,7 @@ export function RelatedToolsSection() {
       bg: "bg-blue-100 dark:bg-blue-900/30"
     },
     { 
-      href: "/sign", 
+      href: "/sign-pdf", 
       icon: <PenTool className="h-5 w-5 text-green-500" />,
       name: t('watermarkPdf.relatedTools.sign') || "Sign PDF",
       bg: "bg-green-100 dark:bg-green-900/30"

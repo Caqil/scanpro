@@ -199,11 +199,6 @@ export function Footer() {
             <h3 className="font-medium mb-4">{t('footer.support') || "Support"}</h3>
             <ul className="space-y-2">
               <li>
-                <LanguageLink href="/help" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  {t('footer.helpCenter') || "Help Center"}
-                </LanguageLink>
-              </li>
-              <li>
                 <LanguageLink href="/en/developer-api" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   {t('footer.apiDocs') || "API Documentation"}
                 </LanguageLink>

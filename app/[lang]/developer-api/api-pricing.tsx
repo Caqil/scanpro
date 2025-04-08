@@ -304,7 +304,7 @@ export function ApiPricing() {
               </p>
               <LanguageLink href="/contact">
                 <Button variant="outline" className="flex items-center gap-1">
-                  {t('developer.pricing.contactSales') || "Contact Sales"}
+                  {t('cta.contactSales') || "Contact Sales"}
                   <ChevronRightIcon className="h-4 w-4" />
                 </Button>
               </LanguageLink>

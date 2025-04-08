@@ -25,6 +25,7 @@ import HeroAnimation from "@/components/hero-animation";
 import { useLanguageStore } from '@/src/store/store'
 import { LanguageLink } from "@/components/language-link";
 import FeaturesContent from "./features-content";
+import { TypingAnimation } from "@/src/components/magicui/typing-animation";
 
 // Create a client component that uses useSearchParams
 function ClientHomeContent() {
@@ -92,12 +93,14 @@ function ClientHomeContent() {
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:grid-cols-2">
             <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
+                
                 <Badge variant="outline" className="w-fit">
                   <LightbulbIcon className="mr-1 h-3 w-3" />
                   {t('hero.badge')}
                 </Badge>
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                  {t('hero.title')}
+                <TypingAnimation>{t('hero.title')}</TypingAnimation>
+                  
                 </h1>
                 <p className="max-w-[600px] text-muted-foreground md:text-xl">
                   {t('hero.description')}
@@ -120,6 +123,7 @@ function ClientHomeContent() {
         <div className="container px-4 md:px-6">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+              
               {t('converter.title')}
             </h2>
             <p className="max-w-[85%] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">

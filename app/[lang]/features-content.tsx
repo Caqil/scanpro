@@ -136,7 +136,7 @@ export default function FeaturesPageContent() {
           title: t("features.categories.security.features.signature.title") || "Digital Signatures",
           description: t("features.categories.security.features.signature.description") || "Add digital signatures to PDFs for document authentication and verification.",
           icon: <PenTool className="h-5 w-5 text-purple-500" />,
-          link: "/sign"
+          link: "/sign-pdf"
         },
         {
           title: t("features.categories.security.features.redaction.title") || "PDF Redaction",
@@ -444,123 +444,6 @@ export default function FeaturesPageContent() {
               />
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Comparison Table */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold text-center mb-8">
-          {t("features.comparison.title") || "Feature Comparison"}
-        </h2>
-        <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-8">
-          {t("features.comparison.description") || "Compare our different plans to find the one that best suits your needs."}
-        </p>
-        
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="border-b">
-                <th className="text-left p-4 bg-muted/30">{t("features.comparison.feature") || "Feature"}</th>
-                <th className="p-4 bg-muted/20 text-center">{t("features.comparison.free") || "Free"}</th>
-                <th className="p-4 bg-primary/10 text-center">{t("features.comparison.basic") || "Basic"}</th>
-                <th className="p-4 bg-primary/20 text-center">{t("features.comparison.pro") || "Pro"}</th>
-                <th className="p-4 bg-primary/30 text-center">{t("features.comparison.enterprise") || "Enterprise"}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-b">
-                <td className="p-4 font-medium">{t("features.comparison.features.convert") || "PDF Conversion"}</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium">{t("features.comparison.features.merge") || "Merge & Split"}</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium">{t("features.comparison.features.compress") || "Compression"}</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium">{t("features.comparison.features.ocr") || "OCR Basic"}</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium">{t("features.comparison.features.advancedOcr") || "Advanced OCR"}</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium">{t("features.comparison.features.watermark") || "Watermarking"}</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium">{t("features.comparison.features.protect") || "Password Protection"}</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium">{t("features.comparison.features.api") || "API Access"}</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium">{t("features.comparison.features.batch") || "Batch Processing"}</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium">{t("features.comparison.features.priority") || "Priority Support"}</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">✓</td>
-                <td className="p-4 text-center">✓</td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium">{t("features.comparison.features.customWorkflow") || "Custom Workflows"}</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">✓</td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium">{t("features.comparison.features.whiteLabel") || "White Labeling"}</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">✓</td>
-              </tr>
-              <tr>
-                <td className="p-4 font-medium">{t("features.comparison.features.dedicated") || "Dedicated Support"}</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">-</td>
-                <td className="p-4 text-center">✓</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </section>
 

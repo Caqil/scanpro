@@ -481,7 +481,7 @@ const handleSubmit = async (e: React.FormEvent) => {
             <Button variant="secondary" className="flex-1" asChild>
               <a href={result.fileUrl} download>
                 <Download className="h-4 w-4 mr-2" />
-                {t('ocr.downloadText') || "Download Text"}
+                {t('watermarkPdf.download') || "Download PDF"}
               </a>
             </Button>
           )}

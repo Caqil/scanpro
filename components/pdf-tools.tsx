@@ -33,7 +33,13 @@ export function PdfTools() {
           id: "pdf-to-word",
           name: t('popular.pdfToWord'),
           description: t('toolDescriptions.pdfToWord'),
-          icon: <FileTextIcon className="h-6 w-6 text-blue-500" />,
+          icon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="24" height="24" rx="6" fill="#DBEAFE"/>
+              <path d="M6 4H18C19.1 4 20 4.9 20 6V18C20 19.1 19.1 20 18 20H6C4.9 20 4 19.1 4 18V6C4 4.9 4.9 4 6 4Z" fill="#3B82F6"/>
+              <path d="M8 8V16M10 8L12 12L14 8M14 16V8M16 8V16" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          ),
           iconBg: "bg-blue-100 dark:bg-blue-900/30",
           href: "/convert/pdf-to-docx"  // Updated URL
         },
@@ -41,7 +47,11 @@ export function PdfTools() {
           id: "pdf-to-powerpoint",
           name: t('popular.pdfToPowerPoint'),
           description: t('toolDescriptions.pdfToPowerpoint'),
-          icon: <FileTextIcon className="h-6 w-6 text-orange-500" />,
+          icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" rx="6" fill="#FFEDD5"/>
+          <path d="M6 4H18C19.1 4 20 4.9 20 6V18C20 19.1 19.1 20 18 20H6C4.9 20 4 19.1 4 18V6C4 4.9 4.9 4 6 4Z" fill="#F97316"/>
+          <path d="M8 8H16V10H8V8ZM8 12H14V14H8V12Z" fill="white"/>
+        </svg>,
           iconBg: "bg-orange-100 dark:bg-orange-900/30",
           href: "/convert/pdf-to-pptx"  // Updated URL
         },
@@ -165,7 +175,7 @@ export function PdfTools() {
         {
           id: "compress-file",
           name: t('compressPdf.compressAll'),
-          description: t('compressPdf.compressAll'),
+          description: t('compressPdf.description'),
           icon: <FileBadge2Icon className="h-6 w-6 text-green-500" />,
           iconBg: "bg-green-100 dark:bg-green-900/30",
           href: "/compress-files",
@@ -174,29 +184,21 @@ export function PdfTools() {
         {
           id: "split-pdf",
           name: t('popular.splitPdf'),
-          description: t('toolDescriptions.compressPdf'),
+          description: t('splitPdf.description'),
           icon: <ArrowDownIcon className="h-6 w-6 text-green-500" />,
           iconBg: "bg-green-100 dark:bg-green-900/30",
           href: "/split-pdf",
         },
         { 
           id: "ocr",
-          name: t('ocr.title'), 
+          name: t('popular.ocr'), 
           href: "/ocr", 
           icon: <FileCheck2 className="h-5 w-5 text-blue-500" />,
           description: t('toolDescriptions.ocr'),
           iconBg: "bg-green-100 dark:bg-yellow-900/30",
           isNew: true
         },
-        { 
-          id: "sign-pdf",
-          name: t('signPdf.title'), 
-          href: "/sign-pdf", 
-          icon: <PenLineIcon className="h-5 w-5 text-red-500" />,
-          description: t('toolDescriptions.ocr'),
-          iconBg: "bg-purple-100 dark:bg-yellow-900/30",
-          isNew: true
-        }
+        
       ]
     },
     {
@@ -241,6 +243,15 @@ export function PdfTools() {
           iconBg: "bg-blue-100 dark:bg-blue-900/30",
           href: "/protect-pdf"
         },
+        { 
+          id: "sign-pdf",
+          name: t('popular.signPdf'), 
+          href: "/sign-pdf", 
+          icon: <PenLineIcon className="h-5 w-5 text-red-500" />,
+          description: t('toolDescriptions.ocr'),
+          iconBg: "bg-purple-100 dark:bg-yellow-900/30",
+          isNew: true
+        }
       ]
     }
   ];
@@ -251,7 +262,7 @@ export function PdfTools() {
         {pdfTools.map((category) => (
           <div key={category.id} className="space-y-4">
             <h2 className="text-xl font-bold">{category.label}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {category.tools.map((tool) => (
                 <PdfToolCard
                   key={tool.id}

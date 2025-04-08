@@ -261,7 +261,7 @@ export function RelatedToolsSection() {
       name: t('protectPdf.title'),
     },
     {
-      href: "/sign",
+      href: "/sign-pdf",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
