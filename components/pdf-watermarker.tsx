@@ -756,4 +756,534 @@ export function PdfWatermarker({ initialType = "text" }: Props) {
           )}
         </div>
 
-        {/* File
+       {/* File Upload Section */}
+       {!file && (
+          <div className="flex-1 flex items-center justify-center p-6">
+            <div
+              className={`border-2 border-dashed rounded-lg p-12 text-center transition-colors ${
+                isDragOver
+                  ? "border-primary bg-primary/5"
+                  : "border-muted-foreground/20"
+              }`}
+              onDragOver={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsDragOver(true);
+              }}
+              onDragLeave={() => setIsDragOver(false)}
+              onDrop={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsDragOver(false);
+                const files = e.dataTransfer.files;
+                if (files && files.length > 0) {
+                  const uploadedFile = files[0];
+                  if (uploadedFile.type !== "application/pdf") {
+                    toast.error(t("ui.error") || "Invalid file type. Please upload a PDF.");
+                    return;
+                  }
+                  setFile(uploadedFile);
+                  setWatermarkedPdfUrl("");
+                  setCurrentPage(0);
+                  processPdf(uploadedFile);
+                }
+              }}
+            >
+              <input
+                type="file"
+                ref={fileInputRef}
+                className="hidden"
+                accept=".pdf"
+                onChange={handleFileUpload}
+              />
+              <div className="mb-6 p-4 rounded-full bg-primary/10 mx-auto w-20 h-20 flex items-center justify-center">
+                <UploadIcon className="h-10 w-10 text-primary" />
+              </div>
+              <h3 className="text-2xl font-semibold mb-3">
+                {t("watermarkPdf.uploadTitle") || "Upload Your PDF"}
+              </h3>
+              <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+                {t("watermarkPdf.uploadDesc") || "Drag and drop your PDF file here, or click the button below to browse your files."}
+              </p>
+              <Button
+                size="lg"
+                className="px-8"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                {t("ui.browse") || "Browse Files"}
+              </Button>
+              <p className="mt-6 text-sm text-muted-foreground">
+                {t("ui.filesSecurity") || "Your files are securely processed and automatically deleted after processing."}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Processing Section */}
+        {file && processing && !watermarkedPdfUrl && (
+          <div className="flex-1 flex flex-col items-center justify-center">
+            <div className="bg-background rounded-lg p-8 shadow-sm border w-96 text-center">
+              <LoaderIcon className="h-16 w-16 animate-spin text-primary mb-6 mx-auto" />
+              <h3 className="text-xl font-semibold mb-3">
+                {t("watermarkPdf.processing") || "Processing..."}
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                {t("watermarkPdf.messages.processing") || "Please wait while we add the watermark to your PDF."}
+              </p>
+              <Progress value={progress} className="w-full h-2" />
+            </div>
+          </div>
+        )}
+
+        {/* PDF Viewer and Watermarking Area */}
+        {file && !processing && !watermarkedPdfUrl && pages.length > 0 && (
+          <div className="flex-1 flex overflow-hidden">
+            {/* Left Sidebar: Page Thumbnails */}
+            <div className="w-24 bg-muted/10 border-r overflow-y-auto hidden md:block">
+              {renderPageThumbnails()}
+            </div>
+
+            {/* Main PDF Viewer */}
+            <div className="flex-1 flex flex-col overflow-hidden">
+              <div className="flex-1 relative">
+                <div
+                  ref={canvasRef}
+                  className="absolute inset-0 bg-muted/5 overflow-auto"
+                  onMouseMove={(e) => {
+                    if (isDraggingPreview) {
+                      handlePreviewDragMove(e);
+                    }
+                  }}
+                  onMouseUp={handlePreviewDragEnd}
+                  onMouseLeave={handlePreviewDragEnd}
+                  onTouchMove={(e) => {
+                    if (isDraggingPreview) {
+                      handlePreviewDragMove(e);
+                    }
+                    handleTouchMove(e);
+                  }}
+                  onTouchStart={handleTouchStart}
+                  onTouchEnd={() => {
+                    handlePreviewDragEnd();
+                    handleTouchEnd();
+                  }}
+                  onTouchCancel={() => {
+                    handlePreviewDragEnd();
+                    handleTouchEnd();
+                  }}
+                >
+                  <div className="min-h-full flex items-center justify-center p-4">
+                    <div className="relative shadow-lg">
+                      <Document file={file}>
+                        <Page
+                          pageNumber={currentPage + 1}
+                          renderTextLayer={false}
+                          renderAnnotationLayer={false}
+                          width={
+                            pages[currentPage]
+                              ? Math.min(
+                                  Math.max(pages[currentPage].width, 400),
+                                  canvasRef.current
+                                    ? Math.min(canvasRef.current.clientWidth - 40, isMobileView ? 600 : 800)
+                                    : 800
+                                ) * scale
+                              : undefined
+                          }
+                          height={
+                            pages[currentPage]
+                              ? Math.min(
+                                  pages[currentPage].height *
+                                    (Math.min(
+                                      Math.max(pages[currentPage].width, 400),
+                                      canvasRef.current
+                                        ? Math.min(canvasRef.current.clientWidth - 40, isMobileView ? 600 : 800)
+                                        : 800
+                                    ) /
+                                      pages[currentPage].width),
+                                  canvasRef.current
+                                    ? canvasRef.current.clientHeight - 60
+                                    : 1000
+                                ) * scale
+                              : undefined
+                          }
+                        />
+                        <div className="absolute inset-0 pointer-events-none">
+                          {renderPreview()}
+                        </div>
+                      </Document>
+                    </div>
+                  </div>
+                  {/* Add the mobile tool trigger here */}
+                  {mobileToolTrigger}
+                </div>
+              </div>
+
+              {/* Mobile Pagination Controls */}
+              <div className="md:hidden flex justify-center items-center py-3 bg-background border-t">
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() =>
+                      handlePageChange(Math.max(0, currentPage - 1))
+                    }
+                    disabled={currentPage === 0}
+                  >
+                    <ChevronLeftIcon className="h-4 w-4" />
+                  </Button>
+                  <span className="text-sm font-medium">
+                    {currentPage + 1} / {pages.length}
+                  </span>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() =>
+                      handlePageChange(
+                        Math.min(pages.length - 1, currentPage + 1)
+                      )
+                    }
+                    disabled={currentPage === pages.length - 1}
+                  >
+                    <ChevronRightIcon className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+
+              {/* Desktop Pagination Controls */}
+              <div className="hidden md:flex justify-between items-center py-3 px-4 bg-background border-t">
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() =>
+                      handlePageChange(Math.max(0, currentPage - 1))
+                    }
+                    disabled={currentPage === 0}
+                  >
+                    <ChevronLeftIcon className="h-4 w-4 mr-1" />
+                    Previous
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() =>
+                      handlePageChange(
+                        Math.min(pages.length - 1, currentPage + 1)
+                      )
+                    }
+                    disabled={currentPage === pages.length - 1}
+                  >
+                    Next
+                    <ChevronRightIcon className="h-4 w-4 ml-1" />
+                  </Button>
+                </div>
+                <span className="text-sm font-medium">
+                  Page {currentPage + 1} of {pages.length}
+                </span>
+              </div>
+            </div>
+
+            {/* Right Sidebar: Watermarking Tools */}
+            <div className="w-80 bg-white dark:bg-slate-900 border-l overflow-hidden hidden md:flex md:flex-col h-full shadow-sm">
+              {/* Watermark Type Selection */}
+              <div className="p-5 border-b">
+                <h3 className="font-semibold text-base mb-3">Watermark Type</h3>
+                <Tabs value={watermarkType} onValueChange={(v) => setWatermarkType(v as WatermarkType)} className="w-full">
+                  <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="text" className="flex items-center gap-2">
+                      <TypeIcon className="h-4 w-4" />
+                      Text
+                    </TabsTrigger>
+                    <TabsTrigger value="image" className="flex items-center gap-2">
+                      <ImageIcon className="h-4 w-4" />
+                      Image
+                    </TabsTrigger>
+                  </TabsList>
+                </Tabs>
+              </div>
+
+              {/* Tool Content Area with inset shadow */}
+              <div className="flex-1 overflow-y-auto bg-muted/5 relative">
+                <div className="absolute inset-0 pointer-events-none shadow-[inset_0_5px_8px_-6px_rgba(0,0,0,0.1)]"></div>
+                <div className="p-5 relative z-10">
+                  {watermarkType === "text" ? (
+                    <>
+                      {/* Text Watermark Options */}
+                      <div className="space-y-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="watermarkText">Watermark Text</Label>
+                          <Input
+                            id="watermarkText"
+                            value={watermarkOptions.text}
+                            onChange={(e) => setWatermarkOptions({...watermarkOptions, text: e.target.value})}
+                            placeholder="Enter watermark text"
+                          />
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="textColor">Text Color</Label>
+                            <div className="flex items-center gap-2">
+                              <Input
+                                id="textColor"
+                                type="color"
+                                value={watermarkOptions.textColor}
+                                onChange={(e) => setWatermarkOptions({...watermarkOptions, textColor: e.target.value})}
+                                className="w-12 h-8 p-0"
+                              />
+                              <span className="text-sm">{watermarkOptions.textColor}</span>
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="fontSize">Font Size</Label>
+                            <Input
+                              id="fontSize"
+                              type="number"
+                              min="10"
+                              max="100"
+                              value={watermarkOptions.fontSize}
+                              onChange={(e) => setWatermarkOptions({...watermarkOptions, fontSize: parseInt(e.target.value)})}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="fontFamily">Font Family</Label>
+                          <select
+                            id="fontFamily"
+                            className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                            value={watermarkOptions.fontFamily}
+                            onChange={(e) => setWatermarkOptions({...watermarkOptions, fontFamily: e.target.value})}
+                          >
+                            <option value="Arial">Arial</option>
+                            <option value="Helvetica">Helvetica</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                            <option value="Courier">Courier</option>
+                            <option value="Verdana">Verdana</option>
+                          </select>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {/* Image Watermark Options */}
+                      <div className="space-y-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="watermarkImage">Watermark Image</Label>
+                          <div className="border-2 border-dashed rounded-md p-5 text-center transition-colors hover:bg-muted/20">
+                            <input
+                              type="file"
+                              id="watermarkImage"
+                              ref={imageInputRef}
+                              className="hidden"
+                              accept="image/*"
+                              onChange={handleImageUpload}
+                            />
+                            <label
+                              htmlFor="watermarkImage"
+                              className="cursor-pointer"
+                            >
+                              <UploadIcon className="h-7 w-7 mx-auto mb-2 text-muted-foreground" />
+                              <p className="text-xs text-muted-foreground mb-3">
+                                Upload image (PNG or JPG)
+                              </p>
+                              <Button variant="outline" size="sm" type="button">
+                                <UploadIcon className="h-3.5 w-3.5 mr-1.5" />
+                                Browse Files
+                              </Button>
+                            </label>
+                          </div>
+                          {watermarkOptions.image && (
+                            <div className="mt-2 p-2 border rounded-md">
+                              <img
+                                src={watermarkOptions.image}
+                                alt="Watermark Preview"
+                                className="max-h-20 w-auto mx-auto"
+                              />
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="imageScale">Image Scale (%)</Label>
+                          <div className="pt-2 px-2">
+                            <Slider
+                              id="imageScale"
+                              min={10}
+                              max={100}
+                              step={1}
+                              value={[watermarkOptions.scale ?? 50]}
+                              onValueChange={(value) => setWatermarkOptions({...watermarkOptions, scale: value[0]})}
+                            />
+                          </div>
+                          <div className="text-center text-sm mt-1">{watermarkOptions.scale ?? 50}%</div>
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  {/* Common Options */}
+                  <div className="space-y-4 mt-6">
+                    <Separator className="my-4" />
+                    <h3 className="font-medium text-sm mb-2">Common Options</h3>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="opacity">Opacity (%)</Label>
+                      <div className="pt-2 px-2">
+                        <Slider
+                          id="opacity"
+                          min={5}
+                          max={100}
+                          step={5}
+                          value={[watermarkOptions.opacity ?? 30]}
+                          onValueChange={(value) => setWatermarkOptions({...watermarkOptions, opacity: value[0]})}
+                        />
+                      </div>
+                                                <div className="text-center text-sm mt-1">{watermarkOptions.opacity ?? 30}%</div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="rotation">Rotation (degrees)</Label>
+                      <div className="pt-2 px-2">
+                        <Slider
+                          id="rotation"
+                          min={0}
+                          max={360}
+                          step={5}
+                          value={[watermarkOptions.rotation ?? 45]}
+                          onValueChange={(value) => setWatermarkOptions({...watermarkOptions, rotation: value[0]})}
+                        />
+                      </div>
+                                                <div className="text-center text-sm mt-1">{watermarkOptions.rotation ?? 45}°</div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="position">Watermark Position</Label>
+                      <select
+                        id="position"
+                        className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        value={watermarkOptions.position}
+                        onChange={(e) => setWatermarkOptions({...watermarkOptions, position: e.target.value as WatermarkPosition})}
+                      >
+                        <option value="center">Center</option>
+                        <option value="tile">Tile (Repeated)</option>
+                        <option value="custom">Custom Position (Drag to position)</option>
+                      </select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="pages">Watermark Pages</Label>
+                      <select
+                        id="pages"
+                        className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        value={watermarkOptions.pages}
+                        onChange={(e) => setWatermarkOptions({...watermarkOptions, pages: e.target.value})}
+                      >
+                        <option value="all">All Pages</option>
+                        <option value="even">Even Pages Only</option>
+                        <option value="odd">Odd Pages Only</option>
+                        <option value="custom">Custom Page Range</option>
+                      </select>
+                    </div>
+
+                    {watermarkOptions.pages === "custom" && (
+                      <div className="space-y-2">
+                        <Label htmlFor="customPages">Custom Page Range</Label>
+                        <Input
+                          id="customPages"
+                          placeholder="e.g., 1,3,5-7"
+                          value={watermarkOptions.customPages}
+                          onChange={(e) => setWatermarkOptions({...watermarkOptions, customPages: e.target.value})}
+                        />
+                        <p className="text-xs text-muted-foreground">
+                          Use commas and hyphens. Example: 1,3,5-10
+                        </p>
+                      </div>
+                    )}
+
+                    <Button 
+                      className="w-full mt-6" 
+                      onClick={applyWatermark}
+                      disabled={
+                        (watermarkType === "text" && !watermarkOptions.text) || 
+                        (watermarkType === "image" && !watermarkOptions.image) ||
+                        !file
+                      }
+                    >
+                      <PlusIcon className="h-4 w-4 mr-2" />
+                      Apply Watermark
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer with help info */}
+              <div className="px-5 py-3 bg-muted/10 border-t">
+                <div className="flex items-center text-xs text-muted-foreground">
+                  <InfoIcon className="h-3.5 w-3.5 mr-1.5" />
+                  <span>
+                    {watermarkOptions.position === "custom"
+                      ? "Drag the watermark to position it on the document"
+                      : "Change position type to 'Custom' to drag and position your watermark"}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Success Section */}
+        {file && !processing && watermarkedPdfUrl && (
+          <div className="flex-1 flex items-center justify-center p-6">
+            <Card className="w-full max-w-md">
+              <CardContent className="p-8 text-center">
+                <div className="mb-6 p-4 rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 mx-auto w-20 h-20 flex items-center justify-center">
+                  <CheckIcon className="h-10 w-10" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-3">
+                  {t("watermarkPdf.messages.success") || "PDF Watermarked Successfully!"}
+                </h3>
+                <p className="text-muted-foreground mb-6">
+                  {t("watermarkPdf.messages.downloadReady") || "Your watermarked PDF is ready to download."}
+                </p>
+                <div className="flex gap-4 justify-center">
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setFile(null);
+                      setWatermarkedPdfUrl("");
+                      setPages([]);
+                      if (fileInputRef.current) {
+                        fileInputRef.current.value = "";
+                      }
+                      if (imageInputRef.current) {
+                        imageInputRef.current.value = "";
+                      }
+                      setWatermarkOptions({
+                        ...watermarkOptions,
+                        image: null,
+                      });
+                    }}
+                  >
+                    <RefreshCwIcon className="h-4 w-4 mr-2" />
+                    Start Over
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      if (watermarkedPdfUrl) {
+                        window.open(watermarkedPdfUrl, "_blank");
+                      }
+                    }}
+                  >
+                    <DownloadIcon className="h-4 w-4 mr-2" />
+                    Download PDF
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

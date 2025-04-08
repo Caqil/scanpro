@@ -9,7 +9,7 @@ import {
 import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
 import { generatePageSeoMetadata } from "@/lib/seo/schemas";
 import { SEO } from "@/components/SEO";
-import { WatermarkTool } from "@/components/watermark-tool";
+import { PdfWatermarker } from "@/components/pdf-watermarker";
 
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
@@ -31,18 +31,7 @@ export default function WatermarkPDFPage() {
       <WatermarkHeaderSection />
    {/* Main Tool Section with Tabs */}
       <div className="mb-12">
-        <Tabs defaultValue="text" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-8">
-            <TabsTrigger value="text">Text Watermark</TabsTrigger>
-            <TabsTrigger value="image">Image Watermark</TabsTrigger>
-          </TabsList>
-          <TabsContent value="text">
-            <WatermarkTool type="text" />
-          </TabsContent>
-          <TabsContent value="image">
-            <WatermarkTool type="image" />
-          </TabsContent>
-        </Tabs>
+      <PdfWatermarker initialType="text" />
       </div>
      
 
