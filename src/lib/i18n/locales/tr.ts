@@ -2799,7 +2799,140 @@ export default {
             pageOf: "{total} içindeki {current}. sayfa",
             selectPageInfo: "Döndürmek için sayfaları seçmek üzere sayfa küçük resimlerine tıklayın"
         }
-    }
+    },
+    pageNumber: {
+        title: "PDF’ye Sayfa Numaraları Ekle",
+        shortDescription: "PDF belgelerinize kolayca özelleştirilebilir sayfa numaraları ekleyin",
+        description: "Çevrimiçi aracımızla çeşitli sayı formatları, konumlar ve stillerle PDF’ye özel sayfa numaraları ekleyin",
 
+        uploadTitle: "PDF’nizi Yükleyin",
+        uploadDesc: "Sayfa numaraları veya başlıklar eklemek için bir PDF dosyası yükleyin. Dosyanız güvenli bir şekilde işlenecek ve herhangi bir işletim sistemiyle uyumlu olacak.",
+
+        messages: {
+            noFile: "Lütfen önce bir PDF dosyası yükleyin",
+            success: "Sayfa numaraları başarıyla eklendi!",
+            error: "Sayfa numaraları eklenirken hata oluştu",
+            processing: "PDF’niz işleniyor..."
+        },
+        ui: {
+            browse: "Dosyalara Gözat",
+            filesSecurity: "Dosyalarınız güvendedir ve asla kalıcı olarak saklanmaz",
+            error: "Geçersiz dosya türü. Lütfen bir PDF yükleyin.",
+            cancel: "İptal",
+            addPageNumbers: "Sayfa Numaraları Ekle",
+            processingProgress: "İşleniyor... ({progress}%)",
+            successTitle: "Sayfa Numaraları Başarıyla Eklendi",
+            successDesc: "PDF'iniz işlendi ve indirmeye hazır",
+            readyMessage: "PDF'iniz hazır!",
+            readyDesc: "PDF dosyanız işlendi ve ayarlarınıza göre sayfa numaraları eklendi.",
+            download: "PDF İndir",
+            processAnother: "Başka bir PDF İşle",
+            settingsTitle: "Sayfa Numarası Ayarları",
+            numberFormat: "Sayı Biçimi",
+            position: "Konum",
+            topLeft: "Üst Sol",
+            topCenter: "Üst Orta",
+            topRight: "Üst Sağ",
+            bottomLeft: "Alt Sol",
+            bottomCenter: "Alt Orta",
+            bottomRight: "Alt Sağ",
+            fontFamily: "Yazı Tipi",
+            fontSize: "Yazı Boyutu",
+            color: "Renk",
+            startFrom: "Başlangıç Numarası",
+            prefix: "Önek",
+            suffix: "Sonek",
+            horizontalMargin: "Yatay Kenar Boşluğu (px)",
+            pagesToNumber: "Numaralandırılacak Sayfalar",
+            pagesHint: "Tüm sayfalar için boş bırakın",
+            pagesExample: "Tek sayfalar için virgül, aralıklar için tire kullanın (örn. 1,3,5-10)",
+            skipFirstPage: "İlk sayfayı atla (örn. kapak sayfaları için)",
+            preview: "Önizleme:",
+            pagePreview: "Sayfa önizleme"
+        },
+        howTo: {
+            title: "Sayfa Numaraları Nasıl Eklenir",
+            step1: {
+                title: "PDF’nizi Yükleyin",
+                description: "Sayfalarını numaralandırmak istediğiniz PDF dosyasını seçin"
+            },
+            step2: {
+                title: "Sayfa Numaralarını Özelleştirin",
+                description: "Sayı formatlarını, sayfa aralığını, konumu, yazı tipini ve diğer ayarları seçerek PDF’yi düzenleyin"
+            },
+            step3: {
+                title: "PDF’nizi İndirin",
+                description: "Çevrimiçi aracımızla PDF’nizi işleyin ve sayfa numaraları eklenmiş PDF’yi indirin"
+            }
+        },
+
+        benefits: {
+            title: "Sayfa Numaraları Ekmenin Faydaları",
+            navigation: {
+                title: "Geliştirilmiş Gezinme",
+                description: "Herhangi bir sayfa aralığında açıkça görünen sayfa numaraları ile belgelerinizde gezinmeyi kolaylaştırın"
+            },
+            professional: {
+                title: "Profesyonel Belgeler",
+                description: "Yasal veya iş belgelerinize doğru biçimlendirilmiş numaralarla profesyonel bir görünüm kazandırın"
+            },
+            organization: {
+                title: "Daha İyi Organizasyon",
+                description: "Büyük belgelerdeki sayfaları takip edin ve eklenen numaralarla belirli sayfalara kolayca atıfta bulunun"
+            },
+            customization: {
+                title: "Tam Özelleştirme",
+                description: "Belgenizin stiline uyacak şekilde sayfa numaralarının görünümünü ve konumunu özelleştirin veya başlıklar ekleyin"
+            }
+        },
+
+        useCases: {
+            title: "Yaygın Kullanım Durumları",
+            books: {
+                title: "Kitaplar ve E-Kitaplar",
+                description: "Kitaplarınıza, e-kitaplarınıza veya raporlarınıza kolayca doğru sayfa numaralandırması ekleyerek okunabilirliği ve referansları iyileştirin"
+            },
+            academic: {
+                title: "Akademik Makaleler",
+                description: "Tezler, tezler ve araştırma makalelerine akademik standartlara göre sayfa numaraları ekleyin, esnek format seçenekleriyle"
+            },
+            business: {
+                title: "İş Belgeleri",
+                description: "Tekliflere, raporlara ve iş planlarına profesyonel sayfa numaraları ekleyin, Adobe Acrobat Pro’ya gerek kalmadan"
+            },
+            legal: {
+                title: "Yasal Belgeler",
+                description: "Sözleşmelere ve yasal belgelere tutarlı sayfa numaralandırması uygulayarak doğru referans sağlayın"
+            }
+        },
+
+        faq: {
+            title: "Sıkça Sorulan Sorular",
+            formats: {
+                question: "Hangi sayı formatları mevcut?",
+                answer: "Çevrimiçi aracımız birden fazla formatı destekler: sayısal (1, 2, 3), Roma rakamları (I, II, III) ve alfabetik (A, B, C). İhtiyacınıza uygun formatı seçin."
+            },
+            customize: {
+                question: "Sayfa numaralarının görünümünü özelleştirebilir miyim?",
+                answer: "Evet, sayfa numaralarını tamamen özelleştirebilirsiniz; önekler (örneğin 'Sayfa '), sonekler (örneğin ' / 10'), yazı tipleri, boyutlar, renkler ekleyebilir ve sayfada herhangi bir yere yerleştirebilirsiniz."
+            },
+            skipPages: {
+                question: "Sayfa numaraları eklerken bazı sayfaları atlayabilir miyim?",
+                answer: "Elbette! Sayfa aralığını belirterek seçici numaralandırma yapabilir veya ilk sayfayı (örneğin kapak) kolayca atlayabilirsiniz."
+            },
+            startNumber: {
+                question: "Sayfa numaralandırmasını belirli bir sayıdan başlatabilir miyim?",
+                answer: "Evet, dizinizin başlangıç numarasını ayarlayabilirsiniz—diğer belgelerden devam eden veya benzersiz numaralandırma ihtiyaçları olan belgeler için idealdir."
+            },
+            security: {
+                question: "PDF’mi yüklediğimde güvenli mi?",
+                answer: "Evet, tüm işlemler güvenlidir. Dosyalarınız aktarım sırasında şifrelenir, işlenir ve ardından otomatik olarak silinir—kalıcı depolama veya numaralar ekleme dışında erişim yoktur."
+            }
+        },
+
+        relatedTools: {
+            title: "İlgili Araçlar"
+        }
+    }
 
 }

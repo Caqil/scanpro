@@ -2794,6 +2794,140 @@ export default {
       pageOf: "Página {current} de {total}",
       selectPageInfo: "Clique nas miniaturas das páginas para selecionar páginas para rotação"
     }
+  },
+  pageNumber: {
+    title: "Adicionar números de página a um PDF",
+    shortDescription: "Adicione facilmente números de página personalizáveis aos seus documentos PDF",
+    description: "Adicione números de página personalizados a um PDF com vários formatos numéricos, posições e estilos usando nossa ferramenta online",
+
+    uploadTitle: "Carregue seu PDF",
+    uploadDesc: "Carregue um arquivo PDF para adicionar números de página ou cabeçalhos. Seu arquivo será processado com segurança, compatível com qualquer sistema operacional.",
+
+    messages: {
+      noFile: "Por favor, carregue um arquivo PDF primeiro",
+      success: "Números de página adicionados com sucesso!",
+      error: "Erro ao adicionar números de página",
+      processing: "Processando seu PDF..."
+    },
+    ui: {
+      browse: "Procurar arquivos",
+      filesSecurity: "Seus arquivos estão seguros e nunca são armazenados permanentemente",
+      error: "Tipo de arquivo inválido. Por favor, envie um PDF.",
+      cancel: "Cancelar",
+      addPageNumbers: "Adicionar números de página",
+      processingProgress: "Processando... ({progress}%)",
+      successTitle: "Números de página adicionados com sucesso",
+      successDesc: "Seu PDF foi processado e está pronto para download",
+      readyMessage: "Seu PDF está pronto!",
+      readyDesc: "Seu arquivo PDF foi processado e os números de página foram adicionados de acordo com suas configurações.",
+      download: "Baixar PDF",
+      processAnother: "Processar outro PDF",
+      settingsTitle: "Configurações de números de página",
+      numberFormat: "Formato do número",
+      position: "Posição",
+      topLeft: "Superior esquerdo",
+      topCenter: "Superior centro",
+      topRight: "Superior direito",
+      bottomLeft: "Inferior esquerdo",
+      bottomCenter: "Inferior centro",
+      bottomRight: "Inferior direito",
+      fontFamily: "Família da fonte",
+      fontSize: "Tamanho da fonte",
+      color: "Cor",
+      startFrom: "Começar a partir de",
+      prefix: "Prefixo",
+      suffix: "Sufixo",
+      horizontalMargin: "Margem horizontal (px)",
+      pagesToNumber: "Páginas para numerar",
+      pagesHint: "Deixe em branco para todas as páginas",
+      pagesExample: "Use vírgulas para páginas individuais e hífens para intervalos (ex.: 1,3,5-10)",
+      skipFirstPage: "Pular primeira página (ex.: para capas)",
+      preview: "Pré-visualização:",
+      pagePreview: "Pré-visualização da página"
+    },
+    howTo: {
+      title: "Como adicionar números de página",
+      step1: {
+        title: "Carregue seu PDF",
+        description: "Selecione o arquivo PDF cujas páginas você deseja numerar"
+      },
+      step2: {
+        title: "Personalize os números de página",
+        description: "Escolha formatos numéricos, intervalo de páginas, posição, fonte e outras configurações para editar o PDF"
+      },
+      step3: {
+        title: "Baixe seu PDF",
+        description: "Processe e baixe seu PDF com números de página adicionados usando nossa ferramenta online"
+      }
+    },
+
+    benefits: {
+      title: "Benefícios de adicionar números de página",
+      navigation: {
+        title: "Navegação aprimorada",
+        description: "Facilite a navegação pelos seus documentos com números de página claramente visíveis em qualquer intervalo de páginas"
+      },
+      professional: {
+        title: "Documentos profissionais",
+        description: "Dê aos seus documentos legais ou comerciais uma aparência profissional com números devidamente formatados"
+      },
+      organization: {
+        title: "Melhor organização",
+        description: "Acompanhe as páginas em documentos extensos e referencie páginas específicas facilmente com os números adicionados"
+      },
+      customization: {
+        title: "Personalização completa",
+        description: "Personalize a aparência e a posição dos números de página ou adicione cabeçalhos para combinar com o estilo do seu documento"
+      }
+    },
+
+    useCases: {
+      title: "Casos de uso comuns",
+      books: {
+        title: "Livros e e-books",
+        description: "Adicione facilmente uma numeração de páginas adequada aos seus livros, e-books ou relatórios para melhorar a legibilidade e referência"
+      },
+      academic: {
+        title: "Trabalhos acadêmicos",
+        description: "Numere as páginas de teses, dissertações e artigos de pesquisa de acordo com padrões acadêmicos com opções de formato flexíveis"
+      },
+      business: {
+        title: "Documentos comerciais",
+        description: "Adicione números de página profissionais a propostas, relatórios e planos de negócios sem precisar do Adobe Acrobat Pro"
+      },
+      legal: {
+        title: "Documentos legais",
+        description: "Aplique uma numeração consistente a contratos e documentos legais para referência adequada"
+      }
+    },
+
+    faq: {
+      title: "Perguntas frequentes",
+      formats: {
+        question: "Quais formatos de números estão disponíveis?",
+        answer: "Nossa ferramenta online suporta vários formatos: numérico (1, 2, 3), números romanos (I, II, III) e alfabético (A, B, C). Escolha o formato que atenda às suas necessidades."
+      },
+      customize: {
+        question: "Posso personalizar a aparência dos números de página?",
+        answer: "Sim, você pode personalizar completamente os números de página adicionando prefixos (como 'Página '), sufixos (como ' de 10'), escolhendo fontes, tamanhos, cores e posicionando-os em qualquer lugar da página."
+      },
+      skipPages: {
+        question: "Posso pular certas páginas ao adicionar números?",
+        answer: "Claro! Você pode especificar um intervalo de páginas para numerar seletivamente ou pular a primeira página (como uma capa) com facilidade."
+      },
+      startNumber: {
+        question: "Posso começar a numeração a partir de um número específico?",
+        answer: "Sim, você pode definir o número inicial da sua sequência, ideal para documentos que continuam de outros ou têm necessidades de numeração únicas."
+      },
+      security: {
+        question: "Meu PDF está seguro ao ser carregado?",
+        answer: "Sim, todo o processamento é seguro. Seus arquivos são criptografados durante a transferência, processados e depois excluídos automaticamente – sem armazenamento permanente ou acesso além de adicionar os números."
+      }
+    },
+
+    relatedTools: {
+      title: "Ferramentas relacionadas"
+    }
   }
 
 }

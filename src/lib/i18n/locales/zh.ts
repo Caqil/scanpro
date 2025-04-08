@@ -2797,6 +2797,140 @@ export default {
             pageOf: "第{current}页，共{total}页",
             selectPageInfo: "点击页面缩略图选择要旋转的页面"
         }
+    },
+    pageNumber: {
+        title: "为PDF添加页面编号",
+        shortDescription: "轻松为您的PDF文档添加可定制的页面编号",
+        description: "使用我们的在线工具，以多种数字格式、位置和样式为PDF添加自定义页面编号",
+
+        uploadTitle: "上传您的PDF",
+        uploadDesc: "上传PDF文件以添加页面编号或页眉。您的文件将安全处理，与任何操作系统兼容。",
+
+        messages: {
+            noFile: "请先上传PDF文件",
+            success: "页面编号添加成功！",
+            error: "添加页面编号时出错",
+            processing: "正在处理您的PDF..."
+        },
+        ui: {
+            browse: "浏览文件",
+            filesSecurity: "您的文件安全且不会被永久存储",
+            error: "文件类型无效。请上传PDF。",
+            cancel: "取消",
+            addPageNumbers: "添加页码",
+            processingProgress: "处理中... ({progress}%)",
+            successTitle: "页码添加成功",
+            successDesc: "您的PDF已处理完成，可以下载",
+            readyMessage: "您的PDF已准备就绪！",
+            readyDesc: "您的PDF文件已处理完成，并根据您的设置添加了页码。",
+            download: "下载PDF",
+            processAnother: "处理另一个PDF",
+            settingsTitle: "页码设置",
+            numberFormat: "数字格式",
+            position: "位置",
+            topLeft: "左上",
+            topCenter: "上中",
+            topRight: "右上",
+            bottomLeft: "左下",
+            bottomCenter: "下中",
+            bottomRight: "右下",
+            fontFamily: "字体",
+            fontSize: "字体大小",
+            color: "颜色",
+            startFrom: "起始页码",
+            prefix: "前缀",
+            suffix: "后缀",
+            horizontalMargin: "水平边距 (px)",
+            pagesToNumber: "需要编号的页面",
+            pagesHint: "留空为所有页面",
+            pagesExample: "使用逗号分隔单个页面，使用连字符表示范围 (例如: 1,3,5-10)",
+            skipFirstPage: "跳过第一页 (例如: 封面)",
+            preview: "预览:",
+            pagePreview: "页面预览"
+        },
+        howTo: {
+            title: "如何添加页面编号",
+            step1: {
+                title: "上传您的PDF",
+                description: "选择您想为页面编号的PDF文件"
+            },
+            step2: {
+                title: "自定义页面编号",
+                description: "选择数字格式、页面范围、位置、字体和其他设置以编辑PDF"
+            },
+            step3: {
+                title: "下载您的PDF",
+                description: "使用我们的在线工具处理并下载添加了页面编号的PDF"
+            }
+        },
+
+        benefits: {
+            title: "添加页面编号的好处",
+            navigation: {
+                title: "改进导航",
+                description: "通过任何页面范围内清晰可见的页面编号，使文档导航更轻松"
+            },
+            professional: {
+                title: "专业文档",
+                description: "为您的法律或商业文档赋予正确格式化的编号，展现专业外观"
+            },
+            organization: {
+                title: "更好的组织",
+                description: "跟踪大文档中的页面，并通过添加的编号轻松引用特定页面"
+            },
+            customization: {
+                title: "完全自定义",
+                description: "自定义页面编号的外观和位置，或添加页眉以匹配您的文档风格"
+            }
+        },
+
+        useCases: {
+            title: "常见使用场景",
+            books: {
+                title: "书籍和电子书",
+                description: "轻松为您的书籍、电子书或报告添加适当的页面编号，以提高可读性和引用"
+            },
+            academic: {
+                title: "学术论文",
+                description: "根据学术标准为论文、学位论文和研究论文添加页面编号，提供灵活的格式选项"
+            },
+            business: {
+                title: "商业文档",
+                description: "为提案、报告和商业计划添加专业页面编号，无需Adobe Acrobat Pro"
+            },
+            legal: {
+                title: "法律文档",
+                description: "为合同和法律文件应用一致的页面编号，确保适当引用"
+            }
+        },
+
+        faq: {
+            title: "常见问题",
+            formats: {
+                question: "有哪些数字格式可用？",
+                answer: "我们的在线工具支持多种格式：数字（1、2、3）、罗马数字（I、II、III）和字母（A、B、C）。选择适合您需求的格式。"
+            },
+            customize: {
+                question: "我可以自定义页面编号的外观吗？",
+                answer: "是的，您可以完全自定义页面编号，添加前缀（例如“第”）、后缀（例如“/10”），选择字体、大小、颜色，并将其放置在页面上的任何位置。"
+            },
+            skipPages: {
+                question: "添加页面编号时可以跳过某些页面吗？",
+                answer: "当然可以！您可以指定页面范围以选择性编号，或轻松跳过第一页（例如封面）。"
+            },
+            startNumber: {
+                question: "我可以从特定数字开始页面编号吗？",
+                answer: "是的，您可以设置序列的起始编号，非常适合从其他文档继续或有独特编号需求的文档。"
+            },
+            security: {
+                question: "我上传的PDF安全吗？",
+                answer: "是的，所有处理都是安全的。您的文件在传输中加密，处理后自动删除—没有永久存储或除添加编号外的访问。"
+            }
+        },
+
+        relatedTools: {
+            title: "相关工具"
+        }
     }
 
 }

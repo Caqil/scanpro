@@ -2642,6 +2642,140 @@ export default {
       pageOf: "{total}中のページ{current}",
       selectPageInfo: "回転するページを選択するためにページサムネイルをクリック"
     }
+  },
+  pageNumber: {
+    title: "PDFにページ番号を追加",
+    shortDescription: "PDFドキュメントにカスタマイズ可能なページ番号を簡単に追加",
+    description: "オンラインツールを使用して、さまざまな数値形式、位置、スタイルでPDFにカスタムページ番号を追加",
+
+    uploadTitle: "PDFをアップロード",
+    uploadDesc: "ページ番号またはヘッダーを追加するためにPDFファイルをアップロードしてください。ファイルは安全に処理され、あらゆるオペレーティングシステムと互換性があります。",
+
+    messages: {
+      noFile: "まずPDFファイルをアップロードしてください",
+      success: "ページ番号が正常に追加されました！",
+      error: "ページ番号の追加中にエラーが発生しました",
+      processing: "PDFを処理中..."
+    },
+    ui: {
+      browse: "ファイルを閲覧",
+      filesSecurity: "あなたのファイルは安全で、永久に保存されることはありません",
+      error: "無効なファイルタイプです。PDFをアップロードしてください。",
+      cancel: "キャンセル",
+      addPageNumbers: "ページ番号を追加",
+      processingProgress: "処理中... ({progress}%)",
+      successTitle: "ページ番号が正常に追加されました",
+      successDesc: "あなたのPDFは処理され、ダウンロードの準備が整いました",
+      readyMessage: "あなたのPDFが準備できました！",
+      readyDesc: "あなたのPDFファイルは処理され、設定に従ってページ番号が追加されました。",
+      download: "PDFをダウンロード",
+      processAnother: "別のPDFを処理",
+      settingsTitle: "ページ番号設定",
+      numberFormat: "番号形式",
+      position: "位置",
+      topLeft: "左上",
+      topCenter: "上中央",
+      topRight: "右上",
+      bottomLeft: "左下",
+      bottomCenter: "下中央",
+      bottomRight: "右下",
+      fontFamily: "フォントファミリー",
+      fontSize: "フォントサイズ",
+      color: "色",
+      startFrom: "開始番号",
+      prefix: "接頭辞",
+      suffix: "接尾辞",
+      horizontalMargin: "水平マージン (px)",
+      pagesToNumber: "番号を付けるページ",
+      pagesHint: "すべてのページの場合は空白のまま",
+      pagesExample: "個別のページにはカンマを、範囲にはハイフンを使用します (例: 1,3,5-10)",
+      skipFirstPage: "最初のページをスキップ (例: 表紙用)",
+      preview: "プレビュー:",
+      pagePreview: "ページプレビュー"
+    },
+    howTo: {
+      title: "ページ番号の追加方法",
+      step1: {
+        title: "PDFをアップロード",
+        description: "ページ番号を付けたいPDFファイルを選択してください"
+      },
+      step2: {
+        title: "ページ番号をカスタマイズ",
+        description: "数値形式、ページ範囲、位置、フォント、その他の設定を選択してPDFを編集"
+      },
+      step3: {
+        title: "PDFをダウンロード",
+        description: "オンラインツールを使用してPDFを処理し、ページ番号が追加されたPDFをダウンロード"
+      }
+    },
+
+    benefits: {
+      title: "ページ番号を追加する利点",
+      navigation: {
+        title: "ナビゲーションの向上",
+        description: "どのページ範囲でも明確に見えるページ番号でドキュメント内のナビゲーションを容易に"
+      },
+      professional: {
+        title: "プロフェッショナルなドキュメント",
+        description: "法的またはビジネスドキュメントに適切にフォーマットされた番号でプロフェッショナルな外観を"
+      },
+      organization: {
+        title: "より良い整理",
+        description: "大きなドキュメントのページを追跡し、追加された番号で特定のページを簡単に参照"
+      },
+      customization: {
+        title: "完全なカスタマイズ",
+        description: "ドキュメントのスタイルに合わせてページ番号の外観と位置をカスタマイズするか、ヘッダーを追加"
+      }
+    },
+
+    useCases: {
+      title: "一般的な使用例",
+      books: {
+        title: "書籍と電子書籍",
+        description: "書籍、電子書籍、またはレポートに適切なページ番号を簡単に追加して、読みやすさと参照を向上"
+      },
+      academic: {
+        title: "学術論文",
+        description: "論文、学位論文、研究論文に学術基準に従ってページ番号を付け、柔軟なフォーマットオプションで"
+      },
+      business: {
+        title: "ビジネスドキュメント",
+        description: "提案書、レポート、ビジネスプランにプロフェッショナルなページ番号を追加、Adobe Acrobat Pro不要"
+      },
+      legal: {
+        title: "法的ドキュメント",
+        description: "契約書や法的書類に一貫したページ番号を適用して適切な参照を確保"
+      }
+    },
+
+    faq: {
+      title: "よくある質問",
+      formats: {
+        question: "どのような数値形式が利用できますか？",
+        answer: "当社のオンラインツールは複数の形式をサポートしています：数値（1、2、3）、ローマ数字（I、II、III）、アルファベット（A、B、C）。ニーズに合った形式を選択してください。"
+      },
+      customize: {
+        question: "ページ番号の外観をカスタマイズできますか？",
+        answer: "はい、ページ番号を完全にカスタマイズできます。プレフィックス（例：「ページ」）、サフィックス（例：「/10」）、フォント、サイズ、色を選択し、ページ上のどこにでも配置できます。"
+      },
+      skipPages: {
+        question: "ページ番号を追加する際に特定のページをスキップできますか？",
+        answer: "もちろんです！ページ範囲を指定して選択的に番号を付けたり、最初のページ（例：表紙）を簡単にスキップできます。"
+      },
+      startNumber: {
+        question: "特定の番号からページ番号を開始できますか？",
+        answer: "はい、シーケンスの開始番号を設定できます。他のドキュメントから続く場合や独自の番号付けが必要な場合に最適です。"
+      },
+      security: {
+        question: "アップロードしたPDFは安全ですか？",
+        answer: "はい、すべての処理は安全です。ファイルは転送中に暗号化され、処理後に自動的に削除されます—永続的な保存や番号追加以外のアクセスはありません。"
+      }
+    },
+
+    relatedTools: {
+      title: "関連ツール"
+    }
   }
 
 }

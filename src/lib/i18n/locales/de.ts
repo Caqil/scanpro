@@ -2663,7 +2663,140 @@ export default {
       pageOf: "Seite {current} von {total}",
       selectPageInfo: "Klicken Sie auf die Seitenminiaturen, um Seiten für die Drehung auszuwählen"
     }
-  }
+  },
+  pageNumber: {
+    title: "Seitenzahlen zu einem PDF hinzufügen",
+    shortDescription: "Fügen Sie anpassbare Seitenzahlen einfach zu Ihren PDF-Dokumenten hinzu",
+    description: "Fügen Sie benutzerdefinierte Seitenzahlen zu einem PDF mit verschiedenen Zahlenformaten, Positionen und Stilen mit unserem Online-Tool hinzu",
 
+    uploadTitle: "Laden Sie Ihr PDF hoch",
+    uploadDesc: "Laden Sie eine PDF-Datei hoch, um Seitenzahlen oder Kopfzeilen hinzuzufügen. Ihre Datei wird sicher verarbeitet, kompatibel mit jedem Betriebssystem.",
+
+    messages: {
+      noFile: "Bitte laden Sie zuerst eine PDF-Datei hoch",
+      success: "Seitenzahlen erfolgreich hinzugefügt!",
+      error: "Fehler beim Hinzufügen der Seitenzahlen",
+      processing: "Verarbeitung Ihres PDFs..."
+    },
+    ui: {
+      browse: "Dateien durchsuchen",
+      filesSecurity: "Ihre Dateien sind sicher und werden nie dauerhaft gespeichert",
+      error: "Ungültiger Dateityp. Bitte laden Sie eine PDF hoch.",
+      cancel: "Abbrechen",
+      addPageNumbers: "Seitennummern hinzufügen",
+      processingProgress: "Wird verarbeitet... ({progress}%)",
+      successTitle: "Seitennummern erfolgreich hinzugefügt",
+      successDesc: "Ihre PDF wurde verarbeitet und ist zum Download bereit",
+      readyMessage: "Ihre PDF ist fertig!",
+      readyDesc: "Ihre PDF-Datei wurde verarbeitet und Seitennummern wurden gemäß Ihren Einstellungen hinzugefügt.",
+      download: "PDF herunterladen",
+      processAnother: "Weitere PDF verarbeiten",
+      settingsTitle: "Seitennummern-Einstellungen",
+      numberFormat: "Zahlenformat",
+      position: "Position",
+      topLeft: "Oben links",
+      topCenter: "Oben Mitte",
+      topRight: "Oben rechts",
+      bottomLeft: "Unten links",
+      bottomCenter: "Unten Mitte",
+      bottomRight: "Unten rechts",
+      fontFamily: "Schriftart",
+      fontSize: "Schriftgröße",
+      color: "Farbe",
+      startFrom: "Beginnen bei",
+      prefix: "Präfix",
+      suffix: "Suffix",
+      horizontalMargin: "Horizontaler Rand (px)",
+      pagesToNumber: "Seiten nummerieren",
+      pagesHint: "Leer lassen für alle Seiten",
+      pagesExample: "Verwenden Sie Kommas für einzelne Seiten und Bindestriche für Bereiche (z.B. 1,3,5-10)",
+      skipFirstPage: "Erste Seite überspringen (z.B. für Deckblätter)",
+      preview: "Vorschau:",
+      pagePreview: "Seitenvorschau"
+    },
+    howTo: {
+      title: "Wie man Seitenzahlen hinzufügt",
+      step1: {
+        title: "Laden Sie Ihr PDF hoch",
+        description: "Wählen Sie die PDF-Datei aus, deren Seiten Sie nummerieren möchten"
+      },
+      step2: {
+        title: "Seitenzahlen anpassen",
+        description: "Wählen Sie Zahlenformate, Seitenbereich, Position, Schriftart und andere Einstellungen, um das PDF zu bearbeiten"
+      },
+      step3: {
+        title: "Laden Sie Ihr PDF herunter",
+        description: "Verarbeiten und laden Sie Ihr PDF mit hinzugefügten Seitenzahlen mit unserem Online-Tool herunter"
+      }
+    },
+
+    benefits: {
+      title: "Vorteile des Hinzufügens von Seitenzahlen",
+      navigation: {
+        title: "Verbesserte Navigation",
+        description: "Erleichtern Sie die Navigation durch Ihre Dokumente mit klar sichtbaren Seitenzahlen über jeden Seitenbereich hinweg"
+      },
+      professional: {
+        title: "Professionelle Dokumente",
+        description: "Verleihen Sie Ihren rechtlichen oder geschäftlichen Dokumenten ein professionelles Aussehen mit korrekt formatierten Nummern"
+      },
+      organization: {
+        title: "Bessere Organisation",
+        description: "Behalten Sie den Überblick über Seiten in großen Dokumenten und verweisen Sie leicht auf bestimmte Seiten mit hinzugefügten Nummern"
+      },
+      customization: {
+        title: "Vollständige Anpassung",
+        description: "Passen Sie das Aussehen und die Position der Seitenzahlen an oder fügen Sie Kopfzeilen hinzu, die zum Stil Ihres Dokuments passen"
+      }
+    },
+
+    useCases: {
+      title: "Häufige Anwendungsfälle",
+      books: {
+        title: "Bücher und E-Books",
+        description: "Fügen Sie einfach korrekte Seitennummerierung zu Ihren Büchern, E-Books oder Berichten hinzu, um Lesbarkeit und Referenzierung zu verbessern"
+      },
+      academic: {
+        title: "Akademische Arbeiten",
+        description: "Nummerieren Sie Seiten in Thesen, Dissertationen und Forschungspapieren gemäß akademischen Standards mit flexiblen Formatoptionen"
+      },
+      business: {
+        title: "Geschäftsdokumente",
+        description: "Fügen Sie professionelle Seitenzahlen zu Angeboten, Berichten und Geschäftsplänen hinzu, ohne Adobe Acrobat Pro zu benötigen"
+      },
+      legal: {
+        title: "Rechtliche Dokumente",
+        description: "Wenden Sie konsistente Seitennummerierung auf Verträge und rechtliche Dokumente an, um korrekte Referenzierung zu gewährleisten"
+      }
+    },
+
+    faq: {
+      title: "Häufig gestellte Fragen",
+      formats: {
+        question: "Welche Zahlenformate sind verfügbar?",
+        answer: "Unser Online-Tool unterstützt mehrere Zahlenformate: numerisch (1, 2, 3), römische Zahlen (I, II, III) und alphabetisch (A, B, C). Wählen Sie das passende Format für Ihre Bedürfnisse."
+      },
+      customize: {
+        question: "Kann ich das Aussehen der Seitenzahlen anpassen?",
+        answer: "Ja, Sie können die Seitenzahlen vollständig anpassen, indem Sie Präfixe (wie 'Seite '), Suffixe (wie ' von 10'), Schriftarten, Größen, Farben hinzufügen und sie an beliebiger Stelle auf der Seite positionieren."
+      },
+      skipPages: {
+        question: "Kann ich bestimmte Seiten beim Hinzufügen von Seitenzahlen überspringen?",
+        answer: "Absolut! Sie können einen Seitenbereich angeben, um Seiten selektiv zu nummerieren, oder die erste Seite (z. B. ein Deckblatt) mit einem Klick überspringen."
+      },
+      startNumber: {
+        question: "Kann ich die Seitennummerierung bei einer bestimmten Zahl beginnen lassen?",
+        answer: "Ja, Sie können die Startnummer für Ihre Sequenz festlegen – ideal für Dokumente, die von anderen fortgesetzt werden oder spezielle Nummerierungsanforderungen haben."
+      },
+      security: {
+        question: "Ist mein PDF sicher, wenn ich es hochlade?",
+        answer: "Ja, alle Verarbeitungen sind sicher. Ihre Dateien werden während der Übertragung verschlüsselt, verarbeitet und anschließend automatisch gelöscht – keine dauerhafte Speicherung oder Zugriff außer zum Hinzufügen der Nummern."
+      }
+    },
+
+    relatedTools: {
+      title: "Verwandte Tools"
+    }
+  }
 
 }

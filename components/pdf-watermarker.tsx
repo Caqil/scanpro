@@ -329,6 +329,10 @@ export function PdfWatermarker({ initialType = "text" }: Props) {
       if (watermarkOptions.position === "custom") {
         formData.append("customX", String(previewX));
         formData.append("customY", String(previewY));
+      } else if (watermarkOptions.position === "center") {
+        // Explicitly send center coordinates (50, 50) for center position
+        formData.append("customX", "50");
+        formData.append("customY", "50");
       }
 
       // Progress simulation
@@ -376,37 +380,39 @@ export function PdfWatermarker({ initialType = "text" }: Props) {
   };
 
   // Render watermark preview
-  const renderPreview = () => {
+ // Fix for the renderPreview function - properly center the watermark
+const renderPreview = () => {
     if (!pages[currentPage]) return null;
     
     if (watermarkType === "text" && watermarkOptions.text) {
-      return (
-        <div
-          ref={previewRef}
-          className={`absolute transform -translate-x-1/2 -translate-y-1/2 select-none ${
-            watermarkOptions.position === "custom" ? "cursor-move" : ""
-          }`}
-          style={{
-            left: `${previewX}%`,
-            top: `${previewY}%`,
-            transform: `translate(-50%, -50%) rotate(${watermarkOptions.rotation}deg)`,
-            color: watermarkOptions.textColor,
-            fontFamily: watermarkOptions.fontFamily,
-            fontSize: `${watermarkOptions.fontSize}px`,
-            opacity: watermarkOptions.opacity / 100,
-            whiteSpace: "nowrap",
-            pointerEvents: watermarkOptions.position === "custom" ? "auto" : "none",
-            userSelect: "none",
-            textAlign: "center",
-            fontWeight: "normal",
-          }}
-          onMouseDown={watermarkOptions.position === "custom" ? handlePreviewDragStart : undefined}
-          onTouchStart={watermarkOptions.position === "custom" ? handlePreviewDragStart : undefined}
-        >
-          {watermarkOptions.text}
-        </div>
-      );
-    } else if (watermarkType === "image" && watermarkOptions.image) {
+        return (
+          <div
+            ref={previewRef}
+            className={`absolute transform -translate-x-1/2 -translate-y-1/2 select-none ${
+              watermarkOptions.position === "custom" ? "cursor-move" : ""
+            }`}
+            style={{
+              // Center the watermark by default
+              left: `${watermarkOptions.position === "center" ? 50 : previewX}%`,
+              top: `${watermarkOptions.position === "center" ? 50 : previewY}%`,
+              transform: `translate(-50%, -50%) rotate(${watermarkOptions.rotation}deg)`,
+              color: watermarkOptions.textColor,
+              fontFamily: watermarkOptions.fontFamily,
+              fontSize: `${watermarkOptions.fontSize}px`,
+              opacity:  (watermarkOptions.opacity ?? 100) / 100,
+              whiteSpace: "nowrap",
+              pointerEvents: watermarkOptions.position === "custom" ? "auto" : "none",
+              userSelect: "none",
+              textAlign: "center",
+              fontWeight: "normal",
+            }}
+            onMouseDown={watermarkOptions.position === "custom" ? handlePreviewDragStart : undefined}
+            onTouchStart={watermarkOptions.position === "custom" ? handlePreviewDragStart : undefined}
+          >
+            {watermarkOptions.text}
+          </div>
+        );
+      }else if (watermarkType === "image" && watermarkOptions.image) {
       // Calculate size based on scale
       const scale = watermarkOptions.scale || 50;
       return (
@@ -416,10 +422,10 @@ export function PdfWatermarker({ initialType = "text" }: Props) {
             watermarkOptions.position === "custom" ? "cursor-move" : ""
           }`}
           style={{
-            left: `${previewX}%`,
-            top: `${previewY}%`,
+            left: `${watermarkOptions.position === "custom" ? previewX : 50}%`,
+            top: `${watermarkOptions.position === "custom" ? previewY : 50}%`,
             transform: `translate(-50%, -50%) rotate(${watermarkOptions.rotation}deg)`,
-            opacity: watermarkOptions.opacity / 100,
+            opacity:  (watermarkOptions.opacity ?? 100) / 100,
             width: `${scale}%`,
             maxWidth: "90%",
             pointerEvents: watermarkOptions.position === "custom" ? "auto" : "none",
@@ -827,9 +833,6 @@ export function PdfWatermarker({ initialType = "text" }: Props) {
               <h3 className="text-xl font-semibold mb-3">
                 {t("watermarkPdf.processing") || "Processing..."}
               </h3>
-              <p className="text-muted-foreground mb-6">
-                {t("watermarkPdf.messages.processing") || "Please wait while we add the watermark to your PDF."}
-              </p>
               <Progress value={progress} className="w-full h-2" />
             </div>
           </div>
@@ -1241,10 +1244,10 @@ export function PdfWatermarker({ initialType = "text" }: Props) {
                   <CheckIcon className="h-10 w-10" />
                 </div>
                 <h3 className="text-2xl font-semibold mb-3">
-                  {t("watermarkPdf.messages.success") || "PDF Watermarked Successfully!"}
+                  {t("watermarkPdf.success") || "PDF Watermarked Successfully!"}
                 </h3>
                 <p className="text-muted-foreground mb-6">
-                  {t("watermarkPdf.messages.downloadReady") || "Your watermarked PDF is ready to download."}
+                  {t("watermarkPdf.successDesc") || "Your watermarked PDF is ready to download."}
                 </p>
                 <div className="flex gap-4 justify-center">
                   <Button

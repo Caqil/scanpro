@@ -2798,7 +2798,140 @@ export default {
       pageOf: "{total}중 페이지 {current}",
       selectPageInfo: "회전할 페이지를 선택하려면 페이지 썸네일을 클릭"
     }
+  },
+  pageNumber: {
+    title: "PDF에 페이지 번호 추가",
+    shortDescription: "PDF 문서에 사용자 지정 가능한 페이지 번호를 쉽게 추가",
+    description: "온라인 도구를 사용하여 다양한 숫자 형식, 위치, 스타일로 PDF에 맞춤 페이지 번호 추가",
+  
+    uploadTitle: "PDF 업로드",
+    uploadDesc: "페이지 번호 또는 헤더를 추가하려면 PDF 파일을 업로드하세요. 파일은 안전하게 처리되며 모든 운영 체제와 호환됩니다.",
+  
+    messages: {
+      noFile: "먼저 PDF 파일을 업로드해 주세요",
+      success: "페이지 번호가 성공적으로 추가되었습니다!",
+      error: "페이지 번호 추가 중 오류 발생",
+      processing: "PDF 처리 중..."
+    },
+    ui: {
+      browse: "파일 찾기",
+      filesSecurity: "귀하의 파일은 안전하며 영구적으로 저장되지 않습니다",
+      error: "잘못된 파일 유형입니다. PDF를 업로드하세요.",
+      cancel: "취소",
+      addPageNumbers: "페이지 번호 추가",
+      processingProgress: "처리 중... ({progress}%)",
+      successTitle: "페이지 번호가 성공적으로 추가되었습니다",
+      successDesc: "귀하의 PDF가 처리되었으며 다운로드할 준비가 되었습니다",
+      readyMessage: "귀하의 PDF가 준비되었습니다!",
+      readyDesc: "귀하의 PDF 파일이 처리되었으며 설정에 따라 페이지 번호가 추가되었습니다.",
+      download: "PDF 다운로드",
+      processAnother: "다른 PDF 처리",
+      settingsTitle: "페이지 번호 설정",
+      numberFormat: "번호 형식",
+      position: "위치",
+      topLeft: "왼쪽 상단",
+      topCenter: "상단 중앙",
+      topRight: "오른쪽 상단",
+      bottomLeft: "왼쪽 하단",
+      bottomCenter: "하단 중앙",
+      bottomRight: "오른쪽 하단",
+      fontFamily: "글꼴",
+      fontSize: "글꼴 크기",
+      color: "색상",
+      startFrom: "시작 번호",
+      prefix: "접두사",
+      suffix: "접미사",
+      horizontalMargin: "수평 여백 (px)",
+      pagesToNumber: "번호를 매길 페이지",
+      pagesHint: "모든 페이지는 비워 둡니다",
+      pagesExample: "개별 페이지에는 쉼표를, 범위에는 하이픈을 사용하세요 (예: 1,3,5-10)",
+      skipFirstPage: "첫 페이지 건너뛰기 (예: 표지용)",
+      preview: "미리보기:",
+      pagePreview: "페이지 미리보기"
+    },
+    howTo: {
+      title: "페이지 번호 추가 방법",
+      step1: {
+        title: "PDF 업로드",
+        description: "페이지 번호를 추가하려는 PDF 파일을 선택하세요"
+      },
+      step2: {
+        title: "페이지 번호 사용자 지정",
+        description: "숫자 형식, 페이지 범위, 위치, 글꼴 및 기타 설정을 선택하여 PDF 편집"
+      },
+      step3: {
+        title: "PDF 다운로드",
+        description: "온라인 도구를 사용하여 PDF를 처리하고 페이지 번호가 추가된 PDF를 다운로드"
+      }
+    },
+  
+    benefits: {
+      title: "페이지 번호 추가의 이점",
+      navigation: {
+        title: "향상된 탐색",
+        description: "모든 페이지 범위에서 명확하게 보이는 페이지 번호로 문서 탐색을 쉽게"
+      },
+      professional: {
+        title: "전문적인 문서",
+        description: "법률 또는 비즈니스 문서에 올바르게 형식화된 번호로 전문적인 모습을"
+      },
+      organization: {
+        title: "더 나은 정리",
+        description: "큰 문서의 페이지를 추적하고 추가된 번호로 특정 페이지를 쉽게 참조"
+      },
+      customization: {
+        title: "완전한 사용자 지정",
+        description: "문서 스타일에 맞게 페이지 번호의 모양과 위치를 사용자 지정하거나 헤더 추가"
+      }
+    },
+  
+    useCases: {
+      title: "일반적인 사용 사례",
+      books: {
+        title: "책 및 전자책",
+        description: "책, 전자책 또는 보고서에 적절한 페이지 번호를 쉽게 추가하여 가독성과 참조 개선"
+      },
+      academic: {
+        title: "학술 논문",
+        description: "논문, 학위 논문, 연구 논문에 학술 기준에 따라 페이지 번호를 지정, 유연한 형식 옵션 포함"
+      },
+      business: {
+        title: "비즈니스 문서",
+        description: "제안서, 보고서, 사업 계획에 전문적인 페이지 번호 추가, Adobe Acrobat Pro 불필요"
+      },
+      legal: {
+        title: "법률 문서",
+        description: "계약서 및 법률 문서에 일관된 페이지 번호를 적용하여 적절한 참조 보장"
+      }
+    },
+  
+    faq: {
+      title: "자주 묻는 질문",
+      formats: {
+        question: "어떤 숫자 형식이 제공되나요?",
+        answer: "저희 온라인 도구는 여러 형식을 지원합니다: 숫자(1, 2, 3), 로마 숫자(I, II, III), 알파벳(A, B, C). 필요에 맞는 형식을 선택하세요."
+      },
+      customize: {
+        question: "페이지 번호 모양을 사용자 지정할 수 있나요?",
+        answer: "네, 페이지 번호를 완전히 사용자 지정할 수 있습니다. 접두사(예: '페이지 '), 접미사(예: ' / 10'), 글꼴, 크기, 색상을 선택하고 페이지 어디에나 배치할 수 있습니다."
+      },
+      skipPages: {
+        question: "페이지 번호를 추가할 때 특정 페이지를 건너뛸 수 있나요?",
+        answer: "물론입니다! 페이지 범위를 지정하여 선택적으로 번호를 매기거나 첫 페이지(예: 표지)를 쉽게 건너뛸 수 있습니다."
+      },
+      startNumber: {
+        question: "특정 번호부터 페이지 번호를 시작할 수 있나요?",
+        answer: "네, 시퀀스의 시작 번호를 설정할 수 있습니다. 다른 문서에서 이어지는 경우나 고유한 번호 지정이 필요한 경우에 이상적입니다."
+      },
+      security: {
+        question: "업로드한 PDF가 안전한가요?",
+        answer: "네, 모든 처리는 안전합니다. 파일은 전송 중 암호화되고, 처리 후 자동으로 삭제됩니다—번호 추가 외에는 영구 저장이나 접근이 없습니다."
+      }
+    },
+  
+    relatedTools: {
+      title: "관련 도구"
+    }
   }
-
 
 }

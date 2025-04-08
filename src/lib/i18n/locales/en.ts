@@ -3015,6 +3015,141 @@ export default {
       pageOf: "Page {current} of {total}",
       selectPageInfo: "Click on the page thumbnails to select pages for rotation"
     }
+  },
+  pageNumber: {
+    title: "Add Page Numbers to PDF",
+    shortDescription: "Easily add customizable page numbers to your PDF documents",
+    description: "Add custom page numbers to a PDF with various number formats, positions, and styles using our online tool",
+
+    uploadTitle: "Upload Your PDF",
+    uploadDesc: "Upload a PDF file to add page numbers or headers. Your file will be processed securely, compatible with any operating system.",
+
+    messages: {
+      noFile: "Please upload a PDF file first",
+      success: "Page numbers added successfully!",
+      error: "Error adding page numbers",
+      processing: "Processing your PDF..."
+    },
+    ui: {
+      browse: "Browse Files",
+      filesSecurity: "Your files are secure and never stored permanently",
+      error: "Invalid file type. Please upload a PDF.",
+      cancel: "Cancel",
+      addPageNumbers: "Add Page Numbers",
+      processingProgress: "Processing... ({progress}%)",
+      successTitle: "Page Numbers Added Successfully",
+      successDesc: "Your PDF has been processed and is ready to download",
+      readyMessage: "Your PDF is ready!",
+      readyDesc: "Your PDF file has been processed and page numbers have been added according to your settings.",
+      download: "Download PDF",
+      processAnother: "Process Another PDF",
+      settingsTitle: "Page Number Settings",
+      numberFormat: "Number Format",
+      position: "Position",
+      topLeft: "Top Left",
+      topCenter: "Top Center",
+      topRight: "Top Right",
+      bottomLeft: "Bottom Left",
+      bottomCenter: "Bottom Center",
+      bottomRight: "Bottom Right",
+      fontFamily: "Font Family",
+      fontSize: "Font Size",
+      color: "Color",
+      startFrom: "Start From",
+      prefix: "Prefix",
+      suffix: "Suffix",
+      horizontalMargin: "Horizontal Margin (px)",
+      pagesToNumber: "Pages to Number",
+      pagesHint: "Leave blank for all pages",
+      pagesExample: "Use commas for individual pages and hyphens for ranges (e.g., 1,3,5-10)",
+      skipFirstPage: "Skip first page (e.g., for cover pages)",
+      preview: "Preview:",
+      pagePreview: "Page preview"
+    },
+    howTo: {
+      title: "How to Add Page Numbers",
+      step1: {
+        title: "Upload Your PDF",
+        description: "Select the PDF file you want to number pages for"
+      },
+      step2: {
+        title: "Customize Page Numbers",
+        description: "Choose number formats, page range, position, font, and other settings to edit PDF"
+      },
+      step3: {
+        title: "Download Your PDF",
+        description: "Process and download your PDF with page numbers added using our online tool"
+      }
+    },
+
+    benefits: {
+      title: "Benefits of Adding Page Numbers",
+      navigation: {
+        title: "Improved Navigation",
+        description: "Make it easier to navigate through your documents with clearly visible page numbers across any page range"
+      },
+      professional: {
+        title: "Professional Documents",
+        description: "Give your legal documents or business PDFs a professional look with properly formatted numbers"
+      },
+      organization: {
+        title: "Better Organization",
+        description: "Keep track of pages in large documents and reference specific pages easily with added numbers"
+      },
+      customization: {
+        title: "Full Customization",
+        description: "Customize the appearance and position of page numbers or add headers to match your document’s style"
+      }
+    },
+
+    useCases: {
+      title: "Common Use Cases",
+      books: {
+        title: "Books and E-books",
+        description: "Easily add proper page numbering to your books, e-books, or reports for better readability and referencing"
+      },
+      academic: {
+        title: "Academic Papers",
+        description: "Number pages in theses, dissertations, and research papers according to academic standards with flexible format options"
+      },
+      business: {
+        title: "Business Documents",
+        description: "Add professional page numbers to proposals, reports, and business plans without needing Adobe Acrobat Pro"
+      },
+      legal: {
+        title: "Legal Documents",
+        description: "Apply consistent page numbering to legal documents like contracts and agreements for proper referencing"
+      }
+    },
+
+    faq: {
+      title: "Frequently Asked Questions",
+      formats: {
+        question: "What number formats are available?",
+        answer: "Our online tool supports multiple number formats: numeric (1, 2, 3), Roman numerals (I, II, III), and alphabetic (A, B, C). Choose the format that fits your needs."
+      },
+      customize: {
+        question: "Can I customize how page numbers appear?",
+        answer: "Yes, you can fully customize your page numbers by adding prefixes (like 'Page '), suffixes (like ' of 10'), choosing fonts, sizes, colors, and positioning them anywhere on the page."
+      },
+      skipPages: {
+        question: "Can I skip certain pages when adding page numbers?",
+        answer: "Absolutely! You can specify a page range to number pages selectively or skip the first page (like a cover) with ease."
+      },
+      startNumber: {
+        question: "Can I start page numbering from a specific number?",
+        answer: "Yes, set the starting number for your sequence—ideal for documents continuing from others or with unique numbering needs."
+      },
+      security: {
+        question: "Is my PDF secure when I upload it?",
+        answer: "Yes, all processing is secure. Files are encrypted during transfer, processed, and deleted automatically—no permanent storage or access beyond adding numbers."
+      }
+    },
+
+    relatedTools: {
+      title: "Related Tools",
+      // Optionally add references to tools like "Acrobat online" or "Adobe Acrobat Pro" alternatives here
+    }
   }
 }
 

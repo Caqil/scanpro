@@ -24,6 +24,7 @@ const API_ROUTES = [
   '/api/pdf/process',
   '/api/pdf/save',
   '/api/pdf/info',
+  '/api/pdf/pagenumber',
 ];
 
 // Routes that should be excluded from API key validation
@@ -108,6 +109,7 @@ const ROUTE_TO_OPERATION_MAP: Record<string, string> = {
   '/api/pdf/process': 'process',
   '/api/pdf/save': 'edit',
   '/api/pdf/info': 'extract',
+  '/api/pdf/pagenumber': 'edit',
 };
 
 export async function middleware(request: NextRequest) {

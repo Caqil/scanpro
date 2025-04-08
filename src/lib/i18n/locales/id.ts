@@ -2800,7 +2800,140 @@ export default {
       pageOf: "Halaman {current} dari {total}",
       selectPageInfo: "Klik pada thumbnail halaman untuk memilih halaman untuk rotasi"
     }
-  }
+  },
+  pageNumber: {
+    title: "Tambah Nomor Halaman ke PDF",
+    shortDescription: "Tambahkan nomor halaman yang dapat disesuaikan dengan mudah ke dokumen PDF Anda",
+    description: "Tambahkan nomor halaman khusus ke PDF dengan berbagai format nomor, posisi, dan gaya menggunakan alat online kami",
 
+    uploadTitle: "Unggah PDF Anda",
+    uploadDesc: "Unggah file PDF untuk menambahkan nomor halaman atau header. File Anda akan diproses dengan aman, kompatibel dengan sistem operasi apa pun.",
+
+    messages: {
+      noFile: "Harap unggah file PDF terlebih dahulu",
+      success: "Nomor halaman berhasil ditambahkan!",
+      error: "Kesalahan saat menambahkan nomor halaman",
+      processing: "Memproses PDF Anda..."
+    },
+    ui: {
+      browse: "Jelajahi File",
+      filesSecurity: "File Anda aman dan tidak pernah disimpan secara permanen",
+      error: "Jenis file tidak valid. Harap unggah PDF.",
+      cancel: "Batal",
+      addPageNumbers: "Tambahkan Nomor Halaman",
+      processingProgress: "Memproses... ({progress}%)",
+      successTitle: "Nomor Halaman Berhasil Ditambahkan",
+      successDesc: "PDF Anda telah diproses dan siap diunduh",
+      readyMessage: "PDF Anda siap!",
+      readyDesc: "File PDF Anda telah diproses dan nomor halaman telah ditambahkan sesuai pengaturan Anda.",
+      download: "Unduh PDF",
+      processAnother: "Proses PDF Lain",
+      settingsTitle: "Pengaturan Nomor Halaman",
+      numberFormat: "Format Nomor",
+      position: "Posisi",
+      topLeft: "Atas Kiri",
+      topCenter: "Atas Tengah",
+      topRight: "Atas Kanan",
+      bottomLeft: "Bawah Kiri",
+      bottomCenter: "Bawah Tengah",
+      bottomRight: "Bawah Kanan",
+      fontFamily: "Jenis Font",
+      fontSize: "Ukuran Font",
+      color: "Warna",
+      startFrom: "Mulai Dari",
+      prefix: "Awalan",
+      suffix: "Akhiran",
+      horizontalMargin: "Margin Horizontal (px)",
+      pagesToNumber: "Halaman yang Dinomori",
+      pagesHint: "Biarkan kosong untuk semua halaman",
+      pagesExample: "Gunakan koma untuk halaman individual dan tanda hubung untuk rentang (contoh: 1,3,5-10)",
+      skipFirstPage: "Lewati halaman pertama (contoh: untuk halaman sampul)",
+      preview: "Pratinjau:",
+      pagePreview: "Pratinjau halaman"
+    },
+    howTo: {
+      title: "Cara Menambahkan Nomor Halaman",
+      step1: {
+        title: "Unggah PDF Anda",
+        description: "Pilih file PDF yang ingin Anda beri nomor halaman"
+      },
+      step2: {
+        title: "Sesuaikan Nomor Halaman",
+        description: "Pilih format nomor, rentang halaman, posisi, font, dan pengaturan lain untuk mengedit PDF"
+      },
+      step3: {
+        title: "Unduh PDF Anda",
+        description: "Proses dan unduh PDF Anda dengan nomor halaman yang ditambahkan menggunakan alat online kami"
+      }
+    },
+
+    benefits: {
+      title: "Manfaat Menambahkan Nomor Halaman",
+      navigation: {
+        title: "Navigasi yang Lebih Baik",
+        description: "Permudah navigasi melalui dokumen Anda dengan nomor halaman yang jelas terlihat di seluruh rentang halaman"
+      },
+      professional: {
+        title: "Dokumen Profesional",
+        description: "Berikan tampilan profesional pada dokumen hukum atau bisnis Anda dengan nomor yang diformat dengan benar"
+      },
+      organization: {
+        title: "Organisasi yang Lebih Baik",
+        description: "Lacak halaman dalam dokumen besar dan rujuk ke halaman tertentu dengan mudah menggunakan nomor yang ditambahkan"
+      },
+      customization: {
+        title: "Kustomisasi Penuh",
+        description: "Sesuaikan tampilan dan posisi nomor halaman atau tambahkan header agar sesuai dengan gaya dokumen Anda"
+      }
+    },
+
+    useCases: {
+      title: "Kasus Penggunaan Umum",
+      books: {
+        title: "Buku dan E-book",
+        description: "Tambahkan nomor halaman yang tepat dengan mudah ke buku, e-book, atau laporan Anda untuk meningkatkan keterbacaan dan referensi"
+      },
+      academic: {
+        title: "Makalah Akademik",
+        description: "Beri nomor halaman pada tesis, disertasi, dan makalah penelitian sesuai standar akademik dengan opsi format yang fleksibel"
+      },
+      business: {
+        title: "Dokumen Bisnis",
+        description: "Tambahkan nomor halaman profesional ke proposal, laporan, dan rencana bisnis tanpa memerlukan Adobe Acrobat Pro"
+      },
+      legal: {
+        title: "Dokumen Hukum",
+        description: "Terapkan nomor halaman yang konsisten pada kontrak dan dokumen hukum untuk referensi yang tepat"
+      }
+    },
+
+    faq: {
+      title: "Pertanyaan yang Sering Diajukan",
+      formats: {
+        question: "Format nomor apa yang tersedia?",
+        answer: "Alat online kami mendukung beberapa format: numerik (1, 2, 3), angka Romawi (I, II, III), dan alfabet (A, B, C). Pilih format yang sesuai dengan kebutuhan Anda."
+      },
+      customize: {
+        question: "Apakah saya bisa menyesuaikan tampilan nomor halaman?",
+        answer: "Ya, Anda bisa menyesuaikan nomor halaman sepenuhnya dengan menambahkan prefiks (seperti 'Halaman '), sufiks (seperti ' dari 10'), memilih font, ukuran, warna, dan menempatkannya di mana saja pada halaman."
+      },
+      skipPages: {
+        question: "Apakah saya bisa melewati halaman tertentu saat menambahkan nomor?",
+        answer: "Tentu saja! Anda bisa menentukan rentang halaman untuk memberi nomor secara selektif atau melewati halaman pertama (seperti halaman sampul) dengan mudah."
+      },
+      startNumber: {
+        question: "Apakah saya bisa memulai penomoran dari angka tertentu?",
+        answer: "Ya, Anda bisa mengatur nomor awal untuk urutan Anda—ideal untuk dokumen yang berlanjut dari dokumen lain atau memiliki kebutuhan penomoran unik."
+      },
+      security: {
+        question: "Apakah PDF saya aman saat diunggah?",
+        answer: "Ya, semua pemrosesan aman. File Anda dienkripsi selama transfer, diproses, lalu dihapus secara otomatis—tidak ada penyimpanan permanen atau akses selain untuk menambahkan nomor."
+      }
+    },
+
+    relatedTools: {
+      title: "Alat Terkait"
+    }
+  }
 
 }

@@ -2796,6 +2796,140 @@ export default {
             pageOf: "Page {current} sur {total}",
             selectPageInfo: "Cliquez sur les miniatures des pages pour sélectionner les pages à faire pivoter"
         }
+    },
+    pageNumber: {
+        title: "Ajouter des numéros de page à un PDF",
+        shortDescription: "Ajoutez facilement des numéros de page personnalisables à vos documents PDF",
+        description: "Ajoutez des numéros de page personnalisés à un PDF avec divers formats numériques, positions et styles grâce à notre outil en ligne",
+
+        uploadTitle: "Téléchargez votre PDF",
+        uploadDesc: "Téléchargez un fichier PDF pour ajouter des numéros de page ou des en-têtes. Votre fichier sera traité en toute sécurité, compatible avec tout système d'exploitation.",
+
+        messages: {
+            noFile: "Veuillez d'abord télécharger un fichier PDF",
+            success: "Numéros de page ajoutés avec succès !",
+            error: "Erreur lors de l'ajout des numéros de page",
+            processing: "Traitement de votre PDF en cours..."
+        },
+        ui: {
+            browse: "Parcourir les fichiers",
+            filesSecurity: "Vos fichiers sont sécurisés et ne sont jamais stockés de manière permanente",
+            error: "Type de fichier invalide. Veuillez télécharger un PDF.",
+            cancel: "Annuler",
+            addPageNumbers: "Ajouter des numéros de page",
+            processingProgress: "Traitement en cours... ({progress}%)",
+            successTitle: "Numéros de page ajoutés avec succès",
+            successDesc: "Votre PDF a été traité et est prêt à être téléchargé",
+            readyMessage: "Votre PDF est prêt !",
+            readyDesc: "Votre fichier PDF a été traité et des numéros de page ont été ajoutés selon vos paramètres.",
+            download: "Télécharger le PDF",
+            processAnother: "Traiter un autre PDF",
+            settingsTitle: "Paramètres des numéros de page",
+            numberFormat: "Format des numéros",
+            position: "Position",
+            topLeft: "En haut à gauche",
+            topCenter: "En haut au centre",
+            topRight: "En haut à droite",
+            bottomLeft: "En bas à gauche",
+            bottomCenter: "En bas au centre",
+            bottomRight: "En bas à droite",
+            fontFamily: "Police d'écriture",
+            fontSize: "Taille de police",
+            color: "Couleur",
+            startFrom: "Commencer à partir de",
+            prefix: "Préfixe",
+            suffix: "Suffixe",
+            horizontalMargin: "Marge horizontale (px)",
+            pagesToNumber: "Pages à numéroter",
+            pagesHint: "Laissez vide pour toutes les pages",
+            pagesExample: "Utilisez des virgules pour les pages individuelles et des tirets pour les plages (ex. 1,3,5-10)",
+            skipFirstPage: "Sauter la première page (ex. pour les pages de couverture)",
+            preview: "Aperçu :",
+            pagePreview: "Aperçu de la page"
+        },
+        howTo: {
+            title: "Comment ajouter des numéros de page",
+            step1: {
+                title: "Téléchargez votre PDF",
+                description: "Sélectionnez le fichier PDF dont vous souhaitez numéroter les pages"
+            },
+            step2: {
+                title: "Personnalisez les numéros de page",
+                description: "Choisissez les formats numériques, la plage de pages, la position, la police et d'autres paramètres pour modifier le PDF"
+            },
+            step3: {
+                title: "Téléchargez votre PDF",
+                description: "Traitez et téléchargez votre PDF avec les numéros de page ajoutés grâce à notre outil en ligne"
+            }
+        },
+
+        benefits: {
+            title: "Avantages d'ajouter des numéros de page",
+            navigation: {
+                title: "Navigation améliorée",
+                description: "Facilitez la navigation dans vos documents avec des numéros de page clairement visibles sur n'importe quelle plage de pages"
+            },
+            professional: {
+                title: "Documents professionnels",
+                description: "Donnez à vos documents juridiques ou professionnels un aspect soigné avec des numéros correctement formatés"
+            },
+            organization: {
+                title: "Meilleure organisation",
+                description: "Suivez les pages dans les documents volumineux et référencez facilement des pages spécifiques avec les numéros ajoutés"
+            },
+            customization: {
+                title: "Personnalisation complète",
+                description: "Personnalisez l'apparence et la position des numéros de page ou ajoutez des en-têtes pour correspondre au style de votre document"
+            }
+        },
+
+        useCases: {
+            title: "Cas d'utilisation courants",
+            books: {
+                title: "Livres et e-books",
+                description: "Ajoutez facilement une numérotation correcte à vos livres, e-books ou rapports pour améliorer la lisibilité et les références"
+            },
+            academic: {
+                title: "Travaux académiques",
+                description: "Numérotez les pages des thèses, dissertations et articles de recherche selon les normes académiques avec des options de format flexibles"
+            },
+            business: {
+                title: "Documents professionnels",
+                description: "Ajoutez des numéros de page professionnels à vos propositions, rapports et plans d'affaires sans avoir besoin d'Adobe Acrobat Pro"
+            },
+            legal: {
+                title: "Documents juridiques",
+                description: "Appliquez une numérotation cohérente aux contrats et documents juridiques pour une référenciation appropriée"
+            }
+        },
+
+        faq: {
+            title: "Questions fréquemment posées",
+            formats: {
+                question: "Quels formats de numéros sont disponibles ?",
+                answer: "Notre outil en ligne prend en charge plusieurs formats : numérique (1, 2, 3), chiffres romains (I, II, III) et alphabétique (A, B, C). Choisissez celui qui convient à vos besoins."
+            },
+            customize: {
+                question: "Puis-je personnaliser l'apparence des numéros de page ?",
+                answer: "Oui, vous pouvez personnaliser entièrement les numéros de page en ajoutant des préfixes (comme 'Page '), des suffixes (comme ' sur 10'), en choisissant des polices, tailles, couleurs et en les positionnant n'importe où sur la page."
+            },
+            skipPages: {
+                question: "Puis-je ignorer certaines pages lors de l'ajout des numéros ?",
+                answer: "Absolument ! Vous pouvez spécifier une plage de pages pour numéroter sélectivement ou ignorer la première page (comme une couverture) facilement."
+            },
+            startNumber: {
+                question: "Puis-je commencer la numérotation à partir d'un numéro spécifique ?",
+                answer: "Oui, vous pouvez définir le numéro de départ de votre séquence, idéal pour les documents qui continuent d'autres ou ont des besoins de numérotation uniques."
+            },
+            security: {
+                question: "Mon PDF est-il sécurisé lorsque je le télécharge ?",
+                answer: "Oui, tout le traitement est sécurisé. Vos fichiers sont cryptés pendant le transfert, traités, puis supprimés automatiquement – pas de stockage permanent ni d'accès autre que pour ajouter les numéros."
+            }
+        },
+
+        relatedTools: {
+            title: "Outils connexes"
+        }
     }
 
 }

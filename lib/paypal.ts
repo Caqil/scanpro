@@ -9,7 +9,7 @@ export const PAYPAL_PLAN_IDS: Record<string, string> = {
 };
 
 // Set up PayPal API base URLs
-const PAYPAL_API_BASE = 'https://api-m.paypal.com';
+const PAYPAL_API_BASE = 'https://api-m.sandbox.paypal.com';
 
 // Get PayPal OAuth token
 async function getPayPalAccessToken(): Promise<string> {
@@ -17,23 +17,29 @@ async function getPayPalAccessToken(): Promise<string> {
     const clientId = process.env.PAYPAL_CLIENT_ID;
     const clientSecret = process.env.PAYPAL_CLIENT_SECRET;
 
+    console.log('Client ID:', clientId ? 'Set' : 'Missing');
+    console.log('Client Secret:', clientSecret ? 'Set' : 'Missing');
+
     if (!clientId || !clientSecret) {
       throw new Error('PayPal credentials are not configured');
     }
 
     const auth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+    console.log('Auth Header:', `Basic ${auth}`);
 
     const response = await fetch(`${PAYPAL_API_BASE}/v1/oauth2/token`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Basic ${auth}`
+        Authorization: `Basic ${auth}`,
       },
-      body: 'grant_type=client_credentials'
+      body: 'grant_type=client_credentials',
     });
 
+    console.log('Response Status:', response.status);
     if (!response.ok) {
       const errorData = await response.json();
+      console.log('Error Data:', errorData);
       throw new Error(`Failed to get PayPal access token: ${errorData.error_description || response.statusText}`);
     }
 

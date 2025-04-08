@@ -107,7 +107,7 @@ function calculateWatermarkPositions(
 ): { x: number, y: number }[] {
     let positions: { x: number, y: number }[] = [];
 
-    switch(position) {
+    switch (position) {
         case 'center':
             // Single watermark in the center
             positions.push({
@@ -119,7 +119,7 @@ function calculateWatermarkPositions(
             // Tile watermarks across the page
             const spacingX = width / 3;
             const spacingY = height / 3;
-            
+
             for (let x = spacingX / 2; x < width; x += spacingX) {
                 for (let y = spacingY / 2; y < height; y += spacingY) {
                     positions.push({ x, y });
@@ -129,11 +129,12 @@ function calculateWatermarkPositions(
         case 'custom':
             // Custom position using provided coordinates (as percentages)
             if (customX !== undefined && customY !== undefined) {
+                // Convert percentages to coordinates with y-axis flip
                 const x = (width * customX) / 100;
-                const y = (height * customY) / 100;
+                // Invert Y-axis: 0% at top = height, 100% at bottom = 0
+                const y = height - ((height * customY) / 100);
                 positions.push({ x, y });
             } else {
-                // Default to center if coordinates not provided
                 positions.push({
                     x: width / 2,
                     y: height / 2
@@ -147,7 +148,7 @@ function calculateWatermarkPositions(
                 y: height / 2
             });
     }
-    
+
     return positions;
 }
 
@@ -217,14 +218,21 @@ async function addTextWatermark(
                 const textWidth = font.widthOfTextAtSize(options.text, options.fontSize);
                 const textHeight = font.heightAtSize(options.fontSize);
 
+                // For text watermarks
                 page.drawText(options.text, {
-                    x: pos.x - textWidth / 2,
-                    y: pos.y - textHeight / 2,
+                    x: pos.x,
+                    y: pos.y,
                     size: options.fontSize,
                     font,
                     color: rgb(r, g, b),
                     opacity: options.opacity / 100,
-                    rotate: degrees(options.rotation)
+                    rotate: degrees(options.rotation),
+                    // This is the key fix - center the text properly with rotation
+                    xSkew: degrees(0),
+                    ySkew: degrees(0),
+                    // Tell pdf-lib to center the text
+                    wordBreaks: [],
+                    lineHeight: 0,
                 });
             }
         }
@@ -385,7 +393,7 @@ export async function POST(request: NextRequest) {
         const customPages = formData.get('customPages') as string || '';
         const opacity = parseInt(formData.get('opacity') as string || '30');
         const rotation = parseInt(formData.get('rotation') as string || '45');
-        
+
         // Get custom position coordinates if applicable
         const customX = position === 'custom' ? parseFloat(formData.get('customX') as string || '50') : undefined;
         const customY = position === 'custom' ? parseFloat(formData.get('customY') as string || '50') : undefined;

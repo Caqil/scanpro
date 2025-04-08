@@ -18,6 +18,8 @@ import {
   FileBadge2Icon,
   ReplaceAllIcon,
   PenLineIcon,
+  FileCog,
+  DiamondIcon,
 } from "lucide-react";
 
 export function PdfTools() {
@@ -251,6 +253,25 @@ export function PdfTools() {
           description: t('toolDescriptions.ocr'),
           iconBg: "bg-purple-100 dark:bg-yellow-900/30",
           isNew: true
+        },
+        {
+          id: "repair-pdf",
+          name: t("repairPdf.title"),
+          description: t("repairPdf.shortDescription"),
+          href: "/repair-pdf",
+          icon: <FileCog className="w-6 h-6 text-indigo-500" />,
+          backgroundColor: "bg-indigo-50 dark:bg-indigo-950/20",
+          iconBg: "bg-green-100 dark:bg-blue-900/30",
+        },
+        {
+          id: "pageNumber-pdf",
+          name: t("pageNumber.title") || "Add Page Numbers", // New tool - Add Page Numbers
+          description: t("pageNumber.shortDescription") || "Add customizable page numbers to your PDF documents",
+          href: "/page-numbers-pdf",
+          icon: <DiamondIcon className="w-6 h-6 text-violet-500" />,
+          backgroundColor: "bg-violet-50 dark:bg-violet-950/20",
+          iconBg: "bg-green-100 dark:bg-blue-900/30",
+          new: true // Mark as new
         }
       ]
     }
