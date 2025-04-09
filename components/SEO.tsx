@@ -14,6 +14,8 @@ export function SEO({
 }: SeoProps) {
   return (
     <Head>
+      <meta name="apple-itunes-app" content="app-id=6743518395" />
+      <meta name="google-play-app" content="app-id=com.scanpro.documentconverter" />
       {/* JSON-LD Schemas */}
       {schemas.map((schema, index) => (
         <script

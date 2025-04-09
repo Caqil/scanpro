@@ -9,7 +9,7 @@ export default {
     nav: {
         tools: "أدوات",
         company: "الشركة",
-        pricing: "التسعير",
+        pricing: "تسعير واجهة برمجة التطبيقات",
         convertPdf: "تحويل PDF",
         convertPdfDesc: "تحويل ملفات PDF من وإلى صيغ أخرى",
         selectLanguage: "اختر اللغة",

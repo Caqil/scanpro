@@ -9,7 +9,7 @@ export default {
   nav: {
     tools: "Strumenti",
     company: "Azienda",
-    pricing: "Prezzi",
+    pricing: "Costo API",
     convertPdf: "Converti PDF",
     convertPdfDesc: "Trasforma i PDF da e verso altri formati",
     selectLanguage: "Seleziona Lingua",

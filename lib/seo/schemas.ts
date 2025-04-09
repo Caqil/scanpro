@@ -120,6 +120,7 @@ export function generatePageSeoMetadata(
         title,
         description,
         keywords,
+        
         openGraph: {
             title,
             description,

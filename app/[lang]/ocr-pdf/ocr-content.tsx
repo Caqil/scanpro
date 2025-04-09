@@ -1,7 +1,9 @@
 "use client"
 
+import { LanguageLink } from "@/components/language-link"
 import { PdfOcr } from "@/components/pdf-ocr"
 import { useLanguageStore } from "@/src/store/store"
+import { Download, FileText, MergeIcon, Settings } from "lucide-react"
 
 export function OcrContent() {
   const { t } = useLanguageStore()
@@ -37,7 +39,7 @@ export function OcrContent() {
             {t("ocrPdf.title")}
           </h1>
           <p className="mt-4 text-xl text-muted-foreground max-w-[700px]">
-            {t("ocrPdf.subtitle")}
+            {t("ocrPdf.description")}
           </p>
         </div>
       </div>
@@ -253,117 +255,46 @@ export function OcrContent() {
         </div>
       </div>
 
-      <div className="mt-12 text-center">
-        <h2 className="text-2xl font-bold mb-6">
-          {t("ocrPdf.relatedToolsTitle")}
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <a
-            href={t("ocrPdf.tool1Href")}
-            className="border rounded-lg p-4 text-center hover:border-primary transition-colors"
-          >
-            <div className="flex flex-col items-center">
-              <div className={`p-2 rounded-full ${t("ocrPdf.tool1BgColor")} mb-2`}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className={t("ocrPdf.tool1IconColor")}
-                >
-                  <path d="M22 12H2m20 0-4 4m4-4-4-4M2 20V4"></path>
-                </svg>
-              </div>
-              <span className="text-sm font-medium">{t("ocrPdf.tool1Title")}</span>
-            </div>
-          </a>
-          <a
-            href={t("ocrPdf.tool2Href")}
-            className="border rounded-lg p-4 text-center hover:border-primary transition-colors"
-          >
-            <div className="flex flex-col items-center">
-              <div className={`p-2 rounded-full ${t("ocrPdf.tool2BgColor")} mb-2`}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className={t("ocrPdf.tool2IconColor")}
-                >
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                  <path d="M14 2v6h6"></path>
-                  <path d="M16 13H8"></path>
-                  <path d="M16 17H8"></path>
-                  <path d="M10 9H8"></path>
-                </svg>
-              </div>
-              <span className="text-sm font-medium">{t("ocrPdf.tool2Title")}</span>
-            </div>
-          </a>
-          <a
-            href={t("ocrPdf.tool3Href")}
-            className="border rounded-lg p-4 text-center hover:border-primary transition-colors"
-          >
-            <div className="flex flex-col items-center">
-              <div className={`p-2 rounded-full ${t("ocrPdf.tool3BgColor")} mb-2`}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className={t("ocrPdf.tool3IconColor")}
-                >
-                  <path d="M8 3H5a2 2 0 0 0-2 2v3"></path>
-                  <path d="M21 8V5a2 2 0 0 0-2-2h-3"></path>
-                  <path d="M3 16v3a2 2 0 0 0 2 2h3"></path>
-                  <path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
-                </svg>
-              </div>
-              <span className="text-sm font-medium">{t("ocrPdf.tool3Title")}</span>
-            </div>
-          </a>
-          <a
-            href={t("ocrPdf.tool4Href")}
-            className="border rounded-lg p-4 text-center hover:border-primary transition-colors"
-          >
-            <div className="flex flex-col items-center">
-              <div className={`p-2 rounded-full ${t("ocrPdf.tool4BgColor")} mb-2`}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className={t("ocrPdf.tool4IconColor")}
-                >
-                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
-                  <polyline points="14 2 14 8 20 8"></polyline>
-                </svg>
-              </div>
-              <span className="text-sm font-medium">{t("ocrPdf.tool4Title")}</span>
-            </div>
-          </a>
+      <section className="mt-12">
+  <h2 className="text-2xl font-bold mb-6 text-center">{t('ocr.relatedTools')}</h2>
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <LanguageLink href="/convert/pdf-to-docx" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+      <div className="flex flex-col items-center">
+        <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 mb-2">
+          <FileText className="h-5 w-5 text-blue-500" />
         </div>
+        <span className="text-sm font-medium">PDF to Word</span>
       </div>
+    </LanguageLink>
+    
+    <LanguageLink href="/compress-pdf" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+      <div className="flex flex-col items-center">
+        <div className="p-2 rounded-full bg-green-100 dark:bg-green-900/30 mb-2">
+          <Download className="h-5 w-5 text-green-500" />
+        </div>
+        <span className="text-sm font-medium">Compress PDF</span>
+      </div>
+    </LanguageLink>
+    
+    <LanguageLink href="/merge-pdf" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+      <div className="flex flex-col items-center">
+        <div className="p-2 rounded-full bg-red-100 dark:bg-red-900/30 mb-2">
+          <MergeIcon className="h-5 w-5 text-red-500" />
+        </div>
+        <span className="text-sm font-medium">Merge PDFs</span>
+      </div>
+    </LanguageLink>
+    
+    <LanguageLink href="/pdf-tools" className="border rounded-lg p-4 text-center hover:border-primary transition-colors">
+      <div className="flex flex-col items-center">
+        <div className="p-2 rounded-full bg-purple-100 dark:bg-purple-900/30 mb-2">
+          <Settings className="h-5 w-5 text-purple-500" />
+        </div>
+        <span className="text-sm font-medium">All Tools</span>
+      </div>
+    </LanguageLink>
+  </div>
+</section>
     </div>
   )
 }

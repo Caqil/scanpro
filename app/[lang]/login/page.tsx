@@ -4,6 +4,7 @@ import { SiteLogo } from "@/components/site-logo";
 import Link from "next/link";
 import { LoginFormWithParams } from "@/components/auth/login-form-with-params";
 import { Metadata } from "next";
+import { LanguageLink } from "@/components/language-link";
 
 export const metadata: Metadata = {
   title: "Login | ScanPro",
@@ -34,13 +35,13 @@ export default function LoginPage() {
           
           <p className="text-center text-sm text-muted-foreground">
             By signing in, you agree to our{" "}
-            <Link href="/terms" className="underline underline-offset-4 hover:text-primary">
+            <LanguageLink  href="/terms" className="underline underline-offset-4 hover:text-primary">
               Terms of Service
-            </Link>{" "}
+            </LanguageLink >{" "}
             and{" "}
-            <Link href="/privacy" className="underline underline-offset-4 hover:text-primary">
+            <LanguageLink  href="/privacy" className="underline underline-offset-4 hover:text-primary">
               Privacy Policy
-            </Link>
+            </LanguageLink >
             .
           </p>
         </div>

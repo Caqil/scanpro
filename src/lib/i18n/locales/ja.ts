@@ -9,7 +9,7 @@ export default {
   nav: {
     tools: "ツール",
     company: "会社",
-    pricing: "価格",
+    pricing: "API 料金",
     convertPdf: "PDF変換",
     convertPdfDesc: "PDFを他の形式に、または他の形式から変換",
     selectLanguage: "言語を選択",

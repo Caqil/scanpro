@@ -4,7 +4,7 @@ import Link from "next/link";
 import { LanguageLink } from "@/components/language-link";
 import { SiteLogo } from "@/components/site-logo";
 import { useLanguageStore } from "@/src/store/store";
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Github, Youtube } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Github, Youtube, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -41,19 +41,19 @@ export function Footer() {
               {t('footer.description') || "Advanced PDF tools for professionals. Convert, edit, protect and optimize your documents with our powerful web-based platform and API."}
             </p>
             <div className="flex space-x-4 pt-2">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialFacebook') || "Facebook"}>
+              <a href="https://www.facebook.com/share/1CWuFzyYFR/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialFacebook') || "Facebook"}>
                 <Facebook className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialTwitter') || "Twitter"}>
-                <Twitter className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
+              <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialTwitter') || "Twitter"}>
+                <X className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
               </a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialInstagram') || "Instagram"}>
                 <Instagram className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialLinkedin') || "LinkedIn"}>
+              <a href="https://www.linkedin.com/company/scanpro-cc/" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialLinkedin') || "LinkedIn"}>
                 <Linkedin className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
               </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialGithub') || "GitHub"}>
+              <a href="https://github.com/scanpro-cc" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialGithub') || "GitHub"}>
                 <Github className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
               </a>
               <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label={t('footer.socialYoutube') || "YouTube"}>

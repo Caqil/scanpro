@@ -9,7 +9,7 @@ export default {
     nav: {
         tools: "उपकरण",
         company: "कंपनी",
-        pricing: "मूल्य निर्धारण",
+        pricing: "एपीआई की कीमत",
         convertPdf: "PDF कन्वर्ट करें",
         convertPdfDesc: "PDF को अन्य प्रारूपों में और से रूपांतरित करें",
         selectLanguage: "भाषा चुनें",

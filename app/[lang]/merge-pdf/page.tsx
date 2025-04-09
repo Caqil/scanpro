@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   // Use the new SEO metadata generator
   return generatePageSeoMetadata(lang as any, { 
     translationPrefix: 'mergePdf', 
-    canonicalPath: 'merge' 
+    canonicalPath: 'merge-pdf' 
   }); 
   
 }

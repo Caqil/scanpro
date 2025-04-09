@@ -9,7 +9,7 @@ export default {
     nav: {
         tools: "工具",
         company: "公司",
-        pricing: "定价",
+        pricing: "API价格",
         convertPdf: "转换PDF",
         convertPdfDesc: "将PDF转换为其他格式或从其他格式转换为PDF",
         selectLanguage: "选择语言",

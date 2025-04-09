@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   // Use the new SEO metadata generator
   return generatePageSeoMetadata(lang as any, { 
     translationPrefix: 'repairPdf', 
-    canonicalPath: 'repair' 
+    canonicalPath: 'repair-pdf' 
   }); 
   
 }

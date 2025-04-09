@@ -9,7 +9,7 @@ export default {
     nav: {
         tools: "Araçlar",
         company: "Şirket",
-        pricing: "Fiyatlandırma",
+        pricing: "API Fiyatı",
         convertPdf: "PDF Dönüştür",
         convertPdfDesc: "PDF'leri diğer formatlara ve diğer formatlardan PDF'ye dönüştür",
         selectLanguage: "Dil Seç",

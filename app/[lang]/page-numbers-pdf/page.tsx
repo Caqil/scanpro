@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   // Use the SEO metadata generator
   return generatePageSeoMetadata(lang as any, { 
     translationPrefix: 'pageNumber', 
-    canonicalPath: 'add-page-numbers' 
+    canonicalPath: 'page-numbers-pdf' 
   }); 
 }
 

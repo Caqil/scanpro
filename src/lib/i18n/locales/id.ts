@@ -9,7 +9,7 @@ export default {
   nav: {
     tools: "Alat",
     company: "Perusahaan",
-    pricing: "Harga",
+    pricing: "Harga API",
     convertPdf: "Konversi PDF",
     convertPdfDesc: "Ubah PDF ke dan dari format lain",
     selectLanguage: "Pilih Bahasa",
