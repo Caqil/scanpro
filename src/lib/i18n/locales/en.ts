@@ -1334,6 +1334,17 @@ export default {
       rotation: "Rotation",
       preview: "Preview"
     },
+    positionX: "Position X",
+    positionY: "Position Y",
+    positions: {
+      topLeft: "Top Left",
+      topRight: "Top Right",
+      bottomLeft: "Bottom Left",
+      bottomRight: "Bottom Right",
+      center: "Center",
+      tile: "Tile",
+      custom: "Custom"
+    },
 
     // Image watermark options
     image: {

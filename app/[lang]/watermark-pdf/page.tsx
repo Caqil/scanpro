@@ -3,12 +3,14 @@ import {
   WatermarkHeaderSection,
   HowToWatermarkSection,
   WatermarkFaqSection,
-  RelatedToolsSection
+  RelatedToolsSection,
+  WhyWatermarkSection,
+  WatermarkTypesSection
 } from "./watermark-content";
 import { SUPPORTED_LANGUAGES } from '@/src/lib/i18n/config';
 import { generatePageSeoMetadata } from "@/lib/seo/schemas";
 import { SEO } from "@/components/SEO";
-import { PdfWatermarker } from "@/components/pdf-watermarker";
+import { WatermarkPDF } from "@/components/pdf-watermarker";
 
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
@@ -30,7 +32,7 @@ export default function WatermarkPDFPage() {
       <WatermarkHeaderSection />
    {/* Main Tool Section with Tabs */}
       <div className="mb-12">
-      <PdfWatermarker initialType="text" />
+      <WatermarkPDF  />
       </div>
      
 
@@ -38,8 +40,9 @@ export default function WatermarkPDFPage() {
       <HowToWatermarkSection />
 
       {/* FAQ Section */}
+      <WhyWatermarkSection />
+      <WatermarkTypesSection /> 
       <WatermarkFaqSection />
-
       {/* Related Tools Section */}
       <RelatedToolsSection />
     </div>

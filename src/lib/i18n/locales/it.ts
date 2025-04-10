@@ -1027,7 +1027,166 @@ export default {
     processAnother: "Elabora un Altro File",
     supportedLanguages: "Supporta oltre 15 lingue, tra cui inglese, spagnolo, francese, tedesco, cinese, giapponese e altro. Seleziona la lingua appropriata per una maggiore accuratezza."
   },
-
+  watermarkPdf: {
+    title: "Aggiungi filigrana al PDF",
+    description: "Aggiungi una filigrana personalizzata di testo o immagine ai tuoi documenti PDF per protezione, branding o identificazione.",
+    textWatermark: "Filigrana di testo",
+    imageWatermark: "Filigrana immagine",
+    privacyNote: "I tuoi file vengono elaborati in modo sicuro. Tutti i file caricati vengono eliminati automaticamente dopo l'elaborazione.",
+    headerTitle: "Aggiungi filigrana al PDF",
+    headerDescription: "Aggiungi filigrane personalizzate di testo o immagine ai tuoi documenti PDF per branding, protezione del copyright e classificazione dei documenti.",
+    invalidFileType: "Tipo di file non valido",
+    selectPdfFile: "Seleziona un file PDF",
+    fileTooLarge: "File troppo grande",
+    maxFileSize: "Dimensione massima del file: 50MB",
+    invalidImageType: "Tipo di immagine non valido",
+    supportedFormats: "Formati supportati: PNG, JPG, SVG",
+    imageTooLarge: "Immagine troppo grande",
+    maxImageSize: "Dimensione massima immagine: 5MB",
+    noFileSelected: "Nessun file selezionato",
+    noImageSelected: "Nessuna immagine di filigrana selezionata",
+    selectWatermarkImage: "Seleziona un'immagine da usare come filigrana",
+    noTextEntered: "Nessun testo per la filigrana inserito",
+    enterWatermarkText: "Inserisci il testo da usare come filigrana",
+    success: "Filigrana aggiunta con successo",
+    successDesc: "Il tuo PDF è stato filigranato ed è pronto per il download",
+    failed: "Aggiunta filigrana fallita",
+    unknownError: "Errore sconosciuto",
+    unknownErrorDesc: "Si è verificato un errore sconosciuto. Riprova",
+    uploadTitle: "Carica PDF per aggiungere filigrana",
+    uploadDesc: "Trascina e rilascia il tuo file PDF qui o fai clic per sfogliare",
+    uploading: "Caricamento in corso...",
+    selectPdf: "Seleziona file PDF",
+    maxSize: "Dimensione massima file: 50MB",
+    change: "Cambia file",
+    commonOptions: "Impostazioni filigrana",
+    position: "Posizione",
+    center: "Centrato",
+    tile: "Affiancato",
+    custom: "Personalizzato",
+    applyToPages: "Applica alle pagine",
+    all: "Tutte le pagine",
+    even: "Pagine pari",
+    odd: "Pagine dispari",
+    customPages: "Pagine personalizzate",
+    pagesFormat: "Inserisci numeri di pagina separati da virgole o intervalli con trattino (es: 1,3,5-10)",
+    processing: "Elaborazione in corso...",
+    addWatermark: "Aggiungi filigrana",
+    adding: "Aggiunta filigrana in corso",
+    pleaseWait: "Attendi mentre elaboriamo il tuo documento",
+    download: "Scarica PDF",
+    newWatermark: "Aggiungi un'altra filigrana",
+    text: {
+      text: "Testo filigrana",
+      placeholder: "Es: Confidenziale, Bozza, ecc.",
+      color: "Colore testo",
+      font: "Font",
+      selectFont: "Seleziona font",
+      size: "Dimensione font",
+      opacity: "Opacità",
+      rotation: "Rotazione",
+      preview: "Anteprima"
+    },
+    image: {
+      title: "Immagine filigrana",
+      upload: "Carica immagine come filigrana",
+      select: "Seleziona immagine",
+      formats: "Formati supportati: PNG, JPEG, SVG",
+      change: "Cambia immagine",
+      scale: "Scala",
+      opacity: "Opacità",
+      rotation: "Rotazione"
+    },
+    positionX: "Posizione X",
+    positionY: "Posizione Y",
+    positions: {
+      topLeft: "In alto a sinistra",
+      topRight: "In alto a destra",
+      bottomLeft: "In basso a sinistra",
+      bottomRight: "In basso a destra",
+      center: "Centrato",
+      tile: "Affiancato",
+      custom: "Personalizzato"
+    },
+    howTo: {
+      title: "Come aggiungere una filigrana",
+      step1: { title: "Carica il tuo PDF", description: "Seleziona e carica il file PDF a cui vuoi aggiungere la filigrana" },
+      step2: { title: "Personalizza la filigrana", description: "Scegli tra filigrana di testo o immagine e personalizzane l'aspetto" },
+      step3: { title: "Scarica il PDF filigranato", description: "Elabora il tuo file e scarica il documento PDF con la filigrana" }
+    },
+    why: {
+      title: "Perché aggiungere una filigrana",
+      copyright: { title: "Protezione copyright", description: "Proteggi la tua proprietà intellettuale aggiungendo dichiarazioni di copyright e informazioni di proprietà" },
+      branding: { title: "Branding e identità", description: "Rafforza la tua identità di brand aggiungendo loghi o testo di brand ai documenti distribuiti" },
+      classification: { title: "Classificazione documenti", description: "Marca i documenti come Bozza, Confidenziale o Finale per indicarne lo stato" },
+      tracking: { title: "Tracciamento documenti", description: "Aggiungi identificatori unici per tracciare la distribuzione dei documenti e identificare perdite" }
+    },
+    types: {
+      title: "Tipi e opzioni di filigrana",
+      text: {
+        title: "Filigrana di testo",
+        description: "Personalizza la filigrana di testo con varie opzioni:",
+        options: {
+          text: "Contenuto testo personalizzato (supporta più righe)",
+          font: "Famiglia, dimensione e colore del font",
+          rotation: "Angolo di rotazione (0-360 gradi)",
+          opacity: "Livello di opacità (da trasparente a completamente visibile)",
+          position: "Posizione (centrato, affiancato, posizionamento personalizzato)"
+        }
+      },
+      image: {
+        title: "Filigrana immagine",
+        description: "Aggiungi una filigrana immagine con queste opzioni di personalizzazione:",
+        options: {
+          upload: "Carica il tuo logo o immagine",
+          scale: "Scala e ridimensionamento",
+          rotation: "Opzioni di rotazione",
+          opacity: "Controllo opacità",
+          position: "Personalizzazione posizione"
+        }
+      }
+    },
+    faq: {
+      title: "Domande frequenti",
+      removable: { question: "La filigrana può essere rimossa dal PDF?", answer: "Le nostre filigrane standard sono semi-permanenti e difficili da rimuovere senza software specializzato. Tuttavia non sono completamente a prova di manomissione. Considera il nostro piano Pro per filigrane più sicure." },
+      printing: { question: "La filigrana apparirà quando stampo il documento?", answer: "Sì, la filigrana sarà visibile in stampa. Puoi controllare l'opacità per renderla meno evidente." },
+      pages: { question: "Posso aggiungere filigrane solo a pagine specifiche?", answer: "Sì, il nostro piano Pro ti permette di applicare filigrane a pagine specifiche." },
+      formats: { question: "Quali formati sono supportati per le filigrane immagine?", answer: "Supportiamo PNG, JPG/JPEG e SVG. Consigliamo PNG per logo con sfondo trasparente." },
+      multiple: { question: "Posso aggiungere più filigrane a un documento?", answer: "Gli utenti Pro possono aggiungere più filigrane a un singolo documento; gli utenti gratuiti sono limitati a una." },
+      q1: { question: "Il mio PDF è al sicuro?", answer: "Sì, tutti i file caricati vengono elaborati in sicurezza e automaticamente eliminati dopo l'elaborazione." },
+      q2: { question: "Quali tipi di filigrana posso aggiungere?", answer: "Filigrane di testo con font personalizzabili o filigrane immagine usando PNG, JPG o SVG." },
+      q3: { question: "La filigrana può essere rimossa dopo l'aggiunta?", answer: "Una volta aggiunta e scaricata, la filigrana diventa parte permanente del PDF." },
+      q4: { question: "Ci sono limiti di dimensione per i file?", answer: "Sì, la dimensione massima per i PDF è 50MB e per le filigrane immagine 5MB." }
+    },
+    bestPractices: {
+      title: "Migliori pratiche per le filigrane",
+      dos: "Cosa fare",
+      donts: "Cosa non fare",
+      dosList: [
+        "Usa filigrane semi-trasparenti per non oscurare i contenuti",
+        "Considera filigrane diagonali per una migliore copertura",
+        "Testa la filigrana su pagine campione prima di elaborare documenti grandi",
+        "Usa colori contrastanti per una migliore visibilità",
+        "Includi il simbolo di copyright © per protezione legale"
+      ],
+      dontsList: [
+        "Non usare filigrane troppo scure o opache",
+        "Non posizionare filigrane su testo o elementi importanti",
+        "Non usare testo troppo piccolo per essere leggibile",
+        "Non fare affidamento solo sulle filigrane per proteggere i documenti",
+        "Non usare immagini a bassa risoluzione che risultino pixelate"
+      ]
+    },
+    relatedTools: {
+      title: "Strumenti correlati",
+      protect: "Proteggi PDF",
+      sign: "Firma PDF",
+      edit: "Modifica PDF",
+      ocr: "OCR PDF",
+      viewAll: "Vedi tutti gli strumenti"
+    }
+  },
+  
   // Protect PDF Page
   protectPdf: {
     title: "Proteger PDF con Contraseña",

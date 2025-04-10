@@ -1222,6 +1222,17 @@ export default {
             opacity: "Opaklık",
             rotation: "Döndürme"
         },
+        positionX: "Pozisyon X",
+        positionY: "Pozisyon Y",
+        positions: {
+            topLeft: "Üst sol",
+            topRight: "Üst sağ",
+            bottomLeft: "Alt sol",
+            bottomRight: "Alt sağ",
+            center: "Merkez",
+            tile: "Döşeme",
+            custom: "Özel"
+        },
         howTo: {
             title: "Filigran Nasıl Eklenir",
             step1: { title: "PDF'nizi Yükleyin", description: "Filigran eklemek istediğiniz PDF dosyasını seçin ve yükleyin" },

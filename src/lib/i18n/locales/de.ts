@@ -1219,6 +1219,17 @@ export default {
       opacity: "Deckkraft",
       rotation: "Rotation"
     },
+    positionX: "Position X",
+    positionY: "Position Y",
+    positions: {
+      topLeft: "Oben links",
+      topRight: "Oben rechts",
+      bottomLeft: "Unten links",
+      bottomRight: "Unten rechts",
+      center: "Mitte",
+      tile: "Kacheln",
+      custom: "Benutzerdefiniert"
+    },
     howTo: {
       title: "Wie man ein Wasserzeichen hinzufügt",
       step1: { title: "Ihr PDF hochladen", description: "Wählen und laden Sie die PDF-Datei hoch, die Sie mit einem Wasserzeichen versehen möchten" },

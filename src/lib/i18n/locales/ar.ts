@@ -1326,7 +1326,17 @@ export default {
             opacity: "الشفافية",
             rotation: "الدوران"
         },
-
+        positionX: "الموضع X",
+        positionY: "الموضع Y",
+        positions: {
+            topLeft: "أعلى اليسار",
+            topRight: "أعلى اليمين",
+            bottomLeft: "أسفل اليسار",
+            bottomRight: "أسفل اليمين",
+            center: "المركز",
+            tile: "تجانب",
+            custom: "مخصص"
+        },
         // How to section
         howTo: {
             title: "كيفية إضافة علامة مائية",

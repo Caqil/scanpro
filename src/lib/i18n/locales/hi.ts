@@ -1220,6 +1220,17 @@ export default {
             opacity: "पारदर्शिता",
             rotation: "घूर्णन"
         },
+        positionX: "स्थिति X",
+        positionY: "स्थिति Y",
+        positions: {
+            topLeft: "ऊपर बाएँ",
+            topRight: "ऊपर दाएँ",
+            bottomLeft: "नीचे बाएँ",
+            bottomRight: "नीचे दाएँ",
+            center: "केंद्र",
+            tile: "टाइल",
+            custom: "कस्टम"
+        },
         howTo: {
             title: "वॉटरमार्क कैसे जोड़ें",
             step1: { title: "अपना PDF अपलोड करें", description: "उस PDF फाइल को चुनें और अपलोड करें जिसमें आप वॉटरमार्क जोड़ना चाहते हैं" },

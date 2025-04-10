@@ -1221,6 +1221,17 @@ export default {
       opacity: "불투명도",
       rotation: "회전"
     },
+    positionX: "위치 X",
+    positionY: "위치 Y",
+    positions: {
+      topLeft: "왼쪽 상단",
+      topRight: "오른쪽 상단",
+      bottomLeft: "왼쪽 하단",
+      bottomRight: "오른쪽 하단",
+      center: "중앙",
+      tile: "타일",
+      custom: "사용자 지정"
+    },
     howTo: {
       title: "워터마크 추가 방법",
       step1: { title: "PDF 업로드", description: "워터마크를 추가하려는 PDF 파일을 선택하고 업로드하세요" },
@@ -2803,10 +2814,10 @@ export default {
     title: "PDF에 페이지 번호 추가",
     shortDescription: "PDF 문서에 사용자 지정 가능한 페이지 번호를 쉽게 추가",
     description: "온라인 도구를 사용하여 다양한 숫자 형식, 위치, 스타일로 PDF에 맞춤 페이지 번호 추가",
-  
+
     uploadTitle: "PDF 업로드",
     uploadDesc: "페이지 번호 또는 헤더를 추가하려면 PDF 파일을 업로드하세요. 파일은 안전하게 처리되며 모든 운영 체제와 호환됩니다.",
-  
+
     messages: {
       noFile: "먼저 PDF 파일을 업로드해 주세요",
       success: "페이지 번호가 성공적으로 추가되었습니다!",
@@ -2864,7 +2875,7 @@ export default {
         description: "온라인 도구를 사용하여 PDF를 처리하고 페이지 번호가 추가된 PDF를 다운로드"
       }
     },
-  
+
     benefits: {
       title: "페이지 번호 추가의 이점",
       navigation: {
@@ -2884,7 +2895,7 @@ export default {
         description: "문서 스타일에 맞게 페이지 번호의 모양과 위치를 사용자 지정하거나 헤더 추가"
       }
     },
-  
+
     useCases: {
       title: "일반적인 사용 사례",
       books: {
@@ -2904,7 +2915,7 @@ export default {
         description: "계약서 및 법률 문서에 일관된 페이지 번호를 적용하여 적절한 참조 보장"
       }
     },
-  
+
     faq: {
       title: "자주 묻는 질문",
       formats: {
@@ -2928,7 +2939,7 @@ export default {
         answer: "네, 모든 처리는 안전합니다. 파일은 전송 중 암호화되고, 처리 후 자동으로 삭제됩니다—번호 추가 외에는 영구 저장이나 접근이 없습니다."
       }
     },
-  
+
     relatedTools: {
       title: "관련 도구"
     }

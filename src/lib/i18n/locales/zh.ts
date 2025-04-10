@@ -1222,6 +1222,17 @@ export default {
             opacity: "透明度",
             rotation: "旋转"
         },
+        positionX: "位置 X",
+        positionY: "位置 Y",
+        positions: {
+            topLeft: "左上",
+            topRight: "右上",
+            bottomLeft: "左下",
+            bottomRight: "右下",
+            center: "居中",
+            tile: "平铺",
+            custom: "自定义"
+        },
         howTo: {
             title: "如何添加水印",
             step1: { title: "上传您的PDF", description: "选择并上传您想添加水印的PDF文件" },

@@ -1220,6 +1220,17 @@ export default {
             opacity: "Opacité",
             rotation: "Rotation"
         },
+        positionX: "Position X",
+        positionY: "Position Y",
+        positions: {
+            topLeft: "En haut à gauche",
+            topRight: "En haut à droite",
+            bottomLeft: "En bas à gauche",
+            bottomRight: "En bas à droite",
+            center: "Centre",
+            tile: "Mosaïque",
+            custom: "Personnalisé"
+        },
         howTo: {
             title: "Comment ajouter un filigrane",
             step1: { title: "Téléchargez votre PDF", description: "Sélectionnez et téléchargez le fichier PDF auquel vous souhaitez ajouter un filigrane" },

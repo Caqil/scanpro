@@ -1219,6 +1219,17 @@ export default {
       opacity: "Opacidad",
       rotation: "Rotación"
     },
+    positionX: "Posición X",
+    positionY: "Posición Y",
+    positions: {
+      topLeft: "Superior izquierda",
+      topRight: "Superior derecha",
+      bottomLeft: "Inferior izquierda",
+      bottomRight: "Inferior derecha",
+      center: "Centro",
+      tile: "Mosaico",
+      custom: "Personalizado"
+    },
     howTo: {
       title: "Cómo agregar una marca de agua",
       step1: { title: "Subir tu PDF", description: "Seleccione y suba el archivo PDF al que desea agregar una marca de agua" },

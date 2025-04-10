@@ -1221,6 +1221,17 @@ export default {
       opacity: "Opasitas",
       rotation: "Rotasi"
     },
+    positionX: "Posisi X",
+    positionY: "Posisi Y",
+    positions: {
+      topLeft: "Kiri atas",
+      topRight: "Kanan atas",
+      bottomLeft: "Kiri bawah",
+      bottomRight: "Kanan bawah",
+      center: "Tengah",
+      tile: "Berubin",
+      custom: "Kustom"
+    },
     howTo: {
       title: "Cara Menambahkan Watermark",
       step1: { title: "Unggah PDF Anda", description: "Pilih dan unggah file PDF yang ingin Anda beri watermark" },

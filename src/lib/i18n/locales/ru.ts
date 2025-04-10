@@ -1221,6 +1221,17 @@ export default {
             opacity: "Прозрачность",
             rotation: "Поворот"
         },
+        positionX: "Позиция X",
+        positionY: "Позиция Y",
+        positions: {
+            topLeft: "Вверху слева",
+            topRight: "Вверху справа",
+            bottomLeft: "Внизу слева",
+            bottomRight: "Внизу справа",
+            center: "Центр",
+            tile: "Плитка",
+            custom: "Пользовательский"
+        },
         howTo: {
             title: "Как добавить водяной знак",
             step1: { title: "Загрузите ваш PDF", description: "Выберите и загрузите PDF-файл, к которому хотите добавить водяной знак" },

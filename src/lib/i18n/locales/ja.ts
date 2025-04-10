@@ -1220,6 +1220,17 @@ export default {
       opacity: "透明度",
       rotation: "回転"
     },
+    positionX: "位置 X",
+    positionY: "位置 Y",
+    positions: {
+      topLeft: "左上",
+      topRight: "右上",
+      bottomLeft: "左下",
+      bottomRight: "右下",
+      center: "中央",
+      tile: "タイル",
+      custom: "カスタム"
+    },
     howTo: {
       title: "透かしの追加方法",
       step1: { title: "PDFをアップロード", description: "透かしを追加したいPDFファイルを選択してアップロードします" },
