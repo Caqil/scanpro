@@ -1,0 +1,115 @@
+# Cloudflare Configuration for ScanPro
+# Replace all values in this file with your own Cloudflare credentials and settings
+
+cloudflare:
+  # Your Cloudflare API credentials
+  api_key: "YOUR_API_KEY"  # Global API key from Cloudflare dashboard
+  email: "your-email@example.com"  # Email address associated with your Cloudflare account
+  zone_id: "YOUR_ZONE_ID"  # Zone ID for your domain
+  domain: "example.com"  # Your domain name
+  server_ip: ""  # Leave empty to auto-detect the server's public IP
+
+# DNS records to create or update
+domains:
+  # Main domain - points to ScanPro frontend
+  - name: "example.com"
+    type: "A"
+    # Content will default to server_ip if not specified
+    proxied: true  # Enable Cloudflare proxying (recommended)
+  
+  # Wildcard for subdomains
+  - name: "*.example.com"
+    type: "A"
+    proxied: true
+  
+  # API subdomain - points to ScanPro API
+  - name: "api.example.com"
+    type: "A"
+    proxied: true
+  
+  # Admin subdomain - points to KubeSphere console
+  - name: "admin.example.com"
+    type: "A"
+    proxied: false  # Not proxied for WebSocket compatibility
+  
+  # Custom alias (optional)
+  - name: "pdf.example.com"
+    type: "CNAME"
+    content: "example.com"
+    proxied: true
+
+# Cloudflare settings to configure
+# See: https://api.cloudflare.com/#zone-settings-properties
+settings:
+  # Security settings
+  security_level: "medium"
+  ssl: "strict"  # Options: off, flexible, full, strict
+  always_use_https: true
+  automatic_https_rewrites: true
+  opportunistic_encryption: true
+  min_tls_version: "1.2"
+  tls_1_3: "on"
+  
+  # Performance settings
+  browser_cache_ttl: 14400  # 4 hours in seconds
+  browser_check: true
+  cache_level: "aggressive"
+  always_online: "on"
+  development_mode: false
+  
+  # Optimization settings
+  minify:
+    css: "on"
+    html: "on"
+    js: "on"
+  
+  rocket_loader: "on"
+  brotli: "on"
+  early_hints: "on"
+  polish: "lossless"  # Options: off, lossless, lossy
+  webp: "on"
+  
+  # Caching settings
+  cache_level: "aggressive"
+  edge_cache_ttl: 7200  # 2 hours
+  browser_cache_ttl: 14400  # 4 hours
+  
+  # Page rules (optional)
+page_rules:
+  # Cache everything at /static/* path
+  - targets:
+      - "*.example.com/static/*"
+    actions:
+      cache_level: "cache_everything"
+      edge_cache_ttl: 86400  # 24 hours
+  
+  # Bypass cache for API
+  - targets:
+      - "api.example.com/*"
+    actions:
+      cache_level: "bypass"
+
+# DNS firewall rules (optional)
+firewall_rules:
+  # Block certain countries (optional)
+  - name: "Block Certain Countries"
+    paused: true  # Set to false to enable
+    action: "block"
+    filter:
+      expression: "ip.geoip.country in {\"RU\" \"CN\" \"IR\"}"
+  
+  # Rate limiting for API (prevents abuse)
+  - name: "Rate Limit API Requests"
+    action: "throttle"
+    threshold: 100  # Max requests
+    period: 60      # Per minute
+    filter:
+      expression: "http.host eq \"api.example.com\""
+
+# Workers (optional) - Use Cloudflare Workers for edge compute functionality
+workers:
+  # Image optimization worker
+  - name: "image-optimizer"
+    routes:
+      - "example.com/images/*"
+    # Worker code would be in a separate file
