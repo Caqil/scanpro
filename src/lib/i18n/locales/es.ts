@@ -1,3 +1,5 @@
+import { Description } from "@radix-ui/react-alert-dialog";
+
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   metadata: {
@@ -2087,10 +2089,8 @@ export default {
   },
 
   security: {
-    hero: {
-      title: "Seguridad y Privacidad en ScanPro",
-      subtitle: "Nos tomamos en serio la seguridad y privacidad de tus documentos. Descubre cómo protegemos tus datos."
-    },
+    title: "Seguridad y Privacidad en ScanPro",
+    description: "Nos tomamos en serio la seguridad y privacidad de tus documentos. Descubre cómo protegemos tus datos.",
     measures: {
       title: "Cómo protegemos tus datos"
     },

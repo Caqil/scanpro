@@ -2087,7 +2087,135 @@ export default {
     socialGithub: "GitHub",
     socialYoutube: "YouTube"
   },
-
+  security: {
+    title: "Sicherheit und Datenschutz in ScanPro",
+    description: "Wir nehmen die Sicherheit und den Schutz Ihrer Dokumente ernst. Erfahren Sie, wie wir Ihre Daten schützen.",
+    measures: {
+      title: "Wie wir Ihre Daten schützen"
+    },
+    sections: {
+      encryption: {
+        title: "Ende-zu-Ende-Verschlüsselung",
+        description: "Alle Dateien werden während der Übertragung mit TLS 1.3 und im Ruhezustand mit AES-256-Verschlüsselung geschützt. Ihre Dokumente werden niemals ungeschützt übertragen."
+      },
+      temporaryStorage: {
+        title: "Temporäre Speicherung",
+        description: "Dateien werden automatisch innerhalb von 24 Stunden nach der Verarbeitung gelöscht. Wir bewahren Ihre Dokumente nicht länger als nötig auf."
+      },
+      access: {
+        title: "Zugriffskontrollen",
+        description: "Robuste Authentifizierungs- und Autorisierungssysteme stellen sicher, dass nur Sie auf Ihre Dokumente und Kontoinformationen zugreifen können."
+      },
+      infrastructure: {
+        title: "Sichere Infrastruktur",
+        description: "Unsere Systeme laufen auf Enterprise-Cloud-Anbietern mit ISO 27001-Zertifizierung und regelmäßigen Sicherheitsüberprüfungen."
+      },
+      compliance: {
+        title: "Compliance",
+        description: "Unsere Prozesse entsprechen der GDPR, CCPA und anderen regionalen Datenschutzbestimmungen, um Ihre Datenrechte zu schützen."
+      },
+      monitoring: {
+        title: "Kontinuierliche Überwachung",
+        description: "Automatisierte und manuelle Sicherheitsüberprüfungen, Schwachstellenscans und Eindringlingserkennung schützen vor neuen Bedrohungen."
+      }
+    },
+    tabs: {
+      security: "Sicherheit",
+      privacy: "Datenschutz",
+      compliance: "Compliance"
+    },
+    tabContent: {
+      security: {
+        title: "Unser Sicherheitsansatz",
+        description: "Umfassende Sicherheitsmaßnahmen zum Schutz Ihrer Dateien und Daten",
+        encryption: {
+          title: "Starke Verschlüsselung",
+          description: "Wir verwenden TLS 1.3 für Daten in Transit und AES-256 für gespeicherte Daten. Alle Dateiübertragungen sind Ende-zu-Ende verschlüsselt."
+        },
+        auth: {
+          title: "Sichere Authentifizierung",
+          description: "Multi-Faktor-Authentifizierung, sichere Passwortspeicherung mit bcrypt und regelmäßige Überwachung der Konten auf verdächtige Aktivitäten."
+        },
+        hosting: {
+          title: "Sichere Hosting-Umgebung",
+          description: "Unsere Infrastruktur wird auf Enterprise-Cloud-Anbietern mit ISO 27001-Zertifizierung gehostet. Wir implementieren Netzwerksegmentierung, Firewalls und Intrusion-Detection-Systeme."
+        },
+        updates: {
+          title: "Regelmäßige Updates",
+          description: "Wir führen regelmäßige Sicherheitsupdates und Patches durch, Schwachstellenbewertungen und Penetrationstests, um potenzielle Probleme zu identifizieren und zu beheben."
+        }
+      },
+      privacy: {
+        title: "Datenschutzpraktiken",
+        description: "Wie wir mit Ihren persönlichen Daten und Dokumenten umgehen",
+        viewPolicy: "Vollständige Datenschutzrichtlinie anzeigen"
+      },
+      compliance: {
+        title: "Compliance und Zertifizierungen",
+        description: "Standards und Vorschriften, die wir einhalten",
+        approach: {
+          title: "Unser Compliance-Ansatz",
+          description: "ScanPro wurde mit Privacy-by-Design- und Security-by-Design-Prinzipien entwickelt. Wir überprüfen und aktualisieren unsere Praktiken regelmäßig, um den sich entwickelnden Vorschriften zu entsprechen."
+        },
+        gdpr: {
+          title: "GDPR-Compliance"
+        },
+        hipaa: {
+          title: "HIPAA-Überlegungen"
+        }
+      }
+    },
+    retention: {
+      title: "Datenaufbewahrungsrichtlinie",
+      description: "Wir befolgen strenge Data-Minimierung-Praktiken. Hier ist, wie lange wir verschiedene Datentypen aufbewahren:",
+      documents: {
+        title: "Hochgeladene Dokumente",
+        description: "Dateien werden automatisch innerhalb von 24 Stunden nach der Verarbeitung von unseren Servern gelöscht. Wir bewahren keine Kopien Ihrer Dokumente auf, es sei denn, Sie wählen explizit Speicheroptionen, die für kostenpflichtige Pläne verfügbar sind."
+      },
+      account: {
+        title: "Kontoinformationen",
+        description: "Grundlegende Kontoinformationen werden so lange aufbewahrt, wie Sie ein aktives Konto haben. Sie können Ihr Konto jederzeit löschen, wodurch Ihre persönlichen Daten aus unseren Systemen entfernt werden."
+      },
+      usage: {
+        title: "Nutzungsdaten",
+        description: "Anonymisierte Nutzungsstatistiken werden bis zu 36 Monate aufbewahrt, um uns bei der Verbesserung unserer Dienste zu helfen. Diese Daten können nicht zur persönlichen Identifizierung verwendet werden."
+      }
+    },
+    contact: {
+      title: "Haben Sie Sicherheitsfragen?",
+      description: "Unser Sicherheitsteam steht bereit, um Ihre Fragen zum Schutz Ihrer Daten und Privatsphäre zu beantworten.",
+      button: "Kontaktieren Sie das Sicherheitsteam"
+    },
+    policy: {
+      button: "Datenschutzrichtlinie"
+    },
+    faq: {
+      dataCollection: {
+        question: "Welche personenbezogenen Daten erfasst ScanPro?",
+        answer: "Wir erfassen nur die minimal notwendigen Informationen, um unsere Dienste bereitzustellen. Für registrierte Benutzer umfasst dies E-Mail, Name und Nutzungsstatistiken. Wir sammeln auch anonymisierte Nutzungsdaten zur Verbesserung unserer Dienste. Wir analysieren, untersuchen oder extrahieren nicht den Inhalt Ihrer Dokumente."
+      },
+      documentStorage: {
+        question: "Wie lange bewahren Sie meine Dokumente auf?",
+        answer: "Dokumente werden automatisch nach der Verarbeitung von unseren Servern gelöscht, in der Regel innerhalb von 24 Stunden. Für kostenpflichtige Abonnenten stehen Dokumentenspeicheroptionen zur Verfügung, dies sind jedoch nur optionale Funktionen."
+      },
+      thirdParty: {
+        question: "Geben Sie meine Daten an Dritte weiter?",
+        answer: "Wir verkaufen oder vermieten Ihre persönlichen Daten nicht. Wir teilen Daten nur mit Dritten, wenn dies für die Erbringung unserer Dienste notwendig ist (z.B. Zahlungsabwickler für Abonnements) oder wenn dies gesetzlich vorgeschrieben ist. Alle Drittanbieter werden sorgfältig geprüft und unterliegen Datenschutzvereinbarungen."
+      },
+      security: {
+        question: "Wie schützen Sie meine Daten?",
+        answer: "Wir verwenden branchenübliche Sicherheitsmaßnahmen, einschließlich TLS-Verschlüsselung für Daten in Transit, AES-256-Verschlüsselung für gespeicherte Daten, sichere Infrastrukturanbieter, Zugriffskontrollen und regelmäßige Sicherheitsüberprüfungen. Unsere Systeme sind mit Sicherheit als Priorität konzipiert."
+      },
+      rights: {
+        question: "Welche Rechte habe ich in Bezug auf meine Daten?",
+        answer: "Abhängig von Ihrer Region haben Sie möglicherweise folgende Rechte: Zugriff auf Ihre Daten, Berichtigung ungenauer Daten, Löschung Ihrer Daten, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch gegen die Verarbeitung. Um diese Rechte auszuüben, wenden Sie sich an unser Support-Team."
+      },
+      breach: {
+        question: "Was passiert bei einem Datenleck?",
+        answer: "Wir haben Protokolle zur Erkennung, Reaktion und Benachrichtigung betroffener Nutzer gemäß geltenden Gesetzen im Falle eines Datenlecks. Wir führen regelmäßige Sicherheitsbewertungen durch, um das Risiko von Verstößen zu minimieren, und haben einen detaillierten Incident-Response-Plan."
+      }
+    }
+  },
   developer: {
     title: "Entwickler-API-Dokumentation",
     description: "Integrieren Sie die leistungsstarken PDF-Tools von ScanPro in Ihre Anwendungen mit unserer RESTful-API",

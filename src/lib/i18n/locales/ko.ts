@@ -2092,10 +2092,8 @@ export default {
   },
 
   security: {
-    hero: {
-      title: "ScanPro의 보안 및 개인정보 보호",
-      subtitle: "문서의 보안과 개인정보 보호를 중요하게 생각합니다. 데이터 보호 방법을 알아보세요."
-    },
+    title: "ScanPro의 보안 및 개인정보 보호",
+    description: "문서의 보안과 개인정보 보호를 중요하게 생각합니다. 데이터 보호 방법을 알아보세요.",
     measures: {
       title: "데이터 보호 방법"
     },

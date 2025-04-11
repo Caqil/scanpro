@@ -2091,10 +2091,8 @@ export default {
         socialYoutube: "YouTube"
     },
     security: {
-        hero: {
-            title: "ScanPro的安全与隐私",
-            subtitle: "我们高度重视您文档的安全性和隐私性。了解我们如何保护您的数据。"
-        },
+        title: "ScanPro的安全与隐私",
+        description: "我们高度重视您文档的安全性和隐私性。了解我们如何保护您的数据。",
         measures: {
             title: "我们如何保护您的数据"
         },

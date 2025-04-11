@@ -2092,10 +2092,8 @@ export default {
         socialYoutube: "YouTube"
     },
     security: {
-        hero: {
-            title: "ScanPro'da Güvenlik ve Gizlilik",
-            subtitle: "Belgelerinizin güvenliğini ve gizliliğini ciddiye alıyoruz. Verilerinizi nasıl koruduğumuzu öğrenin."
-        },
+        title: "ScanPro'da Güvenlik ve Gizlilik",
+        description: "Belgelerinizin güvenliğini ve gizliliğini ciddiye alıyoruz. Verilerinizi nasıl koruduğumuzu öğrenin.",
         measures: {
             title: "Verilerinizi Nasıl Koruyoruz"
         },

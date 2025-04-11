@@ -2163,10 +2163,8 @@ export default {
   },
 
   security: {
-    hero: {
-      title: "Sicurezza e Privacy in ScanPro",
-      subtitle: "Prendiamo sul serio la sicurezza e la privacy dei tuoi documenti. Scopri come proteggiamo i tuoi dati."
-    },
+    title: "Sicurezza e Privacy in ScanPro",
+    description: "Prendiamo sul serio la sicurezza e la privacy dei tuoi documenti. Scopri come proteggiamo i tuoi dati.",
     measures: {
       title: "Come proteggiamo i tuoi dati"
     },

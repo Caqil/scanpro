@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  output: 'standalone',
+  assetPrefix: '', // atau biarkan kosong
+  basePath: '',    // juga kosong, kecuali kamu deploy di subfolder
   async headers() {
     return [
       {

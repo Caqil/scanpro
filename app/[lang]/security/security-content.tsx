@@ -123,10 +123,10 @@ export function SecurityContent() {
           <Shield className="h-8 w-8 text-blue-500" />
         </div>
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
-          {t('security.hero.title') || "Security & Privacy at ScanPro"}
+          {t('security.title') || "Security & Privacy at ScanPro"}
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          {t('security.hero.subtitle') || "We take the security and privacy of your documents seriously. Learn how we protect your data."}
+          {t('security.description') || "We take the security and privacy of your documents seriously. Learn how we protect your data."}
         </p>
       </section>
 

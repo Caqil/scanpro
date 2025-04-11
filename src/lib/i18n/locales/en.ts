@@ -2285,10 +2285,8 @@ export default {
     socialYoutube: "YouTube"
   },
   security: {
-    hero: {
-      title: "Security & Privacy at ScanPro",
-      subtitle: "We take the security and privacy of your documents seriously. Learn how we protect your data."
-    },
+    title: "Security & Privacy at ScanPro",
+    description: "We take the security and privacy of your documents seriously. Learn how we protect your data.",
     measures: {
       title: "How We Protect Your Data"
     },
@@ -2461,14 +2459,14 @@ export default {
       subscribe: "Subscribe",
       freePlan: {
         description: "For occasional use and testing",
-        feature1: "1000 operations per month",
+        feature1: "100 operations per month",
         feature2: "10 requests per hour",
         feature3: "1 API key",
         feature4: "Basic PDF operations"
       },
       basicPlan: {
         description: "For startups and small projects",
-        feature1: "10,000 operations per month",
+        feature1: "1,000 operations per month",
         feature2: "100 requests per hour",
         feature3: "3 API keys",
         feature4: "All PDF operations",
@@ -2476,7 +2474,7 @@ export default {
       },
       proPlan: {
         description: "For businesses and power users",
-        feature1: "100,000 operations per month",
+        feature1: "10,000 operations per month",
         feature2: "1,000 requests per hour",
         feature3: "10 API keys",
         feature4: "Advanced OCR",
@@ -2485,7 +2483,7 @@ export default {
       },
       enterprisePlan: {
         description: "For high-volume integrations",
-        feature1: "1000,000+ operations per month",
+        feature1: "100,000+ operations per month",
         feature2: "5,000+ requests per hour",
         feature3: "50+ API keys",
         feature4: "Dedicated support",
@@ -2611,10 +2609,10 @@ export default {
     features: {
       operations: "Monthly operations",
       amount: {
-        free: "1000 operations",
-        basic: "10,000 operations",
-        pro: "100,000 operations",
-        enterprise: "1,000,000 operations"
+        free: "100 operations",
+        basic: "1,000 operations",
+        pro: "10,000 operations",
+        enterprise: "100,000 operations"
       },
       apiAccess: "API Access",
       apiKeys: {

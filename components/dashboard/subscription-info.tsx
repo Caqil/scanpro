@@ -18,7 +18,7 @@ const pricingTiers = [
     name: "Free",
     price: "$0",
     features: [
-      "1000 operations per month",
+      "100 operations per month",
       "100 requests per hour",
       "1 API key",
       "Basic PDF operations"
@@ -33,7 +33,7 @@ const pricingTiers = [
     name: "Basic",
     price: "$9.99",
     features: [
-      "10,000 operations per month",
+      "1,000 operations per month",
       "1000 requests per hour",
       "3 API keys",
       "All PDF operations",
@@ -47,8 +47,8 @@ const pricingTiers = [
     name: "Pro",
     price: "$29.99",
     features: [
-      "100,000 operations per month",
-      "10,000 requests per hour",
+      "10,000 operations per month",
+      "2,000 requests per hour",
       "10 API keys",
       "Advanced OCR",
       "Priority support",
@@ -60,8 +60,8 @@ const pricingTiers = [
     name: "Enterprise",
     price: "$99.99",
     features: [
-      "1,000,000 operations per month",
-      "50,000 requests per hour",
+      "100,000 operations per month",
+      "5,000 requests per hour",
       "50 API keys",
       "Dedicated support",
       "Custom integration help",

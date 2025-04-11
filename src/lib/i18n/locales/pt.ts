@@ -2088,10 +2088,8 @@ export default {
     socialYoutube: "YouTube"
   },
   security: {
-    hero: {
-      title: "Segurança e Privacidade no ScanPro",
-      subtitle: "Levamos a segurança e privacidade dos seus documentos a sério. Saiba como protegemos seus dados."
-    },
+    title: "Segurança e Privacidade no ScanPro",
+    description: "Levamos a segurança e privacidade dos seus documentos a sério. Saiba como protegemos seus dados.",
     measures: {
       title: "Como protegemos seus dados"
     },
