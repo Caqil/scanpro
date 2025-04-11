@@ -1,6 +1,8 @@
 # Use Node.js as base image with Ubuntu
 FROM node:18 AS builder
 
+# Set working directory
+WORKDIR /app
 
 # Install system dependencies for PDF processing
 RUN apt-get update && apt-get install -y \
@@ -53,6 +55,9 @@ RUN npm run build
 # Production image
 FROM node:18
 
+# Set working directory
+WORKDIR /app
+
 # Install system dependencies for PDF processing (runtime only)
 RUN apt-get update && apt-get install -y \
     ghostscript \
@@ -99,13 +104,13 @@ RUN mkdir -p \
     public
 
 # Copy built app from builder stage
-COPY --from=builder /node_modules ./node_modules
-COPY --from=builder /.next ./.next
-COPY --from=builder /public ./public
-COPY --from=builder /package.json ./package.json
-COPY --from=builder /next.config.js ./next.config.js
-COPY --from=builder /prisma ./prisma
-COPY --from=builder /scripts ./scripts
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/next.config.js ./next.config.js
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/scripts ./scripts
 
 # Expose the port
 EXPOSE 3001
