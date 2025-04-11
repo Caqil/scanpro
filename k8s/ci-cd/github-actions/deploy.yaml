@@ -8,7 +8,7 @@ on:
       - "docs/**"
       - ".github/*.md"
   workflow_run:
-    workflows: ["Build ScanPro Containers"]
+    workflows: ["Build ScanPro Container"]
     types:
       - completed
     branches: [main]
@@ -30,6 +30,7 @@ on:
 
 env:
   KUBECONFIG_FILE: kubeconfig.yaml
+  IMAGE_NAME: ${{ github.repository }}/scanpro
 
 jobs:
   deploy:
@@ -86,29 +87,30 @@ jobs:
       # Update Kubernetes manifests with the correct image tags
       - name: Update deployment manifests
         run: |
+          # Get full image name
+          FULL_IMAGE="ghcr.io/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
+
           # Update API deployment
-          sed -i "s|image: your-registry/scanpro-api:latest|image: ghcr.io/${{ github.repository }}/api:${{ env.IMAGE_TAG }}|g" k8s/deployment/backend/scanpro_api.yaml
+          sed -i "s|image: your-registry/scanpro:latest|image: ${FULL_IMAGE}|g" k8s/deployment/backend/scanpro_api.yaml
 
           # Update Frontend deployment
-          sed -i "s|image: your-registry/scanpro-frontend:latest|image: ghcr.io/${{ github.repository }}/frontend:${{ env.IMAGE_TAG }}|g" k8s/deployment/frontend/scanpro_frontend.yaml
+          sed -i "s|image: your-registry/scanpro:latest|image: ${FULL_IMAGE}|g" k8s/deployment/frontend/scanpro_frontend.yaml
 
           # Update Worker deployment
-          sed -i "s|image: your-registry/scanpro-worker:latest|image: ghcr.io/${{ github.repository }}/worker:${{ env.IMAGE_TAG }}|g" k8s/deployment/backend/scanpro_worker.yaml
+          sed -i "s|image: your-registry/scanpro:latest|image: ${FULL_IMAGE}|g" k8s/deployment/backend/scanpro_worker.yaml
 
       # Update Kubernetes configs with environment variables
       - name: Update ConfigMaps with environment variables
         run: |
           # Load environment-specific variables
           if [ "${{ env.ENVIRONMENT }}" == "production" ]; then
-            source k8s/deployment/backend/environment/production.env.example
+            source k8s/deployment/backend/environment/production.env
           else
-            source k8s/deployment/backend/environment/staging.env.example
+            source k8s/deployment/backend/environment/staging.env
           fi
 
-          # Update API ConfigMap
-          yq eval '.data.NEXT_PUBLIC_API_URL = env(NEXT_PUBLIC_API_URL)' -i k8s/deployment/backend/scanpro_api.yaml
-          yq eval '.data.NEXT_PUBLIC_APP_URL = env(NEXT_PUBLIC_APP_URL)' -i k8s/deployment/backend/scanpro_api.yaml
-          yq eval '.data.SMTP_HOST = env(SMTP_HOST)' -i k8s/deployment/backend/scanpro_api.yaml
+          # Update ConfigMap
+          kubectl create configmap scanpro-config -n scanpro --from-env-file=k8s/deployment/backend/environment/${{ env.ENVIRONMENT }}.env --dry-run=client -o yaml | kubectl apply -f -
 
       # Apply Kubernetes manifests
       - name: Deploy to Kubernetes

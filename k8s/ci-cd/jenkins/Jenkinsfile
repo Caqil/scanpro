@@ -34,9 +34,7 @@ pipeline {
     environment {
         REGISTRY = 'ghcr.io'
         REGISTRY_CREDENTIALS = credentials('github-registry')
-        FRONTEND_IMAGE = "${REGISTRY}/your-org/scanpro-frontend"
-        API_IMAGE = "${REGISTRY}/your-org/scanpro-api"
-        WORKER_IMAGE = "${REGISTRY}/your-org/scanpro-worker"
+        SCANPRO_IMAGE = "${REGISTRY}/your-org/scanpro"
         IMAGE_TAG = "${env.GIT_BRANCH.replaceAll('/', '-')}-${env.BUILD_NUMBER}"
         KUBECONFIG = credentials('kubesphere-kubeconfig')
     }
@@ -58,33 +56,17 @@ pipeline {
             }
         }
         
-        stage('Build Docker Images') {
+        stage('Build Docker Image') {
             steps {
                 container('docker') {
                     sh 'echo $REGISTRY_CREDENTIALS_PSW | docker login $REGISTRY -u $REGISTRY_CREDENTIALS_USR --password-stdin'
                     
-                    // Build Frontend
+                    // Build unified ScanPro image
                     sh """
-                    docker build -t ${FRONTEND_IMAGE}:${IMAGE_TAG} ./frontend
-                    docker tag ${FRONTEND_IMAGE}:${IMAGE_TAG} ${FRONTEND_IMAGE}:latest
-                    docker push ${FRONTEND_IMAGE}:${IMAGE_TAG}
-                    docker push ${FRONTEND_IMAGE}:latest
-                    """
-                    
-                    // Build API
-                    sh """
-                    docker build -t ${API_IMAGE}:${IMAGE_TAG} ./api
-                    docker tag ${API_IMAGE}:${IMAGE_TAG} ${API_IMAGE}:latest
-                    docker push ${API_IMAGE}:${IMAGE_TAG}
-                    docker push ${API_IMAGE}:latest
-                    """
-                    
-                    // Build Worker
-                    sh """
-                    docker build -t ${WORKER_IMAGE}:${IMAGE_TAG} ./worker
-                    docker tag ${WORKER_IMAGE}:${IMAGE_TAG} ${WORKER_IMAGE}:latest
-                    docker push ${WORKER_IMAGE}:${IMAGE_TAG}
-                    docker push ${WORKER_IMAGE}:latest
+                    docker build -t ${SCANPRO_IMAGE}:${IMAGE_TAG} .
+                    docker tag ${SCANPRO_IMAGE}:${IMAGE_TAG} ${SCANPRO_IMAGE}:latest
+                    docker push ${SCANPRO_IMAGE}:${IMAGE_TAG}
+                    docker push ${SCANPRO_IMAGE}:latest
                     """
                 }
             }
@@ -100,15 +82,18 @@ pipeline {
                     sh 'cat $KUBECONFIG > ~/.kube/config'
                     sh 'chmod 600 ~/.kube/config'
                     
-                    // Update deployment manifests
+                    // Update deployment manifests with the new image
                     sh """
-                    sed -i 's|image: your-registry/scanpro-api:latest|image: ${API_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/backend/scanpro_api.yaml
-                    sed -i 's|image: your-registry/scanpro-frontend:latest|image: ${FRONTEND_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/frontend/scanpro_frontend.yaml
-                    sed -i 's|image: your-registry/scanpro-worker:latest|image: ${WORKER_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/backend/scanpro_worker.yaml
+                    sed -i 's|image: your-registry/scanpro:latest|image: ${SCANPRO_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/backend/scanpro_api.yaml
+                    sed -i 's|image: your-registry/scanpro:latest|image: ${SCANPRO_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/frontend/scanpro_frontend.yaml
+                    sed -i 's|image: your-registry/scanpro:latest|image: ${SCANPRO_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/backend/scanpro_worker.yaml
                     """
                     
                     // Load environment-specific variables
-                    sh 'source k8s/deployment/backend/environment/staging.env.example'
+                    sh 'source k8s/deployment/backend/environment/staging.env'
+                    
+                    // Create configmap from environment file
+                    sh 'kubectl create configmap scanpro-config -n scanpro --from-env-file=k8s/deployment/backend/environment/staging.env --dry-run=client -o yaml | kubectl apply -f -'
                     
                     // Apply Kubernetes manifests
                     sh """
@@ -148,15 +133,18 @@ pipeline {
                     sh 'cat $KUBECONFIG > ~/.kube/config'
                     sh 'chmod 600 ~/.kube/config'
                     
-                    // Update deployment manifests
+                    // Update deployment manifests with the new image
                     sh """
-                    sed -i 's|image: your-registry/scanpro-api:latest|image: ${API_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/backend/scanpro_api.yaml
-                    sed -i 's|image: your-registry/scanpro-frontend:latest|image: ${FRONTEND_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/frontend/scanpro_frontend.yaml
-                    sed -i 's|image: your-registry/scanpro-worker:latest|image: ${WORKER_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/backend/scanpro_worker.yaml
+                    sed -i 's|image: your-registry/scanpro:latest|image: ${SCANPRO_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/backend/scanpro_api.yaml
+                    sed -i 's|image: your-registry/scanpro:latest|image: ${SCANPRO_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/frontend/scanpro_frontend.yaml
+                    sed -i 's|image: your-registry/scanpro:latest|image: ${SCANPRO_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/backend/scanpro_worker.yaml
                     """
                     
                     // Load environment-specific variables
-                    sh 'source k8s/deployment/backend/environment/production.env.example'
+                    sh 'source k8s/deployment/backend/environment/production.env'
+                    
+                    // Create configmap from environment file
+                    sh 'kubectl create configmap scanpro-config -n scanpro --from-env-file=k8s/deployment/backend/environment/production.env --dry-run=client -o yaml | kubectl apply -f -'
                     
                     // Apply Kubernetes manifests
                     sh """

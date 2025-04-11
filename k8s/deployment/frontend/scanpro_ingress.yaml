@@ -1,0 +1,59 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: scanpro-ingress
+  namespace: scanpro
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "180"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "180"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "Strict-Transport-Security: max-age=31536000; includeSubDomains; preload";
+      more_set_headers "X-Content-Type-Options: nosniff";
+      more_set_headers "X-Frame-Options: SAMEORIGIN";
+      more_set_headers "X-XSS-Protection: 1; mode=block";
+spec:
+  tls:
+    - hosts:
+        - scanpro.cc
+        - www.scanpro.cc
+      secretName: scanpro-frontend-tls
+    - hosts:
+        - api.scanpro.cc
+      secretName: scanpro-api-tls
+  rules:
+    - host: scanpro.cc
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: scanpro-frontend
+                port:
+                  number: 80
+    - host: www.scanpro.cc
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: scanpro-frontend
+                port:
+                  number: 80
+    - host: api.scanpro.cc
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: scanpro-api
+                port:
+                  number: 80

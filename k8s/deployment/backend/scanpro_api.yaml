@@ -1,40 +1,3 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: scanpro-api-config
-  namespace: scanpro
-data:
-  NODE_ENV: "production"
-  PORT: "8080"
-  DATABASE_URL: "postgresql://scanpro:scanpro-pw-change-me@scanpro-postgresql:5432/scanprodb"
-  REDIS_URL: "redis://scanpro-redis:6379"
-  STORAGE_BASE_PATH: "/app/storage"
-  NEXT_PUBLIC_API_URL: "https://api.scanpro.cc"
-  NEXT_PUBLIC_APP_URL: "https://scanpro.cc"
-  SMTP_HOST: "mail.example.com"
-  SMTP_PORT: "587"
-  SMTP_SECURE: "false"
-  EMAIL_FROM: "noreply@scanpro.cc"
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: scanpro-api-secrets
-  namespace: scanpro
-type: Opaque
-data:
-  # Base64 encoded secrets (change these!)
-  NEXTAUTH_SECRET: "Y2hhbmdlLXRoaXMtc2VjcmV0LWluLXByb2R1Y3Rpb24=" # change-this-secret-in-production
-  SMTP_USER: ""
-  SMTP_PASSWORD: ""
-  PAYPAL_CLIENT_ID: ""
-  PAYPAL_CLIENT_SECRET: ""
-  GOOGLE_CLIENT_ID: ""
-  GOOGLE_CLIENT_SECRET: ""
-  GITHUB_CLIENT_ID: ""
-  GITHUB_CLIENT_SECRET: ""
-  SYSTEM_API_KEY: "c2NhbnByby1hcGkta2V5LWNoYW5nZS1tZQ==" # scanpro-api-key-change-me
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -42,142 +5,37 @@ metadata:
   namespace: scanpro
   labels:
     app: scanpro
-    tier: backend
+    component: api
 spec:
   replicas: 2
   selector:
     matchLabels:
       app: scanpro
-      tier: backend
+      component: api
   template:
     metadata:
       labels:
         app: scanpro
-        tier: backend
+        component: api
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/api/metrics"
+        prometheus.io/port: "8080"
     spec:
       containers:
         - name: api
-          image: your-registry/scanpro-api:latest
+          image: your-registry/scanpro:latest
           imagePullPolicy: Always
+          command: ["npm", "run", "start"]
           ports:
             - containerPort: 8080
               name: http
-          env:
-            # Config from ConfigMap
-            - name: NODE_ENV
-              valueFrom:
-                configMapKeyRef:
-                  name: scanpro-api-config
-                  key: NODE_ENV
-            - name: PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: scanpro-api-config
-                  key: PORT
-            - name: DATABASE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: scanpro-api-config
-                  key: DATABASE_URL
-            - name: REDIS_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: scanpro-api-config
-                  key: REDIS_URL
-            - name: STORAGE_BASE_PATH
-              valueFrom:
-                configMapKeyRef:
-                  name: scanpro-api-config
-                  key: STORAGE_BASE_PATH
-            - name: NEXT_PUBLIC_API_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: scanpro-api-config
-                  key: NEXT_PUBLIC_API_URL
-            - name: NEXT_PUBLIC_APP_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: scanpro-api-config
-                  key: NEXT_PUBLIC_APP_URL
-            - name: SMTP_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: scanpro-api-config
-                  key: SMTP_HOST
-            - name: SMTP_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: scanpro-api-config
-                  key: SMTP_PORT
-            - name: SMTP_SECURE
-              valueFrom:
-                configMapKeyRef:
-                  name: scanpro-api-config
-                  key: SMTP_SECURE
-            - name: EMAIL_FROM
-              valueFrom:
-                configMapKeyRef:
-                  name: scanpro-api-config
-                  key: EMAIL_FROM
-            # Secrets
-            - name: NEXTAUTH_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: scanpro-api-secrets
-                  key: NEXTAUTH_SECRET
-            - name: SMTP_USER
-              valueFrom:
-                secretKeyRef:
-                  name: scanpro-api-secrets
-                  key: SMTP_USER
-                  optional: true
-            - name: SMTP_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: scanpro-api-secrets
-                  key: SMTP_PASSWORD
-                  optional: true
-            - name: PAYPAL_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: scanpro-api-secrets
-                  key: PAYPAL_CLIENT_ID
-                  optional: true
-            - name: PAYPAL_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: scanpro-api-secrets
-                  key: PAYPAL_CLIENT_SECRET
-                  optional: true
-            - name: GOOGLE_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: scanpro-api-secrets
-                  key: GOOGLE_CLIENT_ID
-                  optional: true
-            - name: GOOGLE_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: scanpro-api-secrets
-                  key: GOOGLE_CLIENT_SECRET
-                  optional: true
-            - name: GITHUB_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: scanpro-api-secrets
-                  key: GITHUB_CLIENT_ID
-                  optional: true
-            - name: GITHUB_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: scanpro-api-secrets
-                  key: GITHUB_CLIENT_SECRET
-                  optional: true
-            - name: SYSTEM_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: scanpro-api-secrets
-                  key: SYSTEM_API_KEY
+          envFrom:
+            - configMapRef:
+                name: scanpro-config
+            - secretRef:
+                name: scanpro-secrets
+                optional: true
           resources:
             requests:
               memory: "512Mi"
@@ -202,12 +60,14 @@ spec:
               port: 8080
             initialDelaySeconds: 30
             periodSeconds: 10
+            timeoutSeconds: 5
           readinessProbe:
             httpGet:
               path: /api/health
               port: 8080
             initialDelaySeconds: 5
             periodSeconds: 5
+            timeoutSeconds: 3
       volumes:
         - name: uploads-volume
           persistentVolumeClaim:
@@ -232,7 +92,7 @@ metadata:
   namespace: scanpro
   labels:
     app: scanpro
-    tier: backend
+    component: api
 spec:
   ports:
     - port: 80
@@ -240,7 +100,7 @@ spec:
       name: http
   selector:
     app: scanpro
-    tier: backend
+    component: api
   type: ClusterIP
 ---
 apiVersion: autoscaling/v2

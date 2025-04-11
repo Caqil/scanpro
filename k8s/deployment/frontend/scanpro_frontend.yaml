@@ -1,14 +1,3 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: scanpro-frontend-config
-  namespace: scanpro
-data:
-  NEXT_PUBLIC_API_URL: "https://api.scanpro.cc"
-  NEXT_PUBLIC_APP_URL: "https://scanpro.cc"
-  NEXT_PUBLIC_GA_MEASUREMENT_ID: ""
-  NEXT_PUBLIC_GTM_ID: ""
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,62 +5,38 @@ metadata:
   namespace: scanpro
   labels:
     app: scanpro
-    tier: frontend
+    component: frontend
 spec:
   replicas: 2
   selector:
     matchLabels:
       app: scanpro
-      tier: frontend
+      component: frontend
   template:
     metadata:
       labels:
         app: scanpro
-        tier: frontend
+        component: frontend
     spec:
       containers:
         - name: frontend
-          image: your-registry/scanpro-frontend:latest
+          image: your-registry/scanpro:latest
           imagePullPolicy: Always
+          command: ["npm", "run", "start"]
           ports:
             - containerPort: 3000
               name: http
+          envFrom:
+            - configMapRef:
+                name: scanpro-config
+            - secretRef:
+                name: scanpro-secrets
+                optional: true
           env:
-            - name: NODE_ENV
-              value: "production"
-            # Config from ConfigMap
-            - name: NEXT_PUBLIC_API_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: scanpro-frontend-config
-                  key: NEXT_PUBLIC_API_URL
-            - name: NEXT_PUBLIC_APP_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: scanpro-frontend-config
-                  key: NEXT_PUBLIC_APP_URL
-            - name: NEXT_PUBLIC_GA_MEASUREMENT_ID
-              valueFrom:
-                configMapKeyRef:
-                  name: scanpro-frontend-config
-                  key: NEXT_PUBLIC_GA_MEASUREMENT_ID
-                  optional: true
-            - name: NEXT_PUBLIC_GTM_ID
-              valueFrom:
-                configMapKeyRef:
-                  name: scanpro-frontend-config
-                  key: NEXT_PUBLIC_GTM_ID
-                  optional: true
-            # Auth configuration from secrets
-            - name: NEXTAUTH_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: scanpro-auth-secrets
-                  key: NEXTAUTH_SECRET
             - name: NEXTAUTH_URL
               valueFrom:
                 configMapKeyRef:
-                  name: scanpro-frontend-config
+                  name: scanpro-config
                   key: NEXT_PUBLIC_APP_URL
           resources:
             requests:
@@ -82,16 +47,18 @@ spec:
               cpu: "300m"
           livenessProbe:
             httpGet:
-              path: /api/health
+              path: /
               port: 3000
             initialDelaySeconds: 30
             periodSeconds: 10
+            timeoutSeconds: 5
           readinessProbe:
             httpGet:
-              path: /api/health
+              path: /
               port: 3000
             initialDelaySeconds: 5
             periodSeconds: 5
+            timeoutSeconds: 3
 ---
 apiVersion: v1
 kind: Service
@@ -100,7 +67,7 @@ metadata:
   namespace: scanpro
   labels:
     app: scanpro
-    tier: frontend
+    component: frontend
 spec:
   ports:
     - port: 80
@@ -108,7 +75,7 @@ spec:
       name: http
   selector:
     app: scanpro
-    tier: frontend
+    component: frontend
   type: ClusterIP
 ---
 apiVersion: autoscaling/v2
