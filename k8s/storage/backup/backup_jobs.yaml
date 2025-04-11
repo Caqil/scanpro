@@ -1,0 +1,168 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scanpro-backup-scripts
+  namespace: scanpro
+data:
+  backup_database.sh: |
+    #!/bin/bash
+    set -e
+
+    TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+    BACKUP_DIR="/backups/postgres"
+    mkdir -p $BACKUP_DIR
+
+    echo "Starting database backup at $(date)"
+
+    # Backup PostgreSQL
+    pg_dump -h scanpro-postgresql -U scanpro scanprodb | gzip > "$BACKUP_DIR/scanprodb-$TIMESTAMP.sql.gz"
+
+    # Retention - keep only the last 7 daily backups
+    cd $BACKUP_DIR
+    ls -t *.sql.gz | tail -n +8 | xargs -r rm
+
+    echo "Database backup completed at $(date)"
+    echo "Backup saved to $BACKUP_DIR/scanprodb-$TIMESTAMP.sql.gz"
+
+  backup_files.sh: |
+    #!/bin/bash
+    set -e
+
+    TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+    BACKUP_DIR="/backups/files"
+    mkdir -p $BACKUP_DIR
+
+    echo "Starting file backup at $(date)"
+
+    # Backup critical directories
+    tar -czf "$BACKUP_DIR/uploads-$TIMESTAMP.tar.gz" -C /app/uploads .
+    tar -czf "$BACKUP_DIR/conversions-$TIMESTAMP.tar.gz" -C /app/public/conversions .
+    tar -czf "$BACKUP_DIR/compressions-$TIMESTAMP.tar.gz" -C /app/public/compressions .
+
+    # Retention - keep only the last 3 backups for each directory
+    cd $BACKUP_DIR
+    for prefix in uploads conversions compressions; do
+      ls -t $prefix-*.tar.gz | tail -n +4 | xargs -r rm
+    done
+
+    echo "File backup completed at $(date)"
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: scanpro-database-backup
+  namespace: scanpro
+spec:
+  schedule: "0 2 * * *" # Daily at 2 AM
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: postgres-backup
+              image: postgres:14-alpine
+              command:
+                - /bin/bash
+                - -c
+                - /scripts/backup_database.sh
+              env:
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: scanpro-db-credentials
+                      key: password
+              volumeMounts:
+                - name: backup-scripts
+                  mountPath: /scripts
+                - name: backup-volume
+                  mountPath: /backups
+              resources:
+                requests:
+                  memory: "128Mi"
+                  cpu: "100m"
+                limits:
+                  memory: "256Mi"
+                  cpu: "200m"
+          restartPolicy: OnFailure
+          volumes:
+            - name: backup-scripts
+              configMap:
+                name: scanpro-backup-scripts
+                defaultMode: 0777
+            - name: backup-volume
+              persistentVolumeClaim:
+                claimName: scanpro-backups-pvc
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: scanpro-files-backup
+  namespace: scanpro
+spec:
+  schedule: "0 3 * * 0" # Weekly on Sunday at 3 AM
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: files-backup
+              image: alpine:latest
+              command:
+                - /bin/bash
+                - -c
+                - /scripts/backup_files.sh
+              volumeMounts:
+                - name: backup-scripts
+                  mountPath: /scripts
+                - name: backup-volume
+                  mountPath: /backups
+                - name: uploads-volume
+                  mountPath: /app/uploads
+                - name: conversions-volume
+                  mountPath: /app/public/conversions
+                - name: compressions-volume
+                  mountPath: /app/public/compressions
+              resources:
+                requests:
+                  memory: "256Mi"
+                  cpu: "250m"
+                limits:
+                  memory: "512Mi"
+                  cpu: "500m"
+          restartPolicy: OnFailure
+          volumes:
+            - name: backup-scripts
+              configMap:
+                name: scanpro-backup-scripts
+                defaultMode: 0777
+            - name: backup-volume
+              persistentVolumeClaim:
+                claimName: scanpro-backups-pvc
+            - name: uploads-volume
+              persistentVolumeClaim:
+                claimName: scanpro-uploads-pvc
+            - name: conversions-volume
+              persistentVolumeClaim:
+                claimName: scanpro-conversions-pvc
+            - name: compressions-volume
+              persistentVolumeClaim:
+                claimName: scanpro-compressions-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: scanpro-backups-pvc
+  namespace: scanpro
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: scanpro-local-storage
+  resources:
+    requests:
+      storage: 50Gi

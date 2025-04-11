@@ -1,0 +1,184 @@
+name: Deploy ScanPro to KubeSphere
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "README.md"
+      - "docs/**"
+      - ".github/*.md"
+  workflow_run:
+    workflows: ["Build ScanPro Containers"]
+    types:
+      - completed
+    branches: [main]
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to deploy to"
+        required: true
+        default: "staging"
+        type: choice
+        options:
+          - staging
+          - production
+      version:
+        description: "Version tag to deploy (defaults to latest)"
+        required: false
+        type: string
+
+env:
+  KUBECONFIG_FILE: kubeconfig.yaml
+
+jobs:
+  deploy:
+    name: Deploy to KubeSphere
+    runs-on: ubuntu-latest
+    # Only run on main branch pushes, successful workflow runs, or manual triggers
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Set environment based on trigger
+      - name: Set environment
+        id: set-env
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "ENVIRONMENT=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
+          else
+            echo "ENVIRONMENT=staging" >> $GITHUB_ENV
+          fi
+
+      # Set image tag based on trigger
+      - name: Set image tag
+        id: set-tag
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ] && [ -n "${{ github.event.inputs.version }}" ]; then
+            echo "IMAGE_TAG=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+          else
+            echo "IMAGE_TAG=sha-$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          fi
+
+      # Set up kubectl and helm
+      - name: Install kubectl and helm
+        run: |
+          curl -LO "https://dl.k8s.io/release/v1.25.0/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+      # Set up KubeConfig
+      - name: Set up KubeConfig
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" > ${{ env.KUBECONFIG_FILE }}
+          chmod 600 ${{ env.KUBECONFIG_FILE }}
+
+      # Connect to cluster and setup namespace if not exists
+      - name: Setup Namespace
+        run: |
+          export KUBECONFIG=${{ env.KUBECONFIG_FILE }}
+          kubectl create namespace scanpro --dry-run=client -o yaml | kubectl apply -f -
+
+      # Update Kubernetes manifests with the correct image tags
+      - name: Update deployment manifests
+        run: |
+          # Update API deployment
+          sed -i "s|image: your-registry/scanpro-api:latest|image: ghcr.io/${{ github.repository }}/api:${{ env.IMAGE_TAG }}|g" k8s/deployment/backend/scanpro_api.yaml
+
+          # Update Frontend deployment
+          sed -i "s|image: your-registry/scanpro-frontend:latest|image: ghcr.io/${{ github.repository }}/frontend:${{ env.IMAGE_TAG }}|g" k8s/deployment/frontend/scanpro_frontend.yaml
+
+          # Update Worker deployment
+          sed -i "s|image: your-registry/scanpro-worker:latest|image: ghcr.io/${{ github.repository }}/worker:${{ env.IMAGE_TAG }}|g" k8s/deployment/backend/scanpro_worker.yaml
+
+      # Update Kubernetes configs with environment variables
+      - name: Update ConfigMaps with environment variables
+        run: |
+          # Load environment-specific variables
+          if [ "${{ env.ENVIRONMENT }}" == "production" ]; then
+            source k8s/deployment/backend/environment/production.env.example
+          else
+            source k8s/deployment/backend/environment/staging.env.example
+          fi
+
+          # Update API ConfigMap
+          yq eval '.data.NEXT_PUBLIC_API_URL = env(NEXT_PUBLIC_API_URL)' -i k8s/deployment/backend/scanpro_api.yaml
+          yq eval '.data.NEXT_PUBLIC_APP_URL = env(NEXT_PUBLIC_APP_URL)' -i k8s/deployment/backend/scanpro_api.yaml
+          yq eval '.data.SMTP_HOST = env(SMTP_HOST)' -i k8s/deployment/backend/scanpro_api.yaml
+
+      # Apply Kubernetes manifests
+      - name: Deploy to Kubernetes
+        run: |
+          export KUBECONFIG=${{ env.KUBECONFIG_FILE }}
+
+          # Apply storage configuration
+          kubectl apply -f k8s/storage/persistent_volumes.yaml
+
+          # Apply database deployments
+          kubectl apply -f k8s/deployment/database/postgres/postgres_deployment.yaml
+          kubectl apply -f k8s/deployment/database/redis/redis_deployment.yaml
+
+          # Apply services
+          kubectl apply -f k8s/deployment/services/libreoffice.yaml
+          kubectl apply -f k8s/deployment/services/ghostscript.yaml
+          kubectl apply -f k8s/deployment/services/ocr/ocrmypdf_deployment.yaml
+          kubectl apply -f k8s/deployment/services/ocr/tesseract_deployment.yaml
+
+          # Wait for databases to be ready
+          kubectl wait --for=condition=ready pod -l app=scanpro,tier=database --timeout=300s
+          kubectl wait --for=condition=ready pod -l app=scanpro,tier=cache --timeout=300s
+
+          # Apply backend components
+          kubectl apply -f k8s/deployment/backend/scanpro_api.yaml
+          kubectl apply -f k8s/deployment/backend/scanpro_worker.yaml
+
+          # Apply frontend components
+          kubectl apply -f k8s/deployment/frontend/scanpro_frontend.yaml
+          kubectl apply -f k8s/deployment/frontend/scanpro_ingress.yaml
+
+          # Apply monitoring components
+          kubectl apply -f k8s/deployment/services/monitoring/prometheus_grafana.yaml
+
+          # Apply backup jobs
+          kubectl apply -f k8s/storage/backup/backup_jobs.yaml
+
+      # Wait for deployments to be ready
+      - name: Check deployment status
+        run: |
+          export KUBECONFIG=${{ env.KUBECONFIG_FILE }}
+
+          # Wait for API deployment
+          kubectl rollout status deployment/scanpro-api -n scanpro --timeout=300s
+
+          # Wait for Frontend deployment
+          kubectl rollout status deployment/scanpro-frontend -n scanpro --timeout=300s
+
+          # Wait for Worker deployment
+          kubectl rollout status deployment/scanpro-worker -n scanpro --timeout=300s
+
+      # Notify on completion
+      - name: Notify on Success
+        if: success()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: deployments
+          SLACK_COLOR: good
+          SLACK_TITLE: "ScanPro Deployed Successfully to ${{ env.ENVIRONMENT }}"
+          SLACK_MESSAGE: "Version ${{ env.IMAGE_TAG }} has been deployed to ${{ env.ENVIRONMENT }} environment."
+          SLACK_FOOTER: "GitHub Actions CI/CD"
+
+      - name: Notify on Failure
+        if: failure()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: deployments
+          SLACK_COLOR: danger
+          SLACK_TITLE: "ScanPro Deployment Failed"
+          SLACK_MESSAGE: "Deployment to ${{ env.ENVIRONMENT }} environment has failed. Check GitHub Actions for details."
+          SLACK_FOOTER: "GitHub Actions CI/CD"

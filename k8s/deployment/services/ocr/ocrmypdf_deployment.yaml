@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scanpro-ocrmypdf
+  namespace: scanpro
+  labels:
+    app: scanpro
+    service: ocrmypdf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scanpro
+      service: ocrmypdf
+  template:
+    metadata:
+      labels:
+        app: scanpro
+        service: ocrmypdf
+    spec:
+      containers:
+        - name: ocrmypdf
+          image: jbarlow83/ocrmypdf:latest
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh", "-c", "sleep infinity"]
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+          volumeMounts:
+            - name: ocr-volume
+              mountPath: /app/ocr
+            - name: uploads-volume
+              mountPath: /app/uploads
+            - name: temp-volume
+              mountPath: /app/temp
+          livenessProbe:
+            exec:
+              command:
+                - ocrmypdf
+                - --version
+            initialDelaySeconds: 30
+            periodSeconds: 60
+      volumes:
+        - name: ocr-volume
+          persistentVolumeClaim:
+            claimName: scanpro-ocr-pvc
+        - name: uploads-volume
+          persistentVolumeClaim:
+            claimName: scanpro-uploads-pvc
+        - name: temp-volume
+          persistentVolumeClaim:
+            claimName: scanpro-temp-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scanpro-ocrmypdf
+  namespace: scanpro
+  labels:
+    app: scanpro
+    service: ocrmypdf
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+      name: http
+  selector:
+    app: scanpro
+    service: ocrmypdf
+  type: ClusterIP

@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scanpro-ghostscript
+  namespace: scanpro
+  labels:
+    app: scanpro
+    service: ghostscript
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: scanpro
+      service: ghostscript
+  template:
+    metadata:
+      labels:
+        app: scanpro
+        service: ghostscript
+    spec:
+      containers:
+        - name: ghostscript
+          image: minidocks/ghostscript:latest
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh", "-c", "sleep infinity"]
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: conversions-volume
+              mountPath: /app/conversions
+            - name: compressions-volume
+              mountPath: /app/compressions
+            - name: uploads-volume
+              mountPath: /app/uploads
+            - name: temp-volume
+              mountPath: /app/temp
+          livenessProbe:
+            exec:
+              command:
+                - gs
+                - --version
+            initialDelaySeconds: 30
+            periodSeconds: 60
+      volumes:
+        - name: conversions-volume
+          persistentVolumeClaim:
+            claimName: scanpro-conversions-pvc
+        - name: compressions-volume
+          persistentVolumeClaim:
+            claimName: scanpro-compressions-pvc
+        - name: uploads-volume
+          persistentVolumeClaim:
+            claimName: scanpro-uploads-pvc
+        - name: temp-volume
+          persistentVolumeClaim:
+            claimName: scanpro-temp-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scanpro-ghostscript
+  namespace: scanpro
+  labels:
+    app: scanpro
+    service: ghostscript
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      name: service
+  selector:
+    app: scanpro
+    service: ghostscript
+  type: ClusterIP

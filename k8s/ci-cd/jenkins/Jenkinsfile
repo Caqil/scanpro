@@ -1,0 +1,205 @@
+pipeline {
+    agent {
+        kubernetes {
+            yaml """
+                apiVersion: v1
+                kind: Pod
+                spec:
+                  containers:
+                  - name: node
+                    image: node:18-alpine
+                    command: ['cat']
+                    tty: true
+                  - name: docker
+                    image: docker:20-dind
+                    command: ['dockerd-entrypoint.sh']
+                    tty: true
+                    privileged: true
+                    volumeMounts:
+                    - name: docker-socket
+                      mountPath: /var/run/docker.sock
+                  - name: kubectl
+                    image: bitnami/kubectl:latest
+                    command: ['cat']
+                    tty: true
+                  volumes:
+                  - name: docker-socket
+                    hostPath:
+                      path: /var/run/docker.sock
+                """
+            defaultContainer 'node'
+        }
+    }
+    
+    environment {
+        REGISTRY = 'ghcr.io'
+        REGISTRY_CREDENTIALS = credentials('github-registry')
+        FRONTEND_IMAGE = "${REGISTRY}/your-org/scanpro-frontend"
+        API_IMAGE = "${REGISTRY}/your-org/scanpro-api"
+        WORKER_IMAGE = "${REGISTRY}/your-org/scanpro-worker"
+        IMAGE_TAG = "${env.GIT_BRANCH.replaceAll('/', '-')}-${env.BUILD_NUMBER}"
+        KUBECONFIG = credentials('kubesphere-kubeconfig')
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                container('node') {
+                    sh 'npm ci'
+                    sh 'npm run lint'
+                    sh 'npm test'
+                }
+            }
+        }
+        
+        stage('Build Docker Images') {
+            steps {
+                container('docker') {
+                    sh 'echo $REGISTRY_CREDENTIALS_PSW | docker login $REGISTRY -u $REGISTRY_CREDENTIALS_USR --password-stdin'
+                    
+                    // Build Frontend
+                    sh """
+                    docker build -t ${FRONTEND_IMAGE}:${IMAGE_TAG} ./frontend
+                    docker tag ${FRONTEND_IMAGE}:${IMAGE_TAG} ${FRONTEND_IMAGE}:latest
+                    docker push ${FRONTEND_IMAGE}:${IMAGE_TAG}
+                    docker push ${FRONTEND_IMAGE}:latest
+                    """
+                    
+                    // Build API
+                    sh """
+                    docker build -t ${API_IMAGE}:${IMAGE_TAG} ./api
+                    docker tag ${API_IMAGE}:${IMAGE_TAG} ${API_IMAGE}:latest
+                    docker push ${API_IMAGE}:${IMAGE_TAG}
+                    docker push ${API_IMAGE}:latest
+                    """
+                    
+                    // Build Worker
+                    sh """
+                    docker build -t ${WORKER_IMAGE}:${IMAGE_TAG} ./worker
+                    docker tag ${WORKER_IMAGE}:${IMAGE_TAG} ${WORKER_IMAGE}:latest
+                    docker push ${WORKER_IMAGE}:${IMAGE_TAG}
+                    docker push ${WORKER_IMAGE}:latest
+                    """
+                }
+            }
+        }
+        
+        stage('Deploy to Staging') {
+            when {
+                branch 'develop'
+            }
+            steps {
+                container('kubectl') {
+                    sh 'mkdir -p ~/.kube'
+                    sh 'cat $KUBECONFIG > ~/.kube/config'
+                    sh 'chmod 600 ~/.kube/config'
+                    
+                    // Update deployment manifests
+                    sh """
+                    sed -i 's|image: your-registry/scanpro-api:latest|image: ${API_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/backend/scanpro_api.yaml
+                    sed -i 's|image: your-registry/scanpro-frontend:latest|image: ${FRONTEND_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/frontend/scanpro_frontend.yaml
+                    sed -i 's|image: your-registry/scanpro-worker:latest|image: ${WORKER_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/backend/scanpro_worker.yaml
+                    """
+                    
+                    // Load environment-specific variables
+                    sh 'source k8s/deployment/backend/environment/staging.env.example'
+                    
+                    // Apply Kubernetes manifests
+                    sh """
+                    kubectl apply -f k8s/storage/persistent_volumes.yaml
+                    kubectl apply -f k8s/deployment/database/postgres/postgres_deployment.yaml
+                    kubectl apply -f k8s/deployment/database/redis/redis_deployment.yaml
+                    kubectl apply -f k8s/deployment/services/libreoffice.yaml
+                    kubectl apply -f k8s/deployment/services/ghostscript.yaml
+                    kubectl apply -f k8s/deployment/services/ocr/ocrmypdf_deployment.yaml
+                    kubectl apply -f k8s/deployment/services/ocr/tesseract_deployment.yaml
+                    kubectl apply -f k8s/deployment/backend/scanpro_api.yaml
+                    kubectl apply -f k8s/deployment/backend/scanpro_worker.yaml
+                    kubectl apply -f k8s/deployment/frontend/scanpro_frontend.yaml
+                    kubectl apply -f k8s/deployment/frontend/scanpro_ingress.yaml
+                    """
+                    
+                    // Wait for deployments to be ready
+                    sh """
+                    kubectl rollout status deployment/scanpro-api -n scanpro --timeout=300s
+                    kubectl rollout status deployment/scanpro-frontend -n scanpro --timeout=300s
+                    kubectl rollout status deployment/scanpro-worker -n scanpro --timeout=300s
+                    """
+                }
+            }
+        }
+        
+        stage('Deploy to Production') {
+            when {
+                branch 'main'
+            }
+            steps {
+                // Require manual approval for production deployment
+                input message: 'Deploy to production?', ok: 'Deploy'
+                
+                container('kubectl') {
+                    sh 'mkdir -p ~/.kube'
+                    sh 'cat $KUBECONFIG > ~/.kube/config'
+                    sh 'chmod 600 ~/.kube/config'
+                    
+                    // Update deployment manifests
+                    sh """
+                    sed -i 's|image: your-registry/scanpro-api:latest|image: ${API_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/backend/scanpro_api.yaml
+                    sed -i 's|image: your-registry/scanpro-frontend:latest|image: ${FRONTEND_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/frontend/scanpro_frontend.yaml
+                    sed -i 's|image: your-registry/scanpro-worker:latest|image: ${WORKER_IMAGE}:${IMAGE_TAG}|g' k8s/deployment/backend/scanpro_worker.yaml
+                    """
+                    
+                    // Load environment-specific variables
+                    sh 'source k8s/deployment/backend/environment/production.env.example'
+                    
+                    // Apply Kubernetes manifests
+                    sh """
+                    kubectl apply -f k8s/storage/persistent_volumes.yaml
+                    kubectl apply -f k8s/deployment/database/postgres/postgres_deployment.yaml
+                    kubectl apply -f k8s/deployment/database/redis/redis_deployment.yaml
+                    kubectl apply -f k8s/deployment/services/libreoffice.yaml
+                    kubectl apply -f k8s/deployment/services/ghostscript.yaml
+                    kubectl apply -f k8s/deployment/services/ocr/ocrmypdf_deployment.yaml
+                    kubectl apply -f k8s/deployment/services/ocr/tesseract_deployment.yaml
+                    kubectl apply -f k8s/deployment/backend/scanpro_api.yaml
+                    kubectl apply -f k8s/deployment/backend/scanpro_worker.yaml
+                    kubectl apply -f k8s/deployment/frontend/scanpro_frontend.yaml
+                    kubectl apply -f k8s/deployment/frontend/scanpro_ingress.yaml
+                    kubectl apply -f k8s/deployment/services/monitoring/prometheus_grafana.yaml
+                    kubectl apply -f k8s/storage/backup/backup_jobs.yaml
+                    """
+                    
+                    // Wait for deployments to be ready
+                    sh """
+                    kubectl rollout status deployment/scanpro-api -n scanpro --timeout=300s
+                    kubectl rollout status deployment/scanpro-frontend -n scanpro --timeout=300s
+                    kubectl rollout status deployment/scanpro-worker -n scanpro --timeout=300s
+                    """
+                }
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo 'Deployment completed successfully!'
+            // You can add notifications here (email, Slack, etc.)
+        }
+        failure {
+            echo 'Deployment failed!'
+            // You can add notifications here (email, Slack, etc.)
+        }
+        always {
+            // Clean up
+            container('docker') {
+                sh 'docker logout $REGISTRY || true'
+            }
+        }
+    }
+}

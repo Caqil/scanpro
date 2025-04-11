@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scanpro-tesseract
+  namespace: scanpro
+  labels:
+    app: scanpro
+    service: tesseract
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scanpro
+      service: tesseract
+  template:
+    metadata:
+      labels:
+        app: scanpro
+        service: tesseract
+    spec:
+      containers:
+        - name: tesseract
+          image: hertzg/tesseract:latest
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh", "-c", "sleep infinity"]
+          env:
+            - name: TESSDATA_PREFIX
+              value: "/usr/share/tesseract-ocr/4.00/tessdata"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: ocr-volume
+              mountPath: /app/ocr
+            - name: uploads-volume
+              mountPath: /app/uploads
+            - name: temp-volume
+              mountPath: /app/temp
+            - name: tessdata-volume
+              mountPath: /usr/share/tesseract-ocr/4.00/tessdata
+          livenessProbe:
+            exec:
+              command:
+                - tesseract
+                - --version
+            initialDelaySeconds: 30
+            periodSeconds: 60
+      initContainers:
+        - name: download-languages
+          image: curlimages/curl:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              cd /tessdata
+              for lang in eng fra deu spa chi_sim chi_tra ara rus por hin; do
+                echo "Downloading $lang language data..."
+                curl -sSL https://github.com/tesseract-ocr/tessdata/raw/4.00/$lang.traineddata -o $lang.traineddata
+              done
+          volumeMounts:
+            - name: tessdata-volume
+              mountPath: /tessdata
+      volumes:
+        - name: ocr-volume
+          persistentVolumeClaim:
+            claimName: scanpro-ocr-pvc
+        - name: uploads-volume
+          persistentVolumeClaim:
+            claimName: scanpro-uploads-pvc
+        - name: temp-volume
+          persistentVolumeClaim:
+            claimName: scanpro-temp-pvc
+        - name: tessdata-volume
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scanpro-tesseract
+  namespace: scanpro
+  labels:
+    app: scanpro
+    service: tesseract
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+      name: http
+  selector:
+    app: scanpro
+    service: tesseract
+  type: ClusterIP

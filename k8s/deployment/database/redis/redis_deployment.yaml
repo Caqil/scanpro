@@ -10,3 +10,131 @@ data:
     port 6379
     tcp-backlog 511
     timeout 0
+    tcp-keepalive 300
+    daemonize no
+    supervised no
+    pidfile /var/run/redis/redis-server.pid
+    loglevel notice
+    logfile ""
+    databases 16
+    always-show-logo yes
+    save 900 1
+    save 300 10
+    save 60 10000
+    stop-writes-on-bgsave-error yes
+    rdbcompression yes
+    rdbchecksum yes
+    dbfilename dump.rdb
+    dir /data
+    replica-serve-stale-data yes
+    replica-read-only yes
+    repl-diskless-sync no
+    repl-diskless-sync-delay 5
+    repl-disable-tcp-nodelay no
+    replica-priority 100
+    lazyfree-lazy-eviction no
+    lazyfree-lazy-expire no
+    lazyfree-lazy-server-del no
+    replica-lazy-flush no
+    appendonly yes
+    appendfilename "appendonly.aof"
+    appendfsync everysec
+    no-appendfsync-on-rewrite no
+    auto-aof-rewrite-percentage 100
+    auto-aof-rewrite-min-size 64mb
+    aof-load-truncated yes
+    aof-use-rdb-preamble yes
+    maxmemory 256mb
+    maxmemory-policy allkeys-lru
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scanpro-redis
+  namespace: scanpro
+  labels:
+    app: scanpro
+    tier: cache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scanpro
+      tier: cache
+  template:
+    metadata:
+      labels:
+        app: scanpro
+        tier: cache
+    spec:
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          command: ["redis-server", "/etc/redis/redis.conf"]
+          ports:
+            - containerPort: 6379
+              name: redis
+          volumeMounts:
+            - name: redis-data
+              mountPath: /data
+            - name: redis-config
+              mountPath: /etc/redis
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "200m"
+          livenessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      volumes:
+        - name: redis-config
+          configMap:
+            name: scanpro-redis-config
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: scanpro-redis-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: scanpro-redis-pvc
+  namespace: scanpro
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: scanpro-local-storage
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scanpro-redis
+  namespace: scanpro
+  labels:
+    app: scanpro
+    tier: cache
+spec:
+  ports:
+    - port: 6379
+      targetPort: 6379
+      name: redis
+  selector:
+    app: scanpro
+    tier: cache
+  type: ClusterIP

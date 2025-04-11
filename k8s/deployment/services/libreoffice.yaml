@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scanpro-libreoffice
+  namespace: scanpro
+  labels:
+    app: scanpro
+    service: libreoffice
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: scanpro
+      service: libreoffice
+  template:
+    metadata:
+      labels:
+        app: scanpro
+        service: libreoffice
+    spec:
+      containers:
+        - name: libreoffice
+          image: linuxserver/libreoffice:latest
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh", "-c", "sleep infinity"]
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+          volumeMounts:
+            - name: conversions-volume
+              mountPath: /app/conversions
+            - name: uploads-volume
+              mountPath: /app/uploads
+            - name: temp-volume
+              mountPath: /app/temp
+          livenessProbe:
+            exec:
+              command:
+                - libreoffice
+                - --version
+            initialDelaySeconds: 30
+            periodSeconds: 60
+            timeoutSeconds: 10
+      volumes:
+        - name: conversions-volume
+          persistentVolumeClaim:
+            claimName: scanpro-conversions-pvc
+        - name: uploads-volume
+          persistentVolumeClaim:
+            claimName: scanpro-uploads-pvc
+        - name: temp-volume
+          persistentVolumeClaim:
+            claimName: scanpro-temp-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scanpro-libreoffice
+  namespace: scanpro
+  labels:
+    app: scanpro
+    service: libreoffice
+spec:
+  ports:
+    - port: 8997
+      targetPort: 8997
+      name: service
+  selector:
+    app: scanpro
+    service: libreoffice
+  type: ClusterIP

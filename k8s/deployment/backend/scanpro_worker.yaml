@@ -1,0 +1,125 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scanpro-worker
+  namespace: scanpro
+  labels:
+    app: scanpro
+    tier: worker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: scanpro
+      tier: worker
+  template:
+    metadata:
+      labels:
+        app: scanpro
+        tier: worker
+    spec:
+      containers:
+        - name: worker
+          image: your-registry/scanpro-worker:latest
+          imagePullPolicy: Always
+          command: ["npm", "run", "worker"]
+          env:
+            # Config from ConfigMap
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: scanpro-api-config
+                  key: NODE_ENV
+            - name: DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: scanpro-api-config
+                  key: DATABASE_URL
+            - name: REDIS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: scanpro-api-config
+                  key: REDIS_URL
+            - name: STORAGE_BASE_PATH
+              valueFrom:
+                configMapKeyRef:
+                  name: scanpro-api-config
+                  key: STORAGE_BASE_PATH
+            - name: NEXT_PUBLIC_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: scanpro-api-config
+                  key: NEXT_PUBLIC_API_URL
+            - name: NEXT_PUBLIC_APP_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: scanpro-api-config
+                  key: NEXT_PUBLIC_APP_URL
+            # Secrets
+            - name: SYSTEM_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: scanpro-api-secrets
+                  key: SYSTEM_API_KEY
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+          volumeMounts:
+            - name: uploads-volume
+              mountPath: /app/uploads
+            - name: conversions-volume
+              mountPath: /app/public/conversions
+            - name: compressions-volume
+              mountPath: /app/public/compressions
+            - name: temp-volume
+              mountPath: /app/temp
+            - name: ocr-volume
+              mountPath: /app/public/ocr
+          livenessProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - "console.log('Worker health check')"
+            initialDelaySeconds: 30
+            periodSeconds: 30
+      volumes:
+        - name: uploads-volume
+          persistentVolumeClaim:
+            claimName: scanpro-uploads-pvc
+        - name: conversions-volume
+          persistentVolumeClaim:
+            claimName: scanpro-conversions-pvc
+        - name: compressions-volume
+          persistentVolumeClaim:
+            claimName: scanpro-compressions-pvc
+        - name: temp-volume
+          persistentVolumeClaim:
+            claimName: scanpro-temp-pvc
+        - name: ocr-volume
+          persistentVolumeClaim:
+            claimName: scanpro-ocr-pvc
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: scanpro-worker-hpa
+  namespace: scanpro
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: scanpro-worker
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
