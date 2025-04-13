@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Run Cleanup API
         run: |
-          curl -X GET -H "x-api-key: ${{ secrets.API_KEY }}" "https://scanpro.cc/api/convert/admin/cleanup?maxAge=60"
+          curl -X GET -H "x-api-key: ${{ secrets.API_KEY }}" "https://scanpro.cc/api/admin/cleanup?maxAge=60"
       
       - name: Check API Response
         run: |
