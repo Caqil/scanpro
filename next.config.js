@@ -2,8 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
-  assetPrefix: '', // atau biarkan kosong
-  basePath: '',    // juga kosong, kecuali kamu deploy di subfolder
+  api: {
+    bodyParser: {
+      sizeLimit: '100mb', // Increase from default
+    },
+    responseLimit: false, // Disable size limit for responses
+  },
   async headers() {
     return [
       {

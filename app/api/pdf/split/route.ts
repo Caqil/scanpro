@@ -1,5 +1,5 @@
 // app/api/pdf/split/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { writeFile, mkdir, readFile } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join } from 'path';
@@ -14,14 +14,15 @@ const execAsync = promisify(exec);
 // Define directories
 const UPLOAD_DIR = join(process.cwd(), 'uploads');
 const SPLIT_DIR = join(process.cwd(), 'public', 'splits');
+const STATUS_DIR = join(process.cwd(), 'public', 'status');
 
 // Ensure directories exist
 async function ensureDirectories() {
-    if (!existsSync(UPLOAD_DIR)) {
-        await mkdir(UPLOAD_DIR, { recursive: true });
-    }
-    if (!existsSync(SPLIT_DIR)) {
-        await mkdir(SPLIT_DIR, { recursive: true });
+    const dirs = [UPLOAD_DIR, SPLIT_DIR, STATUS_DIR];
+    for (const dir of dirs) {
+        if (!existsSync(dir)) {
+            await mkdir(dir, { recursive: true });
+        }
     }
 }
 
@@ -76,68 +77,132 @@ async function getTotalPages(inputPath: string): Promise<number> {
     }
 }
 
-// Process PDF splitting with better handling for large files
-async function splitPdfInBatches(
-    inputPath: string, 
-    pageSets: number[][], 
-    sessionId: string,
-    maxBatchSize: number = 10 // Process at most 10 splits at a time
-): Promise<Array<{
+// Process a single PDF split
+async function processOneSplit(
+    inputPath: string,
+    pages: number[],
+    outputFileName: string,
+    outputPath: string
+): Promise<{
     fileUrl: string;
     filename: string;
     pages: number[];
     pageCount: number;
-}>> {
-    const results = [];
-    
-    // Process in batches to avoid memory issues
-    for (let batchStart = 0; batchStart < pageSets.length; batchStart += maxBatchSize) {
-        const batchEnd = Math.min(batchStart + maxBatchSize, pageSets.length);
-        console.log(`Processing batch ${batchStart} to ${batchEnd-1} of ${pageSets.length} splits`);
-        
-        // Process each batch sequentially
-        const batchPromises = [];
-        
-        for (let i = batchStart; i < batchEnd; i++) {
-            const pages = pageSets[i];
-            const outputFileName = `${sessionId}-split-${i + 1}.pdf`;
-            const outputPath = join(SPLIT_DIR, outputFileName);
+}> {
+    // Convert page numbers to qpdf range format
+    const pageRange = pages.length === 1
+        ? `${pages[0]}`
+        : `${pages[0]}-${pages[pages.length - 1]}`;
 
-            // Convert page numbers to qpdf range format
-            const pageRange = pages.length === 1
-                ? `${pages[0]}`
-                : `${pages[0]}-${pages[pages.length - 1]}`;
+    // Construct qpdf command
+    const command = `qpdf "${inputPath}" --pages . ${pageRange} -- "${outputPath}"`;
 
-            // Construct qpdf command
-            const command = `qpdf "${inputPath}" --pages . ${pageRange} -- "${outputPath}"`;
+    // Execute qpdf command
+    await execAsync(command);
 
-            // Execute qpdf command and store the promise
-            const processPromise = execAsync(command)
-                .then(() => ({
-                    fileUrl: `/api/file?folder=splits&filename=${outputFileName}`,
-                    filename: outputFileName,
-                    pages: pages,
-                    pageCount: pages.length
-                }))
-                .catch(error => {
-                    console.error(`Error processing split ${i + 1}:`, error);
+    return {
+        fileUrl: `/api/file?folder=splits&filename=${outputFileName}`,
+        filename: outputFileName,
+        pages: pages,
+        pageCount: pages.length
+    };
+}
+
+// Process PDF splitting in the background
+async function processSplitsInBackground(
+    sessionId: string,
+    inputPath: string,
+    pageSets: number[][]
+): Promise<void> {
+    try {
+        // Create status file with initial state
+        const statusPath = join(STATUS_DIR, `${sessionId}-status.json`);
+        const initialStatus = {
+            id: sessionId,
+            status: 'processing',
+            progress: 0,
+            total: pageSets.length,
+            completed: 0,
+            results: [],
+            error: null
+        };
+        await writeFile(statusPath, JSON.stringify(initialStatus));
+
+        // Process in smaller batches
+        const batchSize = 5;
+        const results = [];
+
+        for (let i = 0; i < pageSets.length; i += batchSize) {
+            // Process a batch of splits
+            const batch = pageSets.slice(i, Math.min(i + batchSize, pageSets.length));
+            const batchPromises = batch.map(async (pages, batchIndex) => {
+                const index = i + batchIndex;
+                const outputFileName = `${sessionId}-split-${index + 1}.pdf`;
+                const outputPath = join(SPLIT_DIR, outputFileName);
+
+                try {
+                    return await processOneSplit(inputPath, pages, outputFileName, outputPath);
+                } catch (error) {
+                    console.error(`Error processing split ${index + 1}:`, error);
                     throw error;
-                });
+                }
+            });
+
+            // Wait for current batch to complete
+            const batchResults = await Promise.allSettled(batchPromises);
             
-            batchPromises.push(processPromise);
+            // Process batch results
+            for (const result of batchResults) {
+                if (result.status === 'fulfilled') {
+                    results.push(result.value);
+                }
+            }
+
+            // Update status after each batch
+            const completedCount = results.length;
+            const progress = Math.round((completedCount / pageSets.length) * 100);
+            
+            const updatedStatus = {
+                ...initialStatus,
+                status: completedCount === pageSets.length ? 'completed' : 'processing',
+                progress,
+                completed: completedCount,
+                results
+            };
+            
+            await writeFile(statusPath, JSON.stringify(updatedStatus));
+            
+            // Small delay between batches
+            if (i + batchSize < pageSets.length) {
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
         }
+
+        // Final status update
+        const finalStatus = {
+            id: sessionId,
+            status: 'completed',
+            progress: 100,
+            total: pageSets.length,
+            completed: results.length,
+            results,
+            error: null
+        };
         
-        // Wait for all operations in this batch to complete
-        const batchResults = await Promise.all(batchPromises);
-        results.push(...batchResults);
+        await writeFile(statusPath, JSON.stringify(finalStatus));
+    } catch (error) {
+        // Update status with error
+        const statusPath = join(STATUS_DIR, `${sessionId}-status.json`);
+        const errorStatus = {
+            id: sessionId,
+            status: 'error',
+            error: error instanceof Error ? error.message : 'Unknown error during processing',
+            results: [] // Include any results processed so far
+        };
         
-        // Small delay between batches to ensure OS resources are released
-        if (batchEnd < pageSets.length) {
-            await new Promise(resolve => setTimeout(resolve, 500));
-        }
+        await writeFile(statusPath, JSON.stringify(errorStatus));
+        console.error('Error in background processing:', error);
     }
-    
-    return results;
 }
 
 export async function POST(request: NextRequest) {
@@ -166,6 +231,7 @@ export async function POST(request: NextRequest) {
                 trackApiUsage(validation.userId, 'split');
             }
         }
+        
         await ensureDirectories();
 
         // Process form data
@@ -232,24 +298,58 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        console.log(`Splitting PDF into ${pageSets.length} parts`);
-
-        // Process splits in batches to prevent memory issues
-        const splitResults = await splitPdfInBatches(inputPath, pageSets, sessionId);
-
-        // Create a streamable response
-        const responseBody = JSON.stringify({
-            success: true,
-            message: `PDF split into ${splitResults.length} files`,
-            originalName: file.name,
-            totalPages,
-            splitParts: splitResults
-        });
-
-        return new Response(responseBody, { 
-            status: 200, 
-            headers: { 'Content-Type': 'application/json' } 
-        });
+        // If we have a large number of splits, use the two-phase approach
+        const isLargeJob = pageSets.length > 15 || totalPages > 100;
+        
+        if (isLargeJob) {
+            console.log(`Large job detected: ${pageSets.length} splits from ${totalPages} pages. Using two-phase approach.`);
+            
+            // Start background processing
+            // Note: We don't await this to allow it to run in the background
+            processSplitsInBackground(sessionId, inputPath, pageSets);
+            
+            // Return immediate response with status endpoint
+            return new Response(
+                JSON.stringify({
+                    success: true,
+                    message: 'PDF splitting started',
+                    jobId: sessionId,
+                    statusUrl: `/api/pdf/split/status?id=${sessionId}`,
+                    originalName: file.name,
+                    totalPages,
+                    totalSplits: pageSets.length,
+                    isLargeJob: true
+                }),
+                { status: 202, headers: { 'Content-Type': 'application/json' } }
+            );
+        } else {
+            // For smaller jobs, process immediately
+            console.log(`Small job: ${pageSets.length} splits. Processing immediately.`);
+            
+            // Process all splits
+            const splitResults = [];
+            for (let i = 0; i < pageSets.length; i++) {
+                const pages = pageSets[i];
+                const outputFileName = `${sessionId}-split-${i + 1}.pdf`;
+                const outputPath = join(SPLIT_DIR, outputFileName);
+                
+                const result = await processOneSplit(inputPath, pages, outputFileName, outputPath);
+                splitResults.push(result);
+            }
+            
+            // Return complete results
+            return new Response(
+                JSON.stringify({
+                    success: true,
+                    message: `PDF split into ${splitResults.length} files`,
+                    originalName: file.name,
+                    totalPages,
+                    splitParts: splitResults,
+                    isLargeJob: false
+                }),
+                { status: 200, headers: { 'Content-Type': 'application/json' } }
+            );
+        }
     } catch (error) {
         console.error('PDF splitting error:', error);
 
