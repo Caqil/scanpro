@@ -24,48 +24,31 @@ async function ensureDirectories() {
     }
 }
 
-// Function to protect PDF using qpdf command line tool
 async function protectPdfWithQpdf(inputPath: string, outputPath: string, options: {
     userPassword: string;
     ownerPassword?: string;
     allowPrinting?: boolean;
     allowCopying?: boolean;
     allowEditing?: boolean;
-    encryptionLevel: '40' | '128' | '256';
 }) {
     try {
-        // If owner password not specified, use the user password
-        const ownerPassword = options.ownerPassword || options.userPassword;
-
-        // Build permission string
-        let permissions = [];
+        // Build qpdf command
+        let command = `qpdf --encrypt "${options.userPassword}" "${options.ownerPassword || options.userPassword}" 256 --`;
 
         // Add permissions based on flags
-        if (options.allowPrinting) permissions.push('print');
-        if (options.allowCopying) permissions.push('copy');
-        if (options.allowEditing) {
-            permissions.push('modify');
-            permissions.push('annotate');
+        if (!options.allowPrinting) command += ' --print=none';
+        if (!options.allowCopying) command += ' --extract=n';
+        if (!options.allowEditing) {
+            command += ' --modify=none';
+            command += ' --annotate=n';
+            command += ' --form=n';
+            command += ' --modify-other=n';
         }
 
-        // Build qpdf command
-        let command = `qpdf --encrypt "${options.userPassword}" "${ownerPassword}" ${options.encryptionLevel}`;
-
-        // Add permissions if any
-        if (permissions.length > 0) {
-            permissions.forEach(perm => {
-                command += ` --${perm}=y`;
-            });
-        } else {
-            // If no permissions specified, deny all
-            command += ' --print=n --modify=n --copy=n --annotate=n';
-        }
-
-        // Add input and output files
-        command += ` -- "${inputPath}" "${outputPath}"`;
+        command += ` "${inputPath}" "${outputPath}"`;
 
         // Execute command (hide passwords in logs)
-        console.log(`Executing: ${command.replace(options.userPassword, '******').replace(ownerPassword, '******')}`);
+        console.log(`Executing: ${command.replace(options.userPassword, '******').replace(options.ownerPassword || '', '******')}`);
 
         const { stdout, stderr } = await execPromise(command);
 
@@ -80,59 +63,6 @@ async function protectPdfWithQpdf(inputPath: string, outputPath: string, options
         return existsSync(outputPath);
     } catch (error) {
         console.error('Error using qpdf:', error);
-        return false;
-    }
-}
-async function protectPdfWithPdftk(inputPath: string, outputPath: string, options: {
-    userPassword: string;
-    ownerPassword?: string;
-    allowPrinting?: boolean;
-    allowCopying?: boolean;
-    allowEditing?: boolean;
-}) {
-    try {
-        // Build permission string
-        let permissions = [];
-
-        // Add permissions based on flags
-        if (options.allowPrinting) permissions.push('Printing');
-        if (options.allowCopying) permissions.push('DegradedPrinting', 'CopyContents');
-        if (options.allowEditing) {
-            permissions.push('ModifyContents', 'ModifyAnnotations');
-            permissions.push('FillIn', 'Assembly');
-        }
-
-        // Build pdftk command - don't set owner_pw if it's the same as user_pw
-        // This follows pdftk's requirement that owner and user passwords must be different,
-        // or the owner password should be omitted
-        let command = `pdftk "${inputPath}" output "${outputPath}" user_pw "${options.userPassword}"`;
-
-        // Only add owner password if it's different from user password
-        if (options.ownerPassword && options.ownerPassword !== options.userPassword) {
-            command += ` owner_pw "${options.ownerPassword}"`;
-        }
-
-        // Add permissions if any
-        if (permissions.length > 0) {
-            command += ` allow ${permissions.join(' ')}`;
-        }
-
-        // Execute command (hide passwords in logs)
-        console.log(`Executing: ${command.replace(options.userPassword, '******').replace(options.ownerPassword || '', '******')}`);
-
-        const { stdout, stderr } = await execPromise(command);
-
-        if (stderr) {
-            console.error('pdftk stderr:', stderr);
-        }
-
-        if (stdout) {
-            console.log('pdftk stdout:', stdout);
-        }
-
-        return existsSync(outputPath);
-    } catch (error) {
-        console.error('Error using pdftk:', error);
         return false;
     }
 }
@@ -210,46 +140,27 @@ export async function POST(request: NextRequest) {
         const buffer = Buffer.from(await file.arrayBuffer());
         await writeFile(inputPath, buffer);
 
-        // Try to protect the PDF using qpdf or pdftk
+        // Try to protect the PDF using qpdf
         let protectionSuccess = false;
         let methodUsed = '';
 
-        // Try qpdf first
         try {
             protectionSuccess = await protectPdfWithQpdf(inputPath, outputPath, {
                 userPassword: password,
                 allowPrinting,
                 allowCopying,
                 allowEditing,
-                encryptionLevel: protectionLevel === '256' ? '256' : '128' as '40' | '128' | '256'
             });
             if (protectionSuccess) {
                 methodUsed = 'qpdf';
             }
         } catch (qpdfError) {
-            console.log('qpdf failed, trying pdftk...');
+            console.error('qpdf failed:', qpdfError);
         }
 
-        // If qpdf fails, try pdftk
+        // If qpdf fails, try a fallback method (JavaScript-based)
         if (!protectionSuccess) {
-            try {
-                protectionSuccess = await protectPdfWithPdftk(inputPath, outputPath, {
-                    userPassword: password,
-                    allowPrinting,
-                    allowCopying,
-                    allowEditing,
-                });
-                if (protectionSuccess) {
-                    methodUsed = 'pdftk';
-                }
-            } catch (pdftkError) {
-                console.error('pdftk failed too:', pdftkError);
-            }
-        }
-
-        // If both command-line tools fail, try a fallback method (JavaScript-based)
-        if (!protectionSuccess) {
-            // For now, let's just copy the file as a fallback and tell the user
+            // For now, just copy the file as a fallback and tell the user
             // In a real implementation, you'd use a JavaScript library like pdf-lib
             await writeFile(outputPath, buffer);
             methodUsed = 'fallback';

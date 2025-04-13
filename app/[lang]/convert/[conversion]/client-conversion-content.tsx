@@ -9,6 +9,7 @@ import Link from "next/link";
 import { FileText, Image, Table, File } from "lucide-react";
 import { LanguageLink } from "@/components/language-link";
 import { useLanguageStore } from "@/src/store/store";
+import { UniversalFileUploader, UploadedFile } from "@/components/universal-file-uploader";
 
 // Define conversion type interface
 interface ConversionType {
@@ -132,6 +133,7 @@ export const useConversionTypes = () => {
 
 export function ClientConversionContent() {
   const params = useParams<ConversionParams>();
+  const [files, setFiles] = useState<UploadedFile[]>([]);
   const conversionPath = params.conversion as string;
   const conversionTypes = useConversionTypes();
   const [inputFormat, setInputFormat] = useState<string>("pdf");
@@ -233,6 +235,11 @@ export function ClientConversionContent() {
           </CardDescription>
         </CardHeader>
         <CardContent>
+        <UniversalFileUploader 
+          fileTypes={['PDF']}
+          maxFiles={1}
+          onFilesChange={setFiles}
+        />
           <FileUploader 
             initialInputFormat={inputFormat}
             initialOutputFormat={outputFormat}

@@ -1,6 +1,5 @@
-// app/api/ocr/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir, readFile, unlink } from 'fs/promises';
+import { writeFile, mkdir, readFile, unlink, readdir, copyFile, rmdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
@@ -79,20 +78,26 @@ async function runOcrOnPdf(inputPath: string, outputPath: string, language: stri
     }
 }
 
-// Fallback method using pdftocairo and tesseract if script fails
+// Fallback method using pdftoppm (primary) or pdftocairo (fallback) and tesseract
 async function fallbackOcrMethod(inputPath: string, outputPath: string, language: string = 'eng'): Promise<boolean> {
     try {
-        console.log('Attempting fallback OCR method using pdftocairo and tesseract');
+        console.log('Attempting fallback OCR method using pdftoppm and tesseract');
 
         // Create a temporary directory for this operation
-        const tempDir = join(TEMP_DIR, uuidv4());
+       const tempDir = join(TEMP_DIR, uuidv4());
         if (!existsSync(tempDir)) {
             await mkdir(tempDir, { recursive: true });
         }
 
-        // Extract images from PDF using pdftocairo (part of poppler-utils)
+        // Extract images from PDF using pdftoppm (part of poppler-utils)
         const imagesPrefix = join(tempDir, 'page');
-        await execPromise(`pdftocairo -png -r 300 "${inputPath}" "${imagesPrefix}"`);
+        try {
+            await execPromise(`pdftoppm -png -r 300 "${inputPath}" "${imagesPrefix}"`);
+        } catch (error) {
+            console.error('Error with pdftoppm, falling back to pdftocairo:', error);
+            // Fallback to pdftocairo if pdftoppm fails
+            await execPromise(`pdftocairo -png -r 300 "${inputPath}" "${imagesPrefix}"`);
+        }
 
         // Process each page with tesseract
         const files = await readdir(tempDir);
@@ -105,10 +110,7 @@ async function fallbackOcrMethod(inputPath: string, outputPath: string, language
             await execPromise(`tesseract "${pngPath}" "${textPath}" -l ${language} pdf`);
         }
 
-        // If we get here, then we've successfully created individual PDF files with OCR
-        // Now we need to merge them
-
-        // Check if we have any PDF files created
+        // Check if any PDF files were created
         const pdfFiles = (await readdir(tempDir)).filter(file => file.endsWith('.pdf')).sort();
 
         if (pdfFiles.length === 0) {
@@ -116,7 +118,7 @@ async function fallbackOcrMethod(inputPath: string, outputPath: string, language
             return false;
         }
 
-        // If we only have one page, just copy it to the output path
+        // If only one page, copy it to the output path
         if (pdfFiles.length === 1) {
             await copyFile(join(tempDir, pdfFiles[0]), outputPath);
             return true;
@@ -158,11 +160,21 @@ async function fallbackOcrMethod(inputPath: string, outputPath: string, language
     } catch (error) {
         console.error('Error in fallback OCR method:', error);
         return false;
+    } finally {
+        const tempDir = join(TEMP_DIR, uuidv4());
+        try {
+            if (existsSync(tempDir)) {
+                const files = await readdir(tempDir);
+                for (const file of files) {
+                    await unlink(join(tempDir, file));
+                }
+                await rmdir(tempDir);
+            }
+        } catch (cleanupError) {
+            console.error('Error cleaning up temporary directory:', cleanupError);
+        }
     }
 }
-
-// Import missing functions
-import { readdir, copyFile } from 'fs/promises';
 
 export async function POST(request: NextRequest) {
     try {

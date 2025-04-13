@@ -6,11 +6,9 @@ import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import { PDFDocument } from 'pdf-lib';
 import { trackApiUsage, validateApiKey } from '@/lib/validate-key';
 
-const execPromise = promisify(exec);
-
+const execAsync = promisify(exec);
 const UPLOAD_DIR = join(process.cwd(), 'uploads');
 const MERGE_DIR = join(process.cwd(), 'public', 'merges');
 
@@ -24,75 +22,29 @@ async function ensureDirectories() {
     }
 }
 
-// Merge PDFs using pdf-lib
-async function mergePdfsWithPdfLib(inputPaths: string[], outputPath: string) {
+// Merge PDFs using qpdf
+async function mergePdfsWithQpdf(inputPaths: string[], outputPath: string) {
     try {
-        console.log('Merging PDFs with pdf-lib...');
+        console.log('Merging PDFs with qpdf...');
 
-        // Create a new PDF document
-        const mergedPdf = await PDFDocument.create();
-
-        // Process each PDF file
-        for (const inputPath of inputPaths) {
-            // Read the PDF file
-            const pdfBytes = await readFile(inputPath);
-
-            // Load the PDF document
-            const pdfDoc = await PDFDocument.load(pdfBytes);
-
-            // Get all pages
-            const pages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
-
-            // Add each page to the new document
-            pages.forEach(page => {
-                mergedPdf.addPage(page);
-            });
+        // Validate input paths
+        if (inputPaths.length === 0) {
+            throw new Error('No input PDFs provided');
         }
 
-        // Save the merged document
-        const mergedPdfBytes = await mergedPdf.save();
+        // Escape input paths to handle spaces or special characters
+        const escapedPaths = inputPaths.map(path => `"${path}"`).join(' ');
 
-        // Write to file
-        await writeFile(outputPath, mergedPdfBytes);
+        // Construct qpdf command
+        const command = `qpdf --empty --pages ${escapedPaths} -- "${outputPath}"`;
+
+        // Execute qpdf command
+        await execAsync(command);
 
         return true;
     } catch (error) {
-        console.error('PDF-lib merge error:', error);
+        console.error('qpdf merge error:', error);
         throw new Error('Failed to merge PDFs: ' + (error instanceof Error ? error.message : String(error)));
-    }
-}
-
-// Alternative method using ghostscript if available (better handling of complex PDFs)
-async function mergePdfsWithGhostscript(inputPaths: string[], outputPath: string) {
-    try {
-        // Determine the correct Ghostscript command based on the platform
-        const gsCommand = process.platform === 'win32' ? 'gswin64c' : 'gs';
-
-        // Create the command arguments
-        const gsArgs = [
-            '-dBATCH',
-            '-dNOPAUSE',
-            '-q',
-            '-sDEVICE=pdfwrite',
-            '-dPDFSETTINGS=/prepress',
-            `-sOutputFile="${outputPath}"`,
-            ...inputPaths.map(path => `"${path}"`)
-        ];
-
-        // Execute Ghostscript
-        const gsCommand_full = `${gsCommand} ${gsArgs.join(' ')}`;
-        console.log('Executing Ghostscript command:', gsCommand_full);
-
-        const { stdout, stderr } = await execPromise(gsCommand_full);
-        console.log('Ghostscript stdout:', stdout);
-        if (stderr) console.error('Ghostscript stderr:', stderr);
-
-        return true;
-    } catch (error) {
-        console.error('Ghostscript merge error:', error);
-        // If Ghostscript fails, we'll fall back to pdf-lib
-        console.log('Falling back to pdf-lib for merging...');
-        return false;
     }
 }
 
@@ -214,24 +166,14 @@ export async function POST(request: NextRequest) {
 
         console.log(`Merging ${files.length} PDF files in specified order`);
 
-        // Try merging with Ghostscript first
+        // Merge with qpdf
         let mergeSuccess = false;
         try {
-            mergeSuccess = await mergePdfsWithGhostscript(orderedInputPaths, outputPath);
+            await mergePdfsWithQpdf(orderedInputPaths, outputPath);
+            mergeSuccess = true;
         } catch (error) {
-            console.error('Ghostscript merge failed:', error);
-            mergeSuccess = false;
-        }
-
-        // If Ghostscript fails, try with pdf-lib
-        if (!mergeSuccess) {
-            try {
-                await mergePdfsWithPdfLib(orderedInputPaths, outputPath);
-                mergeSuccess = true;
-            } catch (error) {
-                console.error('PDF-lib merge failed:', error);
-                throw new Error('All PDF merging methods failed');
-            }
+            console.error('qpdf merge failed:', error);
+            throw new Error('PDF merging failed');
         }
 
         // Verify the output file exists

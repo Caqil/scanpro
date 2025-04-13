@@ -1143,7 +1143,7 @@ export default {
   // Protect PDF Page
   protectPdf: {
     title: "Password Protect PDF",
-    description: "Secure your PDF documents with password protection and custom access permissions",
+    description: "Secure and protect PDF documents with password protection and custom access permissions",
     howTo: {
       title: "How to Protect Your PDF",
       step1: {
@@ -1244,15 +1244,15 @@ export default {
       },
       removeProtection: {
         question: "Can I remove the password protection later?",
-        answer: "Yes, you can use our Unlock PDF tool to remove password protection from your PDF files, but you'll need to know the current password to do so."
+        answer: "Yes, you can use our Unlock PDF tool to remove password protection from your PDF files, but you'll need to know the current pdf with a password to do so."
       },
       securityStrength: {
         question: "How secure is the password protection?",
-        answer: "Our tool uses industry-standard AES encryption. The security depends on the strength of your password and the encryption level you choose. We recommend using strong, unique passwords with a mix of characters."
+        answer: "Our tool uses industry-standard AES encryption. The security depends on password strength and the encryption level you choose. We recommend using strong, choose a strong password with a mix of characters."
       },
       contentQuality: {
         question: "Will password protection affect the PDF content or quality?",
-        answer: "No, password protection only adds security to your document and doesn't alter the content, layout, or quality of your PDF in any way."
+        answer: "No, password protection only adds security settings to your document and doesn't alter the content, layout, or quality of your PDF in any way."
       },
       batchProcessing: {
         question: "Can I protect multiple PDFs at once?",
@@ -1499,7 +1499,7 @@ export default {
   // Compress PDF
   compressPdf: {
     title: "Compress PDF Files",
-    description: "Reduce PDF file sizes effortlessly while preserving document quality",
+    description: "compress PDF file sizes effortlessly while preserving document quality",
     quality: {
       high: "High Quality",
       highDesc: "Minimal compression, best visual quality",
@@ -1549,7 +1549,7 @@ export default {
       title: "How to Compress PDF Files",
       step1: {
         title: "Upload PDF",
-        description: "Upload the large PDF files you want to compress. Our free PDF compressor supports files up to 100MB and works on Windows, Linux, and other platforms."
+        description: "Upload the large PDF files you want to compress. Our free PDF compressor supports files up to 100MB and works on Windows, Linux, and other operating system."
       },
       step2: {
         title: "Choose Quality",
@@ -1568,7 +1568,7 @@ export default {
       },
       emailFriendly: {
         title: "Email Friendly",
-        description: "Reduce file size so your PDFs fit within email size limits. Our PDF compress tool ensures easy sharing without losing quality."
+        description: "Reduce file size so your PDFs fit within email size limits. Our PDF compress tool ensures easy sharing high quality."
       },
       storage: {
         title: "Storage Efficient",
@@ -1583,7 +1583,7 @@ export default {
       title: "Frequently Asked Questions",
       howMuch: {
         question: "How much can PDF files be compressed?",
-        answer: "Most large PDF files can be compressed by 20-80%, depending on content. Our PDF compressor is optimized for different use cases, helping you reduce file size effectively — especially for image-heavy PDFs."
+        answer: "Most large PDF files can be compressed by 20-80%, depending on content. Our PDF compressor is optimized for different use cases, helping you reduce file size effectively — especially for image quality PDFs."
       },
       quality: {
         question: "Will compression affect the quality of my PDF?",
@@ -1599,7 +1599,7 @@ export default {
       },
       batch: {
         question: "Can I compress multiple PDFs at once?",
-        answer: "Yes, you can compress PDFs in batches. Upload multiple files and let our PDF compressor reduce each file’s size efficiently in a single session — great for both individuals and teams."
+        answer: "Yes, you can compress PDFs in batches. Upload multiple files and let our PDF online pdf compressor reduce each file’s size efficiently in a single session — great for both individuals and teams."
       }
     },
     modes: {
@@ -1662,7 +1662,7 @@ export default {
         },
         {
           title: "Easy Unlocking PDF Files",
-          description: "With a simple enter password box, unlock PDF files online by entering the permissions password or document open password—click save and you’re done."
+          description: "With a simple enter password box, unlock PDF files online by entering the permissions password or document open password save and you’re done."
         },
         {
           title: "Unlock PDFs on Any Platform",
@@ -3027,7 +3027,7 @@ export default {
   },
   pageNumber: {
     title: "Add Page Numbers to PDF",
-    shortDescription: "Easily add customizable page numbers to your PDF documents",
+    shortDescription: "Easily add page numbers to your PDF documents",
     description: "Add custom page numbers to a PDF with various number formats, positions, and styles using our online tool",
 
     uploadTitle: "Upload Your PDF",
@@ -3107,7 +3107,7 @@ export default {
       },
       customization: {
         title: "Full Customization",
-        description: "Customize the appearance and position of page numbers or add headers to match your document’s style"
+        description: "Customize the appearance and position of page numbers or add headers to match your document’s style and support other operating system."
       }
     },
 

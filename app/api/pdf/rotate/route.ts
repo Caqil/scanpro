@@ -1,11 +1,14 @@
-// app/api/pdf/rotate/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir, readFile, unlink } from 'fs/promises';
+import { writeFile, mkdir, unlink } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
-import { PDFDocument, RotationTypes } from 'pdf-lib';
+import { exec } from 'child_process';
+import { promisify } from 'util';
 import { trackApiUsage, validateApiKey } from '@/lib/validate-key';
+
+// Promisify exec for async/await
+const execAsync = promisify(exec);
 
 // Define directories
 const UPLOAD_DIR = join(process.cwd(), 'uploads');
@@ -25,6 +28,16 @@ interface PageRotation {
     pageNumber: number;
     angle: number;
     original: number;
+}
+
+// Get total pages using qpdf
+async function getTotalPages(inputPath: string): Promise<number> {
+    try {
+        const { stdout } = await execAsync(`qpdf --show-npages "${inputPath}"`);
+        return parseInt(stdout.trim(), 10);
+    } catch (error) {
+        throw new Error(`Failed to get page count: ${error instanceof Error ? error.message : String(error)}`);
+    }
 }
 
 export async function POST(request: NextRequest) {
@@ -101,38 +114,42 @@ export async function POST(request: NextRequest) {
         await writeFile(inputPath, buffer);
         console.log(`PDF saved to ${inputPath}`);
 
-        // Load the PDF document
-        const pdfBytes = await readFile(inputPath);
-        const pdfDoc = await PDFDocument.load(pdfBytes);
-        const pageCount = pdfDoc.getPageCount();
+        // Get total pages using qpdf
+        const pageCount = await getTotalPages(inputPath);
 
-        // Apply rotations
+        // Validate page numbers
         for (const rotation of effectiveRotations) {
-            const { pageNumber, angle } = rotation;
-        
-            // Skip invalid page numbers
+            const { pageNumber } = rotation;
             if (pageNumber < 1 || pageNumber > pageCount) {
                 console.warn(`Skipping invalid page number: ${pageNumber}`);
-                continue;
+                return NextResponse.json(
+                    { error: `Invalid page number: ${pageNumber}` },
+                    { status: 400 }
+                );
             }
-        
-            const pageIndex = pageNumber - 1;
-            const page = pdfDoc.getPage(pageIndex);
-        
-            // Get the current rotation
-            const currentRotation = page.getRotation().angle;
-        
-            // Calculate the new rotation
-            const newRotation = (currentRotation + angle) % 360;
-        
-            // Set the new rotation using RotationTypes.Degrees
-            page.setRotation({ type: RotationTypes.Degrees, angle: newRotation });
         }
-        
 
-        // Save the modified PDF
-        const rotatedPdfBytes = await pdfDoc.save();
-        await writeFile(outputPath, rotatedPdfBytes);
+        // Build qpdf rotation command
+        const rotationParams: string[] = [];
+        for (let i = 1; i <= pageCount; i++) {
+            const rotation = effectiveRotations.find(r => r.pageNumber === i);
+            if (rotation) {
+                // Normalize angle to 0, 90, 180, 270
+                const normalizedAngle = ((rotation.angle % 360) + 360) % 360;
+                if ([0, 90, 180, 270].includes(normalizedAngle)) {
+                    rotationParams.push(`--rotate=${normalizedAngle}:${i}`);
+                } else {
+                    console.warn(`Unsupported rotation angle ${normalizedAngle} for page ${i}`);
+                    continue;
+                }
+            }
+        }
+
+        // Construct qpdf command
+        const command = `qpdf "${inputPath}" ${rotationParams.join(' ')} "${outputPath}"`;
+
+        // Execute qpdf command
+        await execAsync(command);
         console.log(`Rotated PDF saved to ${outputPath}`);
 
         // Clean up input file

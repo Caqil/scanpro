@@ -1,11 +1,14 @@
-// app/api/pdf/split/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir, readFile } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
-import { PDFDocument } from 'pdf-lib';
+import { exec } from 'child_process';
+import { promisify } from 'util';
 import { trackApiUsage, validateApiKey } from '@/lib/validate-key';
+
+// Promisify exec for async/await
+const execAsync = promisify(exec);
 
 // Define directories
 const UPLOAD_DIR = join(process.cwd(), 'uploads');
@@ -60,6 +63,16 @@ function parsePageRanges(pagesString: string, totalPages: number): number[][] {
     }
 
     return result;
+}
+
+// Get total pages using qpdf
+async function getTotalPages(inputPath: string): Promise<number> {
+    try {
+        const { stdout } = await execAsync(`qpdf --show-npages "${inputPath}"`);
+        return parseInt(stdout.trim(), 10);
+    } catch (error) {
+        throw new Error(`Failed to get page count: ${error instanceof Error ? error.message : String(error)}`);
+    }
 }
 
 export async function POST(request: NextRequest) {
@@ -123,10 +136,8 @@ export async function POST(request: NextRequest) {
         const buffer = Buffer.from(await file.arrayBuffer());
         await writeFile(inputPath, buffer);
 
-        // Load the PDF document
-        const pdfBytes = await readFile(inputPath);
-        const pdfDoc = await PDFDocument.load(pdfBytes);
-        const totalPages = pdfDoc.getPageCount();
+        // Get total pages using qpdf
+        const totalPages = await getTotalPages(inputPath);
 
         console.log(`Loaded PDF with ${totalPages} pages`);
 
@@ -161,25 +172,22 @@ export async function POST(request: NextRequest) {
         // Create a result array to store info about each split document
         const splitResults = [];
 
-        // Process each set of pages
+        // Process each set of pages with qpdf
         for (let i = 0; i < pageSets.length; i++) {
             const pages = pageSets[i];
             const outputFileName = `${sessionId}-split-${i + 1}.pdf`;
             const outputPath = join(SPLIT_DIR, outputFileName);
 
-            // Create a new PDF document
-            const newPdfDoc = await PDFDocument.create();
+            // Convert page numbers to qpdf range format
+            const pageRange = pages.length === 1
+                ? `${pages[0]}`
+                : `${pages[0]}-${pages[pages.length - 1]}`;
 
-            // Copy the specified pages
-            for (const pageNum of pages) {
-                // PDF pages are 0-indexed, but we accept 1-indexed input
-                const [copiedPage] = await newPdfDoc.copyPages(pdfDoc, [pageNum - 1]);
-                newPdfDoc.addPage(copiedPage);
-            }
+            // Construct qpdf command
+            const command = `qpdf "${inputPath}" --pages . ${pageRange} -- "${outputPath}"`;
 
-            // Save the new PDF
-            const newPdfBytes = await newPdfDoc.save();
-            await writeFile(outputPath, newPdfBytes);
+            // Execute qpdf command
+            await execAsync(command);
 
             // Add result info with URL using the file API route
             splitResults.push({
