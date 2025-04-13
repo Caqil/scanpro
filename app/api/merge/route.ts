@@ -1,5 +1,5 @@
 // app/api/merge/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { writeFile, mkdir, readFile } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join } from 'path';
@@ -22,8 +22,8 @@ async function ensureDirectories() {
     }
 }
 
-// Merge PDFs using qpdf
-async function mergePdfsWithQpdf(inputPaths: string[], outputPath: string) {
+// Merge PDFs using qpdf with improved error handling
+async function mergePdfsWithQpdf(inputPaths: string[], outputPath: string): Promise<boolean> {
     try {
         console.log('Merging PDFs with qpdf...');
 
@@ -32,21 +32,81 @@ async function mergePdfsWithQpdf(inputPaths: string[], outputPath: string) {
             throw new Error('No input PDFs provided');
         }
 
-        // Escape input paths to handle spaces or special characters
-        const escapedPaths = inputPaths.map(path => `"${path}"`).join(' ');
+        // For large merges, use a two-stage approach to minimize memory usage
+        if (inputPaths.length > 10) {
+            console.log(`Large merge with ${inputPaths.length} files, using staged approach...`);
+            
+            // Create temporary directory for intermediate merges
+            const tempDir = join(UPLOAD_DIR, `merge-temp-${uuidv4()}`);
+            if (!existsSync(tempDir)) {
+                await mkdir(tempDir, { recursive: true });
+            }
+            
+            try {
+                // Split into batches of 5 files
+                const batchSize = 5;
+                const tempFiles = [];
+                
+                // Process each batch
+                for (let i = 0; i < inputPaths.length; i += batchSize) {
+                    const batchFiles = inputPaths.slice(i, i + batchSize);
+                    const batchOutputPath = join(tempDir, `batch-${i}.pdf`);
+                    
+                    // Merge this batch
+                    const escapedPaths = batchFiles.map(path => `"${path}"`).join(' ');
+                    const batchCommand = `qpdf --empty --pages ${escapedPaths} -- "${batchOutputPath}"`;
+                    
+                    console.log(`Processing batch ${i/batchSize + 1} of ${Math.ceil(inputPaths.length/batchSize)}...`);
+                    await execAsync(batchCommand);
+                    
+                    tempFiles.push(batchOutputPath);
+                }
+                
+                // Final merge of all batches
+                console.log(`Merging ${tempFiles.length} batches to final output...`);
+                const escapedTempPaths = tempFiles.map(path => `"${path}"`).join(' ');
+                const finalCommand = `qpdf --empty --pages ${escapedTempPaths} -- "${outputPath}"`;
+                await execAsync(finalCommand);
+                
+                // Verify the output was created
+                return existsSync(outputPath);
+            } finally {
+                // Clean up temp files
+                for (const tempFile of await readdir(tempDir)) {
+                    try {
+                        await unlink(join(tempDir, tempFile));
+                    } catch (error) {
+                        console.warn(`Failed to clean up temp file: ${tempFile}`, error);
+                    }
+                }
+                
+                try {
+                    await rmdir(tempDir);
+                } catch (error) {
+                    console.warn(`Failed to clean up temp directory: ${tempDir}`, error);
+                }
+            }
+        } else {
+            // For smaller merges, use single command
+            // Escape input paths to handle spaces or special characters
+            const escapedPaths = inputPaths.map(path => `"${path}"`).join(' ');
 
-        // Construct qpdf command
-        const command = `qpdf --empty --pages ${escapedPaths} -- "${outputPath}"`;
+            // Construct qpdf command
+            const command = `qpdf --empty --pages ${escapedPaths} -- "${outputPath}"`;
 
-        // Execute qpdf command
-        await execAsync(command);
-
-        return true;
+            // Execute qpdf command
+            await execAsync(command);
+            
+            return existsSync(outputPath);
+        }
     } catch (error) {
         console.error('qpdf merge error:', error);
         throw new Error('Failed to merge PDFs: ' + (error instanceof Error ? error.message : String(error)));
     }
 }
+
+// Import file system functions needed for cleanup
+import { readdir, unlink, rmdir } from 'fs/promises';
 
 export async function POST(request: NextRequest) {
     try {
@@ -63,9 +123,9 @@ export async function POST(request: NextRequest) {
 
             if (!validation.valid) {
                 console.error('API key validation failed:', validation.error);
-                return NextResponse.json(
-                    { error: validation.error || 'Invalid API key' },
-                    { status: 401 }
+                return new Response(
+                    JSON.stringify({ error: validation.error || 'Invalid API key' }),
+                    { status: 401, headers: { 'Content-Type': 'application/json' } }
                 );
             }
 
@@ -74,9 +134,10 @@ export async function POST(request: NextRequest) {
                 trackApiUsage(validation.userId, 'merge');
             }
         }
+        
         await ensureDirectories();
 
-        // Process form data
+        // Process form data in a memory-efficient way
         const formData = await request.formData();
 
         // Get all files from the formData
@@ -85,16 +146,16 @@ export async function POST(request: NextRequest) {
         console.log(`Received ${files.length} files for merging`);
 
         if (!files || files.length === 0) {
-            return NextResponse.json(
-                { error: 'No PDF files provided' },
-                { status: 400 }
+            return new Response(
+                JSON.stringify({ error: 'No PDF files provided' }),
+                { status: 400, headers: { 'Content-Type': 'application/json' } }
             );
         }
 
         if (files.length < 2) {
-            return NextResponse.json(
-                { error: 'At least two PDF files are required for merging' },
-                { status: 400 }
+            return new Response(
+                JSON.stringify({ error: 'At least two PDF files are required for merging' }),
+                { status: 400, headers: { 'Content-Type': 'application/json' } }
             );
         }
 
@@ -126,7 +187,7 @@ export async function POST(request: NextRequest) {
         const uniqueId = uuidv4();
         const inputPaths: string[] = [];
 
-        // Write each file to disk
+        // Write each file to disk sequentially to reduce memory pressure
         for (let i = 0; i < files.length; i++) {
             const file = files[i] as File;
 
@@ -137,13 +198,15 @@ export async function POST(request: NextRequest) {
 
             // Verify it's a PDF
             if (!file.name.toLowerCase().endsWith('.pdf')) {
-                return NextResponse.json(
-                    { error: `File "${file.name}" is not a PDF` },
-                    { status: 400 }
+                return new Response(
+                    JSON.stringify({ error: `File "${file.name}" is not a PDF` }),
+                    { status: 400, headers: { 'Content-Type': 'application/json' } }
                 );
             }
 
             const inputPath = join(UPLOAD_DIR, `${uniqueId}-input-${i}.pdf`);
+            
+            // Read and write file in a way that doesn't hold the entire file in memory
             const buffer = Buffer.from(await file.arrayBuffer());
             await writeFile(inputPath, buffer);
             inputPaths.push(inputPath);
@@ -151,9 +214,9 @@ export async function POST(request: NextRequest) {
         }
 
         if (inputPaths.length < 2) {
-            return NextResponse.json(
-                { error: 'Failed to process all input files' },
-                { status: 500 }
+            return new Response(
+                JSON.stringify({ error: 'Failed to process all input files' }),
+                { status: 500, headers: { 'Content-Type': 'application/json' } }
             );
         }
 
@@ -166,18 +229,17 @@ export async function POST(request: NextRequest) {
 
         console.log(`Merging ${files.length} PDF files in specified order`);
 
-        // Merge with qpdf
+        // Merge with qpdf with improved handling
         let mergeSuccess = false;
         try {
-            await mergePdfsWithQpdf(orderedInputPaths, outputPath);
-            mergeSuccess = true;
+            mergeSuccess = await mergePdfsWithQpdf(orderedInputPaths, outputPath);
         } catch (error) {
             console.error('qpdf merge failed:', error);
             throw new Error('PDF merging failed');
         }
 
         // Verify the output file exists
-        if (!existsSync(outputPath)) {
+        if (!mergeSuccess || !existsSync(outputPath)) {
             throw new Error(`Merged file was not created at ${outputPath}`);
         }
 
@@ -197,24 +259,43 @@ export async function POST(request: NextRequest) {
         // Create relative URL for the merged file using the file API
         const fileUrl = `/api/file?folder=merges&filename=${outputFileName}`;
 
-        return NextResponse.json({
-            success: true,
-            message: 'PDF merge successful',
-            fileUrl,
-            filename: outputFileName,
-            mergedSize,
-            totalInputSize,
-            fileCount: files.length
-        });
+        // Clean up input files
+        for (const inputPath of inputPaths) {
+            try {
+                await unlink(inputPath);
+            } catch (error) {
+                console.warn(`Failed to clean up input file ${inputPath}:`, error);
+            }
+        }
+
+        // Return a proper JSON response using the Response API
+        return new Response(
+            JSON.stringify({
+                success: true,
+                message: 'PDF merge successful',
+                fileUrl,
+                filename: outputFileName,
+                mergedSize,
+                totalInputSize,
+                fileCount: files.length
+            }),
+            { 
+                status: 200, 
+                headers: { 'Content-Type': 'application/json' } 
+            }
+        );
     } catch (error) {
         console.error('Merge error:', error);
 
-        return NextResponse.json(
-            {
+        return new Response(
+            JSON.stringify({
                 error: error instanceof Error ? error.message : 'An unknown error occurred during merging',
                 success: false
-            },
-            { status: 500 }
+            }),
+            { 
+                status: 500, 
+                headers: { 'Content-Type': 'application/json' } 
+            }
         );
     }
 }

@@ -1,3 +1,4 @@
+// app/api/pdf/split/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir, readFile } from 'fs/promises';
 import { existsSync } from 'fs';
@@ -75,6 +76,70 @@ async function getTotalPages(inputPath: string): Promise<number> {
     }
 }
 
+// Process PDF splitting with better handling for large files
+async function splitPdfInBatches(
+    inputPath: string, 
+    pageSets: number[][], 
+    sessionId: string,
+    maxBatchSize: number = 10 // Process at most 10 splits at a time
+): Promise<Array<{
+    fileUrl: string;
+    filename: string;
+    pages: number[];
+    pageCount: number;
+}>> {
+    const results = [];
+    
+    // Process in batches to avoid memory issues
+    for (let batchStart = 0; batchStart < pageSets.length; batchStart += maxBatchSize) {
+        const batchEnd = Math.min(batchStart + maxBatchSize, pageSets.length);
+        console.log(`Processing batch ${batchStart} to ${batchEnd-1} of ${pageSets.length} splits`);
+        
+        // Process each batch sequentially
+        const batchPromises = [];
+        
+        for (let i = batchStart; i < batchEnd; i++) {
+            const pages = pageSets[i];
+            const outputFileName = `${sessionId}-split-${i + 1}.pdf`;
+            const outputPath = join(SPLIT_DIR, outputFileName);
+
+            // Convert page numbers to qpdf range format
+            const pageRange = pages.length === 1
+                ? `${pages[0]}`
+                : `${pages[0]}-${pages[pages.length - 1]}`;
+
+            // Construct qpdf command
+            const command = `qpdf "${inputPath}" --pages . ${pageRange} -- "${outputPath}"`;
+
+            // Execute qpdf command and store the promise
+            const processPromise = execAsync(command)
+                .then(() => ({
+                    fileUrl: `/api/file?folder=splits&filename=${outputFileName}`,
+                    filename: outputFileName,
+                    pages: pages,
+                    pageCount: pages.length
+                }))
+                .catch(error => {
+                    console.error(`Error processing split ${i + 1}:`, error);
+                    throw error;
+                });
+            
+            batchPromises.push(processPromise);
+        }
+        
+        // Wait for all operations in this batch to complete
+        const batchResults = await Promise.all(batchPromises);
+        results.push(...batchResults);
+        
+        // Small delay between batches to ensure OS resources are released
+        if (batchEnd < pageSets.length) {
+            await new Promise(resolve => setTimeout(resolve, 500));
+        }
+    }
+    
+    return results;
+}
+
 export async function POST(request: NextRequest) {
     try {
         console.log('Starting PDF splitting process...');
@@ -85,14 +150,14 @@ export async function POST(request: NextRequest) {
 
         // If this is a programmatic API call (not from web UI), validate the API key
         if (apiKey) {
-            console.log('Validating API key for compression operation');
+            console.log('Validating API key for split operation');
             const validation = await validateApiKey(apiKey, 'split');
 
             if (!validation.valid) {
                 console.error('API key validation failed:', validation.error);
-                return NextResponse.json(
-                    { error: validation.error || 'Invalid API key' },
-                    { status: 401 }
+                return new Response(
+                    JSON.stringify({ error: validation.error || 'Invalid API key' }),
+                    { status: 401, headers: { 'Content-Type': 'application/json' } }
                 );
             }
 
@@ -114,17 +179,17 @@ export async function POST(request: NextRequest) {
         const everyNPages = parseInt(formData.get('everyNPages') as string || '1');
 
         if (!file) {
-            return NextResponse.json(
-                { error: 'No PDF file provided' },
-                { status: 400 }
+            return new Response(
+                JSON.stringify({ error: 'No PDF file provided' }),
+                { status: 400, headers: { 'Content-Type': 'application/json' } }
             );
         }
 
         // Verify it's a PDF
         if (!file.name.toLowerCase().endsWith('.pdf')) {
-            return NextResponse.json(
-                { error: 'Only PDF files can be split' },
-                { status: 400 }
+            return new Response(
+                JSON.stringify({ error: 'Only PDF files can be split' }),
+                { status: 400, headers: { 'Content-Type': 'application/json' } }
             );
         }
 
@@ -161,59 +226,39 @@ export async function POST(request: NextRequest) {
         }
 
         if (pageSets.length === 0) {
-            return NextResponse.json(
-                { error: 'No valid page ranges specified' },
-                { status: 400 }
+            return new Response(
+                JSON.stringify({ error: 'No valid page ranges specified' }),
+                { status: 400, headers: { 'Content-Type': 'application/json' } }
             );
         }
 
         console.log(`Splitting PDF into ${pageSets.length} parts`);
 
-        // Create a result array to store info about each split document
-        const splitResults = [];
+        // Process splits in batches to prevent memory issues
+        const splitResults = await splitPdfInBatches(inputPath, pageSets, sessionId);
 
-        // Process each set of pages with qpdf
-        for (let i = 0; i < pageSets.length; i++) {
-            const pages = pageSets[i];
-            const outputFileName = `${sessionId}-split-${i + 1}.pdf`;
-            const outputPath = join(SPLIT_DIR, outputFileName);
-
-            // Convert page numbers to qpdf range format
-            const pageRange = pages.length === 1
-                ? `${pages[0]}`
-                : `${pages[0]}-${pages[pages.length - 1]}`;
-
-            // Construct qpdf command
-            const command = `qpdf "${inputPath}" --pages . ${pageRange} -- "${outputPath}"`;
-
-            // Execute qpdf command
-            await execAsync(command);
-
-            // Add result info with URL using the file API route
-            splitResults.push({
-                fileUrl: `/api/file?folder=splits&filename=${outputFileName}`,
-                filename: outputFileName,
-                pages: pages,
-                pageCount: pages.length
-            });
-        }
-
-        return NextResponse.json({
+        // Create a streamable response
+        const responseBody = JSON.stringify({
             success: true,
             message: `PDF split into ${splitResults.length} files`,
             originalName: file.name,
             totalPages,
             splitParts: splitResults
         });
+
+        return new Response(responseBody, { 
+            status: 200, 
+            headers: { 'Content-Type': 'application/json' } 
+        });
     } catch (error) {
         console.error('PDF splitting error:', error);
 
-        return NextResponse.json(
-            {
+        return new Response(
+            JSON.stringify({
                 error: error instanceof Error ? error.message : 'An unknown error occurred during PDF splitting',
                 success: false
-            },
-            { status: 500 }
+            }),
+            { status: 500, headers: { 'Content-Type': 'application/json' } }
         );
     }
 }
