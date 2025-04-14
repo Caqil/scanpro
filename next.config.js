@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'standalone',
+  //output: 'standalone',
   api: {
     bodyParser: {
       sizeLimit: '100mb', // Increase from default

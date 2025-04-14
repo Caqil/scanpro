@@ -1,105 +1,80 @@
+// components/ui/upload-progress.tsx
 "use client";
 
 import { Progress } from "@/components/ui/progress";
-import {
-  UploadCloudIcon,
-  CheckCircleIcon,
-  XCircleIcon,
-  LoaderIcon,
-} from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertCircle, ArrowUp, Clock, Loader2 } from "lucide-react";
+import { UploadStats } from "./upload-stats";
 
 interface UploadProgressProps {
   progress: number;
   isUploading: boolean;
-  error: Error | null;
   isProcessing?: boolean;
   processingProgress?: number;
-  variant?: "default" | "compact";
+  error?: Error | null;
   label?: string;
+  // Upload stats
+  uploadStats?: {
+    speed: number;
+    elapsedTime: number;
+    remainingTime: number;
+    loaded: number;
+    total: number;
+  };
 }
 
 export function UploadProgress({
   progress,
   isUploading,
-  error,
   isProcessing = false,
   processingProgress = 0,
-  variant = "default",
+  error,
   label,
+  uploadStats,
 }: UploadProgressProps) {
-  // Determine the effective progress (upload or processing)
-  const effectiveProgress = isUploading
-    ? progress
-    : isProcessing
-    ? processingProgress
-    : progress === 100 && !error
-    ? 100
-    : 0;
+  // Determine which progress to show
+  const displayProgress = isUploading ? progress : processingProgress;
 
-  // Determine the status text
-  let statusText = "";
-  if (isUploading) {
-    statusText = label || "Uploading...";
-  } else if (isProcessing) {
-    statusText = "Processing...";
-  } else if (progress === 100 && !error) {
-    statusText = "Complete";
-  } else if (error) {
-    statusText = error.message || "Upload failed";
-  }
+  // Determine which label to show
+  const displayLabel =
+    label ||
+    (isUploading ? "Uploading..." : isProcessing ? "Processing..." : "");
 
-  // Render a compact version for inline use
-  if (variant === "compact") {
-    return (
-      <div
-        className={`flex items-center gap-2 text-sm ${
-          error ? "text-red-500" : "text-muted-foreground"
-        }`}
-      >
-        {isUploading || isProcessing ? (
-          <LoaderIcon className="h-4 w-4 animate-spin" />
-        ) : error ? (
-          <XCircleIcon className="h-4 w-4 text-red-500" />
-        ) : progress === 100 ? (
-          <CheckCircleIcon className="h-4 w-4 text-green-500" />
-        ) : (
-          <UploadCloudIcon className="h-4 w-4" />
-        )}
-        <span>
-          {statusText}{" "}
-          {(isUploading || isProcessing) && `${effectiveProgress}%`}
-        </span>
-      </div>
-    );
-  }
-
-  // Default full-size version
   return (
     <div className="space-y-2">
-      <Progress value={effectiveProgress} className="h-2" />
-      <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-        {isUploading || isProcessing ? (
-          <>
+      {error && (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{error.message}</AlertDescription>
+        </Alert>
+      )}
+
+      <div className="space-y-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-sm">
             {isUploading ? (
-              <UploadCloudIcon className="h-4 w-4 animate-pulse" />
-            ) : (
-              <LoaderIcon className="h-4 w-4 animate-spin" />
-            )}
-            <span>
-              {statusText} {effectiveProgress}%
-            </span>
-          </>
-        ) : error ? (
-          <>
-            <XCircleIcon className="h-4 w-4 text-red-500" />
-            <span className="text-red-500">{statusText}</span>
-          </>
-        ) : progress === 100 ? (
-          <>
-            <CheckCircleIcon className="h-4 w-4 text-green-500" />
-            <span>{statusText}</span>
-          </>
-        ) : null}
+              <ArrowUp className="h-4 w-4 animate-pulse text-blue-500" />
+            ) : isProcessing ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : null}
+            <span>{displayLabel}</span>
+          </div>
+          <span className="text-sm font-medium">{displayProgress}%</span>
+        </div>
+
+        <Progress value={displayProgress} className="h-2" />
+
+        {/* Add upload statistics if available */}
+        {uploadStats && isUploading && (
+          <UploadStats
+            isUploading={isUploading}
+            speed={uploadStats.speed}
+            elapsedTime={uploadStats.elapsedTime}
+            remainingTime={uploadStats.remainingTime}
+            bytesLoaded={uploadStats.loaded}
+            bytesTotal={uploadStats.total}
+          />
+        )}
       </div>
     </div>
   );

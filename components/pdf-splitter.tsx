@@ -37,7 +37,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useLanguageStore } from "@/src/store/store";
-
+import { UploadProgress } from "@/components/ui/upload-progress";
+import useFileUpload from "@/hooks/useFileUpload";
 // Form schema
 const formSchema = z.object({
   splitMethod: z.enum(["range", "extract", "every"]).default("range"),
@@ -91,7 +92,14 @@ export function PdfSplitter() {
   const [jobId, setJobId] = useState<string | null>(null);
   const [statusUrl, setStatusUrl] = useState<string | null>(null);
   const [isPolling, setIsPolling] = useState(false);
-
+  const {
+    isUploading,
+    progress: uploadProgress,
+    error: uploadError,
+    uploadFile,
+    resetUpload,
+    uploadStats,
+  } = useFileUpload();
   // Initialize form
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -130,7 +138,7 @@ export function PdfSplitter() {
         setError(null);
         setJobId(null);
         setStatusUrl(null);
-
+        resetUpload();
         // Estimate number of pages based on file size for better UX
         const fileSizeInMB = newFile.size / (1024 * 1024);
         // Rough estimate: 1 MB ≈ 10 pages
@@ -274,7 +282,7 @@ export function PdfSplitter() {
       return;
     }
 
-    setIsProcessing(true);
+    setIsProcessing(false); // Don't set processing yet - the upload will happen first
     setProgress(0);
     setError(null);
     setSplitResult(null);
@@ -292,70 +300,68 @@ export function PdfSplitter() {
       formData.append("everyNPages", values.everyNPages.toString());
     }
 
-    try {
-      // Simulate initial progress
-      const progressInterval = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= 95) {
+    // Use the uploadFile method from the hook
+    uploadFile(file, formData, {
+      url: "/api/pdf/split",
+      onProgress: (progress) => {
+        // Update progress for upload phase (0-50%)
+        setProgress(progress / 2); // First half is upload
+      },
+      onSuccess: async (data) => {
+        // Upload complete, start processing phase
+        setIsProcessing(true);
+
+        // Simulate processing progress from 50% to 95%
+        let processingProgress = 50;
+        const progressInterval = setInterval(() => {
+          processingProgress += 2;
+          if (processingProgress >= 95) {
             clearInterval(progressInterval);
-            return 95;
+            processingProgress = 95;
           }
-          return prev + 2;
+          setProgress(processingProgress);
+        }, 500);
+
+        // Check if this is a large job that requires status polling
+        if (data.isLargeJob && data.jobId && data.statusUrl) {
+          clearInterval(progressInterval); // Clear interval as we'll use polling
+
+          // Start polling for status updates
+          setJobId(data.jobId);
+          setStatusUrl(data.statusUrl);
+          setIsPolling(true);
+
+          toast.info(
+            t("splitPdf.largeSplitStarted") || "Large PDF split started",
+            {
+              description:
+                t("splitPdf.largeSplitDesc") ||
+                "This may take a few minutes. You'll be notified when it's complete.",
+            }
+          );
+        } else {
+          // Small job with immediate result
+          clearInterval(progressInterval);
+          setProgress(100);
+          setSplitResult(data);
+
+          toast.success(t("splitPdf.success"), {
+            description: t("splitPdf.successDesc"),
+          });
+
+          setIsProcessing(false);
+        }
+      },
+      onError: (err) => {
+        setError(err.message || t("splitPdf.error.unknown"));
+
+        toast.error(t("splitPdf.error.failed"), {
+          description: err.message || t("splitPdf.error.unknown"),
         });
-      }, 500);
 
-      // Make the API request
-      const response = await fetch("/api/pdf/split", {
-        method: "POST",
-        body: formData,
-      });
-
-      clearInterval(progressInterval);
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || t("splitPdf.error.generic"));
-      }
-
-      const data = await response.json();
-
-      // Check if this is a large job that requires status polling
-      if (data.isLargeJob && data.jobId && data.statusUrl) {
-        // Start polling for status updates
-        setJobId(data.jobId);
-        setStatusUrl(data.statusUrl);
-        setIsPolling(true);
-
-        toast.info(
-          t("splitPdf.largeSplitStarted") || "Large PDF split started",
-          {
-            description:
-              t("splitPdf.largeSplitDesc") ||
-              "This may take a few minutes. You'll be notified when it's complete.",
-          }
-        );
-      } else {
-        // Small job with immediate result
-        setProgress(100);
-        setSplitResult(data);
-
-        toast.success(t("splitPdf.success"), {
-          description: t("splitPdf.successDesc"),
-        });
-      }
-    } catch (err) {
-      setError(
-        err instanceof Error ? err.message : t("splitPdf.error.unknown")
-      );
-      toast.error(t("splitPdf.error.failed"), {
-        description:
-          err instanceof Error ? err.message : t("splitPdf.error.unknown"),
-      });
-    } finally {
-      if (!isPolling) {
         setIsProcessing(false);
-      }
-    }
+      },
+    });
   };
 
   // Helper function to get split parts safely from different response formats
@@ -580,29 +586,20 @@ export function PdfSplitter() {
             )}
 
             {/* Progress Indicator */}
-            {isProcessing && (
-              <div className="space-y-2">
-                <Progress value={progress} className="h-2" />
-                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                  {isPolling ? (
-                    <>
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      <span>
-                        {t("splitPdf.processingLargeJob") ||
-                          "Processing large PDF"}{" "}
-                        {progress}%
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <ScissorsIcon className="h-4 w-4 animate-pulse" />
-                      <span>
-                        {t("splitPdf.splitting")} {progress}%
-                      </span>
-                    </>
-                  )}
-                </div>
-              </div>
+            {(isUploading || isProcessing) && (
+              <UploadProgress
+                progress={progress}
+                isUploading={isUploading}
+                isProcessing={isProcessing}
+                processingProgress={progress}
+                error={uploadError}
+                label={
+                  isUploading
+                    ? t("fileUploader.uploading")
+                    : t("splitPdf.splitting")
+                }
+                uploadStats={uploadStats}
+              />
             )}
 
             {/* Results */}

@@ -53,6 +53,8 @@ export function PdfMerger() {
     progress: uploadProgress,
     error: uploadError,
     uploadFile,
+    resetUpload,
+    uploadStats,
   } = useFileUpload();
 
   // Generate a unique ID
@@ -407,10 +409,15 @@ export function PdfMerger() {
           <UploadProgress
             progress={progress}
             isUploading={isUploading}
-            error={uploadError}
-            isProcessing={isProcessing && !isUploading}
+            isProcessing={isProcessing}
             processingProgress={progress}
-            label={isUploading ? "Uploading files..." : "Merging files..."}
+            error={uploadError}
+            label={
+              isUploading
+                ? t("fileUploader.uploading")
+                : t("splitPdf.splitting")
+            }
+            uploadStats={uploadStats}
           />
         )}
 
