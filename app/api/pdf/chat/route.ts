@@ -9,7 +9,7 @@ import OpenAI from 'openai';
 
 // Initialize OpenAI client
 const openai = new OpenAI({
-  apiKey: "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" // process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 // Define directories
