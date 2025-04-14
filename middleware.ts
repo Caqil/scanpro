@@ -42,6 +42,7 @@ const EXCLUDED_ROUTES = [
   '/api/auth/callback/apple',
   '/forgot-password', // Exclude forgot password route
   '/reset-password',  // Exclude reset password route
+  '/api/pdf/chat',
 
   // Language-specific auth routes
   ...['en', 'id', 'es', 'fr', 'zh', 'ar', 'hi', 'ru', 'pt', 'de', 'ja', 'ko', 'it', 'tr'].flatMap(lang => [
@@ -111,6 +112,7 @@ const ROUTE_TO_OPERATION_MAP: Record<string, string> = {
   '/api/pdf/save': 'edit',
   '/api/pdf/info': 'extract',
   '/api/pdf/pagenumber': 'edit',
+  '/api/pdf/chat': 'chat',
 };
 
 export async function middleware(request: NextRequest) {

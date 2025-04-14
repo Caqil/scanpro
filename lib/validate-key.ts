@@ -19,6 +19,7 @@ export const API_OPERATIONS = [
     'extract',   // Extract content from PDF
     'redact',    // Redact content from PDF
     'organize',  // Organize/rearrange PDF pages
+    'chat',
 ];
 
 // Define usage limits by tier (operations per month)

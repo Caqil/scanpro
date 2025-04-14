@@ -1,0 +1,445 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import { useDropzone } from "react-dropzone";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { FileIcon, Cross2Icon, UploadIcon } from "@radix-ui/react-icons";
+import {
+  AlertCircle,
+  FileText,
+  Loader2,
+  MessageSquare,
+  Bot,
+  User,
+  SendIcon,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useLanguageStore } from "@/src/store/store";
+import { UploadProgress } from "@/components/ui/upload-progress";
+import useFileUpload from "@/hooks/useFileUpload";
+import ReactMarkdown from "react-markdown";
+
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+  timestamp: string;
+}
+
+interface ChatSession {
+  sessionId: string;
+  messages: Message[];
+  createdAt: string;
+}
+
+export function PdfChat() {
+  const { t } = useLanguageStore();
+  const [file, setFile] = useState<File | null>(null);
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isLoadingPdf, setIsLoadingPdf] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Use our custom upload hook
+  const {
+    isUploading,
+    progress: uploadProgress,
+    error: uploadError,
+    uploadFile,
+    resetUpload,
+    uploadStats,
+  } = useFileUpload();
+
+  // Set up dropzone for PDF files only
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: {
+      "application/pdf": [".pdf"],
+    },
+    maxSize: 50 * 1024 * 1024, // 50MB per file
+    onDrop: (acceptedFiles, rejectedFiles) => {
+      if (rejectedFiles.length > 0) {
+        const rejection = rejectedFiles[0];
+        if (rejection.file.size > 50 * 1024 * 1024) {
+          setError(
+            t("fileUploader.maxSize") ||
+              "File is too large. Maximum size is 50MB."
+          );
+        } else {
+          setError(
+            t("fileUploader.inputFormat") || "Please upload a valid PDF file."
+          );
+        }
+        return;
+      }
+
+      if (acceptedFiles.length > 0) {
+        // Clear any previous errors and session
+        setError(null);
+        resetUpload();
+        setFile(acceptedFiles[0]);
+        setSessionId(null);
+        setMessages([]);
+
+        // Automatically upload the file when selected
+        handleFileUpload(acceptedFiles[0]);
+      }
+    },
+    multiple: false,
+  });
+
+  // Scroll to bottom of messages when new ones are added
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+
+  // Format file size for display
+  const formatFileSize = (sizeInBytes: number): string => {
+    if (sizeInBytes < 1024) {
+      return `${sizeInBytes} B`;
+    } else if (sizeInBytes < 1024 * 1024) {
+      return `${(sizeInBytes / 1024).toFixed(2)} KB`;
+    } else {
+      return `${(sizeInBytes / (1024 * 1024)).toFixed(2)} MB`;
+    }
+  };
+
+  // Handle file removal
+  const handleRemoveFile = () => {
+    setFile(null);
+    setSessionId(null);
+    setMessages([]);
+    setError(null);
+  };
+
+  // Handle file upload and create chat session
+  const handleFileUpload = async (selectedFile: File) => {
+    setIsLoadingPdf(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+
+      await uploadFile(selectedFile, formData, {
+        url: "/api/pdf/chat",
+        onProgress: (progress) => {
+          // Progress is handled by the upload hook
+        },
+        onSuccess: (data) => {
+          setSessionId(data.sessionId);
+          // Add initial welcome message
+          setMessages([
+            {
+              role: "assistant",
+              content: data.message,
+              timestamp: new Date().toISOString(),
+            },
+          ]);
+        },
+        onError: (error) => {
+          setError(
+            t("pdfChat.uploadError") ||
+              "Failed to upload PDF. Please try again."
+          );
+          toast.error("Upload failed");
+          console.error("Upload error:", error);
+        },
+      });
+    } catch (error) {
+      setError(
+        t("pdfChat.uploadError") || "Failed to upload PDF. Please try again."
+      );
+      toast.error("Upload failed");
+      console.error("Upload error:", error);
+    } finally {
+      setIsLoadingPdf(false);
+    }
+  };
+
+  // Handle sending a message
+  const sendMessage = async () => {
+    if (!inputValue.trim() || !sessionId) return;
+
+    const newMessage: Message = {
+      role: "user",
+      content: inputValue,
+      timestamp: new Date().toISOString(),
+    };
+
+    setMessages((prev) => [...prev, newMessage]);
+    setInputValue("");
+    setIsProcessing(true);
+
+    try {
+      const response = await fetch("/api/pdf/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sessionId,
+          message: inputValue,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to get response");
+      }
+
+      const data = await response.json();
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: data.message,
+          timestamp: new Date().toISOString(),
+        },
+      ]);
+    } catch (error) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content:
+            t("pdfChat.errorResponse") ||
+            "Sorry, I encountered an error processing your question. Please try again.",
+          timestamp: new Date().toISOString(),
+        },
+      ]);
+      toast.error("Failed to get response");
+      console.error("Chat error:", error);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  // Handle input submission
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (inputValue.trim() && sessionId) {
+      sendMessage();
+    }
+  };
+
+  return (
+    <Card className="border shadow-sm flex flex-col">
+      <CardHeader>
+        <CardTitle>{t("pdfChat.title") || "Ask Anything PDF Chat"}</CardTitle>
+        <CardDescription>
+          {t("pdfChat.description") ||
+            "Upload a PDF and ask questions about its content"}
+        </CardDescription>
+      </CardHeader>
+
+      <CardContent className="flex-grow overflow-hidden flex flex-col">
+        {!sessionId ? (
+          // File upload UI
+          <div
+            {...getRootProps()}
+            className={cn(
+              "border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer h-full flex flex-col justify-center",
+              isDragActive
+                ? "border-primary bg-primary/10"
+                : file
+                ? "border-green-500 bg-green-50 dark:bg-green-950/20"
+                : "border-muted-foreground/25 hover:border-muted-foreground/50",
+              (isUploading || isLoadingPdf) && "pointer-events-none opacity-80"
+            )}
+          >
+            <input
+              {...getInputProps()}
+              disabled={isUploading || isLoadingPdf}
+            />
+
+            {file ? (
+              <div className="flex flex-col items-center gap-4">
+                <div className="h-12 w-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                  <FileText className="h-6 w-6 text-green-600 dark:text-green-400" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium">{file.name}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {formatFileSize(file.size)}
+                  </p>
+                </div>
+                {isUploading || isLoadingPdf ? (
+                  <UploadProgress
+                    progress={uploadProgress}
+                    isUploading={isUploading}
+                    isProcessing={isLoadingPdf}
+                    processingProgress={uploadProgress}
+                    error={uploadError}
+                    label={
+                      isUploading
+                        ? t("pdfChat.uploading") || "Uploading PDF..."
+                        : t("pdfChat.processing") || "Processing PDF..."
+                    }
+                    uploadStats={uploadStats}
+                  />
+                ) : (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRemoveFile();
+                    }}
+                  >
+                    <Cross2Icon className="h-4 w-4 mr-1" />{" "}
+                    {t("ui.remove") || "Remove"}
+                  </Button>
+                )}
+              </div>
+            ) : (
+              <div className="flex flex-col items-center gap-2">
+                <div className="h-12 w-12 rounded-full bg-muted flex items-center justify-center">
+                  <UploadIcon className="h-6 w-6 text-muted-foreground" />
+                </div>
+                <div className="text-lg font-medium">
+                  {isDragActive
+                    ? t("fileUploader.dropHere") || "Drop your PDF file here"
+                    : t("pdfChat.uploadPrompt") || "Upload your PDF document"}
+                </div>
+                <p className="text-sm text-muted-foreground max-w-sm">
+                  {t("pdfChat.dropHereDesc") ||
+                    "Drop your PDF file here or click to browse. I'll analyze it so you can ask questions about the content."}
+                </p>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  className="mt-2"
+                >
+                  {t("fileUploader.browse") || "Browse Files"}
+                </Button>
+              </div>
+            )}
+          </div>
+        ) : (
+          // Chat messages UI
+          <div className="flex flex-col h-full">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <FileText className="h-4 w-4 text-green-600" />
+                <span className="text-sm font-medium">{file?.name}</span>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleRemoveFile}
+                disabled={isProcessing}
+              >
+                <Cross2Icon className="h-4 w-4 mr-1" />
+                {t("pdfChat.newPdf") || "New PDF"}
+              </Button>
+            </div>
+
+            <div className="border rounded-lg flex-grow overflow-y-auto mb-4 p-4 space-y-4 max-h-[400px]">
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={cn(
+                    "flex gap-2 p-2 rounded-lg",
+                    message.role === "user"
+                      ? "bg-primary/10 ml-8"
+                      : "bg-muted/40 mr-8"
+                  )}
+                >
+                  <div className="flex-shrink-0">
+                    {message.role === "user" ? (
+                      <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center">
+                        <User className="h-4 w-4 text-primary" />
+                      </div>
+                    ) : (
+                      <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
+                        <Bot className="h-4 w-4" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-grow overflow-hidden">
+                    <div className="text-sm prose dark:prose-invert max-w-none">
+                      <ReactMarkdown>{message.content}</ReactMarkdown>
+                    </div>
+                    <div className="text-xs text-muted-foreground mt-1">
+                      {new Date(message.timestamp).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {isProcessing && (
+                <div className="flex gap-2 p-2 rounded-lg bg-muted/40 mr-8">
+                  <div className="flex-shrink-0">
+                    <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
+                      <Bot className="h-4 w-4" />
+                    </div>
+                  </div>
+                  <div className="flex-grow">
+                    <div className="text-sm flex items-center gap-2">
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      {t("pdfChat.thinking") || "Thinking..."}
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+
+            <form onSubmit={handleSubmit} className="flex gap-2">
+              <Input
+                placeholder={
+                  t("pdfChat.askPrompt") ||
+                  "Ask a question about the document..."
+                }
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                disabled={isProcessing}
+                className="flex-grow"
+              />
+              <Button
+                type="submit"
+                disabled={isProcessing || !inputValue.trim()}
+              >
+                <SendIcon className="h-4 w-4 mr-2" />
+                {t("pdfChat.send") || "Send"}
+              </Button>
+            </form>
+          </div>
+        )}
+
+        {/* Error message */}
+        {error && (
+          <Alert variant="destructive" className="mt-4">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+      </CardContent>
+
+      <CardFooter className="flex justify-between border-t pt-4 text-xs text-muted-foreground">
+        <div>
+          {t("pdfChat.securityNote") ||
+            "Your files are processed securely and not stored permanently."}
+        </div>
+        <div>{t("pdfChat.poweredBy") || "Powered by OpenAI"}</div>
+      </CardFooter>
+    </Card>
+  );
+}
