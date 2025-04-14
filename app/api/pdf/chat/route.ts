@@ -7,12 +7,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { trackApiUsage, validateApiKey } from '@/lib/validate-key';
 import OpenAI from 'openai';
 
-// Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Define directories
 const UPLOAD_DIR = join(process.cwd(), 'uploads');
 const CHAT_SESSIONS_DIR = join(process.cwd(), 'chatsessions');
 
