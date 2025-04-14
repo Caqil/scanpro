@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import { trackApiUsage, validateApiKey } from '@/lib/validate-key';
-import { pdfQueue } from '@/lib/job-queue';
 
 // Promisify exec for async/await
 const execAsync = promisify(exec);
@@ -303,32 +302,27 @@ export async function POST(request: NextRequest) {
         const isLargeJob = pageSets.length > 15 || totalPages > 100;
         
         if (isLargeJob) {
-            console.log(`Large job detected: ${pageSets.length} splits from ${totalPages} pages. Adding to queue.`);
+            console.log(`Large job detected: ${pageSets.length} splits from ${totalPages} pages. Using two-phase approach.`);
             
-            // Add to processing queue
-            const jobId = await pdfQueue.add('split-pdf', {
-              sessionId,
-              inputPath,
-              pageSets, 
-              originalName: file.name,
-              totalPages
-            });
+            // Start background processing
+            // Note: We don't await this to allow it to run in the background
+            processSplitsInBackground(sessionId, inputPath, pageSets);
             
-            // Return immediate response with job ID
+            // Return immediate response with status endpoint
             return new Response(
-              JSON.stringify({
-                success: true,
-                message: 'PDF splitting started',
-                jobId,
-                statusUrl: `/api/pdf/split/status?id=${jobId}`,
-                originalName: file.name,
-                totalPages,
-                totalSplits: pageSets.length,
-                isLargeJob: true
-              }),
-              { status: 202, headers: { 'Content-Type': 'application/json' } }
+                JSON.stringify({
+                    success: true,
+                    message: 'PDF splitting started',
+                    jobId: sessionId,
+                    statusUrl: `/api/pdf/split/status?id=${sessionId}`,
+                    originalName: file.name,
+                    totalPages,
+                    totalSplits: pageSets.length,
+                    isLargeJob: true
+                }),
+                { status: 202, headers: { 'Content-Type': 'application/json' } }
             );
-          } else {
+        } else {
             // For smaller jobs, process immediately
             console.log(`Small job: ${pageSets.length} splits. Processing immediately.`);
             

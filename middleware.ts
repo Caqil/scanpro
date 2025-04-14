@@ -54,6 +54,7 @@ const EXCLUDED_ROUTES = [
   '/api/convert/download',
   '/api/compress/download',
   '/api/file',  // Important! This enables file downloads from the web UI
+  '/api/health', 
 ];
 
 // User agent patterns for browsers (to identify web UI requests)
