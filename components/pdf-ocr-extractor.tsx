@@ -135,7 +135,7 @@ export function PdfOcrExtractor() {
         setExtractedText(null);
         setTextFile(null);
         setError(null);
-
+        resetUpload();
         const fileSizeInMB = acceptedFiles[0].size / (1024 * 1024);
         const estimatedPages = Math.max(1, Math.round(fileSizeInMB * 5));
         setTotalPages(estimatedPages);

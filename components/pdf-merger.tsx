@@ -83,7 +83,7 @@ export function PdfMerger() {
       if (acceptedFiles.length > 0) {
         // Clear any previous errors
         setError(null);
-
+        resetUpload();
         // Add new files to the list, avoid duplicates
         setFiles((prev) => {
           const existingFileNames = new Set(prev.map((f) => f.file.name));
