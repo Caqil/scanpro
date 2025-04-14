@@ -1,19 +1,53 @@
 // middleware/api-middleware.ts
 import { NextRequest, NextResponse } from 'next/server';
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
 import { prisma } from '@/lib/prisma';
-import { applyRateLimit, checkUsageLimit, addRateLimitHeaders } from '@/lib/rate-limiter';
+
+// Set up rate limiting with Upstash Redis
+let redis: Redis;
+try {
+    redis = new Redis({
+        url: process.env.UPSTASH_REDIS_URL!,
+        token: process.env.UPSTASH_REDIS_TOKEN!,
+    });
+} catch (error) {
+    console.warn('Redis configuration error. Using fallback rate limiting.', error);
+}
+
+// Define rate limits based on subscription tier
+const rateLimits = {
+    free: {
+        limit: 100,
+        window: 3600, // 100 requests per hour (3600 seconds)
+    },
+    basic: {
+        limit: 1000,
+        window: 3600, // 1000 requests per hour
+    },
+    pro: {
+        limit: 2000,
+        window: 3600, // 2000 requests per hour
+    },
+    enterprise: {
+        limit: 5000,
+        window: 3600, // 5000 requests per hour
+    },
+};
+
+// Define usage limits by tier (operations per month)
+const usageLimits = {
+    free: 100,
+    basic: 1000,
+    pro: 10000,
+    enterprise: 100000,
+};
 
 // Web UI bypass check - this function identifies browser-based requests
 function isWebUIRequest(request: NextRequest): boolean {
     const userAgent = request.headers.get('user-agent') || '';
     const referer = request.headers.get('referer') || '';
     const acceptHeader = request.headers.get('accept') || '';
-    const sourceHeader = request.headers.get('x-source') || '';
-
-    // If the request has the x-source: web-ui header, it's from our web UI
-    if (sourceHeader === 'web-ui') {
-        return true;
-    }
 
     // Browser user agent patterns
     const browserPatterns = [
@@ -39,6 +73,7 @@ function isWebUIRequest(request: NextRequest): boolean {
     // 2. It accepts HTML or is referred from our own site
     return isBrowser && (acceptsHtml || ownSiteReferer);
 }
+
 export async function apiMiddleware(request: NextRequest) {
     // Always allow web UI requests to bypass API key check
     if (isWebUIRequest(request)) {
@@ -47,10 +82,7 @@ export async function apiMiddleware(request: NextRequest) {
     }
 
     // Get API key from header or query param
-    const apiKey = request.headers.get('x-api-key') || request.nextUrl.searchParams.get('api_key');
-    
-    const path = request.nextUrl.pathname;
-    console.log(`API request for ${path} with key: ${apiKey ? apiKey.substring(0, 6) + '...' : 'none'}`);
+    const apiKey = request.headers.get('x-api-key');
 
     if (!apiKey) {
         return NextResponse.json(
@@ -85,8 +117,8 @@ export async function apiMiddleware(request: NextRequest) {
     }
 
     // Extract operation from URL path
+    const path = request.nextUrl.pathname;
     const operation = path.split('/').pop() || 'unknown';
-    console.log(`Operation: ${operation}`);
 
     // Check if the API key has permission for the requested operation
     if (!keyRecord.permissions.includes(operation) && !keyRecord.permissions.includes('*')) {
@@ -98,76 +130,117 @@ export async function apiMiddleware(request: NextRequest) {
 
     // Get subscription tier
     const tier = keyRecord.user.subscription?.tier || 'free';
-    console.log(`User tier: ${tier}`);
 
-    try {
-        // Apply rate limiting based on subscription tier
-        const rateLimitResponse = await applyRateLimit(request, apiKey, keyRecord.user);
-        if (rateLimitResponse) {
-            console.log(`Rate limit applied for ${apiKey.substring(0, 6)}..., returning 429 response`);
-            return rateLimitResponse; // Return 429 response if rate limited
-        }
-    } catch (rateError) {
-        // If rate limiting fails, log error but continue
-        console.error('Error applying rate limits:', rateError);
-    }
+    // Apply rate limiting based on subscription tier
+    if (redis) {
+        const { limit, window } = rateLimits[tier as keyof typeof rateLimits];
+        const ratelimit = new Ratelimit({
+            redis,
+            limiter: Ratelimit.slidingWindow(limit, `${window}s`), // Explicitly add 's' for seconds
+            analytics: true,
+            prefix: 'scanpro:ratelimit',
+        });
 
-    try {
-        // Check monthly usage limit BEFORE incrementing
-        const usageLimitResponse = await checkUsageLimit(keyRecord.user.id, tier);
-        if (usageLimitResponse) {
-            return usageLimitResponse; // Return 403 response if usage limit exceeded
+        // Use the API key as the identifier for rate limiting
+        const { success, remaining, reset } = await ratelimit.limit(apiKey);
+
+        if (!success) {
+            return NextResponse.json(
+                {
+                    error: 'Rate limit exceeded',
+                    limit,
+                    remaining: 0,
+                    reset: new Date(reset).toISOString(),
+                },
+                {
+                    status: 429,
+                    headers: {
+                        'X-RateLimit-Limit': limit.toString(),
+                        'X-RateLimit-Remaining': '0',
+                        'X-RateLimit-Reset': new Date(reset).toISOString(),
+                    },
+                }
+            );
         }
-    } catch (usageError) {
-        // If usage check fails, log error but continue
-        console.error('Error checking usage limits:', usageError);
     }
 
     // Update last used timestamp for the API key
-    try {
-        await prisma.apiKey.update({
-            where: { id: keyRecord.id },
-            data: { lastUsed: new Date() }
-        });
-    } catch (updateError) {
-        console.error('Error updating API key last used timestamp:', updateError);
+    await prisma.apiKey.update({
+        where: { id: keyRecord.id },
+        data: { lastUsed: new Date() }
+    });
+
+    // Check monthly usage limit BEFORE incrementing
+    const firstDayOfMonth = new Date();
+    firstDayOfMonth.setDate(1);
+    firstDayOfMonth.setHours(0, 0, 0, 0);
+
+    const monthlyUsage = await prisma.usageStats.aggregate({
+        where: {
+            userId: keyRecord.user.id,
+            date: { gte: firstDayOfMonth }
+        },
+        _sum: {
+            count: true
+        }
+    });
+
+    const totalUsage = monthlyUsage._sum.count || 0;
+    const usageLimit = usageLimits[tier as keyof typeof usageLimits];
+
+    if (totalUsage >= usageLimit) {
+        return NextResponse.json(
+            {
+                error: `Monthly usage limit of ${usageLimit} operations reached for your ${tier} plan`,
+                usage: totalUsage,
+                limit: usageLimit
+            },
+            { status: 403 }
+        );
     }
 
-    // Track usage statistics (AFTER confirming within limits)
-    try {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
+    // Now we can safely track usage statistics (AFTER checking the limit)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-        await prisma.usageStats.upsert({
-            where: {
-                userId_operation_date: {
-                    userId: keyRecord.user.id,
-                    operation,
-                    date: today
-                }
-            },
-            update: {
-                count: { increment: 1 }
-            },
-            create: {
+    await prisma.usageStats.upsert({
+        where: {
+            userId_operation_date: {
                 userId: keyRecord.user.id,
                 operation,
-                count: 1,
                 date: today
             }
-        });
-    } catch (trackError) {
-        console.error('Error tracking API usage in database:', trackError);
-    }
+        },
+        update: {
+            count: { increment: 1 }
+        },
+        create: {
+            userId: keyRecord.user.id,
+            operation,
+            count: 1,
+            date: today
+        }
+    });
 
     // Continue with the request
     const response = NextResponse.next();
 
     // Add rate limit headers
-    try {
-        return await addRateLimitHeaders(response, apiKey, tier);
-    } catch (headerError) {
-        console.error('Error adding rate limit headers:', headerError);
-        return response; // Return original response if adding headers fails
+    if (redis) {
+        const { limit, window } = rateLimits[tier as keyof typeof rateLimits];
+        const ratelimit = new Ratelimit({
+            redis,
+            limiter: Ratelimit.slidingWindow(limit, `${window}s`),
+            analytics: true,
+            prefix: 'scanpro:ratelimit',
+        });
+
+        const { remaining, reset } = await ratelimit.limit(apiKey);
+
+        response.headers.set('X-RateLimit-Limit', limit.toString());
+        response.headers.set('X-RateLimit-Remaining', remaining.toString());
+        response.headers.set('X-RateLimit-Reset', new Date(reset).toISOString());
     }
+
+    return response;
 }
