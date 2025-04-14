@@ -2,12 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   //output: 'standalone',
-  api: {
-    bodyParser: {
-      sizeLimit: '100mb', // Increase from default
-    },
-    responseLimit: false, // Disable size limit for responses
-  },
   async headers() {
     return [
       {

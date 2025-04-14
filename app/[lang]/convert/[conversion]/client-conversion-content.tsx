@@ -3,7 +3,13 @@
 import { useParams } from "next/navigation";
 import { useState, useEffect, ReactNode } from "react";
 import { FileUploader } from "@/components/file-uploader";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FileText, Image, Table, File } from "lucide-react";
@@ -27,7 +33,7 @@ interface ConversionParams {
 
 export const useConversionTypes = () => {
   const { t } = useLanguageStore();
-  
+
   const conversionTypes: Record<string, ConversionType> = {
     "pdf-to-docx": {
       title: t("convert.title.pdfToWord"),
@@ -126,7 +132,7 @@ export const useConversionTypes = () => {
       outputFormat: "pdf",
     },
   };
-  
+
   return conversionTypes;
 };
 
@@ -136,12 +142,13 @@ export function ClientConversionContent() {
   const conversionTypes = useConversionTypes();
   const [inputFormat, setInputFormat] = useState<string>("pdf");
   const [outputFormat, setOutputFormat] = useState<string>("docx");
-  const [conversionDetails, setConversionDetails] = useState<ConversionType | null>(null);
-    const { t } = useLanguageStore()
+  const [conversionDetails, setConversionDetails] =
+    useState<ConversionType | null>(null);
+  const { t } = useLanguageStore();
   useEffect(() => {
     if (conversionPath) {
       console.log(`Processing conversion path: ${conversionPath}`);
-      
+
       if (conversionTypes[conversionPath]) {
         const details = conversionTypes[conversionPath];
         setInputFormat(details.inputFormat);
@@ -152,12 +159,13 @@ export function ClientConversionContent() {
         if (parts.length === 2) {
           setInputFormat(parts[0]);
           setOutputFormat(parts[1]);
-          
-          const fallbackKey = Object.keys(conversionTypes).find(key => 
-            conversionTypes[key].inputFormat === parts[0] && 
-            conversionTypes[key].outputFormat === parts[1]
+
+          const fallbackKey = Object.keys(conversionTypes).find(
+            (key) =>
+              conversionTypes[key].inputFormat === parts[0] &&
+              conversionTypes[key].outputFormat === parts[1]
           );
-          
+
           if (fallbackKey) {
             setConversionDetails(conversionTypes[fallbackKey]);
           } else {
@@ -167,29 +175,31 @@ export function ClientConversionContent() {
               icon: <File className="h-8 w-8 text-blue-500" />,
               iconBg: "bg-blue-100 dark:bg-blue-900/30",
               inputFormat: parts[0],
-              outputFormat: parts[1]
+              outputFormat: parts[1],
             });
           }
         }
       }
     }
   }, [conversionPath]);
-  
+
   const getRelatedConversions = () => {
     const isFromPdf = inputFormat === "pdf";
-    
+
     if (isFromPdf) {
       return Object.entries(conversionTypes)
-        .filter(([key, value]) => 
-          value.inputFormat === "pdf" && 
-          key !== conversionPath)
+        .filter(
+          ([key, value]) =>
+            value.inputFormat === "pdf" && key !== conversionPath
+        )
         .slice(0, 4)
         .map(([key, value]) => ({ id: key, ...value }));
     } else {
       return Object.entries(conversionTypes)
-        .filter(([key, value]) => 
-          value.outputFormat === "pdf" && 
-          key !== conversionPath)
+        .filter(
+          ([key, value]) =>
+            value.outputFormat === "pdf" && key !== conversionPath
+        )
         .slice(0, 4)
         .map(([key, value]) => ({ id: key, ...value }));
     }
@@ -203,7 +213,7 @@ export function ClientConversionContent() {
         <div className="flex items-center justify-center">
           <div className="text-center">
             <div className="h-16 w-16 mx-auto mb-4 border-4 border-t-primary rounded-full animate-spin"></div>
-            <p className="text-muted-foreground">{t('ui.loading')}</p>
+            <p className="text-muted-foreground">{t("ui.loading")}</p>
           </div>
         </div>
       </div>
@@ -222,70 +232,89 @@ export function ClientConversionContent() {
           {conversionDetails.description}
         </p>
       </div>
-  
+
       <Card className="mb-8 border shadow-sm">
         <CardHeader>
-          <CardTitle>{t('ui.upload')}</CardTitle>
+          <CardTitle>{t("ui.upload")}</CardTitle>
           <CardDescription>
-            {inputFormat === "pdf" 
-              ? t('convert.description.generic').replace('{from}', 'PDF').replace('{to}', outputFormat.toUpperCase())
-              : t('convert.description.generic').replace('{from}', inputFormat.toUpperCase()).replace('{to}', 'PDF')}
+            {inputFormat === "pdf"
+              ? t("convert.description.generic")
+                  .replace("{from}", "PDF")
+                  .replace("{to}", outputFormat.toUpperCase())
+              : t("convert.description.generic")
+                  .replace("{from}", inputFormat.toUpperCase())
+                  .replace("{to}", "PDF")}
           </CardDescription>
         </CardHeader>
         <CardContent>
-      
-          <FileUploader 
+          <FileUploader
             initialInputFormat={inputFormat}
             initialOutputFormat={outputFormat}
             key={`${inputFormat}-to-${outputFormat}`}
           />
         </CardContent>
       </Card>
-  
+
       <div className="mb-12">
         <h2 className="text-2xl font-bold mb-6 text-center">
-          {t('convert.howTo.title').replace('{from}', inputFormat.toUpperCase()).replace('{to}', outputFormat.toUpperCase())}
+          {t("convert.howTo.title")
+            .replace("{from}", inputFormat.toUpperCase())
+            .replace("{to}", outputFormat.toUpperCase())}
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           <div className="flex flex-col items-center text-center">
             <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-4">
               <span className="font-bold">1</span>
             </div>
-            <h3 className="text-lg font-medium mb-2">{t('convert.howTo.step1.title')}</h3>
+            <h3 className="text-lg font-medium mb-2">
+              {t("convert.howTo.step1.title")}
+            </h3>
             <p className="text-sm text-muted-foreground">
-              {inputFormat === "pdf" 
-                ? t('convert.howTo.step1.description').replace('{from}', 'PDF')
-                : t('convert.howTo.step1.description').replace('{from}', inputFormat.toUpperCase())}
+              {inputFormat === "pdf"
+                ? t("convert.howTo.step1.description").replace("{from}", "PDF")
+                : t("convert.howTo.step1.description").replace(
+                    "{from}",
+                    inputFormat.toUpperCase()
+                  )}
             </p>
           </div>
           <div className="flex flex-col items-center text-center">
             <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-4">
               <span className="font-bold">2</span>
             </div>
-            <h3 className="text-lg font-medium mb-2">{t('convert.howTo.step2.title')}</h3>
+            <h3 className="text-lg font-medium mb-2">
+              {t("convert.howTo.step2.title")}
+            </h3>
             <p className="text-sm text-muted-foreground">
-              {t('convert.howTo.step2.description')}
+              {t("convert.howTo.step2.description")}
             </p>
           </div>
           <div className="flex flex-col items-center text-center">
             <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-4">
               <span className="font-bold">3</span>
             </div>
-            <h3 className="text-lg font-medium mb-2">{t('convert.howTo.step3.title')}</h3>
+            <h3 className="text-lg font-medium mb-2">
+              {t("convert.howTo.step3.title")}
+            </h3>
             <p className="text-sm text-muted-foreground">
-              {inputFormat === "pdf" 
-                ? t('convert.howTo.step3.description').replace('{to}', outputFormat.toUpperCase())
-                : t('convert.howTo.step3.description').replace('{to}', 'PDF')}
+              {inputFormat === "pdf"
+                ? t("convert.howTo.step3.description").replace(
+                    "{to}",
+                    outputFormat.toUpperCase()
+                  )
+                : t("convert.howTo.step3.description").replace("{to}", "PDF")}
             </p>
           </div>
         </div>
       </div>
-  
+
       <div>
-        <h2 className="text-2xl font-bold mb-6 text-center">{t('convert.moreTools')}</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">
+          {t("convert.moreTools")}
+        </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {relatedConversions.map((conversion) => (
-            <LanguageLink 
+            <LanguageLink
               key={conversion.id}
               href={`/convert/${conversion.id}`}
               className="border rounded-lg p-4 text-center hover:border-primary transition-colors"
@@ -301,7 +330,7 @@ export function ClientConversionContent() {
         </div>
         <div className="text-center mt-6">
           <LanguageLink href="/pdf-tools">
-            <Button variant="outline">{t('popular.viewAll')}</Button>
+            <Button variant="outline">{t("popular.viewAll")}</Button>
           </LanguageLink>
         </div>
       </div>
