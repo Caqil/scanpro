@@ -43,6 +43,7 @@ import {
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { WatermarkPositionPreview } from "./watermark-position-preview";
+import useFileUpload from "@/hooks/useFileUpload";
 
 // Define the form schema
 const watermarkFormSchema = z.object({
@@ -51,7 +52,15 @@ const watermarkFormSchema = z.object({
   textColor: z.string().default("#FF0000"),
   fontSize: z.number().min(8).max(120).default(48),
   fontFamily: z.string().default("Arial"),
-  position: z.enum(["center", "tile", "top-left", "top-right", "bottom-left", "bottom-right", "custom"]),
+  position: z.enum([
+    "center",
+    "tile",
+    "top-left",
+    "top-right",
+    "bottom-left",
+    "bottom-right",
+    "custom",
+  ]),
   rotation: z.number().min(0).max(360).default(45),
   opacity: z.number().min(1).max(100).default(30),
   scale: z.number().min(10).max(100).default(50),
@@ -76,7 +85,14 @@ export function WatermarkPDF() {
   const [watermarkedPdfUrl, setWatermarkedPdfUrl] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
+  const {
+    isUploading,
+    progress: uploadProgress,
+    error: uploadError,
+    uploadFile,
+    resetUpload,
+    uploadStats,
+  } = useFileUpload();
   // Default form values
   const defaultValues: Partial<WatermarkFormValues> = {
     watermarkType: "text",
@@ -191,25 +207,24 @@ export function WatermarkPDF() {
     }
 
     try {
-      const response = await fetch("/api/pdf/watermark", {
-        method: "POST",
-        body: formData,
+      await uploadFile(file, formData, {
+        url: "/api/pdf/watermark",
+        onProgress: (progress) => {
+          // Optionally update UI with progress
+        },
+        onSuccess: (result) => {
+          setDownloadUrl(result.fileUrl);
+          setWatermarkedPdfUrl(result.fileUrl);
+          toast.success(t("watermarkPdf.successDesc"));
+        },
+        onError: (err) => {
+          console.error("Watermark error:", err);
+          toast.error(err.message || t("watermarkPdf.unknownError"));
+        },
       });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to add watermark");
-      }
-
-      const result = await response.json();
-      setDownloadUrl(result.fileUrl);
-      setWatermarkedPdfUrl(result.fileUrl); // Assuming the API returns the watermarked file URL
-      toast.success(t("watermarkPdf.successDesc"));
     } catch (error) {
       console.error("Watermark error:", error);
-      toast.error(
-        error instanceof Error ? error.message : t("watermarkPdf.unknownError")
-      );
+      toast.error(t("watermarkPdf.unknownError"));
     } finally {
       setIsSubmitting(false);
     }
@@ -297,7 +312,10 @@ export function WatermarkPDF() {
         <Card>
           <CardContent className="pt-6">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-6"
+              >
                 <Tabs
                   defaultValue="text"
                   onValueChange={(value) =>
@@ -305,11 +323,17 @@ export function WatermarkPDF() {
                   }
                 >
                   <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="text" className="flex items-center gap-2">
+                    <TabsTrigger
+                      value="text"
+                      className="flex items-center gap-2"
+                    >
                       <TypeIcon className="h-4 w-4" />
                       {t("watermarkPdf.textWatermark")}
                     </TabsTrigger>
-                    <TabsTrigger value="image" className="flex items-center gap-2">
+                    <TabsTrigger
+                      value="image"
+                      className="flex items-center gap-2"
+                    >
                       <ImageIcon className="h-4 w-4" />
                       {t("watermarkPdf.imageWatermark")}
                     </TabsTrigger>
@@ -323,7 +347,10 @@ export function WatermarkPDF() {
                         <FormItem>
                           <FormLabel>{t("watermarkPdf.text.text")}</FormLabel>
                           <FormControl>
-                            <Input placeholder={t("watermarkPdf.text.placeholder")} {...field} />
+                            <Input
+                              placeholder={t("watermarkPdf.text.placeholder")}
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -344,10 +371,14 @@ export function WatermarkPDF() {
                                   max={120}
                                   step={1}
                                   value={[field.value]}
-                                  onValueChange={(value) => field.onChange(value[0])}
+                                  onValueChange={(value) =>
+                                    field.onChange(value[0])
+                                  }
                                 />
                               </FormControl>
-                              <span className="w-12 text-center">{field.value}px</span>
+                              <span className="w-12 text-center">
+                                {field.value}px
+                              </span>
                             </div>
                             <FormMessage />
                           </FormItem>
@@ -360,17 +391,28 @@ export function WatermarkPDF() {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>{t("watermarkPdf.text.font")}</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                            >
                               <FormControl>
                                 <SelectTrigger>
-                                  <SelectValue placeholder={t("watermarkPdf.text.selectFont")} />
+                                  <SelectValue
+                                    placeholder={t(
+                                      "watermarkPdf.text.selectFont"
+                                    )}
+                                  />
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
                                 <SelectItem value="Arial">Arial</SelectItem>
-                                <SelectItem value="Times New Roman">Times New Roman</SelectItem>
+                                <SelectItem value="Times New Roman">
+                                  Times New Roman
+                                </SelectItem>
                                 <SelectItem value="Courier">Courier</SelectItem>
-                                <SelectItem value="Helvetica">Helvetica</SelectItem>
+                                <SelectItem value="Helvetica">
+                                  Helvetica
+                                </SelectItem>
                               </SelectContent>
                             </Select>
                             <FormMessage />
@@ -380,36 +422,42 @@ export function WatermarkPDF() {
                     </div>
 
                     <FormField
-  control={form.control}
-  name="textColor"
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>{t("watermarkPdf.text.color")}</FormLabel>
-      <div className="flex items-center gap-2">
-        <div
-          className="h-10 w-10 rounded border"
-          style={{ backgroundColor: field.value }}
-        />
-        <input
-          type="color"
-          value={field.value}
-          onChange={(e) => field.onChange(e.target.value)}
-          className="h-10 w-20 rounded border cursor-pointer"
-        />
-      </div>
-      <FormMessage />
-    </FormItem>
-  )}
-/>
+                      control={form.control}
+                      name="textColor"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>{t("watermarkPdf.text.color")}</FormLabel>
+                          <div className="flex items-center gap-2">
+                            <div
+                              className="h-10 w-10 rounded border"
+                              style={{ backgroundColor: field.value }}
+                            />
+                            <input
+                              type="color"
+                              value={field.value}
+                              onChange={(e) => field.onChange(e.target.value)}
+                              className="h-10 w-20 rounded border cursor-pointer"
+                            />
+                          </div>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </TabsContent>
 
                   <TabsContent value="image" className="space-y-4 py-4">
                     <div className="mb-4">
-                      <h4 className="text-sm font-medium mb-2">{t("watermarkPdf.image.upload")}</h4>
+                      <h4 className="text-sm font-medium mb-2">
+                        {t("watermarkPdf.image.upload")}
+                      </h4>
                       <input
                         type="file"
                         accept="image/jpeg,image/png,image/svg+xml"
-                        onChange={(e) => handleImageUpload(e.target.files ? Array.from(e.target.files) : [])}
+                        onChange={(e) =>
+                          handleImageUpload(
+                            e.target.files ? Array.from(e.target.files) : []
+                          )
+                        }
                         className="block w-full text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
                       />
                     </div>
@@ -427,10 +475,14 @@ export function WatermarkPDF() {
                                 max={100}
                                 step={1}
                                 value={[field.value]}
-                                onValueChange={(value) => field.onChange(value[0])}
+                                onValueChange={(value) =>
+                                  field.onChange(value[0])
+                                }
                               />
                             </FormControl>
-                            <span className="w-12 text-center">{field.value}%</span>
+                            <span className="w-12 text-center">
+                              {field.value}%
+                            </span>
                           </div>
                           <FormMessage />
                         </FormItem>
@@ -447,38 +499,64 @@ export function WatermarkPDF() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>{t("watermarkPdf.position")}</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder={t("watermarkPdf.position")} />
+                                <SelectValue
+                                  placeholder={t("watermarkPdf.position")}
+                                />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="center" className="flex items-center gap-2">
+                              <SelectItem
+                                value="center"
+                                className="flex items-center gap-2"
+                              >
                                 <ChevronsUpDownIcon className="h-4 w-4" />
                                 {t("watermarkPdf.center")}
                               </SelectItem>
-                              <SelectItem value="tile" className="flex items-center gap-2">
+                              <SelectItem
+                                value="tile"
+                                className="flex items-center gap-2"
+                              >
                                 <Grid2x2Icon className="h-4 w-4" />
                                 {t("watermarkPdf.tile")}
                               </SelectItem>
-                              <SelectItem value="top-left" className="flex items-center gap-2">
+                              <SelectItem
+                                value="top-left"
+                                className="flex items-center gap-2"
+                              >
                                 <ArrowRightIcon className="h-4 w-4 rotate-[-135deg]" />
                                 {t("watermarkPdf.positions.topLeft")}
                               </SelectItem>
-                              <SelectItem value="top-right" className="flex items-center gap-2">
+                              <SelectItem
+                                value="top-right"
+                                className="flex items-center gap-2"
+                              >
                                 <ArrowRightIcon className="h-4 w-4 rotate-[-45deg]" />
                                 {t("watermarkPdf.positions.topRight")}
                               </SelectItem>
-                              <SelectItem value="bottom-left" className="flex items-center gap-2">
+                              <SelectItem
+                                value="bottom-left"
+                                className="flex items-center gap-2"
+                              >
                                 <ArrowRightIcon className="h-4 w-4 rotate-[135deg]" />
                                 {t("watermarkPdf.positions.bottomLeft")}
                               </SelectItem>
-                              <SelectItem value="bottom-right" className="flex items-center gap-2">
+                              <SelectItem
+                                value="bottom-right"
+                                className="flex items-center gap-2"
+                              >
                                 <ArrowRightIcon className="h-4 w-4 rotate-[45deg]" />
                                 {t("watermarkPdf.positions.bottomRight")}
                               </SelectItem>
-                              <SelectItem value="custom" className="flex items-center gap-2">
+                              <SelectItem
+                                value="custom"
+                                className="flex items-center gap-2"
+                              >
                                 <MoveHorizontalIcon className="h-4 w-4" />
                                 {t("watermarkPdf.custom")}
                               </SelectItem>
@@ -517,7 +595,9 @@ export function WatermarkPDF() {
                           name="customX"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>{t("watermarkPdf.positionX") || "Position X"}</FormLabel>
+                              <FormLabel>
+                                {t("watermarkPdf.positionX") || "Position X"}
+                              </FormLabel>
                               <div className="flex items-center gap-4">
                                 <FormControl>
                                   <Slider
@@ -525,10 +605,14 @@ export function WatermarkPDF() {
                                     max={100}
                                     step={1}
                                     value={[field.value || 50]}
-                                    onValueChange={(value) => field.onChange(value[0])}
+                                    onValueChange={(value) =>
+                                      field.onChange(value[0])
+                                    }
                                   />
                                 </FormControl>
-                                <span className="w-12 text-center">{field.value || 50}%</span>
+                                <span className="w-12 text-center">
+                                  {field.value || 50}%
+                                </span>
                               </div>
                               <FormMessage />
                             </FormItem>
@@ -539,7 +623,9 @@ export function WatermarkPDF() {
                           name="customY"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>{t("watermarkPdf.positionY") || "Position Y"}</FormLabel>
+                              <FormLabel>
+                                {t("watermarkPdf.positionY") || "Position Y"}
+                              </FormLabel>
                               <div className="flex items-center gap-4">
                                 <FormControl>
                                   <Slider
@@ -547,10 +633,14 @@ export function WatermarkPDF() {
                                     max={100}
                                     step={1}
                                     value={[field.value || 50]}
-                                    onValueChange={(value) => field.onChange(value[0])}
+                                    onValueChange={(value) =>
+                                      field.onChange(value[0])
+                                    }
                                   />
                                 </FormControl>
-                                <span className="w-12 text-center">{field.value || 50}%</span>
+                                <span className="w-12 text-center">
+                                  {field.value || 50}%
+                                </span>
                               </div>
                               <FormMessage />
                             </FormItem>
@@ -564,7 +654,9 @@ export function WatermarkPDF() {
                       name="rotation"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t("watermarkPdf.text.rotation")}</FormLabel>
+                          <FormLabel>
+                            {t("watermarkPdf.text.rotation")}
+                          </FormLabel>
                           <div className="flex items-center gap-4">
                             <FormControl>
                               <Slider
@@ -572,10 +664,14 @@ export function WatermarkPDF() {
                                 max={360}
                                 step={1}
                                 value={[field.value]}
-                                onValueChange={(value) => field.onChange(value[0])}
+                                onValueChange={(value) =>
+                                  field.onChange(value[0])
+                                }
                               />
                             </FormControl>
-                            <span className="w-12 text-center">{field.value}°</span>
+                            <span className="w-12 text-center">
+                              {field.value}°
+                            </span>
                           </div>
                           <FormMessage />
                         </FormItem>
@@ -589,7 +685,9 @@ export function WatermarkPDF() {
                       name="opacity"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t("watermarkPdf.text.opacity")}</FormLabel>
+                          <FormLabel>
+                            {t("watermarkPdf.text.opacity")}
+                          </FormLabel>
                           <div className="flex items-center gap-4">
                             <FormControl>
                               <Slider
@@ -597,10 +695,14 @@ export function WatermarkPDF() {
                                 max={100}
                                 step={1}
                                 value={[field.value]}
-                                onValueChange={(value) => field.onChange(value[0])}
+                                onValueChange={(value) =>
+                                  field.onChange(value[0])
+                                }
                               />
                             </FormControl>
-                            <span className="w-12 text-center">{field.value}%</span>
+                            <span className="w-12 text-center">
+                              {field.value}%
+                            </span>
                           </div>
                           <FormMessage />
                         </FormItem>
@@ -612,7 +714,9 @@ export function WatermarkPDF() {
                       name="pages"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t("watermarkPdf.applyToPages")}</FormLabel>
+                          <FormLabel>
+                            {t("watermarkPdf.applyToPages")}
+                          </FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
@@ -668,9 +772,14 @@ export function WatermarkPDF() {
                         name="customPages"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>{t("watermarkPdf.customPages")}</FormLabel>
+                            <FormLabel>
+                              {t("watermarkPdf.customPages")}
+                            </FormLabel>
                             <FormControl>
-                              <Input placeholder={t("watermarkPdf.pagesFormat")} {...field} />
+                              <Input
+                                placeholder={t("watermarkPdf.pagesFormat")}
+                                {...field}
+                              />
                             </FormControl>
                             <FormDescription className="text-xs">
                               {t("watermarkPdf.pagesFormat")}
@@ -692,7 +801,9 @@ export function WatermarkPDF() {
                       (watchWatermarkType === "image" && !watermarkImage)
                     }
                   >
-                    {isSubmitting ? t("watermarkPdf.adding") : t("watermarkPdf.addWatermark")}
+                    {isSubmitting
+                      ? t("watermarkPdf.adding")
+                      : t("watermarkPdf.addWatermark")}
                   </Button>
 
                   {downloadUrl && (

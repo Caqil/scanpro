@@ -595,7 +595,7 @@ export function PdfSplitter() {
                 error={uploadError}
                 label={
                   isUploading
-                    ? t("fileUploader.uploading")
+                    ? t("watermarkPdf.uploading")
                     : t("splitPdf.splitting")
                 }
                 uploadStats={uploadStats}
