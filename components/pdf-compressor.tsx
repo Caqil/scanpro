@@ -127,7 +127,7 @@ export function MultiPdfCompressor() {
         const rejection = rejectedFiles[0];
         setError(
           rejection.file.size > 100 * 1024 * 1024
-            ? t("ui.filesSecurity")
+            ? t("fileUploader.maxSize")
             : t("fileUploader.inputFormat")
         );
         return;
