@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -8,9 +8,8 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { 
+import {
   Form,
   FormControl,
   FormField,
@@ -18,7 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { 
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -33,20 +32,21 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { 
-  FileIcon, 
-  Cross2Icon, 
-  CheckCircledIcon, 
-  CrossCircledIcon, 
-  UploadIcon, 
-  ReloadIcon, 
+import {
+  FileIcon,
+  Cross2Icon,
+  CheckCircledIcon,
+  UploadIcon,
   DownloadIcon,
   FileTextIcon,
   ImageIcon,
-  TableIcon
+  TableIcon,
 } from "@radix-ui/react-icons";
+import { AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useLanguageStore } from '@/src/store/store';
+import { useLanguageStore } from "@/src/store/store";
+import { UploadProgress } from "@/components/ui/upload-progress";
+import useFileUpload from "@/hooks/useFileUpload";
 
 const FORMAT_CATEGORIES = [
   {
@@ -54,25 +54,44 @@ const FORMAT_CATEGORIES = [
     icon: <FileTextIcon className="h-4 w-4" />,
     formats: [
       { value: "pdf", label: "PDF Document (.pdf)", accept: "application/pdf" },
-      { value: "docx", label: "Word Document (.docx)", accept: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" },
-      { value: "rtf", label: "Rich Text Format (.rtf)", accept: "application/rtf" },
+      {
+        value: "docx",
+        label: "Word Document (.docx)",
+        accept:
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      },
+      {
+        value: "rtf",
+        label: "Rich Text Format (.rtf)",
+        accept: "application/rtf",
+      },
       { value: "txt", label: "Text File (.txt)", accept: "text/plain" },
       { value: "html", label: "HTML Document (.html)", accept: "text/html" },
-    ]
+    ],
   },
   {
     name: "Spreadsheets",
     icon: <TableIcon className="h-4 w-4" />,
     formats: [
-      { value: "xlsx", label: "Excel Spreadsheet (.xlsx)", accept: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" },
-    ]
+      {
+        value: "xlsx",
+        label: "Excel Spreadsheet (.xlsx)",
+        accept:
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      },
+    ],
   },
   {
     name: "Presentations",
     icon: <FileTextIcon className="h-4 w-4" />,
     formats: [
-      { value: "pptx", label: "PowerPoint Presentation (.pptx)", accept: "application/vnd.openxmlformats-officedocument.presentationml.presentation" },
-    ]
+      {
+        value: "pptx",
+        label: "PowerPoint Presentation (.pptx)",
+        accept:
+          "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      },
+    ],
   },
   {
     name: "Images",
@@ -80,8 +99,8 @@ const FORMAT_CATEGORIES = [
     formats: [
       { value: "jpg", label: "JPEG Image (.jpg)", accept: "image/jpeg" },
       { value: "png", label: "PNG Image (.png)", accept: "image/png" },
-    ]
-  }
+    ],
+  },
 ];
 
 // Form schema
@@ -97,26 +116,25 @@ type FormValues = z.infer<typeof formSchema>;
 
 // Get all input formats as flattened array
 const getAllInputFormats = () => {
-  return FORMAT_CATEGORIES.flatMap(category => category.formats);
+  return FORMAT_CATEGORIES.flatMap((category) => category.formats);
 };
 
-// Get all acceptable MIME types for the selected input format
+// Memoized functions
 const getAcceptedFileTypes = (inputFormat: string) => {
   const allFormats = getAllInputFormats();
-  const format = allFormats.find(f => f.value === inputFormat);
+  const format = allFormats.find((f) => f.value === inputFormat);
   return format ? { [format.accept]: [`.${format.value}`] } : {};
 };
 
-// Get file Icon based on format
 const getFileIcon = (format: string) => {
-  if (['jpg', 'jpeg', 'png'].includes(format)) {
-    return <ImageIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />;
-  } else if (['xlsx', 'xls'].includes(format)) {
-    return <TableIcon className="h-6 w-6 text-green-600 dark:text-green-400" />;
-  } else if (['pptx'].includes(format)) {
-    return <FileTextIcon className="h-6 w-6 text-orange-600 dark:text-orange-400" />;
+  if (["jpg", "jpeg", "png"].includes(format)) {
+    return <ImageIcon className="h-6 w-6 text-blue-500" />;
+  } else if (["xlsx", "xls"].includes(format)) {
+    return <TableIcon className="h-6 w-6 text-green-500" />;
+  } else if (["pptx"].includes(format)) {
+    return <FileTextIcon className="h-6 w-6 text-orange-500" />;
   } else {
-    return <FileIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />;
+    return <FileIcon className="h-6 w-6 text-blue-500" />;
   }
 };
 
@@ -125,19 +143,28 @@ interface FileUploaderProps {
   initialOutputFormat?: string;
 }
 
-export function FileUploader({ 
-  initialInputFormat = "pdf", 
-  initialOutputFormat = "docx" 
+export function FileUploader({
+  initialInputFormat = "pdf",
+  initialOutputFormat = "docx",
 }: FileUploaderProps) {
   const { t } = useLanguageStore();
   const [file, setFile] = useState<File | null>(null);
-  const [isUploading, setIsUploading] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [convertedFileUrl, setConvertedFileUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [acceptedFileTypes, setAcceptedFileTypes] = useState<Record<string, string[]>>({});
+  const [acceptedFileTypes, setAcceptedFileTypes] = useState<
+    Record<string, string[]>
+  >({});
 
-  // Initialize form with provided initial values
+  const {
+    isUploading,
+    progress: uploadProgress,
+    error: uploadError,
+    uploadFile,
+    resetUpload,
+  } = useFileUpload();
+
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -149,60 +176,61 @@ export function FileUploader({
     },
   });
 
-  // Update form when initialInputFormat or initialOutputFormat changes
+  // Update form values when props change
   useEffect(() => {
     form.setValue("inputFormat", initialInputFormat);
     form.setValue("outputFormat", initialOutputFormat);
-    
-    // Also update the accepted file types when initialInputFormat changes
-    setAcceptedFileTypes(getAcceptedFileTypes(initialInputFormat));
-  }, [initialInputFormat, initialOutputFormat, form]);
+  }, [initialInputFormat, initialOutputFormat]);
 
-  // Watch inputFormat to update accepted file types for the dropzone
+  // Update accepted file types
   const inputFormat = form.watch("inputFormat");
-
   useEffect(() => {
     setAcceptedFileTypes(getAcceptedFileTypes(inputFormat));
-    
-    // Reset file if format changes
+  }, [inputFormat]);
+
+  // Reset file state when inputFormat changes
+  useEffect(() => {
     if (file) {
       setFile(null);
       setConvertedFileUrl(null);
+      resetUpload();
     }
-  }, [inputFormat]);
+  }, [inputFormat, file, resetUpload]);
 
-  // Set up dropzone
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: acceptedFileTypes,
     maxFiles: 1,
-    maxSize: 50 * 1024 * 1024, // 50MB
+    maxSize: 50 * 1024 * 1024,
     onDrop: (acceptedFiles, rejectedFiles) => {
       if (rejectedFiles.length > 0) {
         const rejection = rejectedFiles[0];
         if (rejection.file.size > 50 * 1024 * 1024) {
-          setError(t('fileUploader.maxSize'));
+          setError(t("fileUploader.maxSize"));
         } else {
-          setError(`${t('fileUploader.inputFormat')} ${inputFormat.toUpperCase()}`);
+          setError(
+            `${t("fileUploader.inputFormat")} ${inputFormat.toUpperCase()}`
+          );
         }
         return;
       }
-      
+
       if (acceptedFiles.length > 0) {
         setFile(acceptedFiles[0]);
         setConvertedFileUrl(null);
         setError(null);
+        resetUpload();
       }
-    }
+    },
+    disabled: isUploading || isProcessing,
   });
 
-  // Handle form submission
   const onSubmit = async (values: FormValues) => {
     if (!file) {
-      setError(t('compressPdf.error.noFiles'));
+      setError(t("compressPdf.error.noFiles"));
       return;
     }
 
-    setIsUploading(true);
+    setIsProcessing(false);
     setProgress(0);
     setError(null);
     setConvertedFileUrl(null);
@@ -213,66 +241,65 @@ export function FileUploader({
     formData.append("outputFormat", values.outputFormat);
     formData.append("ocr", values.enableOcr ? "true" : "false");
     formData.append("quality", values.quality.toString());
-    
+
     if (values.password) {
       formData.append("password", values.password);
     }
 
-    try {
-      // Set up progress tracking
-      const progressInterval = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= 95) {
-            clearInterval(progressInterval);
-            return 95;
+    uploadFile(file, formData, {
+      url: "/api/convert",
+      onProgress: (progress) => {
+        setProgress(progress / 2);
+      },
+      onSuccess: (data) => {
+        let processingProgress = 50;
+        setIsProcessing(true);
+
+        const processingInterval = setInterval(() => {
+          processingProgress += 2;
+          setProgress(Math.min(processingProgress, 95));
+
+          if (processingProgress >= 95) {
+            clearInterval(processingInterval);
           }
-          return prev + 5;
+        }, 200);
+
+        setTimeout(() => {
+          clearInterval(processingInterval);
+          setProgress(100);
+          setConvertedFileUrl(data.filename);
+          setIsProcessing(false);
+
+          toast.success(t("fileUploader.successful"), {
+            description: `${t(
+              "fileUploader.successDesc"
+            )} ${values.inputFormat.toUpperCase()} to ${values.outputFormat.toUpperCase()}.`,
+          });
+        }, 1000);
+      },
+      onError: (err) => {
+        setProgress(0);
+        setError(err.message || t("compressPdf.error.unknown"));
+        setIsProcessing(false);
+
+        toast.error(t("compressPdf.error.failed"), {
+          description: err.message || t("compressPdf.error.unknown"),
         });
-      }, 300);
-
-      // Make API request
-      const response = await fetch('/api/convert', {
-        method: 'POST',
-        body: formData,
-      });
-
-      clearInterval(progressInterval);
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `${t('compressPdf.error.failed')} ${values.inputFormat.toUpperCase()} to ${values.outputFormat.toUpperCase()}`);
-      }
-
-      const data = await response.json();
-      setProgress(100);
-      setConvertedFileUrl(data.filename);
-      
-      toast.success(t('fileUploader.successful'), {
-        description: `${t('fileUploader.successDesc')} ${values.inputFormat.toUpperCase()} to ${values.outputFormat.toUpperCase()}.`,
-      });
-    } catch (err) {
-      setError(err instanceof Error ? err.message : t('compressPdf.error.unknown'));
-      toast.error(t('compressPdf.error.failed'), {
-        description: err instanceof Error ? err.message : t('compressPdf.error.unknown'),
-      });
-    } finally {
-      setIsUploading(false);
-    }
+      },
+    });
   };
 
-  // Handle file removal
   const handleRemoveFile = () => {
     setFile(null);
     setConvertedFileUrl(null);
     setError(null);
+    resetUpload();
   };
 
-  // Get file extension
   const getFileExtension = (filename: string) => {
-    return filename.split('.').pop()?.toUpperCase() || "";
+    return filename.split(".").pop()?.toUpperCase() || "";
   };
 
-  // Format file size for display
   const formatFileSize = (sizeInBytes: number): string => {
     if (sizeInBytes < 1024) {
       return `${sizeInBytes} B`;
@@ -283,70 +310,35 @@ export function FileUploader({
     }
   };
 
-  // Check if format is an image format
-  const isImageFormat = form.watch("outputFormat") === "jpg" || form.watch("outputFormat") === "png";
+  const isImageFormat =
+    form.watch("outputFormat") === "jpg" ||
+    form.watch("outputFormat") === "png";
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Left column: File selection */}
           <div className="space-y-4">
-            <div className="text-lg font-medium">1. {t('ui.upload')}</div>
-            
-            {/* Input Format Dropdown - Hidden, now controlled by parent */}
-            <div className="hidden">
-              <FormField
-                control={form.control}
-                name="inputFormat"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('fileUploader.inputFormat')}</FormLabel>
-                    <Select
-                      disabled={isUploading}
-                      onValueChange={field.onChange}
-                      value={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={t('fileUploader.inputFormat')} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {FORMAT_CATEGORIES.map((category) => (
-                          <div key={category.name}>
-                            <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground flex items-center">
-                              {category.icon}
-                              <span className="ml-1">{t(`fileUploader.categories.${category.name.toLowerCase()}`)}</span>
-                            </div>
-                            {category.formats.map((format) => (
-                              <SelectItem key={format.value} value={format.value}>
-                                {format.label}
-                              </SelectItem>
-                            ))}
-                          </div>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            
-            {/* File Drop Zone */}
-            <div 
-              {...getRootProps()} 
+            <div className="text-lg font-medium">1. {t("ui.upload")}</div>
+
+            <div
+              {...getRootProps()}
               className={cn(
                 "border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer",
-                isDragActive ? "border-primary bg-primary/10" : 
-                file ? "border-green-500 bg-green-50 dark:bg-green-950/20" : 
-                "border-muted-foreground/25 hover:border-muted-foreground/50",
-                isUploading && "pointer-events-none opacity-60"
+                isDragActive
+                  ? "border-primary bg-primary/10"
+                  : file
+                  ? "border-green-500 bg-green-50 dark:bg-green-950/20"
+                  : "border-muted-foreground/25 hover:border-muted-foreground/50",
+                (isUploading || isProcessing) &&
+                  "pointer-events-none opacity-60"
               )}
             >
-              <input {...getInputProps()} disabled={isUploading} />
-              
+              <input
+                {...getInputProps()}
+                disabled={isUploading || isProcessing}
+              />
+
               {file ? (
                 <div className="flex flex-col items-center gap-2">
                   <div className="h-12 w-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
@@ -355,20 +347,22 @@ export function FileUploader({
                   <div>
                     <p className="text-sm font-medium">{file.name}</p>
                     <p className="text-xs text-muted-foreground">
-                      {formatFileSize(file.size)} • {getFileExtension(file.name)}
+                      {formatFileSize(file.size)} •{" "}
+                      {getFileExtension(file.name)}
                     </p>
                   </div>
-                  <Button 
-                    type="button" 
-                    variant="outline" 
-                    size="sm" 
-                    disabled={isUploading}
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    disabled={isUploading || isProcessing}
                     onClick={(e) => {
                       e.stopPropagation();
                       handleRemoveFile();
                     }}
                   >
-                    <Cross2Icon className="h-4 w-4 mr-1" /> {t('fileUploader.remove')}
+                    <Cross2Icon className="h-4 w-4 mr-1" />{" "}
+                    {t("fileUploader.remove")}
                   </Button>
                 </div>
               ) : (
@@ -377,94 +371,86 @@ export function FileUploader({
                     <UploadIcon className="h-6 w-6 text-muted-foreground" />
                   </div>
                   <div className="text-lg font-medium">
-                    {isDragActive ? t('fileUploader.dropHere') : t('fileUploader.dragAndDrop')}
+                    {isDragActive
+                      ? t("fileUploader.dropHere")
+                      : t("fileUploader.dragAndDrop")}
                   </div>
                   <p className="text-sm text-muted-foreground max-w-sm">
-                    {t('fileUploader.dropHereDesc')} {t('fileUploader.maxSize')}
+                    {t("fileUploader.dropHereDesc")} {t("fileUploader.maxSize")}
                   </p>
-                  <Button type="button" variant="secondary" size="sm" className="mt-2">
-                    {t('fileUploader.browse')}
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    className="mt-2"
+                  >
+                    {t("fileUploader.browse")}
                   </Button>
                 </div>
               )}
             </div>
           </div>
-          
-          {/* Right column: Conversion options */}
+
           <div className="space-y-4">
-            <div className="text-lg font-medium">2. {t('convert.options.title')}</div>
-            
-            {/* Output Format Dropdown - Hidden, now controlled by parent */}
-            <div className="hidden">
-              <FormField
-                control={form.control}
-                name="outputFormat"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('fileUploader.outputFormat')}</FormLabel>
-                    <Select
-                      disabled={isUploading}
-                      onValueChange={field.onChange}
-                      value={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={t('fileUploader.outputFormat')} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {FORMAT_CATEGORIES.map((category) => (
-                          <div key={category.name}>
-                            <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground flex items-center">
-                              {category.icon}
-                              <span className="ml-1">{t(`fileUploader.categories.${category.name.toLowerCase()}`)}</span>
-                            </div>
-                            {category.formats.map((format) => (
-                              <SelectItem key={format.value} value={format.value}>
-                                {format.label}
-                              </SelectItem>
-                            ))}
-                          </div>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <div className="text-lg font-medium">
+              2. {t("convert.options.title")}
             </div>
-            
-            {/* Conversion Info */}
+
             <Card className="bg-muted/30">
               <CardContent className="pt-6">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="flex items-center gap-2">
-                    <div className={`p-2 rounded-lg ${getFileIcon(inputFormat) === getFileIcon('pdf') ? 'bg-blue-100 dark:bg-blue-900/30' : 
-                      inputFormat === 'xlsx' ? 'bg-green-100 dark:bg-green-900/30' : 
-                      inputFormat === 'pptx' ? 'bg-orange-100 dark:bg-orange-900/30' : 
-                      'bg-blue-100 dark:bg-blue-900/30'}`}>
+                    <div
+                      className={`p-2 rounded-lg ${
+                        getFileIcon(inputFormat) === getFileIcon("pdf")
+                          ? "bg-blue-100 dark:bg-blue-900/30"
+                          : inputFormat === "xlsx"
+                          ? "bg-green-100 dark:bg-green-900/30"
+                          : inputFormat === "pptx"
+                          ? "bg-orange-100 dark:bg-orange-900/30"
+                          : "bg-blue-100 dark:bg-blue-900/30"
+                      }`}
+                    >
                       {getFileIcon(inputFormat)}
                     </div>
-                    <span className="font-medium">{inputFormat.toUpperCase()}</span>
+                    <span className="font-medium">
+                      {inputFormat.toUpperCase()}
+                    </span>
                   </div>
                   <div className="text-muted-foreground">→</div>
                   <div className="flex items-center gap-2">
-                    <div className={`p-2 rounded-lg ${getFileIcon(form.watch("outputFormat")) === getFileIcon('pdf') ? 'bg-blue-100 dark:bg-blue-900/30' : 
-                      form.watch("outputFormat") === 'xlsx' ? 'bg-green-100 dark:bg-green-900/30' : 
-                      form.watch("outputFormat") === 'pptx' ? 'bg-orange-100 dark:bg-orange-900/30' : 
-                      'bg-blue-100 dark:bg-blue-900/30'}`}>
+                    <div
+                      className={`p-2 rounded-lg ${
+                        getFileIcon(form.watch("outputFormat")) ===
+                        getFileIcon("pdf")
+                          ? "bg-blue-100 dark:bg-blue-900/30"
+                          : form.watch("outputFormat") === "xlsx"
+                          ? "bg-green-100 dark:bg-green-900/30"
+                          : form.watch("outputFormat") === "pptx"
+                          ? "bg-orange-100 dark:bg-orange-900/30"
+                          : "bg-blue-100 dark:bg-blue-900/30"
+                      }`}
+                    >
                       {getFileIcon(form.watch("outputFormat"))}
                     </div>
-                    <span className="font-medium">{form.watch("outputFormat").toUpperCase()}</span>
+                    <span className="font-medium">
+                      {form.watch("outputFormat").toUpperCase()}
+                    </span>
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  {t('converter.description')} <span className="font-medium">{inputFormat.toUpperCase()}</span> {t('ui.to')} <span className="font-medium">{form.watch("outputFormat").toUpperCase()}</span>
+                  {t("converter.description")}{" "}
+                  <span className="font-medium">
+                    {inputFormat.toUpperCase()}
+                  </span>{" "}
+                  {t("ui.to")}{" "}
+                  <span className="font-medium">
+                    {form.watch("outputFormat").toUpperCase()}
+                  </span>
                 </p>
               </CardContent>
             </Card>
-            
-            {/* OCR Option */}
+
             <FormField
               control={form.control}
               name="enableOcr"
@@ -474,43 +460,46 @@ export function FileUploader({
                     <Checkbox
                       checked={field.value}
                       onCheckedChange={field.onChange}
-                      disabled={isUploading}
+                      disabled={isUploading || isProcessing}
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>
-                      {t('fileUploader.ocr')}
-                    </FormLabel>
+                    <FormLabel>{t("fileUploader.ocr")}</FormLabel>
                     <p className="text-sm text-muted-foreground">
-                      {t('fileUploader.ocrDesc')}
+                      {t("fileUploader.ocrDesc")}
                     </p>
                   </div>
                 </FormItem>
               )}
             />
-            
-            {/* Image Quality (only for image outputs) */}
+
             {isImageFormat && (
               <FormField
                 control={form.control}
                 name="quality"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('fileUploader.quality')}: {field.value}%</FormLabel>
+                    <FormLabel>
+                      {t("fileUploader.quality")}: {field.value}%
+                    </FormLabel>
                     <FormControl>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs">{t('fileUploader.low')}</span>
+                        <span className="text-xs">{t("fileUploader.low")}</span>
                         <Input
                           type="range"
                           min={10}
                           max={100}
                           step={5}
                           value={field.value}
-                          onChange={(e) => field.onChange(parseInt(e.target.value))}
-                          disabled={isUploading}
+                          onChange={(e) =>
+                            field.onChange(parseInt(e.target.value))
+                          }
+                          disabled={isUploading || isProcessing}
                           className="[&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4"
                         />
-                        <span className="text-xs">{t('fileUploader.high')}</span>
+                        <span className="text-xs">
+                          {t("fileUploader.high")}
+                        </span>
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -520,66 +509,71 @@ export function FileUploader({
             )}
           </div>
         </div>
-        
-        {/* Error message */}
+
         {error && (
           <Alert variant="destructive">
             <AlertDescription>
               <div className="flex items-center gap-2">
-                <CrossCircledIcon className="h-4 w-4" />
+                <AlertCircle className="h-4 w-4" />
                 {error}
               </div>
             </AlertDescription>
           </Alert>
         )}
-        
-        {/* Progress indicator */}
-        {isUploading && (
-          <div className="space-y-2">
-            <Progress value={progress} className="h-2" />
-            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-              <ReloadIcon className="h-4 w-4 animate-spin" />
-              {t('fileUploader.converting')}... {progress}%
-            </div>
-          </div>
+
+        {(isUploading || isProcessing) && (
+          <UploadProgress
+            progress={progress}
+            isUploading={isUploading}
+            error={uploadError}
+            isProcessing={isProcessing && !isUploading}
+            processingProgress={progress}
+            label={
+              isUploading
+                ? t("fileUploader.uploading")
+                : t("fileUploader.converting")
+            }
+          />
         )}
-        
+
         {convertedFileUrl && (
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-green-600 dark:text-green-400 flex items-center gap-2">
                 <CheckCircledIcon className="h-5 w-5" />
-                {t('fileUploader.successful')}
+                {t("fileUploader.successful")}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">
-                {t('fileUploader.successDesc')}
+                {t("fileUploader.successDesc")}
               </p>
-              <Button 
-                className="w-full" 
-                asChild
-                variant="default"
-              >
-                <a href={`/api/file?folder=conversions&filename=${encodeURIComponent(convertedFileUrl)}`} download>
+              <Button className="w-full" asChild variant="default">
+                <a
+                  href={`/api/file?folder=conversions&filename=${encodeURIComponent(
+                    convertedFileUrl
+                  )}`}
+                  download
+                >
                   <DownloadIcon className="h-4 w-4 mr-2" />
-                  {t('fileUploader.download')}
+                  {t("fileUploader.download")}
                 </a>
               </Button>
             </CardContent>
             <CardFooter className="text-xs text-muted-foreground">
-              {t('fileUploader.filesSecurity')}
+              {t("fileUploader.filesSecurity")}
             </CardFooter>
           </Card>
         )}
-        
-        {/* Submit button */}
-        <Button 
-          type="submit" 
-          className="w-full" 
-          disabled={!file || isUploading}
+
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={!file || isUploading || isProcessing}
         >
-          {isUploading ? t('ui.processing') : t('convert.howTo.step2.title')}
+          {isUploading || isProcessing
+            ? t("ui.processing")
+            : t("convert.howTo.step2.title")}
         </Button>
       </form>
     </Form>
