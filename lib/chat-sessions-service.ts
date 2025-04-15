@@ -1,5 +1,5 @@
 // lib/chat-sessions-service.ts
-import { writeFile, readFile, access } from 'fs/promises';
+import { writeFile, readFile, access, unlink } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { constants } from 'fs';
@@ -35,7 +35,14 @@ export class ChatSessionsService {
       await mkdir(this.CHAT_SESSIONS_DIR, { recursive: true });
     }
   }
-
+  static async deleteSession(sessionId: string): Promise<void> {
+    const sessionPath = join(process.cwd(), 'chatsessions', `${sessionId}.json`);
+    if (existsSync(sessionPath)) {
+      await unlink(sessionPath);
+    } else {
+      throw new Error('Session not found');
+    }
+  }
   /**
    * Create a new chat session
    * 

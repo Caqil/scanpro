@@ -3160,9 +3160,6 @@ export default {
       // Optionally add references to tools like "Acrobat online" or "Adobe Acrobat Pro" alternatives here
     }
   },
-  // Add these translations to src/lib/i18n/locales/en.ts
-
-// Inside the default export object, add the following section:
 
 pdfChat: {
   title: "Ask Anything PDF Chat",
@@ -3243,6 +3240,6 @@ pdfChat: {
       description: "Ask anything about the document and get accurate answers drawing from the PDF content."
     }
   },
-}
+},
 }
 

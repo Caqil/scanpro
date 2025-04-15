@@ -1,13 +1,19 @@
-"use client"
-import { useState, useEffect } from "react"
-import { DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+"use client";
+import { useState, useEffect } from "react";
+import { DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
-import type React from "react"
+import type React from "react";
 
-import Link from "next/link"
-import { ModeToggle } from "@/components/mode-toggle"
-import { Button } from "@/components/ui/button"
-import { HamburgerMenuIcon, Cross1Icon, ChevronDownIcon, MobileIcon } from "@radix-ui/react-icons"
+import Link from "next/link";
+import { ModeToggle } from "@/components/mode-toggle";
+import { Button } from "@/components/ui/button";
+import {
+  HamburgerMenuIcon,
+  Cross1Icon,
+  ChevronDownIcon,
+  MobileIcon,
+  ChatBubbleIcon,
+} from "@radix-ui/react-icons";
 import {
   FileText,
   Image,
@@ -23,63 +29,63 @@ import {
   PenTool,
   ScanFace,
   ScanEyeIcon,
-} from "lucide-react"
-import { useLanguageStore } from "@/src/store/store"
+} from "lucide-react";
+import { useLanguageStore } from "@/src/store/store";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu"
-import { LanguageLink } from "./language-link"
-import { LanguageSwitcher } from "./language-switcher"
-import { SiteLogo } from "./site-logo"
-import { useSession } from "next-auth/react"
-import { LogoutButton } from "./auth/logout-button"
+} from "@/components/ui/dropdown-menu";
+import { LanguageLink } from "./language-link";
+import { LanguageSwitcher } from "./language-switcher";
+import { SiteLogo } from "./site-logo";
+import { useSession } from "next-auth/react";
+import { LogoutButton } from "./auth/logout-button";
 type ToolDefinition = {
-  name: string
-  href: string
-  icon: React.ReactNode
-  description: string
-}
+  name: string;
+  href: string;
+  icon: React.ReactNode;
+  description: string;
+};
 
 type CategoryDefinition = {
-  category: string
-  description: string
-  tools: ToolDefinition[]
-}
+  category: string;
+  description: string;
+  tools: ToolDefinition[];
+};
 
 interface LanguageOption {
-  code: string
-  name: string
-  nativeName: string
-  flag: string
+  code: string;
+  name: string;
+  nativeName: string;
+  flag: string;
 }
 
 interface ProHeaderProps {
-  urlLanguage: string
+  urlLanguage: string;
 }
 
 export function ProHeader({ urlLanguage }: ProHeaderProps) {
-  const { language, setLanguage, t } = useLanguageStore()
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [showAppBanner, setShowAppBanner] = useState(true)
-  const [isClient, setIsClient] = useState(false)
-  const { data: session } = useSession()
+  const { language, setLanguage, t } = useLanguageStore();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [showAppBanner, setShowAppBanner] = useState(true);
+  const [isClient, setIsClient] = useState(false);
+  const { data: session } = useSession();
   useEffect(() => {
-    setIsClient(true)
+    setIsClient(true);
     if (urlLanguage && urlLanguage !== language) {
-      useLanguageStore.setState({ language: urlLanguage as any })
+      useLanguageStore.setState({ language: urlLanguage as any });
     }
 
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
-    }
+      setScrolled(window.scrollY > 10);
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [urlLanguage, language])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [urlLanguage, language]);
   const userMenu = session ? (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -87,7 +93,9 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs font-medium">
             {session.user?.name ? session.user.name[0].toUpperCase() : "A"}
           </div>
-          <span className="hidden sm:inline">{session.user?.name || "Account"}</span>
+          <span className="hidden sm:inline">
+            {session.user?.name || "Account"}
+          </span>
           <ChevronDownIcon className="h-4 w-4 opacity-70" />
         </Button>
       </DropdownMenuTrigger>
@@ -97,9 +105,9 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-        <div className="mt-auto border-t p-4">
-  <LogoutButton />
-</div>
+          <div className="mt-auto border-t p-4">
+            <LogoutButton />
+          </div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -109,27 +117,51 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
         Sign in
       </Button>
     </LanguageLink>
-  )
+  );
   const languages: LanguageOption[] = [
     { code: "en", name: "English", nativeName: "English", flag: "🇺🇸" },
-    { code: "id", name: "Indonesian", nativeName: "Bahasa Indonesia", flag: "🇮🇩" },
+    {
+      code: "id",
+      name: "Indonesian",
+      nativeName: "Bahasa Indonesia",
+      flag: "🇮🇩",
+    },
     { code: "es", name: "Spanish", nativeName: "Español", flag: "🇪🇸" },
     { code: "fr", name: "French", nativeName: "Français", flag: "🇫🇷" },
     { code: "zh", name: "Chinese", nativeName: "中文 (Zhōngwén)", flag: "🇨🇳" },
-    { code: "ar", name: "Arabic", nativeName: "العربية (al-ʿArabiyyah)", flag: "🇸🇦" },
+    {
+      code: "ar",
+      name: "Arabic",
+      nativeName: "العربية (al-ʿArabiyyah)",
+      flag: "🇸🇦",
+    },
     { code: "hi", name: "Hindi", nativeName: "हिन्दी (Hindī)", flag: "🇮🇳" },
-    { code: "ru", name: "Russian", nativeName: "Русский (Russkiy)", flag: "🇷🇺" },
+    {
+      code: "ru",
+      name: "Russian",
+      nativeName: "Русский (Russkiy)",
+      flag: "🇷🇺",
+    },
     { code: "pt", name: "Portuguese", nativeName: "Português", flag: "🇧🇷" },
     { code: "de", name: "German", nativeName: "Deutsch", flag: "🇩🇪" },
-    { code: "ja", name: "Japanese", nativeName: "日本語 (Nihongo)", flag: "🇯🇵" },
+    {
+      code: "ja",
+      name: "Japanese",
+      nativeName: "日本語 (Nihongo)",
+      flag: "🇯🇵",
+    },
     { code: "ko", name: "Korean", nativeName: "한국어 (Hangugeo)", flag: "🇰🇷" },
     { code: "it", name: "Italian", nativeName: "Italiano", flag: "🇮🇹" },
     { code: "tr", name: "Turkish", nativeName: "Türkçe", flag: "🇹🇷" },
-  ]
+  ];
   const PDF_TOOLS: CategoryDefinition[] = [
     {
-      category: isClient ? t("pdfTools.categories.convertFromPdf") : "Convert PDF",
-      description: t("pdfTools.categories.convertFromPdfDesc") || "Convert PDF files to various formats and vice versa",
+      category: isClient
+        ? t("pdfTools.categories.convertFromPdf")
+        : "Convert PDF",
+      description:
+        t("pdfTools.categories.convertFromPdfDesc") ||
+        "Convert PDF files to various formats and vice versa",
       tools: [
         {
           name: t("popular.pdfToWord"),
@@ -165,7 +197,9 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
     },
     {
       category: t("pdfTools.categories.organizePdf") || "PDF Management",
-      description: t("pdfTools.categories.organizePdfDesc") || "Tools to organize and modify PDF files",
+      description:
+        t("pdfTools.categories.organizePdfDesc") ||
+        "Tools to organize and modify PDF files",
       tools: [
         {
           name: t("popular.mergePdf"),
@@ -223,38 +257,62 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
         },
         {
           name: t("ocrPdf.title"),
-          href: "/ocr-pdf",
+          href: "/ask-pdf",
           icon: <ScanEyeIcon className="h-5 w-5 text-blue-500" />,
-          description: t("ocrPdf.description"),
+          description: t("pdfChat.description"),
         },
       ],
     },
-  ]
+    {
+      category: "AI PDF",
+      description: "AI PDF",
+      tools: [
+        {
+          name: t("pdfChat.title"),
+          href: "/ask-pdf",
+          icon: <ChatBubbleIcon className="h-5 w-5 text-blue-500" />,
+          description: t("pdfChat.description"),
+        },
+      ],
+    },
+  ];
 
   const navItems = [
     {
       label: t("nav.convertPdf"),
       dropdown: PDF_TOOLS.filter(
-        (cat) => cat.category === (isClient ? t("pdfTools.categories.convertFromPdf") : "Convert PDF"),
+        (cat) =>
+          cat.category ===
+          (isClient ? t("pdfTools.categories.convertFromPdf") : "Convert PDF")
       ),
     },
     {
       label: t("pdfTools.categories.organizePdf"),
       dropdown: PDF_TOOLS.filter(
-        (cat) => cat.category === (isClient ? t("pdfTools.categories.organizePdf") : "PDF Management"),
+        (cat) =>
+          cat.category ===
+          (isClient ? t("pdfTools.categories.organizePdf") : "PDF Management")
       ),
     },
     {
       label: t("pdfTools.categories.pdfSecurity"),
       dropdown: PDF_TOOLS.filter(
-        (cat) => cat.category === (isClient ? t("pdfTools.categories.pdfSecurity") : "PDF Security"),
+        (cat) =>
+          cat.category ===
+          (isClient ? t("pdfTools.categories.pdfSecurity") : "PDF Security")
       ),
     },
     {
       label: t("popular.viewAll"),
       dropdown: PDF_TOOLS,
     },
-  ]
+    {
+      label: "AI PDF",
+      dropdown: PDF_TOOLS.filter(
+        (cat) => cat.category === (isClient ? "AI PDF" : "AI PDF")
+      ),
+    },
+  ];
 
   return (
     <>
@@ -266,7 +324,8 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
               <MobileIcon className="h-4 w-4 mr-2 hidden sm:inline-block" />
               <p className="text-sm font-medium">
                 {isClient
-                  ? t("nav.getApp") || "Get our mobile app for on-the-go PDF tools"
+                  ? t("nav.getApp") ||
+                    "Get our mobile app for on-the-go PDF tools"
                   : "Get our mobile app for on-the-go PDF tools"}
               </p>
             </div>
@@ -315,7 +374,9 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
 
       {/* Main Header */}
       <header
-        className={`sticky top-0 z-50 bg-gradient-to-r from-background/95 to-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/60 ${scrolled ? "shadow-sm" : "border-b"} transition-all duration-200`}
+        className={`sticky top-0 z-50 bg-gradient-to-r from-background/95 to-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/60 ${
+          scrolled ? "shadow-sm" : "border-b"
+        } transition-all duration-200`}
       >
         <div className="container max-w-6xl mx-auto flex h-16 items-center justify-between py-4 px-4">
           {/* Logo */}
@@ -326,7 +387,6 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
                 <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
                   ScanPro
                 </span>
-               
               </span>
             </LanguageLink>
           </div>
@@ -335,11 +395,11 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
           <nav className="hidden md:flex items-center gap-6">
             {/* Direct link to Image Tools */}
             <LanguageLink
-    href="/pricing"
-    className="text-sm font-medium text-foreground transition-colors hover:text-primary"
-  >
-    {isClient ? t("nav.pricing") || "Pricing" : "Pricing"}
-  </LanguageLink>
+              href="/pricing"
+              className="text-sm font-medium text-foreground transition-colors hover:text-primary"
+            >
+              {isClient ? t("nav.pricing") || "Pricing" : "Pricing"}
+            </LanguageLink>
             {/* PDF Tool Dropdowns */}
             {navItems.slice(1).map((item) => (
               <div key={item.label} className="relative group">
@@ -357,7 +417,9 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
                     <div className="absolute top-full left-0 mt-2 w-[600px] bg-background border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 p-4">
                       {item.dropdown.map((category) => (
                         <div key={category.category} className="mb-4">
-                          <div className="font-semibold text-sm text-foreground mb-2">{category.category}</div>
+                          <div className="font-semibold text-sm text-foreground mb-2">
+                            {category.category}
+                          </div>
                           <div className="grid grid-cols-3 gap-4">
                             {category.tools.map((tool) => (
                               <LanguageLink
@@ -365,10 +427,16 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
                                 href={tool.href}
                                 className="flex items-start gap-3 p-2 hover:bg-muted rounded-md transition-colors"
                               >
-                                <div className="p-1 rounded-md bg-primary/10">{tool.icon}</div>
+                                <div className="p-1 rounded-md bg-primary/10">
+                                  {tool.icon}
+                                </div>
                                 <div>
-                                  <div className="text-sm font-medium">{tool.name}</div>
-                                  <p className="text-xs text-muted-foreground">{tool.description}</p>
+                                  <div className="text-sm font-medium">
+                                    {tool.name}
+                                  </div>
+                                  <p className="text-xs text-muted-foreground">
+                                    {tool.description}
+                                  </p>
                                 </div>
                               </LanguageLink>
                             ))}
@@ -393,7 +461,11 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
               className="md:hidden"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              {mobileMenuOpen ? <Cross1Icon className="h-5 w-5" /> : <HamburgerMenuIcon className="h-5 w-5" />}
+              {mobileMenuOpen ? (
+                <Cross1Icon className="h-5 w-5" />
+              ) : (
+                <HamburgerMenuIcon className="h-5 w-5" />
+              )}
               <span className="sr-only">Toggle menu</span>
             </Button>
           </div>
@@ -405,12 +477,12 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
             <div className="container max-w-6xl mx-auto py-4 space-y-4">
               {/* Direct link to Image Tools */}
               <LanguageLink
-        href="/pricing"
-        className="block px-3 py-3 text-lg font-medium hover:bg-primary/5 rounded-md transition-colors"
-        onClick={() => setMobileMenuOpen(false)}
-      >
-        {isClient ? t("nav.pricing") || "Pricing" : "Pricing"}
-      </LanguageLink>
+                href="/pricing"
+                className="block px-3 py-3 text-lg font-medium hover:bg-primary/5 rounded-md transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {isClient ? t("nav.pricing") || "Pricing" : "Pricing"}
+              </LanguageLink>
               {navItems.slice(1).map((item) => (
                 <div key={item.label} className="space-y-2">
                   <div className="block px-3 py-3 text-lg font-medium hover:bg-primary/5 rounded-md transition-colors">
@@ -420,7 +492,9 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
                     <div className="pl-4 space-y-2">
                       {item.dropdown.map((category) => (
                         <div key={category.category}>
-                          <div className="text-sm font-medium text-primary mb-2">{category.category}</div>
+                          <div className="text-sm font-medium text-primary mb-2">
+                            {category.category}
+                          </div>
                           <div className="grid grid-cols-2 gap-2">
                             {category.tools.map((tool) => (
                               <LanguageLink
@@ -429,9 +503,13 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
                                 className="flex items-start gap-3 p-2 hover:bg-muted rounded-md transition-colors"
                                 onClick={() => setMobileMenuOpen(false)}
                               >
-                                <div className="p-1 rounded-md bg-primary/10">{tool.icon}</div>
+                                <div className="p-1 rounded-md bg-primary/10">
+                                  {tool.icon}
+                                </div>
                                 <div>
-                                  <div className="text-sm font-medium">{tool.name}</div>
+                                  <div className="text-sm font-medium">
+                                    {tool.name}
+                                  </div>
                                 </div>
                               </LanguageLink>
                             ))}
@@ -447,6 +525,5 @@ export function ProHeader({ urlLanguage }: ProHeaderProps) {
         )}
       </header>
     </>
-  )
+  );
 }
-

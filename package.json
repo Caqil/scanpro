@@ -58,6 +58,7 @@
     "canvas": "^3.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dompurify": "^3.2.5",
     "firebase": "^11.5.0",
     "fontkit": "^2.0.4",
     "formidable": "^3.5.2",
@@ -96,6 +97,7 @@
     "tailwindcss-animate": "^1.0.7",
     "tesseract.js": "^2.1.5",
     "uuid": "^11.1.0",
+    "winston": "^3.17.0",
     "xmldom": "^0.6.0",
     "zod": "^3.24.2",
     "zustand": "^5.0.3"

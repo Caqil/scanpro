@@ -1,0 +1,23 @@
+{
+  "id": "29b767fb-9bd9-4e34-a0b7-0a38d12759c0",
+  "pdfPath": "/Users/cakra/Documents/app/scanpro-project/scanpro/uploads/29b767fb-9bd9-4e34-a0b7-0a38d12759c0-chat.pdf",
+  "createdAt": "2025-04-15T01:31:03.940Z",
+  "pdfText": "[PDF Content Extraction Limited]\n\nDocument Information:\n- Filename: 29b767fb-9bd9-4e34-a0b7-0a38d12759c0-chat.pdf\n- Pages: 1\n- Size: 0.16 MB\n\nThe text content could not be fully extracted from this PDF using available methods. The document may be scanned, contain only images, or have security restrictions.",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "I've processed your PDF document. Ask me any questions about its contents, and I'll do my best to answer based on the information in the document.",
+      "timestamp": "2025-04-15T01:31:03.944Z"
+    },
+    {
+      "role": "user",
+      "content": "what my pdf content?",
+      "timestamp": "2025-04-15T01:31:15.253Z"
+    },
+    {
+      "role": "assistant",
+      "content": "I couldn't find that information in the document. The text content could not be fully extracted from your PDF, which means it might be a scanned document, contain only images, or have security restrictions that prevent text extraction.",
+      "timestamp": "2025-04-15T01:31:18.584Z"
+    }
+  ]
+}

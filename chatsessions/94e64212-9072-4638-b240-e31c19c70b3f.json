@@ -1,0 +1,33 @@
+{
+  "id": "94e64212-9072-4638-b240-e31c19c70b3f",
+  "pdfPath": "/Users/cakra/Documents/app/scanpro-project/scanpro/uploads/94e64212-9072-4638-b240-e31c19c70b3f-chat.pdf",
+  "createdAt": "2025-04-15T03:36:45.866Z",
+  "pdfText": "[Failed to extract text from this PDF]\nThe document might be encrypted, scanned without OCR, or contain only images.",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "I've processed your PDF document. Ask me any questions about its contents, and I'll do my best to answer based on the information in the document.",
+      "timestamp": "2025-04-15T03:36:45.869Z"
+    },
+    {
+      "role": "user",
+      "content": "what that docs?",
+      "timestamp": "2025-04-15T03:36:53.958Z"
+    },
+    {
+      "role": "assistant",
+      "content": "I couldn't find that information in the document.",
+      "timestamp": "2025-04-15T03:36:57.273Z"
+    },
+    {
+      "role": "user",
+      "content": "so can you create it",
+      "timestamp": "2025-04-15T03:39:17.706Z"
+    },
+    {
+      "role": "assistant",
+      "content": "I'm here to help answer questions based on existing document content. If you provide me with specific questions about the document, I'll do my best to assist you.",
+      "timestamp": "2025-04-15T03:39:19.109Z"
+    }
+  ]
+}

@@ -53,6 +53,7 @@ export function PdfChat() {
   const [isLoadingPdf, setIsLoadingPdf] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // Use our custom upload hook
   const {
@@ -128,10 +129,13 @@ export function PdfChat() {
     }
   };
 
-  // Scroll to bottom of messages when new ones are added
+  // Scroll chat container to bottom when new messages are added
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    if (messagesEndRef.current && chatContainerRef.current) {
+      // Use the chat container's scrolling instead of scrollIntoView
+      // This prevents the whole page from scrolling
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -298,104 +302,109 @@ export function PdfChat() {
   };
 
   return (
-    <Card className="border shadow-sm flex flex-col">
-      <CardHeader>
-        <CardTitle>{t("pdfChat.title") || "Ask Anything PDF Chat"}</CardTitle>
+    <Card className="border shadow-sm flex flex-col h-[600px] relative">
+      <CardHeader className="px-4 py-3 flex-shrink-0">
+        <CardTitle className="text-xl">
+          {t("pdfChat.title") || "Ask Anything PDF Chat"}
+        </CardTitle>
         <CardDescription>
           {t("pdfChat.description") ||
             "Upload a PDF and ask questions about its content"}
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="flex-grow overflow-hidden flex flex-col">
+      <CardContent className="p-0 flex-grow overflow-hidden">
         {!sessionId ? (
           // File upload UI
-          <div
-            {...getRootProps()}
-            className={cn(
-              "border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer h-full flex flex-col justify-center",
-              isDragActive
-                ? "border-primary bg-primary/10"
-                : file
-                ? "border-green-500 bg-green-50 dark:bg-green-950/20"
-                : "border-muted-foreground/25 hover:border-muted-foreground/50",
-              (isUploading || isLoadingPdf) && "pointer-events-none opacity-80"
-            )}
-          >
-            <input
-              {...getInputProps()}
-              disabled={isUploading || isLoadingPdf}
-            />
+          <div className="h-full p-4">
+            <div
+              {...getRootProps()}
+              className={cn(
+                "border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer h-full flex flex-col justify-center",
+                isDragActive
+                  ? "border-primary bg-primary/10"
+                  : file
+                  ? "border-green-500 bg-green-50 dark:bg-green-950/20"
+                  : "border-muted-foreground/25 hover:border-muted-foreground/50",
+                (isUploading || isLoadingPdf) &&
+                  "pointer-events-none opacity-80"
+              )}
+            >
+              <input
+                {...getInputProps()}
+                disabled={isUploading || isLoadingPdf}
+              />
 
-            {file ? (
-              <div className="flex flex-col items-center gap-4">
-                <div className="h-12 w-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
-                  <FileText className="h-6 w-6 text-green-600 dark:text-green-400" />
+              {file ? (
+                <div className="flex flex-col items-center gap-4">
+                  <div className="h-12 w-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                    <FileText className="h-6 w-6 text-green-600 dark:text-green-400" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium">{file.name}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {formatFileSize(file.size)}
+                    </p>
+                  </div>
+                  {isUploading || isLoadingPdf ? (
+                    <UploadProgress
+                      progress={uploadProgress}
+                      isUploading={isUploading}
+                      isProcessing={isLoadingPdf}
+                      processingProgress={uploadProgress}
+                      error={uploadError}
+                      label={
+                        isUploading
+                          ? t("pdfChat.uploading") || "Uploading PDF..."
+                          : t("pdfChat.processing") || "Processing PDF..."
+                      }
+                      uploadStats={uploadStats}
+                    />
+                  ) : (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleRemoveFile();
+                      }}
+                    >
+                      <Cross2Icon className="h-4 w-4 mr-1" />{" "}
+                      {t("ui.remove") || "Remove"}
+                    </Button>
+                  )}
                 </div>
-                <div>
-                  <p className="text-sm font-medium">{file.name}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {formatFileSize(file.size)}
+              ) : (
+                <div className="flex flex-col items-center gap-2">
+                  <div className="h-12 w-12 rounded-full bg-muted flex items-center justify-center">
+                    <UploadIcon className="h-6 w-6 text-muted-foreground" />
+                  </div>
+                  <div className="text-lg font-medium">
+                    {isDragActive
+                      ? t("fileUploader.dropHere") || "Drop your PDF file here"
+                      : t("pdfChat.uploadPrompt") || "Upload your PDF document"}
+                  </div>
+                  <p className="text-sm text-muted-foreground max-w-sm">
+                    {t("pdfChat.dropHereDesc") ||
+                      "Drop your PDF file here or click to browse. I'll analyze it so you can ask questions about the content."}
                   </p>
-                </div>
-                {isUploading || isLoadingPdf ? (
-                  <UploadProgress
-                    progress={uploadProgress}
-                    isUploading={isUploading}
-                    isProcessing={isLoadingPdf}
-                    processingProgress={uploadProgress}
-                    error={uploadError}
-                    label={
-                      isUploading
-                        ? t("pdfChat.uploading") || "Uploading PDF..."
-                        : t("pdfChat.processing") || "Processing PDF..."
-                    }
-                    uploadStats={uploadStats}
-                  />
-                ) : (
                   <Button
                     type="button"
-                    variant="outline"
+                    variant="secondary"
                     size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleRemoveFile();
-                    }}
+                    className="mt-2"
                   >
-                    <Cross2Icon className="h-4 w-4 mr-1" />{" "}
-                    {t("ui.remove") || "Remove"}
+                    {t("fileUploader.browse") || "Browse Files"}
                   </Button>
-                )}
-              </div>
-            ) : (
-              <div className="flex flex-col items-center gap-2">
-                <div className="h-12 w-12 rounded-full bg-muted flex items-center justify-center">
-                  <UploadIcon className="h-6 w-6 text-muted-foreground" />
                 </div>
-                <div className="text-lg font-medium">
-                  {isDragActive
-                    ? t("fileUploader.dropHere") || "Drop your PDF file here"
-                    : t("pdfChat.uploadPrompt") || "Upload your PDF document"}
-                </div>
-                <p className="text-sm text-muted-foreground max-w-sm">
-                  {t("pdfChat.dropHereDesc") ||
-                    "Drop your PDF file here or click to browse. I'll analyze it so you can ask questions about the content."}
-                </p>
-                <Button
-                  type="button"
-                  variant="secondary"
-                  size="sm"
-                  className="mt-2"
-                >
-                  {t("fileUploader.browse") || "Browse Files"}
-                </Button>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         ) : (
           // Chat messages UI
           <div className="flex flex-col h-full">
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between px-4 py-2 border-b">
               <div className="flex items-center gap-2">
                 <FileText className="h-4 w-4 text-green-600" />
                 <span className="text-sm font-medium">{file?.name}</span>
@@ -411,19 +420,28 @@ export function PdfChat() {
               </Button>
             </div>
 
-            <div className="border rounded-lg flex-grow overflow-y-auto mb-4 p-4 space-y-4 max-h-[400px]">
+            <div
+              ref={chatContainerRef}
+              className="flex-grow overflow-y-auto px-4 py-3 space-y-4"
+              style={{
+                scrollbarWidth: "thin",
+                scrollbarColor: "rgba(155, 155, 155, 0.5) transparent",
+                maxHeight: "100%",
+                height: "390px", // Fixed height to ensure proper scrolling containment
+              }}
+            >
               {messages.length > 0 ? (
                 messages.map((message, index) => (
                   <div
                     key={index}
                     className={cn(
-                      "flex gap-2 p-2 rounded-lg",
+                      "flex gap-2 p-3 rounded-lg",
                       message.role === "user"
-                        ? "bg-primary/10 ml-8"
-                        : "bg-muted/40 mr-8"
+                        ? "bg-primary/10 ml-4"
+                        : "bg-muted/40 mr-4"
                     )}
                   >
-                    <div className="flex-shrink-0">
+                    <div className="flex-shrink-0 mt-1">
                       {message.role === "user" ? (
                         <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center">
                           <User className="h-4 w-4 text-primary" />
@@ -457,8 +475,8 @@ export function PdfChat() {
                 </div>
               )}
               {isProcessing && (
-                <div className="flex gap-2 p-2 rounded-lg bg-muted/40 mr-8">
-                  <div className="flex-shrink-0">
+                <div className="flex gap-2 p-3 rounded-lg bg-muted/40 mr-4">
+                  <div className="flex-shrink-0 mt-1">
                     <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
                       <Bot className="h-4 w-4" />
                     </div>
@@ -474,39 +492,41 @@ export function PdfChat() {
               <div ref={messagesEndRef} />
             </div>
 
-            <form onSubmit={handleSubmit} className="flex gap-2">
-              <Input
-                placeholder={
-                  t("pdfChat.askPrompt") ||
-                  "Ask a question about the document..."
-                }
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyDown={handleKeyDown}
-                disabled={isProcessing}
-                className="flex-grow"
-              />
-              <Button
-                type="submit"
-                disabled={isProcessing || !inputValue.trim()}
-              >
-                <Send className="h-4 w-4 mr-2" />
-                {t("pdfChat.send") || "Send"}
-              </Button>
-            </form>
+            <div className="p-3 border-t mt-auto">
+              <form onSubmit={handleSubmit} className="flex gap-2">
+                <Input
+                  placeholder={
+                    t("pdfChat.askPrompt") ||
+                    "Ask a question about the document..."
+                  }
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  disabled={isProcessing}
+                  className="flex-grow"
+                />
+                <Button
+                  type="submit"
+                  disabled={isProcessing || !inputValue.trim()}
+                >
+                  <Send className="h-4 w-4 mr-2" />
+                  {t("pdfChat.send") || "Send"}
+                </Button>
+              </form>
+            </div>
           </div>
         )}
 
         {/* Error message */}
         {error && (
-          <Alert variant="destructive" className="mt-4">
+          <Alert variant="destructive" className="m-4 mt-0">
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
       </CardContent>
 
-      <CardFooter className="flex justify-between border-t pt-4 text-xs text-muted-foreground">
+      <CardFooter className="flex justify-between border-t pt-3 pb-3 px-4 text-xs text-muted-foreground">
         <div>
           {t("pdfChat.securityNote") ||
             "Your files are processed securely and not stored permanently."}
