@@ -1,0 +1,23 @@
+{
+  "id": "9118d218-e92d-416c-a28c-7c7fcaf6dd1a",
+  "pdfPath": "/Users/cakra/Documents/app/scanpro-project/scanpro/uploads/9118d218-e92d-416c-a28c-7c7fcaf6dd1a-chat.pdf",
+  "createdAt": "2025-04-15T01:14:19.060Z",
+  "pdfText": "[PDF Content Extraction Limited]\n\nDocument Information:\n- Filename: 9118d218-e92d-416c-a28c-7c7fcaf6dd1a-chat.pdf\n- Pages: 2\n- Size: 0.07 MB\n\nThe text content could not be fully extracted from this PDF using available methods. The document may be scanned, contain only images, or have security restrictions.",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "I've processed your PDF document. Ask me any questions about its contents, and I'll do my best to answer based on the information in the document.",
+      "timestamp": "2025-04-15T01:14:19.062Z"
+    },
+    {
+      "role": "user",
+      "content": "Summarize this report.",
+      "timestamp": "2025-04-15T01:14:26.716Z"
+    },
+    {
+      "role": "assistant",
+      "content": "I couldn't find that information in the document.",
+      "timestamp": "2025-04-15T01:14:31.994Z"
+    }
+  ]
+}

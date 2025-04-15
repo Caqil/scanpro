@@ -22,7 +22,8 @@ import {
   MessageSquare,
   Bot,
   User,
-  SendIcon,
+  Send,
+  RefreshCw,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguageStore } from "@/src/store/store";
@@ -100,6 +101,33 @@ export function PdfChat() {
     multiple: false,
   });
 
+  // Load chat history when session is established
+  useEffect(() => {
+    if (sessionId) {
+      fetchChatHistory(sessionId);
+    }
+  }, [sessionId]);
+
+  // Fetch chat history for a session
+  const fetchChatHistory = async (sid: string) => {
+    try {
+      const response = await fetch(`/api/pdf/chat?sessionId=${sid}`);
+
+      if (!response.ok) {
+        console.error("Failed to fetch chat history:", response.statusText);
+        return;
+      }
+
+      const data = await response.json();
+
+      if (data.success && data.messages) {
+        setMessages(data.messages);
+      }
+    } catch (error) {
+      console.error("Error fetching chat history:", error);
+    }
+  };
+
   // Scroll to bottom of messages when new ones are added
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -141,21 +169,31 @@ export function PdfChat() {
         },
         onSuccess: (data) => {
           setSessionId(data.sessionId);
-          // Add initial welcome message
-          setMessages([
-            {
-              role: "assistant",
-              content: data.message,
-              timestamp: new Date().toISOString(),
-            },
-          ]);
+
+          // Add initial welcome message if provided
+          if (data.message) {
+            setMessages([
+              {
+                role: "assistant",
+                content: data.message,
+                timestamp: new Date().toISOString(),
+              },
+            ]);
+          }
+
+          toast.success("PDF uploaded successfully", {
+            description: "You can now ask questions about the document.",
+          });
         },
         onError: (error) => {
           setError(
             t("pdfChat.uploadError") ||
               "Failed to upload PDF. Please try again."
           );
-          toast.error("Upload failed");
+          toast.error("Upload failed", {
+            description:
+              error.message || "Please try again with a different PDF.",
+          });
           console.error("Upload error:", error);
         },
       });
@@ -174,12 +212,14 @@ export function PdfChat() {
   const sendMessage = async () => {
     if (!inputValue.trim() || !sessionId) return;
 
+    const userMessage = inputValue.trim();
     const newMessage: Message = {
       role: "user",
-      content: inputValue,
+      content: userMessage,
       timestamp: new Date().toISOString(),
     };
 
+    // Add user message to UI immediately
     setMessages((prev) => [...prev, newMessage]);
     setInputValue("");
     setIsProcessing(true);
@@ -192,24 +232,35 @@ export function PdfChat() {
         },
         body: JSON.stringify({
           sessionId,
-          message: inputValue,
+          message: userMessage,
         }),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to get response");
+        throw new Error(
+          `API returned ${response.status}: ${response.statusText}`
+        );
       }
 
       const data = await response.json();
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: data.message,
-          timestamp: new Date().toISOString(),
-        },
-      ]);
+
+      if (data.success && data.message) {
+        // Add AI response to messages
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content: data.message,
+            timestamp: new Date().toISOString(),
+          },
+        ]);
+      } else {
+        throw new Error("Invalid response from server");
+      }
     } catch (error) {
+      console.error("Chat error:", error);
+
+      // Add error message to chat
       setMessages((prev) => [
         ...prev,
         {
@@ -220,8 +271,10 @@ export function PdfChat() {
           timestamp: new Date().toISOString(),
         },
       ]);
-      toast.error("Failed to get response");
-      console.error("Chat error:", error);
+
+      toast.error("Failed to get response", {
+        description: "There was a problem processing your question.",
+      });
     } finally {
       setIsProcessing(false);
     }
@@ -232,6 +285,15 @@ export function PdfChat() {
     e.preventDefault();
     if (inputValue.trim() && sessionId) {
       sendMessage();
+    }
+  };
+
+  // Handle key press (Ctrl+Enter or Cmd+Enter to send)
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+      if (inputValue.trim() && sessionId) {
+        sendMessage();
+      }
     }
   };
 
@@ -350,40 +412,50 @@ export function PdfChat() {
             </div>
 
             <div className="border rounded-lg flex-grow overflow-y-auto mb-4 p-4 space-y-4 max-h-[400px]">
-              {messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={cn(
-                    "flex gap-2 p-2 rounded-lg",
-                    message.role === "user"
-                      ? "bg-primary/10 ml-8"
-                      : "bg-muted/40 mr-8"
-                  )}
-                >
-                  <div className="flex-shrink-0">
-                    {message.role === "user" ? (
-                      <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center">
-                        <User className="h-4 w-4 text-primary" />
-                      </div>
-                    ) : (
-                      <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
-                        <Bot className="h-4 w-4" />
-                      </div>
+              {messages.length > 0 ? (
+                messages.map((message, index) => (
+                  <div
+                    key={index}
+                    className={cn(
+                      "flex gap-2 p-2 rounded-lg",
+                      message.role === "user"
+                        ? "bg-primary/10 ml-8"
+                        : "bg-muted/40 mr-8"
                     )}
-                  </div>
-                  <div className="flex-grow overflow-hidden">
-                    <div className="text-sm prose dark:prose-invert max-w-none">
-                      <ReactMarkdown>{message.content}</ReactMarkdown>
+                  >
+                    <div className="flex-shrink-0">
+                      {message.role === "user" ? (
+                        <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center">
+                          <User className="h-4 w-4 text-primary" />
+                        </div>
+                      ) : (
+                        <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
+                          <Bot className="h-4 w-4" />
+                        </div>
+                      )}
                     </div>
-                    <div className="text-xs text-muted-foreground mt-1">
-                      {new Date(message.timestamp).toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
+                    <div className="flex-grow overflow-hidden">
+                      <div className="text-sm prose dark:prose-invert max-w-none">
+                        <ReactMarkdown>{message.content}</ReactMarkdown>
+                      </div>
+                      <div className="text-xs text-muted-foreground mt-1">
+                        {new Date(message.timestamp).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </div>
                     </div>
                   </div>
+                ))
+              ) : (
+                <div className="flex flex-col items-center justify-center h-full text-muted-foreground py-10">
+                  <MessageSquare className="h-12 w-12 mb-4 opacity-20" />
+                  <p className="text-center text-sm">
+                    {t("pdfChat.noMessages") ||
+                      "Ask any question about the PDF document, and I'll search for answers in its content."}
+                  </p>
                 </div>
-              ))}
+              )}
               {isProcessing && (
                 <div className="flex gap-2 p-2 rounded-lg bg-muted/40 mr-8">
                   <div className="flex-shrink-0">
@@ -393,7 +465,7 @@ export function PdfChat() {
                   </div>
                   <div className="flex-grow">
                     <div className="text-sm flex items-center gap-2">
-                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <RefreshCw className="h-4 w-4 animate-spin" />
                       {t("pdfChat.thinking") || "Thinking..."}
                     </div>
                   </div>
@@ -410,6 +482,7 @@ export function PdfChat() {
                 }
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={handleKeyDown}
                 disabled={isProcessing}
                 className="flex-grow"
               />
@@ -417,7 +490,7 @@ export function PdfChat() {
                 type="submit"
                 disabled={isProcessing || !inputValue.trim()}
               >
-                <SendIcon className="h-4 w-4 mr-2" />
+                <Send className="h-4 w-4 mr-2" />
                 {t("pdfChat.send") || "Send"}
               </Button>
             </form>

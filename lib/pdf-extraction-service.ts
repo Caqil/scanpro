@@ -20,44 +20,50 @@ export class PDFExtractionService {
    */
   static async extractText(pdfPath: string): Promise<string> {
     try {
+      // First, check if pdftotext is available
+      let pdftotextAvailable = false;
+      try {
+        await execPromise('which pdftotext || where pdftotext 2>/dev/null');
+        pdftotextAvailable = true;
+      } catch (err) {
+        console.log('pdftotext not available on this system, skipping this extraction method');
+      }
+      
       // Try multiple extraction methods in order of preference
       
       // 1. Try pdftotext (most reliable for text extraction if available)
-      try {
-        console.log('Attempting text extraction with pdftotext...');
-        const tempOutputPath = `${pdfPath}.txt`;
-        await execPromise(`pdftotext -layout "${pdfPath}" "${tempOutputPath}"`);
-        
-        if (existsSync(tempOutputPath)) {
-          const text = await readFile(tempOutputPath, 'utf-8');
-          // Clean up temp file
-          try {
-            await execPromise(`rm "${tempOutputPath}"`);
-          } catch (cleanupError) {
-            console.warn('Failed to clean up temp file:', cleanupError);
-          }
+      if (pdftotextAvailable) {
+        try {
+          console.log('Attempting text extraction with pdftotext...');
+          const tempOutputPath = `${pdfPath}.txt`;
+          await execPromise(`pdftotext -layout "${pdfPath}" "${tempOutputPath}"`);
           
-          if (text.trim().length > 0) {
-            console.log('Successfully extracted text with pdftotext');
-            return text;
+          if (existsSync(tempOutputPath)) {
+            const text = await readFile(tempOutputPath, 'utf-8');
+            // Clean up temp file
+            try {
+              await execPromise(`rm "${tempOutputPath}"`).catch(() => {
+                // On Windows, use del instead of rm
+                return execPromise(`del "${tempOutputPath}"`);
+              });
+            } catch (cleanupError) {
+              console.warn('Failed to clean up temp file:', cleanupError);
+            }
+            
+            if (text.trim().length > 0) {
+              console.log('Successfully extracted text with pdftotext');
+              return text;
+            }
+            console.log('pdftotext output was empty, trying next method');
           }
-          console.log('pdftotext output was empty, trying next method');
+        } catch (pdftotextError) {
+          console.warn('pdftotext extraction failed:', pdftotextError);
         }
-      } catch (pdftotextError) {
-        console.warn('pdftotext extraction failed:', pdftotextError);
       }
       
-      // 2. Try pdf.js-based extraction (if available)
-      try {
-        console.log('Attempting text extraction with pdf.js...');
-        // This would be implemented using pdf.js node modules
-        // For now, we'll skip to the fallback method
-      } catch (pdfJsError) {
-        console.warn('pdf.js extraction failed:', pdfJsError);
-      }
-      
-      // 3. Fallback to pdf-lib for basic info
-      console.log('Using pdf-lib as fallback extraction method');
+      // 2. Directly attempt PDF-lib text extraction
+      // Unfortunately, pdf-lib doesn't support text extraction directly
+      console.log('Using pdf-lib for basic PDF information');
       const pdfBytes = await readFile(pdfPath);
       const pdfDoc = await PDFDocument.load(pdfBytes);
       const pageCount = pdfDoc.getPageCount();
