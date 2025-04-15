@@ -13,7 +13,7 @@
 
 # Testing
 /coverage
-
+/chatsessions
 # Next.js
 /.next/
 /out/
